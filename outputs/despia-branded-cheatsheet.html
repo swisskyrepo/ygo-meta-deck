@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Despia Branded 2026 Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #5a6672;
+      --line: #d8e0e7;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --panel-2: #eef4f2;
+      --accent: #a8333f;
+      --accent-2: #146c72;
+      --accent-3: #855f12;
+      --accent-4: #3d5a80;
+      --good: #0d7a48;
+      --warn: #a45b12;
+      --bad: #a4262c;
+      --shadow: 0 14px 36px rgba(20, 34, 45, .13);
+      --radius: 8px;
+      --card-w: 54px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #ffffff 0, #f5f8fa 420px, #eef4f2 100%),
+        var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    a { color: #0c6471; }
+
+    button, input, select {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(1220px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+
+    .hero {
+      min-height: 74vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 28px;
+      align-items: center;
+      padding: 16px 0 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.4rem, 7vw, 5.8rem);
+      line-height: .94;
+      letter-spacing: 0;
+      max-width: 780px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0 0 18px;
+      font-size: 1.05rem;
+      color: #33414c;
+    }
+
+    .hero-metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      color: #26343f;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong { color: var(--ink); }
+
+    .hero-stack {
+      position: relative;
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+    }
+
+    .showcase {
+      width: min(100%, 520px);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(54px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,38,.12);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .showcase .mini-card:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
+    .showcase .mini-card:nth-child(2) { transform: translateY(-8px) rotate(3deg); }
+    .showcase .mini-card:nth-child(3) { transform: translateY(4px) rotate(-2deg); }
+    .showcase .mini-card:nth-child(4) { transform: translateY(-14px) rotate(4deg); }
+    .showcase .mini-card:nth-child(5) { transform: translateY(10px) rotate(-3deg); }
+    .showcase .mini-card:nth-child(6) { transform: translateY(-4px) rotate(2deg); }
+    .showcase .mini-card:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .mini-card:nth-child(8) { transform: translateY(-10px) rotate(1deg); }
+    .showcase .mini-card:nth-child(9) { transform: translateY(2px) rotate(-4deg); }
+    .showcase .mini-card:nth-child(10) { transform: translateY(-6px) rotate(3deg); }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin: 0 0 14px;
+      background: linear-gradient(180deg, rgba(247,249,251,.96), rgba(247,249,251,.88));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(216,224,231,.72);
+    }
+
+    .quick-nav a,
+    .tab-button,
+    .route-button {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 9px 12px;
+      min-height: 38px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .quick-nav a:hover,
+    .tab-button:hover,
+    .route-button:hover {
+      border-color: #96aebb;
+      background: #f7fbfb;
+    }
+
+    section {
+      margin: 26px 0;
+      scroll-margin-top: 70px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 4px 0 0;
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: 0 8px 22px rgba(29,45,58,.06);
+    }
+
+    .panel.tint {
+      background: linear-gradient(180deg, #fff, #f3f7f6);
+    }
+
+    .panel h3 .badge {
+      vertical-align: 1px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: #33414c;
+      font-size: .82rem;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: #e5edf0;
+      color: #18303c;
+      font-size: .77rem;
+      font-weight: 800;
+    }
+
+    .badge.red { background: #f7dee1; color: var(--accent); }
+    .badge.teal { background: #d9eff0; color: var(--accent-2); }
+    .badge.gold { background: #f6ead0; color: var(--accent-3); }
+    .badge.blue { background: #e0e9f5; color: var(--accent-4); }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 18px;
+      color: #26343f;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .64em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-2);
+    }
+
+    .mind-map {
+      display: grid;
+      grid-template-columns: 1fr minmax(220px, .8fr) 1fr;
+      gap: 16px;
+      align-items: center;
+      min-height: 480px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 52% 45%, rgba(20,108,114,.09), transparent 32%),
+        linear-gradient(180deg, #fff, #f5f9f8);
+      overflow: visible;
+    }
+
+    .map-column {
+      display: grid;
+      gap: 12px;
+    }
+
+    .map-core {
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      min-height: 260px;
+      border: 2px solid #b7ccd2;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 18px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .map-core strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+
+    .map-node {
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent-2);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 12px;
+      min-height: 120px;
+    }
+
+    .map-node[data-type="pressure"] { border-left-color: var(--accent); }
+    .map-node[data-type="recover"] { border-left-color: var(--good); }
+    .map-node[data-type="variant"] { border-left-color: var(--accent-3); }
+
+    .trigger-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .plus {
+      width: 22px;
+      height: 22px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #ebf2f5;
+      color: #18303c;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .card-chip,
+    .mini-card {
+      position: relative;
+      display: inline-grid;
+      gap: 4px;
+      align-content: start;
+      width: var(--card-w);
+      color: #1d2b36;
+      text-decoration: none;
+      cursor: zoom-in;
+      z-index: 1;
+    }
+
+    .card-chip img,
+    .mini-card img {
+      width: 100%;
+      aspect-ratio: 421 / 614;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 5px 12px rgba(20,34,45,.18);
+      background: #dfe7eb;
+      transition: transform .16s ease, box-shadow .16s ease;
+      transform-origin: center;
+    }
+
+    .card-chip:hover,
+    .mini-card:hover,
+    .card-chip:focus-visible,
+    .mini-card:focus-visible {
+      z-index: 60;
+      outline: none;
+    }
+
+    .card-chip:hover img,
+    .mini-card:hover img,
+    .card-chip:focus-visible img,
+    .mini-card:focus-visible img {
+      transform: scale(2.25);
+      box-shadow: 0 18px 42px rgba(20,34,45,.32);
+    }
+
+    .card-chip span {
+      display: none;
+    }
+
+    .deck-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px 12px;
+    }
+
+    .deck-strip .card-chip {
+      flex: 0 0 var(--card-w);
+    }
+
+    .info {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #a8bdc7;
+      border-radius: 50%;
+      background: #fff;
+      color: #21404d;
+      font-size: .74rem;
+      font-weight: 900;
+      cursor: help;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    .info::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(280px, 72vw);
+      padding: 9px 10px;
+      border-radius: var(--radius);
+      background: #122631;
+      color: #fff;
+      font-weight: 500;
+      text-transform: none;
+      font-size: .8rem;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .12s ease;
+      z-index: 80;
+      box-shadow: var(--shadow);
+    }
+
+    .info:hover::after,
+    .info:focus-visible::after {
+      opacity: 1;
+    }
+
+    .combo-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .combo-list {
+      position: sticky;
+      top: 64px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .tab-button {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+      min-height: 54px;
+    }
+
+    .tab-button.active {
+      border-color: #8fb8bc;
+      background: #e9f6f5;
+      box-shadow: inset 4px 0 0 var(--accent-2);
+    }
+
+    .tab-button span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .combo-stage {
+      min-height: 520px;
+    }
+
+    .combo-title {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .route-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .route-button.active {
+      background: #17313d;
+      border-color: #17313d;
+      color: #fff;
+    }
+
+    .graph {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px dashed #b4c5cd;
+      border-radius: var(--radius);
+      background: #fbfdfd;
+    }
+
+    .graph-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr);
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .graph-row.single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .edge {
+      display: grid;
+      place-items: center;
+      min-height: 42px;
+      color: #3d5563;
+      font-weight: 900;
+    }
+
+    .node {
+      display: grid;
+      gap: 8px;
+      min-height: 116px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .node.branch {
+      border-color: #d8c089;
+      background: #fffaf0;
+    }
+
+    .node.end {
+      border-color: #a4ccb8;
+      background: #f0faf4;
+    }
+
+    .node .step-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 850;
+    }
+
+    .node p {
+      margin: 0;
+      color: #364651;
+    }
+
+    .endboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .zone {
+      display: grid;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .zone strong {
+      color: #20313d;
+      font-size: .86rem;
+      text-transform: uppercase;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 8px;
+      border: 1px solid #ccd8de;
+      border-radius: 999px;
+      background: #fff;
+      color: #273844;
+      font-size: .82rem;
+    }
+
+    .matchup-table {
+      display: grid;
+      gap: 8px;
+    }
+
+    .matchup-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .matchup-row strong {
+      color: var(--ink);
+    }
+
+    .refs {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .refs summary {
+      cursor: pointer;
+      padding: 14px;
+      font-weight: 850;
+      list-style: none;
+    }
+
+    .refs summary::-webkit-details-marker { display: none; }
+
+    .refs summary::before {
+      content: "+";
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: #e9f0f2;
+      font-weight: 900;
+    }
+
+    .refs[open] summary::before { content: "i"; }
+
+    .refs-body {
+      border-top: 1px solid var(--line);
+      padding: 14px;
+    }
+
+    .refs-body ol {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(10, 20, 28, .72);
+      z-index: 100;
+    }
+
+    .image-modal.active { display: grid; }
+
+    .image-modal figure {
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .image-modal img {
+      max-width: min(86vw, 430px);
+      max-height: 78vh;
+      border-radius: 8px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.38);
+    }
+
+    .image-modal figcaption {
+      color: #fff;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .close-modal {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.16);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .note {
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent-3);
+      background: #fff8e9;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: #473817;
+    }
+
+    .small {
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 24px;
+      }
+
+      .hero-stack {
+        min-height: 330px;
+      }
+
+      .grid.cols-3,
+      .grid.cols-4,
+      .combo-layout,
+      .endboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .combo-list {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mind-map {
+        grid-template-columns: 1fr;
+      }
+
+      .map-core { min-height: 170px; }
+
+      .matchup-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 18px, 1220px);
+        padding-bottom: 36px;
+      }
+
+      .quick-nav {
+        margin-left: -9px;
+        margin-right: -9px;
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+
+      .grid.cols-2,
+      .combo-list {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase {
+        grid-template-columns: repeat(5, minmax(42px, 1fr));
+        gap: 7px;
+        padding: 10px;
+      }
+
+      :root { --card-w: 48px; }
+
+      .graph-row {
+        grid-template-columns: 1fr;
+      }
+
+      .edge {
+        min-height: 20px;
+      }
+
+      .edge::before {
+        content: "v";
+      }
+
+      .edge span { display: none; }
+
+      .section-head {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero" id="top">
+      <div>
+        <div class="hero-metadata">
+          <span class="pill"><strong>TCG</strong> checked June 7, 2026</span>
+          <span class="pill"><strong>Example</strong> Rochester WCQ Regional Top 4</span>
+          <span class="pill"><strong>Variant</strong> Branded Dracotail tops</span>
+        </div>
+        <h1>Despia Branded Mind Map</h1>
+        <p>
+          A top-to-bottom cheatsheet for the 2026 Dogmatika / Branded / Despia shell.
+          The focus is branch selection: when to use the one-card <strong>Fallen of the White Dragon</strong> spine,
+          when to cash in <strong>Branded Fusion</strong>, and how to turn Extra Deck sends into follow-up.
+        </p>
+        <div class="trigger-group" aria-label="Primary card cluster">
+          <span data-card="73819701"></span><span class="plus">+</span>
+          <span data-card="30271097"></span><span class="plus">+</span>
+          <span data-card="44146295"></span><span class="plus">+</span>
+          <span data-card="98829635"></span>
+        </div>
+        <p class="small">
+          Hover a card to enlarge it. Tap a card to open a full-size preview on touch devices.
+        </p>
+      </div>
+      <div class="hero-stack" aria-label="Core card showcase">
+        <div class="showcase" id="showcase"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Cheatsheet navigation">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#mindmap">Mind Map</a>
+      <a href="#combos">Combo Graph</a>
+      <a href="#endboards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side & Counters</a>
+      <a href="#references">References</a>
+    </nav>
+
+    <section id="snapshot">
+      <div class="section-head">
+        <div>
+          <h2>Playstyle And Win Condition</h2>
+          <p class="subhead">Midrange Fusion control. You win by trading one card for multiple pieces of value, then converting a simplified board into Mirrorjade pressure or a Fusion push.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <article class="panel tint">
+          <div class="kicker"><span class="badge red">1</span> Identity</div>
+          <h3>Resource engine first, combo deck second</h3>
+          <p>Modern Branded is less all-in on a single <strong>Branded Fusion</strong>. White Dragon, Nadir, Branded in High Spirits, and The Fallen & The Virtuous all convert Extra Deck sends into setup or removal.</p>
+        </article>
+        <article class="panel tint">
+          <div class="kicker"><span class="badge teal">2</span> Pressure</div>
+          <h3>Layered interruptions</h3>
+          <p>Typical layers are <strong>Mirrorjade</strong> banish, <strong>The Fallen & The Virtuous</strong> pop or revive, <strong>Forbidden Crown</strong> freeze, <strong>Super Polymerization</strong>, Mercourier, and Branded Retribution.</p>
+        </article>
+        <article class="panel tint">
+          <div class="kicker"><span class="badge gold">3</span> Close</div>
+          <h3>Grind into lethal</h3>
+          <p>Albion, Cartesia, BIHS, Quem, Branded Sword, and Dragon Dogma reload the hand. Once the opponent is low on cards, Mirrorjade plus a second Fusion or Super Poly usually ends the game.</p>
+        </article>
+      </div>
+
+      <div class="panel" style="margin-top:12px;">
+        <h3>Current example package</h3>
+        <p class="small">From the referenced YGOPRODeck list: 40 main, 15 extra, 15 side. Key ratios include 2 Aluber, 2 Fallen of the White Dragon, 1 Branded Fusion, 3 Branded Opening, 3 Branded in High Spirits, 3 Nadir Servant, 3 The Fallen & The Virtuous, 3 Forbidden Crown, and 3 Super Polymerization.</p>
+        <div class="deck-strip" id="coreStrip"></div>
+      </div>
+    </section>
+
+    <section id="mindmap">
+      <div class="section-head">
+        <div>
+          <h2>Mind Map</h2>
+          <p class="subhead">Read this as a routing map: starter access on the left, payoff and counter-pressure on the right.</p>
+        </div>
+      </div>
+      <div class="mind-map">
+        <div class="map-column">
+          <article class="map-node">
+            <h3>Starters</h3>
+            <div class="trigger-group">
+              <span data-card="62962630"></span><span class="plus">+</span>
+              <span data-card="36637374"></span><span class="plus">+</span>
+              <span data-card="73819701"></span>
+            </div>
+            <p>Aluber and Opening find Branded Fusion. White Dragon starts without the Normal Summon if it is in hand.</p>
+          </article>
+          <article class="map-node">
+            <h3>Extra Deck send engine</h3>
+            <div class="trigger-group">
+              <span data-card="29948294"></span><span class="plus">+</span>
+              <span data-card="1984618"></span><span class="plus">+</span>
+              <span data-card="76666602"></span>
+            </div>
+            <p>BIHS and Nadir turn Albion or Dragon Dogma into End Phase set/search value. Use Nadir after Extra Deck summons.</p>
+          </article>
+          <article class="map-node" data-type="recover">
+            <h3>Recursion</h3>
+            <div class="trigger-group">
+              <span data-card="95515789"></span><span class="plus">+</span>
+              <span data-card="45883110"></span><span class="plus">+</span>
+              <span data-card="81767888"></span>
+            </div>
+            <p>Cartesia returns, Quem revives when cards leave the Extra Deck, and Branded Sword recovers banished Albaz mentioners.</p>
+          </article>
+        </div>
+
+        <div class="map-core">
+          <div>
+            <strong>Despia Branded</strong>
+            <p>Trade up with Fusion bodies, force awkward responses, then loop Branded and Dogmatika value through the End Phase.</p>
+            <div class="trigger-group" style="justify-content:center;">
+              <span data-card="68468459"></span>
+              <span data-card="44146295"></span>
+              <span data-card="78397661"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-column">
+          <article class="map-node" data-type="pressure">
+            <h3>Interruptions</h3>
+            <div class="trigger-group">
+              <span data-card="44146295"></span><span class="plus">+</span>
+              <span data-card="30271097"></span><span class="plus">+</span>
+              <span data-card="98829635"></span>
+            </div>
+            <p>Mirrorjade removes monsters, TFTV pops or revives, Crown blanks a key monster without allowing monster responses.</p>
+          </article>
+          <article class="map-node" data-type="pressure">
+            <h3>Going second</h3>
+            <div class="trigger-group">
+              <span data-card="48130397"></span><span class="plus">+</span>
+              <span data-card="68468459"></span><span class="plus">+</span>
+              <span data-card="3410461"></span>
+            </div>
+            <p>Super Poly and Albaz convert enemy boards into your Fusions. Alba-Lenatus punishes Dragon-heavy fields.</p>
+          </article>
+          <article class="map-node" data-type="variant">
+            <h3>Dracotail variant</h3>
+            <div class="trigger-group">
+              <span data-card="1498449"></span><span class="plus">+</span>
+              <span data-card="33760966"></span><span class="plus">+</span>
+              <span data-card="80208225"></span>
+            </div>
+            <p>Faimena and Lukias add extra Fusion volume, Arthalion bounces, and Dracotail traps recycle while drawing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="section-head">
+        <div>
+          <h2>Core Combo Graph</h2>
+          <p class="subhead">Choose a route. Each graph is intentionally branch-based because current Branded hands change shape depending on the starter, discard, and Extra Deck send target.</p>
+        </div>
+      </div>
+      <div class="combo-layout">
+        <div class="combo-list" id="comboTabs" aria-label="Combo route tabs"></div>
+        <div class="combo-stage panel" id="comboStage" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="endboards">
+      <div class="section-head">
+        <div>
+          <h2>End Board Examples</h2>
+          <p class="subhead">These are practical field states, not goldfish promises. Add drawn non-engine like Crown, Super Poly, Called By, or Fuwalos on top.</p>
+        </div>
+      </div>
+      <div class="endboard-grid">
+        <article class="panel">
+          <h3>Mirrorjade line</h3>
+          <div class="zone"><strong>Field by End Phase</strong><div class="trigger-group"><span data-card="44146295"></span></div></div>
+          <div class="zone"><strong>Hand</strong><p>Recovered <strong>Branded Fusion</strong> if Saronir sent Retribution, plus any unspent board breaker or starter.</p></div>
+          <div class="zone"><strong>GY setup</strong><p>Saronir, Retribution banished after recycle, discard from Lubellion. Mirrorjade can send Albion or Dragon Dogma on the opponent turn.</p></div>
+        </article>
+        <article class="panel">
+          <h3>White Dragon spine</h3>
+          <div class="zone"><strong>Field by End Phase</strong><div class="trigger-group"><span data-card="78397661"></span><span class="plus">+</span><span data-card="30271097"></span></div></div>
+          <div class="zone"><strong>GY setup</strong><p>Incredible Ecclesia plus the sent Albion or Dragon Dogma. This makes TFTV revive mode live and prepares a set/search trigger.</p></div>
+          <div class="zone"><strong>Opponent turn</strong><p>Ecclesia and the Dark Dragon tags into Albaz or a Level 4 Albaz mentioner, then returns in the End Phase.</p></div>
+        </article>
+        <article class="panel">
+          <h3>Cartesia / Quem loop</h3>
+          <div class="zone"><strong>Field by End Phase</strong><div class="trigger-group"><span data-card="24915933"></span><span class="plus">+</span><span data-card="45883110"></span></div></div>
+          <div class="zone"><strong>GY setup</strong><p>Albaz, Dragon Dogma, Branded Sword, or Retribution depending on what Quem and Granguignol sent.</p></div>
+          <div class="zone"><strong>Follow-up</strong><p>Cartesia returns to hand if a Fusion hit the GY. Quem revives when a card leaves the Extra Deck.</p></div>
+        </article>
+        <article class="panel">
+          <h3>Dracotail hybrid</h3>
+          <div class="zone"><strong>Field by End Phase</strong><div class="trigger-group"><span data-card="33760966"></span><span class="plus">+</span><span data-card="44146295"></span><span class="plus">+</span><span data-card="80208225"></span></div></div>
+          <div class="zone"><strong>Backrow</strong><p>Sting, Flame, or Horn from Fusion-material triggers. These recycle a Dracotail card and draw after resolving.</p></div>
+          <div class="zone"><strong>Pressure</strong><p>Arthalion bounces based on hand materials, while Branded cards keep Mirrorjade or Secreterion online.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div>
+          <h2>Sequencing Tips</h2>
+          <p class="subhead">Small order choices matter more than a memorized line.</p>
+        </div>
+      </div>
+      <div class="grid cols-2">
+        <article class="panel">
+          <h3>Before committing Branded Fusion</h3>
+          <ul class="list">
+            <li>Check whether White Dragon, BIHS, or Nadir already gives you a playable board. Branded Fusion is limited, so it is strongest when it resolves through a weak response window.</li>
+            <li>If using the Saronir route, dump Branded Retribution so it can add Branded Fusion back from the GY.</li>
+            <li>Keep a discard plan for Lubellion. Discarding a card that later recurs is better than throwing away a live interruption.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Choosing Extra Deck sends <span class="info" tabindex="0" data-tip="The right send target depends on whether you need a set Branded card, a Dogmatika/Tri-Brigade search, or a live monster to revive.">i</span></h3>
+          <ul class="list">
+            <li><strong>Albion</strong>: set or add a Branded Spell/Trap in the End Phase.</li>
+            <li><strong>The Dragon that Devours the Dogma</strong>: End Phase search for Dogmatika or Tri-Brigade access.</li>
+            <li><strong>Granguignol</strong>: sends a Level 6+ LIGHT/DARK monster and later tags out when the opponent Special Summons by monster effect.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Using The Fallen & The Virtuous</h3>
+          <ul class="list">
+            <li>Mode 1 sends an Albaz Extra Deck monster and destroys a face-up card. This is removal plus future End Phase value if the sent monster has a GY trigger.</li>
+            <li>Mode 2 revives from either GY if an Ecclesia monster is in your field or GY. White Dragon into Incredible Ecclesia turns this on naturally.</li>
+            <li>Because it is a Quick-Play Spell, set it before passing if you want interaction on the opponent's turn.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Crown and Super Poly</h3>
+          <ul class="list">
+            <li>Forbidden Crown can force a turn by freezing a key monster, but the Crowned monster cannot be used as regular Fusion material that turn.</li>
+            <li>Use Super Polymerization before Crown if that monster must become material. Use Crown first if the monster is a negate you do not need to fuse away.</li>
+            <li>Mirrorjade cannot use its banish effect on the next turn after it resolves, so pair it with TFTV, Super Poly, or Mercourier when possible.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div>
+          <h2>Recovery Options</h2>
+          <p class="subhead">The deck stays alive by turning graveyard and banished cards back into live cards.</p>
+        </div>
+      </div>
+      <div class="grid cols-4">
+        <article class="panel">
+          <h3>Albion EP set</h3>
+          <div class="trigger-group"><span data-card="87746184"></span></div>
+          <p>When sent to GY that turn, Albion sets or adds a Branded Spell/Trap. This finds follow-up or interaction.</p>
+        </article>
+        <article class="panel">
+          <h3>BIHS returns</h3>
+          <div class="trigger-group"><span data-card="29948294"></span></div>
+          <p>If a Fusion Monster was sent to your GY this turn, Branded in High Spirits can add itself back in the End Phase.</p>
+        </article>
+        <article class="panel">
+          <h3>Cartesia loop</h3>
+          <div class="trigger-group"><span data-card="95515789"></span></div>
+          <p>Cartesia returns from GY in the End Phase if a Fusion was sent to your GY that turn.</p>
+        </article>
+        <article class="panel">
+          <h3>Sword retrieve</h3>
+          <div class="trigger-group"><span data-card="81767888"></span></div>
+          <p>Branded Sword recovers a banished Albaz or monster that mentions it, including Mercourier after Gold Sarcophagus.</p>
+        </article>
+        <article class="panel">
+          <h3>Retribution recycle</h3>
+          <div class="trigger-group"><span data-card="17751597"></span></div>
+          <p>Banish Retribution from GY to add another Branded Spell/Trap from GY, often the lone Branded Fusion.</p>
+        </article>
+        <article class="panel">
+          <h3>Quem revive</h3>
+          <div class="trigger-group"><span data-card="45883110"></span></div>
+          <p>When a card leaves the Extra Deck, Quem can revive Albaz or an Albaz mentioner from your GY.</p>
+        </article>
+        <article class="panel">
+          <h3>Aluber safety net</h3>
+          <div class="trigger-group"><span data-card="62962630"></span></div>
+          <p>If your Fusion leaves by opponent effect, Aluber can revive and negate an opponent's Effect Monster.</p>
+        </article>
+        <article class="panel">
+          <h3>Dark Dragon shuffle</h3>
+          <div class="trigger-group"><span data-card="78397661"></span></div>
+          <p>From GY, Ecclesia and the Dark Dragon shuffles itself, a Level 8 Fusion, and a field card into the Deck.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="side">
+      <div class="section-head">
+        <div>
+          <h2>Side Deck Options And Counters</h2>
+          <p class="subhead">Use the example side deck as the baseline, then tune for your room.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Example side cards from recent lists</h3>
+        <div class="deck-strip" id="sideStrip"></div>
+      </div>
+
+      <div class="matchup-table" style="margin-top:12px;">
+        <div class="matchup-row">
+          <strong>Kewl Tune</strong>
+          <div><strong>Bring in:</strong> Droll, Mistaken Arrest, Dark Ruler, Droplet, Purulia when hand summons matter.</div>
+          <div><strong>Plan:</strong> reduce hand knowledge payoff by having multiple live engines. Do not rely only on Branded Fusion.</div>
+        </div>
+        <div class="matchup-row">
+          <strong>Branded mirror / Dracotail</strong>
+          <div><strong>Bring in:</strong> Bystial Magnamhut, D.D. Crow or Ghost Belle if available, Super Poly, Illusion Gate, Crown.</div>
+          <div><strong>Plan:</strong> hit Albaz, Cartesia, or the revival window. Crown White Dragon, Cartesia, Arthalion, or Mirrorjade when it buys the turn.</div>
+        </div>
+        <div class="matchup-row">
+          <strong>DoomZ / combo boards</strong>
+          <div><strong>Bring in:</strong> Dark Ruler No More, Forbidden Droplet, Lightning Storm, Super Polymerization, Forbidden Crown.</div>
+          <div><strong>Plan:</strong> break first, then establish Mirrorjade plus follow-up. TFTV is valuable because it removes a face-up card while loading GY value.</div>
+        </div>
+        <div class="matchup-row">
+          <strong>Backrow / stun</strong>
+          <div><strong>Bring in:</strong> Feather Duster, Lightning Storm, Cosmic Cyclone if you expect floodgates.</div>
+          <div><strong>Plan:</strong> force backrow before committing Cartesia or Branded Fusion. Save Crown for floodgate monsters, not passive traps.</div>
+        </div>
+        <div class="matchup-row">
+          <strong>What counters you</strong>
+          <div><strong>Watch for:</strong> Ash on Branded Fusion or Nadir, Droll, Dimensional Barrier, D.D. Crow/Bystials, Necrovalley, Dimensional Fissure, Anti-Spell.</div>
+          <div><strong>Answer:</strong> diversify into White Dragon, BIHS, Nadir, and set removal. Use Called By/Crossout only when the exchange protects a real route.</div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:12px;">
+        <h3>Counter cards to recognize</h3>
+        <div class="deck-strip" id="counterStrip"></div>
+      </div>
+    </section>
+
+    <section id="references">
+      <details class="refs">
+        <summary>Hidden references tab</summary>
+        <div class="refs-body">
+          <p class="small">These links were used to build the cheatsheet knowledge and verify current card IDs, lists, and meta context.</p>
+          <ol>
+            <li><a href="https://ygoprodeck.com/deck/despia-branded-715431">YGOPRODeck example list: Despia Branded, Rochester WCQ Regional Top 4, Domenic Riccio, June 6, 2026</a></li>
+            <li><a href="https://ygoprodeck.com/category/type/despia">YGOPRODeck Despia category, latest uploaded/tournament Despia and Branded lists</a></li>
+            <li><a href="https://ygoprodeck.com/category/type/dracotail">YGOPRODeck Dracotail category, recent Branded Dracotail tournament tops</a></li>
+            <li><a href="https://ygoprodeck.com/deck/branded-dracotail-715419">YGOPRODeck Branded Dracotail, Mobile WCQ Regional Top 8, Khalil Afaneh, June 6, 2026</a></li>
+            <li><a href="https://ygoprodeck.com/deck/branded-dracotail-713072">YGOPRODeck Branded Dracotail, YCS Columbus winner, Jesse Kotton, May 23, 2026</a></li>
+            <li><a href="https://ygoprodeck.com/article/event-breakdown-ycs-columbus-302868">YGOPRODeck Event Breakdown: YCS Columbus, Blazing Dominion format</a></li>
+            <li><a href="https://www.tcgplayer.com/content/article/The-Best-Advanced-Decks-in-Yu-Gi-Oh-Right-Now-May-2026/948e13fa-57fd-4839-a15f-04564a63704c/">TCGplayer: The Best Advanced Decks in Yu-Gi-Oh Right Now, June 2026</a></li>
+            <li><a href="https://www.masterduelmeta.com/articles/guides/branded-despia-poisonrose">Master Duel Meta: Introduction to Branded guide</a></li>
+            <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta: Combos & Counters hub</a></li>
+            <li><a href="https://metagamesgx.com/en-cad/products/yugioh-spreadsheet">MetaGamesGX paid Master Yu-Gi-Oh combo spreadsheet listing for Branded Despia and Dracotail variants</a></li>
+            <li><a href="https://db.ygoprodeck.com/api-guide/">YGOPRODeck card API and image URLs</a></li>
+          </ol>
+        </div>
+      </details>
+    </section>
+  </div>
+
+  <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Card preview">
+    <button class="close-modal" id="closeModal" aria-label="Close card preview">x</button>
+    <figure>
+      <img id="modalImage" alt="">
+      <figcaption id="modalCaption"></figcaption>
+    </figure>
+  </div>
+
+  <script>
+    const cards = {
+      "62962630": "Aluber the Jester of Despia",
+      "73819701": "Fallen of the White Dragon",
+      "68468459": "Fallen of Albaz",
+      "95515789": "Blazing Cartesia, the Virtuous",
+      "45883110": "Guiding Quem, the Virtuous",
+      "55273560": "Incredible Ecclesia, the Virtuous",
+      "60303688": "Dogmatika Ecclesia, the Virtuous",
+      "19096726": "Tri-Brigade Mercourier",
+      "60242223": "Bystial Saronir",
+      "25451383": "Albion the Shrouded Dragon",
+      "42141493": "Mulcharmy Fuwalos",
+      "44362883": "Branded Fusion",
+      "36637374": "Branded Opening",
+      "29948294": "Branded in High Spirits",
+      "1984618": "Nadir Servant",
+      "30271097": "The Fallen & The Virtuous",
+      "98829635": "Forbidden Crown",
+      "48130397": "Super Polymerization",
+      "24224830": "Called by the Grave",
+      "75500286": "Gold Sarcophagus",
+      "81767888": "Branded Sword",
+      "17751597": "Branded Retribution",
+      "72272462": "Despian Quaeritis",
+      "87746184": "Albion the Branded Dragon",
+      "44146295": "Mirrorjade the Iceblade Dragon",
+      "70534340": "Lubellion the Searing Dragon",
+      "3410461": "Alba-Lenatus the Abyss Dragon",
+      "24915933": "Granguignol the Dusk Dragon",
+      "41373230": "Titaniklad the Ash Dragon",
+      "51409648": "Rindbrumm the Striking Dragon",
+      "76666602": "The Dragon that Devours the Dogma",
+      "89851827": "Secreterion Dragon",
+      "96334243": "Sea Monster of Theseus",
+      "78397661": "Ecclesia and the Dark Dragon",
+      "84192580": "Mulcharmy Purulia",
+      "94145021": "Droll & Lock Bird",
+      "33854624": "Bystial Magnamhut",
+      "18144507": "Harpie's Feather Duster",
+      "14532163": "Lightning Storm",
+      "54693926": "Dark Ruler No More",
+      "4227096": "Mistaken Arrest",
+      "14558128": "Ash Blossom & Joyous Spring",
+      "14558127": "Ash Blossom & Joyous Spring",
+      "33017964": "Illusion Gate",
+      "24299458": "Forbidden Droplet",
+      "35269904": "Triple Tactics Thrust",
+      "25311006": "Triple Tactics Talent",
+      "1498449": "Dracotail Faimena",
+      "75003700": "Dracotail Lukias",
+      "84477320": "Dracotail Phryxul",
+      "7375867": "Dracotail Mululu",
+      "70871153": "Dracotail Urgula",
+      "44482554": "Dracotail Pan",
+      "6153210": "Ketu Dracotail",
+      "32548318": "Rahu Dracotail",
+      "5431722": "Dracotail Flame",
+      "80208225": "Dracotail Sting",
+      "69932023": "Dracotail Horn",
+      "33760966": "Dracotail Arthalion",
+      "72578374": "Khaos Starsource Dragon",
+      "54757758": "Mudragon of the Swamp",
+      "83326048": "Dimensional Barrier",
+      "24508238": "D.D. Crow",
+      "73642296": "Ghost Belle & Haunted Mansion",
+      "27204311": "Nibiru, the Primal Being",
+      "8267140": "Cosmic Cyclone",
+      "34267821": "Artifact Lancea",
+      "15693423": "Evenly Matched",
+      "35480699": "Book of Eclipse",
+      "58921041": "Anti-Spell Fragrance",
+      "47355498": "Necrovalley",
+      "81674782": "Dimensional Fissure",
+      "65681983": "Crossout Designator",
+      "10045474": "Infinite Impermanence"
+    };
+
+    const combos = [
+      {
+        title: "Aluber / Opening into Branded Fusion",
+        icon: "44362883",
+        summary: "The classic access route. In 2026 it is best as a high-impact push, not the only plan.",
+        routes: [
+          {
+            label: "Saronir recycle",
+            nodes: [
+              {type: "single", title: "Access Branded Fusion", cards: ["36637374", "62962630", "44362883"], text: "Special or Normal Summon Aluber, then search Branded Fusion. Opening does this while putting protection in GY later."},
+              {type: "branch", title: "Send Albaz + Saronir", cards: ["44362883", "68468459", "60242223", "70534340"], text: "Branded Fusion sends Fallen of Albaz and Bystial Saronir to make Lubellion."},
+              {type: "branch", title: "Load Retribution", cards: ["60242223", "17751597"], text: "Saronir sends Branded Retribution. Lubellion discards and shuffles itself with Albaz to make Mirrorjade."},
+              {type: "end", title: "Mirrorjade plus Fusion follow-up", cards: ["44146295", "17751597", "44362883"], text: "Banish Retribution to add the used Branded Fusion back. Mirrorjade can send Albion or Dragon Dogma on the opponent turn for more value."}
+            ]
+          },
+          {
+            label: "Board-break mode",
+            nodes: [
+              {type: "single", title: "Bait or clear first", cards: ["98829635", "48130397", "54693926"], text: "If going second, force negates with Crown, Super Poly, or Dark Ruler before committing Branded Fusion."},
+              {type: "branch", title: "Resolve Fusion", cards: ["44362883", "68468459", "70534340"], text: "Use Branded Fusion to put Albaz plus the required attribute in GY and reach Lubellion or Albion."},
+              {type: "end", title: "Convert to Mirrorjade", cards: ["44146295", "87746184", "76666602"], text: "Mirrorjade removes a monster. The next Extra Deck send decides whether the End Phase gives a Branded set or a Dogmatika/Tri-Brigade search."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "Fallen of the White Dragon spine",
+        icon: "73819701",
+        summary: "A one-card body plus Ecclesia access that turns on Synchro and TFTV lines.",
+        routes: [
+          {
+            label: "Albion set",
+            nodes: [
+              {type: "single", title: "Send Albion", cards: ["73819701", "87746184"], text: "From hand, White Dragon sends Albion from Extra Deck to GY and Special Summons itself."},
+              {type: "branch", title: "Summon Ecclesia", cards: ["73819701", "55273560"], text: "White Dragon summons Incredible Ecclesia from Deck, hand, or GY."},
+              {type: "branch", title: "Synchro 8", cards: ["55273560", "73819701", "78397661"], text: "Make Ecclesia and the Dark Dragon. Incredible Ecclesia in GY also turns on TFTV revive mode."},
+              {type: "end", title: "Set Branded interaction", cards: ["87746184", "30271097", "17751597"], text: "End Phase Albion sets a Branded Spell/Trap such as The Fallen & The Virtuous or Retribution."}
+            ]
+          },
+          {
+            label: "Dogma search",
+            nodes: [
+              {type: "single", title: "Send Dragon Dogma", cards: ["73819701", "76666602"], text: "Send The Dragon that Devours the Dogma instead of Albion when you need a Dogmatika or Tri-Brigade search."},
+              {type: "branch", title: "White plus Ecclesia", cards: ["73819701", "55273560"], text: "White Dragon summons Ecclesia, creating a Synchro 8 or keeping Ecclesia in rotation for TFTV."},
+              {type: "end", title: "End Phase search", cards: ["76666602", "19096726", "60303688"], text: "Dogma searches Mercourier for a hand negate, or Dogmatika Ecclesia for a follow-up body."}
+            ]
+          },
+          {
+            label: "Opponent-turn tag",
+            nodes: [
+              {type: "single", title: "Pass with Dark Dragon", cards: ["78397661", "30271097"], text: "Dark Dragon is the visible pressure. TFTV or Crown from hand/set supplies the second layer."},
+              {type: "branch", title: "Quick tag", cards: ["78397661", "68468459"], text: "During the Main Phase, banish Dark Dragon until End Phase to summon Albaz or a Level 4 Albaz mentioner from Deck/GY."},
+              {type: "end", title: "Fuse their monster", cards: ["68468459", "44146295", "51409648"], text: "If Albaz resolves, discard to fuse using the opponent's monster, often into Mirrorjade or Rindbrumm."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "BIHS / Nadir dump engine",
+        icon: "29948294",
+        summary: "Turns the Extra Deck into a toolbox. This route fixes hands and loads End Phase value.",
+        routes: [
+          {
+            label: "BIHS fix",
+            nodes: [
+              {type: "single", title: "Reveal a matching monster", cards: ["29948294", "73819701", "87746184"], text: "Reveal a Dragon or Spellcaster, send a matching Level 8 Fusion with 2500 ATK or DEF, then search Albaz or an Albaz mentioner."},
+              {type: "branch", title: "Search the missing piece", cards: ["45883110", "95515789", "19096726"], text: "Choose Quem for GY setup, Cartesia for Fusion access, or Mercourier for protection/search pressure."},
+              {type: "end", title: "End Phase recursion", cards: ["29948294"], text: "If a Fusion was sent to your GY this turn, BIHS adds itself back in the End Phase."}
+            ]
+          },
+          {
+            label: "Nadir last",
+            nodes: [
+              {type: "single", title: "Use after Extra Deck summons", cards: ["1984618"], text: "Nadir locks you out of Extra Deck Special Summons after it resolves. Use it after Synchro/Fusion plays unless you are accepting the lock."},
+              {type: "branch", title: "Send payoff", cards: ["76666602", "87746184", "41373230"], text: "Send Dragon Dogma for a search, Albion for a Branded set, or Titaniklad when Dogmatika access is the priority."},
+              {type: "end", title: "Add Albaz or Dogmatika", cards: ["68468459", "60303688", "55273560"], text: "Nadir searches the next body while the sent monster prepares End Phase value."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "Quem plus Cartesia loop",
+        icon: "45883110",
+        summary: "The recurring Fusion line. It rewards careful timing around cards leaving the Extra Deck.",
+        routes: [
+          {
+            label: "Fusion loop",
+            nodes: [
+              {type: "single", title: "Summon Quem", cards: ["45883110"], text: "Quem sends Fallen of Albaz or a card that mentions it. Choose Albaz, Branded Sword, or Retribution based on hand texture."},
+              {type: "branch", title: "Bring out Cartesia", cards: ["95515789", "68468459"], text: "Cartesia Special Summons if you control Albaz or have it in GY. White Dragon also counts as Fallen of Albaz."},
+              {type: "branch", title: "Quick Fusion", cards: ["95515789", "24915933"], text: "Cartesia fuses into Granguignol, which sends a Level 6+ LIGHT/DARK monster from Deck or Extra Deck."},
+              {type: "end", title: "Tag and revive", cards: ["24915933", "45883110", "95515789"], text: "When the opponent Special Summons by monster effect, Granguignol can tag out. When a card leaves the Extra Deck, Quem can revive an Albaz mentioner."}
+            ]
+          },
+          {
+            label: "GY utility",
+            nodes: [
+              {type: "single", title: "Send Sword or Retribution", cards: ["45883110", "81767888", "17751597"], text: "If the hand already plays, send a Branded recovery trap to convert later."},
+              {type: "branch", title: "Recover banished cards", cards: ["81767888", "19096726", "73819701"], text: "Sword can return a banished Mercourier or White Dragon to hand."},
+              {type: "end", title: "Keep interaction live", cards: ["19096726", "44146295"], text: "Mercourier becomes a hand negate while you control an Albaz Fusion."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "Gold Sarcophagus resource route",
+        icon: "75500286",
+        summary: "A compact line that converts Mercourier into both starter access and later hand-trap pressure.",
+        routes: [
+          {
+            label: "Mercourier search",
+            nodes: [
+              {type: "single", title: "Banish Mercourier", cards: ["75500286", "19096726"], text: "Gold Sarcophagus banishes Mercourier, triggering it to search Fallen of Albaz or a monster that mentions it."},
+              {type: "branch", title: "Search White / Quem / Cartesia", cards: ["73819701", "45883110", "95515789"], text: "White is the cleanest one-card spine. Quem or Cartesia are better if your hand already has Albaz access."},
+              {type: "branch", title: "Put Sword in GY", cards: ["81767888", "60242223", "45883110"], text: "Saronir, Quem, or BIHS lines can place Branded Sword into the GY."},
+              {type: "end", title: "Recover Mercourier", cards: ["81767888", "19096726", "44146295"], text: "Sword adds the banished Mercourier. Once Mirrorjade or another Albaz Fusion is up, Mercourier is live interaction."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "Going second Super Poly / Albaz",
+        icon: "48130397",
+        summary: "The cleanest board breaker package in the deck.",
+        routes: [
+          {
+            label: "Super Poly",
+            nodes: [
+              {type: "single", title: "Identify materials", cards: ["48130397", "89851827", "76666602"], text: "Check whether the opponent gives you Dragon + Spellcaster for Secreterion, Albaz materials for Dogma/Mirrorjade lines, or generic targets in the variant."},
+              {type: "branch", title: "Discard with purpose", cards: ["95515789", "81767888", "17751597"], text: "Discard Cartesia or a Branded recovery card when possible so the discard still matters later."},
+              {type: "end", title: "Break and establish", cards: ["44146295", "76666602", "89851827"], text: "Convert their board into your Fusion, then use the rest of your engine to keep pressure."}
+            ]
+          },
+          {
+            label: "Albaz normal",
+            nodes: [
+              {type: "single", title: "Summon Albaz", cards: ["68468459"], text: "Albaz on summon discards to Fusion Summon using itself and opponent's monsters."},
+              {type: "branch", title: "Pick the answer", cards: ["51409648", "44146295", "3410461"], text: "Rindbrumm answers certain Extra Deck monsters, Mirrorjade is the default pressure card, and Alba-Lenatus punishes Dragon boards."},
+              {type: "end", title: "Hold follow-up", cards: ["29948294", "95515789", "30271097"], text: "BIHS, Cartesia, and TFTV make the second wave after the board is broken."}
+            ]
+          }
+        ]
+      },
+      {
+        title: "Branded Dracotail branch",
+        icon: "1498449",
+        summary: "The latest top variant adds Fusion volume and trap-based recycling.",
+        routes: [
+          {
+            label: "Faimena pressure",
+            nodes: [
+              {type: "single", title: "Quick Fusion access", cards: ["1498449", "75003700", "95515789"], text: "Faimena discards to Fusion Summon Dragon or Spellcaster Fusions. Lukias searches a Dracotail monster on summon."},
+              {type: "branch", title: "Material triggers set traps", cards: ["1498449", "7375867", "80208225", "5431722"], text: "Dracotail monsters set Sting, Flame, or Horn when used as Fusion material. Mululu can also negate a face-up monster."},
+              {type: "branch", title: "Arthalion bounce", cards: ["33760966"], text: "Arthalion bounces cards equal to the number of hand materials used, and can revive itself when two or more monsters hit the GY at once."},
+              {type: "end", title: "Hybrid end board", cards: ["33760966", "44146295", "80208225", "5431722"], text: "The variant pairs Arthalion or Secreterion with Mirrorjade and set Dracotail traps."}
+            ]
+          }
+        ]
+      }
+    ];
+
+    const showcaseIds = ["73819701", "30271097", "98829635", "44146295", "78397661", "95515789", "45883110", "29948294", "1984618", "48130397"];
+    const coreIds = ["62962630", "73819701", "68468459", "95515789", "45883110", "55273560", "19096726", "60242223", "44362883", "36637374", "29948294", "1984618", "30271097", "98829635", "48130397", "81767888", "17751597"];
+    const sideIds = ["84192580", "94145021", "33854624", "18144507", "14532163", "54693926", "4227096", "14558128", "33017964", "24299458", "35269904", "69932023"];
+    const counterIds = ["83326048", "14558128", "94145021", "24508238", "73642296", "58921041", "47355498", "81674782", "10045474", "8267140", "65681983", "27204311"];
+
+    const img = id => `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
+
+    function cardEl(id, className = "card-chip") {
+      const a = document.createElement("a");
+      a.className = className;
+      a.href = `https://ygoprodeck.com/card/?search=${id}`;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.dataset.id = id;
+      a.title = cards[id] || id;
+      a.innerHTML = `<img src="${img(id)}" alt="${cards[id] || id}" loading="lazy"><span>${cards[id] || id}</span>`;
+      a.addEventListener("click", event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey) return;
+        event.preventDefault();
+        openCard(id);
+      });
+      return a;
+    }
+
+    function hydrateCards(root = document) {
+      root.querySelectorAll("[data-card]").forEach(slot => {
+        const id = slot.dataset.card;
+        slot.replaceWith(cardEl(id));
+      });
+    }
+
+    function fillStrip(id, ids) {
+      const el = document.getElementById(id);
+      ids.forEach(cardId => el.appendChild(cardEl(cardId)));
+    }
+
+    function openCard(id) {
+      const modal = document.getElementById("imageModal");
+      document.getElementById("modalImage").src = img(id);
+      document.getElementById("modalImage").alt = cards[id] || id;
+      document.getElementById("modalCaption").textContent = cards[id] || id;
+      modal.classList.add("active");
+    }
+
+    function closeCard() {
+      document.getElementById("imageModal").classList.remove("active");
+    }
+
+    function renderComboTabs() {
+      const tabs = document.getElementById("comboTabs");
+      combos.forEach((combo, index) => {
+        const button = document.createElement("button");
+        button.className = `tab-button${index === 0 ? " active" : ""}`;
+        button.type = "button";
+        button.innerHTML = `<span class="badge ${index % 2 ? "teal" : "red"}">${index + 1}</span><span>${combo.title}</span>`;
+        button.addEventListener("click", () => {
+          tabs.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+          renderCombo(index, 0);
+        });
+        tabs.appendChild(button);
+      });
+      renderCombo(0, 0);
+    }
+
+    function nodeEl(node, index) {
+      const div = document.createElement("div");
+      div.className = `node ${node.type || ""}`;
+      const trigger = document.createElement("div");
+      trigger.className = "trigger-group";
+      node.cards.forEach((id, cardIndex) => {
+        if (cardIndex) {
+          const plus = document.createElement("span");
+          plus.className = "plus";
+          plus.textContent = "+";
+          trigger.appendChild(plus);
+        }
+        trigger.appendChild(cardEl(id));
+      });
+      div.innerHTML = `<div class="step-label"><span class="badge">${index + 1}</span>${node.title}</div><p>${node.text}</p>`;
+      div.appendChild(trigger);
+      return div;
+    }
+
+    function renderCombo(comboIndex, routeIndex) {
+      const combo = combos[comboIndex];
+      const route = combo.routes[routeIndex];
+      const stage = document.getElementById("comboStage");
+      stage.innerHTML = "";
+
+      const title = document.createElement("div");
+      title.className = "combo-title";
+      title.innerHTML = `<h3>${combo.title}</h3><p>${combo.summary}</p>`;
+      const routeBar = document.createElement("div");
+      routeBar.className = "route-bar";
+      combo.routes.forEach((r, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `route-button${i === routeIndex ? " active" : ""}`;
+        btn.textContent = r.label;
+        btn.addEventListener("click", () => renderCombo(comboIndex, i));
+        routeBar.appendChild(btn);
+      });
+      title.appendChild(routeBar);
+      stage.appendChild(title);
+
+      const graph = document.createElement("div");
+      graph.className = "graph";
+      route.nodes.forEach((node, i) => {
+        if (i === 0 || window.matchMedia("(max-width: 680px)").matches) {
+          const row = document.createElement("div");
+          row.className = "graph-row single";
+          row.appendChild(nodeEl(node, i));
+          graph.appendChild(row);
+        } else {
+          const row = document.createElement("div");
+          row.className = "graph-row";
+          const connector = document.createElement("div");
+          connector.className = "edge";
+          connector.innerHTML = "<span>+</span>";
+          const spacer = document.createElement("div");
+          spacer.className = "node";
+          spacer.style.visibility = "hidden";
+          if (i % 2 === 1) {
+            row.append(spacer, connector, nodeEl(node, i));
+          } else {
+            row.append(nodeEl(node, i), connector, spacer);
+          }
+          graph.appendChild(row);
+        }
+      });
+      stage.appendChild(graph);
+    }
+
+    document.getElementById("closeModal").addEventListener("click", closeCard);
+    document.getElementById("imageModal").addEventListener("click", event => {
+      if (event.target.id === "imageModal") closeCard();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCard();
+    });
+
+    hydrateCards();
+    showcaseIds.forEach(id => document.getElementById("showcase").appendChild(cardEl(id, "mini-card")));
+    fillStrip("coreStrip", coreIds);
+    fillStrip("sideStrip", sideIds);
+    fillStrip("counterStrip", counterIds);
+    renderComboTabs();
+  </script>
+</body>
+</html>

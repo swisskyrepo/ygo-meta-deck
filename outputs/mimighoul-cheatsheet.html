@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mimighoul 2026 Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182022;
+      --muted: #56636a;
+      --paper: #f4f6f1;
+      --panel: #ffffff;
+      --panel-2: #eef3eb;
+      --line: #d6ded1;
+      --green: #1f6f58;
+      --teal: #1b7880;
+      --gold: #a97818;
+      --brick: #a23e35;
+      --blue: #355b8c;
+      --shade: 0 18px 45px rgba(24, 32, 34, .12);
+      --radius: 8px;
+      --card-w: 58px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96) 0, rgba(244,246,241,.98) 430px, #edf2ea 100%),
+        repeating-linear-gradient(135deg, rgba(31,111,88,.08) 0 1px, transparent 1px 16px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); }
+
+    button {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(1220px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+
+    .hero {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(310px, .95fr);
+      gap: 26px;
+      align-items: center;
+      padding: 20px 0 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 14px;
+      font-size: clamp(2.35rem, 6vw, 4.9rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 790px;
+      color: #314046;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+    }
+
+    .hero-pills,
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      color: #263338;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      position: relative;
+      min-height: 350px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(48px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(24,32,34,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shade);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(12px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(214,222,209,.78);
+      background: linear-gradient(180deg, rgba(244,246,241,.96), rgba(244,246,241,.88));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a,
+    .route-button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 750;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .route-button.is-active {
+      border-color: rgba(31,111,88,.44);
+      background: #eaf3ed;
+    }
+
+    .section {
+      margin: 14px 0;
+      padding: clamp(16px, 3vw, 24px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shade);
+      overflow: visible;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .title-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .title-left h2 { margin: 0; }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      color: var(--green);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .info {
+      display: inline-grid;
+      place-items: center;
+      width: 19px;
+      height: 19px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      color: var(--teal);
+      font-size: .78rem;
+      font-style: normal;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .grid-3,
+    .grid-2,
+    .grid-4 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel,
+    .mini-panel,
+    .board-card,
+    .variant-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .panel {
+      padding: 14px;
+    }
+
+    .panel p,
+    .mini-panel p,
+    .variant-card p,
+    .board-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .mini-panel {
+      padding: 12px;
+      background: linear-gradient(180deg, #fff, #f8faf6);
+    }
+
+    .card-row,
+    .pair-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+
+    .pair-row { margin-bottom: 9px; }
+
+    .plus {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #f5f8f1;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .card-chip,
+    .card-mini {
+      position: relative;
+      display: inline-grid;
+      gap: 5px;
+      justify-items: center;
+      align-content: start;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      color: var(--ink);
+      text-decoration: none;
+      overflow: visible;
+    }
+
+    .card-mini {
+      width: auto;
+      min-width: 0;
+    }
+
+    .card-art {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      aspect-ratio: 421 / 614;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(24,32,34,.18);
+      background: #e3e8df;
+      box-shadow: 0 8px 18px rgba(24,32,34,.18);
+    }
+
+    .card-chip span {
+      width: 100%;
+      color: #3e4a50;
+      font-size: .68rem;
+      line-height: 1.05;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .card-chip .qty {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      z-index: 2;
+      display: inline-grid;
+      place-items: center;
+      min-width: 21px;
+      height: 21px;
+      padding: 0 5px;
+      border: 1px solid rgba(24,32,34,.18);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--brick);
+      font-size: .75rem;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(24,32,34,.16);
+    }
+
+    .mind-map {
+      display: grid;
+      grid-template-columns: minmax(260px, .82fr) minmax(0, 1.18fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .core-node {
+      padding: 14px;
+      border: 1px solid rgba(31,111,88,.28);
+      border-radius: var(--radius);
+      background: #f2f8f3;
+    }
+
+    .node-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .node-line {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      min-height: 64px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .node-line b {
+      color: var(--green);
+    }
+
+    .route-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .combo-route { display: none; }
+    .combo-route.is-active { display: block; }
+
+    .graph-board {
+      overflow: visible;
+    }
+
+    .graph-row {
+      display: grid;
+      grid-template-columns: minmax(112px, 1fr) 44px minmax(112px, 1fr) 44px minmax(112px, 1fr) 44px minmax(112px, 1fr);
+      gap: 8px;
+      align-items: stretch;
+      margin: 10px 0;
+    }
+
+    .combo-node {
+      position: relative;
+      min-height: 118px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: visible;
+    }
+
+    .combo-node strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .92rem;
+      line-height: 1.16;
+    }
+
+    .combo-node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .edge {
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .branch {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px dashed rgba(162,62,53,.42);
+      border-radius: var(--radius);
+      background: #fffaf6;
+    }
+
+    .branch h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--brick);
+    }
+
+    .walkthrough {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding: 10px 12px 10px 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: #324046;
+    }
+
+    .step:before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      display: inline-grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #e7f0e9;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .endbox {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid rgba(31,111,88,.3);
+      border-radius: var(--radius);
+      background: #f4faf5;
+    }
+
+    .board-card {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .board-zone {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      padding: 8px;
+      border-radius: var(--radius);
+      background: #f8faf6;
+    }
+
+    .board-zone b {
+      color: var(--blue);
+    }
+
+    .variant-card {
+      padding: 14px;
+      overflow: visible;
+    }
+
+    .variant-card h3 {
+      color: var(--green);
+    }
+
+    .ratio-list,
+    .tip-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ratio-list li,
+    .tip-list li {
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .ratio-list b,
+    .tip-list b { color: var(--ink); }
+
+    .matchup-table {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr 1.25fr;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .matchup-table div {
+      padding: 10px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .matchup-table div:nth-child(3n) { border-right: 0; }
+    .matchup-table div:nth-last-child(-n+3) { border-bottom: 0; }
+    .matchup-table .head {
+      background: #eef5ef;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    details.references {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    details.references summary {
+      cursor: pointer;
+      padding: 13px 14px;
+      font-weight: 900;
+      color: var(--green);
+      background: #eef5ef;
+    }
+
+    .references-body {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .references-body p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .source-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .card-preview {
+      position: fixed;
+      z-index: 1000;
+      display: none;
+      width: min(245px, 44vw);
+      pointer-events: none;
+      filter: drop-shadow(0 18px 34px rgba(0,0,0,.26));
+    }
+
+    .card-preview img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.7);
+      background: #fff;
+    }
+
+    .card-preview.is-visible { display: block; }
+
+    @media (max-width: 920px) {
+      .hero,
+      .mind-map,
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 8px;
+      }
+
+      .hero-showcase {
+        min-height: 0;
+      }
+
+      .showcase {
+        grid-template-columns: repeat(5, minmax(44px, 1fr));
+      }
+
+      .graph-row {
+        grid-template-columns: 1fr;
+      }
+
+      .edge {
+        min-height: 18px;
+      }
+
+      .edge:before {
+        content: "v";
+      }
+
+      .edge span { display: none; }
+
+      .matchup-table {
+        grid-template-columns: 1fr;
+      }
+
+      .matchup-table div,
+      .matchup-table div:nth-child(3n),
+      .matchup-table div:nth-last-child(-n+3) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .matchup-table div:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 18px, 1220px);
+        padding-bottom: 36px;
+      }
+
+      .section {
+        padding: 14px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .node-line,
+      .board-zone {
+        grid-template-columns: 1fr;
+      }
+
+      :root { --card-w: 52px; }
+
+      .card-preview {
+        width: min(210px, 66vw);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="icon">i</span> TCG / Master Duel / Genesys, checked June 7, 2026</div>
+        <h1>Mimighoul Cheatsheet Mind Map</h1>
+        <p class="lead">A control deck that donates face-down Flip monsters, turns their bad effects against the controller, and wins by trapping the opponent under Dungeon while looping Dragon, Archfiend, Room, Master, and Rank 1 pressure.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Plan:</strong> resource denial</span>
+          <span class="pill"><strong>Win:</strong> Dungeon lock + hand rip + Rank 1 finish</span>
+          <span class="pill"><strong>Latest top:</strong> YCS Columbus Genesys Top 8</span>
+          <span class="pill"><strong>Variants:</strong> Pure, Lyrilusc, Yummy</span>
+        </div>
+      </div>
+      <div class="hero-showcase" aria-label="Mimighoul core card showcase">
+        <div class="showcase">
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=59293853" data-card-id="59293853" data-card-name="Mimighoul Room"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/59293853.jpg" alt="Mimighoul Room"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=43066927" data-card-id="43066927" data-card-name="Mimighoul Fairy"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/43066927.jpg" alt="Mimighoul Fairy"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=82933935" data-card-id="82933935" data-card-name="Mimighoul Flower"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/82933935.jpg" alt="Mimighoul Flower"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=16955631" data-card-id="16955631" data-card-name="Giant Mimighoul"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/16955631.jpg" alt="Giant Mimighoul"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=42940335" data-card-id="42940335" data-card-name="Mimighoul Throne"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/42940335.jpg" alt="Mimighoul Throne"></a>
+          <a class="card-mini" href="https://ygoprodeck.com/card/?search=55537983" data-card-id="55537983" data-card-name="Mimighoul Master"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt="Mimighoul Master"></a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Cheatsheet navigation">
+      <a href="#playstyle">Playstyle</a>
+      <a href="#core">Core Triggers</a>
+      <a href="#combos">Combo Graph</a>
+      <a href="#boards">End Boards</a>
+      <a href="#variants">Variants</a>
+      <a href="#tips">Tips</a>
+      <a href="#side">Side / Counters</a>
+      <a href="#refs">References</a>
+    </nav>
+
+    <section class="section" id="playstyle">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">i</span><h2>Playstyle And Win Condition</h2></div>
+      </div>
+      <div class="grid-3">
+        <article class="panel">
+          <h3>Identity</h3>
+          <p>Mimighoul is a control engine, not a pure combo race. The deck gives the opponent face-down monsters, then flips them so you receive the upside while they suffer the lock, discard, board wipe, or activation restriction.</p>
+        </article>
+        <article class="panel">
+          <h3>Primary Win</h3>
+          <p>Keep <b>Mimighoul Dungeon</b> online while the opponent controls a set monster. They lose their Normal Summon and cannot attack with monsters Special Summoned that turn, buying turns for Archfiend hand pressure and Rank 1 bodies.</p>
+        </article>
+        <article class="panel">
+          <h3>Closing</h3>
+          <p>Convert repeated Level 1s into <b>Giant Mimighoul</b>, Throne/Master pressure, Lyrilusc Zeus lines, or variant payoffs like Utopic Future Zexal, Yummy Synchros, Life Hack damage, or Bot Herder swings.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="core">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">+</span><h2>Core Triggers And Interactions</h2></div>
+      </div>
+      <div class="mind-map">
+        <div class="core-node">
+          <h3>Trigger Principle</h3>
+          <p>If the opponent controls your set Mimighoul, its Flip text is read from their perspective. Dragon destroys their face-up non-Mimighouls, Archfiend makes them lose a card while you draw, Slime/Flower let you search or summon, and Fairy restricts their hand-summoned monster effects.</p>
+          <ul class="tip-list">
+            <li><b>Never give without a flip plan.</b> End with Master, Room, Maker in GY, Number 31, Panther, or Book effects.</li>
+            <li><b>Do not overfill zones.</b> You need one set monster for Dungeon; extra donated monsters are leverage, not decoration.</li>
+            <li><b>Respect Maker timing.</b> If you used Maker this turn, the GY flip waits until the opponent's turn.</li>
+          </ul>
+        </div>
+        <div class="node-list">
+          <div class="node-line">
+            <div class="card-row">
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"><span>Maker</span></a>
+              <span class="plus">+</span>
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Archfiend</span></a>
+            </div>
+            <p><b>Starter + flip button.</b> Maker places a Flip on the opponent's field; Archfiend flips it immediately if you can summon it.</p>
+          </div>
+          <div class="node-line">
+            <div class="card-row">
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"><span>Dungeon</span></a>
+              <span class="plus">+</span>
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=59293853" data-card-id="59293853" data-card-name="Mimighoul Room"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/59293853.jpg" alt="Mimighoul Room"><span>Room</span></a>
+            </div>
+            <p><b>Lock + reload.</b> Dungeon controls tempo; Room adds a fresh Dragon or set body and later bounces your Mimighouls back for follow-up.</p>
+          </div>
+          <div class="node-line">
+            <div class="card-row">
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=55537983" data-card-id="55537983" data-card-name="Mimighoul Master"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt="Mimighoul Master"><span>Master</span></a>
+              <span class="plus">+</span>
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=42940335" data-card-id="42940335" data-card-name="Mimighoul Throne"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/42940335.jpg" alt="Mimighoul Throne"><span>Throne</span></a>
+            </div>
+            <p><b>Opponent-turn pressure.</b> Throne summons Master, Master flips on their Main Phase, and Throne can become a non-targeting bounce layer.</p>
+          </div>
+          <div class="node-line">
+            <div class="card-row">
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=82933935" data-card-id="82933935" data-card-name="Mimighoul Flower"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/82933935.jpg" alt="Mimighoul Flower"><span>Flower</span></a>
+              <span class="plus">+</span>
+              <a class="card-chip" href="https://ygoprodeck.com/card/?search=84824728" data-card-id="84824728" data-card-name="Treasure Panther"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/84824728.jpg" alt="Treasure Panther"><span>Panther</span></a>
+            </div>
+            <p><b>2026 extender package.</b> Flower rewards any face-down monster; Panther special summons itself and flips multiple face-downs for Rank 1 access or burn pressure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="combos">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">+</span><h2>Combo Graph</h2></div>
+        <span class="tag"><strong>Tap a starter</strong> to switch routes</span>
+      </div>
+      <div class="route-tabs" role="tablist" aria-label="Combo routes">
+        <button class="route-button is-active" data-route="dungeon" type="button">Dungeon 1-card</button>
+        <button class="route-button" data-route="dragon" type="button">Dragon 1-card</button>
+        <button class="route-button" data-route="maker" type="button">Maker 1-card</button>
+        <button class="route-button" data-route="ceiling" type="button">2-card ceiling</button>
+        <button class="route-button" data-route="yummy" type="button">Yummy bridge</button>
+        <button class="route-button" data-route="genesys" type="button">Genesys Lyrilusc</button>
+      </div>
+
+      <div class="graph-board">
+        <article class="combo-route is-active" data-route-panel="dungeon">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><span class="qty">1</span><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"><span>Dungeon</span></a></div>
+              <strong>Start with Dungeon</strong>
+              <p>Add Dragon, then Normal Summon Dragon to search Maker.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"><span>Maker</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=80551022" data-card-id="80551022" data-card-name="Mimighoul Slime"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/80551022.jpg" alt="Mimighoul Slime"><span>Slime</span></a></div>
+              <strong>Reveal Slime + Archfiend</strong>
+              <p>The opponent decides which one becomes their set monster.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Archfiend</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"><span>Dragon</span></a></div>
+              <strong>High branch: Slime set</strong>
+              <p>Summon Archfiend, flip Slime, Slime summons Dragon, Dragon searches Room.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=42940335" data-card-id="42940335" data-card-name="Mimighoul Throne"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/42940335.jpg" alt="Mimighoul Throne"><span>Throne</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=55537983" data-card-id="55537983" data-card-name="Mimighoul Master"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt="Mimighoul Master"><span>Master</span></a></div>
+              <strong>End board</strong>
+              <p>Dungeon, Master, Throne, Room set, Maker in GY, plus I:P/S:P in Advanced or Giant/Rank 1 pressure in Genesys.</p>
+            </div>
+          </div>
+          <div class="branch">
+            <h3><i class="info">i</i> Low branch: Archfiend set</h3>
+            <p>If Maker gives the opponent Archfiend and you add Slime, use Dragon + Slime for Giant, search Room, and keep the opponent's set Archfiend under Dungeon. This is lower ceiling but preserves Dungeon lock and Maker GY pressure for the opponent's turn.</p>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Activate Dungeon</b>, add Mimighoul Dragon.</div>
+            <div class="step"><b>Normal Dragon</b>, search Mimighoul Maker.</div>
+            <div class="step"><b>Maker reveal Slime + Archfiend.</b> If Slime is set to the opponent, add Archfiend and Special Summon it.</div>
+            <div class="step"><b>Archfiend flips Slime.</b> Slime lets you Special Summon Dragon from Deck; Dragon searches Room.</div>
+            <div class="step"><b>Make Throne</b> with two Level 1 Mimighouls, summon Master, search Fairy or the missing follow-up, then use the spare Level 1s for I:P/Giant depending on format.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Dungeon active, Room set, Master + Throne live, Maker in GY for next turn, and at least one line to place or flip a face-down Mimighoul during the opponent's Main Phase.</div>
+        </article>
+
+        <article class="combo-route" data-route-panel="dragon">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><span class="qty">1</span><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"><span>Dragon</span></a></div>
+              <strong>Normal Dragon</strong>
+              <p>Default search is Maker. Search Dungeon instead only when Maker or Room is already covered.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"><span>Maker</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Archfiend</span></a></div>
+              <strong>Maker branch</strong>
+              <p>Reveal Slime + Archfiend. Slime set is the high-output branch; Archfiend set is the safer lock branch.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=59293853" data-card-id="59293853" data-card-name="Mimighoul Room"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/59293853.jpg" alt="Mimighoul Room"><span>Room</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=43066927" data-card-id="43066927" data-card-name="Mimighoul Fairy"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/43066927.jpg" alt="Mimighoul Fairy"><span>Fairy</span></a></div>
+              <strong>Convert bodies</strong>
+              <p>Use Slime/Dragon/Archfiend to reach Throne or Giant, then Room supplies Dragon or a fresh set body.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=16955631" data-card-id="16955631" data-card-name="Giant Mimighoul"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/16955631.jpg" alt="Giant Mimighoul"><span>Giant</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=55537983" data-card-id="55537983" data-card-name="Mimighoul Master"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt="Mimighoul Master"><span>Master</span></a></div>
+              <strong>End board</strong>
+              <p>Without Dungeon, the board is still recursive. With any extender, add Dungeon to turn the line into the standard lock.</p>
+            </div>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Dragon -> Maker</b> is the default one-card route because Maker creates the opponent's set monster and loads Maker in GY.</div>
+            <div class="step"><b>If Slime is set</b>, add and summon Archfiend, flip Slime, summon another Dragon, and search Room.</div>
+            <div class="step"><b>If Archfiend is set</b>, add and summon Slime, make Giant with Dragon + Slime, search Room, and end on a set Archfiend under follow-up pressure.</div>
+            <div class="step"><b>If you opened Room or Maker already</b>, Dragon can search Dungeon so the same line ends with the full lock instead of just recursion.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Room set, Maker in GY, Giant or Throne line online. Add Dungeon through any extender or next turn Dragon to upgrade the board into the floodgate plan.</div>
+        </article>
+
+        <article class="combo-route" data-route-panel="maker">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><span class="qty">1</span><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"><span>Maker</span></a></div>
+              <strong>Start with Maker</strong>
+              <p>Reveal Dragon + Archfiend when you want both a search route and an immediate flip route.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"><span>Dragon</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"><span>Dungeon</span></a></div>
+              <strong>Archfiend set branch</strong>
+              <p>Add Dragon, Special Summon Dragon, search Dungeon, then Dungeon gets a second Archfiend or Fairy.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Archfiend</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=82933935" data-card-id="82933935" data-card-name="Mimighoul Flower"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/82933935.jpg" alt="Mimighoul Flower"><span>Flower</span></a></div>
+              <strong>Flip or extend</strong>
+              <p>Normal Archfiend to flip the set monster; use Flower/Fairy as the extra Level 1 body when a face-down exists.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=42940335" data-card-id="42940335" data-card-name="Mimighoul Throne"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/42940335.jpg" alt="Mimighoul Throne"><span>Throne</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=59293853" data-card-id="59293853" data-card-name="Mimighoul Room"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/59293853.jpg" alt="Mimighoul Room"><span>Room</span></a></div>
+              <strong>Board or floor</strong>
+              <p>High roll reaches draw/discard + Dungeon + Throne. Low roll keeps Room + set Dragon/Archfiend as the next-turn trap.</p>
+            </div>
+          </div>
+          <div class="branch">
+            <h3><i class="info">i</i> Going second bonus</h3>
+            <p>If Dragon is the monster given to the opponent and Archfiend flips it, Dragon acts as a non-Mimighoul board wipe against the opponent's face-up monsters. That is weaker going first but valuable into established boards.</p>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Maker reveal Dragon + Archfiend.</b> If Archfiend is set, add Dragon and Special Summon Dragon to search Dungeon.</div>
+            <div class="step"><b>Dungeon add another Archfiend</b> when you need to flip the set Archfiend immediately; otherwise add Fairy or Flower to extend.</div>
+            <div class="step"><b>Normal Archfiend</b>, flip the set Archfiend, draw 1, force the opponent to send 1, then convert the Level 1s into Throne/Giant.</div>
+            <div class="step"><b>If Dragon is set instead</b>, summon Archfiend to flip Dragon. Use the resulting bodies for Giant and search Dungeon or Room based on what is missing.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Maker-only is RNG-sensitive. Accept a lower board if needed: Dungeon or Room plus an opponent set monster is still a real lock and creates next-turn Maker GY pressure.</div>
+        </article>
+
+        <article class="combo-route" data-route-panel="ceiling">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"><span>Dungeon</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"><span>Dragon</span></a></div>
+              <strong>Two-card starter</strong>
+              <p>Having Dragon and Dungeon means Dragon can search Maker while Dungeon searches the missing monster.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=80551022" data-card-id="80551022" data-card-name="Mimighoul Slime"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/80551022.jpg" alt="Mimighoul Slime"><span>Slime</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Archfiend</span></a></div>
+              <strong>Flip package</strong>
+              <p>Maker supplies one set monster while the extra search supplies the monster that flips it or stays set.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=55537983" data-card-id="55537983" data-card-name="Mimighoul Master"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt="Mimighoul Master"><span>Master</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=16955631" data-card-id="16955631" data-card-name="Giant Mimighoul"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/16955631.jpg" alt="Giant Mimighoul"><span>Giant</span></a></div>
+              <strong>Rank 1 conversion</strong>
+              <p>Throne summons Master, Giant finds the missing Mimighoul card, and spare bodies become I:P or Lyrilusc Xyz.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=50415441" data-card-id="50415441" data-card-name="Mimighoul Archfiend"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt="Mimighoul Archfiend"><span>Set Archfiend</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=59293853" data-card-id="59293853" data-card-name="Mimighoul Room"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/59293853.jpg" alt="Mimighoul Room"><span>Room</span></a></div>
+              <strong>Ceiling board</strong>
+              <p>Hand rip now, Dungeon lock now, and Room/Master/Maker layered for their Main Phase.</p>
+            </div>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Use the card you naturally drew as the starter</b>, then use the other search to fetch the missing Maker/Dungeon/Archfiend piece.</div>
+            <div class="step"><b>Prioritize Archfiend hand rip</b> when you can flip it immediately and still leave the opponent with a face-down monster.</div>
+            <div class="step"><b>Use Room as the backup lock</b>: summon Dragon to your field for follow-up or set it to the opponent if you need Dungeon to stay active.</div>
+            <div class="step"><b>Stop extending when Nibiru/Mulcharmy math gets bad.</b> Dungeon + Room + one opponent set monster is usually enough if the hand is exposed.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Dungeon lock, opponent face-down Archfiend or Slime, Room set, Master + Throne or Giant, Maker in GY, and one searched follow-up Mimighoul.</div>
+        </article>
+
+        <article class="combo-route" data-route-panel="yummy">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=31425736" data-card-id="31425736" data-card-name="Cupsy Yummy"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/31425736.jpg" alt="Cupsy Yummy"><span>Cupsy</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=13204145" data-card-id="13204145" data-card-name="Mimighoul Maker"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt="Mimighoul Maker"><span>Maker</span></a></div>
+              <strong>Yummy bodies + Maker</strong>
+              <p>Yummy gives repeatable Level 1 access while Maker creates the Mimighoul field state.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=41999284" data-card-id="41999284" data-card-name="Linkuriboh"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/41999284.jpg" alt="Linkuriboh"><span>Linkuriboh</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=16955631" data-card-id="16955631" data-card-name="Giant Mimighoul"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/16955631.jpg" alt="Giant Mimighoul"><span>Giant</span></a></div>
+              <strong>Bridge both ways</strong>
+              <p>Mimighoul can bridge into Yummy through Link-1 bodies; Yummy can bridge into Mimighoul by making Giant with two Level 1s.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=30581601" data-card-id="30581601" data-card-name="Yummy Snatchy"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/30581601.jpg" alt="Yummy Snatchy"><span>Snatchy</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=33198837" data-card-id="33198837" data-card-name="Naturia Beast"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/33198837.jpg" alt="Naturia Beast"><span>Naturia Beast</span></a></div>
+              <strong>Variant payoffs</strong>
+              <p>Yummy pressure adds stronger going-second pushes and different end-board threats.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=26973555" data-card-id="26973555" data-card-name="Utopic Draco Future"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/26973555.jpg" alt="Number F0: Utopic Draco Future"><span>Draco Future</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=86809440" data-card-id="86809440" data-card-name="Mimighoul Dungeon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt="Mimighoul Dungeon"><span>Dungeon</span></a></div>
+              <strong>End board</strong>
+              <p>Layer a Yummy board with Dungeon/Room or use Mimighoul as the searchable disruption package.</p>
+            </div>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Keep Maker as the Mimighoul core.</b> The 2026 Yummy notes specifically treat Maker as the card that turns the variant on.</div>
+            <div class="step"><b>Use Yummy Level 1s to make Giant</b>, search Dungeon/Room/Maker, then let the Yummy engine reclaim bodies for its own Synchro and Link route.</div>
+            <div class="step"><b>Do not cut all non-engine.</b> The successful Yummy lists kept hand traps, Dominus Purge, Thrust/Talent, and Called by the Grave style protection.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Deck-dependent Yummy interruption plus Mimighoul Dungeon or Room. Common payoffs include Snatchy, Naturia Beast, Draco Future, and a prepared Maker/Dungeon follow-up.</div>
+        </article>
+
+        <article class="combo-route" data-route-panel="genesys">
+          <div class="graph-row">
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=97949165" data-card-id="97949165" data-card-name="Lyrilusc - Turquoise Warbler"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/97949165.jpg" alt="Lyrilusc - Turquoise Warbler"><span>Warbler</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=81522098" data-card-id="81522098" data-card-name="Mimighoul Dragon"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"><span>Dragon</span></a></div>
+              <strong>Top 8 shell</strong>
+              <p>Daniel Nguyen's YCS Columbus Top 8 list used Lyrilusc bodies with the Mimighoul engine.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=8491961" data-card-id="8491961" data-card-name="Lyrilusc - Recital Starling"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/8491961.jpg" alt="Lyrilusc - Recital Starling"><span>Recital</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=16955631" data-card-id="16955631" data-card-name="Giant Mimighoul"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/16955631.jpg" alt="Giant Mimighoul"><span>Giant</span></a></div>
+              <strong>Rank 1 engine</strong>
+              <p>Lyrilusc finds more Level 1s; Giant searches the missing Mimighoul card.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=41522092" data-card-id="41522092" data-card-name="Number F0: Utopic Future Zexal"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/41522092.jpg" alt="Number F0: Utopic Future Zexal"><span>Future Zexal</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=90448279" data-card-id="90448279" data-card-name="Divine Arsenal AA-ZEUS"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/90448279.jpg" alt="Divine Arsenal AA-ZEUS - Sky Thunder"><span>ZEUS</span></a></div>
+              <strong>Genesys payoff</strong>
+              <p>No Links in Genesys means Xyz conversion matters more: Future Zexal, Lyrilusc, Dragon Gate, and ZEUS.</p>
+            </div>
+            <div class="edge"><span>-></span></div>
+            <div class="combo-node">
+              <div class="card-row"><a class="card-chip" href="https://ygoprodeck.com/card/?search=45951104" data-card-id="45951104" data-card-name="Bot Herder"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/45951104.jpg" alt="Bot Herder"><span>Bot Herder</span></a><span class="plus">+</span><a class="card-chip" href="https://ygoprodeck.com/card/?search=83589191" data-card-id="83589191" data-card-name="Life Hack"><img class="card-art" src="https://images.ygoprodeck.com/images/cards/83589191.jpg" alt="Life Hack"><span>Life Hack</span></a></div>
+              <strong>Genesys tech</strong>
+              <p>Top lists used Panther, Bot Herder, Life Hack, Shifter/Fissure, and Book-style cards to punish the unique format.</p>
+            </div>
+          </div>
+          <div class="walkthrough">
+            <div class="step"><b>Open with whichever engine is live.</b> Lyrilusc gives bodies; Mimighoul gives the lock and searchable interaction.</div>
+            <div class="step"><b>Use Recital/Warbler/Cobalt to create Rank 1 density</b>, then make Giant or Throne based on whether you need search, Master, or a board clear.</div>
+            <div class="step"><b>Remember the Genesys constraint.</b> No Link plan means I:P/S:P lines become Lyrilusc, Future Zexal, Dragon Gate, and ZEUS lines.</div>
+          </div>
+          <div class="endbox"><b>Field by End Phase:</b> Xyz pressure plus Dungeon/Room. A clean line threatens Future Zexal or Lyrilusc interaction while Dungeon forces the opponent to answer the set monster first.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="boards">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">i</span><h2>End Board Examples</h2></div>
+      </div>
+      <div class="grid-4">
+        <article class="board-card">
+          <h3>Low-commitment Lock</h3>
+          <div class="board-zone"><b>Your field</b><span>Dungeon + Room set, Giant or spare Level 1.</span></div>
+          <div class="board-zone"><b>Opponent field</b><span>One face-down Mimighoul.</span></div>
+          <div class="board-zone"><b>GY / hand</b><span>Maker in GY next turn, Dragon or Fairy follow-up.</span></div>
+          <p>Use when playing under Nibiru, Mulcharmy, or weak extension.</p>
+        </article>
+        <article class="board-card">
+          <h3>Standard Control</h3>
+          <div class="board-zone"><b>Your field</b><span>Dungeon, Master, Throne, Room set, I:P/S:P or Giant.</span></div>
+          <div class="board-zone"><b>Opponent field</b><span>Face-down Archfiend, Dragon, or Slime.</span></div>
+          <div class="board-zone"><b>Triggers</b><span>Master flip, Throne bounce, Room summon/book, Maker GY.</span></div>
+          <p>The board tries to remove a card from hand, deny Normal Summon, and force awkward sequencing.</p>
+        </article>
+        <article class="board-card">
+          <h3>Genesys Top Shell</h3>
+          <div class="board-zone"><b>Your field</b><span>Dungeon or Room plus Lyrilusc/Giant/Throne/Future Zexal access.</span></div>
+          <div class="board-zone"><b>Opponent field</b><span>Set Mimighoul to switch on Dungeon.</span></div>
+          <div class="board-zone"><b>Backup</b><span>ZEUS line, Dragon Gate, Book of Eclipse, Shifter/Fissure.</span></div>
+          <p>This is the May 2026 tournament direction: Rank 1 density instead of Link conversion.</p>
+        </article>
+        <article class="board-card">
+          <h3>Yummy Hybrid</h3>
+          <div class="board-zone"><b>Your field</b><span>Yummy payoff plus Mimighoul Dungeon or Room.</span></div>
+          <div class="board-zone"><b>Opponent field</b><span>Set Mimighoul from Maker or Room.</span></div>
+          <div class="board-zone"><b>Backup</b><span>Draco Future, Naturia Beast, Snatchy, hand traps.</span></div>
+          <p>Use Yummy bodies to make Giant; use Mimighoul cards to turn on Yummy's pressure safely.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="variants">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">i</span><h2>Latest Variant Evidence</h2></div>
+        <span class="tag"><strong>Current anchor:</strong> YCS Columbus Genesys, May 23, 2026</span>
+      </div>
+      <div class="grid-3">
+        <article class="variant-card">
+          <h3>Top 8 Lyrilusc Mimighoul</h3>
+          <p>Daniel Nguyen, YCS Columbus (Genesys) Top 8. The list mixes 15 Mimighoul main-deck cards with a Lyrilusc Rank 1 package and Genesys techs.</p>
+          <ul class="ratio-list">
+            <li><b>Mimighoul core:</b> 3 Dragon, 3 Dungeon, 3 Maker, 2 Archfiend, 2 Flower, 1 Fairy, 1 Slime, 1 Master, 1 Room.</li>
+            <li><b>Bridge:</b> Beryl Canary, Turquoise Warbler, Cobalt Sparrow, Sapphire Swallow, Recital Starling, Ensemblue Robin.</li>
+            <li><b>Techs:</b> Treasure Panther, Bot Herder, Life Hack, Nibiru, Droll, Dominus Purge.</li>
+          </ul>
+        </article>
+        <article class="variant-card">
+          <h3>Top 16 Pure / Genesys</h3>
+          <p>Jordan Micah Swinkunas, YCS Columbus (Genesys) Top 16. Cleaner Mimighoul count with Shifter and Book of Eclipse.</p>
+          <ul class="ratio-list">
+            <li><b>Heavy core:</b> 3 Dragon, 3 Archfiend, 3 Fairy, 3 Flower, 3 Dungeon, 3 Maker, 2 Room.</li>
+            <li><b>Extra:</b> 3 Giant, 2 Throne, 2 Ripple Bird, Lyrilusc Xyz, Future Zexal, ZEUS.</li>
+            <li><b>Side:</b> Gameciel, Cosmic Cyclone, Swords of Concealing Light, Dimensional Fissure, Summoning Curse.</li>
+          </ul>
+        </article>
+        <article class="variant-card">
+          <h3>Yummy Mimighoul</h3>
+          <p>Master Duel and online list trend. Maker stays the core; Yummy adds better bodies, stronger going-second pushes, and alternate end-board threats.</p>
+          <ul class="ratio-list">
+            <li><b>Core:</b> 3 Dragon, 3 Dungeon, 3 Maker, 2 Archfiend, 1 Room, 1 Fairy.</li>
+            <li><b>Yummy package:</b> Cupsy, Cooky, Lollipo, Surprise, Mignon, Snatchy, Yummy Way Synchros.</li>
+            <li><b>Non-engine:</b> Purge, Imperm, Ash, Belle, Mourner, Droll, Thrust/Talent, Called by.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tips">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">i</span><h2>Tips And Recovery</h2></div>
+      </div>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Sequencing Tips</h3>
+          <ul class="tip-list">
+            <li><b>Dungeon first when you need the missing monster.</b> It turns two-card hands into deterministic lines.</li>
+            <li><b>Dragon cannot fix everything.</b> Its Flip wipe is Main Phase only, and if the opponent flips it early you lose that disruption window.</li>
+            <li><b>Archfiend is the choke point.</b> Its Flip draw/discard can be Ash'd, so do not spend every extender before it resolves unless the payoff demands it.</li>
+            <li><b>Room before your own wipe.</b> Bounce Mimighoul cards with Room GY before ZEUS or other board wipes when possible.</li>
+            <li><b>Stop at the lock against hand traps.</b> Dungeon + one opponent set + Room is often better than extending into Nibiru or extra Mulcharmy draws.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Recovery Options</h3>
+          <ul class="tip-list">
+            <li><b>Dungeon adds from GY.</b> Rebuy Dragon, Archfiend, Fairy, or an Extra Deck Mimighoul that returns to the Extra Deck instead of hand.</li>
+            <li><b>Room GY bounces any number.</b> Recycle face-up Mimighouls, save Master/Throne, dodge targeted negation, or reload donated monsters.</li>
+            <li><b>Giant searches any Mimighoul card.</b> Use spare Level 1s to replace a stopped Dungeon, Maker, or Room.</li>
+            <li><b>Master searches a monster on summon.</b> It turns Throne, Slime, or revival lines into follow-up even after your first wave is broken.</li>
+            <li><b>Flower rebuilds from any face-down.</b> If a set monster remains, Flower is both an extender and a search when flipped on the opponent's field.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="side">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">+</span><h2>Side Deck Options And Counters</h2></div>
+      </div>
+      <div class="matchup-table" role="table" aria-label="Mimighoul side deck and counter matrix">
+        <div class="head">Matchup / Problem</div>
+        <div class="head">Side For Mimighoul</div>
+        <div class="head">Countering Mimighoul</div>
+
+        <div><b>Combo decks</b><br>Kewl Tune, Yummy, RDA-style engines</div>
+        <div>Droll &amp; Lock Bird, Nibiru, Mulcharmy Fuwalos/Purulia, Dominus Purge, Kurikara.</div>
+        <div>Trade on Archfiend, Dragon, or Maker. Force them to settle for Dungeon + Room instead of a multi-body board.</div>
+
+        <div><b>Graveyard decks</b><br>recursion and GY chains</div>
+        <div>Dimension Shifter, Dimensional Fissure, Different Dimension Ground, D.D. Crow, Retaliating &quot;C&quot;.</div>
+        <div>Remove Dungeon, then play through the single set monster. Banishing Room before GY bounce matters.</div>
+
+        <div><b>Backrow / field spell wars</b><br>floodgates, Lab-style traps</div>
+        <div>Cosmic Cyclone, Hey, Trunade!, Magic Deflector, Solemn Judgment, Shared Ride if they search repeatedly.</div>
+        <div>Hit Dungeon or Room with Cosmic before they can recycle. Mass backrow removal is a known weakness.</div>
+
+        <div><b>Big boss boards</b><br>negates, towers, untargetable bodies</div>
+        <div>Gameciel, Kurikara, Book of Eclipse, Swords of Concealing Light, Dragon Flip wipe, Giant burn/destruction.</div>
+        <div>Do not leave face-downs that turn on Flower/Panther for free. Flip their donated Dragon before they can use it as removal.</div>
+
+        <div><b>Mirror / rogue control</b></div>
+        <div>Cosmic Cyclone, Shared Ride, Magic Deflector, Summoning Curse, Bot Herder for stolen board states.</div>
+        <div>Avoid giving them clean Archfiend or Flower value. If you can answer Dungeon, their monsters become much less oppressive.</div>
+      </div>
+    </section>
+
+    <section class="section" id="refs">
+      <div class="section-head">
+        <div class="title-left"><span class="icon">i</span><h2>Reference Tab</h2></div>
+      </div>
+      <details class="references">
+        <summary>Hidden references used to build this cheatsheet</summary>
+        <div class="references-body">
+          <p><b>Retrieved:</b> June 7, 2026 UTC. Public pages can change; this cheatsheet records the sources used for the current build.</p>
+          <p><b>Combo spreadsheet search:</b> Checked Master Duel Meta Combos &amp; Counters and the public Yu-Gi-Oh MD Combo Hub v1.7 spreadsheet. The visible Combo Hub tabs did not include Mimighoul, and no dedicated public Mimighoul spreadsheet surfaced in search. The combo graph above is built from the public Mimighoul guide lines plus tournament deck evidence.</p>
+          <ol class="source-list">
+            <li><a href="https://www.masterduelmeta.com/articles/guides/mimighoul-chomp">Master Duel Meta: Introduction to Mimighoul</a> - card roles, core combo families, strengths, weaknesses, tech notes.</li>
+            <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta: Combos &amp; Counters</a> - checked for combo/spreadsheet hub context.</li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1SNBSImm9jV4EMl904CK_y-rxuxQvzkNq-7aRmuaEVNw/edit?usp=sharing">Yu-Gi-Oh MD Combo Hub v1.7</a> - public spreadsheet checked; visible tabs did not show Mimighoul.</li>
+            <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Mimighoul">YGOPRODeck API: Mimighoul archetype</a> - card IDs and card-text verification for image URLs.</li>
+            <li><a href="https://ygoprodeck.com/tournament/ycs-columbus-genesys-4625">YGOPRODeck: YCS Columbus (Genesys), May 23, 2026</a> - latest tournament placement anchor, including Mimighoul Top 8 and Top 16.</li>
+            <li><a href="https://ygoprodeck.com/deck/lyrilusc-mimighoul-713162">YGOPRODeck: Lyrilusc Mimighoul Top 8</a> - Daniel Nguyen deck ratios and Genesys shell.</li>
+            <li><a href="https://ygoprodeck.com/deck/mimighoul-713486">YGOPRODeck: Mimighoul Top 16</a> - Jordan Micah Swinkunas pure/Genesys ratios.</li>
+            <li><a href="https://www.masterduelmeta.com/top-decks/rating-duels/february-2026/yummy-mimighoul/drex/cnXeA">Master Duel Meta: Yummy Mimighoul by Drex</a> - Yummy bridge notes and core Maker emphasis.</li>
+            <li><a href="https://ygoprodeck.com/deck/mimighoul-yummy-1st-place-704205">YGOPRODeck: Mimighoul-Yummy 1st place</a> - Yummy/Mimighoul list ratios and side deck examples.</li>
+            <li><a href="https://www.yugiohmeta.com/tier-list/deck-types/Mimighoul">Yu-Gi-Oh! Meta: Mimighoul deck breakdown</a> - TCG statistics and current deck size context.</li>
+            <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Mimighoul">Master Duel Meta: Mimighoul deck breakdown</a> - Master Duel usage and sample deck context.</li>
+            <li><a href="https://www.reddit.com/r/Yugioh101/comments/1tyegpk/any_tips_to_improve_my_mimighoul_deck/">Reddit r/Yugioh101: June 2026 community tips</a> - current community signal favoring Flower, Treasure Panther, Bot Herder, and fewer traps outside Room.</li>
+          </ol>
+          <p><b>Card images:</b> All card art uses the requested pattern: <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code>.</p>
+        </div>
+      </details>
+    </section>
+  </div>
+
+  <div class="card-preview" id="cardPreview" aria-hidden="true">
+    <img src="" alt="">
+  </div>
+
+  <script>
+    const routeButtons = document.querySelectorAll("[data-route]");
+    const routePanels = document.querySelectorAll("[data-route-panel]");
+
+    routeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const route = button.dataset.route;
+        routeButtons.forEach((btn) => btn.classList.toggle("is-active", btn === button));
+        routePanels.forEach((panel) => {
+          panel.classList.toggle("is-active", panel.dataset.routePanel === route);
+        });
+      });
+    });
+
+    const preview = document.getElementById("cardPreview");
+    const previewImg = preview.querySelector("img");
+    const cardTargets = document.querySelectorAll("[data-card-id]");
+
+    function showPreview(target, event) {
+      const id = target.dataset.cardId;
+      previewImg.src = `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
+      previewImg.alt = target.dataset.cardName || "Card preview";
+      preview.classList.add("is-visible");
+      movePreview(event);
+    }
+
+    function movePreview(event) {
+      if (!event) return;
+      const gap = 18;
+      const width = preview.offsetWidth || 245;
+      const height = preview.offsetHeight || 356;
+      let x = event.clientX + gap;
+      let y = event.clientY + gap;
+      if (x + width > window.innerWidth - 8) x = event.clientX - width - gap;
+      if (y + height > window.innerHeight - 8) y = window.innerHeight - height - 8;
+      preview.style.left = `${Math.max(8, x)}px`;
+      preview.style.top = `${Math.max(8, y)}px`;
+    }
+
+    function hidePreview() {
+      preview.classList.remove("is-visible");
+      previewImg.removeAttribute("src");
+    }
+
+    cardTargets.forEach((target) => {
+      target.addEventListener("mouseenter", (event) => showPreview(target, event));
+      target.addEventListener("mousemove", movePreview);
+      target.addEventListener("mouseleave", hidePreview);
+      target.addEventListener("focus", (event) => showPreview(target, event));
+      target.addEventListener("blur", hidePreview);
+    });
+  </script>
+</body>
+</html>

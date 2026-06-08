@@ -1,0 +1,1929 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sky Striker Mitsurugi Cheatsheet</title>
+  <style>
+    :root {
+      --ink: #16181d;
+      --muted: #5a6070;
+      --line: #d9dee8;
+      --paper: #f5f7fb;
+      --panel: #ffffff;
+      --panel-2: #f0f4f8;
+      --red: #c73932;
+      --gold: #c28a22;
+      --green: #157a5b;
+      --blue: #315ba8;
+      --violet: #7252a6;
+      --shadow: 0 18px 60px rgba(21, 24, 32, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(245,247,251,0.98)),
+        repeating-linear-gradient(135deg, rgba(49,91,168,0.08) 0 1px, transparent 1px 12px);
+      font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .section {
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: clamp(20px, 4vw, 36px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(199,57,50,0.1), transparent 34%),
+        linear-gradient(300deg, rgba(21,122,91,0.12), transparent 38%);
+      pointer-events: none;
+    }
+
+    .hero-main > * {
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--green);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      max-width: 780px;
+      font-size: clamp(36px, 7vw, 68px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.05;
+      margin-bottom: 12px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: 16px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 840px;
+      color: #303744;
+      font-size: clamp(16px, 2vw, 19px);
+      margin-bottom: 20px;
+    }
+
+    .hero-side {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .mini-stack {
+      display: grid;
+      gap: 9px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.82);
+      padding: 10px;
+      border-radius: var(--radius);
+      min-height: 82px;
+    }
+
+    .fact b {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .fact span {
+      display: block;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .section {
+      padding: clamp(16px, 3vw, 24px);
+      margin: 14px 0;
+    }
+
+    .section.tight {
+      padding-bottom: 14px;
+    }
+
+    .section-title {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title h2 {
+      margin-bottom: 0;
+    }
+
+    .title-left {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-weight: 900;
+      border: 1px solid currentColor;
+      color: var(--blue);
+      background: #eef4ff;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .icon.plus {
+      color: var(--green);
+      background: #eaf7f1;
+    }
+
+    .icon.info {
+      color: var(--gold);
+      background: #fff8e7;
+      font-style: italic;
+    }
+
+    .chip-row,
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #27303e;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .pill.red {
+      background: #fff0ee;
+      color: #9f2f2b;
+      border-color: #efc8c4;
+    }
+
+    .pill.green {
+      background: #eaf7f1;
+      color: #0f674d;
+      border-color: #b9dfd1;
+    }
+
+    .pill.gold {
+      background: #fff8e7;
+      color: #8d641a;
+      border-color: #ead195;
+    }
+
+    .pill.blue {
+      background: #eef4ff;
+      color: #254d92;
+      border-color: #c3d2f2;
+    }
+
+    .card-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 36px;
+      max-width: 100%;
+      padding: 4px 9px 4px 4px;
+      border: 1px solid #cfd6e3;
+      border-radius: 7px;
+      background: #fff;
+      color: #111827;
+      font-weight: 800;
+      font-size: 12px;
+      box-shadow: 0 3px 9px rgba(12, 18, 28, 0.06);
+      cursor: default;
+    }
+
+    .card-chip img {
+      width: 25px;
+      height: 35px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: #e7ebf1;
+    }
+
+    .card-chip span {
+      overflow-wrap: anywhere;
+    }
+
+    .card-chip:focus,
+    .card-chip:hover {
+      border-color: var(--blue);
+      outline: 2px solid rgba(49,91,168,0.14);
+    }
+
+    .card-preview {
+      position: fixed;
+      z-index: 1000;
+      width: min(240px, 44vw);
+      display: none;
+      pointer-events: none;
+      border-radius: 10px;
+      border: 1px solid rgba(20,24,30,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      background: #fff;
+      padding: 7px;
+    }
+
+    .card-preview img {
+      display: block;
+      width: 100%;
+      border-radius: 7px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note-card,
+    .combo-card,
+    .board-card,
+    .match-card,
+    .variant-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 14px;
+    }
+
+    .note-card {
+      background: linear-gradient(180deg, #fff, #f8fafc);
+    }
+
+    .note-card p:last-child,
+    .combo-card p:last-child,
+    .board-card p:last-child,
+    .match-card p:last-child,
+    .variant-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #eef4ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .trigger-box {
+      border: 1px dashed #c5ccd8;
+      background: #f8fafc;
+      border-radius: var(--radius);
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .trigger-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .plus-text {
+      font-weight: 1000;
+      color: var(--green);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .mind-map-wrap {
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .mind-map {
+      min-width: 880px;
+      display: grid;
+      grid-template-columns: 220px repeat(4, minmax(150px, 1fr));
+      gap: 12px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .map-node {
+      position: relative;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 12px;
+      min-height: 132px;
+      text-align: left;
+      box-shadow: 0 8px 22px rgba(12,18,28,0.07);
+    }
+
+    button.map-node {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .map-node.active {
+      outline: 3px solid rgba(49,91,168,0.2);
+      border-color: var(--blue);
+    }
+
+    .map-node.root {
+      background: linear-gradient(180deg, #111827, #253043);
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .map-node.root p {
+      color: #dfe6f2;
+    }
+
+    .map-node:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 13px;
+      border-top: 2px solid #aeb8c9;
+    }
+
+    .map-node:nth-last-child(1):after,
+    .map-node:nth-last-child(2):after,
+    .map-node:nth-last-child(3):after,
+    .map-node:nth-last-child(4):after {
+      display: none;
+    }
+
+    .map-node small {
+      display: inline-flex;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 11px;
+    }
+
+    .map-node.root small {
+      color: #b6c5dc;
+    }
+
+    .map-node h3 {
+      margin-bottom: 8px;
+    }
+
+    .map-node p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .combo-detail {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      padding: 14px;
+    }
+
+    .detail-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-main {
+      border-left: 1px solid var(--line);
+      padding-left: 14px;
+    }
+
+    .detail-meta {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .path-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #fff;
+      background: #253043;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .combo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .combo-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .combo-card header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #3d4552;
+      font-weight: 900;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .tag.red {
+      background: #fff0ee;
+      color: #9f2f2b;
+    }
+
+    .tag.green {
+      background: #eaf7f1;
+      color: #0f674d;
+    }
+
+    .tag.gold {
+      background: #fff8e7;
+      color: #8d641a;
+    }
+
+    .tag.blue {
+      background: #eef4ff;
+      color: #254d92;
+    }
+
+    .tag.violet {
+      background: #f1ecfb;
+      color: #624293;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-line {
+      display: grid;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
+    .field-line b {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .match-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .match-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .side-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: table;
+      background: #fff;
+    }
+
+    .side-table th,
+    .side-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .side-table th {
+      background: #eef2f7;
+      font-size: 12px;
+      color: #3b4350;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .side-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .timeline-date {
+      font-weight: 900;
+      color: var(--blue);
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      min-height: 36px;
+      padding: 7px 12px;
+      font-weight: 900;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .tab-button[aria-selected="true"] {
+      color: #fff;
+      background: #253043;
+      border-color: #253043;
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
+    .refs-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .refs-list li {
+      padding-left: 4px;
+    }
+
+    .source-note {
+      border: 1px solid #ead195;
+      background: #fff8e7;
+      color: #5f471a;
+      border-radius: var(--radius);
+      padding: 10px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .two-col,
+      .tips-grid,
+      .combo-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-main {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 14px;
+      }
+
+      .three-col,
+      .combo-grid,
+      .board-grid,
+      .match-grid,
+      .variant-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .shell {
+        width: min(100% - 18px, 1180px);
+        padding-top: 10px;
+      }
+
+      .facts,
+      .three-col,
+      .combo-grid,
+      .board-grid,
+      .match-grid,
+      .variant-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .section,
+      .hero-side {
+        padding: 14px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .card-chip {
+        font-size: 11px;
+      }
+
+      .side-table,
+      .side-table tbody,
+      .side-table tr,
+      .side-table td,
+      .side-table th {
+        display: block;
+      }
+
+      .side-table thead {
+        display: none;
+      }
+
+      .side-table tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .side-table td {
+        border-bottom: 0;
+      }
+
+      .side-table td:before {
+        content: attr(data-label);
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="cardPreview" class="card-preview" aria-hidden="true"></div>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-main">
+        <div class="eyebrow"><span class="icon info">i</span> TCG-focused hybrid mind map</div>
+        <h1 id="pageTitle">Sky Striker Mitsurugi</h1>
+        <p class="subtitle">A top-down cheatsheet for the Striker control shell plus the Mitsurugi Ritual package: how to open, where the lines branch, what the End Phase should look like, and how to side into the June 2026 field.</p>
+        <div class="chip-row">
+          <span class="pill green">Last checked: 2026-06-07 UTC</span>
+          <span class="pill red">TCG Advanced: May 18, 2026 list</span>
+          <span class="pill blue">Use card hover for full-size images</span>
+          <span class="pill gold">Hidden references tab at bottom</span>
+        </div>
+        <div class="facts" aria-label="Deck quick facts">
+          <div class="fact">
+            <b>Role</b>
+            <span>Midrange control</span>
+          </div>
+          <div class="fact">
+            <b>Main win</b>
+            <span>Trade, loop, then Linkage or Murakumo push</span>
+          </div>
+          <div class="fact">
+            <b>Core tension</b>
+            <span>Keep Main Monster Zones clear</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side" aria-label="Core cards">
+        <h2>Core Pack</h2>
+        <div class="mini-stack">
+          <div>
+            <div class="trigger-title"><span class="icon plus">+</span> Sky Striker access</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="engage"></span>
+              <span class="card-chip" data-card="raye"></span>
+              <span class="card-chip" data-card="linkage"></span>
+              <span class="card-chip" data-card="zero"></span>
+            </div>
+          </div>
+          <div>
+            <div class="trigger-title"><span class="icon plus">+</span> Mitsurugi access</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="habakiri"></span>
+              <span class="card-chip" data-card="preprep"></span>
+              <span class="card-chip" data-card="mirror"></span>
+              <span class="card-chip" data-card="prayers"></span>
+            </div>
+          </div>
+          <div>
+            <div class="trigger-title"><span class="icon info">i</span> Current top-shell notes</div>
+            <p>Recent exact hybrid tops favored a compact Mitsurugi package inside a heavy spell shell. Radiant Typhoon Sky Striker is the broader post-banlist Striker variant with the most recent YCS Top 4 signal.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="planTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="planTitle">Playstyle And Win Condition</h2>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="note-card">
+          <h3>Game Plan</h3>
+          <p>Sky Striker gives the deck a low-commitment spell engine: trade with Widow Anchor, Shark Cannon, Linkage, Droplet, and Engage recursion while keeping Raye live. Mitsurugi raises the ceiling by turning Habakiri, Pre-Prep, or Prayers into Ritual pressure and tribute-trigger follow-up.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use Striker spells while your Main Monster Zones are empty.</span></li>
+            <li><span class="num">2</span><span>Only put Mitsurugi Rituals in the Main Monster Zone when the interaction is worth turning off Striker spells.</span></li>
+            <li><span class="num">3</span><span>Win by exhausting responses, then convert with Linkage damage, Murakumo wipe, stolen monsters, or Extra Deck cleanup.</span></li>
+          </ul>
+        </div>
+        <div class="note-card">
+          <h3>Current Format Assumptions</h3>
+          <p>As of the official May 18, 2026 TCG list, Habakiri is Limited, Droll is Semi-Limited, Hornet Drones is Limited, and King of the Feral Imps is Forbidden. Master Duel lines can differ, so the TCG graph avoids relying on Feral Imps as the bridge.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="habakiri"></span>
+            <span class="card-chip" data-card="droll"></span>
+            <span class="card-chip" data-card="hornet"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" aria-labelledby="mapTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="mapTitle">Combo Mind Map</h2>
+        </div>
+        <span class="pill blue">Tap a node to inspect the route</span>
+      </div>
+
+      <div class="mind-map-wrap" aria-label="Interactive combo graph">
+        <div class="mind-map">
+          <button class="map-node root active" type="button" data-combo="root">
+            <small>Decision point</small>
+            <h3>Open hand</h3>
+            <p>Choose the route by which engine is live and whether you must respect Droll, Nibiru, or Main Monster Zone lockout.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="engage"></span>
+              <span class="card-chip" data-card="preprep"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="strikerControl">
+            <small>Low risk</small>
+            <h3>Engage/Raye -> Shizuku</h3>
+            <p>One-card control setup. Best when the hand already has interruption or you expect hand traps.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="raye"></span>
+              <span class="card-chip" data-card="shizuku"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="strikerValue">
+            <small>Spell snowball</small>
+            <h3>Hayate -> Kagari loop</h3>
+            <p>Dump and recover Engage, Linkage, or Hornet Drones to build spell count and follow-up.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="hayate"></span>
+              <span class="card-chip" data-card="kagari"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="zeroBridge">
+            <small>Modern support</small>
+            <h3>Zero bridge</h3>
+            <p>Zero adds a Striker Spell and can tribute itself for Raye plus Roze. Use for bodies, not Feral Imps in TCG.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="zero"></span>
+              <span class="card-chip" data-card="roze"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="linkageKill">
+            <small>Going second</small>
+            <h3>Linkage push</h3>
+            <p>After trades, convert the current Ace into another body and count exact damage.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="linkage"></span>
+              <span class="card-chip" data-card="kagari"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="preprep">
+            <small>Ritual access</small>
+            <h3>Pre-Prep -> Mirror</h3>
+            <p>Pre-Prep gets Mirror plus a named Ritual monster. It pressures Droll before your Striker searches.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="preprep"></span>
+              <span class="card-chip" data-card="mirror"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="habakiriSaji">
+            <small>Starter</small>
+            <h3>Habakiri -> Saji</h3>
+            <p>Reveal Habakiri, summon Saji, tribute Saji, then choose Prayers or Ritual based on your hand.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="habakiri"></span>
+              <span class="card-chip" data-card="saji"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="murakumoBreak">
+            <small>Board break</small>
+            <h3>Murakumo pressure</h3>
+            <p>Ritual or Prayers access lets Murakumo clear monsters, tax responses, and force battle math.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="murakumo"></span>
+              <span class="card-chip" data-card="ritual"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="futsuControl">
+            <small>Going first</small>
+            <h3>Futsu control branch</h3>
+            <p>Heavier Mitsurugi lists can end on Futsu plus Great Purification for opponent-turn interaction.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="futsu"></span>
+              <span class="card-chip" data-card="purification"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="combo-detail" aria-live="polite">
+        <aside class="detail-side">
+          <span id="detailLabel" class="path-label">Decision point</span>
+          <h3 id="detailTitle">Open hand</h3>
+          <div id="detailCards" class="card-row"></div>
+          <p id="detailMeta" class="detail-meta">Pick the engine that gives the cleanest first search while preserving enough interaction for the matchup.</p>
+        </aside>
+        <div class="detail-main">
+          <ol id="detailSteps" class="list"></ol>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> End board target</div>
+            <p id="detailEnd">A playable hand should become either Shizuku plus Raye/follow-up, a Ritual interaction board, or a going-second damage line without leaving dead Main Monster Zone clutter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="comboTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="comboTitle">Core Combos And Interactions</h2>
+        </div>
+      </div>
+
+      <div class="combo-grid">
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag blue">Striker starter</span>
+              <h3>Basic Engage into Shizuku</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="engage"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="raye"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Activate Engage while the Main Monster Zone is empty. Add Raye if you lack a body; otherwise add Linkage, Widow Anchor, or follow-up.</span></li>
+            <li><span class="num">2</span><span>Normal Raye, link into Shizuku, set interaction, and pass.</span></li>
+            <li><span class="num">3</span><span>End Phase Shizuku searches a different Striker Spell than the names already in GY.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Triggers together</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="shizuku"></span>
+              <span class="plus-text">+</span>
+              <span class="card-chip" data-card="raye"></span>
+            </div>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag green">Mitsurugi starter</span>
+              <h3>Habakiri reveal into Saji</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="habakiri"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="saji"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="prayers"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Reveal Habakiri in hand; Special Summon Saji from Deck; resolve Habakiri by Tributing Saji.</span></li>
+            <li><span class="num">2</span><span>Saji triggers because it was Tributed. Add Prayers when you need bodies or Ritual when you already have materials.</span></li>
+            <li><span class="num">3</span><span>Prayers can search the missing Mitsurugi monster and turn a hand/GY Mitsurugi into a field body, setting up Murakumo or follow-up.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Chain discipline</div>
+            <p>Do not default to the longest line. If Shizuku plus Prayers already beats the hand you expect, stop before walking into Nibiru.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag gold">Search density</span>
+              <h3>Pre-Prep into Mirror package</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="preprep"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="mirror"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="habakiri"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Pre-Preparation gets Mitsurugi Mirror and one named Mitsurugi Ritual Monster.</span></li>
+            <li><span class="num">2</span><span>Use Habakiri to access Saji, then choose the Saji search based on what Pre-Prep already covered.</span></li>
+            <li><span class="num">3</span><span>Mirror is your recovery Ritual Spell from hand or GY; Ritual is the power card that can summon from Deck.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> Droll checkpoint</div>
+            <p>Pre-Prep often forces Droll. If it resolves and the opponent does not Droll you, your later Engage or Prayers searches are more likely to resolve.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag red">Going second</span>
+              <h3>Murakumo board break</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="murakumo"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="droplet"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="linkage"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use Droplet, Anchor, H.A.M.P., Lava Golem, or Prayers to force interaction before committing the Ritual line.</span></li>
+            <li><span class="num">2</span><span>Special Summon Murakumo through Ritual, Mirror, or Prayers access to clear opposing monsters.</span></li>
+            <li><span class="num">3</span><span>Convert into damage with Linkage or keep Murakumo plus set interaction when lethal is not clean.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Tax response</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="murakumo"></span>
+              <span class="plus-text">+</span>
+              <span class="card-chip" data-card="prayers"></span>
+            </div>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag violet">Modern Striker</span>
+              <h3>Zero into body conversion</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="zero"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="raye"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="roze"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Make Zero only when the added Striker Spell or the Raye/Roze bodies improve the hand more than Kagari or Shizuku.</span></li>
+            <li><span class="num">2</span><span>Tribute Zero to produce Raye and Roze from Deck/GY, then use them for Link pressure or generic Rank 4s available to the list.</span></li>
+            <li><span class="num">3</span><span>In current TCG, do not plan on King of the Feral Imps. It is forbidden.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> Best use</div>
+            <p>Zero is a bridge and refill tool. It is not always better than simply ending on Shizuku plus a live Raye.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag blue">OTK branch</span>
+              <h3>Raye plus Linkage</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="raye"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="linkage"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="hayate"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Raye into Hayate, attack directly, and send the Spell that your hand can reuse immediately.</span></li>
+            <li><span class="num">2</span><span>Kagari recovers the best Spell. If damage is safe, attack with Kagari.</span></li>
+            <li><span class="num">3</span><span>Activate Linkage by sending your current Ace or another card you control, summon the right Ace, and count exact lethal.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> If they survive</div>
+            <p>Convert back into Shizuku, search End Phase, and keep the game controlled instead of forcing an unsafe final attack.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="boardTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="boardTitle">End Board Examples</h2>
+        </div>
+        <span class="pill gold">Field by End Phase</span>
+      </div>
+
+      <div class="board-grid">
+        <article class="board-card">
+          <span class="tag blue">Control floor</span>
+          <h3>Shizuku Hold</h3>
+          <div class="field-line">
+            <b>Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="shizuku"></span>
+              <span class="card-chip" data-card="widow"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>GY/follow-up</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="raye"></span>
+              <span class="card-chip" data-card="engage"></span>
+            </div>
+          </div>
+          <p>Use when you suspect Droll, Nibiru, or a hand that already has enough defense.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag green">Hybrid pressure</span>
+          <h3>Shizuku plus Prayers</h3>
+          <div class="field-line">
+            <b>Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="shizuku"></span>
+              <span class="card-chip" data-card="prayers"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>Hand/GY</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="habakiri"></span>
+              <span class="card-chip" data-card="murakumo"></span>
+            </div>
+          </div>
+          <p>The cleanest compact-hybrid board: Striker follow-up stays online while Prayers threatens a Ritual swing.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag red">Ritual board</span>
+          <h3>Murakumo Interaction</h3>
+          <div class="field-line">
+            <b>Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="murakumo"></span>
+              <span class="card-chip" data-card="purification"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>Cost</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="mirror"></span>
+              <span class="card-chip" data-card="kusanagi"></span>
+            </div>
+          </div>
+          <p>Strongest when the opponent must play through monster clear plus negate, but it turns off Striker spells until you clear the Main Monster Zone.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag violet">Modern support</span>
+          <h3>Amatsu/Lemnisgate Trap</h3>
+          <div class="field-line">
+            <b>Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="amatsu"></span>
+              <span class="card-chip" data-card="lemnisgate"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>GY/follow-up</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="raye"></span>
+              <span class="card-chip" data-card="azalea"></span>
+            </div>
+          </div>
+          <p>Use only when the support pieces are actually in your list. The safer default is still Shizuku plus interaction.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tipsTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="tipsTitle">Tips And Recovery</h2>
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Start with Striker spells when your hand needs Engage value. Start with Pre-Prep when you want to test for Droll before committing Engage.</span></li>
+            <li><span class="num">2</span><span>After a Ritual monster occupies a Main Monster Zone, plan how it leaves: Link into Camellia/Zeke, tribute with Prayers/Purification, or convert to Dyna Mondo.</span></li>
+            <li><span class="num">3</span><span>Do not make Zero just because it is available. Kagari or Shizuku is often the tighter line when you need one exact Spell.</span></li>
+            <li><span class="num">4</span><span>Track three Spells in GY. Engage draw changes borderline hands into winning hands.</span></li>
+            <li><span class="num">5</span><span>Against open engine decks, pass on fewer summons with real interaction rather than building a 5+ summon board into Nibiru.</span></li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="raye"></span>
+            <span class="card-chip" data-card="kagari"></span>
+            <span class="card-chip" data-card="kusanagi"></span>
+            <span class="card-chip" data-card="mirror"></span>
+            <span class="card-chip" data-card="dyna"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">A</span><span>Raye recurs after Striker Links leave by battle or opponent effect. Preserve her unless Linkage damage is lethal.</span></li>
+            <li><span class="num">B</span><span>Kagari gets the best Spell back, usually Engage, Linkage, Widow Anchor, Shark Cannon, or Hornet Drones.</span></li>
+            <li><span class="num">C</span><span>Kusanagi recovers a Mitsurugi card from GY or banishment, so it fixes Mirror/Ritual attrition and Shifter games better than most engines.</span></li>
+            <li><span class="num">D</span><span>Mirror Ritual Summons from hand or GY and can shuffle itself back when your controlled Mitsurugi Ritual is Tributed.</span></li>
+            <li><span class="num">E</span><span>Dyna Mondo converts Ritual monsters into recursion and gives you a clean Extra Monster Zone body.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sideTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="sideTitle">Side Deck Options And Counters</h2>
+        </div>
+      </div>
+
+      <div class="source-note">
+        This table favors cards seen across recent topping Sky Striker Mitsurugi lists plus current-format pressure points. Always re-check local legality before registering.
+      </div>
+
+      <table class="side-table">
+        <thead>
+          <tr>
+            <th>Matchup / problem</th>
+            <th>Side options</th>
+            <th>How to use them</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Matchup / problem">Combo search decks: Kewl Tune, Mitsurugi, Yummy, Maliss</td>
+            <td data-label="Side options">
+              <div class="card-row">
+                <span class="card-chip" data-card="droll"></span>
+                <span class="card-chip" data-card="fuwalos"></span>
+                <span class="card-chip" data-card="purulia"></span>
+                <span class="card-chip" data-card="nibiru"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Droll after the first search. Fuwalos/Purulia before they chain bodies. Nibiru only when their line cannot stop short on interaction.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Branded, Dracotail, GY recursion, Mirror lines</td>
+            <td data-label="Side options">
+              <div class="card-row">
+                <span class="card-chip" data-card="ash"></span>
+                <span class="card-chip" data-card="ghostbelle"></span>
+                <span class="card-chip" data-card="ddground"></span>
+                <span class="card-chip" data-card="shark"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Ash the strongest starter, Belle the GY recovery or Kagari/Raye-style recursion, and Shark Cannon key GY bodies after forcing priority.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Established boards and high-ATK monsters</td>
+            <td data-label="Side options">
+              <div class="card-row">
+                <span class="card-chip" data-card="droplet"></span>
+                <span class="card-chip" data-card="evenly"></span>
+                <span class="card-chip" data-card="hamp"></span>
+                <span class="card-chip" data-card="lava"></span>
+                <span class="card-chip" data-card="pankratops"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Break first, then engage. Droplet sends extra spells for count; H.A.M.P. is searchable Striker removal; Lava Golem conflicts with Normal Summon, so board before committing.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Backrow and trap decks</td>
+            <td data-label="Side options">
+              <div class="card-row">
+                <span class="card-chip" data-card="duster"></span>
+                <span class="card-chip" data-card="storm"></span>
+                <span class="card-chip" data-card="jamming"></span>
+                <span class="card-chip" data-card="thrust"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Thrust finds the exact breaker after they interact. Jamming Waves is searchable and keeps Striker spell count live.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Going first into blowouts</td>
+            <td data-label="Side options">
+              <div class="card-row">
+                <span class="card-chip" data-card="solemn"></span>
+                <span class="card-chip" data-card="accusation"></span>
+                <span class="card-chip" data-card="purification"></span>
+                <span class="card-chip" data-card="eagle"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Protect Shizuku or Ritual boards. Purification is best when you can tribute a Level 5+ Reptile and still profit from the tribute trigger.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="match-grid" style="margin-top:14px">
+        <article class="match-card">
+          <div class="match-title">
+            <h3>What Stops You</h3>
+            <span class="tag red">Counter map</span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Ash on Pre-Prep or Engage denies the highest-value search.</span></li>
+            <li><span class="num">2</span><span>Droll after Pre-Prep, Engage, or Prayers cuts both engines in half.</span></li>
+            <li><span class="num">3</span><span>Imperm/Veiler on Saji or Kagari can leave you with bodies but no search.</span></li>
+            <li><span class="num">4</span><span>Nibiru punishes full hybrid lines after the fifth summon.</span></li>
+            <li><span class="num">5</span><span>Dimension Shifter hurts Striker GY loops more than Mitsurugi tribute triggers, so lean on Ritual pressure if it resolves.</span></li>
+          </ul>
+        </article>
+
+        <article class="match-card">
+          <div class="match-title">
+            <h3>How You Counter Back</h3>
+            <span class="tag green">Response map</span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Bait with a lower-value search when you already have the missing half.</span></li>
+            <li><span class="num">2</span><span>Use Droplet and Linkage as spell-count builders, not only as board breakers.</span></li>
+            <li><span class="num">3</span><span>Keep Raye in GY before passing so an opponent's removal can turn into another Ace.</span></li>
+            <li><span class="num">4</span><span>When ahead, search Widow/Shark instead of chasing more combo pieces.</span></li>
+            <li><span class="num">5</span><span>When behind, prioritize Murakumo, H.A.M.P., Evenly, TY-PHON, or Exciton over pure resource loops.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="variantTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="variantTitle">Latest Tournament Variant Notes</h2>
+        </div>
+      </div>
+
+      <div class="variant-grid">
+        <article class="variant-card">
+          <span class="tag green">Exact hybrid</span>
+          <h3>Compact Mitsurugi Striker</h3>
+          <p>Recent exact hybrid tops often trim Mitsurugi to one Habakiri, one Saji, one Murakumo, three Prayers, one Ritual, and one Mirror. This lowers bricks and leaves room for Striker, Radiant Typhoon, and board breakers.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="habakiri"></span>
+            <span class="card-chip" data-card="saji"></span>
+            <span class="card-chip" data-card="murakumo"></span>
+            <span class="card-chip" data-card="radiant"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag gold">Heavier engine</span>
+          <h3>Aramasa/Kusanagi/Futsu Build</h3>
+          <p>Heavier lists add Aramasa, Kusanagi, and Futsu to enable fuller Ritual loops, better recovery, and Great Purification boards. The tradeoff is more non-Striker pieces and more Main Monster Zone pressure.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="aramasa"></span>
+            <span class="card-chip" data-card="kusanagi"></span>
+            <span class="card-chip" data-card="futsu"></span>
+            <span class="card-chip" data-card="purification"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag blue">Current Striker trend</span>
+          <h3>Radiant Typhoon Sky Striker</h3>
+          <p>The latest high-profile Striker result found during research was Radiant Typhoon Sky Striker Top 4 at YCS Columbus 2026 on May 23. That supports keeping the Radiant Typhoon spell package in mind even when testing Mitsurugi.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="radiant"></span>
+            <span class="card-chip" data-card="fallen"></span>
+            <span class="card-chip" data-card="mst"></span>
+            <span class="card-chip" data-card="engage"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag violet">High ceiling</span>
+          <h3>Azamina 60-card Hybrid</h3>
+          <p>A Montevideo WCQ Regional-winning list used a 60-card Azamina/Mitsurugi/Sky Striker shell. It is powerful but much less suitable as a compact cheatsheet baseline because it adds a separate Sinful Spoils/Azamina decision tree.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="diabellstar"></span>
+            <span class="card-chip" data-card="deception"></span>
+            <span class="card-chip" data-card="azamina"></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="timeline" aria-label="Recent tournament trail">
+        <div class="timeline-item">
+          <div class="timeline-date">2026-05-23</div>
+          <div><b>YCS Columbus 2026:</b> Radiant Typhoon Sky Striker reached Top 4. Not the Mitsurugi hybrid, but it is the newest major Striker signal found.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026-05-10</div>
+          <div><b>Omaha WCQ Regional:</b> Mitsurugi Sky Striker Top 8, William Lewis. Compact Mitsurugi package plus Radiant Typhoon and Striker spells.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026-04-18</div>
+          <div><b>Team YCS Las Vegas:</b> Mitsurugi Sky Striker Top 8, Michael Ehresman. Another Radiant Typhoon version with heavy board breaker/Thrust options.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2026-03-28</div>
+          <div><b>Little Rock WCQ Regional:</b> Sky Striker Mitsurugi Top 8, Brandon Strong. More complete Mitsurugi package including Aramasa, Kusanagi, and Futsu.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="refsTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="refsTitle">Knowledge Tabs</h2>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Knowledge tabs">
+        <button class="tab-button" id="tab-summary" type="button" role="tab" aria-selected="true" aria-controls="panel-summary" data-tab="summary">Summary</button>
+        <button class="tab-button" id="tab-references" type="button" role="tab" aria-selected="false" aria-controls="panel-references" data-tab="references">References</button>
+      </div>
+
+      <div class="tab-panel" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary">
+        <div class="source-note">
+          Spreadsheet status: Master Duel Meta Combos & Counters is included because the user requested it, but its public crawl did not expose a submitted Mitsurugi spreadsheet. Open Combo Codex's public Markdown combo repository was used as the combo-sheet style source for the graph.
+        </div>
+        <p class="footer-note">All card thumbnails and hover previews use the requested YGOPRODeck image pattern: <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code>.</p>
+      </div>
+
+      <div class="tab-panel" id="panel-references" role="tabpanel" aria-labelledby="tab-references" hidden>
+        <ol class="refs-list">
+          <li><a href="https://ygoprodeck.com/deck/mitsurugi-sky-striker-710915" target="_blank" rel="noreferrer">YGOPRODeck: Mitsurugi Sky Striker, Omaha WCQ Regional Top 8, William Lewis, May 10 2026</a></li>
+          <li><a href="https://ygoprodeck.com/deck/mitsurugi-sky-striker-706678" target="_blank" rel="noreferrer">YGOPRODeck: Mitsurugi Sky Striker, Team YCS Las Vegas Top 8, Michael Ehresman, Apr 18 2026</a></li>
+          <li><a href="https://ygoprodeck.com/deck/sky-striker-mitsurugi-703641" target="_blank" rel="noreferrer">YGOPRODeck: Sky Striker Mitsurugi, Little Rock WCQ Regional Top 8, Brandon Strong, Mar 28 2026</a></li>
+          <li><a href="https://ygoprodeck.com/deck/azamina-mitsurugi-sky-striker-706320" target="_blank" rel="noreferrer">YGOPRODeck: Azamina Mitsurugi Sky Striker, Montevideo WCQ Regional Winner, Apr 12 2026</a></li>
+          <li><a href="https://yugioh.fandom.com/wiki/Yu-Gi-Oh%21_Championship_Series_Columbus_2026" target="_blank" rel="noreferrer">Yu-Gi-Oh! Wiki: YCS Columbus 2026 results and deck breakdown</a></li>
+          <li><a href="https://www.yugiohmeta.com/tier-list" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta tier list, one-month tournament tops, checked Jun 7 2026</a></li>
+          <li><a href="https://tcgcontender.com/yugioh/meta?format=tcg&view=overview" target="_blank" rel="noreferrer">TCG Contender TCG meta overview, June 2026</a></li>
+          <li><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/" target="_blank" rel="noreferrer">Official Yu-Gi-Oh! TCG Forbidden & Limited List, effective May 18 2026</a></li>
+          <li><a href="https://www.masterduelmeta.com/articles/guides/mitsu-kage" target="_blank" rel="noreferrer">Master Duel Meta: Introduction to Mitsurugi</a></li>
+          <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta: Combos & Counters</a></li>
+          <li><a href="https://www.opencombocodex.com/" target="_blank" rel="noreferrer">Open Combo Codex: searchable open-source combo browser</a></li>
+          <li><a href="https://github.com/Siebe-Uy/Open-Combo-Codex/tree/main/content/combos" target="_blank" rel="noreferrer">Open Combo Codex GitHub combo Markdown repository</a></li>
+          <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/355137" target="_blank" rel="noreferrer">Game8: Sky Striker core combos and interactions</a></li>
+          <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/557181" target="_blank" rel="noreferrer">Game8: Mitsurugi card guide and Pre-Preparation / Mirror notes</a></li>
+          <li><a href="https://db.ygoprodeck.com/api-guide/" target="_blank" rel="noreferrer">YGOPRODeck API and image source</a></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const imageUrl = (id) => "https://images.ygoprodeck.com/images/cards/" + id + ".jpg";
+
+    const cards = {
+      raye: { id: "26077387", name: "Sky Striker Ace - Raye" },
+      roze: { id: "37351133", name: "Sky Striker Ace - Roze" },
+      engage: { id: "63166095", name: "Sky Striker Mobilize - Engage!" },
+      linkage: { id: "9726840", name: "Sky Striker Mobilize - Linkage!" },
+      widow: { id: "98338152", name: "Sky Striker Mecha - Widow Anchor" },
+      shark: { id: "51227866", name: "Sky Striker Mecha - Shark Cannon" },
+      hornet: { id: "52340444", name: "Sky Striker Mecha - Hornet Drones" },
+      hayate: { id: "8491308", name: "Sky Striker Ace - Hayate" },
+      kagari: { id: "63288573", name: "Sky Striker Ace - Kagari" },
+      shizuku: { id: "90673288", name: "Sky Striker Ace - Shizuku" },
+      zero: { id: "76072561", name: "Sky Striker Ace = Zero" },
+      camellia: { id: "63013339", name: "Sky Striker Ace - Camellia" },
+      amatsu: { id: "25072579", name: "Prototype Sky Striker Ace - Amatsu" },
+      zeke: { id: "75147529", name: "Sky Striker Ace - Zeke" },
+      azalea: { id: "98462037", name: "Sky Striker Ace - Azalea" },
+      lemnisgate: { id: "34433770", name: "Sky Striker Special Maneuver - Lemnisgate!" },
+      hamp: { id: "33331231", name: "Surgical Striker - H.A.M.P." },
+      jamming: { id: "25955749", name: "Sky Striker Maneuver - Jamming Waves!" },
+      eagle: { id: "25733157", name: "Sky Striker Mecha - Eagle Booster" },
+      combined: { id: "17217034", name: "Combined Maneuver - Engage Zero!" },
+      habakiri: { id: "13332685", name: "Ame no Habakiri no Mitsurugi" },
+      murakumo: { id: "19899073", name: "Ame no Murakumo no Mitsurugi" },
+      futsu: { id: "55397172", name: "Futsu no Mitama no Mitsurugi" },
+      saji: { id: "18176525", name: "Mitsurugi no Mikoto, Saji" },
+      aramasa: { id: "40543231", name: "Mitsurugi no Mikoto, Aramasa" },
+      kusanagi: { id: "82782870", name: "Mitsurugi no Mikoto, Kusanagi" },
+      wousu: { id: "76948970", name: "Mitsurugi no Miko, Wousu" },
+      prayers: { id: "45171524", name: "Mitsurugi Prayers" },
+      ritual: { id: "81560239", name: "Mitsurugi Ritual" },
+      mirror: { id: "49721684", name: "Mitsurugi Mirror" },
+      purification: { id: "17954937", name: "Mitsurugi Great Purification" },
+      prep: { id: "13048472", name: "Preparation of Rites" },
+      preprep: { id: "13048472", name: "Pre-Preparation of Rites" },
+      radiant: { id: "20508881", name: "Radiant Typhoon Vision" },
+      fallen: { id: "30271097", name: "The Fallen & The Virtuous" },
+      mst: { id: "5318639", name: "Mystical Space Typhoon" },
+      ash: { id: "14558127", name: "Ash Blossom & Joyous Spring" },
+      droll: { id: "94145021", name: "Droll & Lock Bird" },
+      fuwalos: { id: "42141493", name: "Mulcharmy Fuwalos" },
+      purulia: { id: "84192580", name: "Mulcharmy Purulia" },
+      meowls: { id: "87126721", name: "Mulcharmy Meowls" },
+      ghostbelle: { id: "73642296", name: "Ghost Belle & Haunted Mansion" },
+      nibiru: { id: "27204311", name: "Nibiru, the Primal Being" },
+      droplet: { id: "24299458", name: "Forbidden Droplet" },
+      thrust: { id: "35269904", name: "Triple Tactics Thrust" },
+      talent: { id: "25311006", name: "Triple Tactics Talent" },
+      called: { id: "24224830", name: "Called by the Grave" },
+      rota: { id: "32807846", name: "Reinforcement of the Army" },
+      imperm: { id: "10045474", name: "Infinite Impermanence" },
+      ddground: { id: "31849106", name: "Different Dimension Ground" },
+      evenly: { id: "15693423", name: "Evenly Matched" },
+      storm: { id: "14532163", name: "Lightning Storm" },
+      duster: { id: "18144507", name: "Harpie's Feather Duster" },
+      lava: { id: "102380", name: "Lava Golem" },
+      pankratops: { id: "82385847", name: "Dinowrestler Pankratops" },
+      retaliating: { id: "46502744", name: "Retaliating \"C\"" },
+      solemn: { id: "41420027", name: "Solemn Judgment" },
+      accusation: { id: "78114463", name: "Solemn Accusation" },
+      dyna: { id: "73898890", name: "Dyna Mondo" },
+      sp: { id: "29301450", name: "S:P Little Knight" },
+      almiraj: { id: "60303245", name: "Salamangreat Almiraj" },
+      typhon: { id: "93039339", name: "Super Starslayer TY-PHON - Sky Crisis" },
+      exciton: { id: "46772449", name: "Evilswarm Exciton Knight" },
+      bagooska: { id: "90590303", name: "Number 41: Bagooska the Terribly Tired Tapir" },
+      diabellstar: { id: "72270339", name: "Diabellstar the Black Witch" },
+      deception: { id: "66328392", name: "Deception of the Sinful Spoils" },
+      azamina: { id: "46396218", name: "Azamina Ilia Silvia" }
+    };
+
+    const combos = {
+      root: {
+        label: "Decision point",
+        title: "Open hand",
+        meta: "Choose the branch by live engine, matchup, and hand trap risk.",
+        cards: ["engage", "raye", "preprep", "habakiri", "droplet"],
+        steps: [
+          "If Engage or Raye is the only starter, take the Shizuku control line first.",
+          "If Pre-Prep or Habakiri is live, decide whether the first search should test for Droll before using Engage.",
+          "If going second, trade with Droplet, Anchor, H.A.M.P., Lava Golem, or Murakumo before using Linkage.",
+          "Stop early when Shizuku plus interaction wins. Extend only when the extra branch beats the expected board."
+        ],
+        end: "A good opener becomes Shizuku control, Ritual interaction, or a Linkage/Murakumo damage push without locking your own Striker spells out too early."
+      },
+      strikerControl: {
+        label: "Low risk",
+        title: "Engage/Raye -> Shizuku",
+        meta: "Default floor when you need stability more than ceiling.",
+        cards: ["engage", "raye", "shizuku", "widow", "linkage"],
+        steps: [
+          "Activate Engage with no Main Monster Zone monster. Add Raye if missing.",
+          "Normal Summon Raye and Link Summon Shizuku.",
+          "Set interaction. Keep Raye in GY for recursion.",
+          "End Phase search the different Striker Spell that your hand did not already cover."
+        ],
+        end: "Shizuku in Extra Monster Zone, Raye in GY, set or held interaction, plus a searched follow-up."
+      },
+      strikerValue: {
+        label: "Spell snowball",
+        title: "Hayate -> Kagari value loop",
+        meta: "Best when battle is safe or you need 3 Spells in GY for Engage draw.",
+        cards: ["hayate", "kagari", "engage", "hornet", "shizuku"],
+        steps: [
+          "Use Raye or a token to make Hayate.",
+          "Attack directly, then send Engage, Linkage, or the needed Striker Spell.",
+          "Link Hayate into Kagari and recover the key Spell.",
+          "If the game continues, finish on Shizuku for End Phase search."
+        ],
+        end: "Spell count increased, one Spell recovered, and Shizuku or another Ace set up for the next turn."
+      },
+      zeroBridge: {
+        label: "Modern support",
+        title: "Zero bridge",
+        meta: "Useful for Striker spell access and extra bodies, but current TCG cannot use King of the Feral Imps.",
+        cards: ["zero", "raye", "roze", "kagari", "bagooska"],
+        steps: [
+          "Make Zero when its on-summon search beats Kagari or Shizuku.",
+          "Add the Striker Spell that converts the hand: Engage, Linkage, Widow Anchor, or Shark Cannon.",
+          "Tribute Zero to summon Raye and Roze from Deck/GY.",
+          "Use the two bodies for Link pressure, Bagooska/Exciton if your list supports it, or simply keep Striker recursion live."
+        ],
+        end: "A searched Striker Spell plus two bodies, usually converting into pressure or a defensive Rank/Link without relying on forbidden TCG cards."
+      },
+      linkageKill: {
+        label: "Going second",
+        title: "Raye plus Linkage push",
+        meta: "OTK branch after the opponent is simplified.",
+        cards: ["raye", "linkage", "hayate", "kagari", "widow"],
+        steps: [
+          "Use Raye into Hayate and attack directly if safe.",
+          "Send the Spell you need to recover, then use Kagari to add it back.",
+          "Use Widow Anchor or Droplet to clear the last blocker.",
+          "Activate Linkage, send your current card, summon the best Ace, and count damage exactly."
+        ],
+        end: "Lethal if the numbers line up; otherwise Shizuku plus recovered follow-up after the battle phase."
+      },
+      preprep: {
+        label: "Ritual access",
+        title: "Pre-Prep -> Mirror",
+        meta: "Pre-Prep reaches Mirror plus a named Mitsurugi Ritual Monster.",
+        cards: ["preprep", "mirror", "habakiri", "murakumo", "prayers"],
+        steps: [
+          "Activate Pre-Preparation of Rites to add Mitsurugi Mirror and a named Ritual monster, usually Habakiri.",
+          "Use Habakiri to summon and tribute Saji.",
+          "Search Prayers or Ritual with Saji depending on what the hand lacks.",
+          "Use Mirror for recovery or Ritual for Deck-summon pressure after your searches resolve."
+        ],
+        end: "Mirror plus Ritual access, Habakiri/Saji value, and a choice between Prayers bodies or Murakumo pressure."
+      },
+      habakiriSaji: {
+        label: "Starter",
+        title: "Habakiri -> Saji",
+        meta: "The compact Mitsurugi line most hybrid lists are built to access.",
+        cards: ["habakiri", "saji", "prayers", "ritual", "murakumo"],
+        steps: [
+          "Reveal Habakiri in hand.",
+          "Special Summon Saji from Deck, then Tribute Saji.",
+          "Saji adds a Mitsurugi Spell/Trap: Prayers for more bodies, Ritual for a power summon.",
+          "Use Prayers to search Murakumo or missing engine, or use Ritual if you can exactly convert Reptile levels."
+        ],
+        end: "A searchable Mitsurugi Spell/Trap, Habakiri still positioned as follow-up, and access to Murakumo or Ritual pressure."
+      },
+      murakumoBreak: {
+        label: "Board break",
+        title: "Murakumo pressure",
+        meta: "Best going second or when the opponent must commit into monster removal.",
+        cards: ["murakumo", "ritual", "mirror", "droplet", "prayers"],
+        steps: [
+          "Force negates first with Droplet, Anchor, or board breakers.",
+          "Special Summon Murakumo through Ritual, Mirror, or Prayers.",
+          "Use Murakumo on summon to destroy opposing monsters.",
+          "If they respond, Murakumo can tax the response by making them discard or lose that effect."
+        ],
+        end: "Opponent's monster board cleared or reduced, Murakumo applying pressure, and follow-up through Ritual/Prayers if lethal is not available."
+      },
+      futsuControl: {
+        label: "Going first",
+        title: "Futsu + Great Purification",
+        meta: "Heavier-engine branch for lists that include Futsu, Kusanagi, and Purification.",
+        cards: ["futsu", "purification", "kusanagi", "mirror", "prayers"],
+        steps: [
+          "Ritual Summon Futsu through Ritual or Mirror.",
+          "Set Great Purification and preserve a Reptile in GY.",
+          "When the opponent Special Summons, Futsu revives a Reptile from GY.",
+          "Use Purification by Tributing a Level 5 or higher Reptile at the highest-impact point."
+        ],
+        end: "Futsu backed by Purification, a revived Reptile, and a tribute-trigger search if the trap is used."
+      }
+    };
+
+    function renderCard(el) {
+      const card = cards[el.dataset.card];
+      if (!card) {
+        el.textContent = el.dataset.card || "Unknown card";
+        return;
+      }
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("data-card-id", card.id);
+      el.setAttribute("data-card-name", card.name);
+      el.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = imageUrl(card.id);
+      img.alt = card.name;
+      img.loading = "lazy";
+      const label = document.createElement("span");
+      label.textContent = card.name;
+      el.append(img, label);
+    }
+
+    document.querySelectorAll(".card-chip[data-card]").forEach(renderCard);
+
+    const preview = document.getElementById("cardPreview");
+
+    function showPreview(target, event) {
+      const id = target.getAttribute("data-card-id");
+      const name = target.getAttribute("data-card-name");
+      if (!id) return;
+      preview.innerHTML = '<img src="' + imageUrl(id) + '" alt="' + name + '">';
+      preview.style.display = "block";
+      movePreview(event || { clientX: window.innerWidth / 2, clientY: 100 });
+    }
+
+    function movePreview(event) {
+      if (preview.style.display !== "block") return;
+      const margin = 18;
+      const width = preview.offsetWidth || 220;
+      const height = preview.offsetHeight || 320;
+      let x = event.clientX + margin;
+      let y = event.clientY + margin;
+      if (x + width > window.innerWidth) x = event.clientX - width - margin;
+      if (y + height > window.innerHeight) y = window.innerHeight - height - margin;
+      preview.style.left = Math.max(margin, x) + "px";
+      preview.style.top = Math.max(margin, y) + "px";
+    }
+
+    function hidePreview() {
+      preview.style.display = "none";
+      preview.innerHTML = "";
+    }
+
+    document.addEventListener("mouseover", (event) => {
+      const target = event.target.closest(".card-chip");
+      if (target) showPreview(target, event);
+    });
+
+    document.addEventListener("mousemove", movePreview);
+
+    document.addEventListener("mouseout", (event) => {
+      if (event.target.closest(".card-chip")) hidePreview();
+    });
+
+    document.addEventListener("focusin", (event) => {
+      const target = event.target.closest(".card-chip");
+      if (target) showPreview(target, { clientX: window.innerWidth / 2, clientY: 110 });
+    });
+
+    document.addEventListener("focusout", (event) => {
+      if (event.target.closest(".card-chip")) hidePreview();
+    });
+
+    function cardChip(key) {
+      const span = document.createElement("span");
+      span.className = "card-chip";
+      span.dataset.card = key;
+      renderCard(span);
+      return span;
+    }
+
+    function selectCombo(key) {
+      const combo = combos[key] || combos.root;
+      document.querySelectorAll(".map-node").forEach((node) => {
+        node.classList.toggle("active", node.dataset.combo === key);
+      });
+      document.getElementById("detailLabel").textContent = combo.label;
+      document.getElementById("detailTitle").textContent = combo.title;
+      document.getElementById("detailMeta").textContent = combo.meta;
+      document.getElementById("detailEnd").textContent = combo.end;
+
+      const detailCards = document.getElementById("detailCards");
+      detailCards.innerHTML = "";
+      combo.cards.forEach((keyName, index) => {
+        if (index > 0) {
+          const plus = document.createElement("span");
+          plus.className = "plus-text";
+          plus.textContent = "+";
+          detailCards.appendChild(plus);
+        }
+        detailCards.appendChild(cardChip(keyName));
+      });
+
+      const steps = document.getElementById("detailSteps");
+      steps.innerHTML = "";
+      combo.steps.forEach((step, index) => {
+        const li = document.createElement("li");
+        const num = document.createElement("span");
+        num.className = "num";
+        num.textContent = String(index + 1);
+        const text = document.createElement("span");
+        text.textContent = step;
+        li.append(num, text);
+        steps.appendChild(li);
+      });
+    }
+
+    document.querySelectorAll(".map-node").forEach((node) => {
+      node.addEventListener("click", () => selectCombo(node.dataset.combo));
+    });
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const tabName = button.dataset.tab;
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.setAttribute("aria-selected", String(btn === button));
+        });
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.hidden = panel.id !== "panel-" + tabName;
+        });
+      });
+    });
+
+    selectCombo("root");
+  </script>
+</body>
+</html>

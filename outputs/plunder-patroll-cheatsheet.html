@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plunder Patroll Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172027;
+      --muted: #5d6670;
+      --paper: #f5f7f8;
+      --panel: #ffffff;
+      --panel-2: #eef4f2;
+      --line: #d7e0de;
+      --teal: #12706f;
+      --red: #bd3d36;
+      --gold: #b98018;
+      --blue: #2d5d91;
+      --green: #22724a;
+      --violet: #69528c;
+      --shadow: 0 16px 46px rgba(21, 31, 38, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96) 0, rgba(245,247,248,.98) 420px, #edf4f2 100%),
+        repeating-linear-gradient(135deg, rgba(18,112,111,.08) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 22px;
+      align-items: center;
+      padding: 16px 0 14px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 860px;
+      margin-bottom: 14px;
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 820px;
+      color: #314048;
+      font-size: clamp(1rem, 1.8vw, 1.16rem);
+    }
+
+    .chips, .hero-pills, .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.84);
+      color: #263239;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong, .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      min-height: 340px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(46px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,39,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(13px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(11px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase .card-mini > span:not(.zoom) { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(215,224,222,.85);
+      background: linear-gradient(180deg, rgba(245,247,248,.97), rgba(245,247,248,.89));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a, .route-button, .tab-button, .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .quick-nav a:hover, .route-button:hover, .tab-button:hover, .ref-toggle:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .route-button.active, .tab-button.active {
+      color: #fff;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .quick-nav .ref-toggle {
+      margin-left: auto;
+      color: var(--violet);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(215,224,222,.8);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 840px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel, .mini-panel, .node, .route-card, .field-zone, .matchup, .tip-row {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+    }
+
+    .panel {
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .mini-panel, .field-zone, .matchup, .tip-row {
+      padding: 13px;
+    }
+
+    .mini-panel p, .field-zone p, .matchup p, .tip-row p {
+      margin-bottom: 0;
+      color: #33424a;
+    }
+
+    .mini-panel strong, .field-zone strong, .matchup strong, .tip-row strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .callout {
+      border-left: 4px solid var(--gold);
+      padding: 12px 14px;
+      background: rgba(255,255,255,.82);
+      border-radius: var(--radius);
+    }
+
+    .callout p { margin-bottom: 0; color: #34414a; }
+
+    .combo-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 8px;
+      position: sticky;
+      top: 62px;
+    }
+
+    .route-button {
+      width: 100%;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .route-meta {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 650;
+    }
+
+    .route-button.active .route-meta { color: rgba(255,255,255,.82); }
+
+    .route-card {
+      padding: 16px;
+      overflow: visible;
+    }
+
+    .graph {
+      display: grid;
+      gap: 10px;
+      overflow: visible;
+    }
+
+    .node {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(92px, .24fr) minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px;
+      overflow: visible;
+    }
+
+    .node:not(:last-child):after {
+      content: "";
+      position: absolute;
+      left: 36px;
+      bottom: -11px;
+      width: 2px;
+      height: 11px;
+      background: var(--line);
+    }
+
+    .node-label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--teal);
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .node-title {
+      font-weight: 850;
+      line-height: 1.15;
+    }
+
+    .node-text p { margin-bottom: 8px; }
+    .node-text p:last-child { margin-bottom: 0; }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .branch {
+      padding: 12px;
+      border: 1px dashed rgba(18,112,111,.45);
+      border-radius: var(--radius);
+      background: rgba(238,244,242,.74);
+    }
+
+    .branch b {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .branch p { margin-bottom: 8px; color: #33424a; }
+
+    .field-board {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .field-zone {
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-zone[data-tone="monster"] { border-top: 4px solid var(--red); }
+    .field-zone[data-tone="spell"] { border-top: 4px solid var(--green); }
+    .field-zone[data-tone="gy"] { border-top: 4px solid var(--violet); }
+    .field-zone[data-tone="hand"] { border-top: 4px solid var(--gold); }
+    .field-zone[data-tone="opp"] { border-top: 4px solid var(--blue); }
+
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px;
+      overflow: visible;
+      min-height: 38px;
+    }
+
+    .card-mini {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      color: var(--ink);
+      text-align: center;
+      font-size: .68rem;
+      font-family: inherit;
+      font-weight: 700;
+      line-height: 1.05;
+      cursor: zoom-in;
+      overflow: visible;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-mini img {
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 4px;
+      object-fit: cover;
+      border: 1px solid rgba(23,32,39,.18);
+      background: #e9eeed;
+      box-shadow: 0 8px 18px rgba(23,32,39,.12);
+    }
+
+    .card-mini > span:not(.zoom) {
+      display: -webkit-box;
+      width: 100%;
+      min-height: 2.1em;
+      overflow-wrap: anywhere;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .zoom {
+      position: fixed;
+      z-index: 100;
+      left: min(72vw, calc(100vw - 260px));
+      top: 78px;
+      display: none;
+      width: 240px;
+      padding: 8px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(23,32,39,.2);
+      background: #fff;
+      box-shadow: 0 18px 46px rgba(23,32,39,.3);
+      pointer-events: none;
+    }
+
+    .zoom img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .card-mini:hover .zoom,
+    .card-mini:focus .zoom,
+    .card-mini.preview-open .zoom {
+      display: block;
+    }
+
+    .plus {
+      align-self: flex-start;
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      margin-top: 28px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .wildcard {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      height: var(--card-h);
+      padding: 6px;
+      border: 1px dashed rgba(23,32,39,.25);
+      border-radius: 4px;
+      color: var(--muted);
+      background: rgba(255,255,255,.72);
+      text-align: center;
+      font-size: .7rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .info {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      margin-left: 4px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-size: .72rem;
+      font-weight: 900;
+      cursor: help;
+      vertical-align: text-bottom;
+    }
+
+    .info:after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      z-index: 50;
+      display: none;
+      width: min(270px, calc(100vw - 40px));
+      transform: translateX(-50%);
+      padding: 8px 10px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: #1d2830;
+      font-size: .78rem;
+      line-height: 1.35;
+      font-weight: 650;
+      text-align: left;
+      box-shadow: 0 10px 28px rgba(23,32,39,.25);
+    }
+
+    .info:hover:after,
+    .info:focus:after {
+      display: block;
+    }
+
+    .matchup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .matchup {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    .matchup-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 850;
+    }
+
+    .compact-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compact-list li {
+      position: relative;
+      padding-left: 15px;
+      color: #33424a;
+    }
+
+    .compact-list li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .62em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .reference-panel {
+      margin: 8px 0 14px;
+      padding: 16px;
+      border: 1px solid rgba(105,82,140,.35);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.95);
+      box-shadow: var(--shadow);
+    }
+
+    .reference-panel[hidden] { display: none; }
+
+    .reference-panel ol {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .reference-panel li { margin-bottom: 8px; }
+
+    .footer-note {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    .preview-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: rgba(10, 18, 23, .72);
+    }
+
+    .preview-modal.open { display: grid; }
+
+    .preview-box {
+      max-width: min(420px, 94vw);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.38);
+    }
+
+    .preview-box img {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .preview-box button {
+      width: 100%;
+      min-height: 38px;
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    @media (max-width: 1020px) {
+      .hero, .combo-layout, .grid-2, .grid-3, .grid-4, .matchup-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase { min-height: 0; }
+      .route-list { position: static; display: flex; overflow-x: auto; padding-bottom: 4px; }
+      .route-button { width: min(78vw, 280px); }
+      .branch-grid { grid-template-columns: 1fr; }
+      .field-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quick-nav .ref-toggle { margin-left: 0; }
+    }
+
+    @media (max-width: 640px) {
+      :root { --card-w: 48px; --card-h: 70px; }
+      .page { width: min(100vw - 20px, 1240px); padding-top: 12px; }
+      .hero { gap: 14px; }
+      .hero-pills .pill, .tag { white-space: normal; }
+      .showcase { grid-template-columns: repeat(5, minmax(38px, 1fr)); gap: 7px; padding: 10px; }
+      .node { grid-template-columns: 1fr; }
+      .node:not(:last-child):after { left: 19px; }
+      .field-board { grid-template-columns: 1fr; }
+      .field-zone { min-height: 0; }
+      .section-head { display: block; }
+      .zoom { left: 50%; transform: translateX(-50%); top: 60px; width: min(230px, calc(100vw - 24px)); }
+      .quick-nav { top: 0; }
+    }
+
+    @media print {
+      .quick-nav, .preview-modal { display: none !important; }
+      .reference-panel { display: block !important; }
+      body { background: #fff; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Plunder Patroll mind map</div>
+        <h1>Attribute toolbox control</h1>
+        <p class="lead">A top-to-bottom cheatsheet for routing Plunder Patroll hands into Jord, Blackbeard, and the right ship for the matchup. The combo graph favors practical branches over rote memorization.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Plan:</strong> tag into ships, draw, recycle</span>
+          <span class="pill"><strong>Win:</strong> Lys negate plus Blackbeard reload</span>
+          <span class="pill"><strong>Meta lens:</strong> TCG June 2026 side choices</span>
+        </div>
+      </div>
+      <div class="hero-showcase">
+        <div class="showcase" data-cards="shipyarrrd,whitebeard,goldenhair,blackeyes,blackbeard,lys,brann,moerk,jord,booty"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Cheatsheet sections">
+      <a href="#playstyle">Playstyle</a>
+      <a href="#combos">Combos</a>
+      <a href="#boards">End Boards</a>
+      <a href="#variants">Variants</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side Deck</a>
+      <button class="ref-toggle" id="refsToggle" type="button" aria-expanded="false" aria-controls="references">References</button>
+    </nav>
+
+    <aside class="reference-panel" id="references" hidden>
+      <h2>References Used</h2>
+      <p>Research note: a dedicated public Plunder Patroll combo spreadsheet was not found in indexed results. Master Duel Meta's Combos & Counters page has a spreadsheet tab, but the Plunder material found was the written deck breakdown and route guide updated April 27, 2024.</p>
+      <ol>
+        <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Plunder%20Patroll">Master Duel Meta Plunder Patroll breakdown</a>, used for the Yarrrd/Gold/White, Rite, and Chimera-Gazelle combo lines.</li>
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta Combos & Counters</a>, checked for spreadsheet workflow and current combo/counter format.</li>
+        <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/380597">Game8 Plunder Patroll guide</a>, used for playstyle framing, Adventure line, boss monster roles, and counter framing.</li>
+        <li><a href="https://db.ygoprodeck.com/api-guide/">YGOPRODeck API</a>, used to verify card IDs and card text summaries; all card images load from <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code>.</li>
+        <li><a href="https://www.yugiohmeta.com/top-decks/ycs-raleigh-2024/plunder-patroll/douglas-alexander-haddad/0pMoA">Douglas Alexander Haddad, Runick Plunder Patroll, Top 16 YCS Raleigh 2024</a>, used as the highest-profile tournament-top variant.</li>
+        <li><a href="https://yugiohblog.konami.com/2024/ycs/ycs-raleigh-pairings-and-deck-types-for-top-16/">Konami YCS Raleigh Top 16 pairings</a>, used to verify the Runick Plunder Patroll deck type in Top 16.</li>
+        <li><a href="https://www.yugiohmeta.com/top-decks/banjaluka-may-2024-regional/plunder-patroll/aleksandar-josipovic/u2ozV">Aleksandar Josipovic, Plunder Patroll, 3rd/4th Banjaluka Regional May 12, 2024</a>, used as the latest Plunder tournament top found.</li>
+        <li><a href="https://ygoprodeck.com/deck/plunder-patroll-cheap-shape-ships-shipping-332403">YGOPRODeck Plunder Patroll Cheap Shape Ships Shipping</a>, checked as a recent May 31, 2026 community Plunder list using Adventurer, Kaiju, and Super Polymerization packages.</li>
+        <li><a href="https://ygoprodeck.com/">YGOPRODeck home and latest tournament deck feed</a>, checked for June 2026 tournament context and current popular decks.</li>
+        <li><a href="https://tcgcontender.com/yugioh/meta">TCG Contender Yu-Gi-Oh! TCG meta page</a>, checked June 8, 2026 for current meta references including Dracotail, Yummy, Kewl Tune, Maliss, Branded, DoomZ, and Sky Striker.</li>
+      </ol>
+    </aside>
+
+    <main>
+      <section id="playstyle">
+        <div class="section-head">
+          <div>
+            <h2>Playstyle and Win Condition</h2>
+            <p>Plunder Patroll is a reactive control deck with a combo spine. It asks what Attributes the opponent has on field or in GY, then turns any Effect Monster into the matching ship.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="mini-panel">
+            <strong>First objective</strong>
+            <div class="card-row" data-cards="shipyarrrd,whitebeard,goldenhair,jord"></div>
+            <p>Reach Jord or Blackbeard with a Plunder in rotation. Jord fixes Attributes with tokens; Blackbeard converts any Effect Monster into the best ship and draws.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>Primary lock point</strong>
+            <div class="card-row" data-cards="blackbeard,lys,moerk,brann"></div>
+            <p>End on Blackbeard plus Lys when possible. Lys handles monster effects, Moerk banishes monsters, and Brann banishes backrow while adding more engine.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>How games end</strong>
+            <div class="card-row" data-cards="shipyarrrd,brann,emblem,zeus"></div>
+            <p>Win by snowballing equips, Shipyarrrd ATK boosts, and repeated draws. When the board stalls, Moerk into Zeus or Brann-boosted damage closes games.</p>
+          </div>
+        </div>
+        <div class="callout" style="margin-top: 12px;">
+          <p><strong>Core rule:</strong> tag effects care about a monster Attribute your opponent controls or has in GY. Booty, Jord tokens, Kaijus, and Adventure Token lines are valuable because they create the Attributes your ships need.</p>
+        </div>
+      </section>
+
+      <section id="combos">
+        <div class="section-head">
+          <div>
+            <h2>Core Combos and Interactions</h2>
+            <p>Select a route to explore the graph. Cards shown with a plus icon are the pieces that must move together or trigger from the same conversion point.</p>
+          </div>
+        </div>
+        <div class="combo-layout">
+          <div class="route-list" id="routeTabs" aria-label="Combo route selector"></div>
+          <div class="route-card" id="routeStage" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="boards">
+        <div class="section-head">
+          <div>
+            <h2>End Board Examples</h2>
+            <p>Use these as board shapes, not as fixed goals. The hand and opponent Attribute mix decide whether Lys, Moerk, Brann, or a generic Extra Deck body is correct.</p>
+          </div>
+        </div>
+        <div class="field-board">
+          <div class="field-zone" data-tone="monster">
+            <strong>Field by End Phase: standard first</strong>
+            <div class="card-row" data-cards="blackbeard,lys"></div>
+            <p>Lys equipped with a Plunder card, Blackbeard ready to tag and draw, plus at least one discard for Lys.</p>
+          </div>
+          <div class="field-zone" data-tone="spell">
+            <strong>Spell/Trap setup</strong>
+            <div class="card-row" data-cards="shipyarrrd,emblem,parrrty"></div>
+            <p>Shipyarrrd pushes damage. Emblem protects a ship and can tag. Parrrty in GY becomes a one-time equip after an Extra Deck summon.</p>
+          </div>
+          <div class="field-zone" data-tone="gy">
+            <strong>GY follow-up</strong>
+            <div class="card-row" data-cards="goldenhair,blackeyes,shipping"></div>
+            <p>Goldenhair revives by discarding. Blackeyes reclaims a Plunder from GY. Shipping banishes to equip Emblem or a Plunder monster.</p>
+          </div>
+          <div class="field-zone" data-tone="hand">
+            <strong>Hand pressure</strong>
+            <div class="card-row" data-cards="whitebeard,redbeard,wild:1 discard"></div>
+            <p>Keep at least one Plunder card as discard fuel. Whitebeard and Redbeard give opponent-turn access to ships when an Attribute is present.</p>
+          </div>
+          <div class="field-zone" data-tone="opp">
+            <strong>Opponent field/GY</strong>
+            <div class="card-row" data-cards="booty,jord,radian,gameciel"></div>
+            <p>Booty changes an Attribute. Jord creates tokens. Kaijus answer towers and also give your ships a DARK, WATER, EARTH, or LIGHT target.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="variants">
+        <div class="section-head">
+          <div>
+            <h2>Latest Top Variants and Current Experiments</h2>
+            <p>The latest Plunder tournament top found is May 12, 2024. Newer 2026 Plunder lists exist, but the May 31, 2026 result found was a community list, not a tournament top.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="mini-panel">
+            <strong>Runick Plunder, YCS Raleigh Top 16</strong>
+            <div class="card-row" data-cards="runickTip,fountain,hugin,blackbeard,lys,moerk"></div>
+            <p>Highest-profile result found. Runick spells give draw pressure, bodies through Hugin, and interaction while Plunder turns Attributes into ships.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>Pure / tech Plunder, Banjaluka 3rd/4th</strong>
+            <div class="card-row" data-cards="shipyarrrd,whitebeard,goldenhair,blackeyes,booty,solemn"></div>
+            <p>Latest tournament top found. The regional shell leans on tight engine ratios and high-impact traps instead of overloading outside engines.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>2026 community shell: Adventurer Kaiju Super Poly</strong>
+            <div class="card-row" data-cards="rite,fateful,gryphon,radian,slumber,superpoly"></div>
+            <p>Recent May 31, 2026 list trend: protect first action with Adventurer, force Attributes with Kaijus, and turn discard costs into Super Poly value.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="tips">
+        <div class="section-head">
+          <div>
+            <h2>Tips</h2>
+            <p>High-value rules for sequencing, choke points, and the June 2026 meta context.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="tip-row">
+            <strong>Sequence discard extenders before committing Normal Summon <span class="info" tabindex="0" data-tip="Yarrrd + Gold or Rite + Gold lines can start without using the Normal Summon. That preserves a fallback if Ash or Impermanence trades with your first effect.">i</span></strong>
+            <div class="card-row" data-cards="shipyarrrd,goldenhair,whitebeard"></div>
+            <p>If Shipyarrrd resolves, use the searched Plunder as discard fuel. If it eats Ash, you still may have Whitebeard, Gold, Blue, or Adventure to continue.</p>
+          </div>
+          <div class="tip-row">
+            <strong>Do not tag blindly into an empty Attribute map</strong>
+            <div class="card-row" data-cards="blackbeard,booty,jord,kaiju"></div>
+            <p>Check opponent GY before committing. If the needed Attribute is missing, create it with Booty, Jord tokens, or a Kaiju before using Blackbeard.</p>
+          </div>
+          <div class="tip-row">
+            <strong>Use Lys to convert equip value into cards</strong>
+            <div class="card-row" data-cards="lys,redbeard,emblem,parrrty"></div>
+            <p>Lys only searches after the negate if equipped with a Plunder card. Redbeard, Emblem, Shipping, and Parrrty make that live more often.</p>
+          </div>
+          <div class="tip-row">
+            <strong>Respect the locks</strong>
+            <div class="card-row" data-cards="whitebeard,goldenhair,blackeyes,wild:generic ED"></div>
+            <p>Whitebeard, Goldenhair, and Blackeyes can lock you into Plunders for the rest of the turn. Make S:P, Zeus setup, or non-Plunder Synchros before those effects if needed.</p>
+          </div>
+          <div class="tip-row">
+            <strong>Current meta pressure points</strong>
+            <div class="card-row" data-cards="droll,imperm,lancea,cosmic"></div>
+            <p>As of June 2026, plan side cards for Kewl Tune, Branded/Dracotail, Yummy, Maliss, DoomZ, Sky Striker, and Power Patron style boards.</p>
+          </div>
+          <div class="tip-row">
+            <strong>Choose ships by job, not by habit</strong>
+            <div class="card-row" data-cards="lys,moerk,brann,jord"></div>
+            <p>Lys is monster-effect insurance, Moerk answers face-up effect monsters and protects from destruction, Brann hits backrow and pushes damage, Jord rebuilds and fixes Attributes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="recovery">
+        <div class="section-head">
+          <div>
+            <h2>Recovery Options</h2>
+            <p>The deck wins long games by making the same cards matter twice: equip, revive, add back, reset, then tag again.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="mini-panel">
+            <strong>GY to hand/body</strong>
+            <div class="card-row" data-cards="blackeyes,goldenhair,whitebeard"></div>
+            <p>Blackeyes adds a Plunder from GY while summoning itself. Goldenhair turns any discard into a body. Whitebeard sent to GY refills from Deck.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>Spell/Trap recursion</strong>
+            <div class="card-row" data-cards="shipyarrrd,shipping,parrrty"></div>
+            <p>Shipyarrrd sets itself from GY by returning a Plunder S/T zone card. Shipping equips from Deck. Parrrty re-equips once per Duel.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>Board rebuild after wipe</strong>
+            <div class="card-row" data-cards="moerk,jord,booty"></div>
+            <p>Moerk can protect Plunder cards by detaching. Jord returns a Plunder card from GY and becomes a scale. Booty revives while changing Attributes.</p>
+          </div>
+          <div class="mini-panel">
+            <strong>Runick or Adventure rebuild</strong>
+            <div class="card-row" data-cards="fountain,hugin,rite,fateful"></div>
+            <p>Runick Fountain reloads spells; Hugin finds it. Adventure provides a token, Fateful search lines, and Gryphon protection when legal in your format.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="side">
+        <div class="section-head">
+          <div>
+            <h2>Side Deck Options, Matchups, and Counters</h2>
+            <p>Pick cards by job. Plunder has engine recursion, so side cards should either force an Attribute, cover a clean choke point, or break a board without spending your Normal Summon.</p>
+          </div>
+        </div>
+        <div class="matchup-grid">
+          <div class="matchup">
+            <div class="matchup-title">Kewl Tune / combo search chains <span class="tag">Droll priority</span></div>
+            <div class="card-row" data-cards="droll,nibiru,imperm,veiler,droplet"></div>
+            <ul class="compact-list">
+              <li>Droll is strongest when they need multiple adds to sculpt hand and top deck.</li>
+              <li>Nibiru is fine only if your own token plan still leaves a path to Blackbeard.</li>
+              <li>Droplet converts dead Plunder cards into board access going second.</li>
+            </ul>
+          </div>
+          <div class="matchup">
+            <div class="matchup-title">Branded / Dracotail Fusion piles <span class="tag">Barrier and Crow</span></div>
+            <div class="card-row" data-cards="dbarrier,ash,belle,crow,superpoly"></div>
+            <ul class="compact-list">
+              <li>Dimensional Barrier calling Fusion buys the cleanest turn if you can protect it.</li>
+              <li>Ghost Belle and D.D. Crow hit GY fusion or recursion points.</li>
+              <li>Super Poly is live into boards that share Type/Attribute lanes.</li>
+            </ul>
+          </div>
+          <div class="matchup">
+            <div class="matchup-title">Maliss / banish-heavy lines <span class="tag">Lancea timing</span></div>
+            <div class="card-row" data-cards="lancea,droll,cosmic,belle,darkruler"></div>
+            <ul class="compact-list">
+              <li>Lancea is a turn-skip style card against banish-dependent turns.</li>
+              <li>Cosmic is better than destruction against cards that replace themselves.</li>
+              <li>Hold Blackbeard until an Attribute exists in GY if they leave the field empty.</li>
+            </ul>
+          </div>
+          <div class="matchup">
+            <div class="matchup-title">Sky Striker / backrow control <span class="tag">Brann value</span></div>
+            <div class="card-row" data-cards="brann,cosmic,duster,lightning,ash"></div>
+            <ul class="compact-list">
+              <li>Brann threatens banish plus monster search if equipped.</li>
+              <li>Cosmic on recursion points is better than firing at replaceable spells.</li>
+              <li>Shipyarrrd damage matters because control mirrors often become low-resource games.</li>
+            </ul>
+          </div>
+          <div class="matchup">
+            <div class="matchup-title">Power Patron / Pendulum boards <span class="tag">Barrier and breakers</span></div>
+            <div class="card-row" data-cards="dbarrier,bookeclipse,evenly,lightning,kaiju"></div>
+            <ul class="compact-list">
+              <li>Dimensional Barrier calling Pendulum can stop the explosive turn.</li>
+              <li>Book of Eclipse and Evenly trade through layered monster interaction.</li>
+              <li>Kaijus force Attributes and answer hard-to-target boss monsters.</li>
+            </ul>
+          </div>
+          <div class="matchup">
+            <div class="matchup-title">Rogue and locals <span class="tag">Flexible package</span></div>
+            <div class="card-row" data-cards="gameciel,radian,slumber,ttalent,thrust"></div>
+            <ul class="compact-list">
+              <li>Kaiju package is unusually good here because it removes a monster and turns on ships.</li>
+              <li>Talent and Thrust punish hand traps aimed at Shipyarrrd, Jord, or Blackbeard.</li>
+              <li>Do not over-side out Plunder names; the ships need discard fuel.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer-note">Card images are loaded from YGOPRODeck by verified card ID. Tap a card for a full preview on touch devices.</p>
+  </div>
+
+  <div class="preview-modal" id="previewModal" role="dialog" aria-modal="true" aria-label="Card preview">
+    <div class="preview-box">
+      <img id="previewImage" alt="">
+      <button type="button" id="previewClose">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const cards = {
+      blackbeard: { id: "67647362", name: "Blackbeard, the Plunder Patroll Captain" },
+      blackeyes: { id: "91642007", name: "Blackeyes, the Plunder Patroll Seaguide" },
+      bluebeard: { id: "55349375", name: "Bluebeard, the Plunder Patroll Shipwright" },
+      emblem: { id: "80621422", name: "Emblem of the Plunder Patroll" },
+      goldenhair: { id: "81344070", name: "Goldenhair, the Newest Plunder Patroll" },
+      booty: { id: "20426176", name: "Plunder Patroll Booty" },
+      parrrty: { id: "43004235", name: "Plunder Patroll Parrrty" },
+      shipping: { id: "44227727", name: "Plunder Patroll Shipshape Ships Shipping" },
+      shipyarrrd: { id: "93031067", name: "Plunder Patroll Shipyarrrd" },
+      brann: { id: "94253655", name: "Plunder Patrollship Brann" },
+      jord: { id: "85969517", name: "Plunder Patrollship Jord" },
+      lys: { id: "18832779", name: "Plunder Patrollship Lys" },
+      moerk: { id: "20248754", name: "Plunder Patrollship Moerk" },
+      pride: { id: "17016131", name: "Pride of the Plunder Patroll" },
+      redbeard: { id: "68769900", name: "Redbeard, the Plunder Patroll Matey" },
+      whitebeard: { id: "31374201", name: "Whitebeard, the Plunder Patroll Helm" },
+
+      rite: { id: "3285551", name: "Rite of Aramesir" },
+      fateful: { id: "39568067", name: "Fateful Adventure" },
+      gryphon: { id: "2563463", name: "Wandering Gryphon Rider" },
+      enchantress: { id: "30680659", name: "Water Enchantress of the Temple" },
+      dracoback: { id: "38745520", name: "Dracoback, the Rideable Dragon" },
+
+      gazelle: { id: "23076639", name: "Gazelle the King of Mythical Claws" },
+      coatl: { id: "92565383", name: "Cornfield Coatl" },
+      swordknight: { id: "28954097", name: "Mirror Swordknight" },
+      chimeraFusion: { id: "63136489", name: "Chimera Fusion" },
+      berfometFusion: { id: "69601012", name: "Berfomet the Mythical King of Phantom Beasts" },
+      chimeraKing: { id: "1769875", name: "Chimera the King of Phantom Beasts" },
+      bigWinged: { id: "55461744", name: "Big-Winged Berfomet" },
+
+      runickTip: { id: "31562086", name: "Runick Tip" },
+      fountain: { id: "92107604", name: "Runick Fountain" },
+      hugin: { id: "55990317", name: "Hugin the Runick Wings" },
+      freezing: { id: "30430448", name: "Runick Freezing Curses" },
+
+      ash: { id: "14558127", name: "Ash Blossom & Joyous Spring" },
+      nibiru: { id: "27204311", name: "Nibiru, the Primal Being" },
+      droll: { id: "94145021", name: "Droll & Lock Bird" },
+      belle: { id: "73642296", name: "Ghost Belle & Haunted Mansion" },
+      veiler: { id: "97268402", name: "Effect Veiler" },
+      imperm: { id: "10045474", name: "Infinite Impermanence" },
+      dbarrier: { id: "83326048", name: "Dimensional Barrier" },
+      lancea: { id: "34267821", name: "Artifact Lancea" },
+      evenly: { id: "15693423", name: "Evenly Matched" },
+      cosmic: { id: "8267140", name: "Cosmic Cyclone" },
+      lightning: { id: "14532163", name: "Lightning Storm" },
+      ttalent: { id: "25311006", name: "Triple Tactics Talent" },
+      thrust: { id: "35269904", name: "Triple Tactics Thrust" },
+      superpoly: { id: "48130397", name: "Super Polymerization" },
+      gameciel: { id: "55063751", name: "Gameciel, the Sea Turtle Kaiju" },
+      radian: { id: "28674152", name: "Radian, the Multidimensional Kaiju" },
+      kumongous: { id: "29726552", name: "Kumongous, the Sticky String Kaiju" },
+      kaiju: { id: "55063751", name: "Any Kaiju" },
+      slumber: { id: "99330325", name: "Interrupted Kaiju Slumber" },
+      lavagolem: { id: "102380", name: "Lava Golem" },
+      darkruler: { id: "54693926", name: "Dark Ruler No More" },
+      droplet: { id: "24299458", name: "Forbidden Droplet" },
+      bookeclipse: { id: "35480699", name: "Book of Eclipse" },
+      duster: { id: "18144506", name: "Harpie's Feather Duster" },
+      crow: { id: "24508238", name: "D.D. Crow" },
+      called: { id: "24224830", name: "Called by the Grave" },
+      crossout: { id: "65681983", name: "Crossout Designator" },
+      solemn: { id: "41420027", name: "Solemn Judgment" },
+
+      almiraj: { id: "60303245", name: "Salamangreat Almiraj" },
+      dweller: { id: "21044178", name: "Abyss Dweller" },
+      sp: { id: "29301450", name: "S:P Little Knight" },
+      zeus: { id: "90448279", name: "Divine Arsenal AA-ZEUS - Sky Thunder" },
+      whale: { id: "5614808", name: "White Aura Whale" },
+      dragite: { id: "9464441", name: "Adamancipator Risen - Dragite" },
+      typhon: { id: "93039339", name: "Super Starslayer TY-PHON - Sky Crisis" },
+      garura: { id: "11765832", name: "Garura, Wings of Resonant Life" },
+      mudragon: { id: "54757758", name: "Mudragon of the Swamp" }
+    };
+
+    const combos = [
+      {
+        title: "Yarrrd + Gold",
+        type: "2 cards, no Normal Summon",
+        summary: "The cleanest Jord line. It turns Shipyarrrd plus Goldenhair into Jord, Blackbeard, Lys, two draws, and a held Whitebeard.",
+        nodes: [
+          { label: "Start", cards: ["shipyarrrd", "goldenhair"], text: "Activate Shipyarrrd, discard Goldenhair, and search Whitebeard." },
+          { label: "Convert", cards: ["goldenhair", "whitebeard"], text: "Use Goldenhair in GY by discarding Whitebeard. Whitebeard triggers and summons Blackeyes from Deck." },
+          { label: "Jord", cards: ["goldenhair", "blackeyes", "jord"], text: "Synchro Summon Jord. Add Blackeyes from GY, then put Jord into the Pendulum Zone and create LIGHT tokens." },
+          { label: "Captain", cards: ["blackeyes", "whitebeard", "blackbeard"], text: "Blackeyes revives, adds Whitebeard back, then Blackeyes plus your token make Blackbeard." },
+          { label: "Output", cards: ["blackbeard", "lys"], text: "Blackbeard summons Lys and draws. Lys summons Blackbeard back from the S/T Zone for the second draw line." }
+        ],
+        branches: [
+          { title: "Standard end", cards: ["blackbeard", "lys", "whitebeard"], text: "Monster negate, Blackbeard tag, Whitebeard follow-up, two draws." },
+          { title: "If Ash hits Yarrrd", cards: ["whitebeard", "bluebeard", "redbeard"], text: "Pivot to a normal summon plus extender line. Do not burn Goldenhair if it is your only extender." },
+          { title: "If Imperm hits Jord", cards: ["blackbeard", "booty", "emblem"], text: "Use remaining bodies to reach Blackbeard or set Booty/Emblem for the opponent turn." }
+        ]
+      },
+      {
+        title: "Yarrrd + White",
+        type: "2 cards",
+        summary: "Similar to Yarrrd + Gold, but Whitebeard is the discard and Goldenhair is the searched tuner/extender.",
+        nodes: [
+          { label: "Start", cards: ["shipyarrrd", "whitebeard"], text: "Activate Shipyarrrd, discard Whitebeard, and search Goldenhair." },
+          { label: "Summon", cards: ["whitebeard", "blackeyes"], text: "Whitebeard summons Blackeyes from Deck. Blackeyes can recover Whitebeard after it hits GY." },
+          { label: "Synchro", cards: ["goldenhair", "blackeyes", "jord"], text: "Use Goldenhair and Blackeyes to make Jord, then add Blackeyes back from GY." },
+          { label: "Token route", cards: ["jord", "goldenhair", "blackbeard"], text: "Use Jord as a scale, create LIGHT tokens, then make Blackbeard with Goldenhair plus token." },
+          { label: "Output", cards: ["blackbeard", "lys"], text: "Blackbeard tags into Lys and draws. Lys can summon Blackbeard back to keep the board layered." }
+        ],
+        branches: [
+          { title: "Plays without Normal Summon", cards: ["shipyarrrd", "whitebeard", "goldenhair"], text: "Strong if your hand contains extra non-engine and you want to keep Normal Summon for recovery." },
+          { title: "Token utility", cards: ["jord", "wild:LIGHT token"], text: "The opponent token turns on LIGHT for Lys and can also interfere with zones or Evenly Matched lines." },
+          { title: "Discard management", cards: ["bluebeard", "parrrty", "shipping"], text: "Bluebeard and Parrrty turn later discards into card selection; Shipping can equip after it is used." }
+        ]
+      },
+      {
+        title: "White or Gold + Blue",
+        type: "Normal Summon plus extender",
+        summary: "The baseline two-monster route. Bluebeard supplies the extender body and can chain-block or cycle later.",
+        nodes: [
+          { label: "Start", cards: ["whitebeard", "bluebeard"], text: "Normal Summon Whitebeard or Goldenhair, then Special Summon Bluebeard because you control a Plunder monster." },
+          { label: "Synchro", cards: ["whitebeard", "bluebeard", "jord"], text: "Make Jord. If Whitebeard was used, it summons a Plunder from Deck; Bluebeard may cycle if sent to GY." },
+          { label: "Scale", cards: ["jord", "wild:LIGHT token"], text: "Add the Plunder back with Jord, move Jord to the scale, and create LIGHT tokens." },
+          { label: "Captain", cards: ["goldenhair", "blackbeard"], text: "Use the remaining Plunder plus your token to Link Summon Blackbeard." },
+          { label: "Output", cards: ["blackbeard", "lys"], text: "Blackbeard turns a body into Lys and draws. Keep a Plunder discard for the negate." }
+        ],
+        branches: [
+          { title: "Chain block Ash", cards: ["bluebeard", "whitebeard"], text: "When both trigger, order can force Ash onto the less important effect depending on hand texture." },
+          { title: "If you drew Booty", cards: ["booty", "moerk", "brann"], text: "Set Booty to change Attribute on the opponent turn and choose the correct ship." },
+          { title: "If you need removal", cards: ["moerk", "brann"], text: "Moerk handles monsters; Brann handles backrow. Do not default to Lys if removal is the matchup's choke." }
+        ]
+      },
+      {
+        title: "Rite + White or Gold",
+        type: "Adventure bridge",
+        summary: "Adventure creates a token body and Fateful discard outlet. It protects the Plunder line while enabling Jord.",
+        nodes: [
+          { label: "Token", cards: ["rite", "fateful"], text: "Activate Rite to summon an Adventure Token and place Fateful Adventure." },
+          { label: "White route", cards: ["whitebeard", "dracoback"], text: "Normal Summon Whitebeard and Synchro with the token into Jord. Fateful can search Dracoback while Whitebeard summons Gold." },
+          { label: "Gold route", cards: ["goldenhair", "enchantress", "dracoback"], text: "If starting with Gold, Fateful can discard Gold, Enchantress can become a body, and Dracoback becomes discard fuel." },
+          { label: "Jord", cards: ["jord", "wild:LIGHT token"], text: "Jord recovers the Plunder from GY and creates LIGHT tokens from the scale." },
+          { label: "Output", cards: ["blackbeard", "lys", "gryphon"], text: "Make Blackbeard, tag into Lys, and use Gryphon if available to protect or force through the board." }
+        ],
+        branches: [
+          { title: "Best protection", cards: ["gryphon", "blackbeard", "lys"], text: "Gryphon protects the first relevant interaction while Lys and Blackbeard cover the next chain." },
+          { title: "No Normal Summon line", cards: ["fateful", "whitebeard"], text: "Fateful discarding Whitebeard can start the Plunder line without committing the Normal Summon." },
+          { title: "Risk", cards: ["ash", "imperm", "jord"], text: "Fateful and Jord are obvious choke points. Keep a Plunder extender if possible before moving into the scale." }
+        ]
+      },
+      {
+        title: "Gazelle + White",
+        type: "Chimera bridge",
+        summary: "Chimera cards add a Fusion layer before Plunder makes Jord. This route resets Chimera Fusion and still ends on the Plunder ship board.",
+        nodes: [
+          { label: "Start", cards: ["gazelle", "chimeraFusion", "whitebeard"], text: "Normal Summon Gazelle, search Chimera Fusion, then Fusion Summon using Gazelle and Whitebeard." },
+          { label: "Triggers", cards: ["whitebeard", "berfometFusion", "coatl"], text: "Whitebeard summons Blackeyes. Berfomet/Gazelle access Coatl and the next Chimera piece." },
+          { label: "Reset", cards: ["chimeraFusion", "goldenhair", "swordknight"], text: "Use Chimera Fusion from GY, then use Goldenhair by discarding Swordknight." },
+          { label: "Jord", cards: ["blackeyes", "goldenhair", "jord"], text: "Synchro into Jord, add Blackeyes back, and create LIGHT tokens." },
+          { label: "Output", cards: ["blackbeard", "lys", "chimeraFusion"], text: "Make Blackbeard, summon Lys, and keep Chimera follow-up or hand pressure depending on the branch." }
+        ],
+        branches: [
+          { title: "Reset Fusion", cards: ["chimeraFusion", "chimeraKing"], text: "Chimera Fusion in GY gives extra pressure after the Plunder board is established." },
+          { title: "Choke point", cards: ["gazelle", "ash", "imperm"], text: "The line is weaker to disruption on Gazelle than the pure Plunder two-card routes." },
+          { title: "Best when", cards: ["whitebeard", "coatl", "wild:discard"], text: "Use it when the hand already has discard fuel and you want more ceiling than the standard Lys board." }
+        ]
+      },
+      {
+        title: "Gazelle + any Plunder or Coatl",
+        type: "High ceiling",
+        summary: "The expanded Chimera route makes a larger board, threatens a hand rip, and still reaches Blackbeard plus Lys.",
+        nodes: [
+          { label: "Start", cards: ["gazelle", "chimeraFusion", "wild:Plunder"], text: "Normal Summon Gazelle, search Chimera Fusion, then fuse Gazelle with a Plunder or pair Gazelle with Coatl." },
+          { label: "Chimera stack", cards: ["chimeraKing", "bigWinged", "berfometFusion"], text: "Resolve Chimera triggers to add Coatl or Chimera Fusion and load the correct materials." },
+          { label: "Gold access", cards: ["coatl", "goldenhair", "wild:discard"], text: "Use Coatl plus Goldenhair to Synchro Summon Jord. If Gold started in hand, the Swordknight negate line improves." },
+          { label: "Plunder output", cards: ["jord", "blackbeard", "lys"], text: "Jord recovers a Plunder, creates LIGHT tokens, then the token plus a body makes Blackbeard into Lys." },
+          { label: "Opponent turn", cards: ["chimeraKing", "berfometFusion", "lys"], text: "Chimera King can revive Berfomet King on the opponent turn while Lys holds monster-effect interaction." }
+        ],
+        branches: [
+          { title: "Best board", cards: ["blackbeard", "lys", "chimeraKing", "berfometFusion"], text: "Layered Plunder interaction plus Chimera follow-up and possible hand pressure." },
+          { title: "If interrupted", cards: ["coatl", "goldenhair", "blackbeard"], text: "Do not chase the full line if Gazelle gets stopped. Convert remaining Fiend bodies into Blackbeard." },
+          { title: "Deckbuilding cost", cards: ["swordknight", "bigWinged", "chimeraFusion"], text: "Higher ceiling requires Chimera slots and can draw cards that are worse without Gazelle." }
+        ]
+      }
+    ];
+
+    function imageUrl(card) {
+      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function cardMini(key) {
+      if (key.startsWith("wild:")) {
+        return `<span class="wildcard">${escapeHtml(key.slice(5))}</span>`;
+      }
+
+      const card = cards[key];
+      if (!card) {
+        return `<span class="wildcard">${escapeHtml(key)}</span>`;
+      }
+
+      const img = imageUrl(card);
+      return `
+        <button class="card-mini" type="button" data-card-key="${escapeHtml(key)}" title="${escapeHtml(card.name)}">
+          <img src="${img}" alt="${escapeHtml(card.name)}" loading="lazy">
+          <span>${escapeHtml(card.name)}</span>
+          <span class="zoom"><img src="${img}" alt=""></span>
+        </button>
+      `;
+    }
+
+    function cardRow(keys) {
+      return keys.map((key, index) => {
+        const plus = index > 0 ? '<span class="plus" aria-hidden="true">+</span>' : "";
+        return plus + cardMini(key);
+      }).join("");
+    }
+
+    function renderStaticRows() {
+      document.querySelectorAll("[data-cards]").forEach(row => {
+        const keys = row.dataset.cards.split(",").map(item => item.trim()).filter(Boolean);
+        row.innerHTML = row.classList.contains("showcase")
+          ? keys.map(cardMini).join("")
+          : cardRow(keys);
+      });
+    }
+
+    function renderRoutes(activeIndex = 0) {
+      const tabs = document.getElementById("routeTabs");
+      const stage = document.getElementById("routeStage");
+      tabs.innerHTML = combos.map((combo, index) => `
+        <button class="route-button ${index === activeIndex ? "active" : ""}" type="button" data-route="${index}">
+          ${escapeHtml(combo.title)}
+          <span class="route-meta">${escapeHtml(combo.type)}</span>
+        </button>
+      `).join("");
+
+      const combo = combos[activeIndex];
+      stage.innerHTML = `
+        <div class="section-head" style="margin-bottom: 12px;">
+          <div>
+            <h3>${escapeHtml(combo.title)} <span class="info" tabindex="0" data-tip="${escapeHtml(combo.summary)}">i</span></h3>
+            <p>${escapeHtml(combo.summary)}</p>
+          </div>
+        </div>
+        <div class="graph">
+          ${combo.nodes.map((node, index) => `
+            <div class="node">
+              <div class="node-label">
+                <span class="step-badge">${index + 1}</span>
+                <span class="node-title">${escapeHtml(node.label)}</span>
+              </div>
+              <div class="node-text">
+                <div class="card-row">${cardRow(node.cards)}</div>
+                <p>${escapeHtml(node.text)}</p>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+        <div class="branch-grid" aria-label="Route branches">
+          ${combo.branches.map(branch => `
+            <div class="branch">
+              <b>${escapeHtml(branch.title)}</b>
+              <div class="card-row">${cardRow(branch.cards)}</div>
+              <p>${escapeHtml(branch.text)}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+
+      tabs.querySelectorAll("[data-route]").forEach(button => {
+        button.addEventListener("click", () => {
+          renderRoutes(Number(button.dataset.route));
+        });
+      });
+    }
+
+    function bindReferences() {
+      const button = document.getElementById("refsToggle");
+      const panel = document.getElementById("references");
+      button.addEventListener("click", () => {
+        const isHidden = panel.hasAttribute("hidden");
+        if (isHidden) {
+          panel.removeAttribute("hidden");
+          button.setAttribute("aria-expanded", "true");
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          panel.setAttribute("hidden", "");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    function bindCardPreview() {
+      const modal = document.getElementById("previewModal");
+      const img = document.getElementById("previewImage");
+      const close = document.getElementById("previewClose");
+
+      document.body.addEventListener("click", event => {
+        const button = event.target.closest(".card-mini");
+        if (!button) return;
+        const card = cards[button.dataset.cardKey];
+        if (!card) return;
+        img.src = imageUrl(card);
+        img.alt = card.name;
+        modal.classList.add("open");
+      });
+
+      close.addEventListener("click", () => modal.classList.remove("open"));
+      modal.addEventListener("click", event => {
+        if (event.target === modal) modal.classList.remove("open");
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") modal.classList.remove("open");
+      });
+    }
+
+    renderStaticRows();
+    renderRoutes();
+    bindReferences();
+    bindCardPreview();
+  </script>
+</body>
+</html>

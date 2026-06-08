@@ -1,0 +1,1833 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primite Blue-Eyes Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212a;
+      --muted: #5b6673;
+      --paper: #f6f7f9;
+      --panel: #ffffff;
+      --panel-2: #eef3f7;
+      --line: #d8e0e8;
+      --soft-line: #e8edf3;
+      --blue: #285f9f;
+      --cyan: #14798a;
+      --gold: #a86f16;
+      --green: #24734f;
+      --red: #a43b42;
+      --violet: #67518a;
+      --shadow: 0 18px 46px rgba(23, 33, 42, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(246,247,249,.96) 380px, #edf4f3 100%),
+        repeating-linear-gradient(135deg, rgba(40,95,159,.075) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+      gap: 24px;
+      align-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--cyan);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 860px;
+      margin-bottom: 14px;
+      font-size: clamp(2.3rem, 6vw, 4.85rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 830px;
+      color: #31414d;
+      font-size: clamp(1rem, 1.8vw, 1.16rem);
+    }
+
+    .hero-pills, .chips, .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #26323c;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong, .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      min-height: 340px;
+      display: grid;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(46px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,33,42,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-12px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(10px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-11px) rotate(1deg); }
+    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase .card-name { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(216,224,232,.86);
+      background: linear-gradient(180deg, rgba(246,247,249,.98), rgba(246,247,249,.92));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a,
+    .route-button,
+    .tab-button,
+    .ref-toggle,
+    .icon-button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 760;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .tab-button:hover,
+    .ref-toggle:hover,
+    .icon-button:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .route-button.active,
+    .tab-button.active {
+      color: #fff;
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .quick-nav .ref-toggle {
+      margin-left: auto;
+      color: var(--violet);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(216,224,232,.82);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 870px;
+      color: var(--muted);
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel,
+    .note-card,
+    .board-card,
+    .matchup-card,
+    .tip-card,
+    .route-summary {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 8px 24px rgba(23, 33, 42, .06);
+    }
+
+    .panel,
+    .note-card,
+    .matchup-card,
+    .tip-card,
+    .route-summary {
+      padding: 14px;
+    }
+
+    .panel p,
+    .note-card p,
+    .board-card p,
+    .matchup-card p,
+    .tip-card p,
+    .route-summary p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .kpi {
+      min-height: 96px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+    }
+
+    .kpi strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .kpi span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .route-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 2px 0 10px;
+      margin-bottom: 10px;
+    }
+
+    .combo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(300px, .6fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .graph-wrap {
+      min-height: 520px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(247,250,251,.92)),
+        repeating-linear-gradient(90deg, rgba(40,95,159,.07) 0 1px, transparent 1px 24px);
+      overflow: auto;
+    }
+
+    .graph {
+      min-width: 770px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(170px, 1fr));
+      gap: 36px 22px;
+      align-items: stretch;
+      padding: 4px;
+    }
+
+    .graph-node {
+      position: relative;
+      min-height: 186px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 10px 22px rgba(23, 33, 42, .07);
+    }
+
+    .graph-node:nth-child(2n) { border-top-color: var(--cyan); }
+    .graph-node:nth-child(3n) { border-top-color: var(--gold); }
+    .graph-node:nth-child(4n) { border-top-color: var(--green); }
+
+    .graph-node::after {
+      content: "";
+      position: absolute;
+      top: 46%;
+      right: -23px;
+      width: 22px;
+      border-top: 2px solid rgba(40,95,159,.45);
+    }
+
+    .graph-node::before {
+      content: "";
+      position: absolute;
+      top: calc(46% - 4px);
+      right: -25px;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid rgba(40,95,159,.55);
+      border-right: 2px solid rgba(40,95,159,.55);
+      transform: rotate(45deg);
+    }
+
+    .graph-node.break::after,
+    .graph-node.break::before,
+    .graph-node:last-child::after,
+    .graph-node:last-child::before {
+      display: none;
+    }
+
+    .graph-node h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .node-type {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: #eaf2fb;
+      color: #1d4d81;
+      font-size: .73rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .node-text {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .node-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .trigger-pair {
+      display: grid;
+      grid-template-columns: auto 18px auto;
+      gap: 5px;
+      align-items: center;
+      margin-top: 8px;
+      padding: 7px;
+      border: 1px dashed #cbd9e4;
+      border-radius: var(--radius);
+      background: #f8fbfd;
+    }
+
+    .trigger-pair .tiny-plus {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #fff;
+      font-weight: 900;
+      font-size: .8rem;
+    }
+
+    .branch-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .branch {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .branch h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .board-card {
+      overflow: hidden;
+    }
+
+    .board-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--soft-line);
+      background: linear-gradient(135deg, rgba(40,95,159,.1), rgba(20,121,138,.08));
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 10px;
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--soft-line);
+    }
+
+    .field-row:last-child { border-bottom: 0; }
+
+    .field-row strong {
+      color: var(--ink);
+      font-size: .85rem;
+      text-transform: uppercase;
+    }
+
+    .field-row span {
+      color: var(--muted);
+    }
+
+    .resource-list,
+    .bullet-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .resource-list li,
+    .bullet-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+    }
+
+    .resource-list li::before,
+    .bullet-list li::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .side-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .card-mini {
+      position: relative;
+      display: inline-grid;
+      grid-template-rows: var(--card-h) auto;
+      gap: 5px;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: zoom-in;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .card-mini img {
+      display: block;
+      width: var(--card-w);
+      height: var(--card-h);
+      border-radius: 4px;
+      object-fit: cover;
+      box-shadow: 0 8px 16px rgba(20, 30, 40, .22);
+      background: #dbe3ea;
+    }
+
+    .card-mini.compact {
+      --card-w: 46px;
+      --card-h: 67px;
+    }
+
+    .card-mini.compact .card-name {
+      display: none;
+    }
+
+    .card-name {
+      width: var(--card-w);
+      color: var(--muted);
+      font-size: .68rem;
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+
+    .info-dot,
+    .plus-icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 21px;
+      height: 21px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .info-dot { background: var(--blue); }
+    .plus-icon { background: var(--green); }
+
+    .info {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      width: 19px;
+      height: 19px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 900;
+      cursor: help;
+    }
+
+    .info:hover::after,
+    .info:focus-visible::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      z-index: 20;
+      width: min(270px, 76vw);
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      transform: translateX(-50%);
+      font-size: .83rem;
+      font-weight: 600;
+      line-height: 1.35;
+      text-transform: none;
+    }
+
+    .reference-panel {
+      margin: 0 0 18px;
+      padding: 16px;
+      border: 1px solid #d7cbea;
+      border-radius: var(--radius);
+      background: #fbf9ff;
+      box-shadow: 0 12px 28px rgba(64, 42, 95, .08);
+    }
+
+    .reference-panel[hidden] {
+      display: none;
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .reference-item {
+      padding: 12px;
+      border: 1px solid #e0d7ef;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .reference-item strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .reference-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .card-preview {
+      position: fixed;
+      z-index: 80;
+      display: none;
+      width: 246px;
+      pointer-events: none;
+      filter: drop-shadow(0 24px 42px rgba(0,0,0,.28));
+    }
+
+    .card-preview.show {
+      display: block;
+    }
+
+    .card-preview img {
+      width: 100%;
+      border-radius: 8px;
+      background: #dbe3ea;
+    }
+
+    .card-preview span {
+      display: block;
+      margin-top: 7px;
+      padding: 6px 8px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.95);
+      color: var(--ink);
+      font-size: .9rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .warning {
+      border-color: #ebd1b0;
+      background: #fff8ed;
+    }
+
+    .danger {
+      border-color: #efc4c7;
+      background: #fff5f6;
+    }
+
+    .success {
+      border-color: #bfe2d0;
+      background: #f3fbf6;
+    }
+
+    .dense {
+      font-size: .92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .combo-layout,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .side-grid,
+      .board-grid,
+      .reference-grid,
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase {
+        min-height: 0;
+      }
+
+      .showcase {
+        grid-template-columns: repeat(5, minmax(44px, 1fr));
+      }
+
+      .combo-layout {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100vw - 18px, 640px);
+        padding-top: 12px;
+      }
+
+      .quick-nav {
+        margin-left: -9px;
+        margin-right: -9px;
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .graph-wrap {
+        min-height: 0;
+        padding: 10px;
+        overflow: visible;
+      }
+
+      .graph {
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .graph-node {
+        min-height: 0;
+      }
+
+      .graph-node::after {
+        top: auto;
+        right: auto;
+        left: 24px;
+        bottom: -25px;
+        height: 24px;
+        width: 0;
+        border-top: 0;
+        border-left: 2px solid rgba(40,95,159,.45);
+      }
+
+      .graph-node::before {
+        top: auto;
+        right: auto;
+        left: 20px;
+        bottom: -27px;
+        transform: rotate(135deg);
+      }
+
+      .trigger-pair {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+
+      .trigger-pair .tiny-plus {
+        margin-left: 11px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .card-preview {
+        width: 196px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="plus-icon">+</span> Primite Blue-Eyes mind map</div>
+        <h1>Primite Blue-Eyes Cheatsheet</h1>
+        <p class="lead">A top-to-bottom routing card for the Primite Blue-Eyes deck: starter choices, graph-style combo branches, end boards, recovery loops, and side plans for the June 2026 meta.</p>
+        <div class="hero-pills" aria-label="Deck notes">
+          <span class="pill"><strong>Role</strong> midrange combo</span>
+          <span class="pill"><strong>Anchor</strong> Blue-Eyes White Dragon</span>
+          <span class="pill"><strong>Engine</strong> Primite grind + Drillbeam</span>
+          <span class="pill"><strong>Checked</strong> June 8, 2026</span>
+        </div>
+      </div>
+      <div class="hero-showcase">
+        <div class="showcase" id="heroCards" aria-label="Featured cards"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page sections">
+      <a href="#overview">Overview</a>
+      <a href="#combos">Combos</a>
+      <a href="#boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side & Counters</a>
+      <button class="ref-toggle" id="refsToggle" type="button" aria-expanded="false" aria-controls="references"><span class="info-dot">i</span> References</button>
+    </nav>
+
+    <aside class="reference-panel" id="references" hidden>
+      <div class="eyebrow"><span class="info-dot">i</span> Hidden references</div>
+      <h2>References Used</h2>
+      <p>The combo spreadsheet search found the public Master Duel Meta hub, but no dedicated indexed Primite Blue-Eyes spreadsheet was visible without JS/login-loaded submissions. The combo graph below is built from public decklists, guide lines, and exact card interactions.</p>
+      <div class="reference-grid" id="referenceGrid"></div>
+    </aside>
+
+    <main>
+      <section id="overview">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="info-dot">i</span> Playstyle and win condition</div>
+            <h2>Turn one pressure, turn three inevitability</h2>
+            <p>Primite Blue-Eyes wins by converting a small starter into Dragon interruptions, then using True Light, Roar, Beryl, and Lode to keep replaying Blue-Eyes bodies while Drillbeam trades with the opponent's best face-up card.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="panel success">
+            <h3>Primary win line</h3>
+            <p>Use Wishes to start the Blue-Eyes engine, place True Light, make Spirit Dragon lines, and end on Ultimate Spirit plus Sifr or a lower-risk Spirit plus Seal board.</p>
+            <div class="card-row" data-cards="wishes,sage,maiden,roar,trueLight,spiritDragon,ultimateSpirit,sifr"></div>
+          </article>
+          <article class="panel">
+            <h3>Primite role</h3>
+            <p>Beryl and Lode are not just extenders. They give Blue-Eyes a normal-monster body, recurring Beryl, and Drillbeam access when the full combo is stopped.</p>
+            <div class="card-row" data-cards="beryl,lode,drillbeam,roarPrimite,bewd"></div>
+          </article>
+          <article class="panel warning">
+            <h3>Latest top variant</h3>
+            <p>The latest full TCG list found is Addy Delplanque's 43-card Bystial Primite Blue-Eyes Top 4 at Manchester WCQ Regional on April 18, 2026. A newer May 2 OCG Malaysia result records Primite Blue-Eyes in Top 8 but without a public list.</p>
+            <div class="card-row" data-cards="magnamhut,druiswurm,dominusPurge,chiwen,chaofeng,heavenlySpheres"></div>
+          </article>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <strong>Best starter</strong>
+            <span>Wishes for Eyes of Blue plus discard turns into Sage, Roar, True Light, and the first Blue-Eyes body.</span>
+          </div>
+          <div class="kpi">
+            <strong>Best backup</strong>
+            <span>Normal Summon Beryl sets Lode, gets Drillbeam, and stores Beryl in GY for the next Standby Phase.</span>
+          </div>
+          <div class="kpi">
+            <strong>Format posture</strong>
+            <span>Rogue in current TCG data. Side for Kewl Tune, Branded, DoomZ, Dracotail, Maliss, Sky Striker, and Yummy.</span>
+          </div>
+          <div class="kpi">
+            <strong>Risk point</strong>
+            <span>Lode's Normal Monster summon locks field effects of Special Summoned monsters for the turn. Sequence it after critical field effects.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="combos">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="plus-icon">+</span> Core combos and interactions</div>
+            <h2>Combo graph</h2>
+            <p>Select a route. The graph shows cards that move together, branch points, and practical end-board choices instead of one memorized script.</p>
+          </div>
+        </div>
+
+        <div class="route-tabs" id="routeTabs"></div>
+        <div class="combo-layout">
+          <div class="graph-wrap">
+            <div class="graph" id="comboGraph"></div>
+          </div>
+          <aside>
+            <div class="route-summary" id="routeSummary"></div>
+            <div class="branch-list" id="routeBranches"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="boards">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="info-dot">i</span> End board examples</div>
+            <h2>Field by End Phase</h2>
+            <p>Choose the board based on matchup and hand trap pressure. The ceiling line is powerful, but current tournament builds often win by making fewer, stickier interactions backed by hand traps.</p>
+          </div>
+        </div>
+        <div class="board-grid" id="boardGrid"></div>
+      </section>
+
+      <section id="tips">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="plus-icon">+</span> Tips</div>
+            <h2>Sequencing notes</h2>
+            <p>Most games are decided by whether the first search resolves cleanly and whether Lode is used as an extender or as a grind card.</p>
+          </div>
+        </div>
+        <div class="grid-3" id="tipsGrid"></div>
+      </section>
+
+      <section id="recovery">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="info-dot">i</span> Recovery options</div>
+            <h2>How the deck gets back on board</h2>
+            <p>Primite turns Blue-Eyes from a one-turn combo deck into a deck that can keep presenting a Normal Monster plus an interruption every turn.</p>
+          </div>
+        </div>
+        <div class="grid-3" id="recoveryGrid"></div>
+      </section>
+
+      <section id="side">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="plus-icon">+</span> Side deck options and counters</div>
+            <h2>Matchup plan</h2>
+            <p>Side with the current spread in mind: Kewl Tune and Branded lead TCG tops, while OCG reports around early May also featured Kewl Tune, Elfnote, Ritual of Light and Darkness, Branded, Sky Striker, Yummy, and Maliss.</p>
+          </div>
+        </div>
+        <div class="side-grid" id="sideGrid"></div>
+
+        <div class="section-head" style="margin-top: 18px;">
+          <div>
+            <h2>Counters to expect</h2>
+            <p>These are the cards opponents will aim at Primite Blue-Eyes. Build your side and route choices around them.</p>
+          </div>
+        </div>
+        <div class="grid-4" id="counterGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="card-preview" id="cardPreview" aria-hidden="true">
+    <img alt="">
+    <span></span>
+  </div>
+
+  <script>
+    const cards = {
+      bewd: { id: 89631139, name: "Blue-Eyes White Dragon", role: "Normal Monster anchor" },
+      sage: { id: 8240199, name: "Sage with Eyes of Blue", role: "Normal Summon searcher" },
+      maiden: { id: 17947697, name: "Maiden of White", role: "True Light access" },
+      neoKaiser: { id: 54332792, name: "Neo Kaiser Sea Horse", role: "Blue-Eyes tuner extender" },
+      jet: { id: 30576089, name: "Blue-Eyes Jet Dragon", role: "Protection and recursion" },
+      chaosMax: { id: 55410871, name: "Blue-Eyes Chaos MAX Dragon", role: "Magia material option" },
+      chiwen: { id: 61488417, name: "Chiwen, Light of the Yang Zing", role: "Yang Zing tuner line" },
+      beryl: { id: 63198739, name: "Primite Dragon Ether Beryl", role: "Primite starter and recursion" },
+      lode: { id: 56506740, name: "Primite Lordly Lode", role: "Primite search plus Normal Monster" },
+      drillbeam: { id: 29095457, name: "Primite Drillbeam", role: "Negate and banish" },
+      roarPrimite: { id: 92501449, name: "Primite Roar", role: "Protection and summon" },
+      wishes: { id: 80326401, name: "Wishes for Eyes of Blue", role: "Best starter" },
+      roar: { id: 17725109, name: "Roar of the Blue-Eyed Dragons", role: "Blue-Eyes summon" },
+      mausoleum: { id: 24382602, name: "Mausoleum of White", role: "Field spell and tuner normal" },
+      majesty: { id: 43219114, name: "Majesty of the White Dragons", role: "Pop and grave setup" },
+      trueLight: { id: 62089826, name: "True Light", role: "Continuous trap engine" },
+      ultimateFusion: { id: 71143015, name: "Ultimate Fusion", role: "Quick fusion and removal" },
+      synchroRumble: { id: 88901994, name: "Synchro Rumble", role: "Crimson Dragon search" },
+      spiritDragon: { id: 59822133, name: "Blue-Eyes Spirit Dragon", role: "GY check and tag-out" },
+      ultimateSpirit: { id: 89604813, name: "Blue-Eyes Ultimate Spirit Dragon", role: "Boss negate" },
+      spiritLink: { id: 42097666, name: "Spirit with Eyes of Blue", role: "Link-1 bridge" },
+      crimson: { id: 63436931, name: "Crimson Dragon", role: "Synchro bridge" },
+      sifr: { id: 26268488, name: "Stardust Sifr Divine Dragon", role: "Protection and negate" },
+      blazar: { id: 21123811, name: "Cosmic Blazar Dragon", role: "Omni-style answer" },
+      tyrant: { id: 11443677, name: "Blue-Eyes Tyrant Dragon", role: "Trap-immune attacker" },
+      neoUltimate: { id: 56532353, name: "Neo Blue-Eyes Ultimate Dragon", role: "Wishes equip target" },
+      twinBurst: { id: 2129638, name: "Blue-Eyes Twin Burst Dragon", role: "Battle removal" },
+      heavenlySpheres: { id: 24361622, name: "Hieratic Seal of the Heavenly Spheres", role: "Bounce plus Dragon summon" },
+      afd: { id: 25862681, name: "Ancient Fairy Dragon", role: "Field spell bridge" },
+      crystalWing: { id: 50954680, name: "Crystal Wing Synchro Dragon", role: "Monster negate" },
+      chaofeng: { id: 19048328, name: "Chaofeng, Phantom of the Yang Zing", role: "Attribute lock line" },
+      mudragon: { id: 54757758, name: "Mudragon of the Swamp", role: "Super Poly target" },
+      garura: { id: 11765832, name: "Garura, Wings of Resonant Life", role: "Super Poly target" },
+      ash: { id: 14558127, name: "Ash Blossom & Joyous Spring", role: "Generic hand trap" },
+      veiler: { id: 97268402, name: "Effect Veiler", role: "Light tuner hand trap" },
+      droll: { id: 94145022, name: "Droll & Lock Bird", role: "Search stopper" },
+      nibiru: { id: 27204311, name: "Nibiru, the Primal Being", role: "Combo punish" },
+      magnamhut: { id: 33854624, name: "Bystial Magnamhut", role: "Dragon search bridge" },
+      druiswurm: { id: 6637331, name: "Bystial Druiswurm", role: "Body plus send" },
+      lubellion: { id: 32731036, name: "The Bystial Lubellion", role: "Bystial package" },
+      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos", role: "Special Summon tax" },
+      purulia: { id: 84192580, name: "Mulcharmy Purulia", role: "Normal/Special pressure" },
+      dominusPurge: { id: 97045737, name: "Dominus Purge", role: "Hand trap trap" },
+      imperm: { id: 10045474, name: "Infinite Impermanence", role: "Monster negate" },
+      calledBy: { id: 24224830, name: "Called by the Grave", role: "GY banish and negate" },
+      superPoly: { id: 48130397, name: "Super Polymerization", role: "Board breaker" },
+      crackdown: { id: 36975314, name: "Crackdown", role: "Monster steal" },
+      shadowMirror: { id: 99735427, name: "Shadow-Imprisoning Mirror", role: "DARK effect hate" },
+      ddGround: { id: 31849106, name: "Different Dimension Ground", role: "GY denial turn" },
+      evenly: { id: 15693423, name: "Evenly Matched", role: "Board equalizer" },
+      solemnStrike: { id: 40605147, name: "Solemn Strike", role: "Summon/effect answer" },
+      shifter: { id: 91800273, name: "Dimension Shifter", role: "GY denial" },
+      ogre: { id: 59438930, name: "Ghost Ogre & Snow Rabbit", role: "Face-up card punish" },
+      belle: { id: 73642297, name: "Ghost Belle & Haunted Mansion", role: "GY interaction stopper" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster", role: "Backrow clear" },
+      lightning: { id: 14532163, name: "Lightning Storm", role: "Board clear" },
+      droplet: { id: 24299458, name: "Forbidden Droplet", role: "Negate push" },
+      talents: { id: 25311006, name: "Triple Tactics Talent", role: "Punish monster effects" },
+      thrust: { id: 35269904, name: "Triple Tactics Thrust", role: "Find power spell/trap" },
+      lance: { id: 27243130, name: "Forbidden Lance", role: "Protect key monster" },
+      crossout: { id: 65681983, name: "Crossout Designator", role: "Mirror hand trap answer" },
+      primiteFusion: { id: 99161253, name: "Primite Fusion", role: "Dragon Fusion line" },
+      berzelius: { id: 26462013, name: "Primite Dragon Nether Berzelius", role: "Primite Fusion boss" },
+      alternative: { id: 38517737, name: "Blue-Eyes Alternative White Dragon", role: "Free body and removal" },
+      ancients: { id: 71039903, name: "The White Stone of Ancients", role: "End Phase body" },
+      dictator: { id: 66961194, name: "Dictator of D.", role: "GY setup and extender" },
+      magia: { id: 12381100, name: "Dragon Master Magia", role: "High-ceiling optional boss" },
+      sp: { id: 29301450, name: "S:P Little Knight", role: "Link interaction" },
+      typhon: { id: 93039339, name: "Super Starslayer TY-PHON - Sky Crisis", role: "Simplified board tool" },
+      lunarRabbit: { id: 47643326, name: "Lunar Rabbit Omajinai", role: "Normal tuner tech" },
+      eTele: { id: 67723438, name: "Emergency Teleport", role: "MD tech in sampled lists" },
+      lurrie: { id: 97651498, name: "Fabled Lurrie", role: "Discard extender tech" }
+    };
+
+    const references = [
+      {
+        title: "Master Duel Meta Combos & Counters",
+        url: "https://www.masterduelmeta.com/combos-and-counters",
+        used: "Checked the user-provided combo, counter, and spreadsheet hub. Public render shows tabs and login submission, but entries are JS/login loaded."
+      },
+      {
+        title: "Game8 Primite Blue-Eyes guide",
+        url: "https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/515320",
+        used: "Used for the Wishes combo structure, boss monster roles, and counter categories. The guide itself notes it stopped updating Master Duel articles after December 2025."
+      },
+      {
+        title: "YGOPRODeck Blue-Eyes Primite combo deck",
+        url: "https://ygoprodeck.com/deck/blue-eyes-primite-dragon-combos-for-yugioh-master-duel-590518",
+        used: "Checked as a public deck and combo-video reference for Master Duel Primite Blue-Eyes."
+      },
+      {
+        title: "YGOPRODeck Addy Delplanque top list",
+        url: "https://ygoprodeck.com/deck/primite-blue-eyes-706991",
+        used: "Used for the recent full TCG tournament variant: 43-card Bystial Primite Blue-Eyes, Top 4 Manchester WCQ Regional, April 18, 2026."
+      },
+      {
+        title: "YGO Stats Addy Delplanque decklist",
+        url: "https://ygostats.com/decks/manchester-wcq-regional-3-4-addy-delplanque-primite-blue-eyes-9ipln",
+        used: "Used for card counts and side deck options in the Manchester Top 4 list, including Dominus Purge, Super Polymerization, Crackdown, Different Dimension Ground, Evenly Matched, and Solemn Strike."
+      },
+      {
+        title: "Dueling Nexus May 2026 Primite Blue-Eyes",
+        url: "https://duelingnexus.com/blog/blue-eyes-primite-deck-may-2026-tcg-format/",
+        used: "Compared a May 22, 2026 TCG build using 2 Blue-Eyes White Dragon, Bystials, 3 Beryl, 3 Lode, Drillbeam, Roar, and a 40-card main."
+      },
+      {
+        title: "Road of the King Asia WCQ 2026 OCG Malaysia",
+        url: "https://roadoftheking.com/yu-gi-oh-asia-wcq-2026-ocg-malaysia/",
+        used: "Used as the latest event sighting found: Primite Blue-Eyes appeared in the Top 8 bracket at the May 2, 2026 OCG Malaysia qualifier."
+      },
+      {
+        title: "Road of the King OCG 2026.04 report #4, #5",
+        url: "https://roadoftheking.com/ocg-2026-04-metagame-report-4-5/",
+        used: "Used for OCG meta context from April 25 to May 6, 2026, including 3 Primite Blue-Eyes tops and dominant Kewl Tune, Elfnote, Ritual, Branded, Sky Striker, Yummy, and Maliss shares."
+      },
+      {
+        title: "YGOPRODeck YCS Columbus 2026",
+        url: "https://ygoprodeck.com/tournament/ycs-columbus-4610",
+        used: "Used for latest major TCG event context: YCS Columbus on May 23, 2026 had no Blue-Eyes in the posted Top 32, so the deck is treated as rogue for current TCG."
+      },
+      {
+        title: "Yu-Gi-Oh! Meta tier list",
+        url: "https://www.yugiohmeta.com/tier-list",
+        used: "Used for June 2026 TCG meta spread and side-deck target priorities: Kewl Tune, Branded, DoomZ, Dracotail, Elfnote, Mitsurugi, Sky Striker, Maliss, Radiant Typhoon, and Yummy."
+      },
+      {
+        title: "YGOPRODeck card API",
+        url: "https://db.ygoprodeck.com/api/v7/cardinfo.php",
+        used: "Used for exact card IDs and card image URLs in the required images.ygoprodeck.com/images/cards/CARD_ID.jpg format."
+      }
+    ];
+
+    const routes = [
+      {
+        title: "Wishes full line",
+        type: "1-card + discard",
+        cards: ["wishes", "sage", "maiden", "roar", "trueLight"],
+        summary: "The standard high-ceiling route. It turns Wishes into Sage, Roar, True Light, Blue-Eyes bodies, double Spirit Dragon, then Ultimate Spirit plus Sifr or Blazar access.",
+        caution: "If Droll or Nibiru is common in the matchup, consider ending lower on Spirit plus Seal instead of pushing Crimson Dragon.",
+        nodes: [
+          {
+            type: "Starter",
+            title: "Wishes resolves",
+            text: "Discard 1 card. Add Sage with Eyes of Blue plus Roar of the Blue-Eyed Dragons.",
+            cards: ["wishes", "sage", "roar"]
+          },
+          {
+            type: "Search",
+            title: "Sage finds Maiden",
+            text: "Normal Sage, add Maiden. Send Maiden from hand to place True Light face-up from Deck.",
+            cards: ["sage", "maiden", "trueLight"],
+            pair: ["sage", "maiden"]
+          },
+          {
+            type: "Body",
+            title: "Roar creates Blue-Eyes",
+            text: "Roar summons Blue-Eyes White Dragon. Maiden sees the Blue-Eyes movement and returns as a tuner.",
+            cards: ["roar", "bewd", "maiden"],
+            pair: ["roar", "maiden"]
+          },
+          {
+            type: "Bridge",
+            title: "Link into Spirit",
+            text: "Use Sage for Spirit with Eyes of Blue. On summon, add Mausoleum of White.",
+            cards: ["spiritLink", "mausoleum"],
+            pair: ["spiritLink", "mausoleum"]
+          },
+          {
+            type: "Convert",
+            title: "Wishes GY effect",
+            text: "Banish Wishes, equip Neo Blue-Eyes Ultimate Dragon to Blue-Eyes, then send the equipped Blue-Eyes to Special Summon Blue-Eyes Tyrant Dragon.",
+            cards: ["wishes", "neoUltimate", "tyrant"]
+          },
+          {
+            type: "Rebuild",
+            title: "Spirit restores Blue-Eyes",
+            text: "Tribute Spirit with Eyes of Blue to revive Blue-Eyes from GY. Use Mausoleum to target Maiden, send another Blue-Eyes, and revive Sage.",
+            cards: ["spiritLink", "bewd", "mausoleum", "maiden", "sage"],
+            pair: ["mausoleum", "maiden"]
+          },
+          {
+            type: "Synchro",
+            title: "Make two Spirit Dragons",
+            text: "Use two Level 8 Blue-Eyes monsters plus two Level 1 LIGHT tuners to make two Blue-Eyes Spirit Dragon.",
+            cards: ["spiritDragon", "spiritDragon", "bewd", "sage", "maiden"]
+          },
+          {
+            type: "End",
+            title: "Tag into bosses",
+            text: "Tag one Spirit into Ultimate Spirit and another into Crimson Dragon. Crimson searches Synchro Rumble, then points at Ultimate Spirit to summon Sifr or Blazar.",
+            cards: ["ultimateSpirit", "crimson", "synchroRumble", "sifr", "blazar"],
+            className: "break"
+          }
+        ],
+        branches: [
+          {
+            title: "Ceiling",
+            cards: ["ultimateSpirit", "sifr", "trueLight", "mausoleum"],
+            text: "Ultimate Spirit + Sifr + True Light + Mausoleum. This is the cleanest explosive line when no interruption is expected."
+          },
+          {
+            title: "Safer end",
+            cards: ["spiritDragon", "heavenlySpheres", "trueLight", "drillbeam"],
+            text: "Stop before overextending. Spirit plus Seal plus a set interaction is often stronger into Nibiru or board breakers."
+          },
+          {
+            title: "Opponent-turn flex",
+            cards: ["crimson", "blazar", "sifr"],
+            text: "If Crimson survives as the tag bridge, choose Blazar for a wide answer or Sifr when protecting your established board matters more."
+          }
+        ]
+      },
+      {
+        title: "Beryl lowball",
+        type: "Primite control",
+        cards: ["beryl", "lode", "drillbeam"],
+        summary: "The route for hands that do not open Wishes. Beryl turns into Lode, a Blue-Eyes body, Drillbeam, and a Standby Phase follow-up.",
+        caution: "Lode's Normal Monster summon prevents field effects of Special Summoned monsters for the rest of the turn. Treat this as a control line unless your Blue-Eyes field effects are already used.",
+        nodes: [
+          {
+            type: "Starter",
+            title: "Normal Beryl",
+            text: "Normal Summon Primite Dragon Ether Beryl and set Primite Lordly Lode from Deck.",
+            cards: ["beryl", "lode"]
+          },
+          {
+            type: "Search",
+            title: "Activate Lode",
+            text: "Lode activation searches Drillbeam or Primite Roar, depending on whether you need interaction or protection.",
+            cards: ["lode", "drillbeam", "roarPrimite"]
+          },
+          {
+            type: "Normal body",
+            title: "Declare Blue-Eyes",
+            text: "Use Lode to declare Blue-Eyes White Dragon and Special Summon it from hand, Deck, or GY in Defense Position.",
+            cards: ["lode", "bewd"]
+          },
+          {
+            type: "GY setup",
+            title: "Tribute Beryl",
+            text: "Tribute Beryl to send a Normal Monster from Deck to GY. This turns on Beryl's next Standby Phase add-back.",
+            cards: ["beryl", "bewd"],
+            pair: ["beryl", "bewd"]
+          },
+          {
+            type: "End",
+            title: "Set interaction",
+            text: "Set Drillbeam if searched. With a Normal Monster available, Drillbeam can negate and banish without revealing a card.",
+            cards: ["drillbeam", "bewd", "lode"],
+            className: "break"
+          }
+        ],
+        branches: [
+          {
+            title: "Interaction first",
+            cards: ["drillbeam", "bewd"],
+            text: "Drillbeam handles a face-up extender, floodgate, or boss monster and banishes it after negating."
+          },
+          {
+            title: "Protection first",
+            cards: ["roarPrimite", "bewd", "lode"],
+            text: "Primite Roar protects Normal Monsters and Primite monsters while placing another body if the board is empty."
+          },
+          {
+            title: "Follow-up",
+            cards: ["beryl", "lode"],
+            text: "During your next Standby Phase, Beryl can return to hand if a Normal Monster is in your field or GY."
+          }
+        ]
+      },
+      {
+        title: "Wishes + Primite",
+        type: "Layered board",
+        cards: ["wishes", "beryl", "lode", "drillbeam"],
+        summary: "The layered route. Resolve the Blue-Eyes field effects first, then add the Primite layer so Lode does not lock your own field-effect sequencing.",
+        caution: "Do not use Lode's summon effect before Spirit with Eyes of Blue, Maiden, Crimson Dragon, or other Special Summoned field effects you still need.",
+        nodes: [
+          {
+            type: "Open",
+            title: "Commit to Blue-Eyes first",
+            text: "Use Wishes, Sage, Maiden, and Roar to place True Light and create the first Blue-Eyes body.",
+            cards: ["wishes", "sage", "maiden", "roar", "trueLight"]
+          },
+          {
+            type: "Resolve effects",
+            title: "Spend field triggers",
+            text: "Make Spirit with Eyes of Blue and resolve its search before activating Lode's summon effect.",
+            cards: ["spiritLink", "mausoleum"]
+          },
+          {
+            type: "Layer",
+            title: "Add Primite interaction",
+            text: "Normal or already-used Beryl can access Lode. Lode searches Drillbeam after the critical Special Summoned field effects are done.",
+            cards: ["beryl", "lode", "drillbeam"]
+          },
+          {
+            type: "Board choice",
+            title: "Pick ceiling or safer board",
+            text: "If the path is clear, push double Spirit into Ultimate Spirit plus Sifr. If not, keep Spirit, Seal, True Light, and Drillbeam.",
+            cards: ["ultimateSpirit", "sifr", "spiritDragon", "heavenlySpheres", "drillbeam"],
+            className: "break"
+          }
+        ],
+        branches: [
+          {
+            title: "Best case",
+            cards: ["ultimateSpirit", "sifr", "drillbeam"],
+            text: "A monster negate layer, protection layer, and Drillbeam's negate-banish."
+          },
+          {
+            title: "Into hand traps",
+            cards: ["spiritDragon", "heavenlySpheres", "trueLight"],
+            text: "End with fewer summons and more persistent cards when the opponent has shown Droll, Nibiru, or board breakers."
+          },
+          {
+            title: "If Blue-Eyes is stopped",
+            cards: ["beryl", "lode", "drillbeam"],
+            text: "Pivot to Primite control. You still get Beryl recursion and a live Drillbeam if a Normal Monster reaches field or GY."
+          }
+        ]
+      },
+      {
+        title: "Bystial Seal bridge",
+        type: "TCG top variant",
+        cards: ["magnamhut", "druiswurm", "heavenlySpheres"],
+        summary: "The Bystial package in recent TCG lists gives a way to turn spare Dragons into Seal and a delayed Blue-Eyes follow-up.",
+        caution: "This route is matchup-dependent. It needs LIGHT/DARK targets for Bystials and is best when you are already playing a hand-trap heavy midrange game.",
+        nodes: [
+          {
+            type: "Interrupt",
+            title: "Use Bystial timing",
+            text: "Banish a LIGHT or DARK from either GY to Special Summon Magnamhut or Druiswurm.",
+            cards: ["magnamhut", "druiswurm"]
+          },
+          {
+            type: "Search",
+            title: "Magnamhut delayed search",
+            text: "Magnamhut can search a Dragon during the End Phase, finding Blue-Eyes follow-up or another Bystial body.",
+            cards: ["magnamhut", "jet", "neoKaiser", "bewd"]
+          },
+          {
+            type: "Link",
+            title: "Make Hieratic Seal",
+            text: "Use Bystial plus another Dragon body to make Hieratic Seal. Seal threatens a bounce and summons a Dragon from Deck.",
+            cards: ["heavenlySpheres", "beryl", "magnamhut"]
+          },
+          {
+            type: "Turn 3",
+            title: "Bridge into engine",
+            text: "Seal and the End Phase Dragon search convert a Primite-only or Bystial-only opening into Blue-Eyes access on the next turn.",
+            cards: ["heavenlySpheres", "neoKaiser", "wishes", "roar"],
+            className: "break"
+          }
+        ],
+        branches: [
+          {
+            title: "Summon from Seal",
+            cards: ["neoKaiser", "jet", "beryl"],
+            text: "Choose Neo Kaiser for combo access, Jet for protection, or Beryl when you need Primite grind."
+          },
+          {
+            title: "Druiswurm removal",
+            cards: ["druiswurm", "heavenlySpheres"],
+            text: "Druiswurm can become material and still pressure a sent-to-GY removal line."
+          },
+          {
+            title: "Mirror value",
+            cards: ["magnamhut", "calledBy", "belle"],
+            text: "Bystials, Called By, and Belle contest Blue-Eyes and Branded graveyard lines while also giving Dragon bodies."
+          }
+        ]
+      },
+      {
+        title: "Going second Tyrant",
+        type: "Break and kill",
+        cards: ["wishes", "tyrant", "ultimateFusion"],
+        summary: "The board-breaking route. Wishes can turn a Blue-Eyes body into Tyrant Dragon; Ultimate Fusion and Super Poly-style cards help clear boards before pushing damage.",
+        caution: "Tyrant is trap-immune, not monster-effect immune. Remove negates or force them before committing to battle.",
+        nodes: [
+          {
+            type: "Setup",
+            title: "Make or revive Blue-Eyes",
+            text: "Use Roar, True Light, or Lode to put Blue-Eyes White Dragon on the field.",
+            cards: ["roar", "trueLight", "lode", "bewd"]
+          },
+          {
+            type: "Equip",
+            title: "Wishes equips from Extra",
+            text: "Banish Wishes from GY to equip Neo Blue-Eyes Ultimate Dragon to Blue-Eyes.",
+            cards: ["wishes", "neoUltimate", "bewd"]
+          },
+          {
+            type: "Convert",
+            title: "Summon Tyrant",
+            text: "Send the equipped Blue-Eyes to GY and Special Summon Blue-Eyes Tyrant Dragon.",
+            cards: ["tyrant", "bewd"]
+          },
+          {
+            type: "Clear",
+            title: "Break the rest",
+            text: "Ultimate Fusion, Super Polymerization, Forbidden Droplet, or board wipes clear the way for Tyrant to attack through monsters.",
+            cards: ["ultimateFusion", "superPoly", "droplet", "lightning", "tyrant"],
+            className: "break"
+          }
+        ],
+        branches: [
+          {
+            title: "Trap-heavy matchup",
+            cards: ["tyrant", "duster", "lightning"],
+            text: "Tyrant ignores trap effects, but remove floodgates and battle traps that restrict attacks before committing."
+          },
+          {
+            title: "Fusion clear",
+            cards: ["ultimateFusion", "twinBurst", "tyrant"],
+            text: "Use Ultimate Fusion to turn GY and field materials into removal while preserving pressure."
+          },
+          {
+            title: "Simplified board",
+            cards: ["typhon", "sp", "tyrant"],
+            text: "If the opponent overextends, TY-PHON or S:P can simplify the board before Tyrant cleans up."
+          }
+        ]
+      }
+    ];
+
+    const boards = [
+      {
+        title: "Combo ceiling",
+        tag: "Wishes resolved",
+        cards: ["ultimateSpirit", "sifr", "trueLight", "mausoleum"],
+        rows: [
+          ["Monsters", "Blue-Eyes Ultimate Spirit Dragon plus Stardust Sifr Divine Dragon. Crimson Dragon can flex into Sifr or Blazar depending on timing."],
+          ["Spell/Trap", "True Light face-up, Mausoleum of White active. Extra set interaction if Primite was layered after the Blue-Eyes effects."],
+          ["GY", "Wishes banished, Blue-Eyes names loaded, Roar line used, Maiden/Sage potentially available as follow-up."],
+          ["Purpose", "One field activation negate, protection, GY banish shield from Ultimate Spirit, and recurring Blue-Eyes access."]
+        ]
+      },
+      {
+        title: "Safer midrange",
+        tag: "Current TCG posture",
+        cards: ["spiritDragon", "heavenlySpheres", "trueLight", "drillbeam"],
+        rows: [
+          ["Monsters", "Blue-Eyes Spirit Dragon plus Hieratic Seal when your hand supports the Dragon count."],
+          ["Spell/Trap", "True Light with Drillbeam or Majesty set. Keep one interaction for the first face-up threat."],
+          ["Hand", "Effect Veiler, Droll, Dominus Purge, Bystial, or Mulcharmy from the high hand-trap build."],
+          ["Purpose", "Lower summon count, better into Nibiru, and easier to rebuild if the board is broken."]
+        ]
+      },
+      {
+        title: "Primite lowball",
+        tag: "Beryl only",
+        cards: ["beryl", "lode", "bewd", "drillbeam"],
+        rows: [
+          ["Monsters", "Blue-Eyes White Dragon from Lode, or no monster if you used Beryl to load GY and played around removal."],
+          ["Spell/Trap", "Lode face-up, Drillbeam set or held, Primite Roar if protection matters more."],
+          ["GY", "Beryl in GY and at least one Normal Monster, enabling Standby Phase Beryl add-back."],
+          ["Purpose", "Survive with one clean interruption and force the game into a grind where Primite cards matter."]
+        ]
+      },
+      {
+        title: "Going second push",
+        tag: "Board break",
+        cards: ["tyrant", "ultimateFusion", "superPoly", "droplet"],
+        rows: [
+          ["Monsters", "Blue-Eyes Tyrant Dragon, possibly backed by Twin Burst or a Link/Xyz utility monster."],
+          ["Spell/Trap", "Ultimate Fusion or board breakers used before battle. True Light can reload a Blue-Eyes body."],
+          ["GY", "Blue-Eyes materials loaded for Ultimate Fusion and True Light follow-up."],
+          ["Purpose", "Break interaction first, then use Tyrant's multi-attack pressure to close the game."]
+        ]
+      }
+    ];
+
+    const tips = [
+      {
+        title: "Lode timing is the deck's biggest skill check",
+        icon: "i",
+        cards: ["lode", "spiritLink", "crimson"],
+        text: "Lode's Normal Monster summon is powerful, but it stops your Special Summoned monsters on field from activating effects for the turn. Resolve Spirit with Eyes of Blue, Crimson Dragon, and other key field effects first."
+      },
+      {
+        title: "Wishes adds two different jobs",
+        icon: "+",
+        cards: ["wishes", "sage", "roar"],
+        text: "Wishes is not just a searcher. It gives the tuner and the Blue-Eyes summon spell, then later becomes the equip that unlocks Tyrant Dragon."
+      },
+      {
+        title: "Do not auto-push Crimson Dragon",
+        icon: "i",
+        cards: ["crimson", "sifr", "blazar", "nibiru"],
+        text: "The ceiling line is real, but in tournament-style games you often win by stopping at Spirit plus Seal or Spirit plus set interaction when the opponent represents Nibiru, Droll, or board wipes."
+      },
+      {
+        title: "Drillbeam needs a live reveal condition",
+        icon: "+",
+        cards: ["drillbeam", "bewd", "lode"],
+        text: "With a Normal Monster on field or a Level 5+ Primite monster, Drillbeam does not need a reveal. Otherwise, keep a Primite card or Normal Monster in hand."
+      },
+      {
+        title: "True Light is power and liability",
+        icon: "i",
+        cards: ["trueLight", "duster", "ogre"],
+        text: "True Light protects Blue-Eyes from targeting and supplies follow-up, but if it leaves the field it destroys your monsters. Respect backrow removal and Ghost Ogre-style answers."
+      },
+      {
+        title: "Top lists lean on hand traps",
+        icon: "+",
+        cards: ["ash", "veiler", "droll", "nibiru", "dominusPurge"],
+        text: "Recent lists use the Blue-Eyes engine as a compact threat package, then spend many slots on hand traps. That makes midrange boards better than all-in combo hands."
+      }
+    ];
+
+    const recoveries = [
+      {
+        title: "Beryl Standby loop",
+        cards: ["beryl", "bewd", "lode"],
+        text: "If Beryl is in GY and a Normal Monster is on field or in GY, add Beryl back in your Standby Phase. Normal it again to set another Primite Spell/Trap."
+      },
+      {
+        title: "True Light reload",
+        cards: ["trueLight", "bewd", "roar"],
+        text: "True Light keeps Blue-Eyes access flowing by summoning Blue-Eyes or setting a Blue-Eyes spell/trap from Deck. Roar reaches Deck, GY, and banishment."
+      },
+      {
+        title: "Ultimate Spirit floats",
+        cards: ["ultimateSpirit", "jet", "spiritDragon"],
+        text: "If Ultimate Spirit is destroyed, it can bring back a LIGHT Dragon from GY. Jet Dragon protects other cards and can recur when cards are destroyed."
+      },
+      {
+        title: "Bystial and Seal bridge",
+        cards: ["magnamhut", "heavenlySpheres", "neoKaiser"],
+        text: "Magnamhut searches a Dragon in the End Phase, while Seal converts any Dragon pair into a bounce plus Dragon summon from Deck."
+      },
+      {
+        title: "Primite S/T recursion",
+        cards: ["drillbeam", "roarPrimite", "beryl"],
+        text: "Drillbeam can set itself from GY while you control a Primite monster. Roar keeps Normal Monsters alive through battle and destruction pressure."
+      },
+      {
+        title: "Fusion cleanup",
+        cards: ["ultimateFusion", "tyrant", "twinBurst"],
+        text: "When the first board breaks, Blue-Eyes materials in GY turn Ultimate Fusion into a removal spell that also creates a threat."
+      }
+    ];
+
+    const sidePlans = [
+      {
+        title: "Kewl Tune / Elfnote combo",
+        cards: ["droll", "nibiru", "purulia", "ogre", "imperm"],
+        text: "Prioritize Droll after the first add, Nibiru when they cross five summons, and Ghost Ogre on face-up engine cards that must remain on field. Purulia/Fuwalos punish long summon chains."
+      },
+      {
+        title: "Branded / Dracotail",
+        cards: ["belle", "ddGround", "superPoly", "droll", "calledBy"],
+        text: "Contest GY and Fusion access. Belle and Called By stop key graveyard effects; Different Dimension Ground or Shifter can force awkward lines. Super Poly turns their board into your removal."
+      },
+      {
+        title: "DoomZ / DARK decks / Maliss",
+        cards: ["shadowMirror", "belle", "ddGround", "magnamhut", "druiswurm"],
+        text: "Shadow-Imprisoning Mirror is narrow but high-impact against DARK effect chains. Bystials and Belle apply pressure while doubling as Dragon material."
+      },
+      {
+        title: "Backrow and control",
+        cards: ["duster", "lightning", "evenly", "tyrant", "crackdown"],
+        text: "Use removal before committing True Light. Tyrant is strong into trap decks once floodgates are gone, and Evenly can reset boards that Blue-Eyes cannot attack through."
+      },
+      {
+        title: "Mirror and Dragon boards",
+        cards: ["droll", "shifter", "calledBy", "superPoly", "duster"],
+        text: "Droll after Wishes, Shifter before GY setup, and backrow removal on True Light are the cleanest ways to punish the mirror. Branded variants can use Fallen of Albaz into Alba-Lenatus lines."
+      },
+      {
+        title: "Going first protection",
+        cards: ["crossout", "lance", "talents", "thrust", "solemnStrike"],
+        text: "Crossout and Lance protect the first starter; Talents and Thrust punish monster effects; Solemn Strike is a clean side option when you expect Normal Summon or Extra Deck choke points."
+      }
+    ];
+
+    const counters = [
+      {
+        title: "Droll & Lock Bird",
+        cards: ["droll"],
+        text: "Stops the chain of Sage, Mausoleum, and follow-up searches after the first add resolves."
+      },
+      {
+        title: "Nibiru",
+        cards: ["nibiru"],
+        text: "Punishes the double Spirit and Crimson line. Route lower when the opponent has not committed their hand trap."
+      },
+      {
+        title: "GY denial",
+        cards: ["shifter", "calledBy", "belle", "ddGround"],
+        text: "Cuts off Maiden, Roar, Beryl, Ultimate Spirit, and True Light follow-up."
+      },
+      {
+        title: "Backrow removal",
+        cards: ["duster", "lightning", "ogre"],
+        text: "True Light leaving field can wipe your monsters. Protect it or sequence so you are not all-in on it."
+      }
+    ];
+
+    function cardImage(card) {
+      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function cardMini(key, compact = false) {
+      const card = cards[key];
+      if (!card) return "";
+      return `
+        <button class="card-mini${compact ? " compact" : ""}" type="button" data-card-key="${escapeHtml(key)}" data-card-name="${escapeHtml(card.name)}" data-card-img="${escapeHtml(cardImage(card))}" aria-label="Preview ${escapeHtml(card.name)}">
+          <img src="${escapeHtml(cardImage(card))}" alt="${escapeHtml(card.name)}" loading="lazy">
+          <span class="card-name">${escapeHtml(card.name)}</span>
+        </button>
+      `;
+    }
+
+    function renderCardRows() {
+      document.querySelectorAll("[data-cards]").forEach(row => {
+        const keys = row.getAttribute("data-cards").split(",").map(item => item.trim()).filter(Boolean);
+        row.innerHTML = keys.map(key => cardMini(key, true)).join("");
+      });
+    }
+
+    function renderHeroCards() {
+      const heroKeys = ["wishes", "beryl", "lode", "drillbeam", "bewd", "trueLight", "ultimateSpirit", "sifr", "heavenlySpheres", "dominusPurge"];
+      document.getElementById("heroCards").innerHTML = heroKeys.map(key => cardMini(key)).join("");
+    }
+
+    let activeRoute = 0;
+
+    function renderRoutes() {
+      const tabs = document.getElementById("routeTabs");
+      tabs.innerHTML = routes.map((route, index) => `
+        <button class="route-button${index === activeRoute ? " active" : ""}" type="button" data-route="${index}">
+          ${escapeHtml(route.title)}
+        </button>
+      `).join("");
+
+      tabs.querySelectorAll("[data-route]").forEach(button => {
+        button.addEventListener("click", () => {
+          activeRoute = Number(button.dataset.route);
+          renderRoutes();
+        });
+      });
+
+      const route = routes[activeRoute];
+      document.getElementById("comboGraph").innerHTML = route.nodes.map((node, index) => `
+        <article class="graph-node ${node.className || ""}">
+          <span class="node-type">${escapeHtml(node.type)}</span>
+          <h3>${escapeHtml(node.title)} ${index === 0 ? `<span class="info" tabindex="0" data-tip="${escapeHtml(route.caution)}">i</span>` : ""}</h3>
+          <p class="node-text">${escapeHtml(node.text)}</p>
+          <div class="node-cards">${(node.cards || []).map(key => cardMini(key, true)).join("")}</div>
+          ${node.pair ? `
+            <div class="trigger-pair" aria-label="Cards that trigger together">
+              ${cardMini(node.pair[0], true)}
+              <span class="tiny-plus">+</span>
+              ${cardMini(node.pair[1], true)}
+            </div>
+          ` : ""}
+        </article>
+      `).join("");
+
+      document.getElementById("routeSummary").innerHTML = `
+        <div class="eyebrow"><span class="info-dot">i</span> ${escapeHtml(route.type)}</div>
+        <h3>${escapeHtml(route.title)}</h3>
+        <p>${escapeHtml(route.summary)}</p>
+        <div class="card-row">${route.cards.map(key => cardMini(key, true)).join("")}</div>
+        <p class="dense" style="margin-top: 10px;"><strong>Watch:</strong> ${escapeHtml(route.caution)}</p>
+      `;
+
+      document.getElementById("routeBranches").innerHTML = route.branches.map(branch => `
+        <article class="branch">
+          <h3><span class="plus-icon">+</span>${escapeHtml(branch.title)}</h3>
+          <p>${escapeHtml(branch.text)}</p>
+          <div class="card-row">${branch.cards.map(key => cardMini(key, true)).join("")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderBoards() {
+      document.getElementById("boardGrid").innerHTML = boards.map(board => `
+        <article class="board-card">
+          <div class="board-head">
+            <div>
+              <h3>${escapeHtml(board.title)}</h3>
+              <div class="meta-line"><span class="tag">${escapeHtml(board.tag)}</span></div>
+            </div>
+            <div class="card-row" style="margin-top:0;">${board.cards.map(key => cardMini(key, true)).join("")}</div>
+          </div>
+          ${board.rows.map(row => `
+            <div class="field-row">
+              <strong>${escapeHtml(row[0])}</strong>
+              <span>${escapeHtml(row[1])}</span>
+            </div>
+          `).join("")}
+        </article>
+      `).join("");
+    }
+
+    function renderTips() {
+      document.getElementById("tipsGrid").innerHTML = tips.map(tip => `
+        <article class="tip-card">
+          <h3><span class="${tip.icon === "i" ? "info-dot" : "plus-icon"}">${tip.icon}</span>${escapeHtml(tip.title)}</h3>
+          <p>${escapeHtml(tip.text)}</p>
+          <div class="card-row">${tip.cards.map(key => cardMini(key, true)).join("")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderRecovery() {
+      document.getElementById("recoveryGrid").innerHTML = recoveries.map(item => `
+        <article class="note-card">
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+          <div class="card-row">${item.cards.map(key => cardMini(key, true)).join("")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderSide() {
+      document.getElementById("sideGrid").innerHTML = sidePlans.map(plan => `
+        <article class="matchup-card">
+          <h3>${escapeHtml(plan.title)}</h3>
+          <p>${escapeHtml(plan.text)}</p>
+          <div class="card-row">${plan.cards.map(key => cardMini(key, true)).join("")}</div>
+        </article>
+      `).join("");
+
+      document.getElementById("counterGrid").innerHTML = counters.map(counter => `
+        <article class="note-card danger">
+          <h3>${escapeHtml(counter.title)}</h3>
+          <p>${escapeHtml(counter.text)}</p>
+          <div class="card-row">${counter.cards.map(key => cardMini(key, true)).join("")}</div>
+        </article>
+      `).join("");
+    }
+
+    function renderReferences() {
+      document.getElementById("referenceGrid").innerHTML = references.map(ref => `
+        <article class="reference-item">
+          <strong><a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(ref.title)}</a></strong>
+          <p>${escapeHtml(ref.used)}</p>
+        </article>
+      `).join("");
+    }
+
+    function bindReferences() {
+      const toggle = document.getElementById("refsToggle");
+      const panel = document.getElementById("references");
+      toggle.addEventListener("click", () => {
+        const open = panel.hasAttribute("hidden");
+        if (open) {
+          panel.removeAttribute("hidden");
+          toggle.setAttribute("aria-expanded", "true");
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          panel.setAttribute("hidden", "");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    function bindCardPreview() {
+      const preview = document.getElementById("cardPreview");
+      const img = preview.querySelector("img");
+      const label = preview.querySelector("span");
+
+      function position(event) {
+        const margin = 18;
+        const width = preview.offsetWidth || 246;
+        const height = preview.offsetHeight || 360;
+        let x = event.clientX + margin;
+        let y = event.clientY + margin;
+        if (x + width > window.innerWidth - 8) x = event.clientX - width - margin;
+        if (y + height > window.innerHeight - 8) y = window.innerHeight - height - 8;
+        preview.style.left = `${Math.max(8, x)}px`;
+        preview.style.top = `${Math.max(8, y)}px`;
+      }
+
+      function show(target, event) {
+        img.src = target.dataset.cardImg;
+        img.alt = target.dataset.cardName;
+        label.textContent = target.dataset.cardName;
+        preview.classList.add("show");
+        preview.setAttribute("aria-hidden", "false");
+        position(event);
+      }
+
+      function hide() {
+        preview.classList.remove("show");
+        preview.setAttribute("aria-hidden", "true");
+      }
+
+      document.body.addEventListener("mouseenter", event => {
+        const card = event.target.closest(".card-mini");
+        if (card && window.matchMedia("(hover: hover)").matches) show(card, event);
+      }, true);
+
+      document.body.addEventListener("mousemove", event => {
+        if (preview.classList.contains("show") && window.matchMedia("(hover: hover)").matches) position(event);
+      });
+
+      document.body.addEventListener("mouseleave", event => {
+        const card = event.target.closest(".card-mini");
+        if (card && window.matchMedia("(hover: hover)").matches) hide();
+      }, true);
+
+      document.body.addEventListener("click", event => {
+        const card = event.target.closest(".card-mini");
+        if (!card) {
+          if (!window.matchMedia("(hover: hover)").matches) hide();
+          return;
+        }
+        if (!window.matchMedia("(hover: hover)").matches) {
+          if (preview.classList.contains("show") && label.textContent === card.dataset.cardName) {
+            hide();
+          } else {
+            show(card, event);
+          }
+        }
+      });
+    }
+
+    renderHeroCards();
+    renderCardRows();
+    renderRoutes();
+    renderBoards();
+    renderTips();
+    renderRecovery();
+    renderSide();
+    renderReferences();
+    bindReferences();
+    bindCardPreview();
+  </script>
+</body>
+</html>

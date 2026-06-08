@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Millennium Exodia Incarnate Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172027;
+      --muted: #5d6870;
+      --paper: #f6f7f2;
+      --panel: #ffffff;
+      --panel-2: #eef3ee;
+      --line: #d9dfd5;
+      --gold: #b47b18;
+      --teal: #147277;
+      --green: #26724d;
+      --red: #ad3d36;
+      --blue: #385f95;
+      --violet: #6b568e;
+      --shadow: 0 16px 42px rgba(23, 32, 39, .12);
+      --radius: 8px;
+      --card-w: 58px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.95) 0, rgba(246,247,242,.98) 420px, #edf3ef 100%),
+        repeating-linear-gradient(135deg, rgba(180,123,24,.08) 0 1px, transparent 1px 16px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--teal); }
+    button { font: inherit; letter-spacing: 0; }
+
+    .page {
+      width: min(1220px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(310px, .95fr);
+      gap: 26px;
+      align-items: center;
+      padding: 20px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 14px;
+      font-size: clamp(2.35rem, 6vw, 4.9rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.18rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 790px;
+      color: #314048;
+      font-size: clamp(1rem, 1.8vw, 1.17rem);
+    }
+
+    .chips, .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.84);
+      color: #263239;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong, .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      min-height: 350px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(48px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,39,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(12px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+
+    .showcase .card-mini span {
+      display: none;
+    }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(217,223,213,.8);
+      background: linear-gradient(180deg, rgba(246,247,242,.96), rgba(246,247,242,.88));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a, .route-button, .tab-button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 760;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .route-button.is-active,
+    .tab-button:hover,
+    .tab-button.is-active {
+      border-color: rgba(20,114,119,.45);
+      background: #e9f4f2;
+    }
+
+    .section {
+      margin: 14px 0;
+      padding: clamp(16px, 3vw, 24px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 14px;
+    }
+
+    .panel.tint { background: var(--panel-2); }
+
+    .mini-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-weight: 850;
+    }
+
+    .icon-plus,
+    .info-dot {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 21px;
+      height: 21px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .info-dot {
+      position: relative;
+      color: var(--blue);
+      cursor: help;
+    }
+
+    .info-dot[data-tip]:hover::after,
+    .info-dot[data-tip]:focus::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      z-index: 70;
+      width: min(260px, 78vw);
+      padding: 9px 10px;
+      border: 1px solid #c7d2dc;
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      font-size: .82rem;
+      font-weight: 650;
+      text-align: left;
+      transform: translateX(-50%);
+    }
+
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      margin: 10px 0;
+      overflow: visible;
+    }
+
+    .card-mini {
+      position: relative;
+      display: grid;
+      gap: 5px;
+      width: var(--card-w);
+      justify-items: center;
+      overflow: visible;
+    }
+
+    .card-mini img {
+      display: block;
+      width: var(--card-w);
+      aspect-ratio: 421 / 614;
+      border-radius: 4px;
+      border: 1px solid rgba(23,32,39,.2);
+      box-shadow: 0 8px 15px rgba(23,32,39,.16);
+      background: #dfe6e1;
+    }
+
+    .card-mini span {
+      width: 100%;
+      color: #3a464d;
+      font-size: .68rem;
+      font-weight: 750;
+      line-height: 1.05;
+      text-align: center;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow-wrap: normal;
+    }
+
+    .card-mini:hover,
+    .card-mini:focus-within {
+      z-index: 80;
+    }
+
+    .card-mini:hover img,
+    .card-mini:focus-within img {
+      transform: translateY(-8px) scale(2.45);
+      transform-origin: center bottom;
+      box-shadow: 0 22px 52px rgba(23,32,39,.35);
+    }
+
+    .plus-token {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff7e8;
+      border: 1px solid #e3c383;
+      color: var(--gold);
+      font-weight: 950;
+    }
+
+    .flow-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .mindmap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .graph {
+      position: relative;
+      min-height: 480px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.9), rgba(238,243,238,.92)),
+        radial-gradient(circle at 20% 20%, rgba(180,123,24,.12), transparent 30%);
+      overflow: visible;
+    }
+
+    .node {
+      position: relative;
+      z-index: 2;
+      min-height: 130px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #cdd8cf;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.95);
+    }
+
+    .node::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      z-index: -1;
+      border: 1px dashed rgba(20,114,119,.28);
+      border-radius: 12px;
+      opacity: .65;
+    }
+
+    .node b {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: #1d2a31;
+      font-size: .95rem;
+    }
+
+    .node small {
+      display: block;
+      color: var(--muted);
+      font-weight: 680;
+    }
+
+    .node .card-row {
+      margin: 0;
+      gap: 6px;
+    }
+
+    .node .card-mini {
+      --card-w: 46px;
+    }
+
+    .node .card-mini span {
+      font-size: .6rem;
+    }
+
+    .route-details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 14px;
+    }
+
+    .route-details ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .route-details li {
+      margin: 0 0 9px;
+      padding-left: 2px;
+    }
+
+    .route-details .callout {
+      margin-top: 12px;
+    }
+
+    .callout {
+      padding: 10px 12px;
+      border: 1px solid #d7d3bf;
+      border-left: 5px solid var(--gold);
+      border-radius: var(--radius);
+      background: #fffaf0;
+      color: #332b1a;
+    }
+
+    .callout.blue { border-left-color: var(--blue); background: #f1f5fb; }
+    .callout.red { border-left-color: var(--red); background: #fff3f1; }
+    .callout.green { border-left-color: var(--green); background: #f1f8f3; }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .board {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .zone-row {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+
+    .zone-label {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .list-clean {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .list-clean li {
+      position: relative;
+      padding-left: 23px;
+    }
+
+    .list-clean li::before {
+      content: "+";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eef6f4;
+      color: var(--teal);
+      font-size: .8rem;
+      font-weight: 950;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      padding: 10px 11px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3ee;
+      color: #263239;
+      font-size: .78rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .refs {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .refs.is-open { display: block; }
+
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .source-list li { margin-bottom: 9px; }
+
+    .muted { color: var(--muted); }
+    .strong { font-weight: 850; }
+    .danger { color: var(--red); font-weight: 850; }
+
+    @media (max-width: 980px) {
+      .hero, .mindmap, .grid-2, .grid-3, .board-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase { min-height: 0; }
+      .mindmap { gap: 12px; }
+      .graph { min-height: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      :root { --card-w: 50px; }
+      .page { width: min(100% - 18px, 1220px); padding-top: 12px; }
+      .section { padding: 14px; }
+      .section-head { display: block; }
+      .showcase { grid-template-columns: repeat(5, minmax(42px, 1fr)); gap: 6px; padding: 10px; }
+      .graph { grid-template-columns: 1fr; padding: 10px; }
+      .node { min-height: 0; }
+      .zone-row { grid-template-columns: 1fr; gap: 6px; }
+      .card-mini:hover img,
+      .card-mini:focus-within img {
+        transform: translateY(-6px) scale(1.9);
+      }
+      .quick-nav { top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="icon-plus">+</span> Millennium Exodia Incarnate mind map</div>
+        <h1>Summon Exodia, protect the turn, cash out with Blaze.</h1>
+        <p class="lead">A compact cheatsheet for the current Millennium Exodia shell: pure Ankh lines, Golem/Wedju protection, Heart of Gaia pressure, and the Fiendsmith/Odion branches showing up in recent Master Duel lists.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Updated</strong> June 8, 2026</span>
+          <span class="pill"><strong>Role</strong> Rogue control / OTK</span>
+          <span class="pill"><strong>Core</strong> Ankh -> Unstoppable -> Exxod or Blaze</span>
+          <span class="pill"><strong>Variant</strong> 50-60 card Fiendsmith/Gaia/Odion shells</span>
+        </div>
+      </div>
+      <div class="hero-showcase">
+        <div class="showcase" data-cards="exodiaBoss,ankh,sengenjin,shield,golem,wedju,heartBlue,heartGaia,exxod,blaze"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page sections">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#combo-graph">Combo Graph</a>
+      <a href="#interactions">Interactions</a>
+      <a href="#boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#variants">Variants</a>
+      <a href="#side">Side & Counters</a>
+      <a href="#references">References</a>
+    </nav>
+
+    <section class="section" id="snapshot">
+      <div class="section-head">
+        <div>
+          <h2>Playstyle And Win Condition</h2>
+          <p>Millennium Exodia is not a five-pieces-in-hand FTK deck. It is a low-combo control deck that turns multiple starters into <span class="strong">Millennium Ankh</span>, summons <span class="strong">The Unstoppable Exodia Incarnate</span>, then uses end-phase access to <span class="strong">Exxod Fires of Rage</span> or <span class="strong">Obliterate!!! Blaze</span>.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="The boss cannot be destroyed by opponent card effects, negates one Spell/Trap activation each turn, sets Exodd or Obliterate cards in the End Phase, and scales in battle from your LP.">i</span> Core Plan</div>
+          <ul class="list-clean">
+            <li>Find Ankh through Shield, Heart of the Blue-Eyes, Sengenjin chains, Wedju Temple, or raw draw.</li>
+            <li>Resolve Ankh after you have used any Extra Deck or non-Millennium lines you need that turn.</li>
+            <li>Set Exxod going first; take Blaze when a battle-phase kill is realistic.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="A resolved Ankh shuffles itself back into the Deck, so repeat summons are real if the five Forbidden One pieces remain accessible.">i</span> Win Paths</div>
+          <ul class="list-clean">
+            <li>Exodia attacks over boards with LP-based ATK.</li>
+            <li>Blaze equips all five pieces for +10000 ATK and piercing after backrow is cleared.</li>
+            <li>Exxod wipes the opponent's field when you control a Level 10+ Exodia monster.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Recent Master Duel notes favor larger Fiendsmith builds because the mandatory Exodia pieces create too many low-quality hands at exactly 40 cards.">i</span> Current Position</div>
+          <ul class="list-clean">
+            <li>Rogue, not Tier 1; current top decks force multiple hand traps and backup engines.</li>
+            <li>Recent Master Duel lists trend toward 50-60 cards with Fiendsmith, Gaia, and many hand traps.</li>
+            <li>Latest sourced TCG placement found: Concepcion WCQ Regional Top 8, February 7, 2026.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="combo-graph">
+      <div class="section-head">
+        <div>
+          <h2>Combo Graph</h2>
+          <p>Pick a route to change the graph details. Treat the graph as a branching map: the same starter can become a hard Ankh commit, a protected Golem/Wedju line, or a bait line that delays Ankh for Fiendsmith/Odion pressure.</p>
+        </div>
+      </div>
+      <div class="flow-tabs" id="routeTabs"></div>
+      <div class="mindmap">
+        <div class="graph" id="routeGraph" aria-live="polite"></div>
+        <aside class="route-details" id="routeDetails"></aside>
+      </div>
+    </section>
+
+    <section class="section" id="interactions">
+      <div class="section-head">
+        <div>
+          <h2>Core Combos And Interactions</h2>
+          <p>These are the card clusters that trigger together most often. The key technical rule: Ankh's text shuffles face-up non-Millennium, non-Level-10+ Exodia monsters you control, so make Extra Deck value before Ankh or plan to delay Ankh.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Shield / Heart Into Ankh</div>
+          <div class="card-row" data-cards="shield,heartBlue,ankh,exodiaBoss,exxod"></div>
+          <p><span class="strong">Shield</span> places itself, summons by paying 2000 LP or revealing Ankh, then searches Ankh. <span class="strong">Heart of the Blue-Eyes</span> discards for Ankh and becomes delayed disruption after Ankh has resolved this Duel.</p>
+        </article>
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Sengenjin Extender Chain</div>
+          <div class="card-row" data-cards="sengenjin,shield,golem,wedju,ankh"></div>
+          <p><span class="strong">Sengenjin</span> searches any Millennium monster. Use it to find Shield when you need Ankh, or Golem when you already have Ankh and want protection from activation negation.</p>
+        </article>
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Golem / Wedju Protected Access</div>
+          <div class="card-row" data-cards="golem,wedju,shield,ankh,exodiaBoss"></div>
+          <p><span class="strong">Golem</span> searches Wedju and makes Ankh's activation unable to be negated while it is face-up. Wedju turns a spare monster in hand into a Shield placement from Deck, converting into Ankh.</p>
+        </article>
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Heart Of Gaia Layer</div>
+          <div class="card-row" data-cards="heartGaia,sengenjin,shield,golem,exodiaBoss"></div>
+          <p><span class="strong">Heart of Gaia</span> is always a Millennium card, can be Normal Summoned without Tribute if a Level 5+ Monster Card is on field, and gives a monster-effect negate by sending another face-up Level 5+ Monster Card.</p>
+        </article>
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Fiendsmith Bait / Backup</div>
+          <div class="card-row" data-cards="engraver,tract,lurrie,requiem,sequence,desirae"></div>
+          <p><span class="strong">Engraver</span> and Tract make Fiendsmith pressure before Ankh. This is strongest when it baits interaction, creates Desirae, or lets you win games where the Exodia half is stopped.</p>
+        </article>
+        <article class="panel tint">
+          <div class="mini-title"><span class="icon-plus">+</span> Odion / Trap Branch</div>
+          <div class="card-row" data-cards="manMark,templeKings,apophis,swampDeity,rabbit,azurune"></div>
+          <p><span class="strong">The Man with the Mark</span> gets Temple of the Kings. Temple lets one Trap activate the turn it was set; Apophis turns into a body and sets another Apophis trap for same-turn interaction.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="boards">
+      <div class="section-head">
+        <div>
+          <h2>End Board Examples</h2>
+          <p>These are practical field snapshots by End Phase. Exact cards depend on LP cost, whether you opened Ankh to reveal instead of paying, and whether you chose to delay Ankh for Fiendsmith/Odion pressure.</p>
+        </div>
+      </div>
+      <div class="board-grid">
+        <article class="board">
+          <h3>Pure Shield Commit</h3>
+          <div class="zone-row"><div class="zone-label">Field</div><div class="card-row" data-cards="exodiaBoss,shield"></div></div>
+          <div class="zone-row"><div class="zone-label">Set / GY</div><div class="card-row" data-cards="exxod,ankh"></div></div>
+          <p class="muted">One Spell/Trap negate, Exxod ready on opponent's turn, Ankh shuffled back after resolving.</p>
+        </article>
+        <article class="board">
+          <h3>Golem / Wedju Commit</h3>
+          <div class="zone-row"><div class="zone-label">Field</div><div class="card-row" data-cards="exodiaBoss,golem,shield,wedju"></div></div>
+          <div class="zone-row"><div class="zone-label">Set</div><div class="card-row" data-cards="exxod"></div></div>
+          <p class="muted">Golem protects Ankh activation from being negated; Wedju can recycle destroyed Millennium monsters back into the Spell/Trap Zone.</p>
+        </article>
+        <article class="board">
+          <h3>Gaia Layer</h3>
+          <div class="zone-row"><div class="zone-label">Field</div><div class="card-row" data-cards="exodiaBoss,heartGaia,sengenjin"></div></div>
+          <div class="zone-row"><div class="zone-label">GY / Set</div><div class="card-row" data-cards="heartBlue,exxod"></div></div>
+          <p class="muted">Gaia can trade a Level 5+ Monster Card for a monster negate; Heart of the Blue-Eyes threatens large summon removal from GY.</p>
+        </article>
+        <article class="board">
+          <h3>Fiendsmith Backup, Ankh Delayed</h3>
+          <div class="zone-row"><div class="zone-label">Field</div><div class="card-row" data-cards="desirae,sequence,rabbit,azurune"></div></div>
+          <div class="zone-row"><div class="zone-label">Follow-up</div><div class="card-row" data-cards="ankh,shield,wedju"></div></div>
+          <p class="muted">Use when keeping Desirae/Rabbit is stronger than clearing them with Ankh. Exodia becomes the next push.</p>
+        </article>
+        <article class="board">
+          <h3>Going Second OTK</h3>
+          <div class="zone-row"><div class="zone-label">Push</div><div class="card-row" data-cards="droplet,evenly,ankh,exodiaBoss,blaze"></div></div>
+          <div class="zone-row"><div class="zone-label">If Not Lethal</div><div class="card-row" data-cards="exxod,obliterate"></div></div>
+          <p class="muted">Break first, summon Exodia after your other summons, then use Blaze as the last effect when damage is available.</p>
+        </article>
+        <article class="board">
+          <h3>Odion Trap Pivot</h3>
+          <div class="zone-row"><div class="zone-label">Field</div><div class="card-row" data-cards="manMark,templeKings,apophis,swampDeity"></div></div>
+          <div class="zone-row"><div class="zone-label">Follow-up</div><div class="card-row" data-cards="ankh,exodiaBoss"></div></div>
+          <p class="muted">Stable when the hand has normal-summon access but not enough Millennium gas. Gaia also wants the normal summon, so choose the branch early.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tips">
+      <div class="section-head">
+        <div>
+          <h2>Tips</h2>
+          <p>Small sequencing choices matter more than long combo memorization.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <article class="panel">
+          <ul class="list-clean">
+            <li><span class="strong">Use Extra Deck value before Ankh.</span> Ankh locks Summons after resolution and shuffles face-up non-Millennium bodies by text.</li>
+            <li><span class="strong">Lead Wedju into K9 pressure.</span> Recent notes call out K9 Izuna punishing hand/GY monster effects; Wedju changes the first interaction point.</li>
+            <li><span class="strong">Golem protects activation, not everything.</span> It stops Ankh activation negation, but effects that negate Ankh's effect can still matter.</li>
+            <li><span class="strong">Blaze is usually last.</span> It prevents your other card effects for the rest of the turn after its equip/wipe mode.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <ul class="list-clean">
+            <li><span class="strong">Track LP before battle.</span> Paying 2000 for multiple Millennium summons lowers Exodia's battle ceiling; revealing Ankh saves LP.</li>
+            <li><span class="strong">Do not expose Exodia too early if your hand is Gaia/Fiendsmith.</span> Recent Master Duel notes mention hiding the Exodia plan when possible.</li>
+            <li><span class="strong">Set Exxod first going first.</span> Exodia already negates one Spell/Trap; Exxod gives a field wipe threat on the opponent's turn.</li>
+            <li><span class="strong">Expect non-destruction removal.</span> Banish, bounce, absorb, tribute, or send effects answer the boss better than destruction.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="recovery">
+      <div class="section-head">
+        <div>
+          <h2>Recovery Options</h2>
+          <p>The deck's recovery is split between repeat Ankh access, Exxod/Obliterate recursion, and backup engines that still play when the Ankh push is stopped.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Ankh shuffles itself into the Deck after activation instead of going to the GY.">i</span> Repeat Ankh</div>
+          <div class="card-row" data-cards="ankh,shield,heartBlue"></div>
+          <p>Shield and Heart can find more Ankh copies. If the boss is answered but the pieces are still in Deck/hand/face-up field, another Ankh can reload Exodia.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Exxod can banish itself from GY after the turn it was sent to recover or recycle Forbidden One pieces.">i</span> Pieces Back</div>
+          <div class="card-row" data-cards="exxod,obliterate,head,leftArm,rightArm,leftLeg,rightLeg"></div>
+          <p>Exxod adds a Forbidden One from Deck/GY or shuffles up to five from GY/banishment. Obliterate can add a piece back if it leaves the Spell/Trap Zone.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Wedju replaces destruction of face-up Millennium monsters by placing them as Continuous Spells.">i</span> Rebuild Bodies</div>
+          <div class="card-row" data-cards="wedju,sengenjin,golem,shield,heartGaia"></div>
+          <p>Wedju keeps Millennium monsters in circulation, while the main monsters can place themselves again from hand and summon from the Spell/Trap Zone.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Fiendsmith Engraver can recur from the GY by recycling another LIGHT Fiend.">i</span> Fiendsmith Grind</div>
+          <div class="card-row" data-cards="engraver,desirae,lacrima,agnumday"></div>
+          <p>Engraver, Lacrima, Desirae, and Agnumday let the backup engine keep pressure when Exodia is delayed or removed.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Heart of the Blue-Eyes is once per Duel from GY after Ankh has been successfully activated.">i</span> Heart Check</div>
+          <div class="card-row" data-cards="heartBlue,exodiaBoss"></div>
+          <p>Heart of the Blue-Eyes can send a Level 8+ or 3000+ ATK summon to the GY and Special Summon itself after Ankh has successfully resolved.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="Do not use Shifter in hands that require Fiendsmith GY lines unless the matchup demands it.">i</span> Side-Aware Recovery</div>
+          <div class="card-row" data-cards="shifter,belle,called"></div>
+          <p>Pure Millennium can tolerate Shifter better than Fiendsmith builds. In Fiendsmith hands, Belle/Called are cleaner anti-GY tools.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="variants">
+      <div class="section-head">
+        <div>
+          <h2>Latest Variants And Tournament Context</h2>
+          <p>The most current evidence found splits by platform: Master Duel has recent detailed Exodia Fiendsmith notes; TCG has a February 2026 Top 8 placement but no public list exposed for that player in the tournament page.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <article class="panel">
+          <div class="mini-title"><span class="icon-plus">+</span> Master Duel 54-card Fiendsmith/Gaia</div>
+          <div class="card-row" data-cards="engraver,tract,lurrie,shield,golem,heartGaia,heartBlue,ankh"></div>
+          <p>May 2026 notes moved from 52 to 54 cards to reduce double-brick hands. The same notes list 23 total starters, 22 hand traps, and 9 bricks, with Fiendsmith carrying games where Exodia hands are poor.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="icon-plus">+</span> Master Duel 50-card Master I</div>
+          <div class="card-row" data-cards="wedju,heartGaia,ankh,droplet,imperm,droll"></div>
+          <p>April 2026 notes favor 50 cards over 40 or 60, cite K9 Izuna and Kewl Tune as difficult pressure, and recommend leading Wedju when available into K9 interaction.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="icon-plus">+</span> Exodia / Fiendsmith / Odion</div>
+          <div class="card-row" data-cards="manMark,templeKings,apophis,swampDeity,engraver,desirae"></div>
+          <p>March 2026 Rating Duel notes say combining pure Millennium, Fiendsmith, and Odion gave the most flexible lines: trap setup, Ankh setup, or Fiendsmith fallback depending on hand and interruption.</p>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="icon-plus">+</span> TCG Top Placement Trail</div>
+          <div class="card-row" data-cards="sengenjin,shield,golem,heartBlue,superpoly,shifter"></div>
+          <p>Latest sourced TCG placement found: Concepcion WCQ Regional, February 7, 2026, Top 8 Exodia/Millennium. The latest list-bearing YGOPRODeck tournament page found is YCS Guayaquil Top 32 from November 2, 2024.</p>
+        </article>
+      </div>
+      <div class="callout blue">
+        Combo spreadsheet status: Master Duel Meta's Combos & Counters page was checked, but no public Exodia-specific spreadsheet was visible in the indexed results. The references panel lists the verified combo tutorial links and deck-note sources used instead.
+      </div>
+    </section>
+
+    <section class="section" id="side">
+      <div class="section-head">
+        <div>
+          <h2>Side Deck Options And Counters</h2>
+          <p>Adjust for format legality. In Master Duel, this is more of a flexible-card map than a literal 15-card side deck.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Matchup / Problem</th>
+              <th>Bring In Or Main More</th>
+              <th>Why It Matters</th>
+              <th>Cut / Caution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="strong">Kewl Tune</span><br><span class="muted">Current Tier 1 / top power deck</span></td>
+              <td><div class="card-row" data-cards="droll,imperm,veiler,book,droplet,nibiru"></div></td>
+              <td>Stop chained searches, hand knowledge, and Synchro setup. Droll is highest ceiling after the first add; Droplet/Book help force a weaker board before Ankh.</td>
+              <td>Nibiru quality depends on their line. Do not cut too many starters; you still need Ankh access.</td>
+            </tr>
+            <tr>
+              <td><span class="strong">K9 / Vanquish Soul K9</span><br><span class="muted">Izuna punishes hand/GY monster effects</span></td>
+              <td><div class="card-row" data-cards="droplet,imperm,veiler,ttt,evenly,wedju"></div></td>
+              <td>Recent Exodia notes call out K9 Izuna as a major issue. Lead Wedju if opened, then use Droplet or TTT after they interact.</td>
+              <td>Super Poly was cut in one recent list because it was not reliable into VS-K9 boards.</td>
+            </tr>
+            <tr>
+              <td><span class="strong">Dracotail / Branded</span><br><span class="muted">Fusion grind and bounce pressure</span></td>
+              <td><div class="card-row" data-cards="ash,belle,droplet,superpoly,evenly,exxod"></div></td>
+              <td>They can answer a single Exodia with bounce or layered fusion pressure. Force a weaker board, then punish overextension with Exxod.</td>
+              <td>Do not rely only on Exodia's destruction protection; non-destruction removal is the real threat.</td>
+            </tr>
+            <tr>
+              <td><span class="strong">Backrow / Trap decks</span><br><span class="muted">Odion, Labrynth, floodgates</span></td>
+              <td><div class="card-row" data-cards="cosmic,evenly,blaze,droplet"></div></td>
+              <td>Cosmic banishes high-value traps; Evenly resets wide fields. Blaze can clear Spell/Trap Zones when Exodia is ready to kill.</td>
+              <td>Blaze locks your effects after its main mode. Sequence removal before activating it.</td>
+            </tr>
+            <tr>
+              <td><span class="strong">GY combo</span><br><span class="muted">Fiendsmith mirrors, Orcust, recursive engines</span></td>
+              <td><div class="card-row" data-cards="shifter,belle,called,ogre"></div></td>
+              <td>Shifter is strong in pure Millennium hands; Belle and Called are cleaner when you need your own Fiendsmith GY.</td>
+              <td>Shifter can turn off your Engraver/Tract lines. Side it only when the matchup payoff is worth it.</td>
+            </tr>
+            <tr>
+              <td><span class="strong">Going second into boards</span><br><span class="muted">Need to resolve Ankh after trades</span></td>
+              <td><div class="card-row" data-cards="fuwalos,purulia,droplet,evenly,superpoly,lava"></div></td>
+              <td>Draw punishers and board breakers force interaction before the Ankh commit. Lava Golem-type cards answer towers or stacked negates.</td>
+              <td>Lava Golem consumes your Normal Summon, which conflicts with Heart of Gaia and The Man with the Mark.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="These are the most reliable ways opponents attack the deck.">i</span> Counters Against Millennium Exodia</div>
+          <ul class="list-clean">
+            <li>Ash, Imperm, or Veiler on Shield/Sengenjin/Golem can stop Ankh access before it starts.</li>
+            <li>Droll after the first search turns off the chain of Shield, Sengenjin, Wedju, and Fiendsmith searches.</li>
+            <li>Negating Ankh's effect still matters; Golem only says the activation cannot be negated.</li>
+            <li>Bounce, banish, absorb, tribute, or send Exodia. Destruction is the weakest removal type.</li>
+            <li>Attack the LP total. Millennium costs lower Exodia's battle ATK ceiling and speed up the standby drain clock.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="mini-title"><span class="info-dot" data-tip="These are the safest flex-card priorities when you do not know the field.">i</span> Default Flex Priority</div>
+          <div class="card-row" data-cards="droll,droplet,imperm,belle,ttt,called"></div>
+          <p>Start with hand traps that trade into the current top decks, then add board breakers if going second feels unwinnable. Keep the starter count high enough that you still see two playable engine cards.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <div class="section-head">
+        <div>
+          <h2>References</h2>
+          <p>The reference tab is hidden by default in the page flow. Open it when you want the source trail behind the cheatsheet calls.</p>
+        </div>
+        <button class="tab-button" id="refsToggle" type="button" aria-expanded="false">Show References</button>
+      </div>
+      <div class="refs" id="refsPanel">
+        <ol class="source-list">
+          <li><a href="https://www.masterduelmeta.com/tier-list/" target="_blank" rel="noreferrer">Master Duel Meta Tier List</a> - checked June 8, 2026. Shows June 4, 2026 banlist/set update, Kewl Tune as the top power deck, K9 / Vanquish Soul K9 / Sky Striker / Elfnote as high-power decks, and current Master 1 popularity.</li>
+          <li><a href="https://www.masterduelmeta.com/top-decks/master-v/may-2026/exodia/dc07/6ZrXW" target="_blank" rel="noreferrer">Master Duel Meta - Exodia, dc07, Master V, May 13, 2026</a> - source for 54-card trend, starter/hand-trap/brick ratios, Fiendsmith carrying poor Exodia hands, and current ladder notes.</li>
+          <li><a href="https://www.masterduelmeta.com/top-decks/master-i/april-2026/exodia/dc07/qncdc" target="_blank" rel="noreferrer">Master Duel Meta - Exodia, dc07, Master I, April 16, 2026</a> - source for 50-card build notes, K9 Izuna issue, Kewl Tune matchup notes, and Wedju sequencing tip.</li>
+          <li><a href="https://www.masterduelmeta.com/top-decks/rating-duels/march-2026/exodia/dc07/s7Htl" target="_blank" rel="noreferrer">Master Duel Meta - Exodia Fiendsmith Odion, Rating Duels, March 28, 2026</a> - source for combining pure Millennium, Fiendsmith, and Odion as flexible lines.</li>
+          <li><a href="https://www.masterduelmeta.com/top-decks/duelist-cup-dlv.-max/march-2026/exodia/dc07/TLNOV" target="_blank" rel="noreferrer">Master Duel Meta - Exodia Fiendsmith DLv Max, March 2026</a> - source for Fiendsmith backup value, 53-card ratio, and the note that pure Exodia alone is not enough into many current boards.</li>
+          <li><a href="https://www.masterduelmeta.com/combos-and-counters/" target="_blank" rel="noreferrer">Master Duel Meta Combos & Counters</a> - searched for Exodia spreadsheet/combo entries. No public Exodia-specific spreadsheet was visible in indexed results during research; the page itself hosts combo, counter, and spreadsheet submissions.</li>
+          <li><a href="https://ygoprodeck.com/tournament/concepci%C3%B3n-wcq-regional-4184" target="_blank" rel="noreferrer">YGOPRODeck - Concepcion WCQ Regional, February 7, 2026</a> - latest sourced TCG tournament placement found with a Top 8 Exodia/Millennium result.</li>
+          <li><a href="https://ygoprodeck.com/deck/millennium-exodia-543218" target="_blank" rel="noreferrer">YGOPRODeck - Millennium Exodia, YCS Guayaquil Top 32, November 2, 2024</a> - latest list-bearing YGOPRODeck tournament deck found during research.</li>
+          <li><a href="https://ygoprodeck.com/article/deck-dictionary-exodia-302498" target="_blank" rel="noreferrer">YGOPRODeck Deck Dictionary - Exodia</a> - source for the general Millennium card-role explanation: Sengenjin, Golem, Shield, Ankh, Wedju, Blaze, Exxod, and Unstoppable Exodia.</li>
+          <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php" target="_blank" rel="noreferrer">YGOPRODeck card database API</a> and <a href="https://images.ygoprodeck.com/images/cards/83257450.jpg" target="_blank" rel="noreferrer">YGOPRODeck card images</a> - used for card IDs, card text checks, and real card image URLs in this page.</li>
+          <li><a href="https://www.youtube.com/watch?v=C3-YKGtznkU" target="_blank" rel="noreferrer">Exodia Fiendsmith Millennium Combo Tutorial</a> - linked from recent Master Duel Meta Exodia deck notes as a step-by-step combo video.</li>
+        </ol>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const cards = {
+      exodiaBoss: [83257450, "The Unstoppable Exodia Incarnate"],
+      ankh: [37613663, "Millennium Ankh"],
+      sengenjin: [38775407, "Sengenjin Wakes from a Millennium"],
+      shield: [1164211, "Shield of the Millennium Dynasty"],
+      golem: [74169516, "Golem that Guards the Millennium Treasures"],
+      wedju: [63017368, "Wedju Temple"],
+      heartBlue: [54475145, "Heart of the Blue-Eyes"],
+      heartGaia: [73129314, "Heart of Gaia"],
+      exxod: [23617756, "Exxod Fires of Rage"],
+      blaze: [402416, "Obliterate!!! Blaze"],
+      obliterate: [64043465, "Obliterate!!!"],
+      head: [33396948, "Exodia the Forbidden One"],
+      leftArm: [7902349, "Left Arm of the Forbidden One"],
+      rightArm: [70903634, "Right Arm of the Forbidden One"],
+      leftLeg: [44519536, "Left Leg of the Forbidden One"],
+      rightLeg: [8124921, "Right Leg of the Forbidden One"],
+      engraver: [60764609, "Fiendsmith Engraver"],
+      tract: [98567237, "Fiendsmith's Tract"],
+      lurrie: [97651498, "Fabled Lurrie"],
+      requiem: [2463794, "Fiendsmith's Requiem"],
+      sequence: [49867899, "Fiendsmith's Sequence"],
+      desirae: [82135803, "Fiendsmith's Desirae"],
+      agnumday: [32991300, "Fiendsmith's Agnumday"],
+      lacrima: [28803166, "Lacrima the Crimson Tears"],
+      moon: [71818935, "Moon of the Closed Heaven"],
+      doomed: [58071334, "Snake-Eyes Doomed Dragon"],
+      ptolemy: [38495396, "Constellar Ptolemy M7"],
+      linkSpider: [98978921, "Link Spider"],
+      manMark: [97522863, "The Man with the Mark"],
+      templeKings: [29762407, "Temple of the Kings"],
+      apophis: [95561146, "Apophis the Serpent"],
+      swampDeity: [85888377, "Apophis the Swamp Deity"],
+      rabbit: [1528054, "Silhouhatte Rabbit"],
+      trick: [24440742, "Silhouhatte Trick"],
+      azurune: [44822037, "Angel Statue - Azurune"],
+      droplet: [24299458, "Forbidden Droplet"],
+      droll: [94145021, "Droll & Lock Bird"],
+      belle: [73642296, "Ghost Belle & Haunted Mansion"],
+      ogre: [59438930, "Ghost Ogre & Snow Rabbit"],
+      ash: [14558127, "Ash Blossom & Joyous Spring"],
+      imperm: [10045474, "Infinite Impermanence"],
+      nibiru: [27204311, "Nibiru, the Primal Being"],
+      ttt: [25311006, "Triple Tactics Talent"],
+      called: [24224830, "Called by the Grave"],
+      evenly: [15693423, "Evenly Matched"],
+      cosmic: [8267140, "Cosmic Cyclone"],
+      superpoly: [48130397, "Super Polymerization"],
+      shifter: [91800273, "Dimension Shifter"],
+      book: [35480699, "Book of Eclipse"],
+      fuwalos: [42141493, "Mulcharmy Fuwalos"],
+      purulia: [84192580, "Mulcharmy Purulia"],
+      lava: [102380, "Lava Golem"],
+      veiler: [97268402, "Effect Veiler"]
+    };
+
+    const shortLabels = {
+      exodiaBoss: "Exodia Boss",
+      sengenjin: "Sengenjin",
+      shield: "Shield",
+      golem: "Millennium Golem",
+      heartBlue: "Blue-Eyes",
+      heartGaia: "Gaia",
+      exxod: "Exxod",
+      blaze: "Blaze",
+      obliterate: "Obliterate",
+      head: "Exodia Head",
+      leftArm: "Left Arm",
+      rightArm: "Right Arm",
+      leftLeg: "Left Leg",
+      rightLeg: "Right Leg",
+      engraver: "Engraver",
+      tract: "Tract",
+      lurrie: "Lurrie",
+      requiem: "Requiem",
+      sequence: "Sequence",
+      desirae: "Desirae",
+      agnumday: "Agnumday",
+      lacrima: "Lacrima",
+      moon: "Closed Heaven",
+      doomed: "Doomed Dragon",
+      ptolemy: "Ptolemy M7",
+      linkSpider: "Link Spider",
+      manMark: "Man with Mark",
+      templeKings: "Temple",
+      apophis: "Apophis",
+      swampDeity: "Swamp Deity",
+      rabbit: "Rabbit",
+      trick: "Trick",
+      azurune: "Azurune",
+      droplet: "Droplet",
+      droll: "Droll",
+      belle: "Belle",
+      ogre: "Ogre",
+      ash: "Ash",
+      imperm: "Imperm",
+      nibiru: "Nibiru",
+      ttt: "TTT",
+      called: "Called By",
+      evenly: "Evenly",
+      cosmic: "Cosmic",
+      superpoly: "Super Poly",
+      shifter: "Shifter",
+      book: "Book",
+      fuwalos: "Fuwalos",
+      purulia: "Purulia",
+      lava: "Lava Golem",
+      veiler: "Veiler"
+    };
+
+    const routes = [
+      {
+        id: "pure",
+        title: "Pure Ankh",
+        subtitle: "Shortest commit line",
+        nodes: [
+          { title: "Starter", cards: ["shield", "heartBlue"], text: "Shield searches Ankh; Heart discards for Ankh." },
+          { title: "Ankh", cards: ["ankh", "head", "leftArm"], text: "Show all five Forbidden One cards from Deck/hand/face-up field." },
+          { title: "Boss", cards: ["exodiaBoss"], text: "Summon Unstoppable; Ankh shuffles itself back." },
+          { title: "End Phase", cards: ["exxod", "blaze"], text: "Set Exxod going first or line up Blaze for lethal." },
+          { title: "Opponent Turn", cards: ["exodiaBoss", "exxod"], text: "Spell/Trap negate plus board wipe threat." },
+          { title: "Follow-Up", cards: ["ankh", "obliterate"], text: "Reload Ankh or recover pieces if the boss is answered." }
+        ],
+        steps: [
+          "Place Shield of the Millennium Dynasty from hand, then Special Summon it by paying 2000 LP or revealing Ankh.",
+          "Shield adds Millennium Ankh. If you started Heart of the Blue-Eyes instead, discard Heart to add Ankh.",
+          "Activate Ankh, show all five Forbidden One monsters from Deck/hand/face-up field, and Special Summon The Unstoppable Exodia Incarnate.",
+          "End Phase: set Exxod Fires of Rage when going first. Choose Blaze only if the battle push is already lined up."
+        ],
+        end: "Field by End Phase: Unstoppable Exodia + Shield if used as starter, set Exxod, Ankh back in Deck. Heart of the Blue-Eyes sits in GY if that was the starter.",
+        warning: "This is the cleanest line but easiest to stop if Shield/Heart/Ankh is interrupted."
+      },
+      {
+        id: "golem",
+        title: "Golem / Wedju",
+        subtitle: "Protected Ankh setup",
+        nodes: [
+          { title: "Starter", cards: ["golem", "wedju"], text: "Golem finds Wedju; Wedju converts hand monster into Deck placement." },
+          { title: "Bridge", cards: ["shield", "sengenjin"], text: "Place or summon Shield/Sengenjin to find Ankh or more Millennium bodies." },
+          { title: "Protection", cards: ["golem", "ankh"], text: "Golem says your Ankh activation cannot be negated." },
+          { title: "Boss", cards: ["exodiaBoss"], text: "Resolve Ankh after building the bodies you want to keep." },
+          { title: "Set", cards: ["exxod"], text: "End Phase sets the opponent-turn wipe." },
+          { title: "Recycle", cards: ["wedju"], text: "Destroyed Millennium monsters return to the Spell/Trap Zone." }
+        ],
+        steps: [
+          "Place Golem, Special Summon it, then add Wedju Temple.",
+          "Use Wedju to place a spare monster from hand and place Shield from Deck as a Continuous Spell.",
+          "Special Summon Shield, then add Millennium Ankh. If Sengenjin is involved, search whichever Millennium piece is missing.",
+          "Resolve Ankh with Golem face-up so the activation itself cannot be negated.",
+          "End Phase set Exxod Fires of Rage."
+        ],
+        end: "Field by End Phase: Unstoppable Exodia + Golem + Shield or Sengenjin + Wedju Temple + set Exxod.",
+        warning: "Golem does not make Ankh's effect immune to every form of negation; it specifically protects the activation."
+      },
+      {
+        id: "gaia",
+        title: "Heart / Gaia",
+        subtitle: "Monster negate layer",
+        nodes: [
+          { title: "Ankh Access", cards: ["heartBlue", "shield"], text: "Heart searches Ankh from hand; Shield searches after summoning." },
+          { title: "Level 5+ Body", cards: ["sengenjin", "golem", "shield"], text: "Any face-up Level 5+ Monster Card enables Gaia's tribute-free Normal Summon." },
+          { title: "Gaia", cards: ["heartGaia"], text: "Always treated as Millennium, so it fits the Ankh field." },
+          { title: "Ankh", cards: ["ankh", "exodiaBoss"], text: "Commit once Gaia or Heart has added enough interaction." },
+          { title: "Disrupt", cards: ["heartGaia", "heartBlue"], text: "Gaia negates monster effects; Heart checks large summons from GY." },
+          { title: "Set", cards: ["exxod"], text: "Exxod adds the wipe layer." }
+        ],
+        steps: [
+          "Get a Level 5+ Monster Card face-up through Shield, Sengenjin, Golem, or a placed Millennium card.",
+          "Normal Summon Heart of Gaia without Tribute. It is always treated as a Millennium card.",
+          "Resolve Ankh to summon Unstoppable Exodia. Gaia remains compatible with the Millennium board.",
+          "On the opponent's turn, Gaia can send another face-up Level 5+ Monster Card to negate and destroy a monster effect.",
+          "If Heart of the Blue-Eyes was discarded earlier, it threatens a once-per-Duel answer to Level 8+ or 3000+ ATK summons."
+        ],
+        end: "Field by End Phase: Unstoppable Exodia + Heart of Gaia + another Level 5+ Monster Card + set Exxod, with Heart of the Blue-Eyes in GY when opened.",
+        warning: "Gaia competes for the Normal Summon with Odion lines, so decide before committing."
+      },
+      {
+        id: "fiendsmith",
+        title: "Fiendsmith",
+        subtitle: "Bait, backup, or delayed Ankh",
+        nodes: [
+          { title: "Starter", cards: ["engraver", "tract"], text: "Engraver finds Tract; Tract finds and discards LIGHT Fiend access." },
+          { title: "Lurrie", cards: ["lurrie", "requiem"], text: "Discarded Lurrie summons itself; link into Requiem." },
+          { title: "Link / Fuse", cards: ["sequence", "desirae"], text: "Sequence converts GY material into Desirae pressure." },
+          { title: "Extension", cards: ["agnumday", "doomed"], text: "Agnumday and Doomed Dragon lines create bodies and removal." },
+          { title: "Decision", cards: ["ankh", "exodiaBoss"], text: "Commit to Ankh only after you have taken Fiendsmith value." },
+          { title: "Backup", cards: ["lacrima", "engraver"], text: "If Ankh is stopped, Fiendsmith still grinds." }
+        ],
+        steps: [
+          "Use Engraver to access Fiendsmith's Tract, then use Tract to find and discard Fabled Lurrie.",
+          "Lurrie Special Summons itself; link it into Requiem and use Requiem to access Engraver.",
+          "With an extra body, make Sequence and convert GY materials into Desirae or continue through Agnumday/Doomed Dragon lines.",
+          "Choose the branch: keep Fiendsmith pressure and delay Ankh, or spend the Fiendsmith line as bait before resolving Ankh.",
+          "If you resolve Ankh while non-Millennium bosses are face-up, expect Ankh's shuffle text to clear those bodies."
+        ],
+        end: "Delayed Ankh board: Desirae with Link equip pressure + trap or Millennium follow-up. Hard Ankh board: Exodia + set Exxod after Fiendsmith has absorbed interruption.",
+        warning: "The Fiendsmith branch is a decision point, not an automatic add-on to a final Exodia field."
+      },
+      {
+        id: "odion",
+        title: "Odion",
+        subtitle: "Trap-normal-summon pivot",
+        nodes: [
+          { title: "Normal", cards: ["manMark"], text: "The Man with the Mark gets Temple of the Kings." },
+          { title: "Temple", cards: ["templeKings"], text: "Temple allows one Trap Card to activate the turn it was set." },
+          { title: "Apophis", cards: ["apophis"], text: "Apophis summons itself and sets another Apophis Trap." },
+          { title: "Negate", cards: ["swampDeity", "azurune"], text: "Swamp Deity negates face-up cards; Azurune checks summons." },
+          { title: "Rabbit", cards: ["rabbit", "trick"], text: "Rabbit can set a trap monster as another disruption line." },
+          { title: "Follow", cards: ["ankh", "exodiaBoss"], text: "Use Millennium as the next wave or when the hand supports it." }
+        ],
+        steps: [
+          "Normal Summon The Man with the Mark and take Temple of the Kings from Deck.",
+          "Use Temple to enable one Trap activation the turn it is Set.",
+          "Set and activate Apophis the Serpent; it summons itself and sets Apophis the Swamp Deity, which can be used this turn.",
+          "Hold Swamp Deity for opponent face-up card negation, or use the trap bodies as material before choosing the Ankh branch.",
+          "If your hand also has Heart of Gaia, remember both branches want your Normal Summon."
+        ],
+        end: "Field by End Phase: Temple + Apophis trap bodies or set trap pressure, with Ankh/Millennium cards held as follow-up unless the hand can safely commit.",
+        warning: "Odion improves floor hands but can add bricks if the list is already overloaded."
+      },
+      {
+        id: "otk",
+        title: "Going Second",
+        subtitle: "Break, Ankh, Blaze",
+        nodes: [
+          { title: "Break", cards: ["droplet", "evenly", "superpoly"], text: "Trade into negates before Ankh." },
+          { title: "Starter", cards: ["sengenjin", "shield", "heartBlue"], text: "Find Ankh after the opponent is simplified." },
+          { title: "Summon", cards: ["ankh", "exodiaBoss"], text: "Ankh after all other summons and board breakers." },
+          { title: "Battle", cards: ["blaze"], text: "Blaze gives piercing and equips all five pieces for +10000 ATK." },
+          { title: "Fallback", cards: ["exxod", "obliterate"], text: "If lethal is not safe, set Exxod and grind." },
+          { title: "Punish", cards: ["ttt", "called"], text: "Use anti-hand-trap cards to force Ankh through." }
+        ],
+        steps: [
+          "Use board breakers first. Do not activate Ankh until you have made every summon and effect you need before the lock.",
+          "Find Ankh through Shield, Sengenjin, Heart of the Blue-Eyes, or Wedju Temple.",
+          "Summon Exodia, enter battle, and use the boss's LP-based ATK gain to force damage.",
+          "Activate Obliterate!!! Blaze only when it is the final effect you need, because its main effect stops your other effects for the rest of the turn.",
+          "If the kill is not guaranteed, set Exxod in the End Phase instead of overcommitting."
+        ],
+        end: "Ideal result: opponent's board is broken and Exodia kills through battle. Backup result: Exodia + set Exxod with opponent low on resources.",
+        warning: "Going second remains rough in the current Master Duel notes; prioritize hands with two interaction pieces plus two starters."
+      }
+    ];
+
+    function cardHtml(key) {
+      const card = cards[key];
+      if (!card) return "";
+      const [id, name] = card;
+      const label = shortLabels[key] || name;
+      return `<span class="card-mini" tabindex="0" title="${escapeHtml(name)}"><img src="https://images.ygoprodeck.com/images/cards/${id}.jpg" alt="${escapeHtml(name)}" loading="lazy"><span>${escapeHtml(label)}</span></span>`;
+    }
+
+    function renderCardRows(root = document) {
+      root.querySelectorAll("[data-cards]").forEach(row => {
+        const keys = row.dataset.cards.split(",").map(x => x.trim()).filter(Boolean);
+        row.innerHTML = keys.map((key, idx) => {
+          const plus = idx > 0 && row.classList.contains("card-row") ? '<span class="plus-token">+</span>' : "";
+          return plus + cardHtml(key);
+        }).join("");
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    let activeRoute = routes[0].id;
+
+    function renderRoutes() {
+      const tabs = document.getElementById("routeTabs");
+      tabs.innerHTML = routes.map(route =>
+        `<button type="button" class="route-button ${route.id === activeRoute ? "is-active" : ""}" data-route="${route.id}">${route.title}</button>`
+      ).join("");
+
+      const route = routes.find(item => item.id === activeRoute) || routes[0];
+      const graph = document.getElementById("routeGraph");
+      graph.innerHTML = route.nodes.map((node, idx) => `
+        <article class="node">
+          <b>${idx + 1}. ${escapeHtml(node.title)} <span class="info-dot" data-tip="${escapeHtml(node.text)}">i</span></b>
+          <div class="card-row" data-cards="${node.cards.join(",")}"></div>
+          <small>${escapeHtml(node.text)}</small>
+        </article>
+      `).join("");
+
+      const details = document.getElementById("routeDetails");
+      details.innerHTML = `
+        <h3>${escapeHtml(route.title)} <span class="muted">- ${escapeHtml(route.subtitle)}</span></h3>
+        <ol>${route.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+        <div class="callout green"><span class="strong">Field by End Phase:</span> ${escapeHtml(route.end)}</div>
+        <div class="callout red"><span class="strong">Watch:</span> ${escapeHtml(route.warning)}</div>
+      `;
+
+      renderCardRows(graph);
+      tabs.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", () => {
+          activeRoute = button.dataset.route;
+          renderRoutes();
+        });
+      });
+    }
+
+    document.getElementById("refsToggle").addEventListener("click", () => {
+      const panel = document.getElementById("refsPanel");
+      const button = document.getElementById("refsToggle");
+      const open = panel.classList.toggle("is-open");
+      button.textContent = open ? "Hide References" : "Show References";
+      button.setAttribute("aria-expanded", String(open));
+    });
+
+    renderCardRows();
+    renderRoutes();
+  </script>
+</body>
+</html>

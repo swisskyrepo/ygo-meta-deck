@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YGO Meta Deck Index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212a;
+      --muted: #5b6673;
+      --paper: #f6f7f9;
+      --panel: #ffffff;
+      --panel-2: #eef3f7;
+      --line: #d8e0e8;
+      --soft-line: #e8edf3;
+      --blue: #285f9f;
+      --cyan: #14798a;
+      --gold: #a86f16;
+      --green: #24734f;
+      --red: #a43b42;
+      --violet: #67518a;
+      --shadow: 0 18px 46px rgba(23, 33, 42, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(246,247,249,.96) 380px, #edf4f3 100%),
+        repeating-linear-gradient(135deg, rgba(40,95,159,.075) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: none; }
+    button, input { font: inherit; letter-spacing: 0; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+      gap: 24px;
+      align-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--cyan);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 860px;
+      margin-bottom: 14px;
+      font-size: clamp(2.3rem, 6vw, 4.85rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 830px;
+      margin-bottom: 16px;
+      color: #31414d;
+      font-size: clamp(1rem, 1.8vw, 1.16rem);
+    }
+
+    .hero-pills,
+    .chips,
+    .deck-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #26323c;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong { color: var(--ink); }
+
+    .plus-icon,
+    .info-dot {
+      display: inline-grid;
+      place-items: center;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--cyan);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .info-dot { background: var(--gold); }
+
+    .hero-showcase {
+      min-height: 340px;
+      display: grid;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(46px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,33,42,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-12px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(10px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-11px) rotate(1deg); }
+    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+
+    .card-mini {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 59 / 86;
+      border: 1px solid rgba(23,33,42,.22);
+      border-radius: 5px;
+      background: #dce4ec;
+      box-shadow: 0 10px 20px rgba(23,33,42,.14);
+      overflow: hidden;
+    }
+
+    .card-mini img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(216,224,232,.86);
+      background: linear-gradient(180deg, rgba(246,247,249,.98), rgba(246,247,249,.92));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a,
+    .filter-button,
+    .open-button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 760;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover,
+    .filter-button:hover,
+    .open-button:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .filter-button.active,
+    .open-button {
+      color: #fff;
+      background: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(216,224,232,.82);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 72ch;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(230px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap .info-dot {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: var(--cyan);
+    }
+
+    .search {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 12px 9px 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      color: var(--ink);
+      outline: none;
+      box-shadow: 0 8px 18px rgba(23,33,42,.05);
+    }
+
+    .search:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(20,121,138,.14);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+      gap: 6px;
+    }
+
+    .deck-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .deck-card {
+      display: grid;
+      align-content: space-between;
+      min-height: 360px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+      color: var(--ink);
+      box-shadow: 0 12px 26px rgba(23,33,42,.08);
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .deck-card:hover,
+    .deck-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: var(--cyan);
+      box-shadow: 0 18px 38px rgba(23,33,42,.13);
+      outline: none;
+    }
+
+    .deck-art {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+      min-height: 94px;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid var(--soft-line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(20,121,138,.09), transparent 44%),
+        linear-gradient(135deg, rgba(168,111,22,.08), transparent 72%),
+        #fff;
+      overflow: visible;
+    }
+
+    .deck-art .card-mini {
+      box-shadow: 0 8px 16px rgba(23,33,42,.12);
+    }
+
+    .deck-art .card-mini:nth-child(1) { transform: translateY(9px) rotate(-5deg); }
+    .deck-art .card-mini:nth-child(2) { transform: translateY(-5px) rotate(3deg); }
+    .deck-art .card-mini:nth-child(3) { transform: translateY(4px) rotate(-2deg); }
+    .deck-art .card-mini:nth-child(4) { transform: translateY(-8px) rotate(4deg); }
+    .deck-art .card-mini:nth-child(5) { transform: translateY(7px) rotate(-3deg); }
+
+    .deck-card:hover .card-mini,
+    .deck-card:focus-visible .card-mini {
+      border-color: rgba(20,121,138,.45);
+    }
+
+    .deck-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+      color: var(--cyan);
+      font-size: .76rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .deck-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.18rem;
+    }
+
+    .deck-card p {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .deck-meta {
+      margin-top: 10px;
+      margin-bottom: 14px;
+    }
+
+    .deck-meta .tag {
+      min-height: 26px;
+      padding: 4px 8px;
+      font-size: .78rem;
+      font-weight: 760;
+    }
+
+    .open-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--soft-line);
+    }
+
+    .path {
+      min-width: 0;
+      color: #6a7480;
+      font-size: .78rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .status-panel,
+    .empty-state {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+      color: var(--muted);
+    }
+
+    .status-panel {
+      display: none;
+      margin-bottom: 14px;
+      border-color: rgba(164,59,66,.26);
+      background: rgba(255,255,255,.94);
+    }
+
+    .status-panel.show { display: block; }
+    .empty-state[hidden] { display: none; }
+    .deck-card[hidden] { display: none; }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .hero-showcase {
+        min-height: 0;
+      }
+
+      .deck-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page {
+        width: min(100% - 18px, 1240px);
+        padding-top: 12px;
+      }
+
+      .hero {
+        gap: 12px;
+      }
+
+      .showcase {
+        grid-template-columns: repeat(5, minmax(42px, 1fr));
+        gap: 7px;
+        padding: 10px;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        justify-content: start;
+      }
+
+      .deck-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .deck-card {
+        min-height: 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero" id="top">
+      <div>
+        <div class="eyebrow"><span class="plus-icon">+</span> Deck cheatsheet router</div>
+        <h1>YGO Meta Deck Index</h1>
+        <p class="lead">Open the right Yu-Gi-Oh! deck cheatsheet from the generated pages in <strong>outputs/</strong>.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>8</strong> deck pages</span>
+          <span class="pill"><strong>Format</strong> standalone HTML</span>
+          <span class="pill"><strong>Cards</strong> YGOPRODeck artwork</span>
+        </div>
+      </div>
+      <div class="hero-showcase" aria-label="Deck card showcase">
+        <div class="showcase">
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63166095.jpg" alt="Sky Striker Mobilize - Engage!"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89631139.jpg" alt="Blue-Eyes White Dragon"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/67647362.jpg" alt="Blackbeard, the Plunder Patroll Captain"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/95440947.jpg" alt="Eldlich the Golden Lord"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44146295.jpg" alt="Mirrorjade the Iceblade Dragon"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18940725.jpg" alt="Floowandereeze &amp; Robina"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/83257450.jpg" alt="The Unstoppable Exodia Incarnate"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13332685.jpg" alt="Ame no Habakiri no Mitsurugi"></span>
+          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/84941194.jpg" alt="Imsety, Glory of Horus"></span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Index navigation">
+      <a href="#decks">Decks</a>
+      <a href="outputs/sky-striker-mitsurugi-cheatsheet.html">Sky Striker Mitsurugi</a>
+      <a href="outputs/primite-blue-eyes-cheatsheet.html">Primite Blue-Eyes</a>
+      <a href="outputs/plunder-patroll-cheatsheet.html">Plunder Patroll</a>
+      <a href="outputs/eldlich-horus-mindmap.html">Eldlich Horus</a>
+      <a href="outputs/despia-branded-cheatsheet.html">Despia Branded</a>
+      <a href="outputs/floowandereeze-cheatsheet.html">Floowandereeze</a>
+      <a href="outputs/millennium-exodia-cheatsheet.html">Millennium Exodia</a>
+      <a href="outputs/mimighoul-cheatsheet.html">Mimighoul</a>
+    </nav>
+
+    <main>
+      <section id="decks">
+        <div class="section-head">
+          <div>
+            <h2>Deck Pages</h2>
+            <p>Search names, archetypes, roles, or use <code>?deck=blue-eyes</code> and <code>#mimighoul</code> style routes for direct redirects.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="search-wrap">
+            <span class="info-dot">i</span>
+            <input class="search" id="deckSearch" type="search" autocomplete="off" placeholder="Search decks" aria-label="Search decks">
+          </div>
+          <div class="filters" aria-label="Deck filters">
+            <button class="filter-button active" type="button" data-filter="all">All</button>
+            <button class="filter-button" type="button" data-filter="control">Control</button>
+            <button class="filter-button" type="button" data-filter="midrange">Midrange</button>
+            <button class="filter-button" type="button" data-filter="combo">Combo</button>
+            <button class="filter-button" type="button" data-filter="rogue">Rogue</button>
+          </div>
+        </div>
+
+        <div class="status-panel" id="routerStatus" role="status"></div>
+
+        <div class="deck-grid" id="deckGrid">
+          <a class="deck-card" href="outputs/sky-striker-mitsurugi-cheatsheet.html" data-route="sky-striker-mitsurugi" data-tags="sky striker mitsurugi tcg hybrid midrange control spell link ritual">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63166095.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/26077387.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/9726840.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/76072561.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13332685.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="info-dot">i</span> TCG hybrid mind map</div>
+              <h3>Sky Striker Mitsurugi</h3>
+              <p>Spell control and Link positioning backed by a compact Mitsurugi Ritual package.</p>
+              <div class="deck-meta">
+                <span class="tag">Control</span>
+                <span class="tag">Midrange</span>
+                <span class="tag">Link</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/sky-striker-mitsurugi-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/primite-blue-eyes-cheatsheet.html" data-route="primite-blue-eyes" data-tags="primite blue eyes blue-eyes dragon synchro combo midrange bystial">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89631139.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/80326401.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63198739.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/56506740.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89604813.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="plus-icon">+</span> Primite Blue-Eyes map</div>
+              <h3>Primite Blue-Eyes</h3>
+              <p>Starter routing into Blue-Eyes, Primite, Bystial, and Synchro end-board branches.</p>
+              <div class="deck-meta">
+                <span class="tag">Combo</span>
+                <span class="tag">Midrange</span>
+                <span class="tag">Dragon</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/primite-blue-eyes-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/plunder-patroll-cheatsheet.html" data-route="plunder-patroll" data-tags="plunder patroll attribute toolbox control ship runick adventurer rogue">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/93031067.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/31374201.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/67647362.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18832779.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/85969517.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="info-dot">i</span> Attribute toolbox</div>
+              <h3>Plunder Patroll</h3>
+              <p>Reactive ship tagging, Attribute control, Blackbeard reloads, and matchup ship choices.</p>
+              <div class="deck-meta">
+                <span class="tag">Control</span>
+                <span class="tag">Rogue</span>
+                <span class="tag">Toolbox</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/plunder-patroll-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/eldlich-horus-mindmap.html" data-route="eldlich-horus" data-tags="eldlich horus trap control golden land rank 8 grind">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/95440947.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/84941194.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/16528181.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/20612097.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/70636044.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="info-dot">i</span> Trap grind map</div>
+              <h3>Eldlich Horus</h3>
+              <p>Golden Land recursion, Horus Level 8 pressure, floodgate choices, and grind routes.</p>
+              <div class="deck-meta">
+                <span class="tag">Control</span>
+                <span class="tag">Midrange</span>
+                <span class="tag">Trap</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/eldlich-horus-mindmap.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/despia-branded-cheatsheet.html" data-route="despia-branded" data-tags="despia branded dogmatika fusion midrange control albaz mirrorjade dracotail">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/62962630.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44362883.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44146295.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/30271097.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/98829635.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="plus-icon">+</span> Fusion value map</div>
+              <h3>Despia Branded</h3>
+              <p>Fusion midrange routes for Branded, Dogmatika, Despia, and Dracotail variants.</p>
+              <div class="deck-meta">
+                <span class="tag">Midrange</span>
+                <span class="tag">Control</span>
+                <span class="tag">Fusion</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/despia-branded-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/floowandereeze-cheatsheet.html" data-route="floowandereeze" data-tags="floowandereeze floo normal summon control tribute winged beast rogue">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18940725.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/54334420.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/80611581.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/28126717.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/69087397.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="plus-icon">+</span> Normal Summon control</div>
+              <h3>Floowandereeze</h3>
+              <p>Normal Summon chains, Empen lines, Dreaming Town turns, and anti-meta side plans.</p>
+              <div class="deck-meta">
+                <span class="tag">Control</span>
+                <span class="tag">Rogue</span>
+                <span class="tag">Tribute</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/floowandereeze-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/millennium-exodia-cheatsheet.html" data-route="millennium-exodia" data-tags="millennium exodia incarnate ankh blaze combo rogue control otk">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/83257450.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/37613663.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/38775407.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63017368.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/23617756.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="plus-icon">+</span> Millennium Ankh routes</div>
+              <h3>Millennium Exodia</h3>
+              <p>Ankh access, Exodia Incarnate protection, Exxod setup, and Blaze cash-out lines.</p>
+              <div class="deck-meta">
+                <span class="tag">Combo</span>
+                <span class="tag">Control</span>
+                <span class="tag">Rogue</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/millennium-exodia-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+
+          <a class="deck-card" href="outputs/mimighoul-cheatsheet.html" data-route="mimighoul" data-tags="mimighoul flip control dungeon rank 1 genesys master duel rogue">
+            <div>
+              <div class="deck-art" aria-hidden="true">
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt=""></span>
+                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt=""></span>
+              </div>
+              <div class="deck-kicker"><span class="info-dot">i</span> Flip control map</div>
+              <h3>Mimighoul</h3>
+              <p>Face-down donation pressure, Dungeon control, Room loops, and Rank 1 finishers.</p>
+              <div class="deck-meta">
+                <span class="tag">Control</span>
+                <span class="tag">Rogue</span>
+                <span class="tag">Flip</span>
+              </div>
+            </div>
+            <div class="open-row">
+              <span class="path">outputs/mimighoul-cheatsheet.html</span>
+              <span class="open-button">Open</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="empty-state" id="emptyState" hidden>No matching deck page found.</div>
+
+        <noscript>
+          <p class="status-panel show">JavaScript is disabled, but every deck card above is a direct link to its generated HTML page.</p>
+        </noscript>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const routeMap = new Map([
+      ["sky-striker-mitsurugi", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+      ["sky-striker-mitsurugi-cheatsheet", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+      ["sky-striker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+      ["skystriker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+      ["striker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+      ["mitsurugi", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+
+      ["primite-blue-eyes", "outputs/primite-blue-eyes-cheatsheet.html"],
+      ["primite-blue-eyes-cheatsheet", "outputs/primite-blue-eyes-cheatsheet.html"],
+      ["blue-eyes", "outputs/primite-blue-eyes-cheatsheet.html"],
+      ["blueeyes", "outputs/primite-blue-eyes-cheatsheet.html"],
+      ["primite", "outputs/primite-blue-eyes-cheatsheet.html"],
+
+      ["plunder-patroll", "outputs/plunder-patroll-cheatsheet.html"],
+      ["plunder-patroll-cheatsheet", "outputs/plunder-patroll-cheatsheet.html"],
+      ["plunder", "outputs/plunder-patroll-cheatsheet.html"],
+
+      ["eldlich-horus", "outputs/eldlich-horus-mindmap.html"],
+      ["eldlich-horus-mindmap", "outputs/eldlich-horus-mindmap.html"],
+      ["eldlich", "outputs/eldlich-horus-mindmap.html"],
+      ["horus", "outputs/eldlich-horus-mindmap.html"],
+
+      ["despia-branded", "outputs/despia-branded-cheatsheet.html"],
+      ["despia-branded-cheatsheet", "outputs/despia-branded-cheatsheet.html"],
+      ["branded", "outputs/despia-branded-cheatsheet.html"],
+      ["despia", "outputs/despia-branded-cheatsheet.html"],
+      ["dogmatika-branded", "outputs/despia-branded-cheatsheet.html"],
+
+      ["floowandereeze", "outputs/floowandereeze-cheatsheet.html"],
+      ["floowandereeze-cheatsheet", "outputs/floowandereeze-cheatsheet.html"],
+      ["floo", "outputs/floowandereeze-cheatsheet.html"],
+
+      ["millennium-exodia", "outputs/millennium-exodia-cheatsheet.html"],
+      ["millennium-exodia-cheatsheet", "outputs/millennium-exodia-cheatsheet.html"],
+      ["exodia", "outputs/millennium-exodia-cheatsheet.html"],
+      ["millennium", "outputs/millennium-exodia-cheatsheet.html"],
+
+      ["mimighoul", "outputs/mimighoul-cheatsheet.html"],
+      ["mimighoul-cheatsheet", "outputs/mimighoul-cheatsheet.html"]
+    ]);
+
+    const normalizeRoute = (value) => decodeURIComponent(String(value || ""))
+      .trim()
+      .toLowerCase()
+      .replace(/^outputs?\//, "")
+      .replace(/\.html$/, "")
+      .replace(/\b(deck|page|mind\s*map|cheatsheet)\b/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-{2,}/g, "-");
+
+    const params = new URLSearchParams(window.location.search);
+    const requestedParam = params.get("deck") || params.get("d") || params.get("page") || params.get("archetype");
+    const hashValue = window.location.hash ? window.location.hash.slice(1) : "";
+    const requestedHash = hashValue && !document.getElementById(hashValue) ? hashValue : "";
+    const requestedRoute = requestedParam || requestedHash;
+    const statusPanel = document.getElementById("routerStatus");
+
+    if (requestedRoute) {
+      const routeKey = normalizeRoute(requestedRoute);
+      const href = routeMap.get(routeKey);
+
+      if (href) {
+        window.location.replace(href);
+      } else {
+        statusPanel.textContent = `No deck route found for "${requestedRoute}". Choose one of the generated pages below.`;
+        statusPanel.classList.add("show");
+      }
+    }
+
+    const deckCards = Array.from(document.querySelectorAll(".deck-card"));
+    const search = document.getElementById("deckSearch");
+    const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
+    const emptyState = document.getElementById("emptyState");
+    let activeFilter = "all";
+
+    const applyFilters = () => {
+      const query = search.value.trim().toLowerCase();
+      let visible = 0;
+
+      deckCards.forEach((card) => {
+        const tags = card.dataset.tags || "";
+        const matchesQuery = !query || tags.includes(query);
+        const matchesFilter = activeFilter === "all" || tags.includes(activeFilter);
+        const show = matchesQuery && matchesFilter;
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+
+      emptyState.hidden = visible !== 0;
+    };
+
+    search.addEventListener("input", applyFilters);
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+        applyFilters();
+      });
+    });
+  </script>
+</body>
+</html>
