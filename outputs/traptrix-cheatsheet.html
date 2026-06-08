@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traptrix Deck Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f3;
+      --panel: #ffffff;
+      --panel-2: #eef4f1;
+      --ink: #172126;
+      --muted: #59666b;
+      --line: #d7e1dc;
+      --green: #1d6a54;
+      --teal: #087987;
+      --blue: #315f90;
+      --gold: #9b7119;
+      --red: #a33d3c;
+      --violet: #614f8b;
+      --shadow: 0 18px 44px rgba(23, 33, 38, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(245,247,243,.98) 390px, #edf4f1 100%),
+        repeating-linear-gradient(135deg, rgba(8,121,135,.08) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+    h1, h2, h3, p { margin-top: 0; }
+    p { margin-bottom: 12px; }
+
+    h1 {
+      max-width: 880px;
+      margin-bottom: 12px;
+      font-size: clamp(2.35rem, 6vw, 4.8rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.04rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 58px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+      gap: 24px;
+      align-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 840px;
+      color: #314247;
+      font-size: clamp(1rem, 1.8vw, 1.14rem);
+    }
+
+    .hero-pills, .tags, .chips, .route-actions, .mini-cards, .board-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #263338;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong, .tag strong { color: var(--ink); }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(52px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,33,38,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-token:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
+    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-token:nth-child(3) { transform: translateY(7px) rotate(-2deg); }
+    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-token:nth-child(5) { transform: translateY(9px) rotate(-3deg); }
+    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-token:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-name { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(215,224,220,.86);
+      background: linear-gradient(180deg, rgba(245,247,243,.98), rgba(245,247,243,.92));
+      backdrop-filter: blur(10px);
+      scrollbar-width: none;
+    }
+
+    .quick-nav::-webkit-scrollbar { display: none; }
+
+    .quick-nav a, .route-button, .tab-button, .ref-toggle, .icon-button {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover, .route-button:hover, .tab-button:hover, .ref-toggle:hover, .icon-button:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .route-button.active, .tab-button.active {
+      color: #fff;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .quick-nav .ref-toggle {
+      margin-left: auto;
+      color: var(--violet);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(215,224,220,.82);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 860px;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .panel, .mini-panel, .route-panel, .deck-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 8px 24px rgba(23,33,38,.06);
+    }
+
+    .panel { padding: 16px; }
+    .mini-panel { padding: 13px; }
+    .deck-box { padding: 14px; }
+
+    .panel p, .mini-panel p, .route-panel p, .deck-box p {
+      color: var(--muted);
+    }
+
+    .callout {
+      border-left: 4px solid var(--gold);
+      background: linear-gradient(90deg, rgba(155,113,25,.12), rgba(255,255,255,.9));
+    }
+
+    .warning {
+      border-left: 4px solid var(--red);
+      background: linear-gradient(90deg, rgba(163,61,60,.11), rgba(255,255,255,.9));
+    }
+
+    .info-dot, .plus-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .info-dot { background: var(--blue); }
+    .plus-icon { background: var(--green); }
+
+    .card-token {
+      position: relative;
+      display: inline-grid;
+      grid-template-rows: var(--card-h) auto;
+      justify-items: center;
+      width: var(--card-w);
+      gap: 5px;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: zoom-in;
+      overflow: visible;
+    }
+
+    .card-token.compact {
+      --card-w: 48px;
+      --card-h: 70px;
+      font-size: .72rem;
+    }
+
+    .card-token.compact {
+      grid-template-rows: var(--card-h);
+    }
+
+    .card-token.compact .card-name {
+      display: none;
+      min-height: 0;
+    }
+
+    .card-token.wide {
+      --card-w: 68px;
+      --card-h: 99px;
+    }
+
+    .card-token img {
+      width: var(--card-w);
+      height: var(--card-h);
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(23,33,38,.18);
+      background: #dce5df;
+      box-shadow: 0 8px 16px rgba(23,33,38,.12);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .card-token:hover img {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 24px rgba(23,33,38,.2);
+    }
+
+    .card-name {
+      max-width: calc(var(--card-w) + 24px);
+      min-height: 2.5em;
+      color: #2d3b40;
+      font-size: .75rem;
+      font-weight: 720;
+      line-height: 1.15;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .mind-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, .8fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .graph-wrap {
+      position: relative;
+      min-height: 640px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.78), rgba(238,244,241,.82)),
+        radial-gradient(circle at 10% 20%, rgba(29,106,84,.08), transparent 22%),
+        radial-gradient(circle at 90% 78%, rgba(97,79,139,.08), transparent 26%);
+      overflow: hidden;
+    }
+
+    .graph-canvas {
+      position: relative;
+      min-height: 610px;
+      overflow: visible;
+    }
+
+    .graph-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .graph-node {
+      position: absolute;
+      width: 176px;
+      min-height: 118px;
+      padding: 10px;
+      border: 1px solid rgba(8,121,135,.22);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 22px rgba(23,33,38,.09);
+      transform: translate(-50%, -50%);
+      transition: opacity .15s ease, transform .15s ease, border-color .15s ease;
+    }
+
+    .graph-node.dim {
+      opacity: .34;
+      border-color: rgba(23,33,38,.12);
+    }
+
+    .graph-node.active {
+      border-color: var(--teal);
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+
+    .graph-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      font-weight: 850;
+      line-height: 1.18;
+    }
+
+    .graph-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .route-panel {
+      padding: 16px;
+      min-height: 640px;
+    }
+
+    .route-panel ol {
+      margin: 0 0 12px 20px;
+      padding: 0;
+    }
+
+    .route-panel li {
+      margin-bottom: 8px;
+      color: #29383d;
+    }
+
+    .trigger-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: var(--radius);
+      background: var(--panel-2);
+    }
+
+    .connector {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .board-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+    }
+
+    .board-card .mini-cards { align-items: flex-start; }
+
+    .list-clean {
+      margin: 0;
+      padding-left: 18px;
+      color: #29383d;
+    }
+
+    .list-clean li { margin-bottom: 7px; }
+
+    .deck-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .deck-list h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ratio-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #29383d;
+      font-size: .92rem;
+    }
+
+    .ratio-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(215,224,220,.7);
+    }
+
+    .ratio-list li:last-child { border-bottom: 0; }
+    .qty { color: var(--teal); font-weight: 850; }
+
+    .side-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .matchup-card {
+      display: grid;
+      gap: 10px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+    }
+
+    .matchup-card strong { color: var(--ink); }
+
+    .references {
+      display: none;
+      margin-top: 12px;
+      padding: 16px;
+      border: 1px solid rgba(97,79,139,.28);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+    }
+
+    .references.show { display: block; }
+
+    .ref-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .ref-item {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(238,244,241,.72);
+    }
+
+    .ref-item p { margin-bottom: 0; }
+
+    .zoom-preview {
+      position: fixed;
+      z-index: 100;
+      display: none;
+      width: 244px;
+      pointer-events: none;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.28));
+    }
+
+    .zoom-preview.show { display: block; }
+
+    .zoom-preview img {
+      width: 244px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.7);
+      background: #fff;
+    }
+
+    .zoom-caption {
+      margin-top: 6px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: rgba(23,33,38,.92);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 760;
+      text-align: center;
+    }
+
+    @media (max-width: 1120px) {
+      .hero, .mind-shell, .deck-list { grid-template-columns: 1fr; }
+      .route-panel { min-height: 0; }
+      .side-grid, .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 20px, 620px); padding-top: 12px; }
+      h1 {
+        font-size: 2.35rem;
+        line-height: 1;
+        overflow-wrap: anywhere;
+      }
+      .lead { font-size: 1rem; }
+      .hero { gap: 14px; }
+      .showcase { grid-template-columns: repeat(4, minmax(44px, 1fr)); gap: 7px; padding: 10px; }
+      .showcase .card-token { transform: none !important; }
+      .showcase .card-token.wide { --card-w: 52px; --card-h: 76px; }
+      .card-token { --card-w: 50px; --card-h: 73px; }
+      .card-token.compact { --card-w: 44px; --card-h: 64px; }
+      .card-name { font-size: .68rem; }
+      .pill, .tag { white-space: normal; }
+      .quick-nav a, .route-button, .tab-button, .ref-toggle, .icon-button { min-height: 36px; padding: 8px 10px; }
+      .section-head { display: block; }
+      .grid-2, .grid-3, .side-grid, .ref-list { grid-template-columns: 1fr; }
+      .graph-wrap { min-height: 0; padding: 10px; overflow: visible; }
+      .graph-canvas {
+        display: grid;
+        gap: 10px;
+        min-height: 0;
+      }
+      .graph-lines { display: none; }
+      .graph-node {
+        position: static;
+        width: auto;
+        min-height: 0;
+        transform: none;
+      }
+      .graph-node.active { transform: none; }
+      .route-panel { padding: 14px; }
+      .board-card { grid-template-columns: 1fr; }
+      .zoom-preview { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="plus-icon">+</span> Trap-control mind map</div>
+        <h1>Traptrix Cheatsheet</h1>
+        <p class="lead">
+          A top-to-bottom Traptrix pilot card: starter graph, branch outs, end boards, recovery,
+          side plans, and the current tournament variant anchor. Built from current combo/counter
+          records and recent tournament/meta sources checked on June 8, 2026.
+        </p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Core plan</strong> Sera plus Normal Traps</span>
+          <span class="pill"><strong>Latest top</strong> Oklahoma WCQ Regional Top 8, Feb 8 2026</span>
+          <span class="pill"><strong>Format read</strong> Rogue control into a June 2026 combo-heavy field</span>
+        </div>
+      </div>
+      <div class="showcase" id="heroCards" aria-label="Core Traptrix card images"></div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page sections">
+      <a href="#plan">Plan</a>
+      <a href="#combos">Combos</a>
+      <a href="#boards">End Boards</a>
+      <a href="#variant">Variant</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side</a>
+      <button class="ref-toggle" id="refToggle" type="button">References</button>
+    </nav>
+
+    <section id="plan">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="info-dot">i</span> Playstyle and win condition</div>
+          <h2>Put Sera online, then make every trap trade up.</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="panel">
+          <h3>1. First priority</h3>
+          <p>
+            Link a non-Link Traptrix into Traptrix Sera. Sera converts Normal Trap activations
+            into deck summons, then converts Traptrix monster effects into set Hole traps.
+          </p>
+          <div class="mini-cards" data-card-row="sera,holeutea,myrmeleo,mantis"></div>
+        </article>
+        <article class="panel">
+          <h3>2. Control texture</h3>
+          <p>
+            Rafflesia turns the deck into a toolbox. Send Gravedigger for hand/GY effects,
+            Floodgate to lock a summon face-down, or Trap Hole Nightmare for a special-summoned
+            monster effect.
+          </p>
+          <div class="mini-cards" data-card-row="rafflesia,gravedigger,floodgate,nightmare"></div>
+        </article>
+        <article class="panel">
+          <h3>3. Closing</h3>
+          <p>
+            After two or three trades, use Pinguicula searches, Holeutea revival, Allomerus bodies,
+            or Atypus boost/negation to turn resource advantage into lethal pressure.
+          </p>
+          <div class="mini-cards" data-card-row="pinguicula,holeutea,allomerus,atypus"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="plus-icon">+</span> Combo graph</div>
+          <h2>Explore starters and branch outs.</h2>
+          <p>
+            Select a route to highlight its path. The graph keeps the shared Sera/Holeutea engine visible
+            so the deck reads like a decision tree instead of a single memorized line.
+          </p>
+        </div>
+      </div>
+      <div class="route-actions" id="routeButtons"></div>
+      <div class="mind-shell">
+        <div class="graph-wrap">
+          <div class="graph-canvas" id="comboGraph"></div>
+        </div>
+        <aside class="route-panel" id="routePanel"></aside>
+      </div>
+    </section>
+
+    <section id="boards">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="info-dot">i</span> Field by End Phase</div>
+          <h2>End board examples</h2>
+          <p>
+            These boards assume no interruption and normal Traptrix sequencing. In real games,
+            stop early when the opponent reveals a high-impact response window or when your set traps
+            already answer the matchup.
+          </p>
+        </div>
+      </div>
+      <div class="grid-2" id="boardGrid"></div>
+    </section>
+
+    <section id="variant">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="plus-icon">+</span> Latest tournament top variant</div>
+          <h2>Kevin Bortle Traptrix, Oklahoma WCQ Regional Top 8</h2>
+          <p>
+            The latest indexed tournament-top Traptrix list found was a 40-card TCG list from
+            February 8, 2026. Its build trims older extenders like Parallel eXceed and Shade Brigandine,
+            then uses strong non-engine traps, Mulcharmy cards, Super Polymerization, and the Fallen
+            &amp; Virtuous package to compete in a broad field.
+          </p>
+        </div>
+      </div>
+      <div class="deck-list" id="deckList"></div>
+      <article class="panel callout" style="margin-top:12px">
+        <h3>Current meta context</h3>
+        <p>
+          YGOStats' current meta analysis lists Branded Dracotail, K9 Vanquish Soul, Radiant Typhoon,
+          @Ignister Maliss, Fiendsmith Yummy, and Despia Branded among the leading archetypes.
+          Recent June 6-7, 2026 event results did not show Traptrix among the first visible recent tops,
+          so treat this as a rogue deck that needs precise trap selection and side decking.
+        </p>
+      </article>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="info-dot">i</span> Tips and counters</div>
+          <h2>Meta tips that matter most</h2>
+        </div>
+      </div>
+      <div class="grid-2">
+        <article class="panel warning">
+          <h3>Do not autopilot into Sera hand traps</h3>
+          <p>
+            The current MDM Traptrix combo note warns that adding or setting Holeutea can be wrong
+            if a response window exposes Ash/Veiler/Imperm pressure on Sera. When the opponent can
+            stop Sera, it is often better to set real traps and pass with fewer summons.
+          </p>
+          <div class="mini-cards" data-card-row="sera,ash,veiler,impermanence"></div>
+        </article>
+        <article class="panel">
+          <h3>Rafflesia changes the Nibiru math</h3>
+          <p>
+            The Myrmeleo + Holeutea route reaches Rafflesia as the fifth summon. Once Rafflesia is
+            live, it can copy Gravedigger's Trap Hole to answer Nibiru and other hand/GY monster effects.
+          </p>
+          <div class="mini-cards" data-card-row="rafflesia,gravedigger,nibiru"></div>
+        </article>
+        <article class="panel">
+          <h3>Board breakers are the real fear</h3>
+          <p>
+            MDM counter records rate Super Polymerization, Evenly Matched, and Red Reboot as high-impact
+            answers. Red Reboot is forbidden in the current TCG Advanced list, but it remains relevant
+            to format-specific or Master Duel counter notes.
+          </p>
+          <div class="mini-cards" data-card-row="superpoly,evenly,redreboot"></div>
+        </article>
+        <article class="panel">
+          <h3>Do not give away free trap triggers</h3>
+          <p>
+            Dominus Impulse, Spiral, and Spark were marked as backfire counters into Traptrix because
+            once Sera is live, Normal Traps can trigger its engine. Traptrix lists can still play
+            selected Dominus traps, but you must respect attribute locks and timing.
+          </p>
+          <div class="mini-cards" data-card-row="dominuspurge,dominusimpulse,dominusspark"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="plus-icon">+</span> Recovery options</div>
+          <h2>Winning after the first wave</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="mini-panel">
+          <h3>Holeutea in GY</h3>
+          <p>
+            Banish Holeutea to revive Myrmeleo for backrow removal, Pudica for a temporary monster banish,
+            Dionaea to reset a Hole, or a properly summoned Sera if you need the engine back.
+          </p>
+          <div class="mini-cards" data-card-row="holeutea,myrmeleo,pudica,dionaea,sera"></div>
+        </article>
+        <article class="mini-panel">
+          <h3>Cularia grind line</h3>
+          <p>
+            If you can afford a Link 2, Cularia lets Hole traps reset instead of going to GY and revives
+            a Traptrix during the End Phase. It is slower than Rafflesia, but excellent when the duel
+            becomes resource based.
+          </p>
+          <div class="mini-cards" data-card-row="cularia,floodgate,gravedigger"></div>
+        </article>
+        <article class="mini-panel">
+          <h3>Atypus close</h3>
+          <p>
+            With a Normal Trap in GY, Atypus gives Traptrix monsters a 1000 ATK push, negates face-up
+            cards up to your Insect/Plant count, and can banish a Normal Trap to destroy one.
+          </p>
+          <div class="mini-cards" data-card-row="atypus,holeutea,allomerus"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="side">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span class="info-dot">i</span> Side deck options</div>
+          <h2>Matchup cards and counter-plans</h2>
+          <p>
+            Use the Oklahoma Top 8 side as the baseline: Retaliating "C", Mulcharmy Purulia, Ash,
+            Droll, Duster, Lightning Storm, Triple Tactics Talent, Evenly, Iron Thunder, and Solemn Judgment.
+          </p>
+        </div>
+      </div>
+      <div class="side-grid" id="sideGrid"></div>
+      <article class="panel warning" style="margin-top:12px">
+        <h3>Card legality note</h3>
+        <p>
+          Red Reboot is a strong theoretical trap-deck counter in MDM records, but the official TCG list
+          effective May 18, 2026 has Red Reboot forbidden. Keep the side deck format-specific.
+        </p>
+      </article>
+    </section>
+
+    <section id="references" class="references" aria-label="Hidden references used">
+      <div class="eyebrow"><span class="info-dot">i</span> Hidden references</div>
+      <h2>Sources used to build the cheatsheet</h2>
+      <p>
+        Spreadsheet search status: Master Duel Meta's Traptrix spreadsheet endpoint returned no Traptrix
+        spreadsheet records. The public Reddit Combo Hub posts were checked as a general spreadsheet lead,
+        but their visible archetype lists did not show Traptrix. The combo graph therefore uses the live
+        Master Duel Meta Traptrix combo/counter records plus guide, card text, and tournament deck evidence.
+      </p>
+      <div class="ref-list" id="refList"></div>
+    </section>
+  </div>
+
+  <div class="zoom-preview" id="zoomPreview" aria-hidden="true"></div>
+
+  <script>
+    const cards = {
+      myrmeleo: { name: "Traptrix Myrmeleo", id: "91812341" },
+      mantis: { name: "Traptrix Mantis", id: "82738277" },
+      pudica: { name: "Traptrix Pudica", id: "49027020" },
+      dionaea: { name: "Traptrix Dionaea", id: "45803070" },
+      arachnocampa: { name: "Traptrix Arachnocampa", id: "75416738" },
+      vesiculo: { name: "Traptrix Vesiculo", id: "28868394" },
+      genlisea: { name: "Traptrix Genlisea", id: "88078306" },
+      sera: { name: "Traptrix Sera", id: "73639099" },
+      rafflesia: { name: "Traptrix Rafflesia", id: "6511113" },
+      pinguicula: { name: "Traptrix Pinguicula", id: "1688285" },
+      allomerus: { name: "Traptrix Allomerus", id: "59071624" },
+      cularia: { name: "Traptrix Cularia", id: "952523" },
+      atypus: { name: "Traptrix Atypus", id: "48183890" },
+      holeutea: { name: "Traptrix Holeutea", id: "74577599" },
+      garden: { name: "Traptrip Garden", id: "12801833" },
+      floodgate: { name: "Floodgate Trap Hole", id: "69599136" },
+      gravedigger: { name: "Gravedigger's Trap Hole", id: "31548215" },
+      nightmare: { name: "Traptrix Trap Hole Nightmare", id: "29616929" },
+      terrifying: { name: "Terrifying Trap Hole Nightmare", id: "75294187" },
+      chainhole: { name: "Chain Hole", id: "9581215" },
+      redoer: { name: "Time Thief Redoer", id: "55285840" },
+      exceed: { name: "Parallel eXceed", id: "71278040" },
+      shade: { name: "The Phantom Knights of Shade Brigandine", id: "98827725" },
+      ash: { name: "Ash Blossom & Joyous Spring", id: "14558128" },
+      veiler: { name: "Effect Veiler", id: "97268402" },
+      impermanence: { name: "Infinite Impermanence", id: "10045474" },
+      nibiru: { name: "Nibiru, the Primal Being", id: "27204311" },
+      belle: { name: "Ghost Belle & Haunted Mansion", id: "73642296" },
+      crow: { name: "D.D. Crow", id: "24508238" },
+      gamma: { name: "PSY-Framegear Gamma", id: "38814750" },
+      ogre: { name: "Ghost Ogre & Snow Rabbit", id: "59438930" },
+      droll: { name: "Droll & Lock Bird", id: "94145021" },
+      fuwalos: { name: "Mulcharmy Fuwalos", id: "42141493" },
+      purulia: { name: "Mulcharmy Purulia", id: "84192580" },
+      dominuspurge: { name: "Dominus Purge", id: "97045737" },
+      dominusimpulse: { name: "Dominus Impulse", id: "40366667" },
+      dominusspiral: { name: "Dominus Spiral", id: "42091632" },
+      dominusspark: { name: "Dominus Spark", id: "6325660" },
+      superpoly: { name: "Super Polymerization", id: "48130397" },
+      evenly: { name: "Evenly Matched", id: "15693423" },
+      redreboot: { name: "Red Reboot", id: "23002292" },
+      fallenvirtuous: { name: "The Fallen & The Virtuous", id: "30271097" },
+      retaliatingc: { name: 'Retaliating "C"', id: "46502744" },
+      duster: { name: "Harpie's Feather Duster", id: "18144507" },
+      storm: { name: "Lightning Storm", id: "14532163" },
+      tactics: { name: "Triple Tactics Talent", id: "25311006" },
+      ironthunder: { name: "Iron Thunder", id: "12682213" },
+      judgment: { name: "Solemn Judgment", id: "41420027" },
+      calledby: { name: "Called by the Grave", id: "24224830" },
+      prosperity: { name: "Pot of Prosperity", id: "84211599" },
+      splittle: { name: "S:P Little Knight", id: "29301450" },
+      mudragon: { name: "Mudragon of the Swamp", id: "54757758" },
+      garura: { name: "Garura, Wings of Resonant Life", id: "11765832" },
+      albion: { name: "Albion the Branded Dragon", id: "87746184" },
+      ecclesiaDark: { name: "Ecclesia and the Dark Dragon", id: "78397661" },
+      typhon: { name: "Super Starslayer TY-PHON - Sky Crisis", id: "93039339" }
+    };
+
+    const routes = {
+      myrmeleo: {
+        label: "Myrmeleo + Hole",
+        subtitle: "Highest-value basic line",
+        cards: ["myrmeleo", "holeutea", "floodgate", "dionaea", "rafflesia"],
+        steps: [
+          "Normal Summon Myrmeleo, search Holeutea if missing or another Hole if Holeutea is already available.",
+          "Link Myrmeleo into Sera.",
+          "Set and activate Holeutea by discarding any Hole Normal Trap.",
+          "Sera summons Dionaea from Deck. Dionaea resets the discarded Hole.",
+          "Sera sets a second Hole from Deck. Xyz Dionaea + Holeutea into Rafflesia or Redoer."
+        ],
+        end: "Sera + Rafflesia or Redoer, one reset Hole, one searched/set Hole, Holeutea in GY for follow-up.",
+        note: "This route reaches Rafflesia as summon five, so Rafflesia can copy Gravedigger into Nibiru or other hand/GY monster effects."
+      },
+      mantis: {
+        label: "Mantis + Hole",
+        subtitle: "Backrow-protected branch",
+        cards: ["mantis", "arachnocampa", "sera", "holeutea", "dionaea"],
+        steps: [
+          "Normal Summon Mantis, search Arachnocampa.",
+          "Link Mantis into Sera, then Special Summon Arachnocampa from hand.",
+          "Arachnocampa's effect triggers Sera to set Holeutea from Deck.",
+          "Activate Holeutea, discard the opened Hole, then Sera summons Dionaea.",
+          "Dionaea resets the discarded Hole. Overlay Dionaea + Holeutea for Rafflesia, Pinguicula, or Redoer."
+        ],
+        end: "Sera + Rafflesia, Arachnocampa body/protection, reset Hole, and an extra Sera-set Hole if the line included a Traptrix monster trigger.",
+        note: "Arachno protects set Spell/Traps once per turn, so this line is better into expected backrow removal."
+      },
+      pudica: {
+        label: "Pudica / Garden",
+        subtitle: "Extra normal summon branch",
+        cards: ["pudica", "garden", "mantis", "pinguicula", "arachnocampa"],
+        steps: [
+          "Normal Summon Pudica to search Traptrip Garden, then Link Pudica into Sera.",
+          "Activate Garden for an additional Traptrix Normal Summon.",
+          "Normal Summon Mantis or Myrmeleo. That monster effect triggers Sera to set Holeutea.",
+          "Use the extra body plus Holeutea access to make Pinguicula or Rafflesia.",
+          "Pinguicula searches Arachnocampa for extension and gives banish pressure when an opponent monster leaves the field."
+        ],
+        end: "Sera + Pinguicula/Rafflesia with Garden active, Arachnocampa access, and follow-up off Pinguicula or Holeutea.",
+        note: "Garden also lets you convert a monster into a Traptrix from hand/GY later, which matters in grind games."
+      },
+      exceed: {
+        label: "Parallel eXceed",
+        subtitle: "Older explosive variant",
+        cards: ["sera", "exceed", "rafflesia", "pinguicula"],
+        steps: [
+          "Normal Summon any Traptrix and Link it into Sera.",
+          "Parallel eXceed triggers from hand to Special Summon itself to Sera's linked zone.",
+          "Resolve eXceed to summon another copy from Deck.",
+          "Overlay the eXceeds for early Rafflesia before spending Holeutea.",
+          "Use Sera plus set traps as the resource engine while Rafflesia protects against blowouts."
+        ],
+        end: "Sera + early Rafflesia plus the rest of your hand as set traps. Less common in the Top 8 variant, but still a clear branch in pure builds.",
+        note: "The latest tournament-top list found did not play eXceed, favoring non-engine and Super Polymerization instead."
+      }
+    };
+
+    const graphNodes = [
+      { id: "start", x: 10, y: 50, title: "Open starter", cards: ["myrmeleo", "mantis", "pudica"], routes: ["myrmeleo", "mantis", "pudica", "exceed"], note: "Any Level 4 Traptrix can become Sera." },
+      { id: "myrmeleo", x: 28, y: 16, title: "Myrmeleo line", cards: ["myrmeleo", "holeutea"], routes: ["myrmeleo"], note: "Search Holeutea or the missing Hole." },
+      { id: "mantis", x: 28, y: 48, title: "Mantis line", cards: ["mantis", "arachnocampa"], routes: ["mantis"], note: "Search Arachno to trigger Sera." },
+      { id: "pudica", x: 28, y: 80, title: "Pudica line", cards: ["pudica", "garden"], routes: ["pudica"], note: "Garden opens another Normal." },
+      { id: "sera", x: 48, y: 48, title: "Link into Sera", cards: ["sera"], routes: ["myrmeleo", "mantis", "pudica", "exceed"], note: "The deck's engine card." },
+      { id: "exceed", x: 51, y: 16, title: "Optional eXceed", cards: ["exceed"], routes: ["exceed"], note: "Early Rank 4 before traps." },
+      { id: "holeutea", x: 68, y: 36, title: "Set + activate Holeutea", cards: ["holeutea", "floodgate"], routes: ["myrmeleo", "mantis", "pudica"], note: "Discard a Normal Trap." },
+      { id: "dionaea", x: 68, y: 64, title: "Sera summons Dionaea", cards: ["sera", "dionaea"], routes: ["myrmeleo", "mantis"], note: "Reset the discarded Hole." },
+      { id: "pinguicula", x: 88, y: 22, title: "Pinguicula out", cards: ["pinguicula", "arachnocampa"], routes: ["pudica", "myrmeleo"], note: "Search follow-up and threaten banish." },
+      { id: "rafflesia", x: 88, y: 50, title: "Rafflesia out", cards: ["rafflesia", "gravedigger"], routes: ["myrmeleo", "mantis", "exceed"], note: "Toolbox trap effect and protection." },
+      { id: "redoer", x: 88, y: 78, title: "Redoer out", cards: ["redoer", "holeutea"], routes: ["myrmeleo", "mantis"], note: "Trap material gives disruption." },
+      { id: "atypus", x: 74, y: 90, title: "Atypus close", cards: ["atypus"], routes: ["pudica", "myrmeleo", "mantis"], note: "Negate, destroy, and push damage." }
+    ];
+
+    const graphEdges = [
+      ["start", "myrmeleo"], ["start", "mantis"], ["start", "pudica"],
+      ["myrmeleo", "sera"], ["mantis", "sera"], ["pudica", "sera"],
+      ["sera", "exceed"], ["exceed", "rafflesia"],
+      ["sera", "holeutea"], ["holeutea", "dionaea"],
+      ["dionaea", "rafflesia"], ["dionaea", "redoer"], ["dionaea", "pinguicula"],
+      ["pudica", "pinguicula"], ["pinguicula", "atypus"], ["redoer", "atypus"]
+    ];
+
+    const boards = [
+      {
+        title: "Myrmeleo + any Hole",
+        cards: ["sera", "rafflesia", "floodgate", "nightmare", "holeutea"],
+        field: "Sera + Rafflesia, one reset Hole, one Sera-set Hole, Holeutea in GY.",
+        play: "Best default going first route. Rafflesia can copy Gravedigger after the fifth summon."
+      },
+      {
+        title: "Mantis + any Hole",
+        cards: ["sera", "rafflesia", "arachnocampa", "floodgate", "holeutea"],
+        field: "Sera + Rafflesia + Arachnocampa, reset Hole, and Holeutea access.",
+        play: "Prioritize when backrow protection matters or when Myrmeleo is unavailable."
+      },
+      {
+        title: "Pudica / Garden",
+        cards: ["sera", "garden", "pinguicula", "arachnocampa", "holeutea"],
+        field: "Sera + Pinguicula or Rafflesia, Garden active, Arachnocampa follow-up.",
+        play: "Stronger grind setup; Pinguicula searches and punishes monsters leaving the field."
+      },
+      {
+        title: "Redoer trap-material line",
+        cards: ["sera", "redoer", "holeutea", "floodgate"],
+        field: "Sera + Redoer with Trap material, set Hole trap, Holeutea pressure.",
+        play: "Use when you need Redoer to dodge removal or remove itself for tempo."
+      }
+    ];
+
+    const deckBlocks = [
+      {
+        title: "Main engine",
+        cards: ["mantis", "myrmeleo", "pudica", "dionaea", "arachnocampa", "garden", "holeutea", "floodgate", "gravedigger", "nightmare"],
+        rows: [
+          ["Traptrix Mantis", "3"], ["Traptrix Myrmeleo", "3"], ["Traptrix Pudica", "2"],
+          ["Traptrix Dionaea", "2"], ["Traptrix Arachnocampa", "2"], ["Traptrip Garden", "1"],
+          ["Traptrix Holeutea", "3"], ["Floodgate Trap Hole", "1"], ["Gravedigger's Trap Hole", "2"],
+          ["Traptrix Trap Hole Nightmare", "1"]
+        ]
+      },
+      {
+        title: "Modern non-engine",
+        cards: ["fuwalos", "ash", "fallenvirtuous", "superpoly", "evenly", "dominuspurge", "impermanence"],
+        rows: [
+          ["Mulcharmy Fuwalos", "3"], ["Ash Blossom & Joyous Spring", "2"],
+          ["The Fallen & The Virtuous", "3"], ["Super Polymerization", "3"],
+          ["Evenly Matched", "2"], ["Dominus Purge", "2"], ["Infinite Impermanence", "3"],
+          ["Pot of Prosperity", "1"], ["Called by the Grave", "1"]
+        ]
+      },
+      {
+        title: "Extra and side focus",
+        cards: ["sera", "atypus", "splittle", "mudragon", "garura", "redoer", "allomerus", "rafflesia", "pinguicula"],
+        rows: [
+          ["Traptrix Sera", "3"], ["Traptrix Atypus", "1"], ["S:P Little Knight", "1"],
+          ["Mudragon / Garura", "1 / 1"], ["Albion", "2"], ["TY-PHON", "1"],
+          ["Time Thief Redoer", "1"], ["Allomerus / Rafflesia / Pinguicula", "1 each"],
+          ["Side: Retaliating C + Purulia", "3 + 3"]
+        ]
+      }
+    ];
+
+    const sidePlans = [
+      {
+        title: "Fusion and GY combo",
+        cards: ["retaliatingc", "superpoly", "droll", "belle"],
+        text: 'Retaliating "C" and Super Poly are the cleanest high-impact pieces. Bring Ghost Belle or Crow when the opposing engine needs GY resolution.'
+      },
+      {
+        title: "Wide combo / search decks",
+        cards: ["droll", "ash", "purulia", "fuwalos"],
+        text: "Droll and Ash reduce explosive starts. Mulcharmy cards buy cards, but MDM notes they can be low impact into conservative Traptrix lines."
+      },
+      {
+        title: "Backrow and trap mirrors",
+        cards: ["duster", "storm", "evenly", "judgment"],
+        text: "Duster, Lightning Storm, Evenly, and Judgment are the practical TCG tools. Red Reboot is a format note, not a current TCG side option."
+      },
+      {
+        title: "Board-breaker protection",
+        cards: ["judgment", "ironthunder", "dominuspurge", "calledby"],
+        text: "Judgment protects Sera setups from sweepers. Iron Thunder and Dominus Purge answer key activations while still being Normal Traps."
+      }
+    ];
+
+    const references = [
+      {
+        title: "Master Duel Meta Combos & Counters",
+        url: "https://www.masterduelmeta.com/combos-and-counters",
+        used: "Queried the live Traptrix combo, counter, and spreadsheet endpoints behind the page. Found one Traptrix combo route, six counter records, and no Traptrix spreadsheet records."
+      },
+      {
+        title: "Master Duel Meta Traptrix Guide",
+        url: "https://www.masterduelmeta.com/articles/guides/traptrix-guide-kito-millyarde",
+        used: "Updated August 8, 2025. Used for control role, Sera goal, core cards, Rafflesia, Holeutea, Garden, and Traptrix variant framing."
+      },
+      {
+        title: "YGOPRODeck Kevin Bortle Traptrix",
+        url: "https://ygoprodeck.com/deck/traptrix-690411",
+        used: "Latest tournament-top Traptrix list found: Top 8 at Oklahoma WCQ Regional, February 8, 2026. Used for current 40-card TCG variant ratios."
+      },
+      {
+        title: "Yu-Gi-Oh! Meta Spicy Tournament Tops",
+        url: "https://www.yugiohmeta.com/articles/spicy/february-21-2026",
+        used: "Cross-check that Kevin Bortle's Traptrix Top 8 was highlighted among February 2026 tournament tops."
+      },
+      {
+        title: "YGO Stats Tournament Decks and Meta Analysis",
+        url: "https://ygostats.com/decks?tab=meta",
+        used: "Current meta context: leading archetypes and recent June 2026 tournament top listings."
+      },
+      {
+        title: "Game8 Traptrix Deck Guide",
+        url: "https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/358810",
+        used: "General playstyle and combo/card-role cross-check. The page itself notes Master Duel guide updates were discontinued after December 2025."
+      },
+      {
+        title: "Dueling Nexus February 2026 Traptrix Deck",
+        url: "https://duelingnexus.com/blog/traptrix-deck-february-2026-tcg-format/",
+        used: "Pure-build comparison that still uses Parallel eXceed and Shade Brigandine, unlike the tournament-top non-engine variant."
+      },
+      {
+        title: "Official TCG Forbidden & Limited List",
+        url: "https://www.yugioh-card.com/en/limited/list_2026-05-18/",
+        used: "Checked current May 18, 2026 legality context, especially Red Reboot being forbidden in TCG Advanced."
+      },
+      {
+        title: "YGOPRODeck Card API and Images",
+        url: "https://db.ygoprodeck.com/api-guide/",
+        used: "Card IDs and required image pattern: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg."
+      }
+    ];
+
+    const $ = selector => document.querySelector(selector);
+    const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+    function esc(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[char]));
+    }
+
+    function cardImage(card) {
+      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
+    }
+
+    function cardToken(key, options = {}) {
+      const card = cards[key];
+      if (!card) return "";
+      const compact = options.compact ? " compact" : "";
+      const wide = options.wide ? " wide" : "";
+      return `
+        <button class="card-token${compact}${wide}" type="button" data-card-key="${esc(key)}" data-card-name="${esc(card.name)}" data-card-img="${esc(cardImage(card))}" aria-label="Zoom ${esc(card.name)}">
+          <img src="${esc(cardImage(card))}" alt="${esc(card.name)}" loading="lazy">
+          <span class="card-name">${esc(card.name)}</span>
+        </button>
+      `;
+    }
+
+    function cardRow(keys, options = {}) {
+      return keys.map(key => cardToken(key, options)).join("");
+    }
+
+    function renderStaticCards() {
+      $("#heroCards").innerHTML = cardRow(["sera", "myrmeleo", "mantis", "holeutea", "rafflesia", "pinguicula", "floodgate", "gravedigger"], { wide: true });
+      $$("[data-card-row]").forEach(el => {
+        el.innerHTML = cardRow(el.dataset.cardRow.split(","), { compact: true });
+      });
+    }
+
+    function renderRouteButtons(active) {
+      $("#routeButtons").innerHTML = Object.entries(routes).map(([key, route]) => `
+        <button class="route-button ${key === active ? "active" : ""}" type="button" data-route="${esc(key)}">
+          <span class="plus-icon">+</span> ${esc(route.label)}
+        </button>
+      `).join("");
+      $$("#routeButtons [data-route]").forEach(btn => {
+        btn.addEventListener("click", () => setActiveRoute(btn.dataset.route));
+      });
+    }
+
+    function renderGraph(active) {
+      const graph = $("#comboGraph");
+      graph.innerHTML = "";
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.classList.add("graph-lines");
+      svg.setAttribute("viewBox", "0 0 100 100");
+      svg.setAttribute("preserveAspectRatio", "none");
+      svg.innerHTML = `
+        <defs>
+          <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#087987"></path>
+          </marker>
+        </defs>
+      `;
+      graph.appendChild(svg);
+      const byId = Object.fromEntries(graphNodes.map(node => [node.id, node]));
+      graphEdges.forEach(([from, to]) => {
+        const a = byId[from];
+        const b = byId[to];
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", a.x);
+        line.setAttribute("y1", a.y);
+        line.setAttribute("x2", b.x);
+        line.setAttribute("y2", b.y);
+        line.setAttribute("stroke", "#087987");
+        line.setAttribute("stroke-width", a.routes.includes(active) && b.routes.includes(active) ? "0.75" : "0.35");
+        line.setAttribute("stroke-opacity", a.routes.includes(active) && b.routes.includes(active) ? "0.78" : "0.22");
+        line.setAttribute("marker-end", "url(#arrow)");
+        svg.appendChild(line);
+      });
+      graphNodes.forEach(node => {
+        const el = document.createElement("article");
+        el.className = `graph-node ${node.routes.includes(active) ? "active" : "dim"}`;
+        el.style.left = `${node.x}%`;
+        el.style.top = `${node.y}%`;
+        el.innerHTML = `
+          <div class="graph-title"><span class="${node.routes.includes(active) ? "plus-icon" : "info-dot"}">${node.routes.includes(active) ? "+" : "i"}</span>${esc(node.title)}</div>
+          <div class="mini-cards">${cardRow(node.cards, { compact: true })}</div>
+          <p class="graph-note">${esc(node.note)}</p>
+        `;
+        graph.appendChild(el);
+      });
+    }
+
+    function renderRoutePanel(active) {
+      const route = routes[active];
+      $("#routePanel").innerHTML = `
+        <div class="eyebrow"><span class="plus-icon">+</span> ${esc(route.subtitle)}</div>
+        <h2>${esc(route.label)}</h2>
+        <div class="trigger-strip">
+          ${cardRow(route.cards, { compact: true })}
+        </div>
+        <ol>${route.steps.map(step => `<li>${esc(step)}</li>`).join("")}</ol>
+        <article class="mini-panel callout">
+          <h3>Field by End Phase</h3>
+          <p>${esc(route.end)}</p>
+        </article>
+        <article class="mini-panel warning" style="margin-top:10px">
+          <h3>Route note</h3>
+          <p>${esc(route.note)}</p>
+        </article>
+      `;
+    }
+
+    function setActiveRoute(route) {
+      renderRouteButtons(route);
+      renderGraph(route);
+      renderRoutePanel(route);
+    }
+
+    function renderBoards() {
+      $("#boardGrid").innerHTML = boards.map(board => `
+        <article class="board-card">
+          <div class="mini-cards">${cardRow(board.cards, { compact: true })}</div>
+          <div>
+            <h3>${esc(board.title)}</h3>
+            <p><strong>Field by End Phase:</strong> ${esc(board.field)}</p>
+            <p>${esc(board.play)}</p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderDeckList() {
+      $("#deckList").innerHTML = deckBlocks.map(block => `
+        <article class="deck-box">
+          <h3>${esc(block.title)} <span class="info-dot">i</span></h3>
+          <div class="mini-cards" style="margin-bottom:10px">${cardRow(block.cards, { compact: true })}</div>
+          <ul class="ratio-list">
+            ${block.rows.map(([name, qty]) => `<li><span>${esc(name)}</span><span class="qty">${esc(qty)}</span></li>`).join("")}
+          </ul>
+        </article>
+      `).join("");
+    }
+
+    function renderSide() {
+      $("#sideGrid").innerHTML = sidePlans.map(plan => `
+        <article class="matchup-card">
+          <h3>${esc(plan.title)}</h3>
+          <div class="mini-cards">${cardRow(plan.cards, { compact: true })}</div>
+          <p>${esc(plan.text)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderRefs() {
+      $("#refList").innerHTML = references.map(ref => `
+        <article class="ref-item">
+          <h3><a href="${esc(ref.url)}" target="_blank" rel="noreferrer">${esc(ref.title)}</a></h3>
+          <p>${esc(ref.used)}</p>
+        </article>
+      `).join("");
+    }
+
+    function setupReferences() {
+      $("#refToggle").addEventListener("click", () => {
+        const refs = $("#references");
+        refs.classList.toggle("show");
+        if (refs.classList.contains("show")) refs.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    function setupZoom() {
+      const zoom = $("#zoomPreview");
+      function show(card, event) {
+        zoom.innerHTML = `<img src="${esc(card.dataset.cardImg)}" alt="${esc(card.dataset.cardName)}"><div class="zoom-caption">${esc(card.dataset.cardName)}</div>`;
+        zoom.classList.add("show");
+        position(event);
+      }
+      function position(event) {
+        const margin = 18;
+        const width = 244;
+        let left = event.clientX + margin;
+        let top = event.clientY + margin;
+        if (left + width > window.innerWidth - 12) left = event.clientX - width - margin;
+        if (top + 360 > window.innerHeight) top = Math.max(12, window.innerHeight - 360);
+        zoom.style.left = `${left}px`;
+        zoom.style.top = `${top}px`;
+      }
+      document.addEventListener("mouseover", event => {
+        const card = event.target.closest(".card-token");
+        if (card && window.matchMedia("(hover: hover)").matches) show(card, event);
+      });
+      document.addEventListener("mousemove", event => {
+        if (zoom.classList.contains("show") && window.matchMedia("(hover: hover)").matches) position(event);
+      });
+      document.addEventListener("mouseout", event => {
+        const card = event.target.closest(".card-token");
+        if (card && window.matchMedia("(hover: hover)").matches) zoom.classList.remove("show");
+      });
+      document.addEventListener("click", event => {
+        const card = event.target.closest(".card-token");
+        if (card && window.matchMedia("(hover: none)").matches) {
+          const open = zoom.classList.contains("show") && zoom.textContent.includes(card.dataset.cardName);
+          if (open) zoom.classList.remove("show");
+          else show(card, event);
+        } else if (!card) {
+          zoom.classList.remove("show");
+        }
+      });
+    }
+
+    renderStaticCards();
+    setActiveRoute("myrmeleo");
+    renderBoards();
+    renderDeckList();
+    renderSide();
+    renderRefs();
+    setupReferences();
+    setupZoom();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Power Patron Mind Map Cheatsheet</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f7f4;
+      --ink: #172228;
+      --muted: #5c6b72;
+      --line: #d8e1dd;
+      --panel: #ffffff;
+      --panel-2: #edf5f1;
+      --teal: #087b83;
+      --green: #287047;
+      --rose: #b94352;
+      --gold: #9b731c;
+      --violet: #665194;
+      --blue: #315e8f;
+      --shadow: 0 16px 42px rgba(23, 34, 40, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(246,247,244,.98) 390px, #edf3f1 100%),
+        repeating-linear-gradient(135deg, rgba(8,123,131,.06) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+    h1, h2, h3, p { margin-top: 0; }
+    p { margin-bottom: 12px; }
+
+    h1 {
+      max-width: 920px;
+      margin-bottom: 12px;
+      font-size: 4.55rem;
+      line-height: .96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 2.02rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(292px, 420px);
+      gap: 24px;
+      align-items: center;
+      padding: 12px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 900px;
+      color: #334247;
+      font-size: clamp(1rem, 1.8vw, 1.14rem);
+    }
+
+    .hero-pills,
+    .tags,
+    .chips,
+    .mini-cards,
+    .route-actions,
+    .board-row,
+    .tab-row,
+    .branch-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: #26343a;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong,
+    .chip strong { color: var(--ink); }
+
+    .showcase-wrap {
+      min-height: 326px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(52px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,34,40,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-mini:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3) { transform: translateY(7px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4) { transform: translateY(-15px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5) { transform: translateY(9px) rotate(-3deg); }
+    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-mini:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .card-mini:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-mini > span:not(.zoom) { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(216,225,221,.88);
+      background: linear-gradient(180deg, rgba(246,247,244,.98), rgba(246,247,244,.92));
+      backdrop-filter: blur(10px);
+      scrollbar-width: none;
+    }
+
+    .quick-nav::-webkit-scrollbar { display: none; }
+
+    .quick-nav a,
+    .route-button,
+    .tab-button,
+    .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 760;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .tab-button:hover,
+    .ref-toggle:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .route-button.active,
+    .tab-button.active {
+      color: #fff;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .quick-nav .ref-toggle {
+      margin-left: auto;
+      color: var(--violet);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(216,225,221,.84);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 880px;
+      color: var(--muted);
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .combo-layout,
+    .matchup-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .combo-layout { grid-template-columns: minmax(0, 1.35fr) minmax(282px, .65fr); align-items: start; }
+    .matchup-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+    .panel,
+    .node,
+    .route-summary,
+    .board,
+    .matchup,
+    .tip,
+    .reference-panel,
+    .variant,
+    .counter-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 26px rgba(23, 34, 40, .07);
+    }
+
+    .panel,
+    .route-summary,
+    .board,
+    .matchup,
+    .tip,
+    .reference-panel,
+    .variant,
+    .counter-card { padding: 14px; }
+
+    .panel p:last-child,
+    .node p:last-child,
+    .route-summary p:last-child,
+    .tip p:last-child,
+    .matchup p:last-child,
+    .variant p:last-child,
+    .counter-card p:last-child { margin-bottom: 0; }
+
+    .panel.accent-green { border-top: 4px solid var(--green); }
+    .panel.accent-teal { border-top: 4px solid var(--teal); }
+    .panel.accent-rose { border-top: 4px solid var(--rose); }
+    .panel.accent-gold { border-top: 4px solid var(--gold); }
+    .panel.accent-violet { border-top: 4px solid var(--violet); }
+
+    .strong { font-weight: 830; color: var(--ink); }
+    .muted { color: var(--muted); }
+
+    .plus-icon,
+    .info-icon,
+    .line-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    .plus-icon { background: var(--green); }
+    .info-icon { background: var(--blue); font-family: Georgia, serif; }
+    .line-icon { background: var(--teal); }
+
+    .card-mini,
+    .wild-card {
+      position: relative;
+      display: inline-grid;
+      grid-template-columns: var(--card-w);
+      gap: 5px;
+      align-items: start;
+      justify-items: center;
+      color: var(--ink);
+      text-align: center;
+      font-size: .74rem;
+      line-height: 1.1;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: help;
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .card-mini img {
+      width: var(--card-w);
+      height: var(--card-h);
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(23,34,40,.22);
+      box-shadow: 0 4px 12px rgba(23,34,40,.16);
+      background: #dfe6e3;
+    }
+
+    .wild-card {
+      min-width: var(--card-w);
+      min-height: var(--card-h);
+      padding: 8px 5px;
+      align-content: center;
+      border: 1px dashed rgba(96,107,114,.48);
+      border-radius: 4px;
+      background: rgba(237,245,241,.85);
+      font-weight: 750;
+    }
+
+    .card-mini .zoom {
+      position: fixed;
+      left: min(70vw, calc(100vw - 240px));
+      top: 74px;
+      z-index: 100;
+      display: none;
+      width: 220px;
+      padding: 8px;
+      border: 1px solid rgba(23,34,40,.2);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      pointer-events: none;
+    }
+
+    .card-mini .zoom img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .card-mini .zoom strong {
+      display: block;
+      margin-top: 6px;
+      font-size: .88rem;
+      line-height: 1.2;
+    }
+
+    .card-mini:hover,
+    .card-mini:focus,
+    .wild-card:hover { z-index: 20; }
+
+    .card-mini:hover .zoom,
+    .card-mini:focus .zoom { display: block; }
+
+    .card-row {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .card-row .plus {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 84px;
+      color: var(--green);
+      font-weight: 950;
+      font-size: 1.05rem;
+    }
+
+    .graph-shell {
+      position: relative;
+      min-height: 492px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(244,249,247,.94)),
+        repeating-linear-gradient(90deg, rgba(8,123,131,.06) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(8,123,131,.04) 0 1px, transparent 1px 72px);
+    }
+
+    .graph-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(176px, 1fr));
+      gap: 18px 28px;
+      min-width: 930px;
+      padding: 18px;
+    }
+
+    .node {
+      position: relative;
+      min-height: 156px;
+      padding: 12px;
+      background: rgba(255,255,255,.94);
+      overflow: visible;
+    }
+
+    .node::after {
+      content: attr(data-arrow);
+      position: absolute;
+      right: -23px;
+      top: 50%;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 6px 16px rgba(8,123,131,.24);
+    }
+
+    .node:last-child::after,
+    .node.break::after { content: ""; display: none; }
+
+    .node .node-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+      font-weight: 850;
+    }
+
+    .node p { color: #47585e; font-size: .92rem; }
+    .node small { color: var(--muted); font-weight: 700; }
+
+    .route-summary {
+      position: sticky;
+      top: 68px;
+      background: rgba(255,255,255,.96);
+    }
+
+    .route-summary .card-row { margin: 10px 0; }
+
+    .route-meta {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .route-meta div {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: #3c4d52;
+    }
+
+    .route-meta b { min-width: 74px; color: var(--ink); }
+
+    .branch {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(216,225,221,.9);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .branch b {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .board {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .board h3 { margin-bottom: 0; }
+
+    .board-zone {
+      min-height: 94px;
+      padding: 10px;
+      border: 1px dashed rgba(96,107,114,.38);
+      border-radius: var(--radius);
+      background: rgba(237,245,241,.72);
+    }
+
+    .board-zone strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #2d4045;
+      font-size: .86rem;
+      text-transform: uppercase;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline-step {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .timeline-step .num {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .timeline-step b { display: block; margin-bottom: 3px; }
+
+    .trigger-matrix {
+      display: grid;
+      gap: 10px;
+    }
+
+    .trigger-pair {
+      display: grid;
+      grid-template-columns: auto 20px minmax(120px, 1fr);
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .trigger-pair .arrow {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .trigger-copy {
+      min-width: 0;
+      color: #415259;
+      font-size: .92rem;
+    }
+
+    .trigger-copy b {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .variant,
+    .counter-card {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .variant-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .event-date {
+      color: var(--muted);
+      font-size: .83rem;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: #3f5056;
+    }
+
+    .list li::before {
+      content: "";
+      flex: 0 0 7px;
+      width: 7px;
+      height: 7px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .matchup {
+      display: grid;
+      gap: 9px;
+      align-content: start;
+    }
+
+    .matchup strong { color: var(--ink); }
+
+    .note {
+      border-left: 4px solid var(--gold);
+      padding: 10px 12px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      background: rgba(255,255,255,.75);
+      color: #3c4d52;
+    }
+
+    .references {
+      display: none;
+      padding-bottom: 28px;
+    }
+
+    .references.open { display: block; }
+
+    .reference-panel {
+      background: rgba(255,255,255,.96);
+    }
+
+    .reference-panel ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .reference-panel li { margin: 0 0 10px; color: #405157; }
+
+    .footer-note {
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 1060px) {
+      h1 { font-size: 3.15rem; }
+      h2 { font-size: 1.68rem; }
+
+      .hero,
+      .combo-layout,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .matchup-grid { grid-template-columns: 1fr; }
+
+      .route-summary { position: static; }
+      .matchup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --card-w: 52px;
+        --card-h: 76px;
+      }
+
+      .page { width: min(100% - 20px, 1240px); padding-top: 10px; }
+      h1 { font-size: 2rem; line-height: 1.03; overflow-wrap: break-word; }
+      h2 { font-size: 1.46rem; }
+      .hero { gap: 12px; }
+      .pill,
+      .tag,
+      .chip {
+        max-width: 100%;
+        white-space: normal;
+      }
+      .showcase-wrap { min-height: auto; }
+      .showcase { grid-template-columns: repeat(4, minmax(48px, 1fr)); padding: 10px; }
+      .section-head { display: block; }
+      .matchup-grid { grid-template-columns: 1fr; }
+      .quick-nav { top: 0; }
+      .quick-nav .ref-toggle { margin-left: 0; }
+      .card-mini .zoom {
+        left: 50%;
+        top: 66px;
+        width: min(220px, calc(100vw - 32px));
+        transform: translateX(-50%);
+      }
+      .graph-shell { min-height: 420px; }
+      .graph-grid {
+        min-width: 800px;
+        grid-template-columns: repeat(5, minmax(150px, 1fr));
+        gap: 14px 24px;
+        padding: 12px;
+      }
+      .node { min-height: 150px; padding: 10px; }
+      .trigger-pair { grid-template-columns: 1fr; }
+      .trigger-pair .arrow { transform: rotate(90deg); }
+      .variant-head { display: block; }
+      .event-date { white-space: normal; }
+    }
+
+    @media print {
+      .quick-nav { position: static; }
+      .references { display: block; }
+      .card-mini .zoom { display: none !important; }
+      body { background: #fff; }
+      .graph-shell { overflow: visible; min-height: 0; }
+      .graph-grid { min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .node::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="info-icon">i</span> Current as of June 8, 2026</div>
+        <h1>Power Patron Mind Map</h1>
+        <p class="lead">
+          A Pendulum toolbox deck that turns cards placed face-up in the Extra Deck into extension, searches, recursion, and Level 12 boss access. The strongest lines route toward Nerva, Junora, and Jupiter, then cash those types in for Vidolium, Vidolia, Viraia, or Shadows.
+        </p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Role:</strong> Pendulum midrange combo</span>
+          <span class="pill"><strong>Recent evidence:</strong> Belgium National Top 4, YCS Columbus Top 16</span>
+          <span class="pill"><strong>Shells:</strong> Pure, Artmage, OCG Astrograph, Elfnote adjacent</span>
+          <span class="pill"><strong>Risk:</strong> Droll and scale removal are high impact</span>
+        </div>
+      </div>
+      <div class="showcase-wrap">
+        <div class="showcase" id="showcase" aria-label="Core Power Patron cards"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page navigation">
+      <a href="#playstyle">Playstyle</a>
+      <a href="#combos">Combos</a>
+      <a href="#boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#variants">Latest Tops</a>
+      <a href="#side">Side/Counters</a>
+      <button class="ref-toggle" type="button" id="refsToggle">References</button>
+    </nav>
+
+    <section id="playstyle">
+      <div class="section-head">
+        <div>
+          <h2>Playstyle And Win Condition</h2>
+          <p>Power Patron plays like a branching resource graph. A starter places a Pendulum body face-up in the Extra Deck, that body fires its trigger, and the next piece decides whether you extend, search interaction, recover, or move into a boss type.</p>
+        </div>
+      </div>
+      <div class="grid-4">
+        <article class="panel accent-teal">
+          <h3>1. Load Face-Up Extra</h3>
+          <div class="card-row" data-cards="treasure + shade + terminus"></div>
+          <p>Treasure, Shade, Terminus, and self-destruction effects turn the Extra Deck into a live hand. The face-up triggers are your real starters.</p>
+        </article>
+        <article class="panel accent-green">
+          <h3>2. Choose The Trigger</h3>
+          <div class="card-row" data-cards="nervedo + jupredo + junoldo + vidolium"></div>
+          <p>Nervedo summons, Jupredo searches Power Patron/DoomZ Spell/Trap, Junoldo recurs, and Vidolium searches any Power Patron card.</p>
+        </article>
+        <article class="panel accent-violet">
+          <h3>3. Convert To Boss Type</h3>
+          <div class="card-row" data-cards="nerva + junora + jupiter"></div>
+          <p>The monster effects destroy the Level 10 bodies and summon the matching Fusion, Synchro, or Xyz boss from the Extra Deck.</p>
+        </article>
+        <article class="panel accent-gold">
+          <h3>4. Cash The Payoff</h3>
+          <div class="card-row" data-cards="vidolium + vidolia + viraia + shadows"></div>
+          <p>Triple-type boards unlock the deck's strongest text: GY lock, protected monster activations, trap banishes, and Vidolium as a 5000 ATK closer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="section-head">
+        <div>
+          <h2>Core Combos And Interactions</h2>
+          <p>Use the tabs to inspect each route. These are practical route maps built from current card text and topping deck construction, not a claim that every opener is a deterministic one-card combo.</p>
+        </div>
+      </div>
+      <div class="route-actions" id="routeButtons" aria-label="Combo route picker"></div>
+      <div class="combo-layout">
+        <div class="graph-shell" aria-label="Combo graph">
+          <div class="graph-grid" id="comboGraph"></div>
+        </div>
+        <aside class="route-summary" id="routeSummary" aria-live="polite"></aside>
+      </div>
+
+      <div class="grid-2" style="margin-top: 12px;">
+        <article class="panel accent-rose">
+          <h3>Face-Up Extra Deck Trigger Map</h3>
+          <div class="trigger-matrix" id="triggerMatrix"></div>
+        </article>
+        <article class="panel accent-gold">
+          <h3>Boss Payoff Rules</h3>
+          <div class="timeline">
+            <div class="timeline-step">
+              <span class="num">1</span>
+              <div><b>Nerva needs Artmage monster-effect support for the wipe.</b> Nerva can rewrite an Artmage monster effect into "destroy all cards your opponent controls." Do not count a Pendulum scale effect as that support unless the specific effect is a legal monster effect.</div>
+            </div>
+            <div class="timeline-step">
+              <span class="num">2</span>
+              <div><b>Junora is strongest in Elfnote hybrid.</b> Pure Power Patron mainly values the on-summon face-up negate. The column material lock scales harder when Elfnote monsters are involved.</div>
+            </div>
+            <div class="timeline-step">
+              <span class="num">3</span>
+              <div><b>Vidolium is both searcher and finisher.</b> Its face-up Extra Deck trigger searches any Power Patron card, but its summon asks you to return 1 Fusion, 1 Synchro, and 1 Xyz from field/GY.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="boards">
+      <div class="section-head">
+        <div>
+          <h2>End Board Examples</h2>
+          <p>These examples describe the field by End Phase. The exact boss mix depends on which face-up Extra Deck triggers you loaded and whether the hand is pure, Artmage, or side-decked for going second.</p>
+        </div>
+      </div>
+      <div class="grid-4" id="boardsGrid"></div>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div>
+          <h2>Tips</h2>
+          <p>Sequencing matters more than memorizing one line. The deck rewards deciding which trigger to spend before you destroy or place a Pendulum card face-up.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="tip panel accent-teal">
+          <h3>Protect The First Real Search</h3>
+          <p>Hands that expose multiple searches should plan around Droll. If Nervedo can summon the missing body without adding, use that route before loading extra adds.</p>
+          <div class="card-row" data-cards="nervedo + droll"></div>
+        </article>
+        <article class="tip panel accent-green">
+          <h3>Do Not Spend Vidolium Too Early</h3>
+          <p>Vidolium is the high scale in many pure hands and also the broadest Power Patron search. Destroy it only when the scale math and next search are already covered.</p>
+          <div class="card-row" data-cards="vidolium + treasure"></div>
+        </article>
+        <article class="tip panel accent-rose">
+          <h3>Use Terminus As Both Starter And Threat</h3>
+          <p>Terminus sends a Power Patron from Deck/Extra Deck and can add Medius. In GY it makes battle with a Power Patron convert into face-down banish.</p>
+          <div class="card-row" data-cards="terminus + medius"></div>
+        </article>
+        <article class="tip panel accent-gold">
+          <h3>Jupredo Is Interaction Access</h3>
+          <p>Face-up Jupredo searches the Power Patron/DoomZ Spell/Trap suite. In scale it can trade itself plus a Power Patron/DoomZ body for a field pop.</p>
+          <div class="card-row" data-cards="jupredo + shadows + viraia"></div>
+        </article>
+        <article class="tip panel accent-violet">
+          <h3>Know When To Stop</h3>
+          <p>Against board breakers, one boss plus set Solemn/Dominus and face-up Extra Deck follow-up can be better than spending everything on a fragile ceiling board.</p>
+          <div class="card-row" data-cards="dominusImpulse + solemnAcc + judgment"></div>
+        </article>
+        <article class="tip panel accent-teal">
+          <h3>Going Second, Break Before Scaling</h3>
+          <p>Current pure lists often main Super Polymerization and board breakers. Clear floodgates or negates first, then Pendulum Summon into link or boss pressure.</p>
+          <div class="card-row" data-cards="superpoly + lightning + duster"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div>
+          <h2>Recovery Options</h2>
+          <p>The deck is good at converting destroyed Pendulum bodies into face-up Extra Deck advantage, but weak hands can still stall if the first scale or search is answered.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="panel accent-green">
+          <h3>Face-Up Extra Deck Becomes Hand</h3>
+          <p>Junoldo recovers a Power Patron or Elfnote card from GY or face-up Extra Deck. Nervedo can turn face-up Extra Deck into another body. Vidolium can search the missing Power Patron card.</p>
+          <div class="card-row" data-cards="junoldo + nervedo + vidolium"></div>
+        </article>
+        <article class="panel accent-teal">
+          <h3>Graveyard Lines Stay Relevant</h3>
+          <p>Terminus in GY threatens battle banish, Viraia in GY replaces future top-deck banish costs, and Shadows revives from hand, face-up Extra Deck, or GY.</p>
+          <div class="card-row" data-cards="terminus + viraia + shadows"></div>
+        </article>
+        <article class="panel accent-gold">
+          <h3>Medius Reopens The Engine</h3>
+          <p>Medius can add or Special Summon a Power Patron monster from Deck on summon. Its GY effect can put a monster back to Special Summon itself, giving a follow-up Normal/Special body.</p>
+          <div class="card-row" data-cards="medius + nervedo + jupredo"></div>
+        </article>
+      </div>
+      <div class="note" style="margin-top: 12px;">
+        If a route gets interrupted, check what was added face-up to the Extra Deck before ending the turn. A destroyed Pendulum body may already have replaced itself with the next starter, search, or recovery piece.
+      </div>
+    </section>
+
+    <section id="variants">
+      <div class="section-head">
+        <div>
+          <h2>Latest Tournament Variants</h2>
+          <p>Recent topping lists show two main TCG branches: a pure Pendulum shell with Amorphage and high staple density, and an Artmage hybrid that converts Medius into fusion pressure. OCG results also show Astrograph/Electrumite style builds, which require legality checks before copying into TCG.</p>
+        </div>
+      </div>
+      <div class="grid-2" id="variantGrid"></div>
+    </section>
+
+    <section id="side">
+      <div class="section-head">
+        <div>
+          <h2>Side Deck Options And Counters</h2>
+          <p>Side choices below are pulled from recent topping lists and mapped to the likely June 2026 field around Dracotail, Branded, Kewl Tune, DoomZ, Artmage, Maliss, Sky Striker, Radiant Typhoon, and mirror/Pendulum decks.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="counter-card">
+          <h3>Going First Locks</h3>
+          <div class="card-row" data-cards="dominusImpulse + solemnAcc + judgment + dbarrier"></div>
+          <p>Dominus, Solemn cards, and D Barrier protect a moderate board and punish high-commitment combo hands. Mistaken Arrest appears in topping sides when search chains matter.</p>
+          <div class="card-row" data-cards="mistaken + forbiddenCrown"></div>
+        </article>
+        <article class="counter-card">
+          <h3>Going Second Breakers</h3>
+          <div class="card-row" data-cards="sphere + lava + evenly + drnm"></div>
+          <p>Sphere Mode and Lava Golem answer towers-style fields. Evenly, Dark Ruler, Book of Eclipse, Droplet, Lightning Storm, and Duster are the broad board-breaker suite.</p>
+          <div class="card-row" data-cards="eclipse + droplet + lightning + duster"></div>
+        </article>
+        <article class="counter-card">
+          <h3>Hand Trap Suite</h3>
+          <div class="card-row" data-cards="fuwalos + purulia + droll + ash"></div>
+          <p>Current lists lean on Mulcharmy cards, Droll, Ash, Belle, Ogre, Nibiru, and Bystials. Use Droll after the first add; use Ogre or removal on scales when it strands the hand.</p>
+          <div class="card-row" data-cards="belle + ogre + nibiru + druiswurm"></div>
+        </article>
+      </div>
+
+      <div class="matchup-grid" style="margin-top: 12px;">
+        <article class="matchup">
+          <h3>Kewl Tune / Synchro</h3>
+          <p><strong>Plan:</strong> Droll after first search, Nibiru before the protected end state, D Barrier calling Synchro when legal, Book/Dark Ruler to turn off layered boards.</p>
+          <div class="card-row" data-cards="droll + nibiru + dbarrier + drnm"></div>
+        </article>
+        <article class="matchup">
+          <h3>Branded / Dracotail</h3>
+          <p><strong>Plan:</strong> D Barrier Fusion, Ash key fusion access, Belle/Bystials on GY extension, Super Poly into Garura/Mudragon/Dragostapelia when board states allow.</p>
+          <div class="card-row" data-cards="dbarrier + ash + belle + superpoly"></div>
+        </article>
+        <article class="matchup">
+          <h3>Maliss / Cyberse Link</h3>
+          <p><strong>Plan:</strong> D Barrier does not call Link, so favor Droll, Fuwalos, Nibiru, Bystials, Sphere Mode, and Dark Ruler. Do not rely on one negate.</p>
+          <div class="card-row" data-cards="fuwalos + nibiru + sphere + drnm"></div>
+        </article>
+        <article class="matchup">
+          <h3>Mirror / Pendulum</h3>
+          <p><strong>Plan:</strong> remove scales, stop Terminus/Medius, force Droll early, and make Jupredo/Nervedo triggers awkward. Evenly and Lightning punish overbuilt boards.</p>
+          <div class="card-row" data-cards="droll + lightning + evenly + ogre"></div>
+        </article>
+        <article class="matchup">
+          <h3>Control / Backrow</h3>
+          <p><strong>Plan:</strong> Duster, Lightning, Heavy Storm where legal, Solemn suite, and restrained commitment. Keep enough follow-up in face-up Extra Deck for the second push.</p>
+          <div class="card-row" data-cards="duster + lightning + judgment + solemnAcc"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="references" id="references" aria-label="References used">
+      <div class="section-head">
+        <div>
+          <h2>References</h2>
+          <p>This tab is hidden by default. It lists the data sources used to build the card text, combo-routing assumptions, tournament evidence, and spreadsheet availability notes.</p>
+        </div>
+      </div>
+      <div class="reference-panel">
+        <ol>
+          <li><a href="https://www.yugiohmeta.com/tier-list/deck-types/Power%20Patron">Yu-Gi-Oh! Meta Power Patron Deck Breakdown</a>. Checked June 8, 2026. The page reports T3 average size around 41 cards and exposes current top main, extra, and side deck usage.</li>
+          <li><a href="https://www.yugiohmeta.com/api/v1/deck-types?name=Power%20Patron&amp;aggregate=aboveThresh&amp;limit=1">Yu-Gi-Oh! Meta deck-type API for Power Patron</a>. Used locally for aggregate TCG/OCG/T3 card usage and deck type id <code>69ba9aa5d6db702f0994a9f3</code>.</li>
+          <li><a href="https://www.yugiohmeta.com/api/v1/top-decks?deckType=69ba9aa5d6db702f0994a9f3&amp;aggregate=sortByRelevance&amp;fields=-__v&amp;limit=20">Yu-Gi-Oh! Meta top-decks API for Power Patron</a>. Used locally for Belgium National 2026, Calgary Regional 2026, South Australia State 2026, Houston Regional 2026, and YCS Columbus 2026 examples.</li>
+          <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Power%20Patron">YGOPRODeck cardinfo API search for Power Patron</a>. Used for official-style names, ids, card text, and card image ids.</li>
+          <li><a href="https://ygoprodeck.com/card/vidrium-the-power-patron-of-chaos-extermination-15476">YGOPRODeck Vidolium card page</a>. Cross-check for Power Patron card text and image availability.</li>
+          <li><a href="https://ygoprodeck.com/tournament/ycs-columbus-4610">YGOPRODeck YCS Columbus 2026 tournament page</a>. Confirms the May 23, 2026 event, meta field, and Power Patron Top 16 representation.</li>
+          <li><a href="https://ygoprodeck.com/deck/power-patron-713095">YGOPRODeck Jeffrey Jones Power Patron Top 16 deck page</a>. Used as an external cross-check for the YCS Columbus pure Power Patron list.</li>
+          <li><a href="https://www.yugiohmeta.com/top-decks/ycs-columbus-2026/power-patron/cody-cameron-bartz/lhOmw">Yu-Gi-Oh! Meta Cody Cameron Bartz YCS Columbus 2026 Power Patron page</a>. Used as evidence for the Artmage hybrid branch.</li>
+          <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta Combos &amp; Counters</a>. Checked for the requested spreadsheet workflow. A dedicated public Power Patron spreadsheet was not exposed by the checked Power Patron combo/spreadsheet endpoints; related Artmage combo records and Elfnote spreadsheet material were found and treated as adjacent context only.</li>
+          <li><a href="https://www.masterduelmeta.com/articles/guides/elfnote-galacticjoey">Master Duel Meta Elfnote guide by GalacticJoey</a>. Used only as adjacent context for Elfnote/Power Patron recovery and Medius lines, not as proof of a pure Power Patron spreadsheet.</li>
+          <li><a href="https://images.ygoprodeck.com/images/cards/17473466.jpg">YGOPRODeck card image CDN example</a>. All card thumbnails on this page use the same <code>/images/cards/CARD_ID.jpg</code> pattern requested in the brief.</li>
+        </ol>
+      </div>
+    </section>
+
+    <p class="footer-note">Legality and side-deck choices can shift with the Forbidden &amp; Limited List and region. The OCG Astrograph/Electrumite branch is labelled separately because it should not be copied into TCG without checking current legality.</p>
+  </div>
+
+  <script>
+    const cards = {
+      treasure: { id: "26237713", name: "Pendulum Treasure" },
+      shade: { id: "77157846", name: "Shade the Obscure" },
+      terminus: { id: "25661743", name: "Prohibited Power Patron Portal - Terminus" },
+      medius: { id: "97556336", name: "Medius the Pure" },
+      nervedo: { id: "17473466", name: "Nervedo the Shadebeast Power Patron" },
+      jupredo: { id: "43871165", name: "Jupredo the Shademachine Power Patron" },
+      junoldo: { id: "10266279", name: "Junoldo the Shadespirit Power Patron" },
+      vidolium: { id: "70488851", name: "Vidolium the Unstable Power Patron of Unity" },
+      nerva: { id: "53589300", name: "Nerva the Power Patron of Creation" },
+      junora: { id: "5914858", name: "Junora the Power Patron of Tuning" },
+      jupiter: { id: "68231287", name: "Jupiter the Power Patron of Destruction" },
+      vidolia: { id: "51669847", name: "Plundered Power Patron Plane - Vidolia" },
+      viraia: { id: "99311889", name: "Dead-End Power Patron Realm - Viraia" },
+      shadows: { id: "22404570", name: "Power Patron Shadows of the End Times" },
+      envoy: { id: "31822037", name: "Power Patron Envoy of Pure Prayers" },
+      artmagePP: { id: "23829452", name: "Artmage Power Patron" },
+      elfnotePP: { id: "12375297", name: "Elfnote Power Patron" },
+      doomzPP: { id: "81650695", name: "Power Patron DoomZ" },
+      forbiddenCrown: { id: "98829635", name: "Forbidden Crown" },
+      fuwalos: { id: "42141493", name: "Mulcharmy Fuwalos" },
+      purulia: { id: "84192580", name: "Mulcharmy Purulia" },
+      droll: { id: "94145021", name: "Droll & Lock Bird" },
+      ash: { id: "14558127", name: "Ash Blossom & Joyous Spring" },
+      belle: { id: "73642296", name: "Ghost Belle & Haunted Mansion" },
+      ogre: { id: "59438930", name: "Ghost Ogre & Snow Rabbit" },
+      nibiru: { id: "27204311", name: "Nibiru, the Primal Being" },
+      sphere: { id: "10000080", name: "The Winged Dragon of Ra - Sphere Mode" },
+      lava: { id: "102380", name: "Lava Golem" },
+      jizukiru: { id: "63941210", name: "Jizukiru, the Star Destroying Kaiju" },
+      dominusImpulse: { id: "40366667", name: "Dominus Impulse" },
+      solemnAcc: { id: "78114463", name: "Solemn Accusation" },
+      judgment: { id: "41420027", name: "Solemn Judgment" },
+      dbarrier: { id: "83326048", name: "Dimensional Barrier" },
+      eclipse: { id: "35480699", name: "Book of Eclipse" },
+      mistaken: { id: "4227096", name: "Mistaken Arrest" },
+      evenly: { id: "15693423", name: "Evenly Matched" },
+      drnm: { id: "54693926", name: "Dark Ruler No More" },
+      droplet: { id: "24299458", name: "Forbidden Droplet" },
+      superpoly: { id: "48130397", name: "Super Polymerization" },
+      lightning: { id: "14532163", name: "Lightning Storm" },
+      duster: { id: "18144507", name: "Harpie's Feather Duster" },
+      thrust: { id: "35269904", name: "Triple Tactics Thrust" },
+      talent: { id: "25311006", name: "Triple Tactics Talent" },
+      called: { id: "24224830", name: "Called by the Grave" },
+      amorphageLechery: { id: "70917315", name: "Amorphage Lechery" },
+      goliath: { id: "69072185", name: "Amorphage Goliath" },
+      sloth: { id: "32687071", name: "Amorphage Sloth" },
+      beyond: { id: "22125101", name: "Beyond the Pendulum" },
+      exceed: { id: "92812851", name: "Exceed the Pendulum" },
+      sp: { id: "29301450", name: "S:P Little Knight" },
+      ip: { id: "65741786", name: "I:P Masquerena" },
+      varudras: { id: "70636044", name: "Varudras, the Final Bringer of the End Times" },
+      bagooska: { id: "90590303", name: "Number 41: Bagooska the Terribly Tired Tapir" },
+      nonfinito: { id: "74631897", name: "Artmage Non-Finito" },
+      diactorus: { id: "27184601", name: "Artmage Diactorus" },
+      acropolis: { id: "74733322", name: "Artmage Academic Arcane Arts Acropolis" },
+      vandalism: { id: "1122030", name: "Artmage Vandalism -Assault-" },
+      impasto: { id: "44654994", name: "Artmage Impasto -Recapture-" },
+      finmel: { id: "34541940", name: "Artmage Finmel" },
+      litera: { id: "97434754", name: "Artmage Litera" },
+      graflare: { id: "60946049", name: "Artmage Graflare" },
+      varnish: { id: "74011784", name: "Artmage Varnish -Alteration-" },
+      pact: { id: "23599634", name: "Artmage Pact -Awakening-" },
+      mudragon: { id: "54757758", name: "Mudragon of the Swamp" },
+      garura: { id: "11765832", name: "Garura, Wings of Resonant Life" },
+      theseus: { id: "96334243", name: "Sea Monster of Theseus" },
+      dragostapelia: { id: "69946549", name: "Predaplant Dragostapelia" },
+      albion: { id: "87746184", name: "Albion the Branded Dragon" },
+      ecclesia: { id: "78397661", name: "Ecclesia and the Dark Dragon" },
+      azamina: { id: "46396218", name: "Azamina Ilia Silvia" },
+      electrumite: { id: "24094258", name: "Heavymetalfoes Electrumite" },
+      starving: { id: "43387895", name: "Supreme King Dragon Starving Venom" },
+      nightingale: { id: "76815942", name: "Lyrilusc - Independent Nightingale" },
+      astro: { id: "76794549", name: "Astrograph Sorcerer" },
+      maxxc: { id: "23434538", name: "Maxx \"C\"" },
+      potSloth: { id: "98476659", name: "Pot of Sloth" },
+      druiswurm: { id: "6637331", name: "Bystial Druiswurm" },
+      magnamhut: { id: "33854624", name: "Bystial Magnamhut" },
+      meowls: { id: "87126721", name: "Mulcharmy Meowls" },
+      redReboot: { id: "23002292", name: "Red Reboot" },
+      typhon: { id: "93039339", name: "Super Starslayer TY-PHON - Sky Crisis" }
+    };
+
+    const routes = [
+      {
+        id: "treasure",
+        title: "Treasure To Missing Piece",
+        cards: ["treasure", "vidolium", "terminus"],
+        pace: "Starter conversion",
+        best: "Any hand that needs a specific Power Patron trigger.",
+        risk: "Droll after an add; do not burn Vidolium if it is your only high scale.",
+        plan: "Pendulum Treasure places the exact Pendulum body face-up in the Extra Deck, then that body decides the rest of the hand.",
+        steps: [
+          { title: "Place the missing trigger", cards: ["treasure", "nervedo", "jupredo", "junoldo", "vidolium"], text: "Activate Pendulum Treasure and choose the face-up Extra Deck trigger your hand lacks." },
+          { title: "Resolve the route fork", cards: ["nervedo", "jupredo", "junoldo", "vidolium"], text: "Nervedo summons a body, Jupredo searches Power Patron/DoomZ Spell/Trap, Junoldo recovers, Vidolium searches any Power Patron card." },
+          { title: "Use Terminus if found", cards: ["terminus", "medius"], text: "Terminus can send a second Power Patron from Deck/Extra Deck and add Medius, opening a normal/special summon line." },
+          { title: "Convert bodies to bosses", cards: ["nervedo", "jupredo", "junoldo", "nerva", "jupiter", "junora"], text: "Spend the matching Level 10 monster effects to summon Nerva, Jupiter, or Junora from the Extra Deck." },
+          { title: "Bank follow-up", cards: ["vidolia", "viraia", "shadows"], text: "Search or set the card that covers the matchup: Vidolia for access/GY lock, Viraia for protection, Shadows for trap pressure." }
+        ],
+        branches: [
+          { label: "Need a starter", cards: ["vidolium", "terminus"], text: "Use Vidolium's face-up trigger to search Terminus, then Terminus sends a second Power Patron and can add Medius." },
+          { label: "Need a body", cards: ["nervedo", "medius"], text: "Use Nervedo to Special Summon a Power Patron or Artmage monster from Deck or face-up Extra Deck." },
+          { label: "Need interaction", cards: ["jupredo", "shadows", "viraia"], text: "Use Jupredo to get Shadows, Vidolia, Viraia, or other Power Patron/DoomZ Spell/Trap access." }
+        ],
+        end: "At minimum this should create one boss line plus a live face-up Extra Deck trigger. High-roll hands continue toward two or three boss types."
+      },
+      {
+        id: "terminus",
+        title: "Terminus Into Medius",
+        cards: ["terminus", "medius", "nervedo"],
+        pace: "Most direct engine line",
+        best: "Hands with Terminus and any playable body/scale.",
+        risk: "Ash/Droll on the add or Medius access; decide whether to send Nervedo, Jupredo, Junoldo, or Vidolium before revealing your full hand.",
+        plan: "Terminus sends a Power Patron from Deck/Extra Deck, then can add Medius. Medius turns the line into a real monster body and a second engine access point.",
+        steps: [
+          { title: "Send the correct body", cards: ["terminus", "nervedo", "jupredo", "junoldo", "vidolium"], text: "Terminus sends the Power Patron that gives the missing trigger or sets up the boss type you can actually summon." },
+          { title: "Add or summon through Medius", cards: ["medius", "nervedo"], text: "Medius adds or Special Summons a Power Patron monster from Deck on summon." },
+          { title: "Start boss conversion", cards: ["nervedo", "nerva"], text: "Nervedo converts itself into Nerva and then triggers if it was placed face-up in the Extra Deck." },
+          { title: "Search the back half", cards: ["jupredo", "vidolia", "shadows"], text: "Jupredo gets the Spell/Trap you need. Vidolia can reveal a boss, while Shadows is the trap payoff." },
+          { title: "Keep Terminus threat", cards: ["terminus"], text: "Once in GY, Terminus turns a Power Patron battle into a face-down banish at the start of Damage Step." }
+        ],
+        branches: [
+          { label: "Nervedo first", cards: ["nervedo", "nerva"], text: "Best when you need a boss body and another Special Summon trigger to keep playing." },
+          { label: "Jupredo first", cards: ["jupredo", "jupiter"], text: "Best when the hand already has bodies but needs Spell/Trap access or a scale pop line." },
+          { label: "Junoldo first", cards: ["junoldo", "junora"], text: "Best when recovery, draw pressure, or Junora's negate matters more than raw extension." }
+        ],
+        end: "Common finish: one boss, Terminus in GY, a searched Power Patron card, and face-up Extra Deck material for next turn."
+      },
+      {
+        id: "shade",
+        title: "Shade Chain",
+        cards: ["shade", "vidolium", "jupredo"],
+        pace: "Hand fixer",
+        best: "Any hand with a Pendulum Zone but awkward access.",
+        risk: "You must destroy a Pendulum Monster Card from hand/field. Avoid destroying the only scale that makes the Pendulum Summon legal.",
+        plan: "Shade Special Summons itself when you control a Pendulum Zone, then pays 1000 to destroy a Pendulum Monster Card and place the right Power Patron trigger face-up.",
+        steps: [
+          { title: "Turn on Shade", cards: ["shade", "Any Pendulum Zone"], text: "Control any card in a Pendulum Zone, then Special Summon Shade from hand." },
+          { title: "Destroy for a face-up trigger", cards: ["shade", "nervedo", "jupredo", "junoldo", "vidolium"], text: "Pay 1000 and destroy a Pendulum Monster Card in hand/field to place the chosen Power Patron face-up in the Extra Deck." },
+          { title: "Resolve the exact trigger", cards: ["nervedo", "jupredo", "junoldo", "vidolium"], text: "Pick extension, search, recursion, or full Power Patron card access." },
+          { title: "Pendulum Summon bodies", cards: ["vidolium", "nervedo", "jupredo"], text: "If scale math is preserved, Pendulum Summon Level 10 bodies and turn them into bosses." },
+          { title: "Link or boss pressure", cards: ["beyond", "exceed", "sp", "nerva"], text: "If boss conversion is not clean, use the bodies as Pendulum link material or interaction setup." }
+        ],
+        branches: [
+          { label: "Destroy Vidolium", cards: ["shade", "vidolium"], text: "Do this only when another high scale or immediate search route covers the lost scale." },
+          { label: "Destroy Jupredo", cards: ["shade", "jupredo", "shadows"], text: "Good when you need Power Patron Spell/Trap access more than another monster." },
+          { label: "Destroy Nervedo", cards: ["shade", "nervedo", "medius"], text: "Good when the hand lacks a body and needs a Deck summon to continue." }
+        ],
+        end: "Shade turns almost any live scale into a routed hand. The end board depends on whether the chosen trigger creates boss access or simply stores follow-up."
+      },
+      {
+        id: "artmage",
+        title: "Artmage Hybrid",
+        cards: ["medius", "artmagePP", "nonfinito"],
+        pace: "Fusion hybrid route",
+        best: "Medius plus Artmage access, or Acropolis/Vandalism hands.",
+        risk: "Artmage Power Patron locks Extra Deck summons to Fusion Monsters while its restriction applies, so sequence Pendulum/link access first when needed.",
+        plan: "Medius finds Artmage Power Patron or a Power Patron body. Artmage Power Patron quick-fuses into Artmage Fusion monsters or Nerva, then replaces itself with an Artmage Spell/Trap.",
+        steps: [
+          { title: "Use Medius as bridge", cards: ["medius", "artmagePP"], text: "Normal or Special Summon Medius and access Artmage Power Patron or the Power Patron body your hand needs." },
+          { title: "Quick Fusion", cards: ["artmagePP", "nonfinito", "diactorus", "nerva"], text: "Artmage Power Patron Fusion Summons an Artmage Fusion Monster or Nerva using itself and hand/field material." },
+          { title: "Search Artmage backrow", cards: ["vandalism", "impasto", "pact"], text: "When Artmage Power Patron is sent from hand/field to GY, it can add an Artmage Spell/Trap with a different name from your GY." },
+          { title: "Layer Power Patron pressure", cards: ["nervedo", "nerva", "junora"], text: "Nervedo protection and boss access let the deck continue after the Fusion line." },
+          { title: "Choose finish", cards: ["nonfinito", "diactorus", "superpoly"], text: "Non-Finito and Super Poly break boards; Diactorus gives field activation pressure when three Types are available." }
+        ],
+        branches: [
+          { label: "Nerva wipe setup", cards: ["nerva", "artmagePP"], text: "Nerva's rewrite becomes live when an Artmage monster effect is available to replace." },
+          { label: "Non-Finito pressure", cards: ["nonfinito", "superpoly"], text: "Best when going second or when the list is already on a broader Fusion package." },
+          { label: "Diactorus layer", cards: ["diactorus", "acropolis"], text: "Best in Artmage-heavy hands that can support Fusion pressure plus searched backrow." }
+        ],
+        end: "Common finish: Nerva/Diactorus or Non-Finito, searched Artmage Spell/Trap, Nervedo scale/protection, and Power Patron follow-up."
+      },
+      {
+        id: "triple",
+        title: "Triple-Type Payoff",
+        cards: ["nerva", "junora", "jupiter", "vidolium"],
+        pace: "Ceiling line",
+        best: "Hands with multiple starters and enough material to produce Fusion, Synchro, and Xyz boss types.",
+        risk: "Resource-intensive and vulnerable to board breakers if you spend every face-up Extra Deck trigger to reach it.",
+        plan: "Build Nerva, Junora, and Jupiter across the field/GY, then turn on Vidolia, Viraia, Shadows, and Vidolium's summon condition.",
+        steps: [
+          { title: "Make Fusion type", cards: ["nervedo", "nerva"], text: "Nervedo destroys itself to summon Nerva, treated as a Fusion Summon." },
+          { title: "Make Synchro type", cards: ["junoldo", "junora"], text: "Junoldo destroys itself to summon Junora, treated as a Synchro Summon." },
+          { title: "Make Xyz type", cards: ["jupredo", "jupiter"], text: "Jupredo destroys itself to summon Jupiter, treated as an Xyz Summon, and can attach a card from hand." },
+          { title: "Unlock the payoff cards", cards: ["vidolia", "viraia", "shadows"], text: "Vidolia locks opposing GY effects while all three bosses are controlled; Viraia protects Power Patron monster effects; Shadows scales its banishes by type count." },
+          { title: "Convert to Vidolium", cards: ["vidolium"], text: "Return a Fusion, Synchro, and Xyz from field/GY to the Extra Deck to summon Vidolium and banish all cards in GYs face-down." }
+        ],
+        branches: [
+          { label: "Control finish", cards: ["vidolia", "shadows"], text: "Keep the bosses and trap. This maximizes layered interruption if you can protect the field." },
+          { label: "OTK finish", cards: ["vidolium"], text: "Convert spent boss types into Vidolium when lethal pressure or GY wipe matters more than the bosses." },
+          { label: "Protected chain", cards: ["viraia", "nervedo"], text: "Viraia plus Nervedo scale makes monster-effect interaction harder for the opponent to answer cleanly." }
+        ],
+        end: "This is the deck's ceiling, not the default expectation. Treat it as the line to pursue when the opener already has redundant access."
+      }
+    ];
+
+    const triggerData = [
+      { from: "nervedo", to: "Body access", text: "If added face-up to the Extra Deck, Special Summon a Power Patron or Artmage monster from Deck or face-up Extra Deck, except itself." },
+      { from: "jupredo", to: "Spell/Trap access", text: "If added face-up to the Extra Deck, add a Power Patron or DoomZ Spell/Trap from Deck." },
+      { from: "junoldo", to: "Recovery", text: "If added face-up to the Extra Deck, add a Power Patron or Elfnote card from face-up Extra Deck or GY, except itself." },
+      { from: "vidolium", to: "Any Power Patron card", text: "If added face-up to the Extra Deck, add any Power Patron card from Deck." }
+    ];
+
+    const boards = [
+      {
+        title: "Pure TCG Stock",
+        cards: ["nerva", "jupiter", "vidolium", "dominusImpulse", "solemnAcc"],
+        field: "One boss or Varudras/Bagooska access, protected scales, set trap/solemn-style interaction, face-up Extra Deck follow-up.",
+        grave: "Terminus in GY makes battle with a Power Patron threaten face-down banish.",
+        purpose: "Efficient first-turn board that keeps follow-up instead of spending every trigger."
+      },
+      {
+        title: "Artmage Hybrid",
+        cards: ["nerva", "diactorus", "nonfinito", "vandalism", "nervedo"],
+        field: "Nerva/Diactorus or Non-Finito, searched Artmage Spell/Trap, Nervedo protection, Power Patron Pendulum follow-up.",
+        grave: "Artmage Power Patron and Medius recursion give the second wave.",
+        purpose: "Better Fusion pressure and board breaking, proven by Calgary Regional and YCS Columbus Artmage hybrid tops."
+      },
+      {
+        title: "Triple-Type Ceiling",
+        cards: ["nerva", "junora", "jupiter", "vidolia", "shadows"],
+        field: "Fusion, Synchro, and Xyz boss types available, Vidolia/Viraia/Shadows online, Vidolium as follow-up or finisher.",
+        grave: "Bosses in GY can still count as return material for Vidolium's summon condition.",
+        purpose: "Highest payoff route. Strong into engines that depend on GY effects or board presence."
+      },
+      {
+        title: "Going Second Break",
+        cards: ["superpoly", "mudragon", "garura", "dragostapelia", "sp"],
+        field: "Board breaker resolves first, then Pendulum Summon or link into S:P/Beyond while Power Patron bodies convert to bosses.",
+        grave: "Terminus battle banish helps clean remaining monsters after the board is softened.",
+        purpose: "Used by pure lists that main Super Polymerization and flexible Fusion targets."
+      }
+    ];
+
+    const variants = [
+      {
+        title: "Pure Pendulum With Amorphage",
+        date: "Belgium National Championship, June 6, 2026",
+        cards: ["amorphageLechery", "goliath", "shade", "nervedo", "vidolium", "superpoly"],
+        text: "Pierre Tomenko and Noah Dendas both reached Top 4 range in Belgium National lists. The shell maxes Nervedo, Jupredo, Vidolium, Terminus, and Super Polymerization, with Amorphage pieces and high side-deck breaker density.",
+        bullets: ["Core: 3 Nervedo, 3 Jupredo, 3 Vidolium, 3 Terminus.", "Side examples: Sphere Mode, Lava Golem, Ash, Droll, Dominus Impulse, Solemn Accusation.", "Plan: stable Pendulum pressure plus non-engine that steals games going first or second."]
+      },
+      {
+        title: "Artmage Hybrid",
+        date: "Calgary Regional June 6 and YCS Columbus May 24, 2026",
+        cards: ["artmagePP", "finmel", "acropolis", "nonfinito", "diactorus", "azamina"],
+        text: "Samuel Shuttleworth placed 2nd at Calgary with Artmage Power Patron, Litera, Finmel, Graflare, Acropolis, Varnish, Pact, and a Fusion-heavy Extra Deck. Cody Cameron Bartz also topped YCS Columbus with the Artmage branch.",
+        bullets: ["Core bridge is Medius into Artmage Power Patron or Power Patron access.", "Fusion package includes Non-Finito, Dragostapelia, Albion, Diactorus, Ecclesia, and sometimes Azamina Ilia Silvia.", "Plan: make Power Patron less linear by adding Fusion pressure and Artmage backrow recursion."]
+      },
+      {
+        title: "Pure TCG Winner Shell",
+        date: "South Australia State Championship, May 31, 2026",
+        cards: ["ash", "fuwalos", "sloth", "treasure", "dominusImpulse", "solemnAcc"],
+        text: "Ryan Slot won South Australia State Championship with a pure shell using Ash, Fuwalos, Shade, Sloth, the full Power Patron engine, Super Polymerization, The Fallen & The Virtuous, and a side suite of Purulia, Dominus Impulse, and Solemn Accusation.",
+        bullets: ["Main deck emphasizes consistency and blowout non-engine over larger hybrid engines.", "Side plan is clean: swap into Purulia, backrow removal, Mistaken Arrest, Dominus, and Solemn cards.", "Plan: keep the engine compact enough to see starters and side cards consistently."]
+      },
+      {
+        title: "OCG Astrograph / Electrumite",
+        date: "OCG tops in late May 2026",
+        cards: ["astro", "electrumite", "starving", "nightingale", "potSloth", "maxxc"],
+        text: "OCG lists show a higher-ceiling Pendulum branch with Astrograph, Electrumite, Supreme King Starving Venom, Independent Nightingale, Pot of Sloth, and Maxx C. Treat this as region-specific technology.",
+        bullets: ["Check legality before copying: Electrumite, Maxx C, and other cards vary by format.", "Plan: higher Pendulum combo ceiling, more Extra Deck utility, and different non-engine expectations.", "Use as inspiration for route structure, not as a direct TCG import."]
+      }
+    ];
+
+    function imageUrl(id) {
+      return `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function cardMini(key) {
+      const raw = String(key || "").trim();
+      const card = cards[raw];
+      if (!card) {
+        return `<span class="wild-card">${escapeHtml(raw)}</span>`;
+      }
+      const safeName = escapeHtml(card.name);
+      return `
+        <button class="card-mini" type="button" title="${safeName}" aria-label="${safeName}">
+          <img src="${imageUrl(card.id)}" alt="${safeName}" loading="lazy">
+          <span>${safeName}</span>
+          <span class="zoom" aria-hidden="true">
+            <img src="${imageUrl(card.id)}" alt="">
+            <strong>${safeName}</strong>
+          </span>
+        </button>
+      `;
+    }
+
+    function renderCardRow(value) {
+      const keys = Array.isArray(value)
+        ? value
+        : String(value || "").split("+").map((item) => item.trim()).filter(Boolean);
+      return `<div class="card-row">${keys.map((key, index) => `${index ? '<span class="plus">+</span>' : ""}${cardMini(key)}`).join("")}</div>`;
+    }
+
+    function hydrateCardRows(root = document) {
+      root.querySelectorAll("[data-cards]").forEach((el) => {
+        el.outerHTML = renderCardRow(el.dataset.cards);
+      });
+    }
+
+    function renderRoute(route) {
+      document.querySelectorAll(".route-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.route === route.id);
+      });
+
+      const graph = document.getElementById("comboGraph");
+      graph.innerHTML = route.steps.map((step, index) => `
+        <article class="node ${index === route.steps.length - 1 ? "break" : ""}" data-arrow=">">
+          <div class="node-title"><span class="line-icon">${index + 1}</span>${escapeHtml(step.title)}</div>
+          ${renderCardRow(step.cards)}
+          <p>${escapeHtml(step.text)}</p>
+          <small>${index === 0 ? "Start" : index === route.steps.length - 1 ? "End pressure" : "Decision point"}</small>
+        </article>
+      `).join("");
+
+      const summary = document.getElementById("routeSummary");
+      summary.innerHTML = `
+        <h3>${escapeHtml(route.title)}</h3>
+        ${renderCardRow(route.cards)}
+        <p>${escapeHtml(route.plan)}</p>
+        <div class="route-meta">
+          <div><b>Pace</b><span>${escapeHtml(route.pace)}</span></div>
+          <div><b>Best</b><span>${escapeHtml(route.best)}</span></div>
+          <div><b>Risk</b><span>${escapeHtml(route.risk)}</span></div>
+        </div>
+        <h3>Branches</h3>
+        <div class="branch-list">
+          ${route.branches.map((branch) => `
+            <div class="branch">
+              <b><span class="plus-icon">+</span>${escapeHtml(branch.label)}</b>
+              ${renderCardRow(branch.cards)}
+              <p>${escapeHtml(branch.text)}</p>
+            </div>
+          `).join("")}
+        </div>
+        <div class="note" style="margin-top: 10px;">${escapeHtml(route.end)}</div>
+      `;
+    }
+
+    function renderRouteButtons() {
+      const wrap = document.getElementById("routeButtons");
+      wrap.innerHTML = routes.map((route, index) => `
+        <button class="route-button ${index === 0 ? "active" : ""}" type="button" data-route="${route.id}">${escapeHtml(route.title)}</button>
+      `).join("");
+      wrap.addEventListener("click", (event) => {
+        const button = event.target.closest(".route-button");
+        if (!button) return;
+        const route = routes.find((item) => item.id === button.dataset.route);
+        if (route) renderRoute(route);
+      });
+      renderRoute(routes[0]);
+    }
+
+    function renderTriggerMatrix() {
+      const matrix = document.getElementById("triggerMatrix");
+      matrix.innerHTML = triggerData.map((row) => `
+        <div class="trigger-pair">
+          ${cardMini(row.from)}
+          <span class="arrow">></span>
+          <div class="trigger-copy">
+            <b>${escapeHtml(row.to)}</b>
+            ${escapeHtml(row.text)}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderBoards() {
+      const grid = document.getElementById("boardsGrid");
+      grid.innerHTML = boards.map((board) => `
+        <article class="board">
+          <h3>${escapeHtml(board.title)}</h3>
+          ${renderCardRow(board.cards)}
+          <div class="board-zone"><strong>Field by End Phase</strong>${escapeHtml(board.field)}</div>
+          <div class="board-zone"><strong>GY / Follow-Up</strong>${escapeHtml(board.grave)}</div>
+          <p><span class="info-icon">i</span> ${escapeHtml(board.purpose)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderVariants() {
+      const grid = document.getElementById("variantGrid");
+      grid.innerHTML = variants.map((variant) => `
+        <article class="variant">
+          <div class="variant-head">
+            <h3>${escapeHtml(variant.title)}</h3>
+            <span class="event-date">${escapeHtml(variant.date)}</span>
+          </div>
+          ${renderCardRow(variant.cards)}
+          <p>${escapeHtml(variant.text)}</p>
+          <ul class="list">
+            ${variant.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+        </article>
+      `).join("");
+    }
+
+    function renderShowcase() {
+      const showcase = document.getElementById("showcase");
+      showcase.innerHTML = ["nervedo", "jupredo", "junoldo", "vidolium", "terminus", "medius", "nerva", "shadows"].map(cardMini).join("");
+    }
+
+    function initReferences() {
+      const toggle = document.getElementById("refsToggle");
+      const refs = document.getElementById("references");
+      toggle.addEventListener("click", () => {
+        refs.classList.toggle("open");
+        if (refs.classList.contains("open")) {
+          refs.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+      if (window.location.hash === "#references") {
+        refs.classList.add("open");
+      }
+    }
+
+    renderShowcase();
+    hydrateCardRows();
+    renderRouteButtons();
+    renderTriggerMatrix();
+    renderBoards();
+    renderVariants();
+    initReferences();
+  </script>
+</body>
+</html>

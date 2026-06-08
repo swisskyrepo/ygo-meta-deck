@@ -1,0 +1,1900 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enneacraft Mind Map Cheatsheet</title>
+  <style>
+    :root {
+      --ink: #15181f;
+      --muted: #5b6472;
+      --line: #d9dee7;
+      --paper: #f4f6f9;
+      --panel: #ffffff;
+      --panel-2: #f7f9fc;
+      --red: #b3342f;
+      --green: #17715a;
+      --blue: #2f5e9e;
+      --gold: #a56e1a;
+      --teal: #236d7a;
+      --shadow: 0 14px 42px rgba(18, 23, 34, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,246,249,0.98)),
+        repeating-linear-gradient(135deg, rgba(47,94,158,0.07) 0 1px, transparent 1px 13px);
+      font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: clamp(36px, 7vw, 66px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      width: min(1200px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .hero-main,
+    .hero-side,
+    .section {
+      background: rgba(255,255,255,0.97);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(20px, 4vw, 36px);
+    }
+
+    .hero-main:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(47,94,158,0.12), transparent 34%),
+        linear-gradient(300deg, rgba(23,113,90,0.12), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero-main > * {
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      max-width: 880px;
+      margin-bottom: 18px;
+      color: #313947;
+      font-size: clamp(16px, 2vw, 19px);
+    }
+
+    .hero-side {
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .section {
+      margin: 14px 0;
+      padding: clamp(16px, 3vw, 24px);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title h2 {
+      margin-bottom: 0;
+    }
+
+    .title-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      background: #eef5ff;
+      color: var(--blue);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .icon.plus {
+      background: #e9f6f1;
+      color: var(--green);
+    }
+
+    .icon.info {
+      background: #fff7e7;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .chip-row,
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #27303d;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pill.green {
+      background: #e9f6f1;
+      color: #0f654f;
+      border-color: #b9dece;
+    }
+
+    .pill.blue {
+      background: #eef5ff;
+      color: #284f89;
+      border-color: #c5d7f0;
+    }
+
+    .pill.gold {
+      background: #fff7e7;
+      color: #7d5516;
+      border-color: #e8cd92;
+    }
+
+    .pill.red {
+      background: #fff0ee;
+      color: #8c312d;
+      border-color: #e8c1bd;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .fact {
+      min-height: 84px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.84);
+    }
+
+    .fact b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fact span {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.12;
+    }
+
+    .pilot-notes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pilot-note {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.78);
+    }
+
+    .pilot-note b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pilot-note p {
+      margin-bottom: 10px;
+      color: #2f3745;
+      font-size: 13px;
+    }
+
+    .mini-stack {
+      display: grid;
+      gap: 11px;
+    }
+
+    .trigger-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .card-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 36px;
+      max-width: 100%;
+      padding: 4px 9px 4px 4px;
+      border: 1px solid #cfd6e2;
+      border-radius: 7px;
+      background: #fff;
+      color: #111827;
+      box-shadow: 0 3px 9px rgba(12, 18, 28, 0.06);
+      cursor: default;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .card-chip img {
+      width: 25px;
+      height: 35px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: #e7ebf1;
+    }
+
+    .card-chip span {
+      overflow-wrap: anywhere;
+    }
+
+    .card-chip:focus,
+    .card-chip:hover {
+      border-color: var(--blue);
+      outline: 2px solid rgba(47,94,158,0.16);
+    }
+
+    .card-preview {
+      position: fixed;
+      z-index: 1000;
+      display: none;
+      width: min(245px, 45vw);
+      padding: 7px;
+      border: 1px solid rgba(20,24,30,0.22);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      pointer-events: none;
+    }
+
+    .card-preview img {
+      display: block;
+      width: 100%;
+      border-radius: 7px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note-card,
+    .combo-card,
+    .board-card,
+    .match-card,
+    .variant-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .note-card {
+      background: linear-gradient(180deg, #fff, #f8fafc);
+    }
+
+    .note-card p:last-child,
+    .combo-card p:last-child,
+    .board-card p:last-child,
+    .match-card p:last-child,
+    .variant-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 23px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+    }
+
+    .num {
+      display: inline-grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #eef5ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .plus-text {
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 1000;
+      line-height: 1;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eef2f7;
+      color: #3e4652;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .tag.green {
+      background: #e9f6f1;
+      color: #0f654f;
+    }
+
+    .tag.blue {
+      background: #eef5ff;
+      color: #284f89;
+    }
+
+    .tag.gold {
+      background: #fff7e7;
+      color: #7d5516;
+    }
+
+    .tag.red {
+      background: #fff0ee;
+      color: #8c312d;
+    }
+
+    .tag.teal {
+      background: #e8f7f8;
+      color: #1f6976;
+    }
+
+    .map-wrap {
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .mind-map {
+      min-width: 960px;
+      display: grid;
+      grid-template-columns: 210px repeat(6, minmax(132px, 1fr));
+      gap: 12px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .map-node {
+      position: relative;
+      min-height: 148px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(12,18,28,0.07);
+      color: var(--ink);
+      text-align: left;
+    }
+
+    button.map-node {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .map-node.root {
+      background: linear-gradient(180deg, #152031, #2a374d);
+      border-color: #152031;
+      color: #fff;
+    }
+
+    .map-node.active {
+      border-color: var(--blue);
+      outline: 3px solid rgba(47,94,158,0.2);
+    }
+
+    .map-node:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -13px;
+      width: 13px;
+      border-top: 2px solid #aeb8c8;
+    }
+
+    .map-node:nth-last-child(1):after,
+    .map-node:nth-last-child(2):after {
+      display: none;
+    }
+
+    .map-node small {
+      display: inline-flex;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .map-node.root small,
+    .map-node.root p {
+      color: #dce5f2;
+    }
+
+    .map-node h3 {
+      margin-bottom: 8px;
+    }
+
+    .map-node p {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .combo-detail {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f8fafc;
+    }
+
+    .detail-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-main {
+      padding-left: 14px;
+      border-left: 1px solid var(--line);
+    }
+
+    .detail-meta {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .path-label {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #253043;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .combo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .combo-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .combo-card header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .trigger-box {
+      margin-top: 4px;
+      padding: 10px;
+      border: 1px dashed #c4ccd8;
+      border-radius: var(--radius);
+      background: #f8fafc;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-line {
+      display: grid;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
+    .field-line b {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 14px;
+    }
+
+    .variant-grid,
+    .match-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .variant-card,
+    .match-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .side-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .side-table th,
+    .side-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .side-table th {
+      background: #eef2f7;
+      color: #3b4350;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .side-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .source-note {
+      margin-bottom: 12px;
+      padding: 10px;
+      border: 1px solid #e8cd92;
+      border-radius: var(--radius);
+      background: #fff7e7;
+      color: #634819;
+      font-weight: 750;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-button {
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 900;
+    }
+
+    .tab-button[aria-selected="true"] {
+      background: #253043;
+      border-color: #253043;
+      color: #fff;
+    }
+
+    .tab-panel[hidden] {
+      display: none;
+    }
+
+    .refs-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .two-col,
+      .tips-grid,
+      .combo-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-main {
+        padding-top: 14px;
+        padding-left: 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+      }
+
+      .three-col,
+      .combo-grid,
+      .board-grid,
+      .variant-grid,
+      .match-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .shell {
+        width: min(100% - 18px, 1200px);
+        padding-top: 10px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section {
+        padding: 14px;
+      }
+
+      .facts,
+      .pilot-notes,
+      .three-col,
+      .combo-grid,
+      .board-grid,
+      .variant-grid,
+      .match-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .card-chip {
+        font-size: 11px;
+      }
+
+      .card-preview {
+        width: min(220px, 58vw);
+      }
+
+      .side-table,
+      .side-table thead,
+      .side-table tbody,
+      .side-table tr,
+      .side-table th,
+      .side-table td {
+        display: block;
+      }
+
+      .side-table thead {
+        display: none;
+      }
+
+      .side-table tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .side-table td {
+        border-bottom: 0;
+      }
+
+      .side-table td:before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="cardPreview" class="card-preview" aria-hidden="true"></div>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="hero-main">
+        <div class="eyebrow"><span class="icon info">i</span> TCG Enneacraft control map</div>
+        <h1 id="pageTitle">Enneacraft</h1>
+        <p class="subtitle">A top-down cheatsheet for the Machine Flip Pendulum control deck: build hidden information, convert Level 1 scales into searches, set reactive Level 9 traps, and close with Enneapolis burn or 3000 ATK pressure.</p>
+        <div class="chip-row">
+          <span class="pill green">Last checked: 2026-06-08 UTC</span>
+          <span class="pill blue">Latest top: Lubbock June 2026 Regional winner</span>
+          <span class="pill gold">Hover or focus cards for full images</span>
+          <span class="pill red">TCG Advanced: May 18, 2026 list</span>
+        </div>
+        <div class="facts" aria-label="Deck quick facts">
+          <div class="fact">
+            <b>Role</b>
+            <span>Reactive control</span>
+          </div>
+          <div class="fact">
+            <b>Main win</b>
+            <span>Enneapolis burn plus Level 9 pressure</span>
+          </div>
+          <div class="fact">
+            <b>Core trick</b>
+            <span>Unknown face-down triggers</span>
+          </div>
+        </div>
+        <div class="pilot-notes" aria-label="Pilot notes">
+          <div class="pilot-note">
+            <b>Setup target</b>
+            <p>Most lines aim for 2 Level 1s or 1 Level 1 plus Release, then convert scale searches into Spia, Mar, and a matchup body.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="release"></span>
+              <span class="card-chip" data-card="atil"></span>
+              <span class="card-chip" data-card="atori"></span>
+            </div>
+          </div>
+          <div class="pilot-note">
+            <b>Latest top cue</b>
+            <p>The June 2026 Lubbock winner added Subspace Battle and The Fallen &amp; The Virtuous to reach Level 9s and simplify boards.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="subspace"></span>
+              <span class="card-chip" data-card="fallen"></span>
+              <span class="card-chip" data-card="aiza"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side" aria-label="Core cards">
+        <h2>Core Pack</h2>
+        <div class="mini-stack">
+          <div>
+            <div class="trigger-title"><span class="icon plus">+</span> Level 1 scale searchers</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="proto"></span>
+              <span class="card-chip" data-card="deftero"></span>
+              <span class="card-chip" data-card="ekto"></span>
+              <span class="card-chip" data-card="trito"></span>
+            </div>
+          </div>
+          <div>
+            <div class="trigger-title"><span class="icon plus">+</span> Level 9 reactive bodies</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="atori"></span>
+              <span class="card-chip" data-card="atil"></span>
+              <span class="card-chip" data-card="asta"></span>
+              <span class="card-chip" data-card="aiza"></span>
+            </div>
+          </div>
+          <div>
+            <div class="trigger-title"><span class="icon info">i</span> Engine glue</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="release"></span>
+              <span class="card-chip" data-card="reverth"></span>
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="field"></span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="planTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="planTitle">Playstyle And Win Condition</h2>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="note-card">
+          <h3>Game Plan</h3>
+          <p>Enneacraft is not a fixed solitaire combo deck. It builds a face-down board that asks the opponent to choose between playing into hidden triggers or waiting while Enneapolis converts every flip into End Phase burn.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use Level 1 Enneacrafts as scales to pay 900 LP and reveal 3 Enneacraft cards. The random add still gives real card flow because most names are live.</span></li>
+            <li><span class="num">2</span><span>Use Enneapolis to clear Pendulum Zones, recycle flipped monsters, and cash E.C. Counters for 900 damage each in the End Phase.</span></li>
+            <li><span class="num">3</span><span>Win by layering Atori, Atil, Asta, Aiza, or Archa so the opponent cannot remove the board cleanly without taking searches, negates, bounce, hand pressure, or burn.</span></li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h3>What The Opponent Must Respect</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="atori"></span>
+            <span class="card-chip" data-card="asta"></span>
+            <span class="card-chip" data-card="aiza"></span>
+            <span class="card-chip" data-card="archa"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">A</span><span>Targeting your cards can flip Asta, negate the effect, and banish a random card face-down from their hand.</span></li>
+            <li><span class="num">B</span><span>Destroying cards can flip Archa, protecting your monsters and Enneacraft Spells for the turn.</span></li>
+            <li><span class="num">C</span><span>Responding to your activation can flip Aiza and bounce up to 3 cards. On your turn, field effects can run into Atori's negate.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="mapTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="mapTitle">Combo Graph</h2>
+        </div>
+        <span class="pill blue">Tap a node to inspect the route</span>
+      </div>
+
+      <div class="map-wrap" aria-label="Interactive combo graph">
+        <div class="mind-map">
+          <button class="map-node root active" type="button" data-combo="root">
+            <small>Decision point</small>
+            <h3>Open hand</h3>
+            <p>Choose the route by whether you opened 2 Level 1s, Release, Reset, Enneapolis, Reverth, or the latest top tech cards.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="release"></span>
+              <span class="card-chip" data-card="field"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="twoLevel">
+            <small>Spreadsheet floor</small>
+            <h3>2 Level 1s or 1 plus Release</h3>
+            <p>Build the full reactive shell by cycling scale searches and setting high-impact unknowns.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="proto"></span>
+              <span class="card-chip" data-card="deftero"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="fieldLine">
+            <small>Field access</small>
+            <h3>Starter plus Reset or Enneapolis</h3>
+            <p>Field online early lets you return scales and convert flips into PZone value.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="field"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="badName">
+            <small>Bad trigger</small>
+            <h3>Wrong Level 1 name</h3>
+            <p>Use scale search and Release to fix hands where your starter trigger does not match the opponent's deck.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="trito"></span>
+              <span class="card-chip" data-card="enato"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="reverth">
+            <small>Grind draw</small>
+            <h3>1 starter plus Reverth</h3>
+            <p>Convert extra monsters into draws and load the GY trigger for the opponent's summon.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="reverth"></span>
+              <span class="card-chip" data-card="atori"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="subspace">
+            <small>Latest top tech</small>
+            <h3>Subspace Battle pivot</h3>
+            <p>Use 3000 ATK Level 9s to win reveal checks and add the exact big body you need.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="subspace"></span>
+              <span class="card-chip" data-card="aiza"></span>
+            </div>
+          </button>
+
+          <button class="map-node" type="button" data-combo="fv">
+            <small>Board break</small>
+            <h3>Fallen & Virtuous line</h3>
+            <p>Latest lists use the F&V package as compact non-engine removal backed by Extra Deck sends.</p>
+            <div class="card-row">
+              <span class="card-chip" data-card="fallen"></span>
+              <span class="card-chip" data-card="albion"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="combo-detail" id="comboDetail" aria-live="polite">
+        <aside class="detail-side">
+          <span id="detailLabel" class="path-label">Decision point</span>
+          <h3 id="detailTitle">Open hand</h3>
+          <div id="detailCards" class="card-row"></div>
+          <p id="detailMeta" class="detail-meta">Pick the line that creates the most unknown reactive cards without losing to Droll, overpaying LP, or clogging both Pendulum Zones.</p>
+        </aside>
+        <div class="detail-main">
+          <ol id="detailSteps" class="list"></ol>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> Field by End Phase</div>
+            <p id="detailEnd">A successful turn leaves Enneacraft monsters set face-down, Enneapolis or Reset access, and either Reset or Reverth in GY to flip monsters down or up on the opponent's turn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="comboTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="comboTitle">Core Combos And Interactions</h2>
+        </div>
+      </div>
+
+      <div class="combo-grid">
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag green">Primary setup</span>
+              <h3>Two Level 1s or Level 1 plus Release</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="release"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="proto"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="deftero"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Put a Level 1 Enneacraft into scale, either naturally or with Release.</span></li>
+            <li><span class="num">2</span><span>Use the scale effect to reveal 3 Enneacraft cards. Prioritize Enneapolis or Reset if the Field Spell is missing, then Reverth or the missing Level 9 trap.</span></li>
+            <li><span class="num">3</span><span>Reveal an Enneacraft in hand to Special Summon a monster from hand face-down. Repeat with different names only when the added cards actually improve the end board.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Triggers together</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="proto"></span>
+              <span class="plus-text">+</span>
+              <span class="card-chip" data-card="deftero"></span>
+              <span class="plus-text">+</span>
+              <span class="card-chip" data-card="reverth"></span>
+            </div>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag blue">Field line</span>
+              <h3>Reset into Enneapolis</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="reset"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="field"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="release"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>If Field is missing, Reset places Enneapolis from Deck or GY into the Field Zone.</span></li>
+            <li><span class="num">2</span><span>Use Enneapolis to return Pendulum Monster Cards you control to hand, freeing scale slots for another named searcher.</span></li>
+            <li><span class="num">3</span><span>If you already control Enneapolis, Reset becomes a real interaction card that negates face-up opposing cards up to your occupied PZones.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Recovery layer</div>
+            <p>Reset in GY can banish itself after the opponent activates an effect to flip your Enneacraft monsters face-down again.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag gold">Draw and reload</span>
+              <h3>Reverth draw into GY trigger</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="reverth"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="field"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="atori"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use Reverth when you have surplus monsters in hand or face-up field and need to dig for Field, Reset, or the correct Level 9.</span></li>
+            <li><span class="num">2</span><span>Shuffle Enneacraft monsters from hand or face-up field into Deck or Extra Deck, then draw the same number.</span></li>
+            <li><span class="num">3</span><span>On the opponent's Normal or Special Summon, banish Reverth to set another Enneacraft from hand or flip a face-down Enneacraft face-up.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> Timing note</div>
+            <p>Reverth is one of the better Ash targets against you, so avoid committing the whole hand to it unless the draw is necessary.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag red">Opponent action map</span>
+              <h3>Set monster trigger matrix</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="ekto"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="enato"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="trito"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Ekto flips on an effect that includes Special Summoning and searches an Enneacraft card.</span></li>
+            <li><span class="num">2</span><span>Deftero flips on a Deck-to-hand effect and threatens a temporary random hand banish on FLIP.</span></li>
+            <li><span class="num">3</span><span>Enato flips on effects in GY or banishment. Trito flips on effects that Set cards and its FLIP can pop a Spell/Trap then set another monster from hand.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Most common first search</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="field"></span>
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="reverth"></span>
+            </div>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag teal">Latest top tech</span>
+              <h3>Subspace Battle search pressure</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="subspace"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="aiza"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="atil"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Reveal Level 9 Enneacrafts with 3000 ATK to win many Subspace Battle checks and add the higher-ATK monster.</span></li>
+            <li><span class="num">2</span><span>Pick the name you do not need to activate that turn, because Subspace prevents either player from activating effects of revealed monster names for the rest of the turn.</span></li>
+            <li><span class="num">3</span><span>Use it as a top-decked bridge to Aiza, Atori, Atil, or Asta when a normal scale line did not find the right Level 9.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon info">i</span> Risk</div>
+            <p>Subspace is not a blind opener. It can lock your own name at the wrong time.</p>
+          </div>
+        </article>
+
+        <article class="combo-card">
+          <header>
+            <div>
+              <span class="tag blue">Non-engine package</span>
+              <h3>Fallen & Virtuous with Extra Deck sends</h3>
+            </div>
+            <span class="icon info">i</span>
+          </header>
+          <div class="card-row">
+            <span class="card-chip" data-card="fallen"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="albion"></span>
+            <span class="plus-text">+</span>
+            <span class="card-chip" data-card="skullKnight"></span>
+          </div>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use The Fallen & The Virtuous as compact face-up removal when you can send the correct Extra Deck monster.</span></li>
+            <li><span class="num">2</span><span>Fossil Warrior Skull Knight and Fossil Machine Skull Wagon add delayed removal pressure from GY.</span></li>
+            <li><span class="num">3</span><span>Albion packages support the F&V removal mode and give the deck a real way to answer cards your set monsters cannot beat cleanly.</span></li>
+          </ul>
+          <div class="trigger-box">
+            <div class="trigger-title"><span class="icon plus">+</span> Pairs well with</div>
+            <div class="card-row">
+              <span class="card-chip" data-card="field"></span>
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="sphere"></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="boardTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="boardTitle">End Board Examples</h2>
+        </div>
+        <span class="pill gold">Field by End Phase</span>
+      </div>
+
+      <div class="board-grid">
+        <article class="board-card">
+          <span class="tag blue">Minimum playable</span>
+          <h3>One Small, One Big</h3>
+          <div class="field-line">
+            <b>Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="proto"></span>
+              <span class="card-chip" data-card="atori"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>Access</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="field"></span>
+            </div>
+          </div>
+          <p>A modest hand still forces the opponent to respect a hand-effect trigger, monster pop, Book effect, and Reset flip-down.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag green">Spreadsheet target</span>
+          <h3>Full Hidden Setup</h3>
+          <div class="field-line">
+            <b>Face-downs</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="proto"></span>
+              <span class="card-chip" data-card="deftero"></span>
+              <span class="card-chip" data-card="atori"></span>
+              <span class="card-chip" data-card="atil"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>GY / Field</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="field"></span>
+              <span class="card-chip" data-card="reset"></span>
+              <span class="card-chip" data-card="reverth"></span>
+            </div>
+          </div>
+          <p>Represents the spreadsheet goal: pop, hand rip, mass book, chain suppression, and GY flip controls.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag red">Burn pressure</span>
+          <h3>Enneapolis Clock</h3>
+          <div class="field-line">
+            <b>Field / Scales</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="field"></span>
+              <span class="card-chip" data-card="ekto"></span>
+              <span class="card-chip" data-card="trito"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>Face-up threats</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="aiza"></span>
+              <span class="card-chip" data-card="archa"></span>
+            </div>
+          </div>
+          <p>Each face-up flip makes the Field Spell count climb. Aiza punishes adds and Archa punishes monsters going to the opponent's GY.</p>
+        </article>
+
+        <article class="board-card">
+          <span class="tag teal">Lubbock variant</span>
+          <h3>Top-list Grind Shell</h3>
+          <div class="field-line">
+            <b>Main tools</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="subspace"></span>
+              <span class="card-chip" data-card="fallen"></span>
+              <span class="card-chip" data-card="field"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <b>Side pivot</b>
+            <div class="card-row">
+              <span class="card-chip" data-card="sphere"></span>
+              <span class="card-chip" data-card="dFissure"></span>
+              <span class="card-chip" data-card="bookEclipse"></span>
+            </div>
+          </div>
+          <p>The June 6 winning list emphasized Trito, Subspace Battle, F&V, and strong side-deck floodgate or board-break pivots.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="tipsTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="tipsTitle">Tips And Recovery</h2>
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Search for what the board is missing, not for a fixed script. The normal target order is Field or Reset, then Reverth, then the exact Level 9 trap.</span></li>
+            <li><span class="num">2</span><span>Do not put both scales into names you cannot pick up. Enneapolis returning Pendulum cards is the main way to keep the chain of searches moving.</span></li>
+            <li><span class="num">3</span><span>Against Droll, take the last search Proto gives you, use Release to place the most relevant scale, and stop trying to snowball.</span></li>
+            <li><span class="num">4</span><span>Keep LP math visible. Multiple 900 LP scale searches are normal, but they make enemy OTK lines and your own Enneapolis burn clock more important.</span></li>
+            <li><span class="num">5</span><span>Subspace Battle is strongest when it finds a Level 9 you will set, not when it locks the exact name you need to activate immediately.</span></li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="reverth"></span>
+            <span class="card-chip" data-card="reset"></span>
+            <span class="card-chip" data-card="release"></span>
+            <span class="card-chip" data-card="field"></span>
+            <span class="card-chip" data-card="skullKnight"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">A</span><span>Reverth refreshes hands and then threatens to flip up or set another Enneacraft after the opponent summons.</span></li>
+            <li><span class="num">B</span><span>Reset turns face-up Enneacrafts face-down from GY so the same monsters can threaten another flip window.</span></li>
+            <li><span class="num">C</span><span>Release, from GY after the turn it was sent, adds a face-up Enneacraft monster from Extra Deck back to hand.</span></li>
+            <li><span class="num">D</span><span>Enneapolis returns face-up Pendulum Monster Cards, protecting value and reopening scales.</span></li>
+            <li><span class="num">E</span><span>The F&V/Fossil package gives you removal when the opponent refuses to trigger your face-downs.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="variantTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2 id="variantTitle">Latest Tournament Variant</h2>
+        </div>
+      </div>
+
+      <div class="source-note">
+        Latest top found during research: Alexander Omar Alvarez, Enneacraft, 1st Place at Lubbock June 2026 Regional on June 6, 2026. The broader large-event reference is Brenden Beckmann's Enneacraft Top 16 at Team YCS Las Vegas on April 18, 2026.
+      </div>
+
+      <div class="variant-grid">
+        <article class="variant-card">
+          <span class="tag teal">Lubbock winner</span>
+          <h3>41-card Subspace/F&V build</h3>
+          <p>Ratios from the visible list: 3 each of Deftero, Ekto, Enato, Proto, Trito, Aiza, Atori, Release, Reverth, Subspace Battle, and The Fallen & The Virtuous; 2 each of Asta, Atil, Reset, and Enneapolis.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="trito"></span>
+            <span class="card-chip" data-card="subspace"></span>
+            <span class="card-chip" data-card="fallen"></span>
+            <span class="card-chip" data-card="field"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag blue">Extra Deck shell</span>
+          <h3>Fossil, Branded, Generaider</h3>
+          <p>The top list used Fossil Warrior Skull Knight, Fossil Machine Skull Wagon, Garura, 3 Albion, 2 Jormungandr, 2 Laevatein, I:P, Paleozoic Cambroraster, and S:P Little Knight.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="skullKnight"></span>
+            <span class="card-chip" data-card="skullWagon"></span>
+            <span class="card-chip" data-card="albion"></span>
+            <span class="card-chip" data-card="jorm"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag gold">Large-event proof</span>
+          <h3>Team YCS Las Vegas Top 16</h3>
+          <p>The April Team YCS version leaned on the pre-BLZD Enneacraft shell with Archa.TAIL, Asta, Atori, Aiza, Release, Reverth, Enneapolis, and Greed-style draw power.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="archa"></span>
+            <span class="card-chip" data-card="asta"></span>
+            <span class="card-chip" data-card="atori"></span>
+            <span class="card-chip" data-card="reverth"></span>
+          </div>
+        </article>
+
+        <article class="variant-card">
+          <span class="tag red">Build lesson</span>
+          <h3>More names, less mystery loss</h3>
+          <p>Post-Blazing Dominion lists gain Trito and Atil, improving the number of live names and giving the deck a stronger chain-link punishment plan. The tradeoff is more exact sequencing and more cards that punish careless name locks.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="trito"></span>
+            <span class="card-chip" data-card="atil"></span>
+            <span class="card-chip" data-card="reset"></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sideTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="sideTitle">Side Deck Options And Counters</h2>
+        </div>
+      </div>
+
+      <table class="side-table">
+        <thead>
+          <tr>
+            <th>Matchup / problem</th>
+            <th>Options</th>
+            <th>How to use them</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Matchup / problem">Latest top side plan</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="sphere"></span>
+                <span class="card-chip" data-card="darkRuler"></span>
+                <span class="card-chip" data-card="dFissure"></span>
+                <span class="card-chip" data-card="bookEclipse"></span>
+                <span class="card-chip" data-card="solemn"></span>
+                <span class="card-chip" data-card="accusation"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">This is the Lubbock June 2026 winner's visible side pattern: Sphere Mode and Dark Ruler for boards, Dimensional Fissure for GY decks, Book for battle/flip pressure, and Solemn cards going first.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Search-heavy combo: Kewl Tune, Branded, Yummy, Enneacraft mirror</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="droll"></span>
+                <span class="card-chip" data-card="ash"></span>
+                <span class="card-chip" data-card="dFissure"></span>
+                <span class="card-chip" data-card="accusation"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Droll after the first add. Ash is usually highest impact on Reverth, not random small searchers. D-Fissure strains Branded and GY recursion while your set monsters still work.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Players trying to beat Enneapolis directly</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="ghostOgre"></span>
+                <span class="card-chip" data-card="archa"></span>
+                <span class="card-chip" data-card="aiza"></span>
+                <span class="card-chip" data-card="asta"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Ghost Ogre on Enneapolis is a known counter. If you expect it, hold Archa for destruction protection, Aiza for bounce lines, or Asta when they target.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Established boards and monsters over 3000 ATK</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="sphere"></span>
+                <span class="card-chip" data-card="darkRuler"></span>
+                <span class="card-chip" data-card="droplet"></span>
+                <span class="card-chip" data-card="crown"></span>
+                <span class="card-chip" data-card="fallen"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">High-ATK monsters can walk over set Level 9s. Use non-targeting negation, Sphere Mode, F&V, Reset's face-up negate, or Book effects to avoid losing the set board in combat.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Maliss, Sky Striker, DoomZ, non-target removal</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="dFissure"></span>
+                <span class="card-chip" data-card="solemn"></span>
+                <span class="card-chip" data-card="bookEclipse"></span>
+                <span class="card-chip" data-card="cosmic"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">TCGplayer's counter article flags Maliss non-target banish, Sky Striker Lemnisgate bounce, and DoomZ Destruction as real problems. Side to stop the engine, not just to protect a single face-down.</td>
+          </tr>
+          <tr>
+            <td data-label="Matchup / problem">Backrow and slow control</td>
+            <td data-label="Options">
+              <div class="card-row">
+                <span class="card-chip" data-card="trito"></span>
+                <span class="card-chip" data-card="cosmic"></span>
+                <span class="card-chip" data-card="duster"></span>
+                <span class="card-chip" data-card="daruma"></span>
+              </div>
+            </td>
+            <td data-label="How to use them">Trito gives in-engine S/T pressure. Cosmic and Duster answer floodgates. Daruma resets awkward boards without targeting and keeps the game in face-down territory.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="match-grid" style="margin-top:14px">
+        <article class="match-card">
+          <span class="tag red">How opponents counter you</span>
+          <h3>Counter Map</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Droll after the first search ends the usual scale-chain turn. It still lets Proto trigger once if Droll was activated from hand.</span></li>
+            <li><span class="num">2</span><span>Ash on Reverth is stronger than Ash on a random Level 1 when you already have multiple searchers.</span></li>
+            <li><span class="num">3</span><span>Forbidden Droplet and Forbidden Crown are non-targeting negates that Enneacraft monsters cannot usually answer with their own monster effects.</span></li>
+            <li><span class="num">4</span><span>Passive play reduces your Enneapolis counters. Opponents can wait, attack over 2500 DEF bodies, then force you to flip on their terms.</span></li>
+          </ul>
+        </article>
+
+        <article class="match-card">
+          <span class="tag green">How you counter back</span>
+          <h3>Response Map</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>When ahead, stop searching and pass with stronger unknowns. A mystery Atori or Asta is often worth more than one more random add.</span></li>
+            <li><span class="num">2</span><span>Against patient players, Flip Summon Asta or Archa yourself to make 3000 ATK pressure and force their removal.</span></li>
+            <li><span class="num">3</span><span>Use Reset from GY before your mandatory FLIP effect resolves if you need to dodge monster negation by flipping back down.</span></li>
+            <li><span class="num">4</span><span>Side into hard board breakers going second, because Enneacraft is strongest when the opponent is the one forced to act first.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="refsTitle">
+      <div class="section-title">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2 id="refsTitle">Knowledge Tabs</h2>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Knowledge tabs">
+        <button class="tab-button" id="tab-summary" type="button" role="tab" aria-selected="true" aria-controls="panel-summary" data-tab="summary">Summary</button>
+        <button class="tab-button" id="tab-references" type="button" role="tab" aria-selected="false" aria-controls="panel-references" data-tab="references">References</button>
+      </div>
+
+      <div class="tab-panel" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary">
+        <div class="source-note">
+          Spreadsheet status: Master Duel Meta has a public Enneacraft spreadsheet by kanna ogata, posted May 17, 2026 and updated with a June 7 branch. It states the deck is a control strategy with sequencing goals rather than one fixed combo.
+        </div>
+        <p class="footer-note">All card thumbnails and hover previews use the requested URL pattern: <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code>.</p>
+      </div>
+
+      <div class="tab-panel" id="panel-references" role="tabpanel" aria-labelledby="tab-references" hidden>
+        <ol class="refs-list">
+          <li><a href="https://www.masterduelmeta.com/spreadsheet/6a0925374f0efc9db9227827" target="_blank" rel="noreferrer">Master Duel Meta Enneacraft spreadsheet, kanna ogata, May 17 2026</a> - source for setup goals, branch names, and endboard labels.</li>
+          <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters</a> - source hub requested by the user.</li>
+          <li><a href="https://www.yugiohmeta.com/top-decks/lubbock-june-2026-regional/enneacraft/alexander-omar-alvarez/vhkdV/" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta: Alexander Omar Alvarez, Enneacraft, 1st Place Lubbock June 2026 Regional, June 6 2026</a> - latest tournament top variant found.</li>
+          <li><a href="https://ygoprodeck.com/deck/enneacraft-706794" target="_blank" rel="noreferrer">YGOPRODeck: Brenden Beckmann, Enneacraft, Team YCS Las Vegas Top 16, April 18 2026</a> - large-event top reference.</li>
+          <li><a href="https://www.yugiohmeta.com/top-decks/omaha-may-2026-regional/enneacraft/hunter-collins/1Z4jA" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta: Hunter Collins, Enneacraft, Omaha May 2026 Regional 3rd/4th, May 10 2026</a> - recent pre-June tournament variant.</li>
+          <li><a href="https://www.tcgplayer.com/content/article/The-Two-Different-Approaches-To-Outplaying-Enneacraft-in-Yu-Gi-Oh/773c047f-af84-4459-acc6-95cb77e5555b/" target="_blank" rel="noreferrer">TCGplayer: The Two Different Approaches To Outplaying Enneacraft, Hanko Chow, June 4 2026</a> - source for current counterplay and matchup tips.</li>
+          <li><a href="https://www.yugiohmeta.com/articles/news/jan-9-2026/BLZD" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta: OCG BLZD Enneacraft reveals</a> - source for Trito, Atil, and Reset support text before TCG release.</li>
+          <li><a href="https://www.yugiohcardguide.com/archetype/enneacraft.html" target="_blank" rel="noreferrer">YuGiOh Card Guide: Enneacraft archetype card list</a> - card text and ID cross-check source.</li>
+          <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Enneacraft" target="_blank" rel="noreferrer">YGOPRODeck card API, Enneacraft archetype query</a> - verified card IDs and effect summaries for image URLs.</li>
+          <li><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/" target="_blank" rel="noreferrer">Official Yu-Gi-Oh! TCG Forbidden &amp; Limited List, effective May 18 2026</a> - legality context for Droll and current side-deck planning.</li>
+          <li><a href="https://yugioh.fandom.com/wiki/Enneacraft" target="_blank" rel="noreferrer">Yu-Gi-Oh! Wiki: Enneacraft archetype overview</a> - source for archetype identity and general playstyle.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const imageUrl = (id) => "https://images.ygoprodeck.com/images/cards/" + id + ".jpg";
+
+    const cards = {
+      deftero: { id: "92171126", name: "Deftero Enneacraft - \"alazoneIA\"" },
+      ekto: { id: "29570824", name: "Ekto Enneacraft - \"tromarIA\"" },
+      enato: { id: "55965529", name: "Enato Enneacraft - \"oknirIA\"" },
+      proto: { id: "56187077", name: "Proto Enneacraft - \"orgIA\"" },
+      trito: { id: "44716748", name: "Trito Enneacraft - \"exapatisIA\"" },
+      aiza: { id: "82359538", name: "Enneacraft - Aiza.LEON" },
+      archa: { id: "81237046", name: "Enneacraft - Archa.TAIL" },
+      asta: { id: "28454232", name: "Enneacraft - Asta.PIXEA" },
+      atori: { id: "54842941", name: "Enneacraft - Atori.MAR" },
+      atil: { id: "71801447", name: "Enneacraft - Atil.SPIA" },
+      release: { id: "54020393", name: "Enneacraft Release" },
+      reverth: { id: "80015408", name: "Enneacraft Reverth" },
+      reset: { id: "19504025", name: "Enneacraft Reset" },
+      field: { id: "17621695", name: "Enneapolis" },
+      subspace: { id: "89693655", name: "Subspace Battle" },
+      fallen: { id: "30271097", name: "The Fallen & The Virtuous" },
+      skullKnight: { id: "59531356", name: "Fossil Warrior Skull Knight" },
+      skullWagon: { id: "83656563", name: "Fossil Machine Skull Wagon" },
+      garura: { id: "11765832", name: "Garura, Wings of Resonant Life" },
+      albion: { id: "87746184", name: "Albion the Branded Dragon" },
+      jorm: { id: "2665273", name: "Jormungandr, Generaider Boss of Eternity" },
+      laevatein: { id: "74615388", name: "Laevatein, Generaider Boss of Shadows" },
+      ip: { id: "65741786", name: "I:P Masquerena" },
+      cambroraster: { id: "36346532", name: "Paleozoic Cambroraster" },
+      sp: { id: "29301450", name: "S:P Little Knight" },
+      sphere: { id: "10000080", name: "The Winged Dragon of Ra - Sphere Mode" },
+      darkRuler: { id: "54693926", name: "Dark Ruler No More" },
+      dFissure: { id: "81674782", name: "Dimensional Fissure" },
+      bookEclipse: { id: "35480699", name: "Book of Eclipse" },
+      solemn: { id: "41420027", name: "Solemn Judgment" },
+      accusation: { id: "78114463", name: "Solemn Accusation" },
+      ash: { id: "14558127", name: "Ash Blossom & Joyous Spring" },
+      ghostOgre: { id: "59438930", name: "Ghost Ogre & Snow Rabbit" },
+      droll: { id: "94145021", name: "Droll & Lock Bird" },
+      droplet: { id: "24299458", name: "Forbidden Droplet" },
+      crown: { id: "98829635", name: "Forbidden Crown" },
+      chaosAngel: { id: "22850702", name: "Chaos Angel" },
+      vidolium: { id: "70488851", name: "Vidolium the Unstable Power Patron of Unity" },
+      dogmaDragon: { id: "76666602", name: "The Dragon that Devours the Dogma" },
+      malissHeart: { id: "21848500", name: "Maliss <Q> Hearts Crypter" },
+      malissMtp: { id: "94722358", name: "Maliss <C> MTP-07" },
+      lemnisgate: { id: "34433770", name: "Sky Striker Special Maneuver - Lemnisgate!" },
+      doomz: { id: "80320877", name: "DoomZ Destruction" },
+      daruma: { id: "30748475", name: "Destructive Daruma Karma Cannon" },
+      nadir: { id: "1984618", name: "Nadir Servant" },
+      punishment: { id: "82956214", name: "Dogmatika Punishment" },
+      fuwalos: { id: "42141493", name: "Mulcharmy Fuwalos" },
+      purulia: { id: "84192580", name: "Mulcharmy Purulia" },
+      duster: { id: "18144507", name: "Harpie's Feather Duster" },
+      cosmic: { id: "8267140", name: "Cosmic Cyclone" },
+      evenly: { id: "15693423", name: "Evenly Matched" },
+      typhon: { id: "93039339", name: "Super Starslayer TY-PHON - Sky Crisis" }
+    };
+
+    const combos = {
+      root: {
+        label: "Decision point",
+        title: "Open hand",
+        meta: "Pick the line by live starter count and whether the hand already contains Field, Reset, or Reverth.",
+        cards: ["release", "proto", "field", "reset", "reverth"],
+        steps: [
+          "If you opened 2 Level 1s or 1 Level 1 plus Release, build the full scale-search setup.",
+          "If you opened Reset or Enneapolis, get the Field Spell online first and use it to clear Pendulum Zones.",
+          "If you opened only 1 starter, decide whether Reverth can fix the hand or whether you should pass on fewer face-downs.",
+          "If you opened Subspace Battle or The Fallen & The Virtuous, use them as pivots, not as replacements for the hidden board."
+        ],
+        end: "End Phase should show face-down Enneacrafts, access to Enneapolis, and a GY or set card that lets you flip down or flip up again."
+      },
+      twoLevel: {
+        label: "Spreadsheet floor",
+        title: "2 Level 1s or 1 plus Release",
+        meta: "The main setup branch from the public spreadsheet.",
+        cards: ["release", "proto", "deftero", "atori", "atil", "asta"],
+        steps: [
+          "Use Release or a natural scale to place the first Level 1 in the Pendulum Zone.",
+          "Use the scale effect to reveal 3 Enneacraft cards. First priority is Enneapolis or Reset.",
+          "Reveal an Enneacraft in hand to Special Summon a monster from hand face-down.",
+          "Use Enneapolis to return scale cards to hand when possible, then continue with different Level 1 names.",
+          "Set Atori and Atil when available, then add Asta, Archa, Aiza, or another Level 1 according to matchup."
+        ],
+        end: "Face-down Proto or Deftero, Atori, Atil, and Asta/Archa/Aiza; Enneapolis or Reset access; Reset/Reverth in GY if opened."
+      },
+      fieldLine: {
+        label: "Field access",
+        title: "Starter plus Reset or Enneapolis",
+        meta: "Stronger than raw starter because it unlocks scale recycling and End Phase burn.",
+        cards: ["reset", "field", "release", "reverth", "trito"],
+        steps: [
+          "Activate Reset to place Enneapolis if Field is not already available.",
+          "Scale a Level 1, search, then use Enneapolis to return Pendulum Monster Cards that are clogging your zones.",
+          "If Field is already live, hold Reset until it can negate face-up opposing cards or load the GY flip-down effect.",
+          "Use Trito or another Level 1 as the next scale name to keep search density high."
+        ],
+        end: "Enneapolis active, at least one face-down small, at least one face-down Level 9, and Reset live either as interaction or GY recovery."
+      },
+      badName: {
+        label: "Bad trigger",
+        title: "Wrong Level 1 name",
+        meta: "Use this when the opened small name does not match the opposing deck's likely first action.",
+        cards: ["trito", "enato", "release", "proto", "ekto"],
+        steps: [
+          "Do not rely on the bad trigger to resolve. Put it in scale instead if its face-down trigger is unlikely.",
+          "Use Release to place Proto, Deftero, or Ekto depending on the matchup.",
+          "Search for Reset, Enneapolis, or the missing live small name.",
+          "Accept a lower ceiling if continuing would only add unknowns that do not trigger against the opponent."
+        ],
+        end: "One fixed live trigger, one scale that already searched, and enough hidden pressure to make the opponent choose awkward actions."
+      },
+      reverth: {
+        label: "Grind draw",
+        title: "1 starter plus Reverth",
+        meta: "Best recovery branch when you opened extra names but not enough structure.",
+        cards: ["reverth", "proto", "release", "reset", "field"],
+        steps: [
+          "Use your starter or Release to access the first Enneacraft scale.",
+          "Use Reverth to shuffle excess Enneacraft monsters from hand or face-up field into Deck or Extra Deck and draw.",
+          "Prioritize drawing into Field, Reset, or a missing Level 9.",
+          "Leave Reverth in GY so the opponent's summon can set another Enneacraft or flip one face-up."
+        ],
+        end: "Smaller board, but with Reverth GY trigger loaded and enough card selection to keep playing through a disrupted opener."
+      },
+      subspace: {
+        label: "Latest top tech",
+        title: "Subspace Battle pivot",
+        meta: "Seen in the June 6 Lubbock winner as a 3-of bridge to 3000 ATK Level 9s.",
+        cards: ["subspace", "aiza", "atori", "atil", "asta"],
+        steps: [
+          "Activate Subspace Battle when adding a 3000 ATK Enneacraft matters more than the name lock.",
+          "Reveal a Level 9 you are comfortable not activating this turn.",
+          "Use the added big monster as the face-down trap that covers your current weakness.",
+          "Avoid picking the exact Level 9 whose Quick Effect you need immediately."
+        ],
+        end: "A specific Level 9 in hand or set face-down, with the name-lock risk managed."
+      },
+      fv: {
+        label: "Board break",
+        title: "Fallen & Virtuous line",
+        meta: "A compact removal package from the latest top lists.",
+        cards: ["fallen", "albion", "skullKnight", "skullWagon", "garura"],
+        steps: [
+          "Use The Fallen & The Virtuous when the opponent gives you a face-up card you cannot beat by waiting.",
+          "Send the relevant Extra Deck monster, commonly Albion or a Fossil tool, to create immediate or delayed removal.",
+          "After simplifying the field, set Enneacrafts so the opponent has to play into your hidden trigger map.",
+          "Do not use this package blindly into your own Aiza or Atil trigger windows if a better hidden board is already enough."
+        ],
+        end: "Opponent's face-up threat handled, Enneacraft set monsters protected by hidden information, and Extra Deck value loaded."
+      }
+    };
+
+    function renderCard(el) {
+      const card = cards[el.dataset.card];
+      if (!card) {
+        el.textContent = el.dataset.card || "Unknown card";
+        return;
+      }
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("data-card-id", card.id);
+      el.setAttribute("data-card-name", card.name);
+      el.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = imageUrl(card.id);
+      img.alt = card.name;
+      img.loading = "lazy";
+      const label = document.createElement("span");
+      label.textContent = card.name;
+      el.append(img, label);
+    }
+
+    document.querySelectorAll(".card-chip[data-card]").forEach(renderCard);
+
+    const preview = document.getElementById("cardPreview");
+
+    function showPreview(target, event) {
+      const id = target.getAttribute("data-card-id");
+      const name = target.getAttribute("data-card-name");
+      if (!id) return;
+      preview.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = imageUrl(id);
+      img.alt = name || "Card preview";
+      preview.appendChild(img);
+      preview.style.display = "block";
+      movePreview(event || { clientX: window.innerWidth / 2, clientY: 120 });
+    }
+
+    function movePreview(event) {
+      if (preview.style.display !== "block") return;
+      const margin = 18;
+      const width = preview.offsetWidth || 230;
+      const height = preview.offsetHeight || 330;
+      let x = event.clientX + margin;
+      let y = event.clientY + margin;
+      if (x + width > window.innerWidth) x = event.clientX - width - margin;
+      if (y + height > window.innerHeight) y = window.innerHeight - height - margin;
+      preview.style.left = Math.max(margin, x) + "px";
+      preview.style.top = Math.max(margin, y) + "px";
+    }
+
+    function hidePreview() {
+      preview.style.display = "none";
+      preview.innerHTML = "";
+    }
+
+    document.addEventListener("mouseover", (event) => {
+      const target = event.target.closest(".card-chip");
+      if (target) showPreview(target, event);
+    });
+
+    document.addEventListener("mousemove", movePreview);
+
+    document.addEventListener("mouseout", (event) => {
+      if (event.target.closest(".card-chip")) hidePreview();
+    });
+
+    document.addEventListener("focusin", (event) => {
+      const target = event.target.closest(".card-chip");
+      if (target) showPreview(target, { clientX: window.innerWidth / 2, clientY: 110 });
+    });
+
+    document.addEventListener("focusout", (event) => {
+      if (event.target.closest(".card-chip")) hidePreview();
+    });
+
+    function cardChip(key) {
+      const span = document.createElement("span");
+      span.className = "card-chip";
+      span.dataset.card = key;
+      renderCard(span);
+      return span;
+    }
+
+    function selectCombo(key) {
+      const combo = combos[key] || combos.root;
+      document.querySelectorAll(".map-node").forEach((node) => {
+        node.classList.toggle("active", node.dataset.combo === key);
+      });
+      document.getElementById("detailLabel").textContent = combo.label;
+      document.getElementById("detailTitle").textContent = combo.title;
+      document.getElementById("detailMeta").textContent = combo.meta;
+      document.getElementById("detailEnd").textContent = combo.end;
+
+      const detailCards = document.getElementById("detailCards");
+      detailCards.innerHTML = "";
+      combo.cards.forEach((keyName, index) => {
+        if (index > 0) {
+          const plus = document.createElement("span");
+          plus.className = "plus-text";
+          plus.textContent = "+";
+          detailCards.appendChild(plus);
+        }
+        detailCards.appendChild(cardChip(keyName));
+      });
+
+      const steps = document.getElementById("detailSteps");
+      steps.innerHTML = "";
+      combo.steps.forEach((step, index) => {
+        const li = document.createElement("li");
+        const num = document.createElement("span");
+        num.className = "num";
+        num.textContent = String(index + 1);
+        const text = document.createElement("span");
+        text.textContent = step;
+        li.append(num, text);
+        steps.appendChild(li);
+      });
+    }
+
+    document.querySelectorAll(".map-node").forEach((node) => {
+      node.addEventListener("click", () => selectCombo(node.dataset.combo));
+    });
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const tabName = button.dataset.tab;
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.setAttribute("aria-selected", String(btn === button));
+        });
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.hidden = panel.id !== "panel-" + tabName;
+        });
+      });
+    });
+
+    selectCombo("root");
+  </script>
+</body>
+</html>

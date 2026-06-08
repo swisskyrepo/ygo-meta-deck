@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dracotail 2026 Combo Mind Map Cheatsheet</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f4;
+      --panel: #ffffff;
+      --panel-2: #eef4f2;
+      --ink: #172226;
+      --muted: #627077;
+      --line: #d5ded9;
+      --teal: #0a7275;
+      --green: #226b4d;
+      --blue: #315f8a;
+      --red: #a23a43;
+      --gold: #9a7018;
+      --violet: #66518a;
+      --shadow: 0 16px 42px rgba(24, 34, 38, .12);
+      --radius: 8px;
+      --card-w: 56px;
+      --card-h: 82px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96) 0, rgba(245,247,244,.98) 440px, #eef4f2 100%),
+        repeating-linear-gradient(135deg, rgba(10,114,117,.07) 0 1px, transparent 1px 22px);
+      font: 15px/1.46 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+    h1, h2, h3, p { margin-top: 0; }
+    p { margin-bottom: 12px; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 18px 0 58px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+      gap: 24px;
+      align-items: center;
+      padding: 12px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--teal);
+      font-size: .8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .icon.plus { background: var(--red); }
+    .icon.info { background: var(--blue); font-style: normal; }
+    .icon.gold { background: var(--gold); }
+
+    h1 {
+      max-width: 900px;
+      margin-bottom: 12px;
+      font-size: clamp(2.25rem, 5.8vw, 4.8rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.04rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 880px;
+      color: #304146;
+      font-size: clamp(1rem, 1.8vw, 1.14rem);
+    }
+
+    .hero-pills,
+    .tags,
+    .card-row,
+    .trigger-row,
+    .route-actions,
+    .source-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: #26343a;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong,
+    .chip strong { color: var(--ink); }
+
+    .showcase-wrap {
+      min-height: 330px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(52px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,34,38,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .mini-card:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
+    .showcase .mini-card:nth-child(2) { transform: translateY(-9px) rotate(3deg); }
+    .showcase .mini-card:nth-child(3) { transform: translateY(7px) rotate(-2deg); }
+    .showcase .mini-card:nth-child(4) { transform: translateY(-14px) rotate(4deg); }
+    .showcase .mini-card:nth-child(5) { transform: translateY(9px) rotate(-3deg); }
+    .showcase .mini-card:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .mini-card:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
+    .showcase .mini-card:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-token .card-name { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(213,222,217,.86);
+      background: linear-gradient(180deg, rgba(245,247,244,.98), rgba(245,247,244,.92));
+      backdrop-filter: blur(10px);
+      scrollbar-width: none;
+    }
+
+    .quick-nav::-webkit-scrollbar { display: none; }
+
+    .quick-nav a,
+    .route-button,
+    .tab-button,
+    .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .tab-button:hover,
+    .ref-toggle:hover {
+      border-color: #94aab0;
+      background: #f7fbfb;
+      text-decoration: none;
+    }
+
+    .route-button.active,
+    .tab-button.active {
+      color: #fff;
+      border-color: var(--teal);
+      background: var(--teal);
+    }
+
+    section {
+      margin: 28px 0;
+      scroll-margin-top: 72px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .subhead {
+      max-width: 820px;
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .band {
+      border: 1px solid rgba(213,222,217,.8);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.68);
+      box-shadow: 0 8px 22px rgba(24,34,38,.05);
+    }
+
+    .band-inner { padding: 14px; }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 14px;
+      box-shadow: 0 8px 22px rgba(24,34,38,.06);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .strong { font-weight: 820; color: var(--ink); }
+
+    .card-token {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      padding: 4px 7px 4px 4px;
+      border: 1px solid rgba(23,34,38,.16);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      vertical-align: middle;
+      outline: none;
+      box-shadow: 0 3px 12px rgba(24,34,38,.05);
+    }
+
+    .card-token .thumb {
+      width: var(--card-w);
+      height: var(--card-h);
+      flex: 0 0 var(--card-w);
+      border-radius: 4px;
+      object-fit: cover;
+      background: #e4ebe8;
+      box-shadow: 0 2px 6px rgba(0,0,0,.18);
+    }
+
+    .card-name {
+      max-width: 128px;
+      overflow-wrap: anywhere;
+      font-size: .86rem;
+      font-weight: 760;
+      line-height: 1.15;
+    }
+
+    .zoom {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      z-index: 60;
+      width: 220px;
+      max-width: 64vw;
+      padding: 6px;
+      border: 1px solid rgba(23,34,38,.18);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px) scale(.96);
+      transition: opacity .14s ease, transform .14s ease;
+      pointer-events: none;
+    }
+
+    .zoom img {
+      display: block;
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .card-token:hover .zoom,
+    .card-token:focus .zoom,
+    .card-token:focus-within .zoom {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .mini-card {
+      display: grid;
+      justify-items: center;
+      gap: 4px;
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+    }
+
+    .mini-card .card-token {
+      padding: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .mini-card .card-token .thumb {
+      width: 72px;
+      height: 105px;
+    }
+
+    .mini-card b {
+      text-align: center;
+      font-size: .82rem;
+      line-height: 1.1;
+    }
+
+    .trigger-card {
+      display: grid;
+      gap: 8px;
+      border-left: 4px solid var(--teal);
+    }
+
+    .trigger-card.red { border-left-color: var(--red); }
+    .trigger-card.gold { border-left-color: var(--gold); }
+    .trigger-card.blue { border-left-color: var(--blue); }
+
+    .trigger-pair {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 5px 8px;
+      border: 1px dashed rgba(23,34,38,.22);
+      border-radius: var(--radius);
+      background: rgba(238,244,242,.7);
+      color: #26343a;
+      font-size: .9rem;
+    }
+
+    .combo-layout {
+      display: grid;
+      grid-template-columns: minmax(230px, 310px) minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .combo-list {
+      display: grid;
+      gap: 8px;
+      position: sticky;
+      top: 66px;
+    }
+
+    .route-button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .route-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    .route-button.active .route-number { background: rgba(255,255,255,.25); }
+
+    .combo-stage { min-height: 520px; }
+
+    .combo-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .mind-map {
+      display: grid;
+      gap: 10px;
+    }
+
+    .node {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .node::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      bottom: -11px;
+      width: 2px;
+      height: 10px;
+      background: var(--line);
+    }
+
+    .node:last-child::after { display: none; }
+    .node.start { border-left: 5px solid var(--green); }
+    .node.action { border-left: 5px solid var(--teal); }
+    .node.branch { border-left: 5px solid var(--gold); }
+    .node.end { border-left: 5px solid var(--red); }
+
+    .node-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 850;
+    }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .branch-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(238,244,242,.62);
+      padding: 10px;
+    }
+
+    .endboard {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .zone {
+      min-height: 136px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .zone h3 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 2px;
+      font-size: .95rem;
+    }
+
+    .board-card-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .board-card-list .card-token {
+      padding: 3px;
+    }
+
+    .board-card-list .thumb {
+      width: 42px;
+      height: 61px;
+    }
+
+    .board-card-list .card-name { display: none; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #26343a;
+      background: #edf4f1;
+      font-size: .86rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .matchup {
+      display: grid;
+      gap: 8px;
+      min-height: 100%;
+    }
+
+    .impact {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: max-content;
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .impact.high { background: var(--red); }
+    .impact.medium { background: var(--gold); }
+    .impact.low { background: var(--blue); }
+    .impact.backfire { background: #5f5963; }
+
+    .references details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(24,34,38,.06);
+    }
+
+    .references summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 850;
+    }
+
+    .reference-body {
+      padding: 0 14px 14px;
+      color: #26343a;
+    }
+
+    .reference-body ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .reference-body li { margin: 8px 0; }
+
+    .footer-note {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .combo-layout,
+      .cols-2,
+      .cols-3,
+      .cols-4,
+      .endboard {
+        grid-template-columns: 1fr;
+      }
+
+      .combo-list {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .branch-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(100vw - 18px, 1240px); padding-top: 10px; }
+      .hero { gap: 12px; }
+      .hero-pills .pill { white-space: normal; }
+      .showcase { grid-template-columns: repeat(4, minmax(46px, 1fr)); gap: 7px; padding: 9px; }
+      .showcase .card-token .thumb { width: 50px; height: 73px; }
+      .combo-list { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .band-inner, .panel { padding: 11px; }
+      .card-token .thumb { width: 46px; height: 67px; }
+      .card-name { max-width: 105px; font-size: .8rem; }
+      th { display: none; }
+      tr {
+        display: block;
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0;
+      }
+      tr:last-child { border-bottom: none; }
+      td {
+        display: grid;
+        gap: 4px;
+        border-bottom: none;
+        padding: 6px 10px;
+      }
+      td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="icon info">i</span> Checked June 8, 2026 | TCG and Master Duel sources</div>
+        <h1>Dracotail Combo Mind Map</h1>
+        <p class="lead">A top-to-bottom cheat sheet for Dracotail: current Branded Dracotail tournament variants, public combo spreadsheet lines, core interactions, end boards, recovery, and matchup counters.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Plan</strong> midrange Fusion resource loop</span>
+          <span class="pill"><strong>Win</strong> Arthalion bounce + Gulamel removal + traps</span>
+          <span class="pill"><strong>Current top shell</strong> Branded Dracotail</span>
+          <span class="pill"><strong>Banlist pressure</strong> Ketu, Rahu, Mululu at 1; Lukias, Arthalion at 2 in TCG data</span>
+        </div>
+      </div>
+      <div class="showcase-wrap">
+        <div class="showcase" id="showcase" aria-label="Core Dracotail cards"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page navigation">
+      <a href="#playstyle">Playstyle</a>
+      <a href="#core">Core Cards</a>
+      <a href="#combos">Combo Graph</a>
+      <a href="#boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side / Counters</a>
+      <a href="#variants">Latest Tops</a>
+      <a href="#references">References</a>
+    </nav>
+
+    <section id="playstyle">
+      <div class="section-head">
+        <div>
+          <h2>Playstyle And Win Condition</h2>
+          <p class="subhead">Dracotail is not a long solitaire deck. It wins by turning each Fusion Summon into material triggers, set traps, recycled bodies, and opponent-turn Fusion pressure.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="panel">
+          <h3><span class="icon info">i</span> Main identity</h3>
+          <p>Self-contained Fusion midrange. You usually need a Dracotail name plus another monster, then you convert hand or field material into a Fusion body and a set Dracotail Spell/Trap.</p>
+          <div class="trigger-row">
+            <span class="trigger-pair"><span class="icon plus">+</span> Dtail material -> set backrow</span>
+            <span class="trigger-pair"><span class="icon plus">+</span> Trap resolves -> recycle + draw</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3><span class="icon gold">+</span> How it closes</h3>
+          <p>Arthalion returns monsters from field or GY, Gulamel threatens a pop whenever a Dracotail effect is activated, and the trap suite trades while replacing itself. Branded variants add Mirrorjade, Sanctifire, Ecclesia, and The Fallen &amp; The Virtuous.</p>
+        </div>
+        <div class="panel">
+          <h3><span class="icon plus">+</span> Current format lens</h3>
+          <p>June 2026 lists are mostly Branded Dracotail: compact Dracotail ratios, Branded Fusion or White Albaz access, Super Polymerization, and a small trap package. MDM lists a public Dracotail spreadsheet updated June 8, 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="core">
+      <div class="section-head">
+        <div>
+          <h2>Core Cards And Trigger Pairs</h2>
+          <p class="subhead">The deck is a trigger matrix. Choose the material for the disruption you need, then pick the trap that covers the matchup.</p>
+        </div>
+      </div>
+      <div class="grid cols-4">
+        <div class="panel trigger-card">
+          <h3>Starters</h3>
+          <div class="card-row" data-cards="Dracotail Lukias,Ketu Dracotail,Rahu Dracotail"></div>
+          <p class="small">Lukias searches a Dracotail monster. Ketu searches first and can fuse going second if the opponent controls a monster. Rahu fuses from hand, field, or Deck, but Fusion-locks after resolution.</p>
+        </div>
+        <div class="panel trigger-card red">
+          <h3>Quick Fusers</h3>
+          <div class="card-row" data-cards="Dracotail Faimena,Dracotail Mululu"></div>
+          <p class="small">Faimena discards from hand to Fusion Summon a Dragon or Spellcaster Fusion during either Main Phase. Mululu fuses from field into Dracotail Fusions and can add a non-targeting monster negate as material.</p>
+        </div>
+        <div class="panel trigger-card gold">
+          <h3>Material Removal</h3>
+          <div class="card-row" data-cards="Dracotail Pan,Dracotail Urgula,Dracotail Mululu"></div>
+          <p class="small">Pan destroys a monster, Urgula destroys a Spell/Trap and later recovers a Spellcaster Dracotail, and Mululu negates a face-up monster. All set Dracotail backrow when used as Fusion material.</p>
+        </div>
+        <div class="panel trigger-card blue">
+          <h3>Fusion Payoffs</h3>
+          <div class="card-row" data-cards="Dracotail Arthalion,Dracotail Gulamel,Dracotail Shaulas"></div>
+          <p class="small">Arthalion bounces or recycles, Gulamel converts Dracotail activations into destruction, and Shaulas shuffles same-type cards from GY plus a face-up card. Fusion bodies can revive when two or more monsters hit the GY at once.</p>
+        </div>
+      </div>
+      <div class="band" style="margin-top:12px;">
+        <div class="band-inner">
+          <h3>Trap Selection</h3>
+          <div class="grid cols-3">
+            <div>
+              <div class="card-row" data-cards="Dracotail Flame"></div>
+              <p class="small"><span class="strong">Flame</span> negates a face-up Spell, then can recycle a Dracotail card from GY/banishment to draw.</p>
+            </div>
+            <div>
+              <div class="card-row" data-cards="Dracotail Horn"></div>
+              <p class="small"><span class="strong">Horn</span> returns an Attack Position monster to hand or Extra Deck, then can recycle and draw.</p>
+            </div>
+            <div>
+              <div class="card-row" data-cards="Dracotail Sting"></div>
+              <p class="small"><span class="strong">Sting</span> banishes a monster and/or Spell/Trap from the opponent's GY, then can recycle and draw.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="section-head">
+        <div>
+          <h2>Core Combos As A Graph</h2>
+          <p class="subhead">Click a route to explore its branch points. The graph shows what cards trigger together and what the route is trying to leave by End Phase.</p>
+        </div>
+      </div>
+      <div class="combo-layout">
+        <div class="combo-list panel" id="comboTabs" aria-label="Combo route tabs"></div>
+        <div class="combo-stage panel" id="comboStage" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="boards">
+      <div class="section-head">
+        <div>
+          <h2>End Board Examples</h2>
+          <p class="subhead">Treat these as field-state templates, not mandatory end states. Choose traps and Fusion targets by matchup and known hand interaction.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="panel">
+          <h3>Pure Lukias / Ketu Starter</h3>
+          <div class="endboard">
+            <div class="zone"><h3>Field</h3><div class="board-card-list" data-cards="Dracotail Arthalion,Dracotail Gulamel"></div></div>
+            <div class="zone"><h3>Backrow</h3><div class="board-card-list" data-cards="Dracotail Flame,Dracotail Horn,Dracotail Sting"></div></div>
+            <div class="zone"><h3>Hand</h3><div class="board-card-list" data-cards="Dracotail Faimena"></div><p class="small">Opponent-turn Fusion access.</p></div>
+            <div class="zone"><h3>GY</h3><div class="board-card-list" data-cards="Dracotail Urgula"></div><p class="small">Recover Faimena or Lukias.</p></div>
+            <div class="zone"><h3>End Phase</h3><p class="small">Two to three interrupts plus draw/recycle if traps resolve.</p></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Branded Dracotail Top Shell</h3>
+          <div class="endboard">
+            <div class="zone"><h3>Field</h3><div class="board-card-list" data-cards="Mirrorjade the Iceblade Dragon,Dracotail Gulamel,Ecclesia and the Dark Dragon"></div></div>
+            <div class="zone"><h3>Backrow</h3><div class="board-card-list" data-cards="The Fallen & The Virtuous,Dracotail Flame,Dracotail Sting"></div></div>
+            <div class="zone"><h3>Hand</h3><div class="board-card-list" data-cards="Dracotail Faimena"></div></div>
+            <div class="zone"><h3>GY</h3><div class="board-card-list" data-cards="Albion the Branded Dragon,Dracotail Arthalion"></div></div>
+            <div class="zone"><h3>End Phase</h3><p class="small">Albion follow-up plus Fusion pressure. Keep field lean into mirror Super Poly and Alba-Lenatus.</p></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Ketu Going Second</h3>
+          <div class="endboard">
+            <div class="zone"><h3>Field</h3><div class="board-card-list" data-cards="Dracotail Arthalion,Dracotail Gulamel"></div></div>
+            <div class="zone"><h3>Material Hit</h3><div class="board-card-list" data-cards="Dracotail Pan,Dracotail Urgula,Dracotail Mululu"></div></div>
+            <div class="zone"><h3>Backrow</h3><div class="board-card-list" data-cards="Dracotail Horn,Dracotail Sting"></div></div>
+            <div class="zone"><h3>Hand</h3><div class="board-card-list" data-cards="Dracotail Faimena,Ketu Dracotail"></div></div>
+            <div class="zone"><h3>End Phase</h3><p class="small">Break board first, then preserve Faimena or trap follow-up for turn three.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div>
+          <h2>Tips</h2>
+          <p class="subhead">Sequencing matters more than memorizing one exact line.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="panel">
+          <h3>Sequence around locks</h3>
+          <p>Rahu locks Extra Deck summons to Fusions after it resolves. Mululu also locks you after its Fusion effect. Make Link/Synchro setup first if your line needs it.</p>
+        </div>
+        <div class="panel">
+          <h3>Protect Faimena economy</h3>
+          <p>Use Arthalion and Urgula to put Faimena back in hand. Holding Faimena changes the opponent's Main Phase because every Dragon or Spellcaster Fusion becomes live.</p>
+        </div>
+        <div class="panel">
+          <h3>Pick traps by matchup</h3>
+          <p>Flame is strongest into Spell starters, Horn into board pieces and Extra Deck monsters, Sting into GY decks. Traps recycle and draw, but their draw/recycle text makes Ash and Belle relevant.</p>
+        </div>
+        <div class="panel">
+          <h3>Material is interaction</h3>
+          <p>Do not fuse a random Dracotail if the board asks for Pan, Urgula, or Mululu. The material you send determines whether you pop a monster, pop backrow, or negate.</p>
+        </div>
+        <div class="panel">
+          <h3>Do not overextend in mirror</h3>
+          <p>MDM combo notes warn that extra bodies can expose boards to Super Polymerization and Alba-Lenatus lines. A lean Gulamel plus Ecclesia or Mirrorjade setup is often safer.</p>
+        </div>
+        <div class="panel">
+          <h3>Bait high-impact stops</h3>
+          <p>MDM counter data marks Ash on Rahu/Ketu as high impact. If you can lead with a lower-value search or Branded line first, do it before committing the card that must resolve.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div>
+          <h2>Recovery Options</h2>
+          <p class="subhead">The deck's grind comes from bottom-deck recycling, GY revive triggers, and reusing Lukias/Faimena.</p>
+        </div>
+      </div>
+      <div class="grid cols-4">
+        <div class="panel">
+          <div class="card-row" data-cards="Dracotail Flame,Dracotail Horn,Dracotail Sting"></div>
+          <h3>Trap loop</h3>
+          <p class="small">Each trap can place a Dracotail card from GY or banishment on the bottom of the Deck, then draw. This keeps one-of traps searchable without clogging hands.</p>
+        </div>
+        <div class="panel">
+          <div class="card-row" data-cards="Dracotail Urgula,Dracotail Faimena"></div>
+          <h3>Urgula recycle</h3>
+          <p class="small">Urgula returns itself to the bottom of the Deck to add back a Spellcaster Dracotail from GY, most often Faimena or Lukias.</p>
+        </div>
+        <div class="panel">
+          <div class="card-row" data-cards="Dracotail Pan,Dracotail Lukias,Dracotail Phryxul"></div>
+          <h3>Pan float</h3>
+          <p class="small">When an opponent destroys your face-up Fusion by card effect, Pan can bottom itself to revive a non-Fusion Dracotail. Lukias and Phryxul generate the best follow-up.</p>
+        </div>
+        <div class="panel">
+          <div class="card-row" data-cards="Dracotail Arthalion,Dracotail Gulamel,Dracotail Shaulas"></div>
+          <h3>Fusion bodies return</h3>
+          <p class="small">If two or more monsters are sent to the GY at the same time, Dracotail Fusion monsters can Special Summon themselves from GY. If they leave after that, they get banished.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="side">
+      <div class="section-head">
+        <div>
+          <h2>Side Deck Options And Counters</h2>
+          <p class="subhead">This section includes cards to side in Dracotail, plus known counter cards against Dracotail from MDM's public counter data.</p>
+        </div>
+      </div>
+      <div class="grid cols-2">
+        <div class="panel">
+          <h3>Side options for Dracotail pilots</h3>
+          <table>
+            <thead><tr><th>Matchup / problem</th><th>Cards</th><th>Use case</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Matchup / problem">Mirror, Branded, Fusion boards</td>
+                <td data-label="Cards"><div class="card-row" data-cards="Super Polymerization,Dracotail Horn,The Fallen & The Virtuous,Ghost Belle & Haunted Mansion"></div></td>
+                <td data-label="Use case">Answer opposing Fusion bodies, punish GY recursion, and keep Horn for Attack Position boss monsters.</td>
+              </tr>
+              <tr>
+                <td data-label="Matchup / problem">GY engines: Maliss, Orcust, Branded</td>
+                <td data-label="Cards"><div class="card-row" data-cards="Dracotail Sting,D.D. Crow,Bystial Magnamhut,Called by the Grave"></div></td>
+                <td data-label="Use case">Sting is searchable; side extra GY stops when the matchup can out-grind your trap loop.</td>
+              </tr>
+              <tr>
+                <td data-label="Matchup / problem">Combo decks and known Extra Deck types</td>
+                <td data-label="Cards"><div class="card-row" data-cards="Dimensional Barrier,Nibiru, the Primal Being,Infinite Impermanence,Effect Veiler"></div></td>
+                <td data-label="Use case">D Barrier is strongest when you know the summon type. Hand traps are also Fusion material when they are dead.</td>
+              </tr>
+              <tr>
+                <td data-label="Matchup / problem">Backrow or established boards</td>
+                <td data-label="Cards"><div class="card-row" data-cards="Harpie's Feather Duster,Lightning Storm,Forbidden Droplet,Triple Tactics Thrust"></div></td>
+                <td data-label="Use case">Thrust finds breakers or engine spells after interaction. Droplet turns spare monsters into clean board pressure.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h3>Counters against Dracotail</h3>
+          <table>
+            <thead><tr><th>Impact</th><th>Cards</th><th>Chokepoint</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="Impact"><span class="impact high">High</span></td>
+                <td data-label="Cards"><div class="card-row" data-cards="Dimensional Barrier,Dimension Shifter,Retaliating &quot;C&quot;,Ash Blossom & Joyous Spring"></div></td>
+                <td data-label="Chokepoint">Chain D Barrier to Fusion effects; Shifter/Retaliating "C" pressure material-to-GY triggers; Ash is best on Rahu or Ketu when Ketu is live.</td>
+              </tr>
+              <tr>
+                <td data-label="Impact"><span class="impact medium">Medium</span></td>
+                <td data-label="Cards"><div class="card-row" data-cards="Maxx &quot;C&quot;,Mulcharmy Fuwalos,Contact &quot;C&quot;,Infinite Impermanence"></div></td>
+                <td data-label="Chokepoint">Maxx "C" and Fuwalos tax Faimena/Rahu lines. Contact "C" is best after the Fusion lock. Imperm/Veiler/Mourner point at Arthalion.</td>
+              </tr>
+              <tr>
+                <td data-label="Impact"><span class="impact low">Low</span></td>
+                <td data-label="Cards"><div class="card-row" data-cards="Droll & Lock Bird,Effect Veiler,Ghost Mourner & Moonlit Chill"></div></td>
+                <td data-label="Chokepoint">Droll punishes greedy Lukias/Ketu search chains, but one clean Fusion can still leave traps. Use Veiler/Mourner when Arthalion must not resolve.</td>
+              </tr>
+              <tr>
+                <td data-label="Impact"><span class="impact backfire">Backfire</span></td>
+                <td data-label="Cards"><div class="card-row" data-cards="Mulcharmy Purulia"></div></td>
+                <td data-label="Chokepoint">MDM flags Purulia as a backfire into Mululu because the line can play through it awkwardly for the defender.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="variants">
+      <div class="section-head">
+        <div>
+          <h2>Latest Tournament Top Variants</h2>
+          <p class="subhead">The latest public YGOPRODeck listings around June 8, 2026 are dominated by Branded Dracotail, with a compact Dracotail core and Branded/Dogmatika support.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <div class="panel">
+          <h3>Khalil Afaneh, Mobile WCQ Regional Top 8</h3>
+          <p class="small">Tournament date: June 6, 2026. Published June 7, 2026. 41-card Branded Dracotail.</p>
+          <div class="card-row" data-cards="Dracotail Faimena,Dracotail Lukias,Ketu Dracotail,Rahu Dracotail,Aluber the Jester of Despia,Fallen of the White Dragon,The Fallen & The Virtuous,Super Polymerization"></div>
+          <p class="small">Signals: 3 Faimena, 2 Lukias, 1 each Ketu/Rahu/Mululu/Urgula/Pan, 2 Arthalion, 3 The Fallen &amp; The Virtuous, 3 Super Polymerization.</p>
+        </div>
+        <div class="panel">
+          <h3>Jesse Kotton, YCS Columbus 1st Place</h3>
+          <p class="small">Tournament date: May 23, 2026. 40-card Branded Dracotail winner.</p>
+          <div class="card-row" data-cards="Branded Fusion,Branded Opening,Branded in High Spirits,Dracotail Flame,Dracotail Sting,Dracotail Horn,Mirrorjade the Iceblade Dragon,Dracotail Arthalion"></div>
+          <p class="small">Signals: same compact Dracotail core, Branded Opening, Branded in High Spirits, Super Poly, and Horn in the Side Deck.</p>
+        </div>
+        <div class="panel">
+          <h3>Other June 2026 tops</h3>
+          <p>YGOPRODeck's Dracotail category also listed Germany National Top 8, Springfield Regional runner-up, Spanish Fork Top 4, Croatia Nationals winner, Hong Kong Qualifier Top 8, and Houston Regional winner Branded Dracotail results in the same window.</p>
+          <div class="source-tags">
+            <span class="chip"><strong>Shell</strong> Branded Dracotail</span>
+            <span class="chip"><strong>MDM</strong> 29 deck breakdowns</span>
+            <span class="chip"><strong>Avg main</strong> 40 cards</span>
+            <span class="chip"><strong>Power</strong> 6.5 tournamentPower</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="references" class="references">
+      <details>
+        <summary><span class="icon info">i</span> Hidden references used to build this cheat sheet</summary>
+        <div class="reference-body">
+          <ul>
+            <li><a href="https://ygoprodeck.com/category/type/dracotail">YGOPRODeck Dracotail deck category</a>. Used for latest June 2026 tournament-top context: Mobile, Germany Nationals, Springfield, Spanish Fork, Croatia Nationals, Hong Kong Qualifier, and Houston results.</li>
+            <li><a href="https://ygoprodeck.com/deck/branded-dracotail-715419">YGOPRODeck: Branded Dracotail, Khalil Afaneh, Mobile WCQ Regional Top 8, June 6, 2026</a>. Used for current 41-card top variant ratios and Side Deck snapshot.</li>
+            <li><a href="https://ygoprodeck.com/deck/branded-dracotail-713072">YGOPRODeck: Branded Dracotail, Jesse Kotton, YCS Columbus 1st Place, May 23, 2026</a>. Used for the winning Branded Dracotail shell and Horn side signal.</li>
+            <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Dracotail">YGOPRODeck Card API: Dracotail archetype</a>. Used for card IDs, card text summaries, image URLs, and YGOPRODeck banlist metadata.</li>
+            <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta: Combos &amp; Counters</a>. Used for public Dracotail combo, counter, and spreadsheet data. The public Dracotail spreadsheet by jeewon was created June 8, 2026 and updated June 8, 2026.</li>
+            <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Dracotail?engine=Dracotail">Master Duel Meta: Dracotail Deck Breakdown</a>. Used for live deck breakdown values, sample deck context, and current Master Duel combo labels.</li>
+            <li><a href="https://www.masterduelmeta.com/articles/guides/dracotail-guide/">Master Duel Meta: Introduction to Dracotail</a>. Used for playstyle framing: midrange Fusion engine, Faimena economy, material triggers, trap loop, and weaknesses to GY hate and Normal Summon pressure.</li>
+            <li><a href="https://www.tcgplayer.com/content/article/Dracotail-Advanced-Format-Yu-Gi-Oh-Deck-Guide/4cb10373-8420-4082-a3dc-665ff6244736/">TCGplayer: Dracotail Advanced Format Yu-Gi-Oh Deck Guide</a>. Used for the detailed Lukias/Faimena into Arthalion/Rahu/Urgula/Gulamel base combo and card-role explanations.</li>
+            <li><a href="https://www.opencombocodex.com/">Open Combo Codex</a> and <a href="https://github.com/Siebe-Uy/Open-Combo-Codex/tree/main/content/combos/dracotail">Open Combo Codex Dracotail Markdown files</a>. Used for public route structure: Lukias Search into Faimena Setup and Ketu Going-Second Fusion.</li>
+            <li><a href="https://metafy.gg/guides/view/dracotail-spreadsheet-1d7fPhp5L6N">Metafy: Dracotail Spreadsheet listing</a>. Used only to note that a paid Dracotail spreadsheet exists; its gated contents were not used.</li>
+            <li><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/">Official Yu-Gi-Oh! TCG Forbidden &amp; Limited Lists, effective May 18, 2026</a>. Used for the current-list date context; Dracotail card-limit display was cross-checked through YGOPRODeck card metadata.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <p class="footer-note">Card images load directly from YGOPRODeck using the requested URL pattern: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg.</p>
+  </main>
+
+  <script>
+    const cardMap = {
+      "Dracotail Arthalion": { id: "33760966", short: "Arthalion" },
+      "Dracotail Faimena": { id: "1498449", short: "Faimena" },
+      "Dracotail Flame": { id: "5431722", short: "Flame" },
+      "Dracotail Gulamel": { id: "79755671", short: "Gulamel" },
+      "Dracotail Horn": { id: "69932023", short: "Horn" },
+      "Dracotail Lukias": { id: "75003700", short: "Lukias" },
+      "Dracotail Mululu": { id: "7375867", short: "Mululu" },
+      "Dracotail Pan": { id: "44482554", short: "Pan" },
+      "Dracotail Phryxul": { id: "84477320", short: "Phryxul" },
+      "Dracotail Shaulas": { id: "42125140", short: "Shaulas" },
+      "Dracotail Sting": { id: "80208225", short: "Sting" },
+      "Dracotail Urgula": { id: "70871153", short: "Urgula" },
+      "Ketu Dracotail": { id: "6153210", short: "Ketu" },
+      "Rahu Dracotail": { id: "32548318", short: "Rahu" },
+      "Aluber the Jester of Despia": { id: "62962630", short: "Aluber" },
+      "Fallen of the White Dragon": { id: "73819701", short: "White Albaz" },
+      "Fallen of Albaz": { id: "68468459", short: "Albaz" },
+      "Branded Fusion": { id: "44362883", short: "Branded Fusion" },
+      "Branded Opening": { id: "36637374", short: "Opening" },
+      "Branded in High Spirits": { id: "29948294", short: "High Spirits" },
+      "The Fallen & The Virtuous": { id: "30271097", short: "Fallen & Virtuous" },
+      "Blazing Cartesia, the Virtuous": { id: "95515789", short: "Cartesia" },
+      "Guiding Quem, the Virtuous": { id: "45883110", short: "Quem" },
+      "Incredible Ecclesia, the Virtuous": { id: "55273560", short: "Ecclesia" },
+      "Bystial Magnamhut": { id: "33854624", short: "Magnamhut" },
+      "Albion the Branded Dragon": { id: "87746184", short: "Albion" },
+      "Mirrorjade the Iceblade Dragon": { id: "44146295", short: "Mirrorjade" },
+      "Lubellion the Searing Dragon": { id: "70534340", short: "Lubellion" },
+      "Alba-Lenatus the Abyss Dragon": { id: "3410461", short: "Alba-Lenatus" },
+      "Granguignol the Dusk Dragon": { id: "24915933", short: "Granguignol" },
+      "Titaniklad the Ash Dragon": { id: "41373230", short: "Titaniklad" },
+      "Rindbrumm the Striking Dragon": { id: "51409648", short: "Rindbrumm" },
+      "The Dragon that Devours the Dogma": { id: "76666602", short: "Dogma Dragon" },
+      "Khaos Starsource Dragon": { id: "72578374", short: "Khaos" },
+      "Secreterion Dragon": { id: "89851827", short: "Secreterion" },
+      "Ecclesia and the Dark Dragon": { id: "78397661", short: "ED Ecclesia" },
+      "Albion the Sanctifire Dragon": { id: "38811586", short: "Sanctifire" },
+      "S:P Little Knight": { id: "29301450", short: "S:P" },
+      "Super Polymerization": { id: "48130397", short: "Super Poly" },
+      "Dimensional Barrier": { id: "83326048", short: "D Barrier" },
+      "Dimension Shifter": { id: "91800273", short: "Shifter" },
+      "Retaliating \"C\"": { id: "46502744", short: "Retal C" },
+      "Ash Blossom & Joyous Spring": { id: "14558127", short: "Ash" },
+      "Maxx \"C\"": { id: "23434538", short: "Maxx C" },
+      "Mulcharmy Fuwalos": { id: "42141493", short: "Fuwalos" },
+      "Mulcharmy Purulia": { id: "84192580", short: "Purulia" },
+      "Mulcharmy Meowls": { id: "87126721", short: "Meowls" },
+      "Contact \"C\"": { id: "87170768", short: "Contact C" },
+      "Droll & Lock Bird": { id: "94145021", short: "Droll" },
+      "Infinite Impermanence": { id: "10045474", short: "Imperm" },
+      "Effect Veiler": { id: "97268402", short: "Veiler" },
+      "Ghost Mourner & Moonlit Chill": { id: "52038441", short: "Mourner" },
+      "Ghost Belle & Haunted Mansion": { id: "73642296", short: "Belle" },
+      "Harpie's Feather Duster": { id: "18144507", short: "Duster" },
+      "Lightning Storm": { id: "14532163", short: "Storm" },
+      "Forbidden Droplet": { id: "24299458", short: "Droplet" },
+      "Nadir Servant": { id: "1984618", short: "Nadir" },
+      "Illusion Gate": { id: "33017964", short: "Illusion Gate" },
+      "Called by the Grave": { id: "24224830", short: "Called By" },
+      "Triple Tactics Talent": { id: "25311006", short: "Talent" },
+      "Triple Tactics Thrust": { id: "35269904", short: "Thrust" },
+      "Artifact Lancea": { id: "34267821", short: "Lancea" },
+      "Nibiru, the Primal Being": { id: "27204311", short: "Nibiru" },
+      "D.D. Crow": { id: "24508238", short: "D.D. Crow" }
+    };
+
+    const routes = [
+      {
+        title: "Lukias / Ketu + any monster",
+        meta: "Public spreadsheet OG starter. TCGplayer base line.",
+        summary: "Turns search access into Arthalion, Rahu, Gulamel, two traps, and Faimena back in hand.",
+        nodes: [
+          { type: "start", title: "Open starter", cards: ["Dracotail Lukias", "Ketu Dracotail"], text: "Normal Summon Lukias or use Ketu to reach Lukias. Add Dracotail Faimena." },
+          { type: "action", title: "Faimena Quick Fusion", cards: ["Dracotail Faimena", "Dracotail Lukias", "Dracotail Arthalion"], text: "Discard Faimena. Fuse Lukias plus any hand monster into Arthalion. Lukias sets Rahu." },
+          { type: "branch", title: "Arthalion recovers Faimena", cards: ["Dracotail Arthalion", "Dracotail Faimena"], text: "Arthalion targets Faimena in GY and returns it to hand. This keeps opponent-turn Fusion live." },
+          { type: "action", title: "Rahu converts Deck material", cards: ["Rahu Dracotail", "Dracotail Urgula", "Dracotail Gulamel"], text: "Activate Rahu. Use Faimena from hand and Urgula from Deck to Fusion Summon Gulamel." },
+          { type: "end", title: "Set traps and reload", cards: ["Dracotail Flame", "Dracotail Horn", "Dracotail Sting", "Dracotail Faimena"], text: "Faimena and Urgula set the best two traps. Urgula can return Faimena to hand for the next Main Phase." }
+        ],
+        branches: [
+          { title: "Spell-heavy matchup", cards: ["Dracotail Flame"], text: "Set Flame first if their starter or breaker is a face-up Spell." },
+          { title: "Monster tempo", cards: ["Dracotail Horn"], text: "Set Horn when bouncing a boss or Extra Deck monster matters more than GY hate." },
+          { title: "GY pressure", cards: ["Dracotail Sting"], text: "Set Sting into Branded, Maliss, Orcust, and other GY-loop decks." }
+        ],
+        board: ["Dracotail Arthalion", "Dracotail Gulamel", "Dracotail Flame", "Dracotail Horn", "Dracotail Faimena"]
+      },
+      {
+        title: "Rahu + any monster",
+        meta: "MDM public spreadsheet: one-card-combo tab.",
+        summary: "Reverse route: Rahu loads the Dracotail name from Deck, then Arthalion or Ketu recovers the missing piece.",
+        nodes: [
+          { type: "start", title: "Open Rahu plus material", cards: ["Rahu Dracotail"], text: "Activate Rahu with any monster available. Remember the Fusion-only Extra Deck lock after it resolves." },
+          { type: "action", title: "Send the right Deck name", cards: ["Dracotail Faimena", "Dracotail Lukias", "Dracotail Urgula"], text: "Send Faimena or Lukias when you need follow-up; send Urgula if you need backrow removal or Faimena recovery." },
+          { type: "branch", title: "Set Ketu or trap", cards: ["Ketu Dracotail", "Dracotail Flame", "Dracotail Sting"], text: "The material trigger sets Ketu if you need the missing monster, or sets a trap if the route already has follow-up." },
+          { type: "action", title: "Arthalion returns the sent name", cards: ["Dracotail Arthalion", "Dracotail Faimena"], text: "Arthalion can return the Deck-sent Dracotail from GY to hand if hand materials were used." },
+          { type: "end", title: "Continue into Gulamel", cards: ["Dracotail Gulamel", "Dracotail Faimena", "Dracotail Flame"], text: "If you can keep Faimena live, convert the next Fusion into Gulamel and a trap loop." }
+        ],
+        branches: [
+          { title: "Ash risk", cards: ["Ash Blossom & Joyous Spring", "Rahu Dracotail"], text: "MDM marks Ash on Rahu as high impact. Bait it first if your hand allows." },
+          { title: "Going second", cards: ["Dracotail Pan", "Dracotail Urgula"], text: "Use Pan or Urgula as the Deck material when the board needs immediate removal." },
+          { title: "No field clutter", cards: ["Dracotail Arthalion"], text: "Arthalion recovery can be stronger than putting extra bodies into Super Poly." }
+        ],
+        board: ["Dracotail Arthalion", "Dracotail Gulamel", "Ketu Dracotail", "Dracotail Flame", "Dracotail Faimena"]
+      },
+      {
+        title: "Ketu going second",
+        meta: "Open Combo Codex route plus MDM spreadsheet.",
+        summary: "Ketu searches before choosing its optional Fusion line, so it is the cleanest board-state checklist.",
+        nodes: [
+          { type: "start", title: "Opponent controls a monster", cards: ["Ketu Dracotail"], text: "Activate Ketu to add the missing Dracotail monster. Ketu can only Fusion Summon if the opponent controls a monster." },
+          { type: "branch", title: "Pick material by removal type", cards: ["Dracotail Pan", "Dracotail Urgula", "Dracotail Mululu"], text: "Pan destroys a monster, Urgula destroys a Spell/Trap, and Mululu negates a face-up monster." },
+          { type: "action", title: "Choose Fusion payoff", cards: ["Dracotail Arthalion", "Dracotail Gulamel"], text: "Arthalion bounces field/GY monsters. Gulamel is better if you have more Dracotail activations after the summon." },
+          { type: "end", title: "Keep the trap loop live", cards: ["Dracotail Horn", "Dracotail Sting", "Dracotail Flame"], text: "Set the trap that covers what survived. Do not forget the recycle and draw line after the trap resolves." }
+        ],
+        branches: [
+          { title: "Boss monster", cards: ["Dracotail Pan", "Dracotail Horn"], text: "Pan pop plus Horn bounce clears two monster layers if both are live." },
+          { title: "Backrow", cards: ["Dracotail Urgula", "Dracotail Flame"], text: "Urgula removes a Spell/Trap and Flame can handle a follow-up face-up Spell." },
+          { title: "Effect monster", cards: ["Dracotail Mululu", "Dracotail Gulamel"], text: "Mululu negate plus Gulamel pop is the highest pressure if you can trigger Gulamel again." }
+        ],
+        board: ["Ketu Dracotail", "Dracotail Arthalion", "Dracotail Gulamel", "Dracotail Pan", "Dracotail Urgula"]
+      },
+      {
+        title: "Mululu + any monster",
+        meta: "MDM one-card-combo tab.",
+        summary: "Low-ceiling but compact. It plays around Droll better than search-heavy routes and creates Flame access.",
+        nodes: [
+          { type: "start", title: "Put Mululu on field", cards: ["Dracotail Mululu"], text: "Mululu must be on field to use its Quick Effect Fusion." },
+          { type: "action", title: "Fuse into a Dracotail Fusion", cards: ["Dracotail Mululu", "Dracotail Gulamel"], text: "Use Mululu plus any monster to summon Gulamel or Arthalion. You are locked into Fusions afterward." },
+          { type: "branch", title: "Mululu material trigger", cards: ["Dracotail Mululu", "Dracotail Flame"], text: "Mululu sets a Dracotail Spell/Trap, usually Flame, and can negate one face-up opponent monster." },
+          { type: "end", title: "Stabilize, then climb", cards: ["Dracotail Gulamel", "Rahu Dracotail", "Dracotail Pan"], text: "If you can access Rahu afterward, use Pan or Urgula as the next material to add removal." }
+        ],
+        branches: [
+          { title: "Droll-proof line", cards: ["Droll & Lock Bird", "Dracotail Mululu"], text: "This route can avoid a long search chain." },
+          { title: "Purulia warning", cards: ["Mulcharmy Purulia", "Dracotail Mululu"], text: "MDM marks Purulia as backfire into Mululu lines." },
+          { title: "Low ceiling", cards: ["Dracotail Flame"], text: "Good when all you need is a body plus Flame, weak when you need layered boards." }
+        ],
+        board: ["Dracotail Gulamel", "Dracotail Mululu", "Dracotail Flame", "Dracotail Pan"]
+      },
+      {
+        title: "Branded Fusion bridge",
+        meta: "MDM spreadsheet and current TCG top shell.",
+        summary: "Branded Fusion acts like extra access to Dracotail movement by sending Albaz plus a useful Dracotail or support piece.",
+        nodes: [
+          { type: "start", title: "Resolve Branded Fusion", cards: ["Branded Fusion", "Fallen of Albaz"], text: "Send Fallen of Albaz plus Phryxul, Mululu, or a Branded/Dogmatika support piece depending on hand." },
+          { type: "action", title: "Bridge through Albion/Lubellion", cards: ["Albion the Branded Dragon", "Lubellion the Searing Dragon"], text: "Make the Branded Fusion body that unlocks Mirrorjade, Sanctifire, or a Dracotail follow-up line." },
+          { type: "branch", title: "Phryxul or Dracotail material starts engine", cards: ["Dracotail Phryxul", "Ketu Dracotail", "Rahu Dracotail"], text: "Using a Dracotail as material sets Ketu, Rahu, or a trap, letting the Branded line become Dracotail pressure." },
+          { type: "action", title: "Layer current support", cards: ["Fallen of the White Dragon", "The Fallen & The Virtuous", "Ecclesia and the Dark Dragon"], text: "June 2026 lists use White Albaz and The Fallen & The Virtuous as extra pressure and interaction." },
+          { type: "end", title: "Hybrid board", cards: ["Mirrorjade the Iceblade Dragon", "Dracotail Arthalion", "Dracotail Flame", "Dracotail Sting"], text: "End on Branded removal plus Dracotail traps and Faimena or GY Fusion follow-up." }
+        ],
+        branches: [
+          { title: "Mirrorjade route", cards: ["Mirrorjade the Iceblade Dragon"], text: "Best when banish pressure is required." },
+          { title: "Sanctifire route", cards: ["Albion the Sanctifire Dragon"], text: "MDM spreadsheet has several Sanctifire-required lines." },
+          { title: "Secreterion route", cards: ["Secreterion Dragon"], text: "Common bridge card in latest spreadsheet and top lists." }
+        ],
+        board: ["Mirrorjade the Iceblade Dragon", "Dracotail Arthalion", "The Fallen & The Virtuous", "Dracotail Flame", "Dracotail Faimena"]
+      },
+      {
+        title: "White Albaz + Dracotail",
+        meta: "MDM public spreadsheet 2-card-combo tab.",
+        summary: "Fallen of the White Dragon plus a Dracotail name is the current branded-support line in Master Duel data.",
+        nodes: [
+          { type: "start", title: "Open White Albaz plus Dtail", cards: ["Fallen of the White Dragon", "Dracotail Lukias", "Dracotail Mululu"], text: "Special Summoning White Albaz is safer into Fuwalos, but it limits the Extra Deck to Level 8 Fusion/Synchro for the turn." },
+          { type: "action", title: "Summon Ecclesia line", cards: ["Incredible Ecclesia, the Virtuous", "Ecclesia and the Dark Dragon"], text: "White Albaz can bring Ecclesia access, then ED Ecclesia creates opponent-turn positioning." },
+          { type: "branch", title: "Add Dracotail fuser", cards: ["Dracotail Faimena", "Blazing Cartesia, the Virtuous"], text: "Use Faimena and Cartesia to keep Fusion effects live without overcommitting monsters." },
+          { type: "end", title: "Lean hybrid endpoint", cards: ["The Fallen & The Virtuous", "Dracotail Gulamel", "Dracotail Flame", "Dracotail Sting"], text: "MDM notes favor lean boards that play around mirror Super Poly and Alba-Lenatus." }
+        ],
+        branches: [
+          { title: "Walbaz + Mululu", cards: ["Fallen of the White Dragon", "Dracotail Mululu"], text: "Leaves Secreterion, ED Ecclesia, Cartesia, Faimena, and traps in spreadsheet lines." },
+          { title: "Walbaz + Lukias/Ketu", cards: ["Fallen of the White Dragon", "Dracotail Lukias", "Ketu Dracotail"], text: "Search route with strong trap access." },
+          { title: "Walbaz + Cartesia", cards: ["Fallen of the White Dragon", "Blazing Cartesia, the Virtuous"], text: "Sanctifire line with The Fallen & The Virtuous and Flame." }
+        ],
+        board: ["Fallen of the White Dragon", "Ecclesia and the Dark Dragon", "The Fallen & The Virtuous", "Dracotail Gulamel", "Dracotail Sting"]
+      }
+    ];
+
+    function imageUrl(id) {
+      return `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
+    }
+
+    function card(name, labelOverride) {
+      const item = cardMap[name] || { id: "", short: name };
+      if (!item.id) {
+        return `<span class="chip">${escapeHtml(labelOverride || item.short || name)}</span>`;
+      }
+      const label = labelOverride || item.short || name;
+      const src = imageUrl(item.id);
+      return `<span class="card-token" tabindex="0" title="${escapeHtml(name)}">
+        <img class="thumb" src="${src}" alt="${escapeHtml(name)}" loading="lazy">
+        <span class="zoom"><img src="${src}" alt="${escapeHtml(name)} large preview" loading="lazy"></span>
+        <span class="card-name">${escapeHtml(label)}</span>
+      </span>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function cardsHtml(names) {
+      return names.map((name) => card(name)).join("");
+    }
+
+    function parseCardList(raw) {
+      const names = [];
+      let remaining = String(raw || "").trim();
+      const knownNames = Object.keys(cardMap).sort((a, b) => b.length - a.length);
+      while (remaining) {
+        remaining = remaining.replace(/^[,\s]+/, "");
+        const match = knownNames.find((name) => remaining === name || remaining.startsWith(`${name},`));
+        if (match) {
+          names.push(match);
+          remaining = remaining.slice(match.length);
+        } else {
+          const nextComma = remaining.indexOf(",");
+          const fallback = (nextComma === -1 ? remaining : remaining.slice(0, nextComma)).trim();
+          if (fallback) names.push(fallback);
+          remaining = nextComma === -1 ? "" : remaining.slice(nextComma + 1);
+        }
+      }
+      return names;
+    }
+
+    function renderStaticCards() {
+      document.getElementById("showcase").innerHTML = [
+        "Dracotail Lukias",
+        "Dracotail Faimena",
+        "Dracotail Arthalion",
+        "Dracotail Gulamel",
+        "Ketu Dracotail",
+        "Rahu Dracotail",
+        "Dracotail Flame",
+        "The Fallen & The Virtuous"
+      ].map((name) => `<div class="mini-card">${card(name)}<b>${escapeHtml(cardMap[name].short)}</b></div>`).join("");
+
+      document.querySelectorAll("[data-cards]").forEach((el) => {
+        const names = parseCardList(el.getAttribute("data-cards"));
+        el.innerHTML = cardsHtml(names);
+      });
+    }
+
+    function renderComboTabs() {
+      const tabs = document.getElementById("comboTabs");
+      tabs.innerHTML = routes.map((route, index) => `
+        <button class="route-button${index === 0 ? " active" : ""}" type="button" data-route="${index}" aria-selected="${index === 0 ? "true" : "false"}">
+          <span class="route-number">${index + 1}</span>
+          <span><strong>${escapeHtml(route.title)}</strong><br><span class="small">${escapeHtml(route.meta)}</span></span>
+        </button>
+      `).join("");
+      tabs.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => renderCombo(Number(button.dataset.route)));
+      });
+      renderCombo(0);
+    }
+
+    function renderCombo(index) {
+      document.querySelectorAll(".route-button").forEach((button) => {
+        const isActive = Number(button.dataset.route) === index;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+      });
+
+      const route = routes[index];
+      const stage = document.getElementById("comboStage");
+      const nodes = route.nodes.map((node, nodeIndex) => `
+        <div class="node ${escapeHtml(node.type)}">
+          <div class="node-title"><span class="icon ${node.type === "end" ? "plus" : node.type === "branch" ? "gold" : "info"}">${node.type === "branch" ? "+" : "i"}</span>${nodeIndex + 1}. ${escapeHtml(node.title)}</div>
+          <div class="card-row">${cardsHtml(node.cards)}</div>
+          <p class="small">${escapeHtml(node.text)}</p>
+        </div>
+      `).join("");
+      const branches = route.branches.map((branch) => `
+        <div class="branch-box">
+          <h3>${escapeHtml(branch.title)}</h3>
+          <div class="card-row">${cardsHtml(branch.cards)}</div>
+          <p class="small">${escapeHtml(branch.text)}</p>
+        </div>
+      `).join("");
+      stage.innerHTML = `
+        <div class="combo-title">
+          <div>
+            <h3>${escapeHtml(route.title)}</h3>
+            <p class="small">${escapeHtml(route.summary)}</p>
+          </div>
+          <span class="tag"><span class="icon plus">+</span> graph route</span>
+        </div>
+        <div class="mind-map">${nodes}</div>
+        <div class="branch-grid">${branches}</div>
+        <div class="band" style="margin-top:12px;">
+          <div class="band-inner">
+            <h3>Field by End Phase</h3>
+            <div class="card-row">${cardsHtml(route.board)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    renderStaticCards();
+    renderComboTabs();
+  </script>
+</body>
+</html>

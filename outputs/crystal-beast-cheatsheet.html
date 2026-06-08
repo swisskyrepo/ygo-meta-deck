@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crystal Beast Mind Map Cheatsheet</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #60717f;
+      --paper: #f4f7f8;
+      --panel: #ffffff;
+      --panel-2: #eef4f6;
+      --line: #d5e0e4;
+      --aqua: #137b86;
+      --green: #267449;
+      --rose: #bd3f55;
+      --gold: #ad7d18;
+      --blue: #2e5c99;
+      --violet: #675092;
+      --shadow: 0 18px 48px rgba(22, 34, 43, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.97) 0, rgba(244,247,248,.98) 460px, #edf5f1 100%),
+        repeating-linear-gradient(135deg, rgba(19,123,134,.075) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 18px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 22px;
+      align-items: center;
+      padding: 10px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 880px;
+      margin-bottom: 14px;
+      font-size: clamp(2.25rem, 5.8vw, 4.6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 830px;
+      color: #31404a;
+      font-size: clamp(1rem, 1.75vw, 1.16rem);
+    }
+
+    .chips, .tags, .hero-pills, .trigger-pairs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #26343d;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong, .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      min-height: 330px;
+      display: grid;
+      align-items: center;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(46px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,33,43,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .mini-card:nth-child(1) { transform: translateY(14px) rotate(-4deg); }
+    .showcase .mini-card:nth-child(2) { transform: translateY(-11px) rotate(3deg); }
+    .showcase .mini-card:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .mini-card:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .mini-card:nth-child(5) { transform: translateY(10px) rotate(-3deg); }
+    .showcase .mini-card:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .mini-card:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .mini-card:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .mini-card:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .mini-card:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase .mini-card > span:not(.zoom) { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 10px 0;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(213,224,228,.88);
+      background: linear-gradient(180deg, rgba(244,247,248,.98), rgba(244,247,248,.9));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .quick-nav a,
+    .route-button,
+    .tab-button,
+    .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .tab-button:hover,
+    .ref-toggle:hover {
+      border-color: var(--aqua);
+      color: var(--aqua);
+      text-decoration: none;
+    }
+
+    .route-button.active, .tab-button.active {
+      color: #fff;
+      background: var(--aqua);
+      border-color: var(--aqua);
+    }
+
+    .quick-nav .ref-toggle {
+      margin-left: auto;
+      color: var(--violet);
+    }
+
+    section {
+      padding: clamp(16px, 3vw, 26px) 0;
+      border-bottom: 1px solid rgba(213,224,228,.84);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 850px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .title-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--aqua);
+      background: rgba(255,255,255,.86);
+    }
+
+    .icon.plus { color: var(--green); }
+    .icon.info { color: var(--blue); font-family: Georgia, serif; font-style: italic; }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel,
+    .route-panel,
+    .cheat-card,
+    .board-card,
+    .tip-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 28px rgba(20,32,42,.08);
+    }
+
+    .panel { padding: 14px; }
+    .panel strong { color: #17212b; }
+
+    .panel p,
+    .tip-card p,
+    .board-card p {
+      color: #3f4d57;
+      margin-bottom: 9px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .mind-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .map-column {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .map-column h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: var(--radius);
+      background: #e8f3f2;
+      color: #173c42;
+    }
+
+    .map-node {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: visible;
+    }
+
+    .map-node:before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      border-radius: var(--radius) 0 0 var(--radius);
+      background: var(--aqua);
+    }
+
+    .map-node.payoff:before { background: var(--rose); }
+    .map-node.recovery:before { background: var(--green); }
+    .map-node.meta:before { background: var(--gold); }
+
+    .mini-card-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-start;
+      overflow: visible;
+    }
+
+    .mini-card {
+      position: relative;
+      display: inline-grid;
+      grid-template-rows: var(--card-h) auto;
+      gap: 4px;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      color: #23313b;
+      text-align: center;
+      font-size: .68rem;
+      line-height: 1.05;
+      overflow: visible;
+      outline: none;
+      vertical-align: top;
+    }
+
+    .mini-card img {
+      width: var(--card-w);
+      height: var(--card-h);
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(23,33,43,.2);
+      background: #dfe7ea;
+      box-shadow: 0 4px 12px rgba(23,33,43,.14);
+      transition: transform .16s ease, box-shadow .16s ease;
+      transform-origin: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-card:hover img,
+    .mini-card:focus-visible img {
+      transform: scale(2.38);
+      z-index: 70;
+      box-shadow: 0 18px 40px rgba(10,18,24,.34);
+    }
+
+    .mini-card .zoom {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 88px;
+      z-index: 72;
+      transform: translateX(-50%);
+      min-width: 132px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      color: #fff;
+      background: rgba(18,27,34,.94);
+      font-size: .78rem;
+      line-height: 1.18;
+      box-shadow: 0 10px 24px rgba(10,18,24,.25);
+      pointer-events: none;
+    }
+
+    .mini-card:hover .zoom,
+    .mini-card:focus-visible .zoom {
+      display: block;
+    }
+
+    .ghost-card {
+      display: inline-grid;
+      place-items: center;
+      width: var(--card-w);
+      min-height: var(--card-h);
+      padding: 7px;
+      border: 1px dashed #afbdc3;
+      border-radius: 5px;
+      background: #f7fafb;
+      color: var(--muted);
+      font-size: .7rem;
+      text-align: center;
+      line-height: 1.08;
+    }
+
+    .trigger-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      font-weight: 780;
+      color: #26343d;
+    }
+
+    .trigger-card .plus-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--green);
+      font-weight: 900;
+    }
+
+    .info-dot {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-weight: 900;
+      cursor: help;
+      flex: 0 0 auto;
+    }
+
+    .routes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .route-panel {
+      padding: clamp(12px, 2vw, 18px);
+      overflow: visible;
+    }
+
+    .route-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .route-title p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .source-badge {
+      flex: 0 0 auto;
+      padding: 5px 8px;
+      border: 1px solid rgba(46,92,153,.24);
+      border-radius: 999px;
+      color: var(--blue);
+      background: #eef4fb;
+      font-size: .78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .combo-graph {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+      overflow: visible;
+      margin: 12px 0 14px;
+    }
+
+    .graph-node {
+      position: relative;
+      min-height: 142px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #fff, #f7fafb);
+      overflow: visible;
+    }
+
+    .graph-node:not(:last-child):after {
+      content: "+";
+      position: absolute;
+      right: -16px;
+      top: 44%;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--green);
+      font-weight: 950;
+      box-shadow: 0 4px 12px rgba(25,88,62,.25);
+    }
+
+    .graph-node h4 {
+      margin: 0 0 8px;
+      font-size: .88rem;
+      color: #25333c;
+      text-transform: uppercase;
+    }
+
+    .graph-node p {
+      color: #4b5b66;
+      font-size: .88rem;
+      margin-bottom: 8px;
+    }
+
+    .graph-node.start { border-top: 4px solid var(--aqua); }
+    .graph-node.engine { border-top: 4px solid var(--gold); }
+    .graph-node.branch { border-top: 4px solid var(--violet); }
+    .graph-node.payoff { border-top: 4px solid var(--rose); }
+
+    .walkthrough {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 8px;
+      counter-reset: route-step;
+    }
+
+    .step {
+      position: relative;
+      padding: 10px 10px 10px 42px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-height: 44px;
+    }
+
+    .step:before {
+      counter-increment: route-step;
+      content: counter(route-step);
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      display: grid;
+      place-items: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--aqua);
+      font-weight: 850;
+      font-size: .82rem;
+    }
+
+    .step b { color: #17212b; }
+
+    .branch-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .branch-box {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--violet);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px;
+    }
+
+    .branch-box h4 {
+      margin: 0 0 6px;
+      font-size: .92rem;
+      color: var(--violet);
+    }
+
+    .end-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      margin: 0 5px 6px 0;
+      padding: 6px 9px;
+      border: 1px solid rgba(189,63,85,.2);
+      border-radius: 999px;
+      background: #fff2f4;
+      color: #6e2331;
+      font-weight: 760;
+      font-size: .86rem;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .board-card {
+      padding: 13px;
+      overflow: visible;
+    }
+
+    .board-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .phase {
+      display: inline-flex;
+      min-height: 24px;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef4fb;
+      color: var(--blue);
+      font-size: .76rem;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 10px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) minmax(220px, .75fr);
+      gap: 10px;
+      align-items: start;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: visible;
+    }
+
+    .matrix-row h3 {
+      margin: 0;
+      color: #22323b;
+    }
+
+    .matrix-row p { margin-bottom: 0; color: #43525c; }
+
+    .side-plan {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tip-card {
+      position: relative;
+      padding: 13px;
+      overflow: visible;
+    }
+
+    .tip-card:before {
+      content: "i";
+      position: absolute;
+      top: 13px;
+      right: 13px;
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-weight: 900;
+    }
+
+    .tip-card h3 { padding-right: 28px; }
+
+    .reference-panel {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .reference-panel[hidden] { display: none; }
+
+    .refs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .ref-item {
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f9fbfc;
+    }
+
+    .ref-item b { display: block; margin-bottom: 5px; }
+    .ref-item p { margin-bottom: 0; color: var(--muted); }
+
+    .format-note {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid rgba(173,125,24,.24);
+      border-radius: var(--radius);
+      background: #fff8ea;
+      color: #5c4312;
+    }
+
+    .format-note .info-dot {
+      background: var(--gold);
+      margin-top: 1px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .walkthrough,
+      .side-plan {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase { min-height: auto; }
+      .mind-map,
+      .grid.cols-3,
+      .grid.cols-4,
+      .board-grid,
+      .tip-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .combo-graph { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .graph-node:not(:last-child):after { display: none; }
+      .matrix-row { grid-template-columns: 1fr; }
+      .refs { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      :root { --card-w: 50px; --card-h: 73px; }
+
+      .page { width: min(100vw - 18px, 1240px); }
+      .hero { gap: 12px; }
+      .showcase { grid-template-columns: repeat(5, minmax(38px, 1fr)); gap: 7px; padding: 10px; }
+      .quick-nav { margin-left: -4px; margin-right: -4px; padding-left: 4px; padding-right: 4px; }
+      .quick-nav .ref-toggle { margin-left: 0; }
+      .mind-map,
+      .grid.cols-2,
+      .grid.cols-3,
+      .grid.cols-4,
+      .board-grid,
+      .tip-grid,
+      .combo-graph {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .route-title {
+        display: grid;
+      }
+
+      .mini-card:hover img,
+      .mini-card:focus-visible img {
+        transform: scale(1.82);
+      }
+
+      .mini-card .zoom { top: 76px; min-width: 112px; }
+      .pill, .tag { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="icon plus">+</span> Crystal Beast mind map</div>
+        <h1>Crystal Beast Cheatsheet</h1>
+        <p class="lead">Top-to-bottom route map for Conclave Control, Ruby OTK, Overdrive pushes, and the current combo-lab variants. Built from MDM combo/counter records, NESHY's guide notes, recent 2026 meta deck listings, and the latest located Crystal Beast TCG tournament top.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Status:</strong> rogue / engine shell</span>
+          <span class="pill"><strong>Latest located TCG top:</strong> YCS Cancun 2024 Top 32</span>
+          <span class="pill"><strong>Current pressure:</strong> Kewl Tune, Branded Dracotail, DoomZ, Elfnote</span>
+          <span class="pill"><strong>MDM spreadsheet:</strong> no Crystal Beast entry found</span>
+        </div>
+      </div>
+      <div class="hero-showcase" aria-label="Crystal Beast key cards">
+        <div class="showcase" id="heroCards"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page navigation">
+      <a href="#plan">Plan</a>
+      <a href="#core">Core</a>
+      <a href="#combos">Combos</a>
+      <a href="#boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side">Side Deck</a>
+      <button class="ref-toggle" id="referencesToggle" type="button" aria-expanded="false">References</button>
+    </nav>
+
+    <section id="plan">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2>Playstyle and Win Condition</h2>
+        </div>
+        <p>Crystal Beast wins by turning monsters into persistent Spell/Trap Zone resources, then converting those crystals into interruption, extra bodies, or lethal pressure.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="panel">
+          <h3>Conclave Control</h3>
+          <p>Stick <strong>Rainbow Bridge of the Heart</strong>, keep a Crystal Beast in the backrow, and use <strong>Crystal Conclave</strong> plus <strong>Crystal Miracle</strong> as low-commitment interaction.</p>
+          <div class="mini-card-row" data-card-row="Heart,Conclave,Miracle,Zenith"></div>
+        </article>
+        <article class="panel">
+          <h3>Ruby OTK</h3>
+          <p>Use <strong>Golden Rule</strong> or <strong>Awakening</strong> to put <strong>Ruby Carbuncle</strong> on field while multiple crystals are loaded, then flood the board and attack.</p>
+          <div class="mini-card-row" data-card-row="GoldenRule,Ruby,Awakening,Pegasus"></div>
+        </article>
+        <article class="panel">
+          <h3>Overdrive Finish</h3>
+          <p>After seven different names are assembled, convert an Ultimate Crystal monster into <strong>Ultimate Crystal Rainbow Dragon Overdrive</strong> for a huge body and a board-shuffle Quick Effect.</p>
+          <div class="mini-card-row" data-card-row="RainbowDragon,Overdrive,RainbowOverdragon,Salvation"></div>
+        </article>
+      </div>
+      <div class="trigger-pairs" style="margin-top:12px">
+        <span class="trigger-card"><span class="plus-mark">+</span> Heart + Bond <span class="info-dot" title="Activate Heart before Crystal Bond when possible so Bond placing Zenith can trigger Heart's bounce.">i</span></span>
+        <span class="trigger-card"><span class="plus-mark">+</span> Golden Rule + Ruby <span class="info-dot" title="Golden Rule places two crystals, then summons a different Crystal Beast from hand or GY. Ruby turns loaded backrow into bodies.">i</span></span>
+        <span class="trigger-card"><span class="plus-mark">+</span> FBG + Salvation <span class="info-dot" title="Foolish Burial Goods sends Rainbow Bridge of Salvation, which later searches a Crystal Beast and a Field Spell.">i</span></span>
+        <span class="trigger-card"><span class="plus-mark">+</span> Awakening + Battle Phase <span class="info-dot" title="Awakening can summon Ruby in Battle Phase, playing around Main Phase only cards such as Veiler and Nibiru.">i</span></span>
+      </div>
+    </section>
+
+    <section id="core">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2>Core Mind Map</h2>
+        </div>
+        <p>Read left to right: starters place names, bridges convert crystals into cards, payoff cards convert the backrow into interruption or damage.</p>
+      </div>
+      <div class="mind-map">
+        <div class="map-column">
+          <h3>1. Starters</h3>
+          <div class="map-node">
+            <strong>Pegasus access</strong>
+            <p>Pegasus places Zenith or missing names from deck, hand, or GY. It is the cleanest one-card route into Rank 4, Heart triggers, and combo ladders.</p>
+            <div class="mini-card-row" data-card-row="Pegasus,Zenith,Cobalt"></div>
+          </div>
+          <div class="map-node">
+            <strong>Spell starters</strong>
+            <p>Bond, Rainbow Bridge, Heart, and Golden Rule make the deck function. They also make Droll and Ash meaningful choke points.</p>
+            <div class="mini-card-row" data-card-row="Bond,Bridge,Heart,GoldenRule"></div>
+          </div>
+        </div>
+        <div class="map-column">
+          <h3>2. Conversion</h3>
+          <div class="map-node recovery">
+            <strong>Backrow as material</strong>
+            <p>Crystal bodies in the S/T Zone become Conclave bounce targets, Miracle fuel, Ruby bodies, or Doomed Dragon material.</p>
+            <div class="mini-card-row" data-card-row="Conclave,Miracle,Ruby,DoomedDragon"></div>
+          </div>
+          <div class="map-node recovery">
+            <strong>Field Spell toolbox</strong>
+            <p>Salvation turns a spent GY setup into a Crystal Beast plus a Field Spell such as Necrovalley, Rainbow Ruins, Duel Academy, or Kyoutou Waterfront.</p>
+            <div class="mini-card-row" data-card-row="Salvation,FBG,Necrovalley,RainbowRuins,DuelAcademy,Waterfront"></div>
+          </div>
+        </div>
+        <div class="map-column">
+          <h3>3. Payoffs</h3>
+          <div class="map-node payoff">
+            <strong>Control end</strong>
+            <p>Heart plus Conclave/Miracle protects the grind while Rank 4 and Link tools handle board texture.</p>
+            <div class="mini-card-row" data-card-row="Bagooska,AbyssDweller,TornadoDragon,Zeus"></div>
+          </div>
+          <div class="map-node payoff">
+            <strong>Combo end</strong>
+            <p>Ruby, Saryuja, Cross-Sheep, Overdrive, and the MDM Gameciel route convert a loaded backrow into lethal or stacked negation.</p>
+            <div class="mini-card-row" data-card-row="CrossSheep,Saryuja,Overdrive,Gameciel,Georgius,Finmel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="combos">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2>Core Combos and Interactions</h2>
+        </div>
+        <p>Select a route. Each route shows a compact graph, then a detailed walkthrough with branch choices and end-board targets.</p>
+      </div>
+      <div class="routes" id="routeButtons"></div>
+      <article class="route-panel" id="routePanel"></article>
+    </section>
+
+    <section id="boards">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2>End Board Examples</h2>
+        </div>
+        <p>Field by End Phase. These are examples, not promises; Crystal Beast hands are zone-sensitive and route choice changes with interruption.</p>
+      </div>
+      <div class="board-grid">
+        <article class="board-card">
+          <h3>Conclave Lock <span class="phase">End Phase</span></h3>
+          <p>Heart active, Conclave face-up, Miracle set, Zenith/name in S/T, Pegasus or a Rank 4 body.</p>
+          <div class="mini-card-row" data-card-row="Heart,Conclave,Miracle,Zenith,Pegasus,Bagooska"></div>
+          <span class="end-chip">Bounce 1</span><span class="end-chip">Negate 1</span><span class="end-chip">Search follow-up</span>
+        </article>
+        <article class="board-card">
+          <h3>Ruby Push <span class="phase">Battle</span></h3>
+          <p>Ruby summons loaded S/T monsters. Two Zeniths plus Pegasus bodies can cross lethal quickly and build into Link/Rank pressure if damage fails.</p>
+          <div class="mini-card-row" data-card-row="Ruby,GoldenRule,Zenith,Pegasus,Topaz,Cobalt"></div>
+          <span class="end-chip">8100+ damage line</span><span class="end-chip">Baits Main Phase hand traps</span>
+        </article>
+        <article class="board-card">
+          <h3>Overdrive <span class="phase">End / OTK</span></h3>
+          <p>Seven names plus an Ultimate Crystal monster banished for Overdrive. The Quick Effect can shuffle the field and refill with banished Crystal Beasts.</p>
+          <div class="mini-card-row" data-card-row="Overdrive,RainbowDragon,RainbowOverdragon,Amethyst,Amber,Emerald,Topaz"></div>
+          <span class="end-chip">11,000 ATK</span><span class="end-chip">Field shuffle</span>
+        </article>
+        <article class="board-card">
+          <h3>MDM Gameciel <span class="phase">Combo Lab</span></h3>
+          <p>Greedy Pegasus plus extender route. Ends on Gameciel counters, Georgius, A Bao A Qu, and Finmel if uninterrupted.</p>
+          <div class="mini-card-row" data-card-row="Gameciel,Waterfront,Georgius,ABao,Finmel,Pegasus"></div>
+          <span class="end-chip">3+ omni negates</span><span class="end-chip">GY pressure</span><span class="end-chip">Monster negate</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2>Tips</h2>
+        </div>
+        <p>Small sequencing errors matter because Pegasus, Ruby, Heart, Conclave, and Miracle all care about timing, zones, or chain order.</p>
+      </div>
+      <div class="tip-grid">
+        <article class="tip-card">
+          <h3>Heart before Bond</h3>
+          <p>If Heart is face-up before Bond places Zenith, Heart can target an opponent's card and bounce itself plus that card before you commit a summon.</p>
+        </article>
+        <article class="tip-card">
+          <h3>Respect "When"</h3>
+          <p>Pegasus and Ruby can miss timing. If Awakening summons Pegasus on the opponent's turn, use Awakening as Chain Link 1 so Pegasus can trigger.</p>
+        </article>
+        <article class="tip-card">
+          <h3>Flip Conclave early</h3>
+          <p>Conclave must already be face-up for its bounce effect. Flip it in Draw Phase when you need interaction, unless hiding information matters more.</p>
+        </article>
+        <article class="tip-card">
+          <h3>Double Conclave trick</h3>
+          <p>Two Conclaves can target the same Crystal Beast and different opponent cards. Resolution returns as much as possible, producing a multi-card bounce.</p>
+        </article>
+        <article class="tip-card">
+          <h3>Battle Phase Ruby</h3>
+          <p>Awakening can summon Ruby in Battle Phase. This avoids Main Phase only interruptions such as Effect Veiler and Nibiru.</p>
+        </article>
+        <article class="tip-card">
+          <h3>Zone management</h3>
+          <p>Do not set extra backrow casually. Crystal Beasts need open S/T zones for Pegasus, Bond, Heart, Golden Rule, Conclave, and Miracle to stay live.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon plus">+</span>
+          <h2>Recovery Options</h2>
+        </div>
+        <p>The archetype's best grind lines come from destroyed monsters becoming crystals, Salvation searches, Conclave replacement, and Ruby converting stored cards into bodies.</p>
+      </div>
+      <div class="matrix">
+        <div class="matrix-row">
+          <h3>After destruction</h3>
+          <p>Most Crystal Beast monsters can place themselves face-up in the S/T Zone instead of going to GY. This preserves material for Heart, Conclave, Ruby, and Miracle.</p>
+          <div class="mini-card-row" data-card-row="Pegasus,Ruby,Conclave,Miracle"></div>
+        </div>
+        <div class="matrix-row">
+          <h3>After losing Heart</h3>
+          <p>Heart can bounce itself with its own trigger, so replay it later. Rainbow Bridge can find it again, and Salvation can shift into a Field Spell plan.</p>
+          <div class="mini-card-row" data-card-row="Heart,Bridge,Salvation,FBG"></div>
+        </div>
+        <div class="matrix-row">
+          <h3>After hand traps</h3>
+          <p>If Pegasus or Bond is stopped, fall back to Heart plus set Conclave/Miracle, or make Bagooska/Abyss Dweller with spare Level 4 bodies.</p>
+          <div class="mini-card-row" data-card-row="Bagooska,AbyssDweller,Miracle,Conclave"></div>
+        </div>
+        <div class="matrix-row">
+          <h3>After board wipe</h3>
+          <p>Use Miracle's GY effect after a Crystal Beast is placed, Salvation's GY search, and Ruby from GY/hand through Golden Rule or Awakening to rebuild bodies.</p>
+          <div class="mini-card-row" data-card-row="Miracle,Salvation,Ruby,GoldenRule,Awakening"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="side">
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2>Side Deck, Matchups, and Counters</h2>
+        </div>
+        <p>Current June 2026 tournament listings emphasize Kewl Tune, Branded/Dracotail, DoomZ, Elfnote, Power Patron, and other combo/midrange decks. Crystal Beast must side with its own spell-heavy engine in mind.</p>
+      </div>
+      <div class="format-note" style="margin-bottom:12px">
+        <span class="info-dot">i</span>
+        <div><strong>Format split:</strong> MDM combo/counter records include Master Duel-only assumptions such as Maxx "C". TCG tournament-top and side-deck notes are separated below. Always verify the active forbidden list before copying a route.</div>
+      </div>
+      <div class="side-plan">
+        <div class="panel">
+          <h3>Side in</h3>
+          <div class="grid">
+            <div>
+              <strong>Versus search-heavy combo</strong>
+              <p class="note">Droll, Ash, Dominus Impulse, Imperm, Veiler. Best into Kewl Tune, Branded Dracotail, Ryzeal shells, and long Pegasus mirror routes.</p>
+              <div class="mini-card-row" data-card-row="Droll,Ash,DominusImpulse,Imperm,Veiler"></div>
+            </div>
+            <div>
+              <strong>Versus board decks</strong>
+              <p class="note">Dark Ruler, Droplet, Book of Eclipse, Evenly, Nibiru. Good when going second, but count your discard and S/T zone costs.</p>
+              <div class="mini-card-row" data-card-row="DarkRuler,Droplet,BookEclipse,Evenly,Nibiru"></div>
+            </div>
+            <div>
+              <strong>Versus GY engines</strong>
+              <p class="note">Necrovalley, D.D. Crow, Ghost Belle, Called by. Strong into Fiendsmith, Tearlaments, Branded, and DoomZ, but Necrovalley can restrict your own Salvation/Overdrive plans.</p>
+              <div class="mini-card-row" data-card-row="Necrovalley,DDCrow,GhostBelle,CalledBy"></div>
+            </div>
+            <div>
+              <strong>Versus backrow or floodgates</strong>
+              <p class="note">Cosmic, Feather Duster, Lightning Storm, Solemn Judgment. Cosmic is also one of the cleanest counters against your own Heart/Conclave setup.</p>
+              <div class="mini-card-row" data-card-row="Cosmic,HFD,LightningStorm,Solemn"></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>What beats Crystal Beast</h3>
+          <div class="grid">
+            <div>
+              <strong>Hit the first conversion</strong>
+              <p class="note">Ash on Bond, Rainbow Bridge, Zenith, or Salvation search. Imperm/Veiler on Pegasus. Droll after the first add if your hand can support it.</p>
+              <div class="mini-card-row" data-card-row="Ash,Imperm,Veiler,Droll"></div>
+            </div>
+            <div>
+              <strong>Remove the engine, not the beasts</strong>
+              <p class="note">Banish or bounce Heart, Conclave, and loaded crystals. Destroying Crystal Beast monsters often lets them become S/T resources.</p>
+              <div class="mini-card-row" data-card-row="Cosmic,GhostOgre,Evenly,HFD"></div>
+            </div>
+            <div>
+              <strong>Stop mass summon windows</strong>
+              <p class="note">Nibiru before Battle Phase Ruby, Dominus Impulse on summon effects, and Droll/Fuwalos/Maxx C for MD-style combo routes.</p>
+              <div class="mini-card-row" data-card-row="Nibiru,DominusImpulse,Fuwalos,MaxxC"></div>
+            </div>
+            <div>
+              <strong>Pick side floodgates carefully</strong>
+              <p class="note">Dimensional Barrier and Anti-Spell can steal games going first, but Crystal Beast is spell-heavy, so do not side Anti-Spell without a plan.</p>
+              <div class="mini-card-row" data-card-row="DBarrier,AntiSpell,TCBOO"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="references" class="reference-panel" hidden>
+      <div class="section-head">
+        <div class="title-left">
+          <span class="icon info">i</span>
+          <h2>References Used</h2>
+        </div>
+        <p>Hidden knowledge tab. Retrieved June 8, 2026 UTC from live pages and APIs.</p>
+      </div>
+      <div class="refs">
+        <div class="ref-item">
+          <b><a href="https://www.masterduelmeta.com/articles/guides/crystal-beast-neshy" target="_blank" rel="noreferrer">Master Duel Meta - Crystal Beast Guide</a></b>
+          <p>Core strategy, Conclave Control vs Overdrive framing, Heart/Bond tip, Ruby Battle Phase tip, timing notes, and resource patterns.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta - Combos &amp; Counters</a></b>
+          <p>Direct API check for deck-type ID 61f82eff2a20d55de2daaee4. Found 2 Crystal Beast combo records, 2 counter records, and no submitted spreadsheet records.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://ygoprodeck.com/category/format/tournament%20meta%20decks/" target="_blank" rel="noreferrer">YGOPRODeck - Tournament Meta Decks</a></b>
+          <p>Current June 2026 tournament landscape: Germany Nationals, Seattle/Springfield/Houston regionals, Kewl Tune, Branded Dracotail, DoomZ, Power Patron, Elfnote.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://ygoprodeck.com/tournament/ycs-canc%C3%BAn-2252" target="_blank" rel="noreferrer">YGOPRODeck - YCS Cancun 2024</a></b>
+          <p>Latest located TCG Crystal Beast tournament top in search: Jesse Kotton, Crystal Beast, Top 32, October 5, 2024, 372 duelists.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://ygoprodeck.com/deck/fiendsmith-snake-eye-crystal-beast-534327" target="_blank" rel="noreferrer">YGOPRODeck - Fiendsmith Snake-Eye Crystal Beast</a></b>
+          <p>Curated tournament-meta list for Jesse Kotton's Top 32 YCS Cancun build; used to identify the Snake-Eye/Fiendsmith hybrid variant.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://ygoprodeck.com/deck/jesse-kotton-s-ycs-cancun-crystal-beast-533989" target="_blank" rel="noreferrer">YGOPRODeck - Jesse Kotton list mirror</a></b>
+          <p>Deck history listing with Golden Rule, Crystal Bond, Heart, Salvation, Snake-Eye, Fiendsmith, Protos, Thrust/Talent, and board-breaker package.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://ygoprodeck.com/category/type/crystal%20beast" target="_blank" rel="noreferrer">YGOPRODeck - Crystal Beast decks</a></b>
+          <p>Recent 2026 non-meta and Genesys uploads including DoomZ, Mitsurugi, Ryzeal, and combo-turbo experiments.</p>
+        </div>
+        <div class="ref-item">
+          <b><a href="https://db.ygoprodeck.com/api-guide/" target="_blank" rel="noreferrer">YGOPRODeck card API and images</a></b>
+          <p>Numeric card IDs and card images. Every visible card image uses the requested pattern: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cards = {
+      Pegasus: { name: "Crystal Beast Sapphire Pegasus", id: 7093411, short: "Sapphire Pegasus" },
+      Zenith: { name: "Crystal Beast Rainbow Dragon", id: 36795102, short: "Zenith" },
+      RainbowDragon: { name: "Rainbow Dragon", id: 79856792, short: "Rainbow Dragon" },
+      Ruby: { name: "Crystal Beast Ruby Carbuncle", id: 32710364, short: "Ruby" },
+      Cobalt: { name: "Crystal Beast Cobalt Eagle", id: 21698716, short: "Cobalt" },
+      Amethyst: { name: "Crystal Beast Amethyst Cat", id: 32933942, short: "Amethyst" },
+      Amber: { name: "Crystal Beast Amber Mammoth", id: 69937550, short: "Amber" },
+      Emerald: { name: "Crystal Beast Emerald Tortoise", id: 68215963, short: "Emerald" },
+      Topaz: { name: "Crystal Beast Topaz Tiger", id: 95600067, short: "Topaz" },
+      Bond: { name: "Crystal Bond", id: 9334391, short: "Bond" },
+      Bridge: { name: "Rainbow Bridge", id: 63945693, short: "Rainbow Bridge" },
+      Heart: { name: "Rainbow Bridge of the Heart", id: 10938846, short: "Heart" },
+      GoldenRule: { name: "Golden Rule", id: 3574681, short: "Golden Rule" },
+      Awakening: { name: "Awakening of the Crystal Ultimates", id: 12877076, short: "Awakening" },
+      Conclave: { name: "Crystal Conclave", id: 87259933, short: "Conclave" },
+      Miracle: { name: "Crystal Miracle", id: 11155484, short: "Miracle" },
+      Salvation: { name: "Rainbow Bridge of Salvation", id: 5611760, short: "Salvation" },
+      FBG: { name: "Foolish Burial Goods", id: 35726888, short: "Foolish Goods" },
+      RainbowRuins: { name: "Ancient City - Rainbow Ruins", id: 34487429, short: "Rainbow Ruins" },
+      Necrovalley: { name: "Necrovalley", id: 47355498, short: "Necrovalley" },
+      DuelAcademy: { name: "Duel Academy", id: 5833312, short: "Duel Academy" },
+      SuperPoly: { name: "Super Polymerization", id: 48130397, short: "Super Poly" },
+      Droplet: { name: "Forbidden Droplet", id: 24299458, short: "Droplet" },
+      TCBOO: { name: "There Can Be Only One", id: 24207889, short: "TCBOO" },
+      Fenrir: { name: "Kashtira Fenrir", id: 32909498, short: "Fenrir" },
+      Zeus: { name: "Divine Arsenal AA-ZEUS - Sky Thunder", id: 90448279, short: "ZEUS" },
+      Bagooska: { name: "Number 41: Bagooska the Terribly Tired Tapir", id: 90590303, short: "Bagooska" },
+      TornadoDragon: { name: "Tornado Dragon", id: 6983839, short: "Tornado" },
+      AbyssDweller: { name: "Abyss Dweller", id: 21044178, short: "Dweller" },
+      Chidori: { name: "Lightning Chidori", id: 22653490, short: "Chidori" },
+      Overdrive: { name: "Ultimate Crystal Rainbow Dragon Overdrive", id: 84544192, short: "Overdrive" },
+      RainbowOverdragon: { name: "Rainbow Overdragon", id: 37440988, short: "Overdragon" },
+      Saryuja: { name: "Saryuja Skull Dread", id: 74997493, short: "Saryuja" },
+      CrossSheep: { name: "Cross-Sheep", id: 50277355, short: "Cross-Sheep" },
+      DoomedDragon: { name: "Snake-Eyes Doomed Dragon", id: 58071334, short: "Doomed Dragon" },
+      Dempsey: { name: "Battlin' Boxer King Dempsey", id: 46804536, short: "Dempsey" },
+      Isolde: { name: "Isolde, Two Tales of the Noble Knights", id: 59934749, short: "Isolde" },
+      Renaud: { name: "Infernoble Knight - Renaud", id: 56824871, short: "Renaud" },
+      Promethean: { name: "Promethean Princess, Bestower of Flames", id: 2772337, short: "Promethean" },
+      RagingPhoenix: { name: "Salamangreat Raging Phoenix", id: 57134592, short: "Raging Phoenix" },
+      Gameciel: { name: "Gameciel, the Sea Turtle Kaiju", id: 55063751, short: "Gameciel" },
+      Waterfront: { name: "Kyoutou Waterfront", id: 56111151, short: "Waterfront" },
+      Georgius: { name: "Dragunity Lord - Georgius", id: 70522875, short: "Georgius" },
+      ABao: { name: "A Bao A Qu, the Lightless Shadow", id: 4731783, short: "A Bao A Qu" },
+      Finmel: { name: "Artmage Finmel", id: 34541940, short: "Finmel" },
+      DominusImpulse: { name: "Dominus Impulse", id: 40366667, short: "Dominus" },
+      Ash: { name: "Ash Blossom & Joyous Spring", id: 14558127, short: "Ash" },
+      MaxxC: { name: "Maxx \"C\"", id: 23434538, short: "Maxx C" },
+      Droll: { name: "Droll & Lock Bird", id: 94145021, short: "Droll" },
+      Fuwalos: { name: "Mulcharmy Fuwalos", id: 42141493, short: "Fuwalos" },
+      Purulia: { name: "Mulcharmy Purulia", id: 84192580, short: "Purulia" },
+      Meowls: { name: "Mulcharmy Meowls", id: 87126721, short: "Meowls" },
+      Nibiru: { name: "Nibiru, the Primal Being", id: 27204311, short: "Nibiru" },
+      Cosmic: { name: "Cosmic Cyclone", id: 8267140, short: "Cosmic" },
+      HFD: { name: "Harpie's Feather Duster", id: 18144507, short: "Duster" },
+      LightningStorm: { name: "Lightning Storm", id: 14532163, short: "Storm" },
+      Evenly: { name: "Evenly Matched", id: 15693423, short: "Evenly" },
+      DBarrier: { name: "Dimensional Barrier", id: 83326048, short: "D Barrier" },
+      AntiSpell: { name: "Anti-Spell Fragrance", id: 58921041, short: "Anti-Spell" },
+      Solemn: { name: "Solemn Judgment", id: 41420027, short: "Judgment" },
+      Talent: { name: "Triple Tactics Talent", id: 25311006, short: "Talent" },
+      Thrust: { name: "Triple Tactics Thrust", id: 35269904, short: "Thrust" },
+      DarkRuler: { name: "Dark Ruler No More", id: 54693926, short: "Dark Ruler" },
+      BookEclipse: { name: "Book of Eclipse", id: 35480699, short: "Eclipse" },
+      Imperm: { name: "Infinite Impermanence", id: 10045474, short: "Imperm" },
+      CalledBy: { name: "Called by the Grave", id: 24224830, short: "Called By" },
+      DDCrow: { name: "D.D. Crow", id: 24508238, short: "D.D. Crow" },
+      GhostBelle: { name: "Ghost Belle & Haunted Mansion", id: 73642296, short: "Belle" },
+      GhostOgre: { name: "Ghost Ogre & Snow Rabbit", id: 59438930, short: "Ogre" },
+      Veiler: { name: "Effect Veiler", id: 97268402, short: "Veiler" },
+      Beacon: { name: "Crystal Beacon", id: 95326659, short: "Beacon" },
+      Promise: { name: "Crystal Promise", id: 8275702, short: "Promise" },
+      Abundance: { name: "Crystal Abundance", id: 72881007, short: "Abundance" },
+      Melody: { name: "The Melody of Awakening Dragon", id: 48800175, short: "Melody" },
+      Bonfire: { name: "Bonfire", id: 85106525, short: "Bonfire" },
+      Wanted: { name: "WANTED: Seeker of Sinful Spoils", id: 80845034, short: "WANTED" },
+      SnakeEyeAsh: { name: "Snake-Eye Ash", id: 9674034, short: "SE Ash" },
+      Poplar: { name: "Snake-Eyes Poplar", id: 90241276, short: "Poplar" },
+      Oak: { name: "Snake-Eye Oak", id: 45663742, short: "Oak" },
+      Flamberge: { name: "Snake-Eyes Flamberge Dragon", id: 48452496, short: "Flamberge" },
+      Diabellstar: { name: "Diabellstar the Black Witch", id: 72270339, short: "Diabellstar" },
+      Engraver: { name: "Fiendsmith Engraver", id: 60764609, short: "Engraver" },
+      Sanct: { name: "Fiendsmith's Sanct", id: 35552985, short: "Sanct" },
+      Requiem: { name: "Fiendsmith's Requiem", id: 2463794, short: "Requiem" },
+      Protos: { name: "Archnemeses Protos", id: 6728559, short: "Protos" },
+      NemesesFlag: { name: "Nemeses Flag", id: 19211362, short: "Flag" },
+      OSS: { name: "Original Sinful Spoils - Snake-Eye", id: 89023486, short: "OSS" },
+      Temple: { name: "Divine Temple of the Snake-Eye", id: 53639887, short: "Temple" },
+      Shinra: { name: "Vaylantz World - Shinra Bansho", id: 49568943, short: "Shinra" },
+      Konig: { name: "Vaylantz World - Konig Wissen", id: 75952542, short: "Konig" },
+      Anima: { name: "Relinquished Anima", id: 94259633, short: "Anima" },
+      SP: { name: "S:P Little Knight", id: 29301450, short: "S:P" },
+      IP: { name: "I:P Masquerena", id: 65741786, short: "I:P" },
+      Zealantis: { name: "Worldsea Dragon Zealantis", id: 45112597, short: "Zealantis" },
+      Hiita: { name: "Hiita the Fire Charmer, Ablaze", id: 48815792, short: "Hiita" },
+      Lyna: { name: "Lyna the Light Charmer, Lustrous", id: 9839945, short: "Lyna" },
+      Moon: { name: "Moon of the Closed Heaven", id: 71818935, short: "Moon" },
+      Caesar: { name: "D/D/D Wave High King Caesar", id: 79559912, short: "Caesar" },
+      Banshee: { name: "Infernal Flame Banshee", id: 29423048, short: "Banshee" },
+      Necroquip: { name: "Necroquip Princess", id: 93860227, short: "Necroquip" },
+      KnightmarePhoenix: { name: "Knightmare Phoenix", id: 2857636, short: "Phoenix" },
+      OneForOne: { name: "One for One", id: 2295440, short: "One for One" }
+    };
+
+    const routes = [
+      {
+        id: "heart-control",
+        title: "Heart + Conclave Control",
+        source: "Guide core",
+        focus: "Safe first-turn plan when your hand has Pegasus/Bond plus Bridge access.",
+        graph: [
+          { type: "start", title: "Open", text: "Pegasus, Bond, or Rainbow Bridge finds your starter.", cards: ["Pegasus", "Bond", "Bridge"] },
+          { type: "engine", title: "Place Zenith", text: "Pegasus or Bond places Zenith as a crystal to store an effect and a name.", cards: ["Zenith", "Heart"] },
+          { type: "branch", title: "Search defense", text: "Heart destroys a Crystal Beast card to add Conclave or Miracle.", cards: ["Conclave", "Miracle"] },
+          { type: "payoff", title: "Hold tempo", text: "Bounce with Conclave/Heart, negate with Miracle, then rebuild with crystals.", cards: ["Bagooska", "TornadoDragon"] }
+        ],
+        steps: [
+          ["Find Heart", "Use Rainbow Bridge for Heart, or use Bond/Pegasus to create the first crystal before committing extra bodies."],
+          ["Activate Heart before Bond if possible", "Heart being face-up lets Bond placing Zenith trigger a bounce on the opponent's field."],
+          ["Normal Pegasus", "Place Zenith or the missing Crystal Beast name into the S/T Zone."],
+          ["Heart search", "Destroy a Crystal Beast card from hand/field to add Conclave if you need bounce, or Miracle if you need a negate."],
+          ["Convert spare Level 4s", "Make Bagooska, Tornado Dragon, Chidori, Abyss Dweller, or keep Pegasus to threaten Conclave replacement."],
+          ["End with live backrow", "Heart, Conclave/Miracle, a crystal in S/T, and at least one follow-up card is enough to play a grind game."]
+        ],
+        branches: [
+          { title: "Against combo", text: "Prioritize Miracle or Bagooska. Keep Conclave face-up only if you can protect it or immediately use it." },
+          { title: "Against backrow", text: "Prioritize Heart bounce and Tornado Dragon. Do not overfill S/T zones before checking for Cosmic/Duster." },
+          { title: "Against unknown", text: "Heart + Conclave + one crystal is the lowest-risk setup. It keeps follow-up without all-in Ruby exposure." }
+        ],
+        end: ["Heart active", "Conclave face-up or Miracle set", "1-2 crystals in S/T", "Pegasus or Rank 4", "Rainbow Bridge follow-up"]
+      },
+      {
+        id: "bond-bounce",
+        title: "Heart + Bond Bounce",
+        source: "Guide tip",
+        focus: "A compact interaction pattern that removes a card before your Normal Summon resolves into a bigger line.",
+        graph: [
+          { type: "start", title: "Heart online", text: "Open or search Heart first.", cards: ["Heart", "Bridge"] },
+          { type: "engine", title: "Bond resolves", text: "Add Pegasus and place Zenith or a missing name.", cards: ["Bond", "Pegasus", "Zenith"] },
+          { type: "branch", title: "Heart trigger", text: "A Crystal Beast was placed in S/T, so target an opponent's card.", cards: ["Heart"] },
+          { type: "payoff", title: "Bounce and continue", text: "Return Heart and the target, then normal Pegasus for the next line.", cards: ["Pegasus", "Conclave"] }
+        ],
+        steps: [
+          ["Activate or search Heart", "Use Rainbow Bridge if needed. Heart has to be face-up before the placement effect."],
+          ["Activate Crystal Bond", "Add Pegasus, then place Zenith from deck as a Continuous Spell."],
+          ["Resolve Heart trigger", "Target one opponent card, then return both that card and Heart to the hand."],
+          ["Replay or hold Heart", "If you still need Heart's extra normal/search, replay it. If removal is likely, hold it for next turn."],
+          ["Normal Pegasus", "Place another name, make a Rank 4, or set up Conclave/Miracle."]
+        ],
+        branches: [
+          { title: "Going second", text: "Use the bounce on floodgates, field centerpieces, or monster negates before committing Pegasus." },
+          { title: "Going first", text: "The same pattern can bounce your own Heart to preserve it after generating value." }
+        ],
+        end: ["Opponent card bounced", "Pegasus access", "Zenith in S/T", "Heart reusable"]
+      },
+      {
+        id: "ruby-otk",
+        title: "Golden Rule Ruby OTK",
+        source: "Guide core",
+        focus: "The clean Crystal Beast kill route. Load backrow, summon Ruby, then flood bodies.",
+        graph: [
+          { type: "start", title: "Loaded crystal", text: "Have Pegasus or another valuable Crystal Beast in S/T.", cards: ["Pegasus", "Zenith"] },
+          { type: "engine", title: "Golden Rule", text: "Place two Crystal Beasts from deck, then summon a different one from hand/GY.", cards: ["GoldenRule", "Ruby"] },
+          { type: "branch", title: "Ruby trigger", text: "Ruby summons as many Crystal Beast monsters from S/T as possible.", cards: ["Ruby", "Topaz", "Cobalt"] },
+          { type: "payoff", title: "Lethal or Link", text: "Attack for lethal, make Overdrive setup, or convert bodies into Link/Rank tools.", cards: ["Overdrive", "Saryuja"] }
+        ],
+        steps: [
+          ["Prepare Ruby", "Ruby should be in hand or GY. Avoid leaving it stranded in deck if Golden Rule is your payoff."],
+          ["Load at least one strong crystal", "Pegasus in S/T is ideal. Zeniths provide damage and Ultimate Crystal access."],
+          ["Activate Golden Rule", "Place two Crystal Beast monsters from deck face-up in S/T, then Special Summon Ruby from hand/GY."],
+          ["Trigger Ruby", "Special Summon the loaded Crystal Beast monsters from your S/T Zone."],
+          ["Push damage", "Two Zeniths, Pegasus, Ruby, and another body can cross 8000 damage. If not lethal, convert to Saryuja, Rank 4, or Overdrive setup."]
+        ],
+        branches: [
+          { title: "Battle Phase line", text: "Awakening can summon Ruby in Battle Phase to dodge Main Phase only interruptions." },
+          { title: "Interrupted Ruby", text: "If Ruby is negated, keep bodies in S/T for Conclave/Miracle instead of overextending into a wipe." }
+        ],
+        end: ["Ruby plus 3-5 bodies", "8100+ damage window", "Link/Rank fallback", "Overdrive setup if seven names are ready"]
+      },
+      {
+        id: "overdrive",
+        title: "Ultimate Crystal Overdrive",
+        source: "Archetype payoff",
+        focus: "The high-ceiling finish after seven Crystal Beast names are on field/GY and an Ultimate Crystal monster has been summoned.",
+        graph: [
+          { type: "start", title: "Seven names", text: "Pegasus, Bond, Golden Rule, Salvation, and Ruby assemble different names.", cards: ["Pegasus", "Bond", "GoldenRule", "Salvation"] },
+          { type: "engine", title: "Ultimate Crystal", text: "Access Rainbow Dragon or Rainbow Overdragon as the required Ultimate Crystal piece.", cards: ["RainbowDragon", "RainbowOverdragon"] },
+          { type: "branch", title: "Banish material", text: "Banish Ultimate Crystal plus seven Crystal Beast monsters from field/GY.", cards: ["Amethyst", "Amber", "Emerald", "Topaz"] },
+          { type: "payoff", title: "Overdrive", text: "Overdrive threatens 11,000 ATK and a Quick Effect field shuffle.", cards: ["Overdrive"] }
+        ],
+        steps: [
+          ["Track unique names", "You need seven different Crystal Beast monster names. Duplicates do not solve the summon condition."],
+          ["Do not lose your Ultimate Crystal access", "Zenith adds Rainbow Dragon, but some combo routes treat Rainbow Dragon as a garnet if hard drawn early."],
+          ["Summon the Ultimate Crystal monster first", "Overdrive requires that you have Special Summoned an Ultimate Crystal monster this Duel."],
+          ["Banish for Overdrive", "Use field/GY materials. Make sure Necrovalley or similar effects are not locking your own GY movement."],
+          ["Use the Quick Effect carefully", "Tribute Overdrive to shuffle as many cards as possible, then summon banished Crystal Beasts for pressure or follow-up."]
+        ],
+        branches: [
+          { title: "Going second", text: "Overdrive is a finisher after you have forced negates with Heart, Droplet, or Golden Rule." },
+          { title: "Going first", text: "Do not force Overdrive if Conclave/Miracle plus follow-up is safer into unknown board breakers." }
+        ],
+        end: ["Overdrive 11,000 ATK", "Field shuffle threat", "Banished Crystal Beast refill", "OTK pressure"]
+      },
+      {
+        id: "mdm-isolde",
+        title: "MDM 1-Card Pegasus Isolde",
+        source: "MDM combo 2026-05-17",
+        focus: "A submitted combo record using Pegasus into Dempsey/Renaud/Isolde, then Golden Rule and Crystal Beast conversion.",
+        graph: [
+          { type: "start", title: "Pegasus", text: "Normal Pegasus, place Zenith, use Zenith to summon a Level 4 Crystal Beast and add Rainbow Dragon.", cards: ["Pegasus", "Zenith", "RainbowDragon"] },
+          { type: "engine", title: "Rank 4", text: "Pegasus plus Level 4 Crystal Beast makes Battlin' Boxer King Dempsey.", cards: ["Dempsey", "Renaud"] },
+          { type: "branch", title: "Isolde package", text: "Dempsey accesses Renaud and leads into Isolde; route assumes the platform allows these cards.", cards: ["Isolde", "GoldenRule"] },
+          { type: "payoff", title: "Crystal end", text: "End record lists Cross-Sheep, Ruby, Doomed Dragon, Pegasus bodies, backrow names, and Rainbow Dragon in hand.", cards: ["CrossSheep", "Ruby", "DoomedDragon"] }
+        ],
+        steps: [
+          ["Normal Pegasus", "Place Crystal Beast Rainbow Dragon (Zenith) in S/T."],
+          ["Use Zenith", "Banish Zenith as a Continuous Spell to Special Summon a Level 4 Crystal Beast from deck and add Rainbow Dragon."],
+          ["Make Dempsey", "Overlay Pegasus plus the Level 4 Crystal Beast into Battlin' Boxer King Dempsey."],
+          ["Access Renaud", "Use Dempsey to reach Renaud, then ladder into Isolde."],
+          ["Convert to Golden Rule", "The submitted route uses the Warrior/Equip package to enable Golden Rule and reload Crystal Beast bodies."],
+          ["End on Crystal conversion", "MDM lists Cross-Sheep, Ruby, Snake-Eyes Doomed Dragon, Pegasus x1/x2 depending on hand-trap branch, backrow names, and Rainbow Dragon in hand."]
+        ],
+        branches: [
+          { title: "Format check", text: "This is an MDM combo record. Verify Isolde, Dempsey, and support cards in the format you are playing." },
+          { title: "Garnet warning", text: "The submitted record warns that hard drawing Rainbow Dragon can break the specific line." }
+        ],
+        end: ["Cross-Sheep", "Ruby", "Snake-Eyes Doomed Dragon", "Pegasus x1/x2", "Crystal Beast names in S/T", "Rainbow Dragon in hand"]
+      },
+      {
+        id: "mdm-gameciel",
+        title: "MDM 1.5-Card Ultimate Gameciel",
+        source: "MDM combo 2026-06-03",
+        focus: "A newer high-garnet combo-lab route that turns Pegasus plus any discard into a Gameciel counter board.",
+        graph: [
+          { type: "start", title: "Pegasus + any", text: "Pegasus places Zenith, summons a Level 4, and adds Rainbow Dragon.", cards: ["Pegasus", "Zenith", "RainbowDragon"] },
+          { type: "engine", title: "Dempsey to Isolde", text: "Dempsey, Bradamante, Wedju/Millennium pieces, Isolde, Renaud, and Golden Rule extend.", cards: ["Dempsey", "Isolde", "Renaud", "GoldenRule"] },
+          { type: "branch", title: "Ruby conversion", text: "Cross-Sheep, Doomed Dragon, and Ruby convert S/T crystals into a large body chain.", cards: ["CrossSheep", "DoomedDragon", "Ruby"] },
+          { type: "payoff", title: "Waterfront end", text: "Curious sends Salvation, Waterfront gets Gameciel, and Link lines add Georgius/A Bao/Finmel.", cards: ["Waterfront", "Gameciel", "Georgius", "ABao", "Finmel"] }
+        ],
+        steps: [
+          ["Start with Pegasus plus any card", "Normal Pegasus, place Zenith, use Zenith to summon a Level 4 Crystal Beast and add Rainbow Dragon."],
+          ["Rank into Dempsey", "Use Dempsey/Bradamante/Wedju/Millennium pieces to produce Isolde and access Renaud."],
+          ["Recover Golden Rule", "Isolde sends Golden Rule; Renaud adds it back."],
+          ["Golden Rule into Ruby setup", "Golden Rule loads Ruby and another Crystal Beast, then summons Pegasus under Cross-Sheep lines."],
+          ["Use Doomed Dragon", "Send Rainbow Dragon and Ruby from S/T to summon Snake-Eyes Doomed Dragon under Cross-Sheep, then chain Cross-Sheep and Doomed Dragon."],
+          ["Send Salvation", "Curious sends Rainbow Bridge of Salvation, which searches Kyoutou Waterfront plus a Crystal Beast."],
+          ["Finish on Waterfront", "Use the Link chain into Georgius/Luin, A Bao A Qu, Saryuja, and summon Gameciel with counters."],
+          ["Opponent turn", "A Bao A Qu can reborn Artmage Finmel; MDM end board lists Gameciel, Georgius, A Bao, and Finmel."]
+        ],
+        branches: [
+          { title: "Why play it", text: "It demonstrates Crystal Beast's ability to act as a one-card body engine for modern combo shells." },
+          { title: "Why not default to it", text: "It is slot-intensive, fragile into hand traps, and has multiple garnets. Use it as a lab reference, not the baseline plan." }
+        ],
+        end: ["Gameciel with 3+ omni negates", "Georgius spell negate and GY pressure", "A Bao A Qu reborn/destroy", "Artmage Finmel monster negate"]
+      }
+    ];
+
+    function imgUrl(id) {
+      return "https://images.ygoprodeck.com/images/cards/" + id + ".jpg";
+    }
+
+    function esc(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function miniCard(ref) {
+      const c = cards[ref];
+      if (!c) return '<span class="ghost-card">' + esc(ref) + '</span>';
+      return [
+        '<span class="mini-card" tabindex="0">',
+        '<img src="' + imgUrl(c.id) + '" alt="' + esc(c.name) + '" loading="lazy">',
+        '<span>' + esc(c.short || c.name) + '</span>',
+        '<span class="zoom">' + esc(c.name) + '</span>',
+        '</span>'
+      ].join("");
+    }
+
+    function renderCardRows(root = document) {
+      root.querySelectorAll("[data-card-row]").forEach(row => {
+        const refs = row.getAttribute("data-card-row").split(",").map(v => v.trim()).filter(Boolean);
+        row.innerHTML = refs.map(miniCard).join("");
+      });
+    }
+
+    function renderHero() {
+      const refs = ["Pegasus", "Zenith", "Ruby", "Heart", "GoldenRule", "Conclave", "Miracle", "Salvation", "Overdrive", "RainbowDragon"];
+      document.getElementById("heroCards").innerHTML = refs.map(miniCard).join("");
+    }
+
+    function renderRouteButtons() {
+      const box = document.getElementById("routeButtons");
+      box.innerHTML = routes.map((route, index) => (
+        '<button type="button" class="route-button' + (index === 0 ? " active" : "") + '" data-route="' + route.id + '">' + esc(route.title) + '</button>'
+      )).join("");
+      box.addEventListener("click", event => {
+        const button = event.target.closest("[data-route]");
+        if (!button) return;
+        box.querySelectorAll(".route-button").forEach(item => item.classList.toggle("active", item === button));
+        renderRoute(button.dataset.route);
+      });
+    }
+
+    function graphNode(node) {
+      return [
+        '<div class="graph-node ' + esc(node.type) + '">',
+        '<h4>' + esc(node.title) + '</h4>',
+        '<p>' + esc(node.text) + '</p>',
+        '<div class="mini-card-row">' + (node.cards || []).map(miniCard).join("") + '</div>',
+        '</div>'
+      ].join("");
+    }
+
+    function renderRoute(id = routes[0].id) {
+      const route = routes.find(item => item.id === id) || routes[0];
+      const panel = document.getElementById("routePanel");
+      panel.innerHTML = [
+        '<div class="route-title">',
+        '<div><h3>' + esc(route.title) + '</h3><p>' + esc(route.focus) + '</p></div>',
+        '<span class="source-badge">' + esc(route.source) + '</span>',
+        '</div>',
+        '<div class="combo-graph">' + route.graph.map(graphNode).join("") + '</div>',
+        '<div class="walkthrough">',
+        '<div><h3>Detailed walkthrough</h3><div class="step-list">',
+        route.steps.map(step => '<div class="step"><b>' + esc(step[0]) + '</b><br>' + esc(step[1]) + '</div>').join(""),
+        '</div></div>',
+        '<aside><h3>Branches</h3><div class="branch-grid">',
+        route.branches.map(branch => '<div class="branch-box"><h4>' + esc(branch.title) + '</h4><p>' + esc(branch.text) + '</p></div>').join(""),
+        '</div><h3 style="margin-top:14px">End board target</h3><div>',
+        route.end.map(item => '<span class="end-chip">' + esc(item) + '</span>').join(""),
+        '</div></aside>',
+        '</div>'
+      ].join("");
+    }
+
+    function setupReferences() {
+      const toggle = document.getElementById("referencesToggle");
+      const panel = document.getElementById("references");
+      toggle.addEventListener("click", () => {
+        const open = panel.hasAttribute("hidden");
+        panel.toggleAttribute("hidden", !open);
+        toggle.setAttribute("aria-expanded", String(open));
+        if (open) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    renderHero();
+    renderCardRows();
+    renderRouteButtons();
+    renderRoute();
+    setupReferences();
+  </script>
+</body>
+</html>

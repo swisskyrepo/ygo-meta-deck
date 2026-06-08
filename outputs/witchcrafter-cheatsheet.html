@@ -1,0 +1,1598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Witchcrafter 2026 Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172023;
+      --muted: #627078;
+      --paper: #f5f4ef;
+      --panel: #ffffff;
+      --panel-2: #eef3f1;
+      --line: #d7ddd8;
+      --sage: #52735f;
+      --teal: #126c73;
+      --blue: #2e5e83;
+      --gold: #9b711d;
+      --rose: #a04450;
+      --violet: #64508c;
+      --shadow: 0 18px 46px rgba(23, 32, 35, .13);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(245,244,239,.98) 390px, #eef3f1 100%),
+        repeating-linear-gradient(135deg, rgba(18,108,115,.08) 0 1px, transparent 1px 22px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    button {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 880px;
+      margin-bottom: 14px;
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      line-height: .94;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.7rem, 3vw, 2.25rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    p { margin-bottom: 12px; }
+
+    .page {
+      width: min(1260px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
+      gap: 26px;
+      align-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--sage);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      max-width: 820px;
+      color: #314247;
+      font-size: 1.12rem;
+    }
+
+    .hero-pills,
+    .chips,
+    .tags,
+    .card-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag,
+    .route-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: #263338;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong { color: var(--ink); }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: .8rem;
+      font-weight: 900;
+      color: #fff;
+      background: var(--teal);
+      flex: 0 0 auto;
+    }
+
+    .icon.plus {
+      background: var(--gold);
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .hero-showcase {
+      min-height: 360px;
+      display: grid;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(46px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,35,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-token:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
+    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-token:nth-child(3) { transform: translateY(5px) rotate(-2deg); }
+    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-token:nth-child(5) { transform: translateY(11px) rotate(-3deg); }
+    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-token:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-token:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-token:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase .card-name { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(215,221,216,.86);
+      background: linear-gradient(180deg, rgba(245,244,239,.98), rgba(245,244,239,.9));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a,
+    .route-button,
+    .tab-button,
+    .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .tab-button:hover,
+    .ref-toggle:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .route-button.active,
+    .tab-button.active,
+    .ref-toggle.active {
+      color: #fff;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    section {
+      padding: 24px 0;
+      border-top: 1px solid rgba(215,221,216,.72);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      max-width: 760px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel,
+    .mini-card,
+    .graph-node,
+    .end-board,
+    .tip-card,
+    .matchup-row,
+    .source-card {
+      border: 1px solid rgba(23,32,35,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 8px 24px rgba(23,32,35,.07);
+    }
+
+    .panel {
+      padding: 16px;
+      overflow: visible;
+    }
+
+    .panel.soft {
+      background: rgba(238,243,241,.88);
+      box-shadow: none;
+    }
+
+    .mini-card,
+    .tip-card {
+      padding: 13px;
+      overflow: visible;
+    }
+
+    .mini-card .label,
+    .tip-card .label,
+    .graph-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .dense-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .dense-list li {
+      position: relative;
+      padding-left: 16px;
+      color: #2f3b40;
+    }
+
+    .dense-list li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .68em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .card-token {
+      --w: var(--card-w);
+      --h: var(--card-h);
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      width: var(--w);
+      min-width: var(--w);
+      gap: 5px;
+      isolation: isolate;
+      outline: none;
+      overflow: visible;
+    }
+
+    .card-token img {
+      width: var(--w);
+      height: var(--h);
+      display: block;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 7px 15px rgba(0,0,0,.2);
+      transition: transform .16s ease, box-shadow .16s ease;
+      transform-origin: center center;
+      background: #cbd3d0;
+    }
+
+    .card-token:hover,
+    .card-token:focus,
+    .card-token:focus-within { z-index: 50; }
+
+    .card-token:hover img,
+    .card-token:focus img,
+    .card-token:focus-within img {
+      transform: scale(2.45);
+      box-shadow: 0 18px 38px rgba(0,0,0,.34);
+    }
+
+    .card-token.compact {
+      --w: 42px;
+      --h: 61px;
+    }
+
+    .card-token.large {
+      --w: 72px;
+      --h: 105px;
+    }
+
+    .card-name {
+      width: 100%;
+      color: #354348;
+      font-size: .68rem;
+      font-weight: 750;
+      line-height: 1.08;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .combo-cards,
+    .trigger-line {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      overflow: visible;
+    }
+
+    .plus-symbol {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--gold);
+      font-weight: 950;
+      flex: 0 0 auto;
+    }
+
+    .info-callout {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px 11px;
+      border: 1px solid rgba(18,108,115,.22);
+      border-radius: var(--radius);
+      background: rgba(18,108,115,.07);
+      color: #2b4146;
+    }
+
+    .route-toolbar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 7px;
+      margin-bottom: 12px;
+    }
+
+    .graph-shell {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,35,.14);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, rgba(18,108,115,.06), transparent 32%, rgba(155,113,29,.06)),
+        rgba(255,255,255,.76);
+      overflow: visible;
+    }
+
+    .graph-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .graph-title-row h3 {
+      font-size: 1.28rem;
+      margin-bottom: 4px;
+    }
+
+    .graph-title-row p {
+      max-width: 840px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .graph-lanes {
+      display: grid;
+      gap: 10px;
+      overflow: visible;
+    }
+
+    .graph-node {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(150px, 240px) minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      overflow: visible;
+    }
+
+    .graph-node:before {
+      content: attr(data-step);
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      min-width: 30px;
+      padding: 4px 7px;
+      border-radius: var(--radius) 0 var(--radius) 0;
+      color: #fff;
+      background: var(--teal);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .node-copy {
+      padding-left: 28px;
+    }
+
+    .node-copy p {
+      margin-bottom: 0;
+      color: #34464b;
+    }
+
+    .graph-edge {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      color: #627078;
+      font-size: .88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .graph-edge:before,
+    .graph-edge:after {
+      content: "";
+      height: 1px;
+      background: var(--line);
+    }
+
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .branch {
+      padding: 12px;
+      border: 1px dashed rgba(18,108,115,.28);
+      border-radius: var(--radius);
+      background: rgba(238,243,241,.76);
+      overflow: visible;
+    }
+
+    .branch h4 {
+      margin: 0 0 8px;
+      font-size: .98rem;
+    }
+
+    .branch p {
+      margin-bottom: 10px;
+      color: #34464b;
+    }
+
+    .end-board {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      overflow: visible;
+    }
+
+    .field-line {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .field-label {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: var(--radius);
+      background: var(--panel-2);
+      color: #304044;
+    }
+
+    .status strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .matchups {
+      display: grid;
+      gap: 10px;
+    }
+
+    .matchup-row {
+      display: grid;
+      grid-template-columns: minmax(140px, .9fr) minmax(260px, 1.5fr) minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 12px;
+      padding: 12px;
+      align-items: start;
+      overflow: visible;
+    }
+
+    .matchup-row.header {
+      color: #fff;
+      background: #28434a;
+      box-shadow: none;
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .matchup-row.header > div { opacity: .92; }
+
+    .variant-box {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .decklist {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .decklist li {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 7px 8px;
+      border-radius: var(--radius);
+      background: rgba(238,243,241,.8);
+    }
+
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 24px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--teal);
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .source-panel {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .source-panel.open { display: block; }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .source-card {
+      padding: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .source-card p {
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    .source-card .url {
+      color: var(--blue);
+      font-size: .86rem;
+    }
+
+    .kbd {
+      display: inline-flex;
+      padding: 2px 6px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fff;
+      color: #38474c;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid.two,
+      .grid.three,
+      .grid.four,
+      .variant-box,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase { min-height: 0; }
+
+      .showcase {
+        grid-template-columns: repeat(5, minmax(42px, 1fr));
+      }
+
+      .branch-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .matchup-row {
+        grid-template-columns: 1fr;
+      }
+
+      .matchup-row.header {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --card-w: 48px;
+        --card-h: 70px;
+      }
+
+      .page {
+        width: min(100vw - 18px, 1260px);
+        padding-top: 10px;
+      }
+
+      .hero {
+        gap: 12px;
+        padding-top: 8px;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .pill,
+      .tag {
+        white-space: normal;
+      }
+
+      .graph-node,
+      .field-line {
+        grid-template-columns: 1fr;
+      }
+
+      .node-copy {
+        padding-left: 0;
+        padding-top: 20px;
+      }
+
+      .graph-title-row,
+      .section-head {
+        display: grid;
+      }
+
+      .card-token:hover img,
+      .card-token:focus img,
+      .card-token:focus-within img {
+        transform: scale(1.85);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="icon">i</span> 2026 OCG support plus current TCG tournament package</div>
+        <h1>Witchcrafter Mind Map</h1>
+        <p class="lead">A top-to-bottom cheat sheet for pure Witchcrafter lines, the new Rilliona/Walpurgis ceiling, recovery loops, and the latest indexed topping variant that uses a Witchcrafter package inside Magistus Fairy Tail.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Playstyle</strong> Spellcaster control</span>
+          <span class="pill"><strong>Win condition</strong> recursive spells plus layered quick effects</span>
+          <span class="pill"><strong>Latest top</strong> Magistus Fairy Tail, Seattle WCQ Regional Top 8, May 31 2026</span>
+        </div>
+      </div>
+      <div class="hero-showcase" aria-label="Core Witchcrafter cards">
+        <div class="showcase">
+          <span data-card="creation"></span>
+          <span data-card="walpurgis"></span>
+          <span data-card="schmietta"></span>
+          <span data-card="genni"></span>
+          <span data-card="terracottan"></span>
+          <span data-card="viceMadame"></span>
+          <span data-card="madameRilliona"></span>
+          <span data-card="pupils"></span>
+          <span data-card="distortion"></span>
+          <span data-card="haine"></span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Cheatsheet sections">
+      <a href="#game-plan">Game Plan</a>
+      <a href="#combo-graph">Combos</a>
+      <a href="#end-boards">End Boards</a>
+      <a href="#tips">Tips</a>
+      <a href="#recovery">Recovery</a>
+      <a href="#side-counters">Side/Counters</a>
+      <a href="#tournament-variant">Tournament Variant</a>
+      <a href="#references">References</a>
+    </nav>
+
+    <section id="game-plan">
+      <div class="section-head">
+        <div>
+          <h2>Playstyle And Win Condition</h2>
+          <p>Witchcrafter converts spells into costs, then reclaims Witchcrafter spells in the End Phase. The deck wins by surviving the first exchange, rebuilding every turn, and turning a stocked hand into disruption and lethal pressure.</p>
+        </div>
+      </div>
+
+      <div class="grid four">
+        <article class="mini-card">
+          <div class="label"><span class="icon">i</span> Core Loop</div>
+          <div class="trigger-line">
+            <span data-card="schmietta" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="spell" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="holiday" data-compact="true"></span>
+          </div>
+          <p>Small Witchcrafters tribute themselves and discard a Spell to summon a boss from Deck. Schmietta then loads the GY with the exact Witchcrafter card you need next.</p>
+        </article>
+        <article class="mini-card">
+          <div class="label"><span class="icon">i</span> Control Bosses</div>
+          <div class="trigger-line">
+            <span data-card="madameVerre" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="haine" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="viceMadame" data-compact="true"></span>
+          </div>
+          <p>Verre blankets opposing field monster effects, Haine picks off face-up cards, and Vice-Madame turns Spell or Spellcaster effects into add, summon, or destroy.</p>
+        </article>
+        <article class="mini-card">
+          <div class="label"><span class="icon">i</span> 2026 Upgrade</div>
+          <div class="trigger-line">
+            <span data-card="walpurgis" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="terracottan" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="madameRilliona" data-compact="true"></span>
+          </div>
+          <p>Walpurgis changes costs into deck sends, Terracottan fuses, and Madame Rilliona floods multiple differently attributed Witchcrafters after Fusion Summon.</p>
+        </article>
+        <article class="mini-card">
+          <div class="label"><span class="icon">i</span> Closing</div>
+          <div class="trigger-line">
+            <span data-card="collaboration" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="madameVerre" data-compact="true"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="haine" data-compact="true"></span>
+          </div>
+          <p>Once the opponent is low on resources, reveal multiple Spells with Verre for a huge battle boost, then use Collaboration or repeated Haine/Verre bodies to end the game.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="combo-graph">
+      <div class="section-head">
+        <div>
+          <h2>Core Combos And Interactions</h2>
+          <p>Pick a route. Each graph node groups cards that trigger together and shows the branch point you should choose based on hand, matchup, and interruption.</p>
+        </div>
+        <div class="route-chip"><span class="icon plus">+</span> Hover or focus a card to enlarge it</div>
+      </div>
+
+      <div class="route-toolbar" role="tablist" aria-label="Combo routes">
+        <button class="route-button active" type="button" data-route="creation">Creation 1-Card Rilliona</button>
+        <button class="route-button" type="button" data-route="basic">Small Witchcrafter + Spell</button>
+        <button class="route-button" type="button" data-route="walpurgis">Walpurgis Ceiling</button>
+        <button class="route-button" type="button" data-route="recovery">Recovery Rebuild</button>
+      </div>
+
+      <div class="graph-shell" id="graphShell" aria-live="polite"></div>
+    </section>
+
+    <section id="end-boards">
+      <div class="section-head">
+        <div>
+          <h2>End Board Examples</h2>
+          <p>These are practical snapshots. Exact cards vary by opener and whether you spent a Witchcrafter spell effect earlier in the turn.</p>
+        </div>
+      </div>
+
+      <div class="grid three">
+        <article class="end-board">
+          <h3>Conservative Basic Control</h3>
+          <div class="field-line">
+            <div class="field-label">Field by End Phase</div>
+            <div class="card-row">
+              <span data-card="madameVerre"></span>
+              <span data-card="bystreet"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <div class="field-label">Hand / GY</div>
+            <div>
+              <p>Recovered Witchcrafter spell names, Schmietta/Pittore/Genni loaded for follow-up, Holiday ready if sent.</p>
+              <div class="chips"><span class="tag">1 mass monster negate</span><span class="tag">Battle pump threat</span><span class="tag">Low summon count</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="end-board">
+          <h3>Creation Into Fusion Board</h3>
+          <div class="field-line">
+            <div class="field-label">Field by End Phase</div>
+            <div class="card-row">
+              <span data-card="viceMadame"></span>
+              <span data-card="madameRilliona"></span>
+              <span data-card="haine"></span>
+              <span data-card="walpurgis"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <div class="field-label">Hand / GY</div>
+            <div>
+              <p>Celebration can return in End Phase, Rilliona has pulled extra names, and Vice-Madame converts later Spell/Spellcaster effects into removal or extension.</p>
+              <div class="chips"><span class="tag">Pop from Vice-Madame</span><span class="tag">Haine pop</span><span class="tag">Follow-up Celebration</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="end-board">
+          <h3>OCG Ceiling With New Support</h3>
+          <div class="field-line">
+            <div class="field-label">Field by End Phase</div>
+            <div class="card-row">
+              <span data-card="distortion"></span>
+              <span data-card="pupils"></span>
+              <span data-card="dragoon"></span>
+              <span data-card="madameVerre"></span>
+              <span data-card="haine"></span>
+            </div>
+          </div>
+          <div class="field-line">
+            <div class="field-label">Role</div>
+            <div>
+              <p>High-roll OCG builds can stack omni-negates, Pupils copying Celebration, Verre, Haine, and removal deterrents. Treat this as ceiling planning, not a guaranteed pure-list baseline.</p>
+              <div class="chips"><span class="tag">Distortion omni-negate</span><span class="tag">Pupils toolbox</span><span class="tag">Heavy extender demand</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="section-head">
+        <div>
+          <h2>Tips</h2>
+          <p>Most games are decided by sequencing. Keep a Spell available for costs, avoid spending duplicate Witchcrafter spell names too early, and know which resource you are supposed to recover in the End Phase.</p>
+        </div>
+      </div>
+
+      <div class="grid three">
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> Walpurgis Replacement</div>
+          <p>When a Witchcrafter monster would discard for cost, Walpurgis can send a Witchcrafter Spell/Trap from Deck instead. Send Celebration for fusion routes, Holiday for rebuilds, or Patronus/Masterpiece for grind.</p>
+        </article>
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> Vice-Madame Chains</div>
+          <p>Vice-Madame triggers from a Spell Card/effect or a non-Fusion Spellcaster monster effect. Choose add when low on gas, summon when pushing, and destroy when the opponent commits a must-answer card.</p>
+        </article>
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> End Phase Discipline</div>
+          <p>Each Witchcrafter spell can only use one of its listed effects that turn. If you activate Creation, that same copy cannot recover itself in the End Phase. Track which names are spent.</p>
+        </article>
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> Hand Trap Texture</div>
+          <p>Current combo notes rate simple negation lower than field-spell removal. Ash can slow you, but Ghost Ogre or removal on Walpurgis can hurt more if your hand needed its replacement effect.</p>
+        </article>
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> Verre Timing</div>
+          <p>Verre negates opposing monsters currently on field when her quick effect resolves. Use it before battle math or before the opponent converts those bodies into Extra Deck material.</p>
+        </article>
+        <article class="tip-card">
+          <div class="label"><span class="icon">i</span> Into Mulcharmy</div>
+          <p>Use Quick-Play and Quick Effect summons where possible to make the opponent draw at awkward times or reduce extra draws. The deck can pass on a smaller board if the hand recurs enough spells.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div>
+          <h2>Recovery Options</h2>
+          <p>Witchcrafter is strongest when the first board trades evenly. These are the rebuild buttons to preserve, mill, or search before committing to a second push.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <article class="panel">
+          <h3>GY And Banished Resource Loop</h3>
+          <div class="trigger-line">
+            <span data-card="patronus"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="genni"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="schmietta"></span>
+          </div>
+          <ul class="dense-list">
+            <li>Patronus recycles a banished or GY Spellcaster into Deck, then searches a Witchcrafter Spell/Trap.</li>
+            <li>Genni copies a Witchcrafter spell from GY while dodging Spell/Trap negates because the copied effect is applied by a monster effect.</li>
+            <li>Schmietta sends whatever the current hand is missing: Holiday to revive, Masterpiece for a later Deck summon, or Patronus for long game.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Board Rebuild</h3>
+          <div class="trigger-line">
+            <span data-card="holiday"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="bystreet"></span>
+            <span class="plus-symbol">+</span>
+            <span data-card="madameRilliona"></span>
+          </div>
+          <ul class="dense-list">
+            <li>Holiday revives Verre or Haine after the opponent spends removal.</li>
+            <li>Bystreet prevents the first destruction of each Witchcrafter monster each turn and can replace a discard from field.</li>
+            <li>Madame Rilliona can revive herself in the End Phase from GY by revealing a Spell, forcing opponents to fully answer the Fusion line.</li>
+            <li>Celebration returns in End Phase if it reached GY and you control a Witchcrafter monster, giving follow-up fusion or removal fodder.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="side-counters">
+      <div class="section-head">
+        <div>
+          <h2>Side Deck Options And Counters</h2>
+          <p>Side plans should respect your own GY dependence. Do not side floodgates that strand your Witchcrafter spell recovery unless the matchup is worth the cost.</p>
+        </div>
+      </div>
+
+      <div class="matchups">
+        <div class="matchup-row header">
+          <div>Matchup Pressure</div>
+          <div>Side In</div>
+          <div>Why It Fits</div>
+          <div>Watch Out</div>
+        </div>
+        <div class="matchup-row">
+          <div><strong>Combo swarm</strong><br>Many summons, fragile search chains</div>
+          <div class="card-row">
+            <span data-card="nibiru" data-compact="true"></span>
+            <span data-card="droll" data-compact="true"></span>
+            <span data-card="imperm" data-compact="true"></span>
+            <span data-card="bookEclipse" data-compact="true"></span>
+          </div>
+          <div>Nibiru and Droll buy the turn your engine wants. Book of Eclipse can force interaction without spending your normal summon.</div>
+          <div>Nibiru can conflict with your own high-summon ceiling if drawn later. Keep it for going second plans.</div>
+        </div>
+        <div class="matchup-row">
+          <div><strong>Established boards</strong><br>Negates plus untargetable bodies</div>
+          <div class="card-row">
+            <span data-card="superPoly" data-compact="true"></span>
+            <span data-card="ultimateSlayer" data-compact="true"></span>
+            <span data-card="darkRuler" data-compact="true"></span>
+            <span data-card="droplet" data-compact="true"></span>
+          </div>
+          <div>Super Polymerization is strong in the current meta and turns spare Spells into live pressure. Ultimate Slayer clears while loading Extra Deck utility.</div>
+          <div>Super Poly and Droplet both ask for discard material. Pure Witchcrafter can pay, but repeated hand costs reduce Verre's ceiling.</div>
+        </div>
+        <div class="matchup-row">
+          <div><strong>Backrow / trap</strong><br>Floodgates, removal, trap engines</div>
+          <div class="card-row">
+            <span data-card="duster" data-compact="true"></span>
+            <span data-card="cosmic" data-compact="true"></span>
+            <span data-card="evenly" data-compact="true"></span>
+            <span data-card="solemnJudgment" data-compact="true"></span>
+          </div>
+          <div>Duster/Cosmic clear anti-spell or graveyard hate. Evenly can reset boards before your normal summon. Judgment protects a setup board going first.</div>
+          <div>Evenly conflicts with Battle Phase lethal plans. Decide whether your turn is reset or kill before committing.</div>
+        </div>
+        <div class="matchup-row">
+          <div><strong>GY decks</strong><br>Recursive monsters, graveyard chains</div>
+          <div class="card-row">
+            <span data-card="ddCrow" data-compact="true"></span>
+            <span data-card="ghostBelle" data-compact="true"></span>
+            <span data-card="dimFissure" data-compact="true"></span>
+          </div>
+          <div>Crow/Belle interact without turning off your own engine. Dimensional Fissure appears in the Magistus Fairy Tail side plan and can steal games.</div>
+          <div>Dimensional Fissure is hostile to pure Witchcrafter recovery. Use it mainly in hybrid plans that can win before the grind matters.</div>
+        </div>
+        <div class="matchup-row">
+          <div><strong>Spell-heavy decks</strong><br>Power spells, board breakers</div>
+          <div class="card-row">
+            <span data-card="secretVillage" data-compact="true"></span>
+            <span data-card="dimBarrier" data-compact="true"></span>
+            <span data-card="solemnStrike" data-compact="true"></span>
+            <span data-card="distortion" data-compact="true"></span>
+          </div>
+          <div>Secret Village is live because your board is Spellcaster-heavy. Barrier and Solemns cover Extra Deck or monster-effect blowouts while Distortion becomes searchable archetype interaction.</div>
+          <div>Village fails if your only Spellcaster is removed. Protect with Bystreet, Judgment, or a second body.</div>
+        </div>
+      </div>
+
+      <div class="grid two" style="margin-top: 12px;">
+        <article class="panel soft">
+          <h3>Best Counters Against Witchcrafter</h3>
+          <ul class="dense-list">
+            <li>Remove or negate Walpurgis before the discard-replacement line resolves.</li>
+            <li>Use D.D. Crow or Ghost Belle on Holiday, Patronus, Genni's copied spell setup, or Celebration materials.</li>
+            <li>Force Vice-Madame early, then negate it when the Witchcrafter player has no follow-up Spellcaster effect.</li>
+            <li>Keep Spell removal for Bystreet or Secret Village instead of firing it at low-impact set cards.</li>
+          </ul>
+        </article>
+        <article class="panel soft">
+          <h3>Playing Through Counters</h3>
+          <ul class="dense-list">
+            <li>If you already have access to a small Witchcrafter, hold Walpurgis search until the opponent commits removal.</li>
+            <li>Use Genni to copy Creation or Holiday when Spell/Trap negates are likely.</li>
+            <li>Summon Verre first against monster-heavy boards; summon Haine first when you need immediate card removal or targeting protection.</li>
+            <li>Accept a smaller board when facing Mulcharmy. A Verre plus recovered spells can be better than giving the opponent several draws.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="tournament-variant">
+      <div class="section-head">
+        <div>
+          <h2>Latest Tournament Variant</h2>
+          <p>The newest indexed tournament top under the Witchcrafter tag is a hybrid, not pure Witchcrafter. It uses Witchcrafter Genni and Verre Magic inside Magistus Fairy Tail.</p>
+        </div>
+      </div>
+
+      <div class="variant-box">
+        <article class="panel">
+          <h3>Magistus Fairy Tail, Seattle WCQ Regional Top 8</h3>
+          <p><strong>Albert Zhou, May 31 2026, 42-card main.</strong> The YGOPRODeck category page listed this as the latest Witchcrafter-tagged tournament top during research on June 8 2026.</p>
+          <div class="status-grid">
+            <div class="status"><strong>Witchcrafter package</strong> 1 Witchcrafter Genni plus 3 Verre Magic - Lacrima of Light.</div>
+            <div class="status"><strong>Engine core</strong> Fairy Tail normal summons plus Magistus extenders and Extra Deck bodies.</div>
+            <div class="status"><strong>Side pattern</strong> Purulia, Dimensional Fissure, Nibiru, Book of Eclipse, Duster, and Solemns.</div>
+          </div>
+          <div class="card-row" style="margin-top: 12px;">
+            <span data-card="fairyLuna"></span>
+            <span data-card="spenta"></span>
+            <span data-card="rillionaMagistus"></span>
+            <span data-card="verreMagic"></span>
+            <span data-card="genni"></span>
+            <span data-card="zoroaFlame"></span>
+            <span data-card="artemis"></span>
+          </div>
+        </article>
+        <article class="panel">
+          <h3>What To Borrow</h3>
+          <ul class="decklist">
+            <li><span class="qty">1</span><span>Witchcrafter Genni gives a searchable Spellcaster name and copies Witchcrafter spells from GY.</span></li>
+            <li><span class="qty">3</span><span>Verre Magic - Lacrima of Light makes the Endymion/Witchcrafter package more explosive.</span></li>
+            <li><span class="qty">1</span><span>Rilliona, the Magistus of Verre bridges Spellcaster engines without committing to pure Witchcrafter.</span></li>
+            <li><span class="qty">3</span><span>Spenta plus Fairy Tail cards give the deck more independent starters than pure Witchcrafter.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="references">
+      <div class="section-head">
+        <div>
+          <h2>References</h2>
+          <p>This tab is hidden by default in the sense that source details stay collapsed until opened.</p>
+        </div>
+        <button class="ref-toggle" type="button" id="refToggle" aria-expanded="false" aria-controls="sourcePanel">Show References</button>
+      </div>
+      <div class="source-panel" id="sourcePanel">
+        <div class="source-grid">
+          <article class="source-card">
+            <strong>Master Duel Meta: Combos & Counters</strong>
+            <p>Requested resource. The public page exposes sections for counters, combos, and spreadsheets, with login required to submit.</p>
+            <a class="url" href="https://www.masterduelmeta.com/combos-and-counters">https://www.masterduelmeta.com/combos-and-counters</a>
+          </article>
+          <article class="source-card">
+            <strong>Master Duel Combo Hub Spreadsheet</strong>
+            <p>General Yu-Gi-Oh Master Duel combo spreadsheet found through r/masterduel. Indexed content did not show a verified Witchcrafter-specific sheet.</p>
+            <a class="url" href="https://www.reddit.com/r/masterduel/comments/1ii6hl9/master_duel_combo_hub_v16_spreadsheet/">https://www.reddit.com/r/masterduel/comments/1ii6hl9/master_duel_combo_hub_v16_spreadsheet/</a>
+          </article>
+          <article class="source-card">
+            <strong>Master Duel Meta: RV01 Witchcrafter Support</strong>
+            <p>Used for the 2026 support card effects: Terracottan, Madame Rilliona, Celebration, Walpurgis, and Distortion.</p>
+            <a class="url" href="https://www.masterduelmeta.com/articles/news/apr-10-2026/RV01">https://www.masterduelmeta.com/articles/news/apr-10-2026/RV01</a>
+          </article>
+          <article class="source-card">
+            <strong>YGOPRODeck: Witchcrafter Card API</strong>
+            <p>Used for card IDs and image URLs in the required format: images.ygoprodeck.com/images/cards/CARD_ID.jpg.</p>
+            <a class="url" href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Witchcrafter">https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Witchcrafter</a>
+          </article>
+          <article class="source-card">
+            <strong>YGOPRODeck: Witchcrafter Deck Category</strong>
+            <p>Used to identify the newest Witchcrafter-tagged tournament tops and recent user builds.</p>
+            <a class="url" href="https://ygoprodeck.com/category/type/witchcrafter">https://ygoprodeck.com/category/type/witchcrafter</a>
+          </article>
+          <article class="source-card">
+            <strong>YGOPRODeck: Seattle Magistus Fairy Tail Top 8</strong>
+            <p>Used for the latest tournament variant: Albert Zhou, Seattle WCQ Regional Top 8, May 31 2026.</p>
+            <a class="url" href="https://ygoprodeck.com/deck/magistus-fairy-tail-714524">https://ygoprodeck.com/deck/magistus-fairy-tail-714524</a>
+          </article>
+          <article class="source-card">
+            <strong>YGOPRODeck: Witchcrafter May 2026 V3</strong>
+            <p>Used as a current pure/hybrid Witchcrafter build reference containing new 2026 support.</p>
+            <a class="url" href="https://ygoprodeck.com/deck/witchcrafter-may-2026-v3-708653">https://ygoprodeck.com/deck/witchcrafter-may-2026-v3-708653</a>
+          </article>
+          <article class="source-card">
+            <strong>Yu-Gi-Oh! Wiki: Madame Rilliona Card Tips</strong>
+            <p>Used for the Creation one-card Rilliona route and associated branch notes.</p>
+            <a class="url" href="https://yugioh.fandom.com/wiki/Card_Tips:Witchcrafter_Madame_Rilliona">https://yugioh.fandom.com/wiki/Card_Tips:Witchcrafter_Madame_Rilliona</a>
+          </article>
+          <article class="source-card">
+            <strong>note.com: 2026 OCG Witchcrafter Deck Introduction</strong>
+            <p>Used for current OCG combo/tip framing, hand-trap danger ratings, and Walpurgis ceiling-board context.</p>
+            <a class="url" href="https://note.com/right_elk1185/n/n5388b431ceb4?hl=en-US">https://note.com/right_elk1185/n/n5388b431ceb4?hl=en-US</a>
+          </article>
+          <article class="source-card">
+            <strong>Duel Links Meta: Witchcrafter Guide</strong>
+            <p>Used for durable engine principles: Schmietta sends, Genni copies, Verre timing, Holiday recovery, and spell End Phase management.</p>
+            <a class="url" href="https://www.duellinksmeta.com/articles/guides/deck-types/witchcrafter-guide-by-acier-blacky-whirlwynnd">https://www.duellinksmeta.com/articles/guides/deck-types/witchcrafter-guide-by-acier-blacky-whirlwynnd</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cards = {
+      spell: { name: "Any Spell", id: "57916305", proxy: true },
+      creation: { name: "Witchcrafter Creation", id: "57916305" },
+      holiday: { name: "Witchcrafter Holiday", id: "83301414" },
+      unveiling: { name: "Witchcrafter Unveiling", id: "70226289" },
+      collaboration: { name: "Witchcrafter Collaboration", id: "10805153" },
+      bystreet: { name: "Witchcrafter Bystreet", id: "83289866" },
+      masterpiece: { name: "Witchcrafter Masterpiece", id: "55072170" },
+      patronus: { name: "Witchcrafter Patronus", id: "94553671" },
+      draping: { name: "Witchcrafter Draping", id: "56894757" },
+      celebration: { name: "Witchcrafter Celebration", id: "6958567" },
+      walpurgis: { name: "Witchcrafter Walpurgis", id: "32353566" },
+      distortion: { name: "Witchcrafter Distortion", id: "69748261" },
+      schmietta: { name: "Witchcrafter Schmietta", id: "21744288" },
+      pittore: { name: "Witchcrafter Pittore", id: "95245544" },
+      potterie: { name: "Witchcrafter Potterie", id: "59851535" },
+      genni: { name: "Witchcrafter Genni", id: "64756282" },
+      terracottan: { name: "Witchcrafter Terracottan", id: "70686400" },
+      marka: { name: "Witchcrafter Marka", id: "6071005" },
+      haine: { name: "Witchcrafter Haine", id: "84523092" },
+      madameVerre: { name: "Witchcrafter Madame Verre", id: "21522601" },
+      aruru: { name: "Witchcrafter Golem Aruru", id: "71074418" },
+      viceMadame: { name: "Witchcrafter Vice-Madame", id: "9603252" },
+      madameRilliona: { name: "Witchcrafter Madame Rilliona", id: "33475154" },
+      pupils: { name: "Witchcrafter Pupils", id: "69964858" },
+      rillionaMagistus: { name: "Rilliona, the Magistus of Verre", id: "72498838" },
+      verreMaid: { name: "Verre, the Maid of Endymion", id: "22623509" },
+      genniMaid: { name: "Genni, the Maid of Endymion", id: "7656689" },
+      regulus: { name: "Regulus, the Prince of Endymion", id: "96228804" },
+      verreMagic: { name: "Verre Magic - Lacrima of Light", id: "73664385" },
+      dragoon: { name: "Red-Eyes Dark Dragoon", id: "37818794" },
+      fancyBall: { name: "W:P Fancy Ball", id: "4993187" },
+      teller: { name: "Teller of Fairy Tails", id: "4026187" },
+      artemis: { name: "Artemis, the Magistus Moon Maiden", id: "34755994" },
+      zoroaFlame: { name: "Zoroa, the Magistus of Flame", id: "36099130" },
+      fairyLuna: { name: "Fairy Tail - Luna", id: "86937530" },
+      spenta: { name: "Spenta, the Magistus Sealer", id: "42544773" },
+      ash: { name: "Ash Blossom & Joyous Spring", id: "14558127" },
+      droll: { name: "Droll & Lock Bird", id: "94145021" },
+      veiler: { name: "Effect Veiler", id: "97268402" },
+      imperm: { name: "Infinite Impermanence", id: "10045474" },
+      nibiru: { name: "Nibiru, the Primal Being", id: "27204311" },
+      bookEclipse: { name: "Book of Eclipse", id: "35480699" },
+      superPoly: { name: "Super Polymerization", id: "48130397" },
+      ultimateSlayer: { name: "Ultimate Slayer", id: "2263869" },
+      darkRuler: { name: "Dark Ruler No More", id: "54693926" },
+      droplet: { name: "Forbidden Droplet", id: "24299458" },
+      thrust: { name: "Triple Tactics Thrust", id: "35269904" },
+      talent: { name: "Triple Tactics Talent", id: "25311006" },
+      duster: { name: "Harpie's Feather Duster", id: "18144507" },
+      cosmic: { name: "Cosmic Cyclone", id: "8267140" },
+      evenly: { name: "Evenly Matched", id: "15693423" },
+      ddCrow: { name: "D.D. Crow", id: "24508238" },
+      ghostBelle: { name: "Ghost Belle & Haunted Mansion", id: "73642296" },
+      ghostOgre: { name: "Ghost Ogre & Snow Rabbit", id: "59438930" },
+      dimFissure: { name: "Dimensional Fissure", id: "81674782" },
+      secretVillage: { name: "Secret Village of the Spellcasters", id: "68462976" },
+      dimBarrier: { name: "Dimensional Barrier", id: "83326048" },
+      solemnJudgment: { name: "Solemn Judgment", id: "41420027" },
+      solemnStrike: { name: "Solemn Strike", id: "40605147" },
+      purulia: { name: "Mulcharmy Purulia", id: "84192580" },
+      fuwalos: { name: "Mulcharmy Fuwalos", id: "42141493" }
+    };
+
+    const routes = {
+      creation: {
+        title: "Creation 1-Card Rilliona",
+        subtitle: "Primary modern pure route. It converts Creation into Verre, Walpurgis, Genni copy, Terracottan, Vice-Madame, then Madame Rilliona.",
+        nodes: [
+          {
+            label: "Open",
+            title: "Creation searches Verre, the Maid",
+            cards: ["creation", "verreMaid"],
+            text: "Activate Creation to add Verre, the Maid of Endymion. Special Summon Verre by its own procedure, then use Verre to access Walpurgis."
+          },
+          {
+            label: "Tutor",
+            title: "Walpurgis loads Genni",
+            cards: ["walpurgis", "genni"],
+            text: "Activate Walpurgis, add a Witchcrafter monster, then discard Witchcrafter Genni. Genni plus the banished Creation effect becomes a second search."
+          },
+          {
+            label: "Extend",
+            title: "Genni copies Creation into Schmietta",
+            cards: ["genni", "creation", "schmietta"],
+            text: "Banish Genni and Creation from GY to copy Creation and add Schmietta. Normal Summon Schmietta."
+          },
+          {
+            label: "Replace Cost",
+            title: "Schmietta sends Celebration through Walpurgis",
+            cards: ["schmietta", "walpurgis", "celebration", "terracottan"],
+            text: "Use Schmietta. Instead of discarding, Walpurgis sends Celebration from Deck to GY, then Schmietta summons Terracottan from Deck."
+          },
+          {
+            label: "Fuse",
+            title: "Terracottan makes Vice-Madame",
+            cards: ["terracottan", "verreMaid", "viceMadame"],
+            text: "Use Terracottan to Fusion Summon Vice-Madame with itself and Verre, the Maid. Schmietta in GY can now send Madame Verre."
+          },
+          {
+            label: "Convert",
+            title: "Vice-Madame retrieves Celebration",
+            cards: ["schmietta", "madameVerre", "viceMadame", "celebration"],
+            text: "Banish Schmietta to send Madame Verre. That non-Fusion Spellcaster effect triggers Vice-Madame, returning Celebration to hand."
+          },
+          {
+            label: "End",
+            title: "Celebration summons Madame Rilliona",
+            cards: ["celebration", "madameRilliona", "haine", "pittore", "marka"],
+            text: "Celebration shuffles Spellcaster materials from GY/banishment to Fusion Summon Madame Rilliona. Rilliona summons up to three Level 7 or lower Witchcrafters with different Attributes."
+          }
+        ],
+        branches: [
+          {
+            title: "Interaction branch",
+            cards: ["haine", "madameVerre", "viceMadame"],
+            text: "Prioritize Haine plus Madame Verre when you expect monster boards and need removal plus a mass negate."
+          },
+          {
+            title: "Follow-up branch",
+            cards: ["marka", "patronus", "creation"],
+            text: "Summon or load Marka/Patronus lines when the hand needs another Witchcrafter Spell/Trap for the next turn."
+          },
+          {
+            title: "Fusion branch",
+            cards: ["pupils", "celebration", "distortion"],
+            text: "If the hand already reaches Rilliona, Pupils and Distortion become the high ceiling interaction package."
+          }
+        ]
+      },
+      basic: {
+        title: "Small Witchcrafter + Spell",
+        subtitle: "Classic low-investment control line. Use it when the hand is light, when playing under Mulcharmy, or when you only need one boss plus recovery.",
+        nodes: [
+          {
+            label: "Open",
+            title: "Normal Summon a small Witchcrafter",
+            cards: ["schmietta", "pittore", "potterie", "genni", "spell"],
+            text: "Normal a small Witchcrafter. Use its Quick Effect, tribute it, and discard a Spell to summon a Witchcrafter from Deck."
+          },
+          {
+            label: "Choose",
+            title: "Pick the boss for the matchup",
+            cards: ["madameVerre", "haine", "aruru"],
+            text: "Madame Verre answers monster effects, Haine removes face-up cards and protects other Spellcasters from targeting, Aruru punishes attacks or targeting."
+          },
+          {
+            label: "Load",
+            title: "Use the small monster's GY role",
+            cards: ["schmietta", "holiday", "patronus", "masterpiece"],
+            text: "Schmietta sends any Witchcrafter card. Pittore filters. Potterie recovers when the hand is empty. Genni copies a Witchcrafter spell from GY."
+          },
+          {
+            label: "End",
+            title: "Recover Witchcrafter spell names",
+            cards: ["holiday", "unveiling", "bystreet", "creation"],
+            text: "During End Phase, recover unused Witchcrafter spells from GY if you control a Witchcrafter monster. Plan which names you spent earlier."
+          }
+        ],
+        branches: [
+          {
+            title: "Verre branch",
+            cards: ["madameVerre", "holiday", "unveiling"],
+            text: "Best when you need to stop field monster effects and keep a Spell-heavy hand for battle pump."
+          },
+          {
+            title: "Haine branch",
+            cards: ["haine", "bystreet", "draping"],
+            text: "Best when a single face-up card must die or when targeting protection matters."
+          },
+          {
+            title: "Genni branch",
+            cards: ["genni", "creation", "holiday"],
+            text: "Best when the opponent has Spell/Trap negation and you can convert a GY spell through a monster effect."
+          }
+        ]
+      },
+      walpurgis: {
+        title: "Walpurgis Ceiling",
+        subtitle: "High-ceiling OCG line. It asks for Walpurgis plus an extra cost/starter, but rewards you with multiple interaction layers.",
+        nodes: [
+          {
+            label: "Open",
+            title: "Resolve Walpurgis safely",
+            cards: ["walpurgis", "marka", "creation"],
+            text: "Use Walpurgis or Marka/Creation access to establish the Field Spell. If the hand already has a starter, consider holding the search to play around removal."
+          },
+          {
+            label: "Send",
+            title: "Replace discard with targeted deck sends",
+            cards: ["walpurgis", "celebration", "patronus", "masterpiece"],
+            text: "Walpurgis turns Witchcrafter discard costs into engine setup. Celebration enables Fusion, while Patronus/Masterpiece create recovery and follow-up."
+          },
+          {
+            label: "Fuse",
+            title: "Layer Vice-Madame, Rilliona, and Pupils",
+            cards: ["terracottan", "viceMadame", "madameRilliona", "pupils"],
+            text: "Terracottan and Celebration let you chain Fusion bodies. Madame Rilliona fills the field, and Pupils can copy Witchcrafter Spell/Trap utility."
+          },
+          {
+            label: "Lock",
+            title: "Add the hard interaction",
+            cards: ["distortion", "madameVerre", "haine", "fancyBall"],
+            text: "Distortion gives an archetype omni-negate when you control a high-level Witchcrafter. Verre, Haine, and W:P Fancy Ball cover monster effects and board removal."
+          }
+        ],
+        branches: [
+          {
+            title: "Max disruption",
+            cards: ["distortion", "dragoon", "madameVerre"],
+            text: "OCG lists can add Dragoon-style omni-negates, but this is a build choice and not required for pure control."
+          },
+          {
+            title: "Safer grind",
+            cards: ["patronus", "holiday", "bystreet"],
+            text: "If the opponent has several cards, keep the line lower and maximize cards that come back after removal."
+          },
+          {
+            title: "Removal branch",
+            cards: ["pupils", "celebration", "haine"],
+            text: "Use Pupils copying Celebration plus Haine to turn every spare Spell into another cleared card."
+          }
+        ]
+      },
+      recovery: {
+        title: "Recovery Rebuild",
+        subtitle: "Use after the first board is broken. The goal is not to overextend, but to restart the End Phase spell loop.",
+        nodes: [
+          {
+            label: "GY",
+            title: "Identify the missing piece",
+            cards: ["schmietta", "holiday", "patronus", "masterpiece"],
+            text: "If you need a body, send or recover Holiday. If you need a specific spell, use Patronus. If you need a Deck summon later, prepare Masterpiece."
+          },
+          {
+            label: "Revive",
+            title: "Put Verre or Haine back on field",
+            cards: ["holiday", "madameVerre", "haine"],
+            text: "Holiday revives the boss that answers the board. Verre is better into monster effects; Haine is better into face-up threats."
+          },
+          {
+            label: "Recycle",
+            title: "Return banished Spellcasters",
+            cards: ["patronus", "genni", "schmietta"],
+            text: "Patronus recycles banished Genni/Schmietta lines and searches another Witchcrafter Spell/Trap, so you do not run out of names."
+          },
+          {
+            label: "End",
+            title: "Rebuild the hand before pushing",
+            cards: ["creation", "unveiling", "collaboration", "bystreet"],
+            text: "Recover spells in End Phase, then use Creation/Unveiling next turn to convert the rebuilt hand into lethal or another control board."
+          }
+        ],
+        branches: [
+          {
+            title: "Low-resource branch",
+            cards: ["potterie", "holiday", "madameVerre"],
+            text: "Potterie can recover a Witchcrafter card when your hand is empty, making it the emergency grind name."
+          },
+          {
+            title: "Banished branch",
+            cards: ["patronus", "genni", "creation"],
+            text: "Patronus is the cleanest way to undo your own Genni and Schmietta banish costs."
+          },
+          {
+            title: "Kill branch",
+            cards: ["collaboration", "madameVerre", "haine"],
+            text: "When enough spells are back in hand, Collaboration plus Verre's reveal boost can end the game through backrow."
+          }
+        ]
+      }
+    };
+
+    function imageUrl(card) {
+      return "https://images.ygoprodeck.com/images/cards/" + card.id + ".jpg";
+    }
+
+    function cardToken(key, compact) {
+      const card = cards[key];
+      if (!card) return "";
+      const compactClass = compact ? " compact" : "";
+      return `
+        <span class="card-token${compactClass}" tabindex="0" title="${card.name}">
+          <img src="${imageUrl(card)}" alt="${card.name}" loading="lazy">
+          <span class="card-name">${card.name}</span>
+        </span>`;
+    }
+
+    function hydrateCards(root = document) {
+      root.querySelectorAll("[data-card]").forEach((slot) => {
+        const key = slot.getAttribute("data-card");
+        const compact = slot.hasAttribute("data-compact");
+        slot.outerHTML = cardToken(key, compact);
+      });
+    }
+
+    function triggerLine(keys) {
+      return `<div class="combo-cards">${keys.map((key, index) => {
+        const token = cardToken(key, false);
+        if (index === 0) return token;
+        return `<span class="plus-symbol">+</span>${token}`;
+      }).join("")}</div>`;
+    }
+
+    function renderGraph(routeKey) {
+      const route = routes[routeKey];
+      const shell = document.getElementById("graphShell");
+      const nodes = route.nodes.map((node, index) => `
+        <article class="graph-node" data-step="${index + 1}">
+          <div class="node-copy">
+            <div class="graph-label"><span class="icon">i</span>${node.label}</div>
+            <h3>${node.title}</h3>
+            <p>${node.text}</p>
+          </div>
+          ${triggerLine(node.cards)}
+        </article>
+        ${index < route.nodes.length - 1 ? `<div class="graph-edge"><span>${route.nodes[index + 1].label}</span></div>` : ""}
+      `).join("");
+
+      const branches = route.branches.map((branch) => `
+        <article class="branch">
+          <h4>${branch.title}</h4>
+          ${triggerLine(branch.cards)}
+          <p>${branch.text}</p>
+        </article>
+      `).join("");
+
+      shell.innerHTML = `
+        <div class="graph-title-row">
+          <div>
+            <h3>${route.title}</h3>
+            <p>${route.subtitle}</p>
+          </div>
+          <span class="route-chip"><span class="icon plus">+</span> Branch outs</span>
+        </div>
+        <div class="graph-lanes">${nodes}</div>
+        <div class="branch-grid">${branches}</div>
+      `;
+    }
+
+    document.querySelectorAll(".route-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".route-button").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderGraph(button.dataset.route);
+      });
+    });
+
+    const refToggle = document.getElementById("refToggle");
+    const sourcePanel = document.getElementById("sourcePanel");
+    refToggle.addEventListener("click", () => {
+      const open = sourcePanel.classList.toggle("open");
+      refToggle.classList.toggle("active", open);
+      refToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      refToggle.textContent = open ? "Hide References" : "Show References";
+    });
+
+    hydrateCards();
+    renderGraph("creation");
+  </script>
+</body>
+</html>

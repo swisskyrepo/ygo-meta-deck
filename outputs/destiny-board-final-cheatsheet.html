@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Destiny Board FINAL Cheatsheet Mind Map</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172026;
+      --muted: #5f6a73;
+      --paper: #f5f7f4;
+      --panel: #ffffff;
+      --panel-2: #edf3ef;
+      --line: #d7dfd9;
+      --green: #1f6f55;
+      --teal: #13767d;
+      --gold: #a77618;
+      --red: #a33c3a;
+      --blue: #315f8d;
+      --violet: #64528b;
+      --shadow: 0 16px 42px rgba(23, 32, 38, .12);
+      --radius: 8px;
+      --card-w: 58px;
+      --card-h: 85px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(245,247,244,.98) 400px, #edf3ef 100%),
+        repeating-linear-gradient(135deg, rgba(19,118,125,.07) 0 1px, transparent 1px 18px);
+      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; letter-spacing: 0; }
+    p, h1, h2, h3 { margin-top: 0; }
+    p { margin-bottom: 12px; }
+
+    .page {
+      width: min(1240px, calc(100vw - 28px));
+      max-width: calc(100vw - 28px);
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, 430px);
+      gap: 24px;
+      align-items: center;
+      padding: 18px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 44px;
+      height: 10px;
+      border-radius: 0;
+      background:
+        radial-gradient(circle at 5px 5px, var(--red) 0 5px, transparent 6px),
+        radial-gradient(circle at 22px 5px, var(--gold) 0 5px, transparent 6px),
+        radial-gradient(circle at 39px 5px, var(--teal) 0 5px, transparent 6px);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin-bottom: 14px;
+      font-size: 4.35rem;
+      line-height: .96;
+      letter-spacing: 0;
+      overflow-wrap: break-word;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 2rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+      overflow-wrap: break-word;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+      overflow-wrap: break-word;
+    }
+
+    .lead {
+      max-width: 800px;
+      color: #314147;
+      font-size: 1.12rem;
+      overflow-wrap: break-word;
+    }
+
+    .hero-pills,
+    .chips,
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      color: #263238;
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .pill strong,
+    .tag strong { color: var(--ink); }
+
+    .hero-showcase {
+      min-height: 350px;
+      display: grid;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(48px, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid rgba(23,32,38,.12);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.82);
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+
+    .showcase .card-token:nth-child(1) { transform: translateY(13px) rotate(-5deg); }
+    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
+    .showcase .card-token:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
+    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
+    .showcase .card-token:nth-child(5) { transform: translateY(11px) rotate(-3deg); }
+    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
+    .showcase .card-token:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
+    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
+    .showcase .card-token:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
+    .showcase .card-token:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase .card-name { display: none; }
+
+    .quick-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(215,223,217,.92);
+      background: linear-gradient(180deg, rgba(245,247,244,.98), rgba(245,247,244,.9));
+      backdrop-filter: blur(10px);
+    }
+
+    .quick-nav a,
+    .route-button,
+    .ref-toggle {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .quick-nav a:hover,
+    .route-button:hover,
+    .ref-toggle:hover { border-color: #aab9b0; text-decoration: none; }
+
+    .ref-toggle {
+      margin-left: auto;
+      color: #fff;
+      border-color: var(--violet);
+      background: var(--violet);
+    }
+
+    main {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    section {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 8px 24px rgba(23,32,38,.06);
+      overflow: visible;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .section-head > div,
+    .grid-2 > *,
+    .grid-3 > *,
+    .grid-4 > *,
+    .board-grid > *,
+    .deck-layout > *,
+    .graph-detail > * {
+      min-width: 0;
+    }
+
+    .section-head p {
+      max-width: 70ch;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid-3,
+    .grid-2,
+    .grid-4 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .info-box,
+    .fact,
+    .matchup,
+    .end-board,
+    .deck-block {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      overflow-wrap: break-word;
+    }
+
+    .info-box.green { border-left: 5px solid var(--green); }
+    .info-box.gold { border-left: 5px solid var(--gold); }
+    .info-box.blue { border-left: 5px solid var(--blue); }
+    .info-box.red { border-left: 5px solid var(--red); }
+    .info-box.violet { border-left: 5px solid var(--violet); }
+
+    .fact strong,
+    .info-box strong,
+    .matchup strong,
+    .end-board strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #e9f2ee;
+      color: var(--green);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .icon.plus {
+      background: #fff2d8;
+      color: #8a590e;
+    }
+
+    .icon.info {
+      background: #e8eff8;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-style: italic;
+    }
+
+    .card-strip,
+    .deck-list,
+    .pair-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-start;
+      overflow: visible;
+    }
+
+    .card-token {
+      position: relative;
+      display: grid;
+      gap: 4px;
+      width: var(--card-w);
+      min-width: var(--card-w);
+      color: var(--ink);
+      text-align: center;
+      isolation: isolate;
+    }
+
+    .card-token img {
+      width: var(--card-w);
+      height: var(--card-h);
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,.22);
+      box-shadow: 0 6px 12px rgba(17,24,28,.16);
+      background: #d8ded9;
+    }
+
+    .card-name {
+      min-height: 28px;
+      display: block;
+      color: #2f3a40;
+      font-size: .72rem;
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+    }
+
+    .qty {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 2px solid #fff;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 850;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+
+    .zoom {
+      position: absolute;
+      z-index: 80;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      width: 210px;
+      height: auto;
+      max-width: min(72vw, 240px);
+      transform: translateX(-50%) scale(.96);
+      transform-origin: bottom center;
+      border-radius: 8px;
+      border: 2px solid #fff;
+      box-shadow: 0 18px 44px rgba(0,0,0,.38);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .14s ease, transform .14s ease;
+    }
+
+    .card-token:hover .zoom,
+    .card-token:focus-within .zoom {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .pair {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #fff, #f8faf8);
+      overflow-wrap: break-word;
+    }
+
+    .pair-row {
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .pair p {
+      margin-bottom: 0;
+      color: #34454a;
+      font-size: .93rem;
+    }
+
+    .route-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .route-button[aria-pressed="true"] {
+      color: #fff;
+      border-color: var(--green);
+      background: var(--green);
+    }
+
+    .graph-shell {
+      position: relative;
+      min-height: 500px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,248,245,.96)),
+        repeating-linear-gradient(90deg, rgba(31,111,85,.07) 0 1px, transparent 1px 80px);
+      overflow: hidden;
+    }
+
+    .graph {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      min-width: 900px;
+    }
+
+    .graph-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .edges {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .edges line {
+      stroke: rgba(49,95,141,.6);
+      stroke-width: 3;
+      marker-end: url(#arrow);
+    }
+
+    .edge-label {
+      position: absolute;
+      z-index: 2;
+      padding: 3px 7px;
+      border: 1px solid #cbd8d1;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      color: #334249;
+      font-size: .72rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+    }
+
+    .node {
+      position: absolute;
+      z-index: 4;
+      width: 178px;
+      min-height: 132px;
+      padding: 9px;
+      border: 1px solid #cbd8d1;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.96);
+      color: var(--ink);
+      text-align: left;
+      box-shadow: 0 10px 24px rgba(23,32,38,.12);
+      cursor: pointer;
+    }
+
+    .node.active {
+      outline: 3px solid rgba(31,111,85,.26);
+      border-color: var(--green);
+    }
+
+    .node.result { border-top: 5px solid var(--green); }
+    .node.warn { border-top: 5px solid var(--red); }
+    .node.choice { border-top: 5px solid var(--gold); }
+    .node.control { border-top: 5px solid var(--blue); }
+    .node.alt { border-top: 5px solid var(--violet); }
+
+    .node-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 7px;
+      font-weight: 850;
+      line-height: 1.1;
+    }
+
+    .node-cards {
+      display: flex;
+      gap: 4px;
+      min-height: 53px;
+      overflow: visible;
+    }
+
+    .node .card-token {
+      --card-w: 35px;
+      --card-h: 51px;
+      width: 35px;
+      min-width: 35px;
+    }
+
+    .node .card-name { display: none; }
+    .node .qty { display: none; }
+    .node .zoom { width: 170px; }
+
+    .node-note {
+      color: #3a4b50;
+      font-size: .78rem;
+      line-height: 1.24;
+    }
+
+    .graph-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .steps li { margin: 0 0 8px; }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+      align-items: start;
+    }
+
+    .field-label {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .deck-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+      gap: 12px;
+    }
+
+    .deck-block h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .deck-block .count {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .compact-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .compact-list li { margin: 0 0 7px; }
+
+    .refs {
+      display: none;
+      border-color: #cfc6df;
+      background: #fbf9ff;
+    }
+
+    .refs.visible { display: block; }
+
+    .refs ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .refs li { margin-bottom: 10px; }
+
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 2px 7px;
+      border: 1px solid #cdd6cf;
+      border-radius: 6px;
+      background: #fff;
+      color: #324047;
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    @media (max-width: 920px) {
+      h1 { font-size: 3.35rem; }
+      .hero,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .graph-detail,
+      .board-grid,
+      .deck-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-showcase { min-height: 0; }
+      .showcase { max-width: 480px; }
+      .ref-toggle { margin-left: 0; }
+    }
+
+    @media (max-width: 620px) {
+      :root {
+        --card-w: 50px;
+        --card-h: 73px;
+      }
+
+      .page {
+        width: calc(100vw - 44px);
+        max-width: calc(100vw - 44px);
+        padding-top: 10px;
+      }
+
+      h1 {
+        font-size: 2.45rem;
+        line-height: 1;
+      }
+
+      h2 { font-size: 1.48rem; }
+      h2 { font-size: 1.32rem; }
+      section { padding: 14px; }
+      section { padding: 14px 12px; }
+      .lead { font-size: 1rem; }
+      .section-head p { font-size: .94rem; }
+      .info-box,
+      .fact,
+      .matchup,
+      .end-board,
+      .deck-block,
+      .pair {
+        padding: 12px;
+        font-size: .94rem;
+      }
+      section,
+      section * {
+        overflow-wrap: anywhere;
+      }
+      .showcase { grid-template-columns: repeat(5, minmax(42px, 1fr)); gap: 7px; padding: 10px; }
+      .quick-nav { top: 0; }
+      .graph-shell { min-height: 450px; padding: 8px; }
+      .graph { height: 450px; min-width: 820px; }
+      .node { width: 152px; min-height: 124px; padding: 8px; }
+      .field-row { grid-template-columns: 1fr; gap: 6px; }
+      .zoom { width: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot" aria-hidden="true"></span> Alternate win control cheatsheet</div>
+        <h1>Destiny Board FINAL Mind Map</h1>
+        <p class="lead">A top-to-bottom reference for the modern Destiny Board game plan: assemble the FINAL clock, protect the board, pivot into Runick trap-control or Necrofear pressure, and side for the current combo-heavy Master Duel field.</p>
+        <div class="hero-pills">
+          <span class="pill"><strong>Win condition</strong> FINAL by opponent End Phases</span>
+          <span class="pill"><strong>Best shell found</strong> Runick trap-control</span>
+          <span class="pill"><strong>Latest direct list</strong> MDM Jan 19, 2026</span>
+          <span class="pill"><strong>Meta caveat</strong> Rogue/fun, not tiered</span>
+        </div>
+      </div>
+      <div class="hero-showcase">
+        <div class="showcase" data-card-strip="hero"></div>
+      </div>
+    </header>
+
+    <nav class="quick-nav" aria-label="Page navigation">
+      <a href="#plan">Plan</a>
+      <a href="#core">Core</a>
+      <a href="#combos">Combo graph</a>
+      <a href="#boards">End boards</a>
+      <a href="#variant">Latest variant</a>
+      <a href="#tips">Tips</a>
+      <a href="#side">Side and counters</a>
+      <button class="ref-toggle" type="button" id="refToggle" aria-expanded="false" aria-controls="references">References</button>
+    </nav>
+
+    <main>
+      <section id="references" class="refs" aria-label="References used">
+        <div class="section-head">
+          <div>
+            <h2>References Used</h2>
+            <p>This tab is hidden by default. It lists the sources used to build the cheatsheet and the limits of what was found.</p>
+          </div>
+        </div>
+        <ol>
+          <li><a href="https://www.masterduelmeta.com/articles/guides/dboard-ybakura" target="_blank" rel="noreferrer">Master Duel Meta - Introduction to Destiny Board</a>. Used for core ratios, Dark Sanctuary role, Dark Spirit's Mastery role, Sentence of Doom caveat, and Necrofear engine notes. Published and updated July 4, 2025.</li>
+          <li><a href="https://www.masterduelmeta.com/top-decks/fusion-x-synchro-festival-/january-2026/destiny-board/ybakura/PsyXp" target="_blank" rel="noreferrer">Master Duel Meta - Destiny Board by YBakura</a>. Latest direct Destiny Board list found during research: Fusion x Synchro Festival +, January 19, 2026. Its notes say the Runick version does not need Dark Sanctuary, but must manage zones carefully.</li>
+          <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Destiny%20Board" target="_blank" rel="noreferrer">Master Duel Meta - Destiny Board deck breakdown</a>. Used for current archetype sample context: average 41-card list and sample WCS 2025 DLv. Max list dated June 10, 2025.</li>
+          <li><a href="https://www.masterduelmeta.com/cards/Destiny%20Board" target="_blank" rel="noreferrer">Master Duel Meta - Destiny Board card page</a>, plus <a href="https://www.masterduelmeta.com/cards/Dark%20Sanctuary" target="_blank" rel="noreferrer">Dark Sanctuary</a>, <a href="https://www.masterduelmeta.com/cards/Dark%20Spirit%27s%20Mastery" target="_blank" rel="noreferrer">Dark Spirit's Mastery</a>, and <a href="https://www.masterduelmeta.com/cards/Sentence%20of%20Doom" target="_blank" rel="noreferrer">Sentence of Doom</a>. Used for card effect summaries and latest-deck context.</li>
+          <li><a href="https://www.masterduelmeta.com/tier-list" target="_blank" rel="noreferrer">Master Duel Meta - Tier List</a>. Checked June 8, 2026. It listed Kewl Tune as the top tournament-power deck, with K9/Elfnote/Branded/Vanquish Soul K9 nearby.</li>
+          <li><a href="https://www.masterduelmeta.com/top-cards/" target="_blank" rel="noreferrer">Master Duel Meta - Top Cards</a>. Checked for current-date context. Page states official in-game highest-rank data and latest update June 4, 2026.</li>
+          <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta - Combos and Counters</a>. It has Combos, Counters, and Spreadsheets tabs. I did not find a dedicated public Destiny Board combo spreadsheet there or elsewhere in search, so the graph uses card interactions plus MDM guide/list evidence.</li>
+          <li><a href="https://ygoprodeck.com/deck/bakura-domain-656407" target="_blank" rel="noreferrer">YGOPRODeck - Bakura Domain</a>. Used only as a current related variant idea: Domain Format, Spirit Message/Archfiend/Fiendsmith, 60 cards. Not treated as a tournament top.</li>
+          <li><a href="https://db.ygoprodeck.com/api-guide/" target="_blank" rel="noreferrer">YGOPRODeck API and card images</a>. Used to resolve card IDs and to render real card images via <span class="kbd">https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</span>.</li>
+        </ol>
+      </section>
+
+      <section id="plan">
+        <div class="section-head">
+          <div>
+            <h2>Playstyle and Win Condition</h2>
+            <p>Destiny Board wins by surviving four opposing End Phases after the first activation. The deck is a control shell first and a special-victory deck second.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <div class="info-box green">
+            <strong><span class="icon info">i</span> Primary plan</strong>
+            Set or search Destiny Board, force the game into low-tempo turns, and let the messages place in order: I, N, A, L. Protect the original Continuous Trap above everything else.
+          </div>
+          <div class="info-box blue">
+            <strong><span class="icon plus">+</span> Runick shell</strong>
+            Runick cards trade your Battle Phase for removal, bodies, Fountain draws, and deckout pressure. That drawback barely matters because FINAL is not combat based.
+          </div>
+          <div class="info-box gold">
+            <strong><span class="icon plus">+</span> Trap shell</strong>
+            Trap Trick, Dogmatika Punishment, Ice Dragon's Prison, Torrential Tribute, Needle Ceiling, and Lord of the Heavenly Prison buy the turns Destiny Board needs.
+          </div>
+          <div class="info-box red">
+            <strong><span class="icon info">i</span> Failure point</strong>
+            If Destiny Board or any placed Spirit Message leaves your field, the package collapses. Destruction protection helps, but banish/bounce/negate still matter.
+          </div>
+        </div>
+      </section>
+
+      <section id="core">
+        <div class="section-head">
+          <div>
+            <h2>Core Cards and Trigger Pairs</h2>
+            <p>These are the cards that create the clock, recover dead letters, or protect the time you need.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="pair">
+            <h3>Search into clock</h3>
+            <div class="pair-row">
+              <span data-card="Dark Spirit's Mastery"></span>
+              <span class="icon plus">+</span>
+              <span data-card="Destiny Board"></span>
+            </div>
+            <p>Mastery turns any discard into Destiny Board or a Level 8 Fiend. Its graveyard effect later recycles bricked letters or spent Destiny Boards into fresh draws.</p>
+          </div>
+          <div class="pair">
+            <h3>Protected message zones</h3>
+            <div class="pair-row">
+              <span data-card="Destiny Board"></span>
+              <span class="icon plus">+</span>
+              <span data-card="Dark Sanctuary"></span>
+            </div>
+            <p>Dark Sanctuary can turn placed Spirit Messages into effect-immune monsters, keeping Spell/Trap zones free. It does not stop direct attacks, so LP still needs protection.</p>
+          </div>
+          <div class="pair">
+            <h3>Backrow shield and tutor</h3>
+            <div class="pair-row">
+              <span data-card="Lord of the Heavenly Prison"></span>
+              <span class="icon plus">+</span>
+              <span data-card="Trap Trick"></span>
+            </div>
+            <p>Lord protects Set cards from destruction while revealed, then can body the field and Set the exact Spell/Trap needed after you activate a Set card.</p>
+          </div>
+          <div class="pair">
+            <h3>Runick grind package</h3>
+            <div class="pair-row">
+              <span data-card="Runick Tip"></span>
+              <span class="icon plus">+</span>
+              <span data-card="Runick Fountain"></span>
+              <span class="icon plus">+</span>
+              <span data-card="Hugin the Runick Wings"></span>
+            </div>
+            <p>Tip finds the right Runick card, Hugin accesses Fountain, and Fountain recycles spent Runick spells into more cards. This is the cleanest modern shell found.</p>
+          </div>
+        </div>
+        <div class="card-strip" data-card-strip="core" style="margin-top: 12px;"></div>
+      </section>
+
+      <section id="combos">
+        <div class="section-head">
+          <div>
+            <h2>Core Combos as an Interactive Graph</h2>
+            <p>Select a route, then click graph nodes for the specific card interaction. Branches show how the deck pivots when the FINAL plan is too slow or interrupted.</p>
+          </div>
+        </div>
+        <div class="route-tabs" id="routeTabs"></div>
+        <div class="graph-shell">
+          <div class="graph-scroll">
+            <div class="graph" id="graph">
+              <svg class="edges" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L10,4 L0,8 Z" fill="rgba(49,95,141,.68)"></path>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="graph-detail">
+          <div class="info-box green">
+            <h3 id="routeTitle">Route</h3>
+            <ol class="steps" id="routeSteps"></ol>
+          </div>
+          <div class="info-box blue">
+            <h3 id="nodeTitle">Selected node</h3>
+            <div class="card-strip" id="nodeCards"></div>
+            <p id="nodeText" class="subtle"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="boards">
+        <div class="section-head">
+          <div>
+            <h2>End Board Examples</h2>
+            <p>Destiny Board end boards are not negate piles. The target field is a protected clock plus enough interaction to survive the next turn cycle.</p>
+          </div>
+        </div>
+        <div class="board-grid">
+          <div class="end-board">
+            <strong>Minimal FINAL clock - by opponent End Phase</strong>
+            <p class="subtle">You found Destiny Board but did not establish Runick Fountain yet.</p>
+            <div class="field-row">
+              <span class="field-label">Field</span>
+              <div class="card-strip" data-cards="Destiny Board,Spirit Message &quot;I&quot;"></div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Protection</span>
+              <div class="card-strip" data-cards="Lord of the Heavenly Prison,Trap Trick,Dogmatika Punishment"></div>
+            </div>
+            <p class="subtle">If Lord is revealed, Set cards resist destruction. If a Set trap is activated, Lord can summon and Set the next defensive piece.</p>
+          </div>
+          <div class="end-board">
+            <strong>Runick control clock - by opponent End Phase</strong>
+            <p class="subtle">The January 2026 list leans here: Runick engine plus traps, with Dark Sanctuary optional.</p>
+            <div class="field-row">
+              <span class="field-label">Field</span>
+              <div class="card-strip" data-cards="Runick Fountain,Destiny Board,Spirit Message &quot;I&quot;,Hugin the Runick Wings"></div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Interaction</span>
+              <div class="card-strip" data-cards="Runick Freezing Curses,Runick Flashing Fire,Ice Dragon's Prison"></div>
+            </div>
+            <p class="subtle">Fountain gives follow-up, Runick spells answer monsters, and the FINAL clock pressures opponents who refuse to commit.</p>
+          </div>
+          <div class="end-board">
+            <strong>Dark Sanctuary fortress - after first letter</strong>
+            <p class="subtle">Use this in non-Runick or slower trap builds when zones matter less than protecting letters.</p>
+            <div class="field-row">
+              <span class="field-label">Field</span>
+              <div class="card-strip" data-cards="Dark Sanctuary,Destiny Board,Spirit Message &quot;I&quot;"></div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Set cards</span>
+              <div class="card-strip" data-cards="Sentence of Doom,Solemn Judgment,Torrential Tribute"></div>
+            </div>
+            <p class="subtle">Spirit Messages placed by Destiny Board can become monsters. Keep Destiny Board itself protected; it remains the key target.</p>
+          </div>
+          <div class="end-board">
+            <strong>Necrofear fallback - after Tour Guide line</strong>
+            <p class="subtle">This is the pressure line when FINAL is not safe or when Mastery searched a Level 8 Fiend.</p>
+            <div class="field-row">
+              <span class="field-label">Field/GY</span>
+              <div class="card-strip" data-cards="Cherubini, Ebon Angel of the Burning Abyss,Dark Necrofear,Dark Spirit of Banishment"></div>
+            </div>
+            <div class="field-row">
+              <span class="field-label">Follow-up</span>
+              <div class="card-strip" data-cards="Curse Necrofear,Dark Spirit of Malice,Dark Spirit's Mastery"></div>
+            </div>
+            <p class="subtle">It is not the Runick list's main plan, but it gives the archetype a real non-FINAL axis.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="variant">
+        <div class="section-head">
+          <div>
+            <h2>Latest Variant Found</h2>
+            <p>The latest direct Destiny Board list found on Master Duel Meta is a January 19, 2026 Runick trap-control event list by YBakura. I did not find a current tournament-top Destiny Board cut.</p>
+          </div>
+        </div>
+        <div class="deck-layout">
+          <div class="deck-block">
+            <h3>Main Deck <span class="count">40 cards</span></h3>
+            <div class="deck-list" id="mainDeck"></div>
+          </div>
+          <div class="deck-block">
+            <h3>Extra Deck <span class="count">15 cards</span></h3>
+            <div class="deck-list" id="extraDeck"></div>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="info-box green">
+            <strong>Why Runick?</strong>
+            It buys turns without needing to attack, converts dead time into Fountain cards, and creates a deckout threat that makes opponents overextend into traps.
+          </div>
+          <div class="info-box gold">
+            <strong>Zone note</strong>
+            The list note says Dark Sanctuary is not required for Runick variants. That saves cards, but you must keep Spell/Trap zones open as the messages accumulate.
+          </div>
+          <div class="info-box violet">
+            <strong>Fiendsmith/Domain idea</strong>
+            A newer YGOPRODeck Bakura Domain concept pairs Destiny Board and Dark Sanctuary with Level 8 Fiends and Fiendsmith cards. It is a variant idea, not tournament-top evidence.
+          </div>
+        </div>
+      </section>
+
+      <section id="tips">
+        <div class="section-head">
+          <div>
+            <h2>Tips and Recovery Options</h2>
+            <p>Most wins come from making the opponent spend removal inefficiently, then either resolving FINAL or pivoting into a grind plan.</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="fact">
+            <strong>Do not expose Destiny Board naked</strong>
+            Open with Set traps and Lord when possible. Destiny Board is the win condition and the easiest single point for opponents to attack.
+          </div>
+          <div class="fact">
+            <strong>Use Mastery as both search and cleanup</strong>
+            Discard a dead Spirit Message to find Destiny Board, Lava Golem, Dark Necrofear, or Curse Necrofear. Later, banish Mastery to return dead package cards and draw.
+          </div>
+          <div class="fact">
+            <strong>Respect Sentence of Doom timing</strong>
+            It accelerates the clock only after Destiny Board is active. The MDM guide specifically warns that placing a letter before activating Destiny Board can fail the win condition.
+          </div>
+          <div class="fact">
+            <strong>Fountain is your second clock</strong>
+            If Destiny Board is answered, Runick Fountain still threatens card advantage and deckout. Preserve it against control decks.
+          </div>
+          <div class="fact">
+            <strong>Punishment targets are toolbox cards</strong>
+            N'tss pops, Garura draws, Malong bounces, Skull Knight gives delayed destruction, and high-ATK fusions let Dogmatika Punishment answer large monsters.
+          </div>
+          <div class="fact">
+            <strong>Switch plans quickly</strong>
+            Against backrow hate, do not chase FINAL at all costs. Lava Golem, Super Polymerization, Runick removal, and Necrofear lines can win games where the letters cannot.
+          </div>
+        </div>
+      </section>
+
+      <section id="side">
+        <div class="section-head">
+          <div>
+            <h2>Side Deck Options and Counters</h2>
+            <p>Master Duel is usually best-of-one, but this section treats side decking as best-of-three prep. The June 2026 MDM tier data points to Kewl Tune, K9/VS K9, Elfnote, Branded, Sky Striker, Dracotail, and other combo/control decks.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="matchup">
+            <strong>Vs combo and Kewl Tune style decks</strong>
+            <div class="card-strip" data-cards="Droll &amp; Lock Bird,Mulcharmy Fuwalos,Nibiru, the Primal Being,Infinite Impermanence,Dimensional Barrier"></div>
+            <p class="subtle">Droll/Fuwalos pressure high-search or high-summon turns. Barrier can call the key Extra Deck type. Use Lava Golem and Super Poly when they commit through hand traps.</p>
+          </div>
+          <div class="matchup">
+            <strong>Vs Branded, Orcust, Maliss, graveyard decks</strong>
+            <div class="card-strip" data-cards="Ghost Belle &amp; Haunted Mansion,Called by the Grave,Different Dimension Ground,Dimension Shifter,Bystial Magnamhut,Bystial Druiswurm"></div>
+            <p class="subtle">Graveyard hate is strong, but Shifter and Different Dimension Ground can conflict with Mastery recovery, Dogmatika Punishment, and Runick Fountain. Side them only when the matchup is worth the self-hit.</p>
+          </div>
+          <div class="matchup">
+            <strong>Vs backrow/control mirrors</strong>
+            <div class="card-strip" data-cards="Cosmic Cyclone,Harpie's Feather Duster,Lightning Storm,Red Reboot,Typhoon,Twin Twisters"></div>
+            <p class="subtle">Cosmic is especially relevant because banish bypasses destruction replacement. Keep Lord of the Heavenly Prison live before you commit multiple Set traps.</p>
+          </div>
+          <div class="matchup">
+            <strong>Cards opponents use to beat Destiny Board</strong>
+            <div class="card-strip" data-cards="Cosmic Cyclone,Evenly Matched,Harpie's Feather Duster,Lightning Storm,Red Reboot,Ash Blossom &amp; Joyous Spring"></div>
+            <p class="subtle">They remove or negate the original Continuous Trap, stop Mastery, or turn off your traps. Destruction protection is not enough against banish, bounce, or trap-lock effects.</p>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 12px;">
+          <div class="info-box blue">
+            <strong>Protecting against removal</strong>
+            Side or main Solemn Judgment when the format is heavy on Cosmic, Feather Duster, and Lightning Storm. Hugin helps only against destruction, not banish.
+          </div>
+          <div class="info-box red">
+            <strong>Beating Dark Sanctuary</strong>
+            Opponents should attack directly if only Spirit Message monsters are blocking. The Sanctuary monsters do not force attacks into themselves.
+          </div>
+          <div class="info-box green">
+            <strong>Going second package</strong>
+            Lava Golem, Super Polymerization, Dark Ruler No More, and Forbidden Droplet buy the first turn cycle. Destiny Board only matters after the board is stable.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const cards = {
+      "Destiny Board": 94212438,
+      "Spirit Message \"I\"": 31893528,
+      "Spirit Message \"N\"": 67287533,
+      "Spirit Message \"A\"": 94772232,
+      "Spirit Message \"L\"": 30170981,
+      "Dark Sanctuary": 16625614,
+      "Dark Spirit's Mastery": 14386013,
+      "Sentence of Doom": 40771118,
+      "Dark Necrofear": 31829185,
+      "Curse Necrofear": 14509651,
+      "Tour Guide From the Underworld": 10802915,
+      "Doomdog Octhros": 58616392,
+      "Fiendish Rhino Warrior": 81035362,
+      "Cherubini, Ebon Angel of the Burning Abyss": 58699500,
+      "Dark Spirit of Banishment": 51993760,
+      "Dark Spirit of Malice": 87988305,
+      "Lava Golem": 102380,
+      "Lord of the Heavenly Prison": 9822220,
+      "Runick Fountain": 92107604,
+      "Super Polymerization": 48130397,
+      "Runick Destruction": 94445733,
+      "Runick Dispelling": 66712905,
+      "Runick Flashing Fire": 68957034,
+      "Runick Freezing Curses": 30430448,
+      "Runick Slumber": 67835547,
+      "Runick Smiting Storm": 93229151,
+      "Runick Tip": 31562086,
+      "Torrential Tribute": 53582587,
+      "Needle Ceiling": 38411870,
+      "Trap Trick": 80101899,
+      "Dogmatika Punishment": 82956214,
+      "Ice Dragon's Prison": 20899496,
+      "Hugin the Runick Wings": 55990317,
+      "Munin the Runick Wings": 92385016,
+      "Elder Entity N'tss": 80532587,
+      "Mudragon of the Swamp": 54757758,
+      "Geri the Runick Fangs": 28373620,
+      "Freki the Runick Fangs": 47219274,
+      "Fossil Warrior Skull Knight": 59531356,
+      "Garura, Wings of Resonant Life": 11765832,
+      "Secreterion Dragon": 89851827,
+      "Sleipnir the Runick Mane": 74659582,
+      "Saint Azamina": 85065943,
+      "Five-Headed Dragon": 99267150,
+      "Golden Cloud Beast - Malong": 93125329,
+      "Chaos Angel": 22850702,
+      "Evenly Matched": 15693423,
+      "Cosmic Cyclone": 8267140,
+      "Harpie's Feather Duster": 18144507,
+      "Lightning Storm": 14532163,
+      "Red Reboot": 23002292,
+      "Solemn Judgment": 41420027,
+      "Dimensional Barrier": 83326048,
+      "Droll & Lock Bird": 94145021,
+      "Nibiru, the Primal Being": 27204311,
+      "Ash Blossom & Joyous Spring": 14558127,
+      "Called by the Grave": 24224830,
+      "Ghost Belle & Haunted Mansion": 73642296,
+      "Artifact Lancea": 34267821,
+      "Different Dimension Ground": 31849106,
+      "Bystial Druiswurm": 6637331,
+      "Bystial Magnamhut": 33854624,
+      "Skill Drain": 82732705,
+      "There Can Be Only One": 24207889,
+      "Gozen Match": 53334471,
+      "Rivalry of Warlords": 90846359,
+      "Anti-Spell Fragrance": 58921041,
+      "Mulcharmy Fuwalos": 42141493,
+      "Infinite Impermanence": 10045474,
+      "Dimension Shifter": 91800273,
+      "Typhoon": 14883228,
+      "Twin Twisters": 43898403,
+      "Dark Ruler No More": 54693926,
+      "Forbidden Droplet": 24299458,
+      "Fiendsmith Engraver": 60764609,
+      "Fiendsmith's Tract": 98567237,
+      "Fiendsmith's Requiem": 2463794,
+      "Fiendsmith's Sequence": 49867899,
+      "Fiendsmith's Desirae": 82135803,
+      "Fiendsmith's Sanct": 35552985,
+      "Fiendsmith in Paradise": 99989863
+    };
+
+    const heroCards = [
+      "Destiny Board",
+      "Spirit Message \"I\"",
+      "Spirit Message \"N\"",
+      "Spirit Message \"A\"",
+      "Spirit Message \"L\"",
+      "Dark Spirit's Mastery",
+      "Dark Sanctuary",
+      "Runick Fountain",
+      "Lord of the Heavenly Prison",
+      "Trap Trick"
+    ];
+
+    const coreCards = [
+      "Destiny Board",
+      "Dark Spirit's Mastery",
+      "Dark Sanctuary",
+      "Sentence of Doom",
+      "Lord of the Heavenly Prison",
+      "Runick Tip",
+      "Runick Fountain",
+      "Trap Trick",
+      "Dogmatika Punishment",
+      "Lava Golem",
+      "Dark Necrofear",
+      "Curse Necrofear"
+    ];
+
+    const mainDeck = [
+      ["Lava Golem", 1],
+      ["Lord of the Heavenly Prison", 3],
+      ["Dark Spirit's Mastery", 3],
+      ["Runick Fountain", 1],
+      ["Spirit Message \"A\"", 1],
+      ["Spirit Message \"I\"", 1],
+      ["Spirit Message \"L\"", 1],
+      ["Spirit Message \"N\"", 1],
+      ["Super Polymerization", 1],
+      ["Runick Destruction", 1],
+      ["Runick Dispelling", 1],
+      ["Runick Flashing Fire", 3],
+      ["Runick Freezing Curses", 2],
+      ["Runick Slumber", 2],
+      ["Runick Smiting Storm", 1],
+      ["Runick Tip", 2],
+      ["Torrential Tribute", 2],
+      ["Needle Ceiling", 2],
+      ["Trap Trick", 3],
+      ["Dogmatika Punishment", 3],
+      ["Ice Dragon's Prison", 2],
+      ["Destiny Board", 3]
+    ];
+
+    const extraDeck = [
+      ["Hugin the Runick Wings", 1],
+      ["Munin the Runick Wings", 1],
+      ["Elder Entity N'tss", 2],
+      ["Mudragon of the Swamp", 1],
+      ["Geri the Runick Fangs", 1],
+      ["Freki the Runick Fangs", 1],
+      ["Fossil Warrior Skull Knight", 1],
+      ["Garura, Wings of Resonant Life", 1],
+      ["Secreterion Dragon", 1],
+      ["Sleipnir the Runick Mane", 1],
+      ["Saint Azamina", 1],
+      ["Five-Headed Dragon", 1],
+      ["Golden Cloud Beast - Malong", 1],
+      ["Chaos Angel", 1]
+    ];
+
+    const routes = {
+      final: {
+        label: "FINAL clock",
+        title: "Route 1 - Search and protect Destiny Board",
+        steps: [
+          "Use Dark Spirit's Mastery to find Destiny Board, discarding a card you can recover later.",
+          "Set Destiny Board behind Lord of the Heavenly Prison, Trap Trick, Punishment, or a Runick interruption.",
+          "During each opponent End Phase, Destiny Board places I, then N, then A, then L.",
+          "If Dark Sanctuary is active, place messages as monsters to keep Spell/Trap zones free.",
+          "If Sentence of Doom is included, use it only after Destiny Board is already active to accelerate a valid message."
+        ],
+        nodes: [
+          { id: "start", x: 7, y: 39, cls: "control", title: "Find Board", cards: ["Dark Spirit's Mastery", "Destiny Board"], note: "Mastery is your extra copy of Destiny Board and later fixes bricked letters." },
+          { id: "set", x: 28, y: 23, cls: "control", title: "Set with cover", cards: ["Lord of the Heavenly Prison", "Trap Trick"], note: "Reveal Lord before committing Set traps. Trap Trick turns into the correct normal trap." },
+          { id: "i", x: 50, y: 21, cls: "result", title: "Opponent EP: I", cards: ["Destiny Board", "Spirit Message \"I\""], note: "First message is placed on the opponent's End Phase." },
+          { id: "branch", x: 50, y: 58, cls: "choice", title: "Choose zones", cards: ["Dark Sanctuary", "Sentence of Doom"], note: "Dark Sanctuary frees backrow zones. Sentence can speed up only after Destiny Board is active." },
+          { id: "final", x: 76, y: 22, cls: "result", title: "N > A > L", cards: ["Spirit Message \"N\"", "Spirit Message \"A\"", "Spirit Message \"L\""], note: "Keep all pieces on your field until the final letter resolves." },
+          { id: "fail", x: 76, y: 61, cls: "warn", title: "If Board leaves", cards: ["Cosmic Cyclone", "Evenly Matched"], note: "Banish, bounce, negate, or removal on Destiny Board collapses the clock." }
+        ],
+        edges: [
+          ["start", "set", "search"],
+          ["set", "i", "activate"],
+          ["i", "final", "survive turns"],
+          ["i", "branch", "optional"],
+          ["branch", "final", "accelerate"],
+          ["branch", "fail", "mis-time/remove"]
+        ]
+      },
+      runick: {
+        label: "Runick trap-control",
+        title: "Route 2 - Runick control into protected FINAL",
+        steps: [
+          "Use Runick Tip or a Runick Quick-Play to access Hugin and Fountain.",
+          "Establish Fountain, Set Destiny Board, and keep Trap Trick/Punishment/IDP live.",
+          "Use Runick Freezing Curses, Flashing Fire, Destruction, or Slumber to stop pressure while skipping a Battle Phase you do not need.",
+          "Recycle Runick spells with Fountain for draws, then let Destiny Board or deckout become the unavoidable clock.",
+          "If zones fill with messages, do not over-set. The January 2026 list notes Dark Sanctuary is not required but zone management matters."
+        ],
+        nodes: [
+          { id: "tip", x: 6, y: 39, cls: "control", title: "Runick access", cards: ["Runick Tip", "Hugin the Runick Wings"], note: "Tip finds the needed Runick spell. Hugin can access Fountain." },
+          { id: "fountain", x: 27, y: 23, cls: "result", title: "Fountain online", cards: ["Runick Fountain", "Runick Flashing Fire"], note: "Fountain converts used Runick spells into new cards." },
+          { id: "traps", x: 27, y: 60, cls: "control", title: "Set trap wall", cards: ["Trap Trick", "Dogmatika Punishment", "Ice Dragon's Prison"], note: "Trap Trick turns into a board wipe, Punishment, or grave interaction." },
+          { id: "board", x: 52, y: 39, cls: "result", title: "Board clock", cards: ["Destiny Board", "Spirit Message \"I\""], note: "The Runick shell gives enough draw and interaction to wait for messages." },
+          { id: "grind", x: 76, y: 22, cls: "result", title: "Two win lines", cards: ["Runick Fountain", "Spirit Message \"L\""], note: "FINAL and Runick deckout pressure opponents from different angles." },
+          { id: "clear", x: 76, y: 61, cls: "warn", title: "Zone discipline", cards: ["Runick Fountain", "Spirit Message \"N\"", "Spirit Message \"A\""], note: "Avoid locking yourself out of Runick/Trap activations as Spirit Messages accumulate." }
+        ],
+        edges: [
+          ["tip", "fountain", "summon/search"],
+          ["tip", "traps", "set defense"],
+          ["fountain", "board", "draw into Board"],
+          ["traps", "board", "survive"],
+          ["board", "grind", "inevitability"],
+          ["board", "clear", "manage zones"]
+        ]
+      },
+      necrofear: {
+        label: "Necrofear fallback",
+        title: "Route 3 - Tour Guide into Necrofear pressure",
+        steps: [
+          "Normal Summon Tour Guide and summon Doomdog Octhros from Deck.",
+          "Link both into Cherubini. Doomdog searches Dark Necrofear or Curse Necrofear.",
+          "Cherubini sends Fiendish Rhino Warrior; Rhino sends a Dark Spirit.",
+          "Banish three non-Dark-Spirit Fiends from the GY to summon Dark Necrofear.",
+          "Link climb or force interaction to recycle Dark Spirit cards, then pressure with Necrofear and traps while FINAL develops in the background."
+        ],
+        nodes: [
+          { id: "tg", x: 6, y: 38, cls: "control", title: "Tour Guide start", cards: ["Tour Guide From the Underworld", "Doomdog Octhros"], note: "Tour Guide gets Doomdog, giving two bodies and a search trigger." },
+          { id: "cherub", x: 27, y: 24, cls: "control", title: "Cherubini", cards: ["Cherubini, Ebon Angel of the Burning Abyss", "Doomdog Octhros"], note: "Doomdog searches a Level 8 Fiend when it leaves the field." },
+          { id: "rhino", x: 50, y: 24, cls: "choice", title: "Rhino mill", cards: ["Fiendish Rhino Warrior", "Dark Spirit of Banishment"], note: "Cherubini sends Rhino, Rhino sends a Dark Spirit setup card." },
+          { id: "necro", x: 72, y: 24, cls: "result", title: "Dark Necrofear", cards: ["Dark Necrofear", "Dark Spirit of Malice"], note: "Banish the three setup Fiends to summon Necrofear. Dark Spirits give follow-up when Level 8 Fiends leave by card effects or link climbing." },
+          { id: "mastery", x: 27, y: 61, cls: "alt", title: "Mastery branch", cards: ["Dark Spirit's Mastery", "Curse Necrofear"], note: "If Mastery is drawn instead, search a Necrofear when Destiny Board is already accessible." },
+          { id: "pivot", x: 72, y: 61, cls: "result", title: "Pivot plan", cards: ["Destiny Board", "Curse Necrofear", "Trap Trick"], note: "Use Necrofear to demand interaction while the backrow plan stabilizes." }
+        ],
+        edges: [
+          ["tg", "cherub", "link"],
+          ["cherub", "rhino", "send"],
+          ["rhino", "necro", "summon"],
+          ["tg", "mastery", "alternate hand"],
+          ["mastery", "pivot", "search"],
+          ["necro", "pivot", "pressure"]
+        ]
+      },
+      second: {
+        label: "Going second",
+        title: "Route 4 - Break board, then start the clock",
+        steps: [
+          "Use Lava Golem or Super Polymerization to remove interaction without starting a chain they can easily negate.",
+          "Use Runick Freezing Curses, Flashing Fire, or Destruction to trade with remaining threats.",
+          "Set Destiny Board only after the first removal wave is handled.",
+          "Trap Trick finds Torrential, Needle Ceiling, Dogmatika Punishment, or Ice Dragon's Prison depending on board shape.",
+          "If they keep too much pressure, abandon FINAL and win through Runick deckout or Necrofear/extra deck bodies."
+        ],
+        nodes: [
+          { id: "breaker", x: 7, y: 39, cls: "warn", title: "Clear threats", cards: ["Lava Golem", "Super Polymerization"], note: "Do this before committing Destiny Board if the opponent already controls interaction." },
+          { id: "runick", x: 29, y: 22, cls: "control", title: "Trade spells", cards: ["Runick Freezing Curses", "Runick Flashing Fire", "Runick Destruction"], note: "Runick spells reduce damage pressure while setting up Fountain." },
+          { id: "trap", x: 29, y: 60, cls: "control", title: "Trap Trick choice", cards: ["Trap Trick", "Torrential Tribute", "Needle Ceiling"], note: "Pick the trap that punishes their rebuild pattern." },
+          { id: "clock", x: 54, y: 40, cls: "result", title: "Start FINAL", cards: ["Destiny Board", "Lord of the Heavenly Prison"], note: "Commit Board after disruption is spent or after Lord is protecting Set cards." },
+          { id: "out", x: 77, y: 23, cls: "result", title: "FINAL line", cards: ["Spirit Message \"I\"", "Spirit Message \"N\""], note: "If the board is contained, let the messages resolve." },
+          { id: "backup", x: 77, y: 61, cls: "alt", title: "Backup win", cards: ["Runick Fountain", "Dark Necrofear"], note: "When FINAL is impossible, use Runick and Necrofear pressure." }
+        ],
+        edges: [
+          ["breaker", "runick", "remaining threats"],
+          ["breaker", "trap", "set punish"],
+          ["runick", "clock", "stable"],
+          ["trap", "clock", "protected"],
+          ["clock", "out", "survive"],
+          ["clock", "backup", "if removed"]
+        ]
+      }
+    };
+
+    let activeRoute = "final";
+    let activeNode = null;
+
+    function imageUrl(name) {
+      const id = cards[name];
+      return `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
+    }
+
+    function cardToken(name, qty = null) {
+      const id = cards[name];
+      const wrapper = document.createElement("span");
+      wrapper.className = "card-token";
+      wrapper.tabIndex = 0;
+      wrapper.title = name;
+      if (!id) {
+        wrapper.innerHTML = `<span class="card-name">${escapeHtml(name)}</span>`;
+        return wrapper;
+      }
+      const qtyHtml = qty && qty > 1 ? `<span class="qty">${qty}</span>` : "";
+      wrapper.innerHTML = `
+        ${qtyHtml}
+        <img src="${imageUrl(name)}" alt="${escapeHtml(name)}" loading="lazy">
+        <img class="zoom" src="${imageUrl(name)}" alt="" loading="lazy" aria-hidden="true">
+        <span class="card-name">${escapeHtml(name)}</span>
+      `;
+      return wrapper;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function renderStrip(container, names) {
+      container.innerHTML = "";
+      names.forEach((item) => {
+        if (Array.isArray(item)) container.appendChild(cardToken(item[0], item[1]));
+        else container.appendChild(cardToken(item));
+      });
+    }
+
+    function parseCardAttr(value) {
+      const parts = value.split(",").map((name) => name.trim()).filter(Boolean);
+      const result = [];
+      for (let i = 0; i < parts.length; i += 1) {
+        let candidate = parts[i];
+        while (!cards[candidate] && i < parts.length - 1) {
+          i += 1;
+          candidate += `,${parts[i]}`;
+        }
+        result.push(candidate);
+      }
+      return result;
+    }
+
+    function hydrateStaticCards() {
+      document.querySelectorAll("[data-card]").forEach((slot) => {
+        slot.replaceWith(cardToken(slot.dataset.card));
+      });
+      document.querySelectorAll("[data-card-strip='hero']").forEach((el) => renderStrip(el, heroCards));
+      document.querySelectorAll("[data-card-strip='core']").forEach((el) => renderStrip(el, coreCards));
+      document.querySelectorAll("[data-cards]").forEach((el) => renderStrip(el, parseCardAttr(el.dataset.cards)));
+      renderStrip(document.getElementById("mainDeck"), mainDeck);
+      renderStrip(document.getElementById("extraDeck"), extraDeck);
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById("routeTabs");
+      tabs.innerHTML = "";
+      Object.entries(routes).forEach(([key, route]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "route-button";
+        button.textContent = route.label;
+        button.setAttribute("aria-pressed", key === activeRoute ? "true" : "false");
+        button.addEventListener("click", () => {
+          activeRoute = key;
+          activeNode = null;
+          renderTabs();
+          renderGraph();
+        });
+        tabs.appendChild(button);
+      });
+    }
+
+    function renderGraph() {
+      const route = routes[activeRoute];
+      const graph = document.getElementById("graph");
+      graph.querySelectorAll(".node, .edge-label").forEach((el) => el.remove());
+      const svg = graph.querySelector("svg");
+      svg.querySelectorAll("line").forEach((el) => el.remove());
+
+      const nodeMap = Object.fromEntries(route.nodes.map((node) => [node.id, node]));
+      route.edges.forEach(([fromId, toId, label]) => {
+        const from = nodeMap[fromId];
+        const to = nodeMap[toId];
+        if (!from || !to) return;
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", from.x * 10 + 70);
+        line.setAttribute("y1", from.y * 5 + 45);
+        line.setAttribute("x2", to.x * 10 + 30);
+        line.setAttribute("y2", to.y * 5 + 45);
+        svg.appendChild(line);
+
+        const edgeLabel = document.createElement("span");
+        edgeLabel.className = "edge-label";
+        edgeLabel.style.left = `${(from.x + to.x) / 2}%`;
+        edgeLabel.style.top = `${(from.y + to.y) / 2 + 8}%`;
+        edgeLabel.textContent = label;
+        graph.appendChild(edgeLabel);
+      });
+
+      route.nodes.forEach((node) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `node ${node.cls || ""}${activeNode === node.id ? " active" : ""}`;
+        btn.style.left = `${node.x}%`;
+        btn.style.top = `${node.y}%`;
+        btn.innerHTML = `
+          <span class="node-title">${escapeHtml(node.title)} <span class="icon info">i</span></span>
+          <span class="node-cards"></span>
+          <span class="node-note">${escapeHtml(node.note)}</span>
+        `;
+        renderStrip(btn.querySelector(".node-cards"), node.cards);
+        btn.addEventListener("click", () => {
+          activeNode = node.id;
+          renderGraph();
+        });
+        graph.appendChild(btn);
+      });
+
+      document.getElementById("routeTitle").textContent = route.title;
+      const steps = document.getElementById("routeSteps");
+      steps.innerHTML = "";
+      route.steps.forEach((step) => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        steps.appendChild(li);
+      });
+
+      const selected = activeNode ? nodeMap[activeNode] : route.nodes[0];
+      activeNode = selected.id;
+      document.getElementById("nodeTitle").textContent = selected.title;
+      renderStrip(document.getElementById("nodeCards"), selected.cards);
+      document.getElementById("nodeText").textContent = selected.note;
+    }
+
+    function setupReferences() {
+      const button = document.getElementById("refToggle");
+      const refs = document.getElementById("references");
+      button.addEventListener("click", () => {
+        const visible = refs.classList.toggle("visible");
+        button.setAttribute("aria-expanded", visible ? "true" : "false");
+        if (visible) refs.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+
+    hydrateStaticCards();
+    renderTabs();
+    renderGraph();
+    setupReferences();
+  </script>
+</body>
+</html>
