@@ -10,20 +10,12 @@
       --ink: #17212a;
       --muted: #5b6673;
       --paper: #f6f7f9;
-      --panel: #ffffff;
-      --panel-2: #eef3f7;
       --line: #d8e0e8;
       --soft-line: #e8edf3;
-      --blue: #285f9f;
       --cyan: #14798a;
       --gold: #a86f16;
-      --green: #24734f;
-      --red: #a43b42;
-      --violet: #67518a;
       --shadow: 0 18px 46px rgba(23, 33, 42, .12);
       --radius: 8px;
-      --card-w: 58px;
-      --card-h: 84px;
     }
 
     * { box-sizing: border-box; }
@@ -45,8 +37,7 @@
       overflow-x: hidden;
     }
 
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: none; }
+    a { color: inherit; text-decoration: none; }
     button, input { font: inherit; letter-spacing: 0; }
 
     .page {
@@ -63,11 +54,11 @@
       padding: 18px 0 16px;
     }
 
-    .eyebrow {
+    .eyebrow,
+    .deck-kicker {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
       color: var(--cyan);
       font-size: .82rem;
       font-weight: 850;
@@ -93,7 +84,7 @@
 
     h3 {
       margin-bottom: 8px;
-      font-size: 1.02rem;
+      font-size: 1.18rem;
       line-height: 1.18;
       letter-spacing: 0;
     }
@@ -106,8 +97,8 @@
     }
 
     .hero-pills,
-    .chips,
-    .deck-meta {
+    .deck-meta,
+    .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
@@ -117,7 +108,6 @@
     .tag {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
       min-height: 30px;
       padding: 6px 10px;
       border: 1px solid var(--line);
@@ -128,8 +118,7 @@
       white-space: nowrap;
     }
 
-    .pill strong,
-    .tag strong { color: var(--ink); }
+    .pill strong { color: var(--ink); }
 
     .plus-icon,
     .info-dot {
@@ -151,34 +140,37 @@
       min-height: 340px;
       display: grid;
       align-items: center;
-      overflow: visible;
     }
 
-    .showcase {
+    .showcase,
+    .deck-art {
       display: grid;
-      grid-template-columns: repeat(5, minmax(46px, 1fr));
-      gap: 10px;
-      padding: 14px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       border: 1px solid rgba(23,33,42,.12);
       border-radius: var(--radius);
       background: rgba(255,255,255,.82);
-      box-shadow: var(--shadow);
-      overflow: visible;
     }
 
-    .showcase .card-mini:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
-    .showcase .card-mini:nth-child(2) { transform: translateY(-12px) rotate(3deg); }
-    .showcase .card-mini:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
-    .showcase .card-mini:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
-    .showcase .card-mini:nth-child(5) { transform: translateY(10px) rotate(-3deg); }
-    .showcase .card-mini:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
-    .showcase .card-mini:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
-    .showcase .card-mini:nth-child(8) { transform: translateY(-11px) rotate(1deg); }
-    .showcase .card-mini:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
-    .showcase .card-mini:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
+    .showcase {
+      gap: 10px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .deck-art {
+      gap: 6px;
+      min-height: 94px;
+      padding: 8px;
+      margin-bottom: 12px;
+      background:
+        linear-gradient(135deg, rgba(20,121,138,.09), transparent 44%),
+        linear-gradient(135deg, rgba(168,111,22,.08), transparent 72%),
+        #fff;
+      overflow: hidden;
+    }
 
     .card-mini {
-      position: relative;
       display: block;
       width: 100%;
       aspect-ratio: 59 / 86;
@@ -195,6 +187,17 @@
       height: 100%;
       object-fit: cover;
     }
+
+    .showcase .card-mini:nth-child(1),
+    .deck-art .card-mini:nth-child(1) { transform: translateY(9px) rotate(-5deg); }
+    .showcase .card-mini:nth-child(2),
+    .deck-art .card-mini:nth-child(2) { transform: translateY(-5px) rotate(3deg); }
+    .showcase .card-mini:nth-child(3),
+    .deck-art .card-mini:nth-child(3) { transform: translateY(4px) rotate(-2deg); }
+    .showcase .card-mini:nth-child(4),
+    .deck-art .card-mini:nth-child(4) { transform: translateY(-8px) rotate(4deg); }
+    .showcase .card-mini:nth-child(5),
+    .deck-art .card-mini:nth-child(5) { transform: translateY(7px) rotate(-3deg); }
 
     .quick-nav {
       position: sticky;
@@ -231,7 +234,6 @@
     .open-button:hover {
       border-color: var(--cyan);
       color: var(--cyan);
-      text-decoration: none;
     }
 
     .filter-button.active,
@@ -300,8 +302,6 @@
     }
 
     .filters {
-      display: flex;
-      flex-wrap: wrap;
       justify-content: end;
       gap: 6px;
     }
@@ -313,8 +313,9 @@
     }
 
     .deck-card {
-      display: grid;
-      align-content: space-between;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
       min-height: 360px;
       padding: 14px;
       border: 1px solid var(--line);
@@ -322,6 +323,7 @@
       background: rgba(255,255,255,.9);
       color: var(--ink);
       box-shadow: 0 12px 26px rgba(23,33,42,.08);
+      overflow: hidden;
       transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
     }
 
@@ -333,51 +335,14 @@
       outline: none;
     }
 
-    .deck-art {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 6px;
-      min-height: 94px;
-      padding: 8px;
-      margin-bottom: 12px;
-      border: 1px solid var(--soft-line);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(135deg, rgba(20,121,138,.09), transparent 44%),
-        linear-gradient(135deg, rgba(168,111,22,.08), transparent 72%),
-        #fff;
-      overflow: visible;
-    }
-
-    .deck-art .card-mini {
-      box-shadow: 0 8px 16px rgba(23,33,42,.12);
-    }
-
-    .deck-art .card-mini:nth-child(1) { transform: translateY(9px) rotate(-5deg); }
-    .deck-art .card-mini:nth-child(2) { transform: translateY(-5px) rotate(3deg); }
-    .deck-art .card-mini:nth-child(3) { transform: translateY(4px) rotate(-2deg); }
-    .deck-art .card-mini:nth-child(4) { transform: translateY(-8px) rotate(4deg); }
-    .deck-art .card-mini:nth-child(5) { transform: translateY(7px) rotate(-3deg); }
-
-    .deck-card:hover .card-mini,
-    .deck-card:focus-visible .card-mini {
-      border-color: rgba(20,121,138,.45);
+    .deck-body {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .deck-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
       margin-bottom: 8px;
-      color: var(--cyan);
       font-size: .76rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .deck-card h3 {
-      margin-bottom: 8px;
-      font-size: 1.18rem;
     }
 
     .deck-card p {
@@ -387,8 +352,7 @@
     }
 
     .deck-meta {
-      margin-top: 10px;
-      margin-bottom: 14px;
+      margin: 10px 0 14px;
     }
 
     .deck-meta .tag {
@@ -400,20 +364,19 @@
 
     .open-row {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      justify-content: flex-end;
+      min-width: 0;
+      margin-top: auto;
       padding-top: 10px;
       border-top: 1px solid var(--soft-line);
     }
 
-    .path {
-      min-width: 0;
-      color: #6a7480;
-      font-size: .78rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    .open-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+      min-width: 88px;
     }
 
     .status-panel,
@@ -437,18 +400,9 @@
     .deck-card[hidden] { display: none; }
 
     @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
-      .hero-showcase {
-        min-height: 0;
-      }
-
-      .deck-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-showcase { min-height: 0; }
+      .deck-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 680px) {
@@ -457,9 +411,7 @@
         padding-top: 12px;
       }
 
-      .hero {
-        gap: 12px;
-      }
+      .hero { gap: 12px; }
 
       .showcase {
         grid-template-columns: repeat(5, minmax(42px, 1fr));
@@ -467,67 +419,178 @@
         padding: 10px;
       }
 
-      .toolbar {
-        grid-template-columns: 1fr;
+      .toolbar,
+      .section-head {
+        display: block;
       }
 
       .filters {
         justify-content: start;
+        margin-top: 12px;
       }
 
-      .deck-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .deck-card {
-        min-height: 0;
-      }
-
-      .section-head {
-        display: block;
-      }
+      .deck-grid { grid-template-columns: 1fr; }
+      .deck-card { min-height: 0; }
     }
   </style>
 </head>
 <body>
+  <!-- Edit this JSON block to add deck cards. Required deck fields: title, location, description, highlight, tags, and cards. -->
+  <script type="application/json" id="deck-data">
+{
+  "filters": ["control", "midrange", "combo", "rogue"],
+  "decks": [
+    {
+      "title": "Sky Striker Mitsurugi",
+      "location": "outputs/sky-striker-mitsurugi-cheatsheet.html",
+      "description": "Spell control and Link positioning backed by a compact Mitsurugi Ritual package.",
+      "highlight": "TCG hybrid mind map",
+      "icon": "i",
+      "tags": ["control", "midrange", "link", "spell", "ritual", "sky striker", "mitsurugi"],
+      "aliases": ["sky-striker", "skystriker", "striker", "mitsurugi"],
+      "cards": [
+        { "id": "63166095", "name": "Sky Striker Mobilize - Engage!" },
+        { "id": "26077387", "name": "Sky Striker Ace - Raye" },
+        { "id": "9726840", "name": "Sky Striker Mobilize - Linkage!" },
+        { "id": "76072561", "name": "Sky Striker Ace = Zero" },
+        { "id": "13332685", "name": "Ame no Habakiri no Mitsurugi" }
+      ]
+    },
+    {
+      "title": "Primite Blue-Eyes",
+      "location": "outputs/primite-blue-eyes-cheatsheet.html",
+      "description": "Starter routing into Blue-Eyes, Primite, Bystial, and Synchro end-board branches.",
+      "highlight": "Primite Blue-Eyes map",
+      "icon": "+",
+      "tags": ["combo", "midrange", "dragon", "synchro", "primite", "blue eyes", "blue-eyes"],
+      "aliases": ["primite", "blue-eyes", "blueeyes"],
+      "cards": [
+        { "id": "89631139", "name": "Blue-Eyes White Dragon" },
+        { "id": "80326401", "name": "Wishes for Eyes of Blue" },
+        { "id": "63198739", "name": "Primite Dragon Ether Beryl" },
+        { "id": "56506740", "name": "Primite Lordly Lode" },
+        { "id": "89604813", "name": "Blue-Eyes Ultimate Spirit Dragon" }
+      ]
+    },
+    {
+      "title": "Plunder Patroll",
+      "location": "outputs/plunder-patroll-cheatsheet.html",
+      "description": "Reactive ship tagging, Attribute control, Blackbeard reloads, and matchup ship choices.",
+      "highlight": "Attribute toolbox",
+      "icon": "i",
+      "tags": ["control", "rogue", "toolbox", "ship", "runick", "adventurer", "plunder patroll"],
+      "aliases": ["plunder"],
+      "cards": [
+        { "id": "93031067", "name": "Plunder Patroll Shipyarrrd" },
+        { "id": "31374201", "name": "Whitebeard, the Plunder Patroll Helm" },
+        { "id": "67647362", "name": "Blackbeard, the Plunder Patroll Captain" },
+        { "id": "18832779", "name": "Plunder Patrollship Lys" },
+        { "id": "85969517", "name": "Plunder Patrollship Jord" }
+      ]
+    },
+    {
+      "title": "Eldlich Horus",
+      "location": "outputs/eldlich-horus-mindmap.html",
+      "description": "Golden Land recursion, Horus Level 8 pressure, floodgate choices, and grind routes.",
+      "highlight": "Trap grind map",
+      "icon": "i",
+      "tags": ["control", "midrange", "trap", "grind", "rank 8", "eldlich", "horus"],
+      "aliases": ["eldlich", "horus"],
+      "cards": [
+        { "id": "95440947", "name": "Eldlich the Golden Lord" },
+        { "id": "84941194", "name": "Imsety, Glory of Horus" },
+        { "id": "16528181", "name": "King's Sarcophagus" },
+        { "id": "20612097", "name": "Eldlixir of Scarlet Sanguine" },
+        { "id": "70636044", "name": "Varudras, the Final Bringer of the End Times" }
+      ]
+    },
+    {
+      "title": "Despia Branded",
+      "location": "outputs/despia-branded-cheatsheet.html",
+      "description": "Fusion midrange routes for Branded, Dogmatika, Despia, and Dracotail variants.",
+      "highlight": "Fusion value map",
+      "icon": "+",
+      "tags": ["midrange", "control", "fusion", "albaz", "mirrorjade", "despia", "branded", "dogmatika"],
+      "aliases": ["branded", "despia", "dogmatika-branded"],
+      "cards": [
+        { "id": "62962630", "name": "Aluber the Jester of Despia" },
+        { "id": "44362883", "name": "Branded Fusion" },
+        { "id": "44146295", "name": "Mirrorjade the Iceblade Dragon" },
+        { "id": "30271097", "name": "The Fallen & The Virtuous" },
+        { "id": "98829635", "name": "Forbidden Crown" }
+      ]
+    },
+    {
+      "title": "Floowandereeze",
+      "location": "outputs/floowandereeze-cheatsheet.html",
+      "description": "Normal Summon chains, Empen lines, Dreaming Town turns, and anti-meta side plans.",
+      "highlight": "Normal Summon control",
+      "icon": "+",
+      "tags": ["control", "rogue", "tribute", "winged beast", "normal summon", "floowandereeze", "floo"],
+      "aliases": ["floo"],
+      "cards": [
+        { "id": "18940725", "name": "Floowandereeze & Robina" },
+        { "id": "54334420", "name": "Floowandereeze & Eglen" },
+        { "id": "80611581", "name": "Floowandereeze & Empen" },
+        { "id": "28126717", "name": "Floowandereeze and the Magnificent Map" },
+        { "id": "69087397", "name": "Floowandereeze and the Advent of Adventure" }
+      ]
+    },
+    {
+      "title": "Millennium Exodia",
+      "location": "outputs/millennium-exodia-cheatsheet.html",
+      "description": "Ankh access, Exodia Incarnate protection, Exxod setup, and Blaze cash-out lines.",
+      "highlight": "Millennium Ankh routes",
+      "icon": "+",
+      "tags": ["combo", "control", "rogue", "otk", "ankh", "blaze", "millennium", "exodia"],
+      "aliases": ["exodia", "millennium"],
+      "cards": [
+        { "id": "83257450", "name": "The Unstoppable Exodia Incarnate" },
+        { "id": "37613663", "name": "Millennium Ankh" },
+        { "id": "38775407", "name": "Sengenjin Wakes from a Millennium" },
+        { "id": "63017368", "name": "Wedju Temple" },
+        { "id": "23617756", "name": "Exxod Fires of Rage" }
+      ]
+    },
+    {
+      "title": "Mimighoul",
+      "location": "outputs/mimighoul-cheatsheet.html",
+      "description": "Face-down donation pressure, Dungeon control, Room loops, and Rank 1 finishers.",
+      "highlight": "Flip control map",
+      "icon": "i",
+      "tags": ["control", "rogue", "flip", "rank 1", "genesys", "master duel", "mimighoul"],
+      "aliases": [],
+      "cards": [
+        { "id": "81522098", "name": "Mimighoul Dragon" },
+        { "id": "50415441", "name": "Mimighoul Archfiend" },
+        { "id": "13204145", "name": "Mimighoul Maker" },
+        { "id": "86809440", "name": "Mimighoul Dungeon" },
+        { "id": "55537983", "name": "Mimighoul Master" }
+      ]
+    }
+  ]
+}
+  </script>
+
   <div class="page">
     <header class="hero" id="top">
       <div>
         <div class="eyebrow"><span class="plus-icon">+</span> Deck cheatsheet router</div>
         <h1>YGO Meta Deck Index</h1>
-        <p class="lead">Open the right Yu-Gi-Oh! deck cheatsheet from the generated pages in <strong>outputs/</strong>.</p>
+        <p class="lead">Open the right Yu-Gi-Oh! deck cheatsheet from the generated pages.</p>
         <div class="hero-pills">
-          <span class="pill"><strong>8</strong> deck pages</span>
-          <span class="pill"><strong>Format</strong> standalone HTML</span>
-          <span class="pill"><strong>Cards</strong> YGOPRODeck artwork</span>
+          <span class="pill"><strong id="deckCount">0</strong>&nbsp;deck pages</span>
+          <span class="pill"><strong>Format</strong>&nbsp;standalone HTML</span>
+          <span class="pill"><strong>Cards</strong>&nbsp;YGOPRODeck artwork</span>
         </div>
       </div>
       <div class="hero-showcase" aria-label="Deck card showcase">
-        <div class="showcase">
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63166095.jpg" alt="Sky Striker Mobilize - Engage!"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89631139.jpg" alt="Blue-Eyes White Dragon"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/67647362.jpg" alt="Blackbeard, the Plunder Patroll Captain"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/95440947.jpg" alt="Eldlich the Golden Lord"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44146295.jpg" alt="Mirrorjade the Iceblade Dragon"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18940725.jpg" alt="Floowandereeze &amp; Robina"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/83257450.jpg" alt="The Unstoppable Exodia Incarnate"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt="Mimighoul Dragon"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13332685.jpg" alt="Ame no Habakiri no Mitsurugi"></span>
-          <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/84941194.jpg" alt="Imsety, Glory of Horus"></span>
-        </div>
+        <div class="showcase" id="heroShowcase"></div>
       </div>
     </header>
 
-    <nav class="quick-nav" aria-label="Index navigation">
+    <nav class="quick-nav" id="deckNav" aria-label="Index navigation">
       <a href="#decks">Decks</a>
-      <a href="outputs/sky-striker-mitsurugi-cheatsheet.html">Sky Striker Mitsurugi</a>
-      <a href="outputs/primite-blue-eyes-cheatsheet.html">Primite Blue-Eyes</a>
-      <a href="outputs/plunder-patroll-cheatsheet.html">Plunder Patroll</a>
-      <a href="outputs/eldlich-horus-mindmap.html">Eldlich Horus</a>
-      <a href="outputs/despia-branded-cheatsheet.html">Despia Branded</a>
-      <a href="outputs/floowandereeze-cheatsheet.html">Floowandereeze</a>
-      <a href="outputs/millennium-exodia-cheatsheet.html">Millennium Exodia</a>
-      <a href="outputs/mimighoul-cheatsheet.html">Mimighoul</a>
     </nav>
 
     <main>
@@ -544,262 +607,32 @@
             <span class="info-dot">i</span>
             <input class="search" id="deckSearch" type="search" autocomplete="off" placeholder="Search decks" aria-label="Search decks">
           </div>
-          <div class="filters" aria-label="Deck filters">
-            <button class="filter-button active" type="button" data-filter="all">All</button>
-            <button class="filter-button" type="button" data-filter="control">Control</button>
-            <button class="filter-button" type="button" data-filter="midrange">Midrange</button>
-            <button class="filter-button" type="button" data-filter="combo">Combo</button>
-            <button class="filter-button" type="button" data-filter="rogue">Rogue</button>
-          </div>
+          <div class="filters" id="deckFilters" aria-label="Deck filters"></div>
         </div>
 
         <div class="status-panel" id="routerStatus" role="status"></div>
-
-        <div class="deck-grid" id="deckGrid">
-          <a class="deck-card" href="outputs/sky-striker-mitsurugi-cheatsheet.html" data-route="sky-striker-mitsurugi" data-tags="sky striker mitsurugi tcg hybrid midrange control spell link ritual">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63166095.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/26077387.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/9726840.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/76072561.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13332685.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="info-dot">i</span> TCG hybrid mind map</div>
-              <h3>Sky Striker Mitsurugi</h3>
-              <p>Spell control and Link positioning backed by a compact Mitsurugi Ritual package.</p>
-              <div class="deck-meta">
-                <span class="tag">Control</span>
-                <span class="tag">Midrange</span>
-                <span class="tag">Link</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/sky-striker-mitsurugi-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/primite-blue-eyes-cheatsheet.html" data-route="primite-blue-eyes" data-tags="primite blue eyes blue-eyes dragon synchro combo midrange bystial">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89631139.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/80326401.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63198739.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/56506740.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/89604813.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="plus-icon">+</span> Primite Blue-Eyes map</div>
-              <h3>Primite Blue-Eyes</h3>
-              <p>Starter routing into Blue-Eyes, Primite, Bystial, and Synchro end-board branches.</p>
-              <div class="deck-meta">
-                <span class="tag">Combo</span>
-                <span class="tag">Midrange</span>
-                <span class="tag">Dragon</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/primite-blue-eyes-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/plunder-patroll-cheatsheet.html" data-route="plunder-patroll" data-tags="plunder patroll attribute toolbox control ship runick adventurer rogue">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/93031067.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/31374201.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/67647362.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18832779.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/85969517.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="info-dot">i</span> Attribute toolbox</div>
-              <h3>Plunder Patroll</h3>
-              <p>Reactive ship tagging, Attribute control, Blackbeard reloads, and matchup ship choices.</p>
-              <div class="deck-meta">
-                <span class="tag">Control</span>
-                <span class="tag">Rogue</span>
-                <span class="tag">Toolbox</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/plunder-patroll-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/eldlich-horus-mindmap.html" data-route="eldlich-horus" data-tags="eldlich horus trap control golden land rank 8 grind">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/95440947.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/84941194.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/16528181.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/20612097.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/70636044.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="info-dot">i</span> Trap grind map</div>
-              <h3>Eldlich Horus</h3>
-              <p>Golden Land recursion, Horus Level 8 pressure, floodgate choices, and grind routes.</p>
-              <div class="deck-meta">
-                <span class="tag">Control</span>
-                <span class="tag">Midrange</span>
-                <span class="tag">Trap</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/eldlich-horus-mindmap.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/despia-branded-cheatsheet.html" data-route="despia-branded" data-tags="despia branded dogmatika fusion midrange control albaz mirrorjade dracotail">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/62962630.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44362883.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/44146295.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/30271097.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/98829635.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="plus-icon">+</span> Fusion value map</div>
-              <h3>Despia Branded</h3>
-              <p>Fusion midrange routes for Branded, Dogmatika, Despia, and Dracotail variants.</p>
-              <div class="deck-meta">
-                <span class="tag">Midrange</span>
-                <span class="tag">Control</span>
-                <span class="tag">Fusion</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/despia-branded-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/floowandereeze-cheatsheet.html" data-route="floowandereeze" data-tags="floowandereeze floo normal summon control tribute winged beast rogue">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/18940725.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/54334420.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/80611581.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/28126717.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/69087397.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="plus-icon">+</span> Normal Summon control</div>
-              <h3>Floowandereeze</h3>
-              <p>Normal Summon chains, Empen lines, Dreaming Town turns, and anti-meta side plans.</p>
-              <div class="deck-meta">
-                <span class="tag">Control</span>
-                <span class="tag">Rogue</span>
-                <span class="tag">Tribute</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/floowandereeze-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/millennium-exodia-cheatsheet.html" data-route="millennium-exodia" data-tags="millennium exodia incarnate ankh blaze combo rogue control otk">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/83257450.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/37613663.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/38775407.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/63017368.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/23617756.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="plus-icon">+</span> Millennium Ankh routes</div>
-              <h3>Millennium Exodia</h3>
-              <p>Ankh access, Exodia Incarnate protection, Exxod setup, and Blaze cash-out lines.</p>
-              <div class="deck-meta">
-                <span class="tag">Combo</span>
-                <span class="tag">Control</span>
-                <span class="tag">Rogue</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/millennium-exodia-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-
-          <a class="deck-card" href="outputs/mimighoul-cheatsheet.html" data-route="mimighoul" data-tags="mimighoul flip control dungeon rank 1 genesys master duel rogue">
-            <div>
-              <div class="deck-art" aria-hidden="true">
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/81522098.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/50415441.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/13204145.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/86809440.jpg" alt=""></span>
-                <span class="card-mini"><img src="https://images.ygoprodeck.com/images/cards/55537983.jpg" alt=""></span>
-              </div>
-              <div class="deck-kicker"><span class="info-dot">i</span> Flip control map</div>
-              <h3>Mimighoul</h3>
-              <p>Face-down donation pressure, Dungeon control, Room loops, and Rank 1 finishers.</p>
-              <div class="deck-meta">
-                <span class="tag">Control</span>
-                <span class="tag">Rogue</span>
-                <span class="tag">Flip</span>
-              </div>
-            </div>
-            <div class="open-row">
-              <span class="path">outputs/mimighoul-cheatsheet.html</span>
-              <span class="open-button">Open</span>
-            </div>
-          </a>
-        </div>
-
+        <div class="deck-grid" id="deckGrid"></div>
         <div class="empty-state" id="emptyState" hidden>No matching deck page found.</div>
 
         <noscript>
-          <p class="status-panel show">JavaScript is disabled, but every deck card above is a direct link to its generated HTML page.</p>
+          <p class="status-panel show">JavaScript is required because the deck cards are generated from the editable JSON data block.</p>
         </noscript>
       </section>
     </main>
   </div>
 
   <script>
-    const routeMap = new Map([
-      ["sky-striker-mitsurugi", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
-      ["sky-striker-mitsurugi-cheatsheet", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
-      ["sky-striker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
-      ["skystriker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
-      ["striker", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
-      ["mitsurugi", "outputs/sky-striker-mitsurugi-cheatsheet.html"],
+    const config = JSON.parse(document.getElementById("deck-data").textContent);
+    const decks = config.decks;
+    const filters = config.filters;
+    const imageUrl = (id) => `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
 
-      ["primite-blue-eyes", "outputs/primite-blue-eyes-cheatsheet.html"],
-      ["primite-blue-eyes-cheatsheet", "outputs/primite-blue-eyes-cheatsheet.html"],
-      ["blue-eyes", "outputs/primite-blue-eyes-cheatsheet.html"],
-      ["blueeyes", "outputs/primite-blue-eyes-cheatsheet.html"],
-      ["primite", "outputs/primite-blue-eyes-cheatsheet.html"],
-
-      ["plunder-patroll", "outputs/plunder-patroll-cheatsheet.html"],
-      ["plunder-patroll-cheatsheet", "outputs/plunder-patroll-cheatsheet.html"],
-      ["plunder", "outputs/plunder-patroll-cheatsheet.html"],
-
-      ["eldlich-horus", "outputs/eldlich-horus-mindmap.html"],
-      ["eldlich-horus-mindmap", "outputs/eldlich-horus-mindmap.html"],
-      ["eldlich", "outputs/eldlich-horus-mindmap.html"],
-      ["horus", "outputs/eldlich-horus-mindmap.html"],
-
-      ["despia-branded", "outputs/despia-branded-cheatsheet.html"],
-      ["despia-branded-cheatsheet", "outputs/despia-branded-cheatsheet.html"],
-      ["branded", "outputs/despia-branded-cheatsheet.html"],
-      ["despia", "outputs/despia-branded-cheatsheet.html"],
-      ["dogmatika-branded", "outputs/despia-branded-cheatsheet.html"],
-
-      ["floowandereeze", "outputs/floowandereeze-cheatsheet.html"],
-      ["floowandereeze-cheatsheet", "outputs/floowandereeze-cheatsheet.html"],
-      ["floo", "outputs/floowandereeze-cheatsheet.html"],
-
-      ["millennium-exodia", "outputs/millennium-exodia-cheatsheet.html"],
-      ["millennium-exodia-cheatsheet", "outputs/millennium-exodia-cheatsheet.html"],
-      ["exodia", "outputs/millennium-exodia-cheatsheet.html"],
-      ["millennium", "outputs/millennium-exodia-cheatsheet.html"],
-
-      ["mimighoul", "outputs/mimighoul-cheatsheet.html"],
-      ["mimighoul-cheatsheet", "outputs/mimighoul-cheatsheet.html"]
-    ]);
+    const escapeHtml = (value) => String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
 
     const normalizeRoute = (value) => decodeURIComponent(String(value || ""))
       .trim()
@@ -811,6 +644,77 @@
       .replace(/^-+|-+$/g, "")
       .replace(/-{2,}/g, "-");
 
+    const labelize = (value) => String(value)
+      .split(/[\s-]+/)
+      .filter(Boolean)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    const cardMarkup = (card) => `
+      <span class="card-mini">
+        <img src="${imageUrl(escapeHtml(card.id))}" alt="${escapeHtml(card.name)}">
+      </span>
+    `;
+
+    const routeMap = new Map();
+    decks.forEach((deck) => {
+      [deck.title, deck.location, ...(deck.aliases || [])].forEach((alias) => {
+        routeMap.set(normalizeRoute(alias), deck.location);
+      });
+    });
+
+    document.getElementById("deckCount").textContent = decks.length;
+
+    document.getElementById("heroShowcase").innerHTML = decks
+      .flatMap((deck) => deck.cards.slice(0, 2))
+      .slice(0, 10)
+      .map(cardMarkup)
+      .join("");
+
+    document.getElementById("deckNav").insertAdjacentHTML("beforeend", decks
+      .map((deck) => `<a href="${escapeHtml(deck.location)}">${escapeHtml(deck.title)}</a>`)
+      .join(""));
+
+    document.getElementById("deckFilters").innerHTML = [
+      `<button class="filter-button active" type="button" data-filter="all">All</button>`,
+      ...filters.map((filter) => (
+        `<button class="filter-button" type="button" data-filter="${escapeHtml(filter)}">${escapeHtml(labelize(filter))}</button>`
+      ))
+    ].join("");
+
+    const deckGrid = document.getElementById("deckGrid");
+    deckGrid.innerHTML = decks.map((deck) => {
+      const icon = deck.icon === "+" ? "+" : "i";
+      const iconClass = icon === "+" ? "plus-icon" : "info-dot";
+      const keywords = [
+        deck.title,
+        deck.description,
+        deck.highlight,
+        ...(deck.tags || []),
+        ...(deck.aliases || []),
+        ...deck.cards.map((card) => card.name)
+      ].join(" ").toLowerCase();
+
+      return `
+        <a class="deck-card" href="${escapeHtml(deck.location)}" data-tags="${escapeHtml(keywords)}">
+          <div class="deck-body">
+            <div class="deck-art" aria-hidden="true">
+              ${deck.cards.slice(0, 5).map(cardMarkup).join("")}
+            </div>
+            <div class="deck-kicker"><span class="${iconClass}">${escapeHtml(icon)}</span> ${escapeHtml(deck.highlight)}</div>
+            <h3>${escapeHtml(deck.title)}</h3>
+            <p>${escapeHtml(deck.description)}</p>
+            <div class="deck-meta">
+              ${(deck.tags || []).slice(0, 3).map((tag) => `<span class="tag">${escapeHtml(labelize(tag))}</span>`).join("")}
+            </div>
+          </div>
+          <div class="open-row">
+            <span class="open-button">Open</span>
+          </div>
+        </a>
+      `;
+    }).join("");
+
     const params = new URLSearchParams(window.location.search);
     const requestedParam = params.get("deck") || params.get("d") || params.get("page") || params.get("archetype");
     const hashValue = window.location.hash ? window.location.hash.slice(1) : "";
@@ -819,8 +723,7 @@
     const statusPanel = document.getElementById("routerStatus");
 
     if (requestedRoute) {
-      const routeKey = normalizeRoute(requestedRoute);
-      const href = routeMap.get(routeKey);
+      const href = routeMap.get(normalizeRoute(requestedRoute));
 
       if (href) {
         window.location.replace(href);
@@ -837,12 +740,12 @@
     let activeFilter = "all";
 
     const applyFilters = () => {
-      const query = search.value.trim().toLowerCase();
+      const words = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
       let visible = 0;
 
       deckCards.forEach((card) => {
         const tags = card.dataset.tags || "";
-        const matchesQuery = !query || tags.includes(query);
+        const matchesQuery = words.every((word) => tags.includes(word));
         const matchesFilter = activeFilter === "all" || tags.includes(activeFilter);
         const show = matchesQuery && matchesFilter;
         card.hidden = !show;
