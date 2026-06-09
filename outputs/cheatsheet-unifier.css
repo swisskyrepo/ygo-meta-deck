@@ -1,0 +1,501 @@
+/* Shared visual and interaction layer for generated deck cheatsheets. */
+:root {
+  --unified-bg: #f3f6fa;
+  --unified-ink: #17212a;
+  --unified-muted: #5b6673;
+  --unified-panel: rgba(255, 255, 255, 0.95);
+  --unified-panel-2: #eef3f7;
+  --unified-line: #d8e0e8;
+  --unified-soft-line: #e9eef4;
+  --unified-blue: #285f9f;
+  --unified-green: #24734f;
+  --unified-gold: #a86f16;
+  --unified-red: #a43b42;
+  --unified-violet: #67518a;
+  --unified-shadow: 0 18px 46px rgba(23, 33, 42, 0.12);
+  --unified-radius: 8px;
+}
+
+html[data-cheatsheet-theme="dark"] {
+  color-scheme: dark;
+  --unified-bg: #0f1318;
+  --unified-ink: #eef3f8;
+  --unified-muted: #b5c0cb;
+  --unified-panel: rgba(22, 28, 34, 0.96);
+  --unified-panel-2: #202934;
+  --unified-line: #354251;
+  --unified-soft-line: #27323d;
+  --unified-blue: #8bb7ff;
+  --unified-green: #75d39d;
+  --unified-gold: #e6b760;
+  --unified-red: #ff8a87;
+  --unified-violet: #c8a7ff;
+  --unified-shadow: 0 18px 52px rgba(0, 0, 0, 0.42);
+}
+
+html[data-cheatsheet-theme="light"] {
+  color-scheme: light;
+}
+
+html.unified-cheatsheet {
+  background: var(--unified-bg);
+}
+
+html.unified-cheatsheet body {
+  color: var(--unified-ink) !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(243,246,250,0.98) 420px, var(--unified-bg)),
+    repeating-linear-gradient(135deg, rgba(40,95,159,0.065) 0 1px, transparent 1px 18px) !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-cheatsheet-theme="dark"] body {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.035), rgba(15,19,24,0.98) 430px, var(--unified-bg)),
+    repeating-linear-gradient(135deg, rgba(139,183,255,0.08) 0 1px, transparent 1px 18px) !important;
+}
+
+html.unified-cheatsheet a {
+  color: var(--unified-blue) !important;
+}
+
+html.unified-cheatsheet h1,
+html.unified-cheatsheet h2,
+html.unified-cheatsheet h3,
+html.unified-cheatsheet p {
+  letter-spacing: 0 !important;
+}
+
+html.unified-cheatsheet .section,
+html.unified-cheatsheet section,
+html.unified-cheatsheet .panel,
+html.unified-cheatsheet .note-card,
+html.unified-cheatsheet .combo-card,
+html.unified-cheatsheet .board-card,
+html.unified-cheatsheet .match-card,
+html.unified-cheatsheet .matchup-card,
+html.unified-cheatsheet .variant-card,
+html.unified-cheatsheet .tip-card,
+html.unified-cheatsheet .route-summary,
+html.unified-cheatsheet .item-card,
+html.unified-cheatsheet .metric,
+html.unified-cheatsheet .reference-panel,
+html.unified-cheatsheet .references,
+html.unified-cheatsheet .hero-main,
+html.unified-cheatsheet .hero-side {
+  border-color: var(--unified-line) !important;
+}
+
+html[data-cheatsheet-theme="dark"] .section,
+html[data-cheatsheet-theme="dark"] section,
+html[data-cheatsheet-theme="dark"] .panel,
+html[data-cheatsheet-theme="dark"] .note-card,
+html[data-cheatsheet-theme="dark"] .combo-card,
+html[data-cheatsheet-theme="dark"] .board-card,
+html[data-cheatsheet-theme="dark"] .match-card,
+html[data-cheatsheet-theme="dark"] .matchup-card,
+html[data-cheatsheet-theme="dark"] .variant-card,
+html[data-cheatsheet-theme="dark"] .tip-card,
+html[data-cheatsheet-theme="dark"] .route-summary,
+html[data-cheatsheet-theme="dark"] .item-card,
+html[data-cheatsheet-theme="dark"] .metric,
+html[data-cheatsheet-theme="dark"] .reference-panel,
+html[data-cheatsheet-theme="dark"] .references,
+html[data-cheatsheet-theme="dark"] .hero-main,
+html[data-cheatsheet-theme="dark"] .hero-side,
+html[data-cheatsheet-theme="dark"] .source-note,
+html[data-cheatsheet-theme="dark"] .branch,
+html[data-cheatsheet-theme="dark"] .branch-card,
+html[data-cheatsheet-theme="dark"] .node,
+html[data-cheatsheet-theme="dark"] .graph-node,
+html[data-cheatsheet-theme="dark"] .map-node,
+html[data-cheatsheet-theme="dark"] .flow-step,
+html[data-cheatsheet-theme="dark"] .field-row,
+html[data-cheatsheet-theme="dark"] .zone,
+html[data-cheatsheet-theme="dark"] .route-panel {
+  color: var(--unified-ink) !important;
+  background: var(--unified-panel) !important;
+  border-color: var(--unified-line) !important;
+}
+
+html[data-cheatsheet-theme="dark"] p,
+html[data-cheatsheet-theme="dark"] li,
+html[data-cheatsheet-theme="dark"] td,
+html[data-cheatsheet-theme="dark"] .small,
+html[data-cheatsheet-theme="dark"] .muted,
+html[data-cheatsheet-theme="dark"] .lead,
+html[data-cheatsheet-theme="dark"] .subtitle,
+html[data-cheatsheet-theme="dark"] .node-text,
+html[data-cheatsheet-theme="dark"] .step-note {
+  color: var(--unified-muted) !important;
+}
+
+html.unified-cheatsheet .unified-theme-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1200;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  border: 1px solid var(--unified-line);
+  border-radius: var(--unified-radius);
+  background: var(--unified-panel);
+  color: var(--unified-ink);
+  box-shadow: var(--unified-shadow);
+  font: 800 13px/1 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+
+html.unified-cheatsheet .unified-theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  flex: 0 0 auto;
+}
+
+html.unified-cheatsheet .unified-theme-toggle:hover,
+html.unified-cheatsheet .unified-theme-toggle:focus-visible {
+  border-color: var(--unified-blue);
+  color: var(--unified-blue);
+  outline: 2px solid color-mix(in srgb, var(--unified-blue) 22%, transparent);
+}
+
+html.unified-cheatsheet .hero.has-unified-card-cloud,
+html.unified-cheatsheet header.hero.has-unified-card-cloud,
+html.unified-cheatsheet section.hero.has-unified-card-cloud {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px) !important;
+  align-items: center;
+}
+
+html.unified-cheatsheet .unified-card-cloud,
+html.unified-cheatsheet .hero-showcase,
+html.unified-cheatsheet .showcase-wrap {
+  justify-self: end;
+  width: min(420px, 100%);
+}
+
+html.unified-cheatsheet .unified-card-cloud-grid,
+html.unified-cheatsheet .showcase {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(42px, 1fr)) !important;
+  gap: 10px !important;
+  align-items: end;
+  padding: 14px !important;
+  border: 1px solid var(--unified-line) !important;
+  border-radius: var(--unified-radius) !important;
+  background: color-mix(in srgb, var(--unified-panel) 88%, transparent) !important;
+  box-shadow: var(--unified-shadow) !important;
+  overflow: visible !important;
+}
+
+html.unified-cheatsheet .unified-cloud-card,
+html.unified-cheatsheet .showcase .card-mini,
+html.unified-cheatsheet .showcase .card-token {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+  cursor: zoom-in;
+}
+
+html.unified-cheatsheet .unified-cloud-card img,
+html.unified-cheatsheet .showcase .card-mini img,
+html.unified-cheatsheet .showcase .card-token img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 421 / 614;
+  object-fit: cover;
+  border-radius: 5px !important;
+  border: 1px solid color-mix(in srgb, var(--unified-line) 88%, transparent) !important;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22) !important;
+}
+
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(1),
+html.unified-cheatsheet .showcase > :nth-child(1) { transform: translateY(13px) rotate(-5deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(2),
+html.unified-cheatsheet .showcase > :nth-child(2) { transform: translateY(-10px) rotate(3deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(3),
+html.unified-cheatsheet .showcase > :nth-child(3) { transform: translateY(6px) rotate(-2deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(4),
+html.unified-cheatsheet .showcase > :nth-child(4) { transform: translateY(-16px) rotate(4deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(5),
+html.unified-cheatsheet .showcase > :nth-child(5) { transform: translateY(11px) rotate(-3deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(6),
+html.unified-cheatsheet .showcase > :nth-child(6) { transform: translateY(-5px) rotate(2deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(7),
+html.unified-cheatsheet .showcase > :nth-child(7) { transform: translateY(7px) rotate(-1deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(8),
+html.unified-cheatsheet .showcase > :nth-child(8) { transform: translateY(-12px) rotate(1deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(9),
+html.unified-cheatsheet .showcase > :nth-child(9) { transform: translateY(4px) rotate(-4deg) !important; }
+html.unified-cheatsheet .unified-card-cloud-grid > :nth-child(10),
+html.unified-cheatsheet .showcase > :nth-child(10) { transform: translateY(-7px) rotate(3deg) !important; }
+
+html.unified-cheatsheet .hero-side .card-row,
+html.unified-cheatsheet .hero-side .chips {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(42px, 1fr)) !important;
+  gap: 9px !important;
+  align-items: end;
+}
+
+html.unified-cheatsheet .hero-side .card-chip {
+  display: block !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.unified-cheatsheet .hero-side .card-chip img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 421 / 614;
+  border-radius: 5px !important;
+  object-fit: cover;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.2);
+}
+
+html.unified-cheatsheet .hero-side .card-chip span {
+  display: none !important;
+}
+
+html.unified-cheatsheet .unified-combo-table-wrap,
+html.unified-cheatsheet .unified-side-table-wrap {
+  overflow-x: auto;
+  margin: 16px 0 18px;
+  border-radius: var(--unified-radius);
+}
+
+html.unified-cheatsheet .unified-combo-table,
+html.unified-cheatsheet .unified-side-table,
+html.unified-cheatsheet .side-table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: 1px solid var(--unified-line) !important;
+  border-radius: var(--unified-radius) !important;
+  overflow: hidden;
+  background: var(--unified-panel) !important;
+  box-shadow: 0 10px 28px rgba(23, 33, 42, 0.06);
+}
+
+html.unified-cheatsheet .unified-combo-table th,
+html.unified-cheatsheet .unified-side-table th,
+html.unified-cheatsheet .side-table th {
+  padding: 11px 12px !important;
+  background: var(--unified-panel-2) !important;
+  color: var(--unified-muted) !important;
+  border-bottom: 1px solid var(--unified-line) !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  text-align: left !important;
+  text-transform: uppercase;
+}
+
+html.unified-cheatsheet .unified-combo-table td,
+html.unified-cheatsheet .unified-side-table td,
+html.unified-cheatsheet .side-table td {
+  padding: 12px !important;
+  border-bottom: 1px solid var(--unified-soft-line) !important;
+  color: var(--unified-ink) !important;
+  vertical-align: top !important;
+}
+
+html.unified-cheatsheet .unified-combo-table tr:last-child td,
+html.unified-cheatsheet .unified-side-table tr:last-child td,
+html.unified-cheatsheet .side-table tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+html.unified-cheatsheet .unified-step-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--unified-blue);
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+html.unified-cheatsheet .unified-route-title {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--unified-ink);
+  font-weight: 900;
+}
+
+html.unified-cheatsheet .unified-route-meta {
+  color: var(--unified-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+html.unified-cheatsheet .unified-card-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+html.unified-cheatsheet .unified-card-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--unified-blue) 35%, var(--unified-line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--unified-blue) 10%, var(--unified-panel));
+  color: var(--unified-blue);
+  font-size: 12px;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+html.unified-cheatsheet .unified-detail-text {
+  color: var(--unified-muted);
+}
+
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .combo-grid,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .graph,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .graph-grid,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .flow,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .mind-map {
+  gap: 10px !important;
+}
+
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .combo-card,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .graph-node,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .node,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .flow-step,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .map-node,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .branch,
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .branch-card {
+  border: 1px solid var(--unified-line) !important;
+  border-radius: var(--unified-radius) !important;
+  background: var(--unified-panel) !important;
+  box-shadow: 0 8px 24px rgba(23, 33, 42, 0.06) !important;
+}
+
+html.unified-cheatsheet :is(#combos, #combo-graph, #interactions) .graph-canvas {
+  border: 1px solid var(--unified-line) !important;
+  border-radius: var(--unified-radius) !important;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--unified-blue) 7%, transparent) 1px, transparent 1px) 0 0 / 34px 34px,
+    linear-gradient(180deg, color-mix(in srgb, var(--unified-blue) 5%, transparent) 1px, transparent 1px) 0 0 / 34px 34px,
+    color-mix(in srgb, var(--unified-panel) 96%, var(--unified-blue)) !important;
+}
+
+html.unified-cheatsheet .card-mention {
+  display: inline;
+  padding: 0 0.16em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--unified-gold) 18%, transparent);
+  color: color-mix(in srgb, var(--unified-gold) 72%, var(--unified-ink));
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  font-weight: 820;
+}
+
+html.unified-cheatsheet .card-mini,
+html.unified-cheatsheet .card-chip,
+html.unified-cheatsheet .card-token {
+  cursor: zoom-in;
+}
+
+html.unified-cheatsheet .unified-card-preview {
+  position: fixed;
+  z-index: 2000;
+  display: none;
+  width: min(248px, 46vw);
+  pointer-events: none;
+  filter: drop-shadow(0 24px 44px rgba(0,0,0,0.32));
+}
+
+html.unified-cheatsheet .unified-card-preview.show {
+  display: block;
+}
+
+html.unified-cheatsheet .unified-card-preview img {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  background: #dbe3ea;
+}
+
+html.unified-cheatsheet .unified-card-preview span {
+  display: block;
+  margin-top: 7px;
+  padding: 7px 8px;
+  border: 1px solid var(--unified-line);
+  border-radius: var(--unified-radius);
+  background: var(--unified-panel);
+  color: var(--unified-ink);
+  font-size: 13px;
+  font-weight: 900;
+  text-align: center;
+}
+
+html.unified-cheatsheet .unified-references-bottom {
+  display: block !important;
+  margin-top: 34px !important;
+  padding-top: 18px !important;
+  border-top: 2px solid var(--unified-line) !important;
+}
+
+html.unified-cheatsheet .unified-references-bottom[hidden],
+html.unified-cheatsheet .unified-references-bottom [hidden] {
+  display: block !important;
+}
+
+html.unified-cheatsheet .unified-references-bottom ol,
+html.unified-cheatsheet .unified-references-bottom ul {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 860px) {
+  html.unified-cheatsheet .hero.has-unified-card-cloud,
+  html.unified-cheatsheet header.hero.has-unified-card-cloud,
+  html.unified-cheatsheet section.hero.has-unified-card-cloud {
+    grid-template-columns: 1fr !important;
+  }
+
+  html.unified-cheatsheet .unified-card-cloud,
+  html.unified-cheatsheet .hero-showcase,
+  html.unified-cheatsheet .showcase-wrap {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  html.unified-cheatsheet .unified-card-cloud-grid,
+  html.unified-cheatsheet .showcase {
+    grid-template-columns: repeat(5, minmax(34px, 1fr)) !important;
+    gap: 7px !important;
+    padding: 10px !important;
+  }
+
+  html.unified-cheatsheet .unified-theme-toggle {
+    top: auto;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  html.unified-cheatsheet .unified-combo-table,
+  html.unified-cheatsheet .unified-side-table,
+  html.unified-cheatsheet .side-table {
+    min-width: 720px;
+  }
+}
