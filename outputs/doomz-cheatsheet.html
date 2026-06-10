@@ -3,1329 +3,524 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DoomZ Combo Mind Map Cheatsheet</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f5f3ee;
-      --panel: #ffffff;
-      --panel-2: #eef4f6;
-      --ink: #182226;
-      --muted: #5f6b72;
-      --line: #d7dedb;
-      --teal: #0e7274;
-      --green: #286b4d;
-      --gold: #a96f13;
-      --rose: #a43e5d;
-      --red: #9f4138;
-      --blue: #315f8d;
-      --violet: #66518e;
-      --shadow: 0 18px 48px rgba(24, 34, 38, .12);
-      --radius: 8px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      background: var(--paper);
-    }
-
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.94) 0, rgba(245,243,238,.98) 380px, #edf2f1 100%),
-        repeating-linear-gradient(135deg, rgba(14,114,116,.07) 0 1px, transparent 1px 22px);
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
-    }
-
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    button { font: inherit; letter-spacing: 0; }
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 920px;
-      margin-bottom: 14px;
-      font-size: clamp(3rem, 9vw, 5.8rem);
-      line-height: .9;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: clamp(1.55rem, 3vw, 2.15rem);
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.02rem;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    p { margin-bottom: 12px; }
-
-    .page {
-      width: min(1260px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 18px 0 58px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
-      gap: 28px;
-      align-items: center;
-      padding: 18px 0 14px;
-    }
-
-    .hero > * { min-width: 0; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--green);
-      font-size: .82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .lead {
-      max-width: 900px;
-      color: #304349;
-      font-size: 1.1rem;
-    }
-
-    .hero-pills,
-    .chips,
-    .tags,
-    .card-row,
-    .route-actions,
-    .tab-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill,
-    .tag,
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      color: #263338;
-      font-size: .88rem;
-      white-space: nowrap;
-    }
-
-    .pill strong,
-    .tag strong { color: var(--ink); }
-
-    .icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      font-size: .78rem;
-      font-weight: 900;
-      color: #fff;
-      background: var(--teal);
-      flex: 0 0 auto;
-    }
-
-    .icon.plus {
-      background: var(--gold);
-      font-size: 1.02rem;
-      line-height: 1;
-    }
-
-    .icon.info { background: var(--blue); }
-    .icon.warn { background: var(--rose); }
-
-    .hero-showcase {
-      min-height: 352px;
-      display: grid;
-      align-items: center;
-      overflow: visible;
-    }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(58px, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border: 1px solid rgba(24,34,38,.12);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(135deg, rgba(14,114,116,.14), transparent 42%),
-        linear-gradient(315deg, rgba(169,111,19,.14), transparent 38%),
-        rgba(255,255,255,.86);
-      box-shadow: var(--shadow);
-      overflow: visible;
-    }
-
-    .showcase .mini-card {
-      width: 100%;
-    }
-
-    .showcase-note {
-      grid-column: 1 / -1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      min-height: 44px;
-      padding: 8px 10px;
-      border: 1px solid rgba(24,34,38,.1);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.88);
-      font-size: .86rem;
-      font-weight: 760;
-    }
-
-    .section {
-      padding: 28px 0;
-      border-top: 1px solid rgba(24,34,38,.1);
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 14px;
-    }
-
-    .section-head p {
-      max-width: 720px;
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      gap: 14px;
-    }
-
-    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .panel,
-    .combo-shell,
-    .refs-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 10px 32px rgba(24,34,38,.08);
-    }
-
-    .panel { padding: 16px; }
-
-    .panel h3 {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .panel p,
-    .panel li {
-      color: #34434a;
-    }
-
-    ul.clean {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    ul.clean li { margin: 7px 0; }
-
-    .ratio-list {
-      display: grid;
-      gap: 7px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .ratio-list li {
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 8px;
-      align-items: center;
-      padding: 7px 9px;
-      border: 1px solid rgba(24,34,38,.09);
-      border-radius: var(--radius);
-      background: rgba(245,247,247,.9);
-    }
-
-    .qty {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 24px;
-      border-radius: 999px;
-      color: #fff;
-      background: var(--teal);
-      font-size: .82rem;
-      font-weight: 850;
-    }
-
-    .mini-card {
-      position: relative;
-      display: inline-grid;
-      grid-template-rows: auto minmax(2.35em, auto);
-      gap: 5px;
-      width: 76px;
-      min-height: 126px;
-      padding: 6px;
-      border: 1px solid rgba(24,34,38,.14);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: 0 8px 18px rgba(24,34,38,.08);
-      vertical-align: top;
-      overflow: visible;
-    }
-
-    .mini-card img {
-      width: 100%;
-      aspect-ratio: 421 / 614;
-      object-fit: cover;
-      border-radius: 5px;
-      background: #d7dedb;
-      display: block;
-    }
-
-    .mini-card span {
-      align-self: start;
-      color: #293940;
-      font-size: .7rem;
-      font-weight: 760;
-      line-height: 1.12;
-      overflow-wrap: anywhere;
-    }
-
-    .mini-card .card-zoom {
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 8px);
-      z-index: 30;
-      width: 214px;
-      max-width: 68vw;
-      transform: translateX(-50%) translateY(6px) scale(.96);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .15s ease, transform .15s ease, visibility .15s ease;
-      border: 1px solid rgba(24,34,38,.25);
-      border-radius: var(--radius);
-      box-shadow: 0 22px 62px rgba(24,34,38,.28);
-    }
-
-    .mini-card:hover,
-    .mini-card:focus-within,
-    .mini-card:focus {
-      z-index: 35;
-      border-color: rgba(14,114,116,.4);
-    }
-
-    .mini-card:hover .card-zoom,
-    .mini-card:focus .card-zoom {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    .card-band {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-      overflow: visible;
-    }
-
-    .trigger-map {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      overflow: visible;
-    }
-
-    .trigger {
-      padding: 12px;
-      border: 1px solid rgba(24,34,38,.1);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(242,246,245,.94));
-      overflow: visible;
-    }
-
-    .trigger-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 8px;
-      font-weight: 850;
-    }
-
-    .trigger p {
-      margin: 0;
-      color: #405159;
-      font-size: .9rem;
-    }
-
-    .combo-shell {
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    .route-actions {
-      margin-bottom: 12px;
-    }
-
-    .route-btn,
-    .tab-btn {
-      min-height: 36px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: #263338;
-      cursor: pointer;
-    }
-
-    .route-btn.active,
-    .tab-btn.active {
-      border-color: rgba(14,114,116,.55);
-      background: #e5f2f1;
-      color: #0b5658;
-      font-weight: 820;
-    }
-
-    .graph-wrap {
-      position: relative;
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      padding: 6px 2px 18px;
-    }
-
-    .graph {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(222px, 264px);
-      align-items: stretch;
-      gap: 18px;
-      min-width: min-content;
-      overflow: visible;
-    }
-
-    .node {
-      position: relative;
-      display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr);
-      gap: 8px;
-      min-height: 254px;
-      padding: 13px;
-      border: 1px solid rgba(24,34,38,.12);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: 0 8px 22px rgba(24,34,38,.08);
-      overflow: visible;
-    }
-
-    .node:not(:last-child)::after {
-      content: "->";
-      position: absolute;
-      top: 50%;
-      right: -16px;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      transform: translateY(-50%);
-      border: 1px solid rgba(24,34,38,.14);
-      border-radius: 999px;
-      background: #f8faf9;
-      color: var(--blue);
-      font-weight: 900;
-      box-shadow: 0 5px 18px rgba(24,34,38,.1);
-    }
-
-    .node .step {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--teal);
-      font-size: .78rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .node h3 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .node p {
-      margin: 0;
-      color: #3d4d54;
-      font-size: .91rem;
-    }
-
-    .node .card-band {
-      margin-top: 0;
-      gap: 7px;
-    }
-
-    .note-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .note {
-      padding: 11px 12px;
-      border: 1px solid rgba(24,34,38,.1);
-      border-radius: var(--radius);
-      background: #fbfcfb;
-      color: #34434a;
-      font-size: .9rem;
-    }
-
-    .endboard {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-      gap: 12px;
-      overflow: visible;
-    }
-
-    .board-row {
-      display: grid;
-      grid-template-columns: 120px minmax(0, 1fr);
-      gap: 10px;
-      align-items: start;
-      padding: 10px 0;
-      border-top: 1px solid rgba(24,34,38,.1);
-    }
-
-    .board-row:first-child { border-top: 0; padding-top: 0; }
-    .board-label { color: var(--muted); font-size: .84rem; font-weight: 850; text-transform: uppercase; }
-
-    .matrix {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .matrix th,
-    .matrix td {
-      padding: 10px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    .matrix th {
-      background: #eaf1f1;
-      color: #213036;
-      font-size: .82rem;
-      text-transform: uppercase;
-    }
-
-    .matrix tr:last-child td { border-bottom: 0; }
-    .matrix td { color: #34434a; }
-
-    .refs-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 18px;
-      padding: 12px;
-      border: 1px dashed rgba(24,34,38,.22);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.8);
-    }
-
-    .refs-panel {
-      margin-top: 10px;
-      padding: 16px;
-    }
-
-    .refs-panel[hidden] { display: none; }
-
-    .source-list {
-      display: grid;
-      gap: 10px;
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .source-list li {
-      color: #3d4d54;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      color: #2b3940;
-      background: #eef4f6;
-      border: 1px solid rgba(24,34,38,.1);
-      font-size: .82rem;
-      font-weight: 780;
-    }
-
-    .status.hot { background: #f8ebdf; color: #79410d; }
-    .status.safe { background: #e8f3ec; color: #1d5b40; }
-    .status.warn { background: #f7eaf0; color: #783047; }
-
-    @media (max-width: 1020px) {
-      .hero,
-      .grid.two,
-      .grid.three,
-      .grid.four,
-      .endboard {
-        grid-template-columns: 1fr;
-      }
-
-      .trigger-map,
-      .note-strip {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 680px) {
-      .page {
-        width: min(100vw - 18px, 560px);
-        padding-top: 10px;
-      }
-
-      .hero {
-        gap: 14px;
-      }
-
-      .hero-showcase { min-height: 0; }
-      .showcase { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .showcase-note {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-      .pill,
-      .tag,
-      .chip {
-        max-width: 100%;
-        white-space: normal;
-      }
-      .hero-pills .pill {
-        width: 100%;
-      }
-      .section { padding: 22px 0; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 8px; }
-      .trigger-map,
-      .note-strip {
-        grid-template-columns: 1fr;
-      }
-
-      .mini-card {
-        width: 70px;
-        min-height: 120px;
-      }
-
-      .graph {
-        grid-auto-columns: minmax(212px, 84vw);
-      }
-
-      .board-row {
-        grid-template-columns: 1fr;
-      }
-
-      .matrix,
-      .matrix tbody,
-      .matrix tr,
-      .matrix td {
-        display: block;
-      }
-
-      .matrix thead { display: none; }
-      .matrix tr { border-bottom: 1px solid var(--line); }
-      .matrix tr:last-child { border-bottom: 0; }
-      .matrix td {
-        border-bottom: 0;
-        padding: 8px 10px;
-      }
-      .matrix td::before {
-        content: attr(data-label);
-        display: block;
-        margin-bottom: 3px;
-        color: var(--muted);
-        font-size: .74rem;
-        font-weight: 850;
-        text-transform: uppercase;
-      }
-
-      .refs-bar {
-        align-items: stretch;
-        flex-direction: column;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>DoomZ Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <main class="page">
-    <section class="hero">
-      <div>
-        <div class="eyebrow"><span class="icon info">i</span> TCG Power Patron DoomZ, checked June 8, 2026</div>
-        <h1>DoomZ Mind Map</h1>
-        <p class="lead">A top-to-bottom combo cheatsheet for the current DoomZ shell: destroy your own DoomZ and Power Patron cards, convert those triggers into Xyz bodies and Equip Spells, then end on Drastrius plus layered Power Patron interaction.</p>
-        <div class="hero-pills">
-          <span class="pill"><span class="icon plus">+</span><strong>Latest top:</strong> Germany National Top 8, May 30, 2026</span>
-          <span class="pill"><span class="icon info">i</span><strong>Public MDM combos:</strong> 6 routes</span>
-          <span class="pill"><span class="icon warn">!</span><strong>Spreadsheet:</strong> no free public MDM sheet found</span>
-          <span class="pill"><span class="icon plus">+</span><strong>Plan:</strong> Drastea into Drastrius, then Power Patron ceiling</span>
+  <main class="shell">
+
+    <header class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">TCG Power Patron DoomZ — checked June 8, 2026</div>
+        <h1>DoomZ</h1>
+        <p class="subtitle">A top-to-bottom combo cheatsheet for the current DoomZ shell: destroy your own DoomZ and Power Patron cards, convert those triggers into Xyz bodies and Equip Spells, then end on Drastrius plus layered Power Patron interaction.</p>
+        <div class="pill-row">
+          <span class="pill green">Last checked: 2026-06-08</span>
+          <span class="pill blue">Role: combo — 6 public MDM routes</span>
+          <span class="pill gold">Win: Drastea into Drastrius, then Power Patron ceiling</span>
+          <span class="pill red">Latest top: Germany National Top 8, May 30, 2026</span>
         </div>
       </div>
-      <div class="hero-showcase">
-        <div class="showcase" id="heroCards"></div>
-      </div>
-    </section>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="elara"></span>
+          <span class="cloud-card" data-card="drastea"></span>
+          <span class="cloud-card" data-card="raiders"></span>
+          <span class="cloud-card" data-card="doomdurg"></span>
+          <span class="cloud-card" data-card="drastrius"></span>
+          <span class="cloud-card" data-card="graflareio"></span>
+          <span class="cloud-card" data-card="jupredo"></span>
+          <span class="cloud-card" data-card="terminus"></span>
+          <span class="cloud-card" data-card="destruction"></span>
+          <span class="cloud-card" data-card="varudras"></span>
+        </div>
+      </aside>
+    </header>
 
     <section class="section" id="playstyle">
-      <div class="section-head">
-        <div>
-          <h2>Playstyle And Win Condition</h2>
-          <div class="tags">
-            <span class="tag"><strong>Combo</strong> Xyz locked often</span>
-            <span class="tag"><strong>Engine removal</strong> destroys own cards</span>
-            <span class="tag"><strong>Ceiling</strong> Drastrius + Varudras + Regulus</span>
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>DoomZ is strongest when its own cards are destroyed by your effects. Every route is a resource loop: destroy, trigger, equip, Xyz, and turn face-up Extra Deck Power Patrons into searches. Going first, make <span class="card-mention" data-card="drastea">Drastea</span> equipped with <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span>, then Xyz into <span class="card-mention" data-card="drastrius">Drastrius</span> on the opponent's turn; ceiling lists add <span class="card-mention" data-card="varudras">Varudras</span>, <span class="card-mention" data-card="sargas">Sargas</span>, <span class="card-mention" data-card="regulus">Regulus</span>, and <span class="card-mention" data-card="destruction">DoomZ Destruction</span>.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Starters: <span class="card-mention" data-card="elara">Elara</span> sets a DoomZ Spell/Trap, <span class="card-mention" data-card="amalthe">Amalthe</span> searches a DoomZ monster, <span class="card-mention" data-card="change">Change</span> destroys a DoomZ from hand, Deck, or field to start the same chain.</span></li>
+            <li><span class="num">2</span><span>Destroy payoff: <span class="card-mention" data-card="raiders">Raiders</span> destroys another DoomZ to add or Special Summon a DoomZ monster; if Raiders itself is destroyed by effect, it destroys a face-up monster.</span></li>
+            <li><span class="num">3</span><span>Bridge: <span class="card-mention" data-card="drastea">Drastea</span> destroys a DoomZ card to summon itself and equip an Equip Spell — equipped Drastea is the opponent-turn <span class="card-mention" data-card="drastrius">Drastrius</span> line.</span></li>
+            <li><span class="num">4</span><span>Search lock: <span class="card-mention" data-card="destruction">DoomZ Destruction</span> attached to a DoomZ Xyz stops the opponent from adding cards from the Main Deck except by drawing.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Going Second And Core Constraint</h3>
+          <p>Going second, <span class="card-mention" data-card="jupredo">Jupredo</span>, <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span>, <span class="card-mention" data-card="destruction">Destruction</span>, and <span class="card-mention" data-card="jupiter">Jupiter</span> let the engine threaten pops, equip opposing monsters, and push direct damage without needing many generic board breakers.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="jupredo"></span>
+            <span class="card-chip" data-card="adrasteia"></span>
+            <span class="card-chip" data-card="jupiter"></span>
           </div>
-        </div>
-        <p>DoomZ is strongest when its cards are destroyed by your effects. Every route is a resource loop: destroy, trigger, equip, Xyz, and turn face-up Extra Deck Power Patrons into searches.</p>
-      </div>
-
-      <div class="grid three">
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Win Going First</h3>
-          <p>Make <strong>Drastea</strong> with <strong>D.O.O.M.D.U.R.G.</strong>, then Xyz into <strong>Drastrius</strong> on the opponent's turn. The ceiling lists add <strong>Varudras</strong>, <strong>Sargas</strong>, <strong>Regulus</strong>, and <strong>DoomZ Destruction</strong>.</p>
-          <div class="card-band" data-cards="drastea,doomdurg,drastrius,varudras,regulus,destruction"></div>
-        </article>
-        <article class="panel">
-          <h3><span class="icon info">i</span> Win Going Second</h3>
-          <p><strong>Jupredo</strong>, <strong>A.D.R.A.S.T.E.I.A.</strong>, <strong>Destruction</strong>, and <strong>Jupiter</strong> let the engine threaten pops, equip opposing monsters, and push direct damage without needing many generic board breakers.</p>
-          <div class="card-band" data-cards="jupredo,adrasteia,destruction,jupiter,graflareio"></div>
-        </article>
-        <article class="panel">
-          <h3><span class="icon warn">!</span> Core Constraint</h3>
-          <p>After <strong>Raiders</strong> resolves, Extra Deck summons are Xyz-only for the rest of the turn. Top lists are built around this, using Rank 4/5/8/10 Xyz lines instead of Link access.</p>
-          <div class="card-band" data-cards="raiders,diactorus,graflareio,sargas,merrymaker"></div>
+          <p style="margin-top:10px">Core constraint: after <span class="card-mention" data-card="raiders">Raiders</span> resolves, Extra Deck summons are Xyz-only for the rest of the turn. Top lists are built around this, using Rank 4/5/8/10 Xyz lines (<span class="card-mention" data-card="diactorus">Diactorus</span>, <span class="card-mention" data-card="graflareio">Graflareio</span>, <span class="card-mention" data-card="sargas">Sargas</span>, <span class="card-mention" data-card="merrymaker">Merrymaker</span>) instead of Link access. The Power Patron loop is the other half of the grammar: when <span class="card-mention" data-card="jupredo">Jupredo</span> reaches the face-up Extra Deck, <span class="card-mention" data-card="terminus">Terminus</span> and <span class="card-mention" data-card="vidolium">Vidolium</span> convert that state into more searches and bodies.</p>
         </article>
       </div>
     </section>
 
-    <section class="section" id="variant">
-      <div class="section-head">
-        <div>
-          <h2>Latest Tournament Variant</h2>
-          <div class="tags">
-            <span class="tag"><strong>Usama Bagaudinov</strong> Germany National 2026 Top 8</span>
-            <span class="tag"><strong>40 cards</strong> Power Patron / Therion</span>
-            <span class="tag"><strong>Large-event proof</strong> YCS Columbus: 6 DoomZ in Top 32</span>
-          </div>
-        </div>
-        <p>The latest top deck found was the May 30, 2026 Germany National Top 8 list. Its shape matches the YCS Columbus DoomZ trend: heavy engine, Terminus/Jupredo package, and side cards aimed at combo mirrors and established boards.</p>
-      </div>
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Elara 1-card — compact board when you cannot afford the full Power Patron chain</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Normal Summon Elara</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="elara"></span><span class="plus-sign">+</span><span class="card-chip" data-card="raiders"></span></div></td>
+              <td><span class="card-mention" data-card="elara">Elara</span> is the single starter: resolve its summon effect to set <span class="card-mention" data-card="raiders">DoomZ Raiders</span> from Deck, the destroy outlet for the route.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Raiders destroys Elara</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="raiders"></span><span class="plus-sign">+</span><span class="card-chip" data-card="amalthe"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="raiders">Raiders</span>, destroy <span class="card-mention" data-card="elara">Elara</span>, and Special Summon <span class="card-mention" data-card="amalthe">Amalthe</span> from Deck. Remember: Raiders locks you into Xyz from the Extra Deck after it resolves.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Amalthe finds Drastea</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="amalthe"></span><span class="plus-sign">+</span><span class="card-chip" data-card="drastea"></span></div></td>
+              <td><span class="card-mention" data-card="amalthe">Amalthe</span> searches <span class="card-mention" data-card="drastea">Drastea</span> — the bridge into the equipped Rank 8 line.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Drastea equips Command</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="drastea"></span><span class="plus-sign">+</span><span class="card-chip" data-card="doomdurg"></span></div></td>
+              <td><span class="card-mention" data-card="drastea">Drastea</span> destroys <span class="card-mention" data-card="amalthe">Amalthe</span>, Special Summons itself, then equips <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span> from Deck.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Opponent-turn Drastrius</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="drastrius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="raiders"></span></div></td>
+              <td>On the opponent's turn, <span class="card-mention" data-card="drastea">Drastea</span> Xyz Summons <span class="card-mention" data-card="drastrius">Drastrius</span>, which equips an opponent monster on summon and can negate a field/GY monster effect. <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span> can destroy <span class="card-mention" data-card="raiders">Raiders</span> to convert it into a monster destruction.</td>
+            </tr>
 
-      <div class="grid three">
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Main Deck Core</h3>
-          <ul class="ratio-list">
-            <li><span class="qty">3</span><span>DoomZ VII Seven - Elara</span></li>
-            <li><span class="qty">3</span><span>DoomZ XII Zero - Drastea</span></li>
-            <li><span class="qty">3</span><span>DoomZ Change</span></li>
-            <li><span class="qty">3</span><span>DoomZ Raiders</span></li>
-            <li><span class="qty">3</span><span>Prohibited Power Patron Portal - Terminus</span></li>
-            <li><span class="qty">3</span><span>Jupredo the Shademachine Power Patron</span></li>
-            <li><span class="qty">2</span><span>DoomZ V Five - Amalthe</span></li>
-          </ul>
-        </article>
-        <article class="panel">
-          <h3><span class="icon info">i</span> Tech Package</h3>
-          <ul class="clean">
-            <li><strong>1 Medius + 1 Power Patron DoomZ</strong> turns the Normal Summon into Diactorus access.</li>
-            <li><strong>1 Regulus</strong> is searched by Sargas and turns the GY Power Patron into an omni-negate.</li>
-            <li><strong>3 The Fallen & The Virtuous + 3 Forbidden Crown</strong> show the current BLZD top-list preference for engine density and flexible pressure.</li>
-            <li><strong>1 DoomZ Destruction</strong> is still the key searchable anti-search trap.</li>
-          </ul>
-        </article>
-        <article class="panel">
-          <h3><span class="icon warn">!</span> Side Deck Trend</h3>
-          <ul class="clean">
-            <li>Kaiju/Santa Claws for towers or protected Xyz boards.</li>
-            <li>D.D. Crow, Droll, Bystials for graveyard and search-heavy decks.</li>
-            <li>Set Rotation + Magical Mid-Breaker Field for combo protection and field-spell fights.</li>
-            <li>Lightning Storm, Feather Duster, Solemn Accusation, Solemn Judgment for backrow and board-breaker trades.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+            <tr class="route-head"><td colspan="4">Elara Post-BLZD — the modern ceiling branch from Elara; best when you can afford Droll/Fuwalos math</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Elara sets A.D.R.A.S.T.E.I.A.</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="elara"></span><span class="plus-sign">+</span><span class="card-chip" data-card="adrasteia"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="elara">Elara</span>, set <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span>, then equip it to Elara.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Xyz into Diactorus, then Graflareio</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="diactorus"></span><span class="plus-sign">+</span><span class="card-chip" data-card="graflareio"></span></div></td>
+              <td><span class="card-mention" data-card="elara">Elara</span> with an Equip Card becomes <span class="card-mention" data-card="diactorus">Diactorus</span> using itself and the equip as material; overlay into <span class="card-mention" data-card="graflareio">Graflareio</span>. Detach <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span> so its GY effect stays live, add <span class="card-mention" data-card="raiders">Raiders</span>, and threaten a pop.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Raiders destroys Graflareio</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="raiders"></span><span class="plus-sign">+</span><span class="card-chip" data-card="powerdoomz"></span></div></td>
+              <td><span class="card-mention" data-card="raiders">Raiders</span> destroys <span class="card-mention" data-card="graflareio">Graflareio</span> and summons <span class="card-mention" data-card="amalthe">Amalthe</span>; Graflareio's destroyed trigger summons a non-Xyz DoomZ such as <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> from Deck or GY — destroying it is extension, not cost.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Drastea plus Destruction</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="drastea"></span><span class="plus-sign">+</span><span class="card-chip" data-card="destruction"></span></div></td>
+              <td><span class="card-mention" data-card="amalthe">Amalthe</span> searches <span class="card-mention" data-card="drastea">Drastea</span>; Power Patron lines access <span class="card-mention" data-card="change">Change</span>. Drastea equips <span class="card-mention" data-card="doomdurg">Command</span>; Change and <span class="card-mention" data-card="destruction">Destruction</span> can chain to recover Destruction and equip <span class="card-mention" data-card="jupredo">Jupredo</span> from Deck.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Ceiling conversion</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="drastrius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="varudras"></span></div></td>
+              <td><span class="card-mention" data-card="drastea">Drastea</span> becomes <span class="card-mention" data-card="drastrius">Drastrius</span>; <span class="card-mention" data-card="jupredo">Jupredo</span>/<span class="card-mention" data-card="terminus">Terminus</span>/<span class="card-mention" data-card="vidolium">Vidolium</span> convert face-up Extra Deck resources into <span class="card-mention" data-card="varudras">Varudras</span> and follow-up.</td>
+            </tr>
 
-    <section class="section" id="interactions">
-      <div class="section-head">
-        <div>
-          <h2>Core Combos And Interactions</h2>
-          <div class="tags">
-            <span class="tag"><span class="icon plus">+</span> cards trigger together</span>
-            <span class="tag"><span class="icon info">i</span> destroy effects are value</span>
-            <span class="tag"><span class="icon warn">!</span> sequence around Droll and board breakers</span>
-          </div>
-        </div>
-        <p>Read this as the deck's trigger grammar. The graph section below shows the routes; this section explains why the cards chain together.</p>
-      </div>
+            <tr class="route-head"><td colspan="4">Terminus 1-card — YgoCombo BLZD route; ends on roughly 8 cards (5 monsters including Varudras, Drastea, Sargas, plus 3 Spell/Traps)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Terminus opens</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="terminus"></span><span class="plus-sign">+</span><span class="card-chip" data-card="vidolium"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="terminus">Terminus</span>, send <span class="card-mention" data-card="jupredo">Jupredo</span>, and add <span class="card-mention" data-card="vidolium">Vidolium</span>. Scale Vidolium, return it to the Extra Deck, Special Summon Jupredo, then search <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Jupredo finds Raiders</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="jupredo"></span><span class="plus-sign">+</span><span class="card-chip" data-card="raiders"></span></div></td>
+              <td><span class="card-mention" data-card="jupredo">Jupredo</span> cycles through the face-up Extra Deck, searches <span class="card-mention" data-card="raiders">Raiders</span>, and adds a body such as <span class="card-mention" data-card="clockwork">Clockwork Knight</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Raiders starts the DoomZ chain</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="raiders"></span><span class="plus-sign">+</span><span class="card-chip" data-card="elara"></span></div></td>
+              <td><span class="card-mention" data-card="raiders">Raiders</span> destroys <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> and summons <span class="card-mention" data-card="elara">Elara</span>; Power Patron's destroyed trigger and Elara set up <span class="card-mention" data-card="amalthe">Amalthe</span> and <span class="card-mention" data-card="change">Change</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Amalthe into Sargas</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="merrymaker"></span><span class="plus-sign">+</span><span class="card-chip" data-card="sargas"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="amalthe">Amalthe</span> to add <span class="card-mention" data-card="drastea">Drastea</span>, then make <span class="card-mention" data-card="merrymaker">Merrymaker</span> into <span class="card-mention" data-card="sargas">Sargas</span> and search <span class="card-mention" data-card="regulus">Regulus</span>, which turns the GY Power Patron into an omni-negate.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Varudras close</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="varudras"></span><span class="plus-sign">+</span><span class="card-chip" data-card="destruction"></span></div></td>
+              <td><span class="card-mention" data-card="drastea">Drastea</span> equips <span class="card-mention" data-card="doomdurg">Command</span> and becomes <span class="card-mention" data-card="drastrius">Drastrius</span>; the line extends through <span class="card-mention" data-card="graflareio">Graflareio</span>/<span class="card-mention" data-card="jupiter">Jupiter</span>, and <span class="card-mention" data-card="varudras">Varudras</span> plus set <span class="card-mention" data-card="destruction">Destruction</span> closes the board. Long route: practice shortcut decisions for Droll, Nibiru, and board breakers.</td>
+            </tr>
 
-      <div class="trigger-map">
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon plus">+</span> Starter Names</div>
-          <p><strong>Elara</strong> sets a DoomZ Spell/Trap. <strong>Amalthe</strong> searches a DoomZ monster. <strong>Change</strong> can load a destroyed DoomZ from hand, Deck, or field to start the same chain.</p>
-          <div class="card-band" data-cards="elara,amalthe,change"></div>
-        </article>
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon plus">+</span> Destroy Payoffs</div>
-          <p><strong>Raiders</strong> destroys another DoomZ to add or Special Summon a DoomZ monster. If Raiders is destroyed by effect, it destroys a face-up monster.</p>
-          <div class="card-band" data-cards="raiders,elara,amalthe,drastea"></div>
-        </article>
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon info">i</span> Drastea Bridge</div>
-          <p><strong>Drastea</strong> destroys a DoomZ card to summon itself and equip an Equip Spell, usually <strong>D.O.O.M.D.U.R.G.</strong>. Equipped Drastea becomes the opponent-turn Drastrius line.</p>
-          <div class="card-band" data-cards="drastea,doomdurg,drastrius"></div>
-        </article>
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon info">i</span> Graflareio Pivot</div>
-          <p><strong>Diactorus</strong> turns into <strong>Graflareio</strong>. Graflareio adds a DoomZ Spell/Trap and can destroy a card; when destroyed, it summons a non-Xyz DoomZ from Deck or GY.</p>
-          <div class="card-band" data-cards="diactorus,graflareio,raiders,powerdoomz"></div>
-        </article>
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon plus">+</span> Power Patron Loop</div>
-          <p><strong>Jupredo</strong> is both extender and board breaker. When it reaches the face-up Extra Deck, <strong>Terminus</strong> and <strong>Vidolium</strong> convert that state into more searches and bodies.</p>
-          <div class="card-band" data-cards="jupredo,terminus,vidolium,vidolia,jupiter"></div>
-        </article>
-        <article class="trigger">
-          <div class="trigger-title"><span class="icon warn">!</span> Search Lock</div>
-          <p><strong>DoomZ Destruction</strong> attached to a DoomZ Xyz functions like a searchable anti-search effect: the opponent cannot add from Main Deck except by drawing.</p>
-          <div class="card-band" data-cards="destruction,drastrius,graflareio"></div>
-        </article>
+            <tr class="route-head"><td colspan="4">Medius + Elara — why current lists still play the small Medius/Power Patron package</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Medius summons Power Patron</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="medius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="powerdoomz"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="medius">Medius</span> and Special Summon <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> from Deck.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Diactorus pops Power Patron</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="diactorus"></span><span class="plus-sign">+</span><span class="card-chip" data-card="raiders"></span></div></td>
+              <td><span class="card-mention" data-card="powerdoomz">Power Patron</span> targets <span class="card-mention" data-card="medius">Medius</span> to Xyz Summon <span class="card-mention" data-card="diactorus">Diactorus</span>, then gets equipped. Diactorus destroys Power Patron, which searches <span class="card-mention" data-card="raiders">Raiders</span> on destruction.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Raiders chain and Drastea</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="raiders"></span><span class="plus-sign">+</span><span class="card-chip" data-card="drastea"></span></div></td>
+              <td><span class="card-mention" data-card="raiders">Raiders</span> destroys <span class="card-mention" data-card="elara">Elara</span> and summons <span class="card-mention" data-card="amalthe">Amalthe</span>; Elara sets <span class="card-mention" data-card="destruction">Destruction</span> and Amalthe adds <span class="card-mention" data-card="drastea">Drastea</span>, which destroys <span class="card-mention" data-card="diactorus">Diactorus</span>, summons itself, and equips <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span></td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Sargas and Regulus</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="sargas"></span><span class="plus-sign">+</span><span class="card-chip" data-card="regulus"></span></div></td>
+              <td><span class="card-mention" data-card="medius">Medius</span> recurs; Medius + <span class="card-mention" data-card="amalthe">Amalthe</span> make <span class="card-mention" data-card="merrymaker">Merrymaker</span> into <span class="card-mention" data-card="sargas">Sargas</span>, then Sargas adds <span class="card-mention" data-card="regulus">Regulus</span>. Requires Extra Deck room and a clean GY line for Regulus.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Layered board</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="drastrius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="destruction"></span></div></td>
+              <td>End on <span class="card-mention" data-card="drastea">Drastea</span>/<span class="card-mention" data-card="drastrius">Drastrius</span> conversion, <span class="card-mention" data-card="regulus">Regulus</span> omni, <span class="card-mention" data-card="sargas">Sargas</span> removal, <span class="card-mention" data-card="destruction">Destruction</span> search lock, and a <span class="card-mention" data-card="raiders">Raiders</span> follow-up pop.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
     <section class="section" id="combo-graph">
-      <div class="section-head">
-        <div>
-          <h2>Combo Graph Explorer</h2>
-          <div class="tags">
-            <span class="tag"><span class="icon plus">+</span> click a route</span>
-            <span class="tag"><span class="icon info">i</span> graph nodes show trigger groups</span>
-            <span class="tag"><span class="icon warn">!</span> lines merge at Drastea or Graflareio</span>
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Elara sets A.D.R.A.S.T.E.I.A.</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="elara"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="adrasteia"></span>
+              </div>
+              <p class="step-note">Normal Summon <span class="card-mention" data-card="elara">Elara</span>, set the Command, and equip it — this is the main post-BLZD line; the compact <span class="card-mention" data-card="raiders">Raiders</span> set is the floor.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Diactorus into Graflareio</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="diactorus"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="graflareio"></span>
+              </div>
+              <p class="step-note">Equipped <span class="card-mention" data-card="elara">Elara</span> becomes <span class="card-mention" data-card="diactorus">Diactorus</span>, overlay into <span class="card-mention" data-card="graflareio">Graflareio</span>. Detach <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span> early so its GY effect stays live; Graflareio adds <span class="card-mention" data-card="raiders">Raiders</span> and can destroy a card.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Spend Raiders the right way</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="raiders"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="powerdoomz"></span>
+              </div>
+              <p class="step-note">You get one <span class="card-mention" data-card="raiders">Raiders</span> effect per turn: destroying <span class="card-mention" data-card="graflareio">Graflareio</span> summons <span class="card-mention" data-card="amalthe">Amalthe</span> AND triggers Graflareio to summon a non-Xyz DoomZ like <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> from Deck or GY.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Drastea bridge with Command</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="drastea"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="doomdurg"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="amalthe">Amalthe</span> searches <span class="card-mention" data-card="drastea">Drastea</span>; Drastea destroys a DoomZ, summons itself, and equips <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span>. <span class="card-mention" data-card="change">Change</span> and <span class="card-mention" data-card="destruction">Destruction</span> chain here for recovery and the Jupredo equip.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Drastrius plus Power Patron ceiling</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="drastrius"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="varudras"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="regulus"></span>
+              </div>
+              <p class="step-note">Opponent-turn <span class="card-mention" data-card="drastrius">Drastrius</span> equips a monster and negates; <span class="card-mention" data-card="jupredo">Jupredo</span>/<span class="card-mention" data-card="terminus">Terminus</span>/<span class="card-mention" data-card="vidolium">Vidolium</span> convert the face-up Extra Deck into <span class="card-mention" data-card="varudras">Varudras</span>, <span class="card-mention" data-card="sargas">Sargas</span>, <span class="card-mention" data-card="regulus">Regulus</span>, and set <span class="card-mention" data-card="destruction">Destruction</span>.</p>
+            </div>
+          </div>
+          <div class="flow-step warn">
+            <div class="step-index">6</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag red">Warn</span> Xyz lock and hand-trap math</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="droll"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="fuwalos"></span>
+              </div>
+              <p class="step-note">After <span class="card-mention" data-card="raiders">Raiders</span> you are Xyz-only for the turn. Under <span class="card-mention" data-card="droll">Droll</span> or <span class="card-mention" data-card="fuwalos">Fuwalos</span> pressure, accept the compact Drastea/Drastrius board and keep follow-up instead of forcing the whole Power Patron chain.</p>
+            </div>
           </div>
         </div>
-        <p>The public combo sources split into compact DoomZ-only lines and BLZD Power Patron ceiling lines. Use these graphs as sequencing cards, not as a rigid solitaire script.</p>
-      </div>
-
-      <div class="combo-shell">
-        <div class="route-actions" id="routeActions"></div>
-        <div class="graph-wrap">
-          <div class="graph" id="comboGraph" aria-live="polite"></div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>Terminus 1-card</h4>
+            <p>When <span class="card-mention" data-card="terminus">Terminus</span> is your only opener: send <span class="card-mention" data-card="jupredo">Jupredo</span>, add <span class="card-mention" data-card="vidolium">Vidolium</span>, and walk into the same Raiders/Drastea chain with a Sargas/Regulus layer on top.</p>
+            <div class="card-row"><span class="card-chip" data-card="terminus"></span><span class="card-chip" data-card="jupredo"></span><span class="card-chip" data-card="vidolium"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Change starter (recovery line)</h4>
+            <p>When <span class="card-mention" data-card="change">Change</span> is the only real engine card: destroy <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span>, search <span class="card-mention" data-card="elara">Elara</span>, and replay the Elara 1-card route into a compact Drastrius threat.</p>
+            <div class="card-row"><span class="card-chip" data-card="change"></span><span class="card-chip" data-card="powerdoomz"></span><span class="card-chip" data-card="elara"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Going second push</h4>
+            <p><span class="card-mention" data-card="jupredo">Jupredo</span>, <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span>, and <span class="card-mention" data-card="destruction">Destruction</span> clear cards and equip opposing monsters, then <span class="card-mention" data-card="jupiter">Jupiter</span> or <span class="card-mention" data-card="drastea">Drastea</span> applies pressure.</p>
+            <div class="card-row"><span class="card-chip" data-card="jupredo"></span><span class="card-chip" data-card="adrasteia"></span><span class="card-chip" data-card="jupiter"></span></div>
+          </div>
         </div>
-        <div class="note-strip" id="routeNotes"></div>
       </div>
     </section>
 
-    <section class="section" id="endboards">
-      <div class="section-head">
-        <div>
-          <h2>End Board Examples</h2>
-          <div class="tags">
-            <span class="tag">Field by End Phase</span>
-            <span class="tag">Opponent-turn conversion</span>
-            <span class="tag">Follow-up mapped</span>
-          </div>
-        </div>
-        <p>DoomZ often ends with a board that looks smaller than the number of effects it represents. The equipped cards and face-up Extra Deck state matter.</p>
-      </div>
-
-      <div class="endboard">
-        <article class="panel">
-          <h3><span class="icon info">i</span> Minimal Drastea Board</h3>
-          <div class="board-row">
-            <div class="board-label">End Phase</div>
-            <div>Drastea equipped with D.O.O.M.D.U.R.G., plus Raiders or Destruction access.</div>
-          </div>
-          <div class="board-row">
-            <div class="board-label">Opponent turn</div>
-            <div>Use equipped Drastea to Xyz Summon Drastrius. Drastrius equips an opponent monster on summon and can negate a field/GY monster effect.</div>
-          </div>
-          <div class="board-row">
-            <div class="board-label">Extra trigger</div>
-            <div>D.O.O.M.D.U.R.G. can destroy another face-up card you control; destroying Raiders converts that into a monster destruction.</div>
-          </div>
-          <div class="card-band" data-cards="drastea,doomdurg,drastrius,raiders"></div>
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
+        <article class="board-card">
+          <span class="tag blue">Compact</span>
+          <h3>Minimal Drastea Board</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="drastea"></span><span class="card-chip" data-card="doomdurg"></span></div></div>
+          <div class="field-line"><b>Access</b><div class="card-row"><span class="card-chip" data-card="raiders"></span><span class="card-chip" data-card="destruction"></span></div></div>
+          <p>Opponent turn: <span class="card-mention" data-card="drastea">Drastea</span> Xyz Summons <span class="card-mention" data-card="drastrius">Drastrius</span> (equips an opponent monster, negates a field/GY monster effect). <span class="card-mention" data-card="doomdurg">D.O.O.M.D.U.R.G.</span> can destroy <span class="card-mention" data-card="raiders">Raiders</span> for a monster pop. Best into hands slowed by <span class="card-mention" data-card="droll">Droll</span> or <span class="card-mention" data-card="fuwalos">Fuwalos</span>; risk: board breakers answer the single body if you do not preserve follow-up.</p>
         </article>
-
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Power Patron Ceiling</h3>
-          <div class="board-row">
-            <div class="board-label">End Phase</div>
-            <div>Drastrius/Drastea line plus Varudras, Sargas, Regulus, DoomZ Destruction, and D.O.O.M.D.U.R.G.</div>
-          </div>
-          <div class="board-row">
-            <div class="board-label">Interruptions</div>
-            <div>Monster negate/equip removal, omni-negates, Sargas removal when material detaches, Destruction search lock, and Raiders follow-up pop if preserved.</div>
-          </div>
-          <div class="board-row">
-            <div class="board-label">Follow-up</div>
-            <div>Jupredo and Power Patron cards in the face-up Extra Deck or GY rebuild through Terminus/Vidolium and convert bodies into Jupiter or Varudras.</div>
-          </div>
-          <div class="card-band" data-cards="drastrius,varudras,sargas,regulus,destruction,jupredo"></div>
+        <article class="board-card">
+          <span class="tag green">Ceiling</span>
+          <h3>Power Patron Ceiling</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="drastrius"></span><span class="card-chip" data-card="varudras"></span><span class="card-chip" data-card="sargas"></span><span class="card-chip" data-card="regulus"></span></div></div>
+          <div class="field-line"><b>Backrow / equips</b><div class="card-row"><span class="card-chip" data-card="destruction"></span><span class="card-chip" data-card="doomdurg"></span></div></div>
+          <p>Interruptions: monster negate plus equip removal, <span class="card-mention" data-card="regulus">Regulus</span> omni-negate, <span class="card-mention" data-card="sargas">Sargas</span> removal on detach, <span class="card-mention" data-card="destruction">Destruction</span> search lock, and a preserved <span class="card-mention" data-card="raiders">Raiders</span> pop. <span class="card-mention" data-card="jupredo">Jupredo</span> in the face-up Extra Deck rebuilds through <span class="card-mention" data-card="terminus">Terminus</span>/<span class="card-mention" data-card="vidolium">Vidolium</span> into <span class="card-mention" data-card="jupiter">Jupiter</span> or <span class="card-mention" data-card="varudras">Varudras</span>. Risk: committing into Super Polymerization, Dark Ruler No More, Kaiju/Santa, or Forbidden Crown.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag gold">Going second</span>
+          <h3>Going Second Push</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="jupiter"></span><span class="card-chip" data-card="drastea"></span></div></div>
+          <div class="field-line"><b>Breakers</b><div class="card-row"><span class="card-chip" data-card="jupredo"></span><span class="card-chip" data-card="adrasteia"></span><span class="card-chip" data-card="destruction"></span></div></div>
+          <p><span class="card-mention" data-card="jupiter">Jupiter</span> or <span class="card-mention" data-card="drastea">Drastea</span> pressure after <span class="card-mention" data-card="jupredo">Jupredo</span>/<span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span>/<span class="card-mention" data-card="destruction">Destruction</span> clear cards. Best into boards relying on targetable face-up cards and monster effects; risk: backrow removal and banish effects break the Equip Spell loop.</p>
         </article>
       </div>
-
-      <table class="matrix" style="margin-top:14px">
-        <thead>
-          <tr>
-            <th>End Board</th>
-            <th>Field By End Phase</th>
-            <th>Best Into</th>
-            <th>Risk</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="End Board">Compact</td>
-            <td data-label="Field By End Phase">Drastea + D.O.O.M.D.U.R.G.; set/search Destruction or Raiders line.</td>
-            <td data-label="Best Into">Hands slowed by Droll, Fuwalos, or low engine density.</td>
-            <td data-label="Risk">Board breakers can answer the single body if you do not preserve follow-up.</td>
-          </tr>
-          <tr>
-            <td data-label="End Board">Tournament ceiling</td>
-            <td data-label="Field By End Phase">Drastrius/Drastea, Varudras, Sargas, Regulus, Destruction, Command.</td>
-            <td data-label="Best Into">No interruption, or hands that open Terminus/Medius plus DoomZ access.</td>
-            <td data-label="Risk">Commitment into Super Polymerization, Dark Ruler No More, Kaiju/Santa, or Forbidden Crown.</td>
-          </tr>
-          <tr>
-            <td data-label="End Board">Going second push</td>
-            <td data-label="Field By End Phase">Jupiter or Drastea pressure after Jupredo/ADRASTEIA/Destruction clear cards.</td>
-            <td data-label="Best Into">Boards relying on targetable face-up cards and monster effects.</td>
-            <td data-label="Risk">Backrow removal and banish effects can break the Equip Spell loop.</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <section class="section" id="tips">
-      <div class="section-head">
-        <div>
-          <h2>Tips And Recovery</h2>
-          <div class="tags">
-            <span class="tag">Sequencing</span>
-            <span class="tag">Choke points</span>
-            <span class="tag">Rebuild lines</span>
-          </div>
-        </div>
-        <p>The best DoomZ play is less about memorizing every ceiling route and more about knowing which trigger must survive this turn.</p>
-      </div>
-
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
       <div class="grid two">
-        <article class="panel">
-          <h3><span class="icon info">i</span> Technical Tips</h3>
-          <ul class="clean">
-            <li>Detach or send <strong>A.D.R.A.S.T.E.I.A.</strong> early when the route wants it in GY; the public BLZD lines specifically value this around Graflareio.</li>
-            <li>Do not spend <strong>Raiders</strong> casually. You can use only one Raiders effect that turn, so decide whether the search/summon or the destroyed trigger matters more.</li>
-            <li>Keep a valid DoomZ card available for <strong>Drastea</strong>. Drastea without a destroy target is just a card in hand.</li>
-            <li>Against Fuwalos or Droll pressure, accept the compact Drastea/Drastrius board and keep follow-up instead of forcing the whole Power Patron chain.</li>
-            <li><strong>DoomZ Destruction</strong> is strongest against decks that need add-to-hand chains; do not expose it to removal unless its destroyed trigger still advances your board.</li>
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Detach or send <span class="card-mention" data-card="adrasteia">A.D.R.A.S.T.E.I.A.</span> early when the route wants it in GY; the public BLZD lines specifically value this around <span class="card-mention" data-card="graflareio">Graflareio</span>.</span></li>
+            <li><span class="num">2</span><span>Do not spend <span class="card-mention" data-card="raiders">Raiders</span> casually — you can use only one Raiders effect that turn, so decide whether the search/summon or the destroyed trigger matters more.</span></li>
+            <li><span class="num">3</span><span>Keep a valid DoomZ card available for <span class="card-mention" data-card="drastea">Drastea</span>. Drastea without a destroy target is just a card in hand.</span></li>
+            <li><span class="num">4</span><span>Against <span class="card-mention" data-card="fuwalos">Fuwalos</span> or <span class="card-mention" data-card="droll">Droll</span> pressure, accept the compact Drastea/Drastrius board and keep follow-up instead of forcing the whole Power Patron chain.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="destruction">DoomZ Destruction</span> is strongest against decks that need add-to-hand chains; do not expose it to removal unless its destroyed trigger still advances your board.</span></li>
           </ul>
         </article>
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Recovery Options</h3>
-          <ul class="clean">
-            <li><strong>Power Patron DoomZ</strong> searches a DoomZ card when destroyed, turning removal on your own card into starter access.</li>
-            <li><strong>Graflareio</strong> being destroyed summons a non-Xyz DoomZ from Deck or GY, so Raiders destroying it is often extension, not cost.</li>
-            <li><strong>Change</strong> restocks the chain by destroying a DoomZ card from hand, Deck, or field, then can recover Destruction in longer lines.</li>
-            <li><strong>Jupredo</strong> in the face-up Extra Deck is still a resource because Terminus and Vidolium convert it into more cards.</li>
-            <li>If the board is cleared, normal-summon <strong>Elara</strong> or <strong>Amalthe</strong> to rebuild through Raiders or Drastea rather than chasing a non-engine answer.</li>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="powerdoomz"></span>
+            <span class="card-chip" data-card="graflareio"></span>
+            <span class="card-chip" data-card="change"></span>
+            <span class="card-chip" data-card="jupredo"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> searches a DoomZ card when destroyed, turning removal on your own card into starter access.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="graflareio">Graflareio</span> being destroyed summons a non-Xyz DoomZ from Deck or GY, so <span class="card-mention" data-card="raiders">Raiders</span> destroying it is often extension, not cost.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="change">Change</span> restocks the chain by destroying a DoomZ card from hand, Deck, or field, then can recover <span class="card-mention" data-card="destruction">Destruction</span> in longer lines.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="jupredo">Jupredo</span> in the face-up Extra Deck is still a resource because <span class="card-mention" data-card="terminus">Terminus</span> and <span class="card-mention" data-card="vidolium">Vidolium</span> convert it into more cards.</span></li>
+            <li><span class="num">5</span><span>If the board is cleared, normal-summon <span class="card-mention" data-card="elara">Elara</span> or <span class="card-mention" data-card="amalthe">Amalthe</span> to rebuild through <span class="card-mention" data-card="raiders">Raiders</span> or <span class="card-mention" data-card="drastea">Drastea</span> rather than chasing a non-engine answer.</span></li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">Germany National 2026 Top 8</span>
+          <h3>Usama Bagaudinov — 40-card Power Patron / Therion</h3>
+          <p>The latest top found (May 30, 2026). Main deck core: 3 <span class="card-mention" data-card="elara">Elara</span>, 3 <span class="card-mention" data-card="drastea">Drastea</span>, 3 <span class="card-mention" data-card="change">Change</span>, 3 <span class="card-mention" data-card="raiders">Raiders</span>, 3 <span class="card-mention" data-card="terminus">Terminus</span>, 3 <span class="card-mention" data-card="jupredo">Jupredo</span>, 2 <span class="card-mention" data-card="amalthe">Amalthe</span>. Its shape matches the YCS Columbus DoomZ trend: heavy engine, Terminus/Jupredo package, and side cards aimed at combo mirrors and established boards.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="elara"></span>
+            <span class="card-chip" data-card="drastea"></span>
+            <span class="card-chip" data-card="terminus"></span>
+            <span class="card-chip" data-card="jupredo"></span>
+          </div>
+        </article>
+        <article class="variant-card">
+          <span class="tag blue">Tech package</span>
+          <h3>Medius Package And BLZD Tech</h3>
+          <p>1 <span class="card-mention" data-card="medius">Medius</span> + 1 <span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span> turns the Normal Summon into <span class="card-mention" data-card="diactorus">Diactorus</span> access. 1 <span class="card-mention" data-card="regulus">Regulus</span> is searched by <span class="card-mention" data-card="sargas">Sargas</span> and turns the GY Power Patron into an omni-negate. 3 <span class="card-mention" data-card="fallen">The Fallen &amp; The Virtuous</span> + 3 <span class="card-mention" data-card="crown">Forbidden Crown</span> show the current BLZD top-list preference for engine density and flexible pressure. 1 <span class="card-mention" data-card="destruction">DoomZ Destruction</span> is still the key searchable anti-search trap.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="medius"></span>
+            <span class="card-chip" data-card="regulus"></span>
+            <span class="card-chip" data-card="fallen"></span>
+            <span class="card-chip" data-card="crown"></span>
+          </div>
+        </article>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2026-05-30</div><div><b>Germany National Championship:</b> DoomZ Top 8 (latest top variant used in this sheet).</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026</div><div><b>YCS Columbus:</b> DoomZ took 1 Top 8, 2 Top 16, and 6 Top 32 placements.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026</div><div><b>Spain National Championship:</b> Top 4 DoomZ, used to compare Power Patron/Therion card choices.</div></div>
       </div>
     </section>
 
     <section class="section" id="side">
-      <div class="section-head">
-        <div>
-          <h2>Side Deck Options And Counters</h2>
-          <div class="tags">
-            <span class="tag">Matchup siding</span>
-            <span class="tag">Counter DoomZ</span>
-            <span class="tag">Current June field</span>
-          </div>
-        </div>
-        <p>Top DoomZ lists are engine heavy, so most matchup adaptation happens in the side. The cards below are drawn from recent Germany, Spain, Hollywood, and Columbus DoomZ tops.</p>
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Combo mirrors: Kewl Tune, Yummy, Elfnote, DoomZ</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="crow"></span><span class="card-chip" data-card="dru"></span><span class="card-chip" data-card="shifter"></span><span class="card-chip" data-card="purulia"></span><span class="card-chip" data-card="fuwalos"></span></div></td>
+              <td><span class="card-mention" data-card="droll">Droll</span> after the first add if it strands extension. <span class="card-mention" data-card="crow">Crow</span>/Bystials hit GY extenders and DoomZ recovery. <span class="card-mention" data-card="shifter">Shifter</span> is strongest when your hand can still reach compact <span class="card-mention" data-card="drastea">Drastea</span>.</td>
+            </tr>
+            <tr>
+              <td>Branded / Dracotail / graveyard fusion decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="crow"></span><span class="card-chip" data-card="dru"></span><span class="card-chip" data-card="magn"></span><span class="card-chip" data-card="superpoly"></span><span class="card-chip" data-card="darkruler"></span></div></td>
+              <td>Trade on the GY card that converts into Fusion material or follow-up. If going second, pair board breakers with the engine's own equip-removal line.</td>
+            </tr>
+            <tr>
+              <td>Backrow and field-spell control</td>
+              <td><div class="card-row"><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="storm"></span><span class="card-chip" data-card="setrotation"></span><span class="card-chip" data-card="midbreaker"></span><span class="card-chip" data-card="antispell"></span><span class="card-chip" data-card="judgment"></span></div></td>
+              <td>Use sweepers to clear before committing equips. <span class="card-mention" data-card="midbreaker">Mid-Breaker</span> protects combo turns; <span class="card-mention" data-card="antispell">Anti-Spell</span> and Solemn cards protect established boards from breakers.</td>
+            </tr>
+            <tr>
+              <td>Protected monsters and negate stacks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="gameciel"></span><span class="card-chip" data-card="santa"></span><span class="card-chip" data-card="droplet"></span><span class="card-chip" data-card="darkruler"></span><span class="card-chip" data-card="crown"></span><span class="card-chip" data-card="superpoly"></span></div></td>
+              <td>Remove the monster that stops <span class="card-mention" data-card="raiders">Raiders</span>, <span class="card-mention" data-card="drastea">Drastea</span>, or <span class="card-mention" data-card="graflareio">Graflareio</span> from resolving. After the board is blanked, engine cards generate the follow-up body count.</td>
+            </tr>
+            <tr>
+              <td>Countering DoomZ directly</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="superpoly"></span><span class="card-chip" data-card="darkruler"></span><span class="card-chip" data-card="gameciel"></span><span class="card-chip" data-card="crow"></span><span class="card-chip" data-card="crown"></span></div></td>
+              <td>Hit the <span class="card-mention" data-card="graflareio">Graflareio</span>/<span class="card-mention" data-card="raiders">Raiders</span>/<span class="card-mention" data-card="drastea">Drastea</span> conversion points (Ghost Ogre also works here). Do not destroy <span class="card-mention" data-card="destruction">DoomZ Destruction</span> unless you can handle its equip trigger. Removing Equip Spells before Drastea converts lowers the board sharply.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <table class="matrix">
-        <thead>
-          <tr>
-            <th>Matchup / Problem</th>
-            <th>Side Options</th>
-            <th>How To Use Them</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Matchup / Problem">Combo mirrors: Kewl Tune, Yummy, Elfnote, DoomZ</td>
-            <td data-label="Side Options">Droll & Lock Bird, D.D. Crow, Bystials, Dimension Shifter, Mulcharmy Purulia/Fuwalos</td>
-            <td data-label="How To Use Them">Droll after the first add if it strands extension. Crow/Bystials hit GY extenders and DoomZ recovery. Shifter is strongest when your hand can still reach compact Drastea.</td>
-          </tr>
-          <tr>
-            <td data-label="Matchup / Problem">Branded / Dracotail / graveyard fusion decks</td>
-            <td data-label="Side Options">D.D. Crow, Bystial Druiswurm/Magnamhut, Droll, Super Polymerization, Dark Ruler No More</td>
-            <td data-label="How To Use Them">Trade on the GY card that converts into Fusion material or follow-up. If going second, pair board breakers with the engine's own equip-removal line.</td>
-          </tr>
-          <tr>
-            <td data-label="Matchup / Problem">Backrow and field-spell control</td>
-            <td data-label="Side Options">Harpie's Feather Duster, Lightning Storm, Set Rotation, Magical Mid-Breaker Field, Anti-Spell Fragrance, Solemn Judgment</td>
-            <td data-label="How To Use Them">Use sweepers to clear before committing equips. Mid-Breaker protects combo turns; Anti-Spell and Solemn cards protect established boards from breakers.</td>
-          </tr>
-          <tr>
-            <td data-label="Matchup / Problem">Protected monsters and negate stacks</td>
-            <td data-label="Side Options">Gameciel, Santa Claws, Forbidden Droplet, Dark Ruler No More, Forbidden Crown, Super Polymerization</td>
-            <td data-label="How To Use Them">Remove the monster that stops Raiders, Drastea, or Graflareio from resolving. After the board is blanked, engine cards generate the follow-up body count.</td>
-          </tr>
-          <tr>
-            <td data-label="Matchup / Problem">Countering DoomZ directly</td>
-            <td data-label="Side Options">Droll, Super Polymerization, Dark Ruler No More, Kaijus/Santa, D.D. Crow, Ghost Ogre, Forbidden Crown</td>
-            <td data-label="How To Use Them">Hit Graflareio/Raiders/Drastea conversion points. Do not destroy DoomZ Destruction unless you can handle its equip trigger. Removing Equip Spells before Drastea converts lowers the board sharply.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="grid four" style="margin-top:14px">
-        <article class="panel">
-          <h3><span class="icon warn">!</span> Droll</h3>
-          <p>DoomZ can still make compact boards, but ceiling routes are much weaker after early Droll.</p>
-          <div class="card-band" data-cards="droll"></div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Early <span class="card-mention" data-card="droll">Droll</span>: compact boards are still possible, but ceiling routes get much weaker.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="superpoly">Super Polymerization</span> (into <span class="card-mention" data-card="garura">Garura</span> or <span class="card-mention" data-card="mudragon">Mudragon</span>) is a known problem for stacked monster boards.</span></li>
+            <li><span class="num">3</span><span>Kaiju/<span class="card-mention" data-card="santa">Santa Claws</span> answers an established <span class="card-mention" data-card="drastrius">Drastrius</span>, <span class="card-mention" data-card="varudras">Varudras</span>, or protected monster before the opponent commits.</span></li>
+            <li><span class="num">4</span><span>Backrow removal and banish effects that break the Equip Spell loop before <span class="card-mention" data-card="drastea">Drastea</span> converts.</span></li>
+          </ul>
         </article>
-        <article class="panel">
-          <h3><span class="icon warn">!</span> Super Poly</h3>
-          <p>A known problem for stacked monster boards; recent lists respect it through side planning and compact lines.</p>
-          <div class="card-band" data-cards="superpoly,garura,mudragon"></div>
-        </article>
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Kaiju / Santa</h3>
-          <p>Answers an established Drastrius, Varudras, or protected monster before committing engine.</p>
-          <div class="card-band" data-cards="gameciel,santa"></div>
-        </article>
-        <article class="panel">
-          <h3><span class="icon plus">+</span> Solemn Layer</h3>
-          <p>Solemn Accusation and Judgment protect the board and trade into high-impact breakers.</p>
-          <div class="card-band" data-cards="accusation,judgment"></div>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Side the Solemn layer: <span class="card-mention" data-card="accusation">Solemn Accusation</span> and <span class="card-mention" data-card="judgment">Solemn Judgment</span> protect the board and trade into high-impact breakers.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="setrotation">Set Rotation</span> + <span class="card-mention" data-card="midbreaker">Magical Mid-Breaker Field</span> protect combo turns and win field-spell fights.</span></li>
+            <li><span class="num">3</span><span>Against hand traps, stop at the compact Drastea/Drastrius board and keep destroyed-trigger value (<span class="card-mention" data-card="powerdoomz">Power Patron DoomZ</span>, <span class="card-mention" data-card="graflareio">Graflareio</span>) as recovery.</span></li>
+            <li><span class="num">4</span><span>Recent lists respect Super Poly through side planning and compact lines rather than overextending.</span></li>
+          </ul>
         </article>
       </div>
     </section>
 
     <section class="section" id="references">
-      <div class="refs-bar">
-        <div>
-          <strong>Hidden references tab</strong>
-          <div style="color:var(--muted);font-size:.9rem">Open this for the public sources and notes used to build the cheatsheet.</div>
-        </div>
-        <button class="tab-btn" id="refsToggle" type="button" aria-expanded="false" aria-controls="refsPanel">Show References</button>
+      <h2><span class="icon">i</span> References</h2>
+      <div class="source-note">
+        Spreadsheet status: no free public sheet found. The Master Duel Meta spreadsheet endpoint for DoomZ returned an empty array (deck type 69ade0456fa11ca339a4ede0: 6 combo submissions, 0 spreadsheet records on June 8, 2026). Paid resources exist (DB Grinder's "DoomZ Spreadsheet", Metafy "DoomZ Masterclass [Post-BLZD]") but their contents were not public and were not used. Local research files: /tmp/doomz-mdm-combos.json, /tmp/doomz-mdm-spreadsheets.json, /tmp/ygp_doomz_714900.html, /tmp/ygp_ycs_columbus_4610.html, /tmp/doomz-cardinfo.json.
       </div>
-      <div class="refs-panel" id="refsPanel" hidden>
-        <div class="grid two">
-          <article>
-            <h3>Evidence Used</h3>
-            <ol class="source-list">
-              <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos & Counters</a>. Public API query for deck type <code>69ade0456fa11ca339a4ede0</code> returned 6 DoomZ combo submissions and 0 spreadsheet records on June 8, 2026.</li>
-              <li><a href="https://www.ygocombo.com/combo/19/" target="_blank" rel="noreferrer">YgoCombo: 1 card combo DoomZ BLZD</a>. Used for the Terminus one-card route and its summarized end board.</li>
-              <li><a href="https://ygoprodeck.com/deck/doomz-714900" target="_blank" rel="noreferrer">YGOPRODeck: DoomZ, Germany National Championship 2026 Top 8</a>. Used as the latest tournament-top variant found, event date May 30, 2026.</li>
-              <li><a href="https://ygoprodeck.com/tournament/ycs-columbus-4610" target="_blank" rel="noreferrer">YGOPRODeck: YCS Columbus 2026 tournament breakdown</a>. Used for large-event context: DoomZ had 1 Top 8, 2 Top 16, and 6 Top 32 placements.</li>
-              <li><a href="https://ygoprodeck.com/deck/doomz-713617" target="_blank" rel="noreferrer">YGOPRODeck: Spain National Championship 2026 Top 4 DoomZ</a>. Used to compare Power Patron/Therion card choices.</li>
-              <li><a href="https://duelingnexus.com/blog/doomz-overview/" target="_blank" rel="noreferrer">Dueling Nexus: DoomZ Overview, June 1, 2026</a>. Used for playstyle, Power Patron support role, pros/cons, and sample BLZD sequencing notes.</li>
-              <li><a href="https://tcgcontender.com/yugioh/meta" target="_blank" rel="noreferrer">TCG Contender Yu-Gi-Oh! Meta Tier List, June 2026</a>. Used for current competitive/meta framing and matchup context.</li>
-              <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=DoomZ" target="_blank" rel="noreferrer">YGOPRODeck Card API</a> and <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code>. Used for real card IDs and images.</li>
-            </ol>
-          </article>
-          <article>
-            <h3>Spreadsheet Status</h3>
-            <p><span class="status warn">No free public sheet found</span></p>
-            <p>The Master Duel Meta spreadsheet endpoint for DoomZ returned an empty array. Search results also show paid resources such as DB Grinder's "DoomZ Spreadsheet" and a Metafy "DoomZ Masterclass [Post-BLZD]", but their contents were not public and were not used for this cheatsheet.</p>
-            <h3>Local Research Files</h3>
-            <ul class="clean">
-              <li><code>/tmp/doomz-mdm-combos.json</code></li>
-              <li><code>/tmp/doomz-mdm-spreadsheets.json</code></li>
-              <li><code>/tmp/ygp_doomz_714900.html</code></li>
-              <li><code>/tmp/ygp_ycs_columbus_4610.html</code></li>
-              <li><code>/tmp/doomz-cardinfo.json</code></li>
-            </ul>
-          </article>
-        </div>
-      </div>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters</a> — public API query returned 6 DoomZ combo submissions on June 8, 2026.</li>
+        <li><a href="https://www.ygocombo.com/combo/19/" target="_blank" rel="noreferrer">YgoCombo: 1 card combo DoomZ BLZD</a> — used for the Terminus one-card route and its summarized end board.</li>
+        <li><a href="https://ygoprodeck.com/deck/doomz-714900" target="_blank" rel="noreferrer">YGOPRODeck: DoomZ, Germany National Championship 2026 Top 8</a> — latest tournament-top variant found, event date May 30, 2026.</li>
+        <li><a href="https://ygoprodeck.com/tournament/ycs-columbus-4610" target="_blank" rel="noreferrer">YGOPRODeck: YCS Columbus 2026 tournament breakdown</a> — large-event context: DoomZ had 1 Top 8, 2 Top 16, and 6 Top 32 placements.</li>
+        <li><a href="https://ygoprodeck.com/deck/doomz-713617" target="_blank" rel="noreferrer">YGOPRODeck: Spain National Championship 2026 Top 4 DoomZ</a> — used to compare Power Patron/Therion card choices.</li>
+        <li><a href="https://duelingnexus.com/blog/doomz-overview/" target="_blank" rel="noreferrer">Dueling Nexus: DoomZ Overview, June 1, 2026</a> — playstyle, Power Patron support role, pros/cons, and sample BLZD sequencing notes.</li>
+        <li><a href="https://tcgcontender.com/yugioh/meta" target="_blank" rel="noreferrer">TCG Contender Yu-Gi-Oh! Meta Tier List, June 2026</a> — current competitive/meta framing and matchup context.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=DoomZ" target="_blank" rel="noreferrer">YGOPRODeck Card API</a> — real card IDs and images.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
     </section>
+
   </main>
 
   <script>
-    const cards = {
-      elara: { id: "54265980", name: "DoomZ VII Seven - Elara" },
-      amalthe: { id: "28877382", name: "DoomZ V Five - Amalthe" },
-      drastea: { id: "92472273", name: "DoomZ XII Zero - Drastea" },
-      raiders: { id: "32442017", name: "DoomZ Raiders" },
-      change: { id: "38007649", name: "DoomZ Change" },
-      destruction: { id: "80320877", name: "DoomZ Destruction" },
-      adrasteia: { id: "84054556", name: 'DoomZ Command "A.D.R.A.S.T.E.I.A."' },
-      doomdurg: { id: "68831625", name: 'DoomZ Command "D.O.O.M.D.U.R.G."' },
-      diactorus: { id: "31010081", name: "DoomZ Break - Diactorus" },
-      graflareio: { id: "65848113", name: "DoomZ XIII Over - Graflareio" },
-      drastrius: { id: "95626382", name: "DoomZ XII End - Drastrius" },
-      powerdoomz: { id: "81650695", name: "Power Patron DoomZ" },
-      jupredo: { id: "43871165", name: "Jupredo the Shademachine Power Patron" },
-      vidolium: { id: "70488851", name: "Vidolium the Unstable Power Patron of Unity" },
-      vidolia: { id: "51669847", name: "Plundered Power Patron Plane - Vidolia" },
-      terminus: { id: "25661743", name: "Prohibited Power Patron Portal - Terminus" },
-      jupiter: { id: "68231287", name: "Jupiter the Power Patron of Destruction" },
-      medius: { id: "97556336", name: "Medius the Pure" },
-      regulus: { id: "10604644", name: 'Therion "King" Regulus' },
-      sargas: { id: "11132674", name: 'Gigantic "Champion" Sargas' },
-      merrymaker: { id: "48285768", name: "Springans Merrymaker" },
-      varudras: { id: "70636044", name: "Varudras, the Final Bringer of the End Times" },
-      clockwork: { id: "41739381", name: "Clockwork Knight" },
-      fallen: { id: "30271097", name: "The Fallen & The Virtuous" },
-      crown: { id: "98829635", name: "Forbidden Crown" },
-      fuwalos: { id: "42141493", name: "Mulcharmy Fuwalos" },
-      purulia: { id: "84192580", name: "Mulcharmy Purulia" },
-      droll: { id: "94145021", name: "Droll & Lock Bird" },
-      ash: { id: "14558128", name: "Ash Blossom & Joyous Spring" },
-      crow: { id: "24508238", name: "D.D. Crow" },
-      magn: { id: "33854624", name: "Bystial Magnamhut" },
-      dru: { id: "6637331", name: "Bystial Druiswurm" },
-      shifter: { id: "91800273", name: "Dimension Shifter" },
-      fissure: { id: "81674782", name: "Dimensional Fissure" },
-      gameciel: { id: "55063751", name: "Gameciel, the Sea Turtle Kaiju" },
-      santa: { id: "46565218", name: "Santa Claws" },
-      droplet: { id: "24299458", name: "Forbidden Droplet" },
-      darkruler: { id: "54693926", name: "Dark Ruler No More" },
-      superpoly: { id: "48130397", name: "Super Polymerization" },
-      garura: { id: "11765832", name: "Garura, Wings of Resonant Life" },
-      mudragon: { id: "54757758", name: "Mudragon of the Swamp" },
-      setrotation: { id: "73468603", name: "Set Rotation" },
-      midbreaker: { id: "71650854", name: "Magical Mid-Breaker Field" },
-      duster: { id: "18144507", name: "Harpie's Feather Duster" },
-      storm: { id: "14532163", name: "Lightning Storm" },
-      accusation: { id: "78114463", name: "Solemn Accusation" },
-      judgment: { id: "41420027", name: "Solemn Judgment" },
-      antispell: { id: "58921041", name: "Anti-Spell Fragrance" },
-      spellcanceller: { id: "84636823", name: "Spell Canceller" },
-      zeus: { id: "90448279", name: "Divine Arsenal AA-ZEUS - Sky Thunder" }
+    const CARDS = {
+      elara: { id: 54265980, name: "DoomZ VII Seven - Elara" },
+      amalthe: { id: 28877382, name: "DoomZ V Five - Amalthe" },
+      drastea: { id: 92472273, name: "DoomZ XII Zero - Drastea" },
+      raiders: { id: 32442017, name: "DoomZ Raiders" },
+      change: { id: 38007649, name: "DoomZ Change" },
+      destruction: { id: 80320877, name: "DoomZ Destruction" },
+      adrasteia: { id: 84054556, name: 'DoomZ Command "A.D.R.A.S.T.E.I.A."' },
+      doomdurg: { id: 68831625, name: 'DoomZ Command "D.O.O.M.D.U.R.G."' },
+      diactorus: { id: 31010081, name: "DoomZ Break - Diactorus" },
+      graflareio: { id: 65848113, name: "DoomZ XIII Over - Graflareio" },
+      drastrius: { id: 95626382, name: "DoomZ XII End - Drastrius" },
+      powerdoomz: { id: 81650695, name: "Power Patron DoomZ" },
+      jupredo: { id: 43871165, name: "Jupredo the Shademachine Power Patron" },
+      vidolium: { id: 70488851, name: "Vidolium the Unstable Power Patron of Unity" },
+      terminus: { id: 25661743, name: "Prohibited Power Patron Portal - Terminus" },
+      jupiter: { id: 68231287, name: "Jupiter the Power Patron of Destruction" },
+      medius: { id: 97556336, name: "Medius the Pure" },
+      regulus: { id: 10604644, name: 'Therion "King" Regulus' },
+      sargas: { id: 11132674, name: 'Gigantic "Champion" Sargas' },
+      merrymaker: { id: 48285768, name: "Springans Merrymaker" },
+      varudras: { id: 70636044, name: "Varudras, the Final Bringer of the End Times" },
+      clockwork: { id: 41739381, name: "Clockwork Knight" },
+      fallen: { id: 30271097, name: "The Fallen & The Virtuous" },
+      crown: { id: 98829635, name: "Forbidden Crown" },
+      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos" },
+      purulia: { id: 84192580, name: "Mulcharmy Purulia" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      crow: { id: 24508238, name: "D.D. Crow" },
+      magn: { id: 33854624, name: "Bystial Magnamhut" },
+      dru: { id: 6637331, name: "Bystial Druiswurm" },
+      shifter: { id: 91800273, name: "Dimension Shifter" },
+      gameciel: { id: 55063751, name: "Gameciel, the Sea Turtle Kaiju" },
+      santa: { id: 46565218, name: "Santa Claws" },
+      droplet: { id: 24299458, name: "Forbidden Droplet" },
+      darkruler: { id: 54693926, name: "Dark Ruler No More" },
+      superpoly: { id: 48130397, name: "Super Polymerization" },
+      garura: { id: 11765832, name: "Garura, Wings of Resonant Life" },
+      mudragon: { id: 54757758, name: "Mudragon of the Swamp" },
+      setrotation: { id: 73468603, name: "Set Rotation" },
+      midbreaker: { id: 71650854, name: "Magical Mid-Breaker Field" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster" },
+      storm: { id: 14532163, name: "Lightning Storm" },
+      accusation: { id: 78114463, name: "Solemn Accusation" },
+      judgment: { id: 41420027, name: "Solemn Judgment" },
+      antispell: { id: 58921041, name: "Anti-Spell Fragrance" }
     };
-
-    const routes = [
-      {
-        id: "elara-basic",
-        label: "Elara 1-card",
-        notes: [
-          ["Starter", "Public MDM route. Best when you need a compact board without the full Power Patron chain."],
-          ["End board", "Drastea with D.O.O.M.D.U.R.G.; opponent-turn Drastrius; Raiders can become a monster pop."],
-          ["Why it matters", "Shows the minimum DoomZ grammar: set Raiders, destroy Elara, search Drastea, equip Command."],
-          ["Caution", "Raiders locks you into Xyz from the Extra Deck after it resolves."]
-        ],
-        nodes: [
-          { title: "Normal Summon Elara", cards: ["elara"], text: "Elara is the single starter. Resolve its summon effect before committing Raiders." },
-          { title: "Set Raiders", cards: ["elara", "raiders"], text: "Elara sets DoomZ Raiders from Deck. Raiders is the destroy outlet for the route." },
-          { title: "Raiders destroys Elara", cards: ["raiders", "elara", "amalthe"], text: "Activate Raiders, destroy Elara, and Special Summon Amalthe from Deck." },
-          { title: "Amalthe finds Drastea", cards: ["amalthe", "drastea"], text: "Amalthe searches Drastea. You now have the bridge into the equipped Rank 8 line." },
-          { title: "Drastea equips Command", cards: ["drastea", "amalthe", "doomdurg"], text: "Drastea destroys Amalthe, Special Summons itself, then equips D.O.O.M.D.U.R.G. from Deck." },
-          { title: "Opponent-turn Drastrius", cards: ["drastea", "drastrius", "raiders"], text: "On opponent turn, Drastea Xyz Summons Drastrius. Command can destroy Raiders to trigger a monster destruction." }
-        ]
-      },
-      {
-        id: "post-blzd",
-        label: "Elara Post-BLZD",
-        notes: [
-          ["Starter", "Public MDM + Dueling Nexus-style BLZD line. This is the modern ceiling branch from Elara."],
-          ["Key pivot", "Diactorus into Graflareio. Detach A.D.R.A.S.T.E.I.A. when possible so the GY effect remains live."],
-          ["End board", "Drastrius plus Destruction, then Power Patron extension into Varudras, Regulus, and Sargas when uninterrupted."],
-          ["Caution", "This route is better when you can afford to play through Droll/Fuwalos math."]
-        ],
-        nodes: [
-          { title: "Elara sets A.D.R.A.S.T.E.I.A.", cards: ["elara", "adrasteia"], text: "Normal Elara, set A.D.R.A.S.T.E.I.A., then equip it to Elara." },
-          { title: "Quick Xyz to Diactorus", cards: ["elara", "adrasteia", "diactorus"], text: "Elara with Equip Card turns into DoomZ Break - Diactorus using itself and the equip as material." },
-          { title: "Graflareio adds Raiders", cards: ["diactorus", "graflareio", "raiders"], text: "Overlay Diactorus into Graflareio. Detach A.D.R.A.S.T.E.I.A. to add Raiders and threaten a pop." },
-          { title: "Raiders destroys Graflareio", cards: ["raiders", "graflareio", "amalthe", "powerdoomz"], text: "Raiders destroys Graflareio, summons Amalthe; Graflareio's destroyed trigger supplies the Power Patron body." },
-          { title: "Amalthe adds Drastea", cards: ["amalthe", "drastea", "change"], text: "Amalthe searches Drastea. Power Patron lines add or access DoomZ Change for the next trigger group." },
-          { title: "Drastea plus Destruction", cards: ["drastea", "doomdurg", "destruction", "jupredo"], text: "Drastea equips Command. Change and Destruction can chain to recover Destruction and equip Jupredo from Deck." },
-          { title: "Ceiling conversion", cards: ["drastrius", "jupredo", "terminus", "vidolium", "varudras"], text: "Drastea becomes Drastrius. Jupredo/Terminus/Vidolium convert face-up Extra Deck resources into Varudras and follow-up." }
-        ]
-      },
-      {
-        id: "terminus",
-        label: "Terminus 1-card",
-        notes: [
-          ["Starter", "YgoCombo BLZD route from Prohibited Power Patron Portal - Terminus."],
-          ["End board", "YgoCombo summarizes 8 cards on field: 5 monsters including Varudras, Drastea, Sargas, plus 3 Spell/Trap cards."],
-          ["Key cards", "Terminus, Jupredo, Vidolium, Raiders, Drastea, Sargas, Regulus, Varudras."],
-          ["Caution", "Long route. Practice shortcut decisions for Droll, Nibiru, and board breakers."]
-        ],
-        nodes: [
-          { title: "Terminus sends Jupredo", cards: ["terminus", "jupredo", "vidolium"], text: "Activate Terminus, send Jupredo from Extra Deck/GY setup, and add Vidolium." },
-          { title: "Vidolium summons Jupredo", cards: ["vidolium", "jupredo", "powerdoomz"], text: "Scale Vidolium, return it to Extra Deck, Special Summon Jupredo, then search Power Patron DoomZ." },
-          { title: "Jupredo finds Raiders", cards: ["jupredo", "clockwork", "raiders"], text: "Jupredo cycles through the face-up Extra Deck and searches Raiders while adding a body such as Clockwork Knight." },
-          { title: "Raiders starts DoomZ chain", cards: ["raiders", "powerdoomz", "elara", "amalthe"], text: "Raiders destroys Power Patron DoomZ, summons Elara, then Power Patron and Elara set up Amalthe and Change." },
-          { title: "Amalthe into Sargas", cards: ["amalthe", "drastea", "merrymaker", "sargas", "regulus"], text: "Normal Amalthe to add Drastea, then make Merrymaker into Sargas and search Regulus." },
-          { title: "Drastea and Destruction chain", cards: ["drastea", "doomdurg", "change", "destruction", "jupredo"], text: "Drastea equips Command. Change and Destruction chain to recover Destruction and equip Jupredo." },
-          { title: "Varudras close", cards: ["drastrius", "graflareio", "jupiter", "varudras", "destruction"], text: "Drastea becomes Drastrius, the line extends through Graflareio/Jupiter, and Varudras plus set Destruction closes the board." }
-        ]
-      },
-      {
-        id: "medius",
-        label: "Medius + Elara",
-        notes: [
-          ["Starter", "Public MDM route using Medius and Elara."],
-          ["End board", "Drastea/Drastrius, Regulus, Sargas, DoomZ Destruction, Angelica's Angelic Ring, Raiders pop."],
-          ["Why it matters", "Shows why current lists still play the small Medius/Power Patron package."],
-          ["Caution", "Requires Extra Deck room for Merrymaker/Sargas and a clean GY line for Regulus."]
-        ],
-        nodes: [
-          { title: "Medius summons Power Patron", cards: ["medius", "powerdoomz"], text: "Normal Medius and Special Summon Power Patron DoomZ from Deck." },
-          { title: "Power Patron makes Diactorus", cards: ["powerdoomz", "medius", "diactorus"], text: "Power Patron targets Medius to Xyz Summon Diactorus, then gets equipped." },
-          { title: "Diactorus destroys Power Patron", cards: ["diactorus", "powerdoomz", "raiders"], text: "Diactorus destroys Power Patron DoomZ. Power Patron searches Raiders." },
-          { title: "Raiders destroys Elara", cards: ["raiders", "elara", "amalthe", "destruction"], text: "Raiders destroys Elara, summons Amalthe; Elara sets Destruction and Amalthe adds Drastea." },
-          { title: "Drastea equips Command", cards: ["drastea", "diactorus", "doomdurg"], text: "Drastea destroys Diactorus, summons itself, and equips D.O.O.M.D.U.R.G." },
-          { title: "Sargas and Regulus", cards: ["medius", "amalthe", "merrymaker", "sargas", "regulus"], text: "Medius recurs, Medius + Amalthe make Merrymaker into Sargas, then Sargas adds Regulus." },
-          { title: "Layered board", cards: ["drastea", "drastrius", "regulus", "sargas", "destruction"], text: "End on Drastea/Drastrius conversion, Regulus omni, Sargas removal, Destruction lock, and Raiders follow-up." }
-        ]
-      },
-      {
-        id: "change",
-        label: "Change starter",
-        notes: [
-          ["Starter", "Public MDM route from DoomZ Change."],
-          ["End board", "Compact Drastea into Drastrius with Raiders available as a destruction trigger."],
-          ["Why it matters", "This is the recovery line when Change is the only real engine card."],
-          ["Caution", "You need a valid DoomZ/Power Patron destroy target and should plan the Raiders once-per-turn choice."]
-        ],
-        nodes: [
-          { title: "Change destroys Power Patron", cards: ["change", "powerdoomz"], text: "Activate Change to destroy Power Patron DoomZ and start a search chain." },
-          { title: "Power Patron adds Elara", cards: ["powerdoomz", "elara"], text: "Power Patron DoomZ searches Elara from Deck." },
-          { title: "Elara sets Raiders", cards: ["elara", "raiders"], text: "Normal Summon Elara and set Raiders." },
-          { title: "Raiders summons Amalthe", cards: ["raiders", "elara", "amalthe"], text: "Raiders destroys Elara and Special Summons Amalthe from Deck." },
-          { title: "Amalthe adds Drastea", cards: ["amalthe", "drastea"], text: "Amalthe searches Drastea." },
-          { title: "Drastea equips Command", cards: ["drastea", "amalthe", "doomdurg", "drastrius"], text: "Drastea destroys Amalthe, summons itself, equips D.O.O.M.D.U.R.G., and threatens Drastrius on opponent turn." }
-        ]
-      }
-    ];
-
-    const esc = (value) => String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;");
-
-    function cardThumb(key) {
-      const card = cards[key];
-      if (!card) return "";
-      const img = `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
-      return `
-        <span class="mini-card" tabindex="0" title="${esc(card.name)}">
-          <img src="${img}" alt="${esc(card.name)}" loading="lazy">
-          <img class="card-zoom" src="${img}" alt="" loading="lazy">
-          <span>${esc(card.name)}</span>
-        </span>`;
-    }
-
-    function renderCardBands() {
-      document.querySelectorAll("[data-cards]").forEach((el) => {
-        const keys = el.getAttribute("data-cards").split(",").map((x) => x.trim()).filter(Boolean);
-        el.innerHTML = keys.map(cardThumb).join("");
-      });
-    }
-
-    function renderHero() {
-      const hero = document.getElementById("heroCards");
-      const heroKeys = ["elara", "drastea", "raiders", "jupredo", "terminus", "drastrius", "destruction", "varudras"];
-      hero.innerHTML = heroKeys.map(cardThumb).join("") + `
-        <div class="showcase-note">
-          <span><span class="icon plus">+</span> Destroy own cards, gain effects</span>
-          <span><span class="icon info">i</span> Hover cards to zoom</span>
-        </div>`;
-    }
-
-    function renderRoutes(activeId = routes[0].id) {
-      const actionWrap = document.getElementById("routeActions");
-      actionWrap.innerHTML = routes.map((route) => `
-        <button type="button" class="route-btn ${route.id === activeId ? "active" : ""}" data-route="${route.id}">
-          ${esc(route.label)}
-        </button>
-      `).join("");
-
-      actionWrap.querySelectorAll("button").forEach((btn) => {
-        btn.addEventListener("click", () => renderRoutes(btn.dataset.route));
-      });
-
-      const route = routes.find((item) => item.id === activeId) || routes[0];
-      document.getElementById("comboGraph").innerHTML = route.nodes.map((node, index) => `
-        <article class="node">
-          <div class="step"><span class="icon ${index === 0 ? "plus" : "info"}">${index === 0 ? "+" : "i"}</span> Step ${index + 1}</div>
-          <h3>${esc(node.title)}</h3>
-          <p>${esc(node.text)}</p>
-          <div class="card-band">${node.cards.map(cardThumb).join("")}</div>
-        </article>
-      `).join("");
-
-      document.getElementById("routeNotes").innerHTML = route.notes.map(([title, text]) => `
-        <div class="note"><strong>${esc(title)}:</strong> ${esc(text)}</div>
-      `).join("");
-    }
-
-    function wireRefs() {
-      const btn = document.getElementById("refsToggle");
-      const panel = document.getElementById("refsPanel");
-      btn.addEventListener("click", () => {
-        const show = panel.hasAttribute("hidden");
-        panel.toggleAttribute("hidden", !show);
-        btn.setAttribute("aria-expanded", String(show));
-        btn.textContent = show ? "Hide References" : "Show References";
-        btn.classList.toggle("active", show);
-      });
-    }
-
-    renderHero();
-    renderCardBands();
-    renderRoutes();
-    wireRefs();
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

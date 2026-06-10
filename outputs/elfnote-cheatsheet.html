@@ -3,1151 +3,507 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Elfnote Deck Mind Map Cheatsheet</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f6f7f4;
-      --panel: #ffffff;
-      --panel-2: #eef4f0;
-      --ink: #182226;
-      --muted: #607077;
-      --line: #d7e0dc;
-      --green: #26704d;
-      --teal: #087c86;
-      --blue: #315f91;
-      --gold: #9a721c;
-      --rose: #b94356;
-      --violet: #665093;
-      --shadow: 0 18px 44px rgba(22, 34, 38, .12);
-      --radius: 8px;
-      --card-w: 58px;
-      --card-h: 84px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      background: var(--paper);
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(246,247,244,.98) 430px, #edf3f1 100%),
-        repeating-linear-gradient(135deg, rgba(8,124,134,.07) 0 1px, transparent 1px 18px);
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
-    }
-
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    button { font: inherit; letter-spacing: 0; }
-    h1, h2, h3, p { margin-top: 0; }
-    p { margin-bottom: 12px; }
-
-    h1 {
-      max-width: 880px;
-      margin-bottom: 12px;
-      font-size: clamp(2.25rem, 5.8vw, 4.7rem);
-      line-height: .96;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 10px;
-      font-size: clamp(1.45rem, 3vw, 2.08rem);
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.04rem;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    .page {
-      width: min(1240px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 18px 0 56px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(292px, 420px);
-      gap: 24px;
-      align-items: center;
-      padding: 12px 0 16px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--green);
-      font-size: .82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .lead {
-      max-width: 870px;
-      color: #334247;
-      font-size: clamp(1rem, 1.8vw, 1.14rem);
-    }
-
-    .hero-pills,
-    .tags,
-    .chips,
-    .mini-cards,
-    .route-actions,
-    .trigger-pairs,
-    .board-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill,
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,.88);
-      color: #26343a;
-      font-size: .88rem;
-      white-space: nowrap;
-    }
-
-    .pill strong,
-    .tag strong { color: var(--ink); }
-
-    .showcase-wrap { min-height: 326px; display: grid; align-items: center; }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(52px, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border: 1px solid rgba(22,34,38,.12);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow);
-      overflow: visible;
-    }
-
-    .showcase .mini-card:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
-    .showcase .mini-card:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
-    .showcase .mini-card:nth-child(3) { transform: translateY(7px) rotate(-2deg); }
-    .showcase .mini-card:nth-child(4) { transform: translateY(-15px) rotate(4deg); }
-    .showcase .mini-card:nth-child(5) { transform: translateY(9px) rotate(-3deg); }
-    .showcase .mini-card:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
-    .showcase .mini-card:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
-    .showcase .mini-card:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
-    .showcase .mini-card > span:not(.zoom) { display: none; }
-
-    .quick-nav {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 12px;
-      border-bottom: 1px solid rgba(215,224,220,.88);
-      background: linear-gradient(180deg, rgba(246,247,244,.98), rgba(246,247,244,.92));
-      backdrop-filter: blur(10px);
-      scrollbar-width: none;
-    }
-
-    .quick-nav::-webkit-scrollbar { display: none; }
-
-    .quick-nav a,
-    .route-button,
-    .tab-button,
-    .ref-toggle {
-      flex: 0 0 auto;
-      min-height: 38px;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font-weight: 750;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .quick-nav a:hover,
-    .route-button:hover,
-    .tab-button:hover,
-    .ref-toggle:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .route-button.active,
-    .tab-button.active {
-      color: #fff;
-      background: var(--teal);
-      border-color: var(--teal);
-    }
-
-    .quick-nav .ref-toggle {
-      margin-left: auto;
-      color: var(--violet);
-    }
-
-    section {
-      padding: clamp(16px, 3vw, 26px) 0;
-      border-bottom: 1px solid rgba(215,224,220,.84);
-    }
-
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .section-head p {
-      max-width: 880px;
-      color: var(--muted);
-    }
-
-    .grid-2,
-    .grid-3,
-    .grid-4,
-    .combo-layout,
-    .matchup-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .combo-layout { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); align-items: start; }
-    .matchup-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-
-    .panel,
-    .node,
-    .route-summary,
-    .board,
-    .matchup,
-    .tip,
-    .reference-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 10px 26px rgba(22, 34, 38, .07);
-    }
-
-    .panel,
-    .route-summary,
-    .board,
-    .matchup,
-    .tip,
-    .reference-panel { padding: 14px; }
-
-    .panel p:last-child,
-    .node p:last-child,
-    .route-summary p:last-child,
-    .tip p:last-child,
-    .matchup p:last-child { margin-bottom: 0; }
-
-    .panel.accent-green { border-top: 4px solid var(--green); }
-    .panel.accent-teal { border-top: 4px solid var(--teal); }
-    .panel.accent-rose { border-top: 4px solid var(--rose); }
-    .panel.accent-gold { border-top: 4px solid var(--gold); }
-    .panel.accent-violet { border-top: 4px solid var(--violet); }
-
-    .strong { font-weight: 820; color: var(--ink); }
-    .muted { color: var(--muted); }
-
-    .plus-icon,
-    .info-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      color: #fff;
-      font-size: .78rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .plus-icon { background: var(--green); }
-    .info-icon { background: var(--blue); font-family: Georgia, serif; }
-
-    .mini-card,
-    .card-chip {
-      position: relative;
-      display: inline-grid;
-      grid-template-columns: var(--card-w);
-      gap: 5px;
-      align-items: start;
-      justify-items: center;
-      color: var(--ink);
-      text-align: center;
-      font-size: .74rem;
-      line-height: 1.1;
-      overflow: visible;
-      isolation: isolate;
-    }
-
-    .mini-card img,
-    .card-chip img {
-      width: var(--card-w);
-      height: var(--card-h);
-      object-fit: cover;
-      border-radius: 4px;
-      border: 1px solid rgba(24,34,38,.22);
-      box-shadow: 0 4px 12px rgba(24,34,38,.16);
-      background: #dfe6e3;
-    }
-
-    .mini-card .zoom,
-    .card-chip .zoom {
-      position: fixed;
-      left: min(70vw, calc(100vw - 240px));
-      top: 74px;
-      z-index: 100;
-      display: none;
-      width: 220px;
-      padding: 8px;
-      border: 1px solid rgba(24,34,38,.2);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
-      pointer-events: none;
-    }
-
-    .mini-card .zoom img,
-    .card-chip .zoom img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      border: 0;
-      box-shadow: none;
-    }
-
-    .mini-card:hover,
-    .mini-card:focus-within,
-    .card-chip:hover,
-    .card-chip:focus-within { z-index: 20; }
-
-    .mini-card:hover .zoom,
-    .mini-card:focus-within .zoom,
-    .card-chip:hover .zoom,
-    .card-chip:focus-within .zoom { display: block; }
-
-    .graph-shell {
-      position: relative;
-      min-height: 460px;
-      overflow: auto;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.94), rgba(244,249,247,.94)),
-        repeating-linear-gradient(90deg, rgba(8,124,134,.06) 0 1px, transparent 1px 72px),
-        repeating-linear-gradient(0deg, rgba(8,124,134,.04) 0 1px, transparent 1px 72px);
-    }
-
-    .graph-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(176px, 1fr));
-      gap: 18px 28px;
-      min-width: 920px;
-      padding: 18px;
-    }
-
-    .node {
-      position: relative;
-      min-height: 150px;
-      padding: 12px;
-      background: rgba(255,255,255,.94);
-      overflow: visible;
-    }
-
-    .node::after {
-      content: attr(data-arrow);
-      position: absolute;
-      right: -23px;
-      top: 50%;
-      width: 26px;
-      height: 26px;
-      display: grid;
-      place-items: center;
-      transform: translateY(-50%);
-      border-radius: 50%;
-      background: var(--teal);
-      color: #fff;
-      font-weight: 900;
-      box-shadow: 0 6px 16px rgba(8,124,134,.24);
-    }
-
-    .node:last-child::after,
-    .node.break::after { content: ""; display: none; }
-
-    .node .node-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 8px;
-      font-weight: 850;
-    }
-
-    .node .mini-cards { margin-bottom: 8px; }
-    .node p { color: #47585e; font-size: .92rem; }
-    .node small { color: var(--muted); font-weight: 700; }
-
-    .route-summary {
-      position: sticky;
-      top: 68px;
-      background: rgba(255,255,255,.96);
-    }
-
-    .route-summary .mini-cards { margin: 10px 0; }
-
-    .route-meta {
-      display: grid;
-      gap: 8px;
-      margin: 10px 0;
-    }
-
-    .route-meta div {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      color: #3c4d52;
-    }
-
-    .route-meta b { min-width: 68px; color: var(--ink); }
-
-    .board {
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .board h3 { margin-bottom: 0; }
-
-    .board-zone {
-      min-height: 92px;
-      padding: 10px;
-      border: 1px dashed rgba(96,112,119,.38);
-      border-radius: var(--radius);
-      background: rgba(238,244,240,.72);
-    }
-
-    .board-zone strong {
-      display: block;
-      margin-bottom: 8px;
-      color: #2d4045;
-      font-size: .86rem;
-      text-transform: uppercase;
-    }
-
-    .trigger-pair {
-      display: grid;
-      grid-template-columns: auto 20px auto minmax(120px, 1fr);
-      gap: 8px;
-      align-items: center;
-      width: 100%;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .trigger-pair .arrow {
-      display: grid;
-      place-items: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--teal);
-      color: #fff;
-      font-weight: 900;
-    }
-
-    .trigger-copy {
-      min-width: 0;
-      color: #415259;
-      font-size: .92rem;
-    }
-
-    .trigger-copy b {
-      display: block;
-      color: var(--ink);
-      margin-bottom: 2px;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 10px;
-    }
-
-    .timeline-step {
-      display: grid;
-      grid-template-columns: 30px minmax(0, 1fr);
-      gap: 10px;
-      align-items: start;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .timeline-step .num {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: #fff;
-      font-weight: 900;
-    }
-
-    .tip ul,
-    .matchup ul,
-    .panel ul {
-      padding-left: 18px;
-      margin: 8px 0 0;
-    }
-
-    .tip li,
-    .matchup li,
-    .panel li { margin-bottom: 6px; }
-
-    .matchup { border-top: 4px solid var(--rose); }
-    .matchup:nth-child(2n) { border-top-color: var(--teal); }
-    .matchup:nth-child(3n) { border-top-color: var(--gold); }
-    .matchup:nth-child(4n) { border-top-color: var(--violet); }
-
-    .reference-panel {
-      display: none;
-      margin-top: 12px;
-      background: #fff;
-    }
-
-    .reference-panel.open { display: block; }
-    .reference-panel ol { margin: 8px 0 0; padding-left: 20px; }
-    .reference-panel li { margin-bottom: 8px; }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    @media (max-width: 980px) {
-      .hero,
-      .combo-layout,
-      .grid-2,
-      .grid-3,
-      .grid-4,
-      .matchup-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .route-summary { position: static; }
-      .showcase-wrap { min-height: 0; }
-      .section-head { display: block; }
-      .quick-nav .ref-toggle { margin-left: 0; }
-      .matchup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 640px) {
-      :root { --card-w: 52px; --card-h: 76px; }
-      .page { width: min(100vw - 18px, 1240px); padding-bottom: 42px; }
-      .hero { padding-top: 6px; }
-      .hero-pills .pill,
-      .tag { white-space: normal; }
-      .showcase { grid-template-columns: repeat(4, minmax(44px, 1fr)); gap: 8px; padding: 10px; }
-      .quick-nav a,
-      .route-button,
-      .tab-button,
-      .ref-toggle { min-height: 36px; padding: 8px 10px; }
-      .matchup-grid { grid-template-columns: 1fr; }
-      .trigger-pair { grid-template-columns: auto 20px auto; }
-      .trigger-copy { grid-column: 1 / -1; }
-      .mini-card .zoom,
-      .card-chip .zoom {
-        left: 50%;
-        top: 58px;
-        width: min(210px, calc(100vw - 28px));
-        transform: translateX(-50%);
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Elfnote Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <div class="page">
+  <main class="shell">
+
     <header class="hero">
-      <div>
-        <div class="eyebrow"><span class="plus-icon">+</span> Elfnote mind map</div>
-        <h1>Elfnote Combo Cheatsheet</h1>
-        <p class="lead">Top-to-bottom route card for the Synchro deck built around center Main Monster Zone movement, Power Patron level changes, Welcome Home, Regina/Fortuna access, and Rhapsodia follow-up. Research checked June 8, 2026.</p>
-        <div class="hero-pills">
-          <span class="pill"><strong>Role</strong> resilient Synchro combo</span>
-          <span class="pill"><strong>Best starts</strong> Lucina, Tinia, Medius</span>
-          <span class="pill"><strong>Current MD sample</strong> Adventure / Grass / Fiendsmith</span>
-          <span class="pill"><strong>Latest OCG top found</strong> 2nd, Asia WCQ Hong Kong</span>
+      <div class="hero-main">
+        <div class="eyebrow">Resilient Synchro combo — checked June 8, 2026</div>
+        <h1>Elfnote</h1>
+        <p class="subtitle">A Synchro deck built around center Main Monster Zone movement: <span class="card-mention" data-card="patron">Elfnote Power Patron</span> level changes, <span class="card-mention" data-card="welcome">Elfnotes: Welcome Home</span> deck summons, <span class="card-mention" data-card="regina">Regina</span>/<span class="card-mention" data-card="fortuna">Fortuna</span> access, and <span class="card-mention" data-card="rhapsodia">Rhapsodia of Madness</span> follow-up.</p>
+        <div class="pill-row">
+          <span class="pill green">Last checked: 2026-06-08</span>
+          <span class="pill blue">Role: resilient Synchro combo</span>
+          <span class="pill gold">Win: layered negates into Synchro lethal</span>
+          <span class="pill red">Latest OCG top: 2nd, Asia WCQ Hong Kong</span>
         </div>
       </div>
-      <div class="showcase-wrap">
-        <div class="showcase" aria-label="Core Elfnote cards">
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/13597785.jpg" alt="Elfnote Lucina"><span>Lucina</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/13597785.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/59581480.jpg" alt="Elfnote Tinia"><span>Tinia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/59581480.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt="Elfnote Regina"><span>Regina</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/85976588.jpg" alt="Elfnote Fortuna"><span>Fortuna</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/85976588.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt="Elfnote Power Patron"><span>Power Patron</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt="Elfnotes: Welcome Home"><span>Welcome Home</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
-          <span class="mini-card" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt="Elfnote Seraphim Strelitzia"><span>Seraphim</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt=""></span></span>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="lucina"></span>
+          <span class="cloud-card" data-card="tinia"></span>
+          <span class="cloud-card" data-card="regina"></span>
+          <span class="cloud-card" data-card="fortuna"></span>
+          <span class="cloud-card" data-card="patron"></span>
+          <span class="cloud-card" data-card="welcome"></span>
+          <span class="cloud-card" data-card="rhapsodia"></span>
+          <span class="cloud-card" data-card="seraphim"></span>
+          <span class="cloud-card" data-card="medius"></span>
+          <span class="cloud-card" data-card="baronne"></span>
         </div>
-      </div>
+      </aside>
     </header>
 
-    <nav class="quick-nav" aria-label="Cheatsheet navigation">
-      <a href="#playstyle">Playstyle</a>
-      <a href="#combos">Combo Graph</a>
-      <a href="#boards">End Boards</a>
-      <a href="#tips">Tips</a>
-      <a href="#recovery">Recovery</a>
-      <a href="#side">Side Deck</a>
-      <button class="ref-toggle" type="button" data-toggle-ref>References</button>
-    </nav>
-
-    <aside class="reference-panel" id="references" aria-label="References used">
-      <h2>References</h2>
-      <p class="muted">Collapsed by default. Sources were used for routes, current deck positioning, card IDs, and tournament context.</p>
-      <ol>
-        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noopener">Master Duel Meta Combos &amp; Counters</a>: Elfnote deck type API exposed 13 combo records and 1 combo spreadsheet by GalacticJoey with tabs for Pure Elfnotes, Fiendsmith Combos, and Walbaz.</li>
-        <li><a href="https://www.masterduelmeta.com/articles/guides/elfnote-galacticjoey" target="_blank" rel="noopener">Master Duel Meta Elfnote Guide</a>, published May 8, 2026 by GalacticJoey: overview, strengths, weaknesses, center MMZ notes, and role descriptions.</li>
-        <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Elfnote" target="_blank" rel="noopener">Master Duel Meta Elfnote Deck Breakdown</a>: June 5, 2026 Top 16 Meta Weekly sample by MaybeItsDestiny, tournament statistics, and top card usage.</li>
-        <li><a href="https://roadoftheking.com/yu-gi-oh-asia-wcq-2026-ocg-hong-kong/" target="_blank" rel="noopener">Road of the King, Asia WCQ 2026 OCG Hong Kong</a>: event held May 31, 2026 with Li Shing Fai placing 2nd on Elfnote, published June 2, 2026.</li>
-        <li><a href="https://ygoprodeck.com/deck/elfnote-mar-2026-701221" target="_blank" rel="noopener">YGOPRODeck Elfnote Mar 2026</a>: TCG Fiendsmith/Mulcharmy list edited May 8, 2026.</li>
-        <li><a href="https://ygoprodeck.com/deck/white-forest-elfnote-706605" target="_blank" rel="noopener">YGOPRODeck White Forest Elfnote</a>: Dary Hilmy Iswara, 2nd Place at Ogre Depok Ranking, April 16, 2026.</li>
-        <li><a href="https://vortexgaming.io/en/postdetail/905548" target="_blank" rel="noopener">Vortex Gaming Elfnote guide</a>: route summaries for Fiendsmith, non-Fiendsmith, and opponent-turn disruption planning.</li>
-        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Elfnote" target="_blank" rel="noopener">YGOPRODeck card API</a>: passcodes for real card image URLs.</li>
-      </ol>
-    </aside>
-
-    <section id="playstyle">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Playstyle and win condition</div>
-          <h2>Take the center, convert one starter into layered interruptions</h2>
-        </div>
-      </div>
-      <div class="grid-3">
-        <article class="panel accent-green">
-          <h3>Primary Plan</h3>
-          <p>Special Summon a main Elfnote to the center MMZ, use <span class="strong">Power Patron</span> to Synchro climb, then loop <span class="strong">Welcome Home</span>, <span class="strong">Regina</span>, and <span class="strong">Fortuna</span> into <span class="strong">Rhapsodia</span>.</p>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt="Elfnote Power Patron"><span>Patron</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt="Elfnotes: Welcome Home"><span>Welcome</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Take the center and convert one starter into layered interruptions. Special Summon a main Elfnote to the center Main Monster Zone, use <span class="card-mention" data-card="patron">Power Patron</span> to Synchro climb, then loop <span class="card-mention" data-card="welcome">Welcome Home</span>, <span class="card-mention" data-card="regina">Regina</span>, and <span class="card-mention" data-card="fortuna">Fortuna</span> into <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="lucina">Lucina</span> searches <span class="card-mention" data-card="patron">Power Patron</span>; Patron raises levels, Synchro climbs, and searches another Elfnote as material.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="tinia">Tinia</span> places <span class="card-mention" data-card="welcome">Welcome Home</span>, which sends a body to bring <span class="card-mention" data-card="regina">Regina</span> to center and start deck summons.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="fortuna">Fortuna</span> places <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>: a send converts into an Elfnote reborn plus a face-up negate while a Synchro is live.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="seraphim">Seraphim Strelitzia</span> revives a Level 6 or lower Elfnote and modulates levels for extra Synchro layers.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Win Condition And Main Risks</h3>
+          <p>End on a mix of omni-negates, monster and Spell/Trap checks, a <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> face-up negate, center-zone bounce and hand rip, and opponent-turn Synchro pressure. The deck wins by denying the first push and converting surviving Elfnote bodies into lethal Synchro damage.</p>
+          <p><span class="card-mention" data-card="fuwalos">Mulcharmy Fuwalos</span> and Maxx "C" force reduced lines. Blocking or occupying the center Main Monster Zone can disable the key self-summons. Going second, the engine needs non-engine help because <span class="card-mention" data-card="patron">Power Patron</span> is fragile into established removal.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="patron"></span>
+            <span class="card-chip" data-card="welcome"></span>
+            <span class="card-chip" data-card="rhapsodia"></span>
+            <span class="card-chip" data-card="fuwalos"></span>
           </div>
         </article>
-        <article class="panel accent-teal">
-          <h3>Win Condition</h3>
-          <p>End on a mix of omni-negates, monster/S/T checks, Rhapsodia face-up negate, center-zone bounce/hand rip, and opponent-turn Synchro pressure. The deck wins by denying the first push and converting surviving Elfnote bodies into lethal Synchro damage.</p>
-        </article>
-        <article class="panel accent-rose">
-          <h3>Main Risks</h3>
-          <p><span class="strong">Fuwalos/Maxx "C"</span> force reduced lines. Blocking or occupying the center MMZ can disable key self-summons. Going second, the engine needs non-engine help because Power Patron is fragile into established removal.</p>
-        </article>
       </div>
     </section>
 
-    <section id="combos">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Core combos and interactions</div>
-          <h2>Route Graph</h2>
-          <p>Select a starter route. Each graph node lists the trigger, cards that fire together, and the end-board branch.</p>
-        </div>
-      </div>
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="source-note">Routes adapted from Master Duel Meta combo records (GalacticJoey, Nhadala, May–June 2026) and the Vortex Gaming Elfnote guide.</div>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Lucina 1-card Walbaz — 1-card starter: Lucina (MDM, GalacticJoey, June 4, 2026)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Center starter</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="lucina"></span></div></td>
+              <td>Special Summon <span class="card-mention" data-card="lucina">Lucina</span> to the center Main Monster Zone and search <span class="card-mention" data-card="patron">Power Patron</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">First Synchro</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="patron"></span><span class="plus-sign">+</span><span class="card-chip" data-card="baronne"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="patron">Patron</span>, raise <span class="card-mention" data-card="lucina">Lucina</span>, and make <span class="card-mention" data-card="baronne">Baronne de Fleur</span>; Patron searches <span class="card-mention" data-card="tinia">Tinia</span>. Establish the omni-negate before extending.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Welcome Home</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="tinia"></span><span class="plus-sign">+</span><span class="card-chip" data-card="welcome"></span><span class="plus-sign">+</span><span class="card-chip" data-card="regina"></span></div></td>
+              <td><span class="card-mention" data-card="tinia">Tinia</span> places <span class="card-mention" data-card="welcome">Welcome Home</span>; Welcome sends Tinia and summons <span class="card-mention" data-card="regina">Regina</span> to center.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Trap access</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="fortuna"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rhapsodia"></span></div></td>
+              <td><span class="card-mention" data-card="regina">Regina</span> brings <span class="card-mention" data-card="fortuna">Fortuna</span>; Fortuna places <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>; Rhapsodia revives <span class="card-mention" data-card="patron">Patron</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Walbaz branch</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="seraphim"></span><span class="plus-sign">+</span><span class="card-chip" data-card="ecclesiaDark"></span><span class="plus-sign">+</span><span class="card-chip" data-card="omega"></span></div></td>
+              <td><span class="card-mention" data-card="seraphim">Seraphim</span> and <span class="card-mention" data-card="patron">Patron</span> convert into <span class="card-mention" data-card="ecclesiaDark">Ecclesia and the Dark Dragon</span>; <span class="card-mention" data-card="fallenWhite">Fallen of the White Dragon</span>/<span class="card-mention" data-card="incredible">Incredible Ecclesia</span> make <span class="card-mention" data-card="omega">PSY-Framelord Omega</span> for a hand rip. Discarding a low-value card can leave an extra Elfnote girl for cleaner disruption access.</td>
+            </tr>
 
-      <div class="route-actions" id="routeButtons"></div>
+            <tr class="route-head"><td colspan="4">Medius Fiendsmith — Normal Summon starter: Medius the Pure (MDM, GalacticJoey, May 18, 2026; "bread-and-butter" Fiendsmith route)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Medius access</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="medius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="armades"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="medius">Medius</span>, summon <span class="card-mention" data-card="patron">Patron</span> from Deck, Synchro into <span class="card-mention" data-card="armades">Armades</span>; Patron searches <span class="card-mention" data-card="lucina">Lucina</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Fiendsmith bridge</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="requiem"></span><span class="plus-sign">+</span><span class="card-chip" data-card="engraver"></span><span class="plus-sign">+</span><span class="card-chip" data-card="necroquip"></span></div></td>
+              <td>Link <span class="card-mention" data-card="armades">Armades</span> into <span class="card-mention" data-card="requiem">Fiendsmith's Requiem</span>, summon <span class="card-mention" data-card="engraver">Engraver</span>, then climb through <span class="card-mention" data-card="necroquip">Necroquip Princess</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Caesar before Nibiru</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="caesar"></span></div></td>
+              <td>Recover <span class="card-mention" data-card="engraver">Engraver</span> and overlay into <span class="card-mention" data-card="caesar">D/D/D Wave High King Caesar</span> — a double Special Summon check that protects the rest of the line from <span class="card-mention" data-card="nibiru">Nibiru</span>-style punishment.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Elfnote core</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="lucina"></span><span class="plus-sign">+</span><span class="card-chip" data-card="regina"></span><span class="plus-sign">+</span><span class="card-chip" data-card="welcome"></span></div></td>
+              <td><span class="card-mention" data-card="lucina">Lucina</span> searches <span class="card-mention" data-card="regina">Regina</span>; Regina sends Lucina and summons <span class="card-mention" data-card="tinia">Tinia</span>; <span class="card-mention" data-card="welcome">Welcome Home</span> brings <span class="card-mention" data-card="fortuna">Fortuna</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">End board</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rhapsodia"></span><span class="plus-sign">+</span><span class="card-chip" data-card="savage"></span></div></td>
+              <td><span class="card-mention" data-card="rhapsodia">Rhapsodia</span> revives <span class="card-mention" data-card="patron">Patron</span>, <span class="card-mention" data-card="seraphim">Seraphim</span> extends, and Patron + Seraphim make <span class="card-mention" data-card="savage">Borreload Savage Dragon</span>.</td>
+            </tr>
 
-      <div class="combo-layout">
-        <div class="graph-shell" aria-live="polite">
-          <div class="graph-grid" id="comboGraph"></div>
-        </div>
-        <aside class="route-summary" id="routeSummary"></aside>
+            <tr class="route-head"><td colspan="4">Tinia 1.5-card Crimson — Tinia plus one extender (MDM, Nhadala, May 17, 2026; highest-ceiling route by upvotes)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Tinia start</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="tinia"></span><span class="plus-sign">+</span><span class="card-chip" data-card="welcome"></span></div></td>
+              <td><span class="card-mention" data-card="tinia">Tinia</span> places <span class="card-mention" data-card="welcome">Welcome Home</span>; Welcome sends Tinia and summons <span class="card-mention" data-card="regina">Regina</span>, then <span class="card-mention" data-card="patron">Patron</span> enters.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Riser search</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="riser"></span></div></td>
+              <td><span class="card-mention" data-card="riser">Shooting Riser Dragon</span> sends Effect Veiler and chain-blocks <span class="card-mention" data-card="patron">Patron</span> to search <span class="card-mention" data-card="lucina">Lucina</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Crimson access</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="crimson"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rumble"></span></div></td>
+              <td><span class="card-mention" data-card="lucina">Lucina</span> searches <span class="card-mention" data-card="fortuna">Fortuna</span>, then Synchro into <span class="card-mention" data-card="crimson">Crimson Dragon</span> and search <span class="card-mention" data-card="rumble">Synchro Rumble</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Zalen and Crystal</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="plus-sign">+</span><span class="card-chip" data-card="crystal"></span></div></td>
+              <td><span class="card-mention" data-card="rumble">Rumble</span> revives <span class="card-mention" data-card="patron">Patron</span>, <span class="card-mention" data-card="seraphim">Seraphim</span> enters center, <span class="card-mention" data-card="crimson">Crimson Dragon</span> becomes <span class="card-mention" data-card="zalen">Zalen the Shackled Dragon</span>, then Patron + Seraphim make <span class="card-mention" data-card="crystal">Crystal Wing Synchro Dragon</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Herald lock</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rhapsodia"></span><span class="plus-sign">+</span><span class="card-chip" data-card="herald"></span></div></td>
+              <td><span class="card-mention" data-card="rhapsodia">Rhapsodia</span> revives <span class="card-mention" data-card="patron">Patron</span>; Patron + Level 3 <span class="card-mention" data-card="regina">Regina</span> make <span class="card-mention" data-card="herald">Herald of the Arc Light</span> for the floodgate negate.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Reduced vs Fuwalos — route change under draw handtraps (MDM, GalacticJoey, June 6, 2026)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Accept the cap</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="fuwalos"></span></div></td>
+              <td>Treat <span class="card-mention" data-card="fuwalos">Fuwalos</span>/Maxx "C" as a route change, not a challenge to push through. Trade ceiling for fewer draws.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Lucina path (one draw)</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="lucina"></span><span class="plus-sign">+</span><span class="card-chip" data-card="baronne"></span></div></td>
+              <td><span class="card-mention" data-card="lucina">Lucina</span> + <span class="card-mention" data-card="patron">Patron</span> makes <span class="card-mention" data-card="baronne">Baronne</span>, then Patron searches <span class="card-mention" data-card="fortuna">Fortuna</span> instead of extending through <span class="card-mention" data-card="tinia">Tinia</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Medius path (two draws)</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="medius"></span><span class="plus-sign">+</span><span class="card-chip" data-card="ecclesiaDark"></span></div></td>
+              <td><span class="card-mention" data-card="medius">Medius</span> + <span class="card-mention" data-card="patron">Patron</span> can make <span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> and search <span class="card-mention" data-card="fortuna">Fortuna</span> after two Fuwalos draws.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Minimal but live</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="fortuna"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rhapsodia"></span></div></td>
+              <td><span class="card-mention" data-card="fortuna">Fortuna</span> places <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> so the opponent still faces a negate/reborn piece. If you hard drew <span class="card-mention" data-card="tinia">Tinia</span> or <span class="card-mention" data-card="regina">Regina</span>, they still create center-zone disruption on the opponent's turn.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section id="boards">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> End board examples</div>
-          <h2>Field by End Phase</h2>
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Lucina to center</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="lucina"></span>
+              </div>
+              <p class="step-note">Special Summon <span class="card-mention" data-card="lucina">Lucina</span> to the center Main Monster Zone; she searches <span class="card-mention" data-card="patron">Power Patron</span>. One card starts the whole line.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Patron Synchro climb</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="patron"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="lucina"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="baronne"></span>
+              </div>
+              <p class="step-note">Normal <span class="card-mention" data-card="patron">Patron</span>, raise <span class="card-mention" data-card="lucina">Lucina</span>, make <span class="card-mention" data-card="baronne">Baronne de Fleur</span>; Patron searches <span class="card-mention" data-card="tinia">Tinia</span>. Get the omni-negate online before committing further.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Welcome Home deck summons</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="tinia"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="welcome"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="regina"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="tinia">Tinia</span> places <span class="card-mention" data-card="welcome">Welcome Home</span>; it sends a body to summon <span class="card-mention" data-card="regina">Regina</span> to center. From here pick the Walbaz, B2B, Fiendsmith, or Crimson branch.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Fortuna trap access</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="fortuna"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="rhapsodia"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="regina">Regina</span> pulls <span class="card-mention" data-card="fortuna">Fortuna</span>; Fortuna places <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>, which revives <span class="card-mention" data-card="patron">Patron</span> and stays live as the opponent-turn negate/reborn engine.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Walbaz pressure</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="seraphim"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="ecclesiaDark"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="omega"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="seraphim">Seraphim</span> + <span class="card-mention" data-card="patron">Patron</span> convert into <span class="card-mention" data-card="ecclesiaDark">Ecclesia and the Dark Dragon</span>; <span class="card-mention" data-card="fallenWhite">Fallen of the White Dragon</span> lines make <span class="card-mention" data-card="omega">Omega</span> for the hand rip and opponent-turn Albaz pressure.</p>
+            </div>
+          </div>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>B2B / Jet Synchron branch</h4>
+            <p>From step 4: <span class="card-mention" data-card="seraphim">Seraphim</span> revives <span class="card-mention" data-card="patron">Patron</span> into <span class="card-mention" data-card="accel">Accel Synchron</span>, send <span class="card-mention" data-card="jet">Jet Synchron</span>, draw with <span class="card-mention" data-card="crocodragon">Ravenous Crocodragon</span>, finish on <span class="card-mention" data-card="b2b">Kewl Tune B2B</span>. Plays through Nibiru and pivots into Fuwalos lines well.</p>
+            <div class="card-row"><span class="card-chip" data-card="accel"></span><span class="card-chip" data-card="jet"></span><span class="card-chip" data-card="crocodragon"></span><span class="card-chip" data-card="b2b"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Fiendsmith branch (from Medius)</h4>
+            <p>Convert <span class="card-mention" data-card="armades">Armades</span> into <span class="card-mention" data-card="requiem">Requiem</span>, <span class="card-mention" data-card="engraver">Engraver</span>, <span class="card-mention" data-card="necroquip">Necroquip</span>, and <span class="card-mention" data-card="caesar">Caesar</span> before returning to the Elfnote trap line. Caesar checks double Special Summons before you over-extend.</p>
+            <div class="card-row"><span class="card-chip" data-card="requiem"></span><span class="card-chip" data-card="engraver"></span><span class="card-chip" data-card="caesar"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Crimson Dragon branch (Tinia start)</h4>
+            <p>With an extender, route through <span class="card-mention" data-card="riser">Shooting Riser Dragon</span> and <span class="card-mention" data-card="crimson">Crimson Dragon</span> into <span class="card-mention" data-card="zalen">Zalen</span>, <span class="card-mention" data-card="crystal">Crystal Wing</span>, and <span class="card-mention" data-card="herald">Herald of the Arc Light</span> — the highest ceiling in the MDM records.</p>
+            <div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="card-chip" data-card="crystal"></span><span class="card-chip" data-card="herald"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Fuwalos fallback</h4>
+            <p>Under <span class="card-mention" data-card="fuwalos">Fuwalos</span>/Maxx "C", stop at <span class="card-mention" data-card="baronne">Baronne</span> + <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> (one draw) or <span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> + <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> (two draws) instead of chasing the full ceiling.</p>
+            <div class="card-row"><span class="card-chip" data-card="baronne"></span><span class="card-chip" data-card="rhapsodia"></span></div>
+          </div>
         </div>
       </div>
-      <div class="grid-3">
-        <article class="board">
+    </section>
+
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
+        <article class="board-card">
+          <span class="tag blue">Going first</span>
           <h3>Lucina Walbaz</h3>
-          <div class="board-zone">
-            <strong>Monster zones</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/84815190.jpg" alt="Baronne de Fleur"><span>Baronne</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/84815190.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/74586817.jpg" alt="PSY-Framelord Omega"><span>Omega</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/74586817.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/78397661.jpg" alt="Ecclesia and the Dark Dragon"><span>Ecclesia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/78397661.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <div class="board-zone">
-            <strong>Backrow / hand</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt="Elfnote Regina"><span>Regina</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <p class="muted">Omni-negate, hand rip, Albaz/Ecclesia line on opponent turn, Rhapsodia negate/reborn, Regina in hand.</p>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="baronne"></span><span class="card-chip" data-card="omega"></span><span class="card-chip" data-card="ecclesiaDark"></span><span class="card-chip" data-card="rhapsodia"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="regina"></span></div></div>
+          <p>Omni-negate, hand rip, Albaz/Ecclesia line on the opponent's turn, <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> negate/reborn, <span class="card-mention" data-card="regina">Regina</span> in hand. The default 1-card output.</p>
         </article>
-
-        <article class="board">
+        <article class="board-card">
+          <span class="tag green">Going first</span>
           <h3>Medius Fiendsmith</h3>
-          <div class="board-zone">
-            <strong>Monster zones</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/79559912.jpg" alt="D/D/D Wave High King Caesar"><span>Caesar</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/79559912.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/27548199.jpg" alt="Borreload Savage Dragon"><span>Savage</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/27548199.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt="Elfnote Seraphim Strelitzia"><span>Seraphim</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <div class="board-zone">
-            <strong>Backrow / hand</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt="Elfnote Regina"><span>Regina</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/56651978.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <p class="muted">Double Special Summon negate, omni-negate, Rhapsodia, Regina follow-up. MDM combo notes call this the bread-and-butter Fiendsmith build.</p>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="caesar"></span><span class="card-chip" data-card="savage"></span><span class="card-chip" data-card="seraphim"></span><span class="card-chip" data-card="rhapsodia"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="regina"></span></div></div>
+          <p>Double Special Summon negate, omni-negate, <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>, <span class="card-mention" data-card="regina">Regina</span> follow-up. MDM calls this the bread-and-butter Fiendsmith build.</p>
         </article>
-
-        <article class="board">
+        <article class="board-card">
+          <span class="tag red">Under handtraps</span>
           <h3>Reduced Fuwalos Line</h3>
-          <div class="board-zone">
-            <strong>Monster zones</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/84815190.jpg" alt="Baronne de Fleur"><span>Baronne</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/84815190.jpg" alt=""></span></span>
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/78397661.jpg" alt="Ecclesia and the Dark Dragon"><span>Ecclesia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/78397661.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <div class="board-zone">
-            <strong>Backrow</strong>
-            <div class="mini-cards">
-              <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
-            </div>
-          </div>
-          <p class="muted">Into Fuwalos/Maxx "C", the target is often Baronne plus Rhapsodia or Ecclesia plus Rhapsodia while limiting draws.</p>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="baronne"></span><span class="card-chip" data-card="ecclesiaDark"></span><span class="card-chip" data-card="rhapsodia"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="fortuna"></span></div></div>
+          <p>Into <span class="card-mention" data-card="fuwalos">Fuwalos</span>/Maxx "C", aim for <span class="card-mention" data-card="baronne">Baronne</span> plus <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> or <span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> plus <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> while limiting draws.</p>
         </article>
       </div>
     </section>
 
-    <section id="interactions">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Trigger pairs</div>
-          <h2>Cards that fire together</h2>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div class="trigger-pair">
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/13597785.jpg" alt="Elfnote Lucina"><span>Lucina</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/13597785.jpg" alt=""></span></span>
-          <span class="arrow">+</span>
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt="Elfnote Power Patron"><span>Patron</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt=""></span></span>
-          <span class="trigger-copy"><b>Starter to tuner bridge</b> Lucina searches Power Patron; Patron raises Lucina and becomes the Synchro material that searches Tinia or Fortuna.</span>
-        </div>
-        <div class="trigger-pair">
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/59581480.jpg" alt="Elfnote Tinia"><span>Tinia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/59581480.jpg" alt=""></span></span>
-          <span class="arrow">+</span>
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt="Elfnotes: Welcome Home"><span>Welcome</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/64491754.jpg" alt=""></span></span>
-          <span class="trigger-copy"><b>Spell access</b> Tinia places Welcome Home, which sends Tinia or another body to bring Regina to center and start deck summons.</span>
-        </div>
-        <div class="trigger-pair">
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/85976588.jpg" alt="Elfnote Fortuna"><span>Fortuna</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/85976588.jpg" alt=""></span></span>
-          <span class="arrow">+</span>
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt="Elfnotes: Rhapsodia of Madness"><span>Rhapsodia</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24092792.jpg" alt=""></span></span>
-          <span class="trigger-copy"><b>End-board trap</b> Fortuna places Rhapsodia; Rhapsodia converts a send into Elfnote reborn and a face-up negate if a Synchro is live.</span>
-        </div>
-        <div class="trigger-pair">
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt="Elfnote Seraphim Strelitzia"><span>Seraphim</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/42302563.jpg" alt=""></span></span>
-          <span class="arrow">+</span>
-          <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt="Elfnote Power Patron"><span>Patron</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/12375297.jpg" alt=""></span></span>
-          <span class="trigger-copy"><b>Climb extender</b> Seraphim revives a Level 6 or lower Elfnote, commonly Patron, and may reduce levels for Crystal Wing, Dragster, Herald, or B2B lines.</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="tips">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Tips</div>
-          <h2>Latest Meta Notes</h2>
-        </div>
-      </div>
-      <div class="grid-3">
-        <article class="tip">
-          <h3>Sequence around Fuwalos</h3>
-          <p>MDM combo records include dedicated <span class="strong">Lucina vs Fuwa</span> and <span class="strong">Medius vs Fuwa</span> routes. Trade ceiling for fewer draws: Lucina can stop at Baronne + Rhapsodia after one draw; Medius can stop at Ecclesia + Rhapsodia after two.</p>
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><b>Sequence around Fuwalos.</b> MDM has dedicated Lucina-vs-Fuwa and Medius-vs-Fuwa routes: <span class="card-mention" data-card="lucina">Lucina</span> can stop at <span class="card-mention" data-card="baronne">Baronne</span> + <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> after one draw; <span class="card-mention" data-card="medius">Medius</span> at <span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> + Rhapsodia after two.</span></li>
+            <li><span class="num">2</span><span><b>Respect Droll.</b> <span class="card-mention" data-card="lucina">Lucina</span> and <span class="card-mention" data-card="patron">Patron</span> search early. If the hand can start with <span class="card-mention" data-card="tinia">Tinia</span> or <span class="card-mention" data-card="welcome">Welcome Home</span>, place instead of repeatedly adding; searching Tinia instead of Lucina is a lower-ceiling <span class="card-mention" data-card="droll">Droll</span> concession.</span></li>
+            <li><span class="num">3</span><span><b>Center MMZ matters.</b> Do not leave your own center zone occupied by a non-converting body before resolving the Elfnote self-summons and opponent-turn movement effects.</span></li>
+            <li><span class="num">4</span><span><b>Regina is the opponent-turn fuse.</b> Keep <span class="card-mention" data-card="welcome">Welcome Home</span> face-up or an expendable Elfnote ready so <span class="card-mention" data-card="regina">Regina</span> can send it, summon herself, and turn <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> and <span class="card-mention" data-card="seraphim">Seraphim</span> live.</span></li>
+            <li><span class="num">5</span><span><b>Fiendsmith raises the ceiling.</b> <span class="card-mention" data-card="armades">Armades</span>/Moon access converts into <span class="card-mention" data-card="requiem">Requiem</span>, <span class="card-mention" data-card="engraver">Engraver</span>, <span class="card-mention" data-card="sequence">Sequence</span>, <span class="card-mention" data-card="lacrima">Lacrima</span>, and <span class="card-mention" data-card="caesar">Caesar</span> before returning to the Elfnote trap line.</span></li>
+          </ul>
         </article>
-        <article class="tip">
-          <h3>Respect Droll</h3>
-          <p>Lucina and Power Patron search early. If the hand can start with Tinia or Welcome Home, you can place instead of repeatedly adding. GalacticJoey's Medius notes mention adding Tinia instead of Lucina as a lower-ceiling Droll concession.</p>
-        </article>
-        <article class="tip">
-          <h3>Center MMZ matters</h3>
-          <p>The MDM guide flags zone awkwardness as a real weakness. Do not leave your own center MMZ occupied by a non-converting body before resolving the Elfnote self-summons and opponent-turn movement effects.</p>
-        </article>
-        <article class="tip">
-          <h3>Regina is the opponent-turn fuse</h3>
-          <p>Keep <span class="strong">Welcome Home</span> face-up or an expendable Elfnote ready so Regina can send it, Special Summon herself, then access another Elfnote to turn Rhapsodia and Seraphim live.</p>
-        </article>
-        <article class="tip">
-          <h3>Fiendsmith raises ceiling</h3>
-          <p>Fiendsmith lines convert Armades/Moon access into Requiem, Engraver, Sequence, Lacrima, and Caesar before returning to the Elfnote trap line. This protects later plays and gives a high-impact end board.</p>
-        </article>
-        <article class="tip">
-          <h3>Latest variants</h3>
-          <p>Master Duel's June 5 sample was a 60-card Adventure/Grass/Fiendsmith Elfnote list. The latest OCG tournament top found was a 40-card Elfnote build in Asia WCQ Hong Kong, showing the deck can also stay lean and Synchro-focused.</p>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="rhapsodia"></span>
+            <span class="card-chip" data-card="regina"></span>
+            <span class="card-chip" data-card="seraphim"></span>
+            <span class="card-chip" data-card="medius"></span>
+            <span class="card-chip" data-card="omega"></span>
+            <span class="card-chip" data-card="b2b"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><b>Rhapsodia rebuild:</b> send from hand or field, revive an Elfnote with a different Attribute, and turn any surviving Synchro into a face-up negate; this also reloads the center zone for <span class="card-mention" data-card="lucina">Lucina</span>/<span class="card-mention" data-card="tinia">Tinia</span>/<span class="card-mention" data-card="fortuna">Fortuna</span> quick effects.</span></li>
+            <li><span class="num">2</span><span><b>Regina hand return:</b> she adds herself back when used as Synchro material — hold her as a flexible opponent-turn extender into deck summons.</span></li>
+            <li><span class="num">3</span><span><b>Seraphim converts scraps:</b> revive a Level 6 or lower Elfnote and alter levels to turn leftover bodies into <span class="card-mention" data-card="dragster">Dawn Dragster</span>, <span class="card-mention" data-card="crystal">Crystal Wing</span>, <span class="card-mention" data-card="herald">Herald</span>, or <span class="card-mention" data-card="omega">Omega</span>.</span></li>
+            <li><span class="num">4</span><span><b>Medius from GY:</b> shuffle a hand or face-up monster into Deck to Special Summon itself, recycling awkward garnets such as <span class="card-mention" data-card="jet">Jet Synchron</span>.</span></li>
+            <li><span class="num">5</span><span><b>Grind tools:</b> <span class="card-mention" data-card="omega">Omega</span> shuffles itself plus a GY card back; <span class="card-mention" data-card="b2b">Kewl Tune B2B</span> converts a Tuner in GY/banishment into opponent-turn Synchro pressure; the Walbaz branch keeps <span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> and <span class="card-mention" data-card="fallenWhite">Fallen of the White Dragon</span> follow-up live.</span></li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section id="recovery">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Recovery options</div>
-          <h2>When the first push breaks</h2>
-        </div>
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">Master Duel</span>
+          <h3>60-card Adventure / Grass / Fiendsmith</h3>
+          <p>The June 5, 2026 Master Duel Meta Top 16 Meta Weekly sample (MaybeItsDestiny) ran 60 cards with <span class="card-mention" data-card="adventure">Rite of Aramesir</span>, <span class="card-mention" data-card="grass">That Grass Looks Greener</span>, and the Fiendsmith package on top of the Elfnote core.</p>
+          <div class="card-row"><span class="card-chip" data-card="grass"></span><span class="card-chip" data-card="adventure"></span><span class="card-chip" data-card="engraver"></span><span class="card-chip" data-card="lacrima"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag blue">TCG / OCG</span>
+          <h3>Lean 40-card and White Forest builds</h3>
+          <p>The latest OCG top found was a 40-card Synchro-focused build (2nd, Asia WCQ Hong Kong). TCG lists pair Fiendsmith with <span class="card-mention" data-card="purulia">Mulcharmy</span> handtraps, and a White Forest hybrid with <span class="card-mention" data-card="whiteForest">Elzette of the White Forest</span> also topped regionally.</p>
+          <div class="card-row"><span class="card-chip" data-card="whiteForest"></span><span class="card-chip" data-card="purulia"></span><span class="card-chip" data-card="fuwalos"></span></div>
+        </article>
       </div>
-      <div class="grid-3">
-        <article class="panel accent-teal">
-          <h3>Rhapsodia Rebuild</h3>
-          <p>Use Rhapsodia to send a monster from hand or field, revive an Elfnote with a different Attribute, and turn any surviving Synchro into a face-up negate. This also reloads the center MMZ for Lucina/Tinia/Fortuna quick effects.</p>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2026-06-05</div><div><b>MDM Top 16 Meta Weekly:</b> 60-card Adventure/Grass/Fiendsmith Elfnote sample by MaybeItsDestiny.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026-05-31</div><div><b>Asia WCQ 2026 (OCG, Hong Kong):</b> Li Shing Fai placed 2nd on a 40-card Elfnote build.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026-04-16</div><div><b>Ogre Depok Ranking:</b> Dary Hilmy Iswara, 2nd Place with White Forest Elfnote.</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kewl Tune</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="lancea"></span></div></td>
+              <td>Stop tuner recursion and hand-sculpting before <span class="card-mention" data-card="b2b">B2B</span> snowballs. Going first, prioritize <span class="card-mention" data-card="caesar">Caesar</span>/<span class="card-mention" data-card="baronne">Baronne</span> over lower-value bounces.</td>
+            </tr>
+            <tr>
+              <td>Branded / Dracotail</td>
+              <td><div class="card-row"><span class="card-chip" data-card="belle"></span><span class="card-chip" data-card="cosmic"></span></div></td>
+              <td><span class="card-mention" data-card="belle">Ghost Belle</span> keys GY recursion and fusion recovery. <span class="card-mention" data-card="fortuna">Fortuna</span> can bounce face-up Spell/Traps, but use <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> for cards that must not resolve.</td>
+            </tr>
+            <tr>
+              <td>Sky Striker</td>
+              <td><div class="card-row"><span class="card-chip" data-card="cosmic"></span><span class="card-chip" data-card="duster"></span></div></td>
+              <td>Keep <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> for the first face-up engine card that sticks. <span class="card-mention" data-card="lucina">Lucina</span> bounce handles small Links if they expose the right level window.</td>
+            </tr>
+            <tr>
+              <td>Yummy / DoomZ / combo</td>
+              <td><div class="card-row"><span class="card-chip" data-card="nibiru"></span><span class="card-chip" data-card="imperm"></span></div></td>
+              <td>Vortex and MDM both point to stopping tuner access and early engine conversion. Keep board breakers for going second; the Elfnote engine alone is not a clean board breaker.</td>
+            </tr>
+            <tr>
+              <td>Backrow / floodgates</td>
+              <td><div class="card-row"><span class="card-chip" data-card="evenly"></span><span class="card-chip" data-card="droplet"></span></div></td>
+              <td><span class="card-mention" data-card="fortuna">Fortuna</span> bounces face-up Spell/Traps, but hard backrow needs side cards. Protect <span class="card-mention" data-card="welcome">Welcome Home</span> and <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> from removal when planning a grind game.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="fuwalos">Fuwalos</span> and Maxx "C" force reduced lines and cap the ceiling.</span></li>
+            <li><span class="num">2</span><span>Blocking or occupying the center Main Monster Zone disables the Elfnote self-summons.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> punishes the early <span class="card-mention" data-card="lucina">Lucina</span>/<span class="card-mention" data-card="patron">Patron</span> search chain.</span></li>
+            <li><span class="num">4</span><span>Going second, <span class="card-mention" data-card="patron">Power Patron</span> is fragile into established removal without non-engine help.</span></li>
+          </ul>
         </article>
-        <article class="panel accent-gold">
-          <h3>Regina Hand Return</h3>
-          <p>Regina adds herself back when used as Synchro material. Hold her as a flexible opponent-turn extender: send Welcome Home or another Elfnote, summon to center, then summon Lucina, Tinia, or Fortuna from Deck.</p>
-        </article>
-        <article class="panel accent-violet">
-          <h3>Seraphim Converts Scraps</h3>
-          <p>Seraphim revives a Level 6 or lower Elfnote and can alter levels across the field. Use it to turn leftover Patron/Fortuna/Regina bodies into Dragster, Crystal Wing, Herald, Omega, or another Synchro layer.</p>
-        </article>
-        <article class="panel accent-green">
-          <h3>Medius From GY</h3>
-          <p>Medius can shuffle a hand or face-up monster into Deck to Special Summon itself from the GY. That gives post-interruption material and helps recycle awkward garnets such as Jet Synchron lines.</p>
-        </article>
-        <article class="panel accent-rose">
-          <h3>Omega and B2B Grind</h3>
-          <p>Omega can shuffle itself and another GY card back, while Kewl Tune B2B can convert a Tuner in GY/banishment into immediate Synchro pressure on the opponent's turn.</p>
-        </article>
-        <article class="panel accent-teal">
-          <h3>Walbaz Follow-up</h3>
-          <p>Walbaz lines set up Ecclesia and Fallen of the White Dragon access. The MDM combo records use this branch for Albaz pressure on the opponent's turn and End Phase follow-up.</p>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Take the dedicated vs-Fuwa routes: one or two draws into <span class="card-mention" data-card="baronne">Baronne</span>/<span class="card-mention" data-card="ecclesiaDark">Ecclesia</span> plus <span class="card-mention" data-card="rhapsodia">Rhapsodia</span>.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="caesar">Caesar</span> first checks <span class="card-mention" data-card="nibiru">Nibiru</span>-style punishment before you extend.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="regina">Regina</span> + <span class="card-mention" data-card="rhapsodia">Rhapsodia</span> rebuild interruption on the opponent's turn even after a broken first push.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="fortuna">Fortuna</span> bounces face-up Spell/Traps and <span class="card-mention" data-card="lucina">Lucina</span> bounces monsters in the right level window.</span></li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section id="side">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Side deck options and counters</div>
-          <h2>Matchup Plans</h2>
-        </div>
-      </div>
-      <div class="matchup-grid">
-        <article class="matchup">
-          <h3>Kewl Tune</h3>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/94145021.jpg" alt="Droll & Lock Bird"><span>Droll</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/94145021.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/34267821.jpg" alt="Artifact Lancea"><span>Lancea</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/34267821.jpg" alt=""></span></span>
-          </div>
-          <ul>
-            <li>Stop tuner recursion and hand-sculpting before B2B snowballs.</li>
-            <li>Going first, prioritize Caesar/Baronne before lower-value bounces.</li>
-          </ul>
-        </article>
-        <article class="matchup">
-          <h3>Branded / Dracotail</h3>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/73642296.jpg" alt="Ghost Belle & Haunted Mansion"><span>Belle</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/73642296.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt="Cosmic Cyclone"><span>Cosmic</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt=""></span></span>
-          </div>
-          <ul>
-            <li>Belle key GY recursion and fusion recovery.</li>
-            <li>Fortuna can bounce face-up S/T, but use Cosmic for cards that must not resolve.</li>
-          </ul>
-        </article>
-        <article class="matchup">
-          <h3>Sky Striker</h3>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt="Cosmic Cyclone"><span>Cosmic</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/18144507.jpg" alt="Harpie's Feather Duster"><span>Duster</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/18144507.jpg" alt=""></span></span>
-          </div>
-          <ul>
-            <li>Keep Rhapsodia for the first face-up engine card that sticks.</li>
-            <li>Lucina bounce handles small Links if they expose the right level window.</li>
-          </ul>
-        </article>
-        <article class="matchup">
-          <h3>Yummy / DoomZ / Combo</h3>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/27204311.jpg" alt="Nibiru, the Primal Being"><span>Nibiru</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/27204311.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/10045474.jpg" alt="Infinite Impermanence"><span>Imperm</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/10045474.jpg" alt=""></span></span>
-          </div>
-          <ul>
-            <li>Vortex and MDM both point to stopping tuner access and early engine conversion.</li>
-            <li>Keep board breakers for going second; the Elfnote engine alone is not a clean board breaker.</li>
-          </ul>
-        </article>
-        <article class="matchup">
-          <h3>Backrow / Floodgate</h3>
-          <div class="mini-cards">
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/15693423.jpg" alt="Evenly Matched"><span>Evenly</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/15693423.jpg" alt=""></span></span>
-            <span class="card-chip" tabindex="0"><img src="https://images.ygoprodeck.com/images/cards/24299458.jpg" alt="Forbidden Droplet"><span>Droplet</span><span class="zoom"><img src="https://images.ygoprodeck.com/images/cards/24299458.jpg" alt=""></span></span>
-          </div>
-          <ul>
-            <li>Fortuna bounces face-up S/T, but hard backrow needs side cards.</li>
-            <li>Protect Welcome Home and Rhapsodia from removal when planning a grind game.</li>
-          </ul>
-        </article>
-      </div>
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <p class="footer-note">Sources were used for routes, current deck positioning, card IDs, and tournament context.</p>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters</a> — Elfnote deck type API exposed 13 combo records and 1 combo spreadsheet by GalacticJoey with tabs for Pure Elfnotes, Fiendsmith Combos, and Walbaz.</li>
+        <li><a href="https://www.masterduelmeta.com/articles/guides/elfnote-galacticjoey" target="_blank" rel="noreferrer">Master Duel Meta Elfnote Guide</a> — published May 8, 2026 by GalacticJoey: overview, strengths, weaknesses, center MMZ notes, and role descriptions.</li>
+        <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Elfnote" target="_blank" rel="noreferrer">Master Duel Meta Elfnote Deck Breakdown</a> — June 5, 2026 Top 16 Meta Weekly sample by MaybeItsDestiny, tournament statistics, and top card usage.</li>
+        <li><a href="https://roadoftheking.com/yu-gi-oh-asia-wcq-2026-ocg-hong-kong/" target="_blank" rel="noreferrer">Road of the King, Asia WCQ 2026 OCG Hong Kong</a> — event held May 31, 2026 with Li Shing Fai placing 2nd on Elfnote, published June 2, 2026.</li>
+        <li><a href="https://ygoprodeck.com/deck/elfnote-mar-2026-701221" target="_blank" rel="noreferrer">YGOPRODeck Elfnote Mar 2026</a> — TCG Fiendsmith/Mulcharmy list edited May 8, 2026.</li>
+        <li><a href="https://ygoprodeck.com/deck/white-forest-elfnote-706605" target="_blank" rel="noreferrer">YGOPRODeck White Forest Elfnote</a> — Dary Hilmy Iswara, 2nd Place at Ogre Depok Ranking, April 16, 2026.</li>
+        <li><a href="https://vortexgaming.io/en/postdetail/905548" target="_blank" rel="noreferrer">Vortex Gaming Elfnote guide</a> — route summaries for Fiendsmith, non-Fiendsmith, and opponent-turn disruption planning.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Elfnote" target="_blank" rel="noreferrer">YGOPRODeck card API</a> — passcodes for real card image URLs.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
     </section>
-  </div>
+
+  </main>
 
   <script>
-    const cards = {
-      lucina: { name: "Elfnote Lucina", id: 13597785 },
-      tinia: { name: "Elfnote Tinia", id: 59581480 },
-      fortuna: { name: "Elfnote Fortuna", id: 85976588 },
-      regina: { name: "Elfnote Regina", id: 56651978 },
-      patron: { name: "Elfnote Power Patron", id: 12375297 },
-      seraphim: { name: "Elfnote Seraphim Strelitzia", id: 42302563 },
-      welcome: { name: "Elfnotes: Welcome Home", id: 64491754 },
-      rhapsodia: { name: "Elfnotes: Rhapsodia of Madness", id: 24092792 },
-      medius: { name: "Medius the Pure", id: 97556336 },
-      baronne: { name: "Baronne de Fleur", id: 84815190 },
-      omega: { name: "PSY-Framelord Omega", id: 74586817 },
-      ecclesiaDark: { name: "Ecclesia and the Dark Dragon", id: 78397661 },
-      fallenWhite: { name: "Fallen of the White Dragon", id: 73819701 },
-      incredible: { name: "Incredible Ecclesia, the Virtuous", id: 55273560 },
-      caesar: { name: "D/D/D Wave High King Caesar", id: 79559912 },
-      savage: { name: "Borreload Savage Dragon", id: 27548199 },
-      requiem: { name: "Fiendsmith's Requiem", id: 2463794 },
-      engraver: { name: "Fiendsmith Engraver", id: 60764609 },
-      sequence: { name: "Fiendsmith's Sequence", id: 49867899 },
-      lacrima: { name: "Fiendsmith's Lacrima", id: 46640168 },
-      tract: { name: "Fiendsmith's Tract", id: 98567237 },
-      armades: { name: "Armades, Keeper of Boundaries", id: 88033975 },
-      necroquip: { name: "Necroquip Princess", id: 93860227 },
-      jet: { name: "Jet Synchron", id: 9742784 },
-      formula: { name: "Formula Synchron", id: 50091196 },
-      accel: { name: "Accel Synchron", id: 37675907 },
-      accelStardust: { name: "Accel Synchro Stardust Dragon", id: 30983281 },
-      b2b: { name: "Kewl Tune B2B", id: 65961304 },
-      dragster: { name: "F.A. Dawn Dragster", id: 33158448 },
-      crocodragon: { name: "Ravenous Crocodragon Archethys", id: 87188910 },
-      fuwalos: { name: "Mulcharmy Fuwalos", id: 42141493 },
-      purulia: { name: "Mulcharmy Purulia", id: 84192580 },
-      crimson: { name: "Crimson Dragon", id: 63436931 },
-      riser: { name: "Shooting Riser Dragon", id: 68431965 },
-      rumble: { name: "Synchro Rumble", id: 88901994 },
-      zalen: { name: "Zalen the Shackled Dragon", id: 4891376 },
-      herald: { name: "Herald of the Arc Light", id: 79606837 },
-      crystal: { name: "Crystal Wing Synchro Dragon", id: 50954680 },
-      dragite: { name: "Adamancipator Risen - Dragite", id: 9464441 },
-      whiteForest: { name: "Elzette of the White Forest", id: 61980241 },
-      adventure: { name: "Rite of Aramesir", id: 3285551 },
-      grass: { name: "That Grass Looks Greener", id: 11110587 },
-      typhon: { name: "Super Starslayer TY-PHON - Sky Crisis", id: 93039339 }
+    const CARDS = {
+      lucina: { id: 13597785, name: "Elfnote Lucina" },
+      tinia: { id: 59581480, name: "Elfnote Tinia" },
+      fortuna: { id: 85976588, name: "Elfnote Fortuna" },
+      regina: { id: 56651978, name: "Elfnote Regina" },
+      patron: { id: 12375297, name: "Elfnote Power Patron" },
+      seraphim: { id: 42302563, name: "Elfnote Seraphim Strelitzia" },
+      welcome: { id: 64491754, name: "Elfnotes: Welcome Home" },
+      rhapsodia: { id: 24092792, name: "Elfnotes: Rhapsodia of Madness" },
+      medius: { id: 97556336, name: "Medius the Pure" },
+      baronne: { id: 84815190, name: "Baronne de Fleur" },
+      omega: { id: 74586817, name: "PSY-Framelord Omega" },
+      ecclesiaDark: { id: 78397661, name: "Ecclesia and the Dark Dragon" },
+      fallenWhite: { id: 73819701, name: "Fallen of the White Dragon" },
+      incredible: { id: 55273560, name: "Incredible Ecclesia, the Virtuous" },
+      caesar: { id: 79559912, name: "D/D/D Wave High King Caesar" },
+      savage: { id: 27548199, name: "Borreload Savage Dragon" },
+      requiem: { id: 2463794, name: "Fiendsmith's Requiem" },
+      engraver: { id: 60764609, name: "Fiendsmith Engraver" },
+      sequence: { id: 49867899, name: "Fiendsmith's Sequence" },
+      lacrima: { id: 46640168, name: "Fiendsmith's Lacrima" },
+      armades: { id: 88033975, name: "Armades, Keeper of Boundaries" },
+      necroquip: { id: 93860227, name: "Necroquip Princess" },
+      jet: { id: 9742784, name: "Jet Synchron" },
+      accel: { id: 37675907, name: "Accel Synchron" },
+      b2b: { id: 65961304, name: "Kewl Tune B2B" },
+      dragster: { id: 33158448, name: "F.A. Dawn Dragster" },
+      crocodragon: { id: 87188910, name: "Ravenous Crocodragon Archethys" },
+      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos" },
+      purulia: { id: 84192580, name: "Mulcharmy Purulia" },
+      crimson: { id: 63436931, name: "Crimson Dragon" },
+      riser: { id: 68431965, name: "Shooting Riser Dragon" },
+      rumble: { id: 88901994, name: "Synchro Rumble" },
+      zalen: { id: 4891376, name: "Zalen the Shackled Dragon" },
+      herald: { id: 79606837, name: "Herald of the Arc Light" },
+      crystal: { id: 50954680, name: "Crystal Wing Synchro Dragon" },
+      whiteForest: { id: 61980241, name: "Elzette of the White Forest" },
+      adventure: { id: 3285551, name: "Rite of Aramesir" },
+      grass: { id: 11110587, name: "That Grass Looks Greener" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      lancea: { id: 34267821, name: "Artifact Lancea" },
+      belle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
+      cosmic: { id: 8267140, name: "Cosmic Cyclone" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster" },
+      nibiru: { id: 27204311, name: "Nibiru, the Primal Being" },
+      imperm: { id: 10045474, name: "Infinite Impermanence" },
+      evenly: { id: 15693423, name: "Evenly Matched" },
+      droplet: { id: 24299458, name: "Forbidden Droplet" }
     };
-
-    const routes = [
-      {
-        id: "lucina-walbaz",
-        title: "Lucina 1-card Walbaz",
-        source: "MDM combo: Lucina 1cc (Featuring Walbaz), GalacticJoey, June 4, 2026",
-        start: ["lucina"],
-        end: ["baronne", "omega", "ecclesiaDark", "rhapsodia", "regina"],
-        summary: "Lucina searches Patron, Patron makes Baronne and searches Tinia, Welcome Home gets Regina/Fortuna, Rhapsodia revives Patron, then the Walbaz branch produces Ecclesia and Omega.",
-        notes: "Good single-card line when playing the Walbaz package. MDM notes mention discarding a low-value card can leave an extra Elfnote girl for cleaner disruption access.",
-        nodes: [
-          { title: "Starter", cards: ["lucina"], text: "Special Lucina to center MMZ, search Power Patron.", tag: "1 card" },
-          { title: "First Synchro", cards: ["patron", "lucina", "baronne"], text: "Normal Patron, raise Lucina, make Baronne; Patron searches Tinia.", tag: "omni before extension" },
-          { title: "Welcome Home", cards: ["tinia", "welcome", "regina"], text: "Tinia places Welcome Home; Welcome sends Tinia and summons Regina to center.", tag: "spell to deck summon" },
-          { title: "Trap Access", cards: ["fortuna", "rhapsodia", "patron"], text: "Regina brings Fortuna; Fortuna places Rhapsodia; Rhapsodia revives Patron.", tag: "Rhapsodia online" },
-          { title: "Walbaz Branch", cards: ["seraphim", "ecclesiaDark", "fallenWhite", "incredible", "omega"], text: "Seraphim and Patron convert into Ecclesia; Fallen/Ecclesia make Omega for a hand rip.", tag: "opponent-turn Albaz pressure" }
-        ]
-      },
-      {
-        id: "medius-fiendsmith",
-        title: "Medius Fiendsmith",
-        source: "MDM combo: Medius (Fiendsmith Combo), GalacticJoey, May 18, 2026",
-        start: ["medius"],
-        end: ["caesar", "savage", "rhapsodia", "regina"],
-        summary: "Medius summons Patron, Patron searches Lucina after Armades, Fiendsmith turns Armades into Caesar, then Lucina/Regina/Tinia/Fortuna build the Elfnote trap line and Savage.",
-        notes: "MDM describes this as the bread-and-butter Fiendsmith route. Caesar protects later engine cards from Nibiru-style punishment.",
-        nodes: [
-          { title: "Medius Access", cards: ["medius", "patron", "armades"], text: "Normal Medius, summon Patron from Deck, Synchro into Armades; Patron searches Lucina.", tag: "normal summon starter" },
-          { title: "Fiendsmith Bridge", cards: ["armades", "requiem", "engraver", "necroquip"], text: "Link Armades into Requiem, summon Engraver, then climb through Necroquip.", tag: "engine conversion" },
-          { title: "Caesar Before Nib", cards: ["engraver", "caesar"], text: "Recover Engraver, overlay into D/D/D Wave High King Caesar.", tag: "double summon check" },
-          { title: "Elfnote Core", cards: ["lucina", "regina", "tinia", "welcome", "fortuna"], text: "Lucina searches Regina; Regina sends Lucina and summons Tinia; Welcome Home brings Fortuna.", tag: "deck summons" },
-          { title: "End Board", cards: ["rhapsodia", "seraphim", "patron", "savage"], text: "Rhapsodia revives Patron, Seraphim extends, Patron + Seraphim makes Borreload Savage.", tag: "Rhapsodia + omni" }
-        ]
-      },
-      {
-        id: "lucina-b2b",
-        title: "Lucina 1.5-card B2B",
-        source: "MDM combo: Lucina 1.5 Card Combo, GalacticJoey, May 18, 2026",
-        start: ["lucina"],
-        end: ["baronne", "b2b", "rhapsodia", "crocodragon"],
-        summary: "Lucina produces Baronne and the Tinia/Welcome/Fortuna/Rhapsodia package, then Seraphim revives Patron into Accel Synchron, Ravenous draw, Jet Synchron, and Kewl Tune B2B.",
-        notes: "High practical ceiling with Jet Synchron. MDM notes this route plays through Nibiru and pivots into Fuwalos lines better than most one-card routes.",
-        nodes: [
-          { title: "Baronne Setup", cards: ["lucina", "patron", "baronne"], text: "Lucina searches Patron; Patron turns Lucina into Baronne and searches Tinia.", tag: "safe first negate" },
-          { title: "Trap Package", cards: ["tinia", "welcome", "regina", "fortuna", "rhapsodia"], text: "Tinia places Welcome, Regina pulls Fortuna, and Fortuna places Rhapsodia.", tag: "core loop" },
-          { title: "Seraphim Modulation", cards: ["rhapsodia", "patron", "seraphim", "accel"], text: "Rhapsodia revives Patron; Patron + Regina make Seraphim; Seraphim revives Patron into Accel Synchron.", tag: "levels matter" },
-          { title: "Draw and Discard", cards: ["jet", "crocodragon", "regina"], text: "Accel sends Jet, Synchro into Ravenous to draw, then Jet discards Regina to revive.", tag: "hand conversion" },
-          { title: "B2B Finish", cards: ["jet", "crocodragon", "b2b"], text: "Jet + Ravenous make Kewl Tune B2B for opponent-turn Synchro pressure.", tag: "two B2B triggers" }
-        ]
-      },
-      {
-        id: "tinia-crimson",
-        title: "Tinia 1.5-card Crimson",
-        source: "MDM combo: Tinia 1.5cc Crimson Dragon, Nhadala, May 17, 2026",
-        start: ["tinia", "purulia"],
-        end: ["zalen", "herald", "crystal", "rhapsodia"],
-        summary: "Tinia starts with Welcome Home into Regina/Patron, Shooting Riser sends Veiler, Lucina finds Fortuna, Crimson Dragon accesses Zalen, then Seraphim and Rhapsodia convert into Crystal Wing and Herald.",
-        notes: "This is the highest ceiling route in the MDM records by upvotes. It requires an extender card and uses Crimson Dragon/Rumble lines.",
-        nodes: [
-          { title: "Tinia Start", cards: ["tinia", "welcome", "regina", "patron"], text: "Tinia places Welcome Home; Welcome sends Tinia, summons Regina, then Patron enters.", tag: "Tinia plus body" },
-          { title: "Riser Search", cards: ["riser", "patron", "lucina"], text: "Riser sends Effect Veiler and chain-blocks Patron to search Lucina.", tag: "chain setup" },
-          { title: "Crimson Access", cards: ["lucina", "fortuna", "crimson", "rumble"], text: "Lucina searches Fortuna, then Synchro into Crimson Dragon and search Synchro Rumble.", tag: "branch point" },
-          { title: "Zalen and Crystal", cards: ["rhapsodia", "seraphim", "patron", "zalen", "crystal"], text: "Rumble revives Patron, Seraphim enters center, Crimson becomes Zalen, then Patron + Seraphim make Crystal Wing.", tag: "boss stack" },
-          { title: "Herald Lock", cards: ["rhapsodia", "patron", "regina", "herald"], text: "Rhapsodia revives Patron; Patron + level-3 Regina make Herald of the Arc Light.", tag: "floodgate negate" }
-        ]
-      },
-      {
-        id: "vs-fuwalos",
-        title: "Reduced vs Fuwalos",
-        source: "MDM combos: Medius 1cc vs Fuwa and Lucina 1cc vs Fuwa, GalacticJoey, June 6, 2026",
-        start: ["lucina", "medius"],
-        end: ["baronne", "ecclesiaDark", "rhapsodia"],
-        summary: "When Fuwalos/Maxx \"C\" appears, stop chasing the full ceiling. Lucina can give one draw and settle on Baronne + Rhapsodia; Medius can give two draws and settle on Ecclesia + Rhapsodia.",
-        notes: "The goal is to preserve a real interruption while preventing the opponent from drawing into enough breakers to overwhelm the board.",
-        nodes: [
-          { title: "Opponent Chains Draw Handtrap", cards: ["fuwalos"], text: "Treat Fuwalos/Maxx \"C\" as a route change, not a challenge to push through.", tag: "draw cap" },
-          { title: "Lucina Path", cards: ["lucina", "patron", "baronne"], text: "Lucina + Patron makes Baronne, then Patron searches Fortuna instead of extending through Tinia.", tag: "one draw line" },
-          { title: "Medius Path", cards: ["medius", "patron", "ecclesiaDark"], text: "Medius + Patron can make Ecclesia and search Fortuna after two Fuwalos draws.", tag: "two draw line" },
-          { title: "Common Finish", cards: ["fortuna", "rhapsodia"], text: "Fortuna places Rhapsodia so the opponent still faces a negate/reborn engine piece.", tag: "minimal but live" },
-          { title: "Opponent Turn", cards: ["rhapsodia", "regina", "tinia"], text: "If you hard drew Tinia or Regina, Rhapsodia and Regina can still create center-zone disruption.", tag: "hidden follow-up" }
-        ]
-      }
-    ];
-
-    function imgUrl(card) {
-      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
-    }
-
-    function cardMini(key) {
-      const card = cards[key];
-      if (!card) return "";
-      return `<span class="card-chip" tabindex="0"><img src="${imgUrl(card)}" alt="${card.name}" loading="lazy"><span>${shortName(card.name)}</span><span class="zoom"><img src="${imgUrl(card)}" alt=""></span></span>`;
-    }
-
-    function shortName(name) {
-      return name
-        .replace("Elfnotes: ", "")
-        .replace("Elfnote ", "")
-        .replace("Fiendsmith's ", "FS ")
-        .replace("Fiendsmith ", "FS ")
-        .replace("D/D/D Wave High King ", "")
-        .replace("PSY-Framelord ", "")
-        .replace("Elfnote Seraphim ", "")
-        .replace("Super Starslayer ", "")
-        .replace(" - Sky Crisis", "");
-    }
-
-    function renderRoute(route) {
-      const graph = document.getElementById("comboGraph");
-      const summary = document.getElementById("routeSummary");
-
-      graph.innerHTML = route.nodes.map((node, index) => `
-        <article class="node ${index === route.nodes.length - 1 ? "break" : ""}" data-arrow="+">
-          <div class="node-title"><span class="${index === route.nodes.length - 1 ? "info-icon" : "plus-icon"}">${index === route.nodes.length - 1 ? "i" : "+"}</span>${node.title}</div>
-          <div class="mini-cards">${node.cards.map(cardMini).join("")}</div>
-          <p>${node.text}</p>
-          <small>${node.tag}</small>
-        </article>
-      `).join("");
-
-      summary.innerHTML = `
-        <div class="eyebrow"><span class="info-icon">i</span> Selected route</div>
-        <h2>${route.title}</h2>
-        <div class="route-meta">
-          <div><b>Starter</b><span>${route.start.map(k => cards[k]?.name || k).join(" + ")}</span></div>
-          <div><b>Source</b><span>${route.source}</span></div>
-        </div>
-        <p>${route.summary}</p>
-        <div class="mini-cards">${route.end.map(cardMini).join("")}</div>
-        <p class="muted">${route.notes}</p>
-      `;
-
-      document.querySelectorAll(".route-button").forEach(button => {
-        button.classList.toggle("active", button.dataset.route === route.id);
-      });
-    }
-
-    function initRoutes() {
-      const buttons = document.getElementById("routeButtons");
-      buttons.innerHTML = routes.map(route => `<button class="route-button" type="button" data-route="${route.id}">${route.title}</button>`).join("");
-      buttons.addEventListener("click", event => {
-        const button = event.target.closest("[data-route]");
-        if (!button) return;
-        const route = routes.find(item => item.id === button.dataset.route);
-        if (route) renderRoute(route);
-      });
-      renderRoute(routes[0]);
-    }
-
-    document.querySelector("[data-toggle-ref]").addEventListener("click", () => {
-      document.getElementById("references").classList.toggle("open");
-    });
-
-    initRoutes();
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

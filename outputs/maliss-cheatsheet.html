@@ -3,1657 +3,502 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maliss 2026 Combo Cheatsheet Mind Map</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f4f7f5;
-      --panel: #ffffff;
-      --panel-2: #edf4f1;
-      --ink: #172126;
-      --muted: #5b6971;
-      --line: #d5e0dc;
-      --teal: #0d7276;
-      --green: #236a55;
-      --gold: #a16d10;
-      --rose: #a13d59;
-      --red: #9d3d37;
-      --blue: #315f88;
-      --violet: #60528a;
-      --shadow: 0 18px 46px rgba(23, 33, 38, .13);
-      --radius: 8px;
-      --card-w: 58px;
-      --card-h: 84px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      background: var(--paper);
-    }
-
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(244,247,245,.98) 390px, #edf4f1 100%),
-        repeating-linear-gradient(135deg, rgba(13,114,118,.08) 0 1px, transparent 1px 20px);
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    button {
-      font: inherit;
-      letter-spacing: 0;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 880px;
-      margin-bottom: 14px;
-      font-size: 4.7rem;
-      line-height: .95;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 2.05rem;
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.03rem;
-      line-height: 1.18;
-      letter-spacing: 0;
-    }
-
-    p { margin-bottom: 12px; }
-
-    .page {
-      width: min(1260px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 18px 0 58px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
-      gap: 26px;
-      align-items: center;
-      padding: 18px 0 16px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--green);
-      font-size: .82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .lead {
-      max-width: 850px;
-      color: #304349;
-      font-size: 1.11rem;
-    }
-
-    .hero-pills,
-    .chips,
-    .tags,
-    .card-row,
-    .route-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill,
-    .tag,
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,.88);
-      color: #263338;
-      font-size: .88rem;
-      white-space: nowrap;
-    }
-
-    .pill strong,
-    .tag strong { color: var(--ink); }
-
-    .icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      font-size: .8rem;
-      font-weight: 900;
-      color: #fff;
-      background: var(--teal);
-      flex: 0 0 auto;
-    }
-
-    .icon.plus {
-      background: var(--gold);
-      font-size: 1.05rem;
-      line-height: 1;
-    }
-
-    .icon.warn { background: var(--rose); }
-
-    .hero-showcase {
-      min-height: 360px;
-      display: grid;
-      align-items: center;
-      overflow: visible;
-    }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(46px, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border: 1px solid rgba(23,33,38,.12);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow);
-      overflow: visible;
-    }
-
-    .showcase .card-token:nth-child(1) { transform: translateY(12px) rotate(-5deg); }
-    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
-    .showcase .card-token:nth-child(3) { transform: translateY(5px) rotate(-2deg); }
-    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
-    .showcase .card-token:nth-child(5) { transform: translateY(11px) rotate(-3deg); }
-    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
-    .showcase .card-token:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
-    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
-    .showcase .card-token:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
-    .showcase .card-token:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
-    .showcase .card-name { display: none; }
-
-    .quick-nav {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 14px;
-      border-bottom: 1px solid rgba(213,224,220,.86);
-      background: linear-gradient(180deg, rgba(244,247,245,.98), rgba(244,247,245,.9));
-      backdrop-filter: blur(10px);
-      scrollbar-width: none;
-    }
-
-    .quick-nav::-webkit-scrollbar { display: none; }
-
-    .quick-nav a,
-    .route-button,
-    .tab-button,
-    .ref-toggle {
-      flex: 0 0 auto;
-      min-height: 38px;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font-weight: 750;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .quick-nav a:hover,
-    .route-button:hover,
-    .tab-button:hover,
-    .ref-toggle:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .route-button.active,
-    .tab-button.active,
-    .ref-toggle.active {
-      color: #fff;
-      background: var(--teal);
-      border-color: var(--teal);
-    }
-
-    section {
-      margin-top: 22px;
-      scroll-margin-top: 74px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-
-    .section-head p {
-      max-width: 720px;
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .panel,
-    .mini-card,
-    .route-card,
-    .trigger-card,
-    .board-card,
-    .match-card,
-    .reference-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 8px 24px rgba(23,33,38,.07);
-    }
-
-    .panel {
-      padding: 16px;
-    }
-
-    .panel.band {
-      background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(237,244,241,.94));
-    }
-
-    .mini-card,
-    .trigger-card,
-    .board-card,
-    .match-card,
-    .reference-card {
-      padding: 13px;
-    }
-
-    .mini-card p,
-    .trigger-card p,
-    .board-card p,
-    .match-card p,
-    .reference-card p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .card-token {
-      position: relative;
-      display: inline-grid;
-      justify-items: center;
-      align-content: start;
-      width: var(--card-w);
-      min-width: var(--card-w);
-      color: var(--ink);
-      text-decoration: none;
-      outline: none;
-      overflow: visible;
-      z-index: 1;
-    }
-
-    .card-token:hover,
-    .card-token:focus {
-      z-index: 25;
-      text-decoration: none;
-    }
-
-    .card-token img {
-      width: var(--card-w);
-      height: var(--card-h);
-      object-fit: cover;
-      display: block;
-      border-radius: 4px;
-      border: 1px solid rgba(23,33,38,.18);
-      background: #e4ebe8;
-      box-shadow: 0 7px 15px rgba(23,33,38,.16);
-      transform-origin: center top;
-      transition: transform .14s ease, box-shadow .14s ease;
-    }
-
-    .card-token:hover img,
-    .card-token:focus img {
-      transform: scale(2.45);
-      box-shadow: 0 18px 42px rgba(23,33,38,.32);
-    }
-
-    .card-name {
-      display: block;
-      width: 92px;
-      margin-top: 5px;
-      color: #2b393e;
-      font-size: .73rem;
-      font-weight: 720;
-      line-height: 1.1;
-      text-align: center;
-      overflow-wrap: anywhere;
-    }
-
-    .card-count {
-      position: absolute;
-      top: -7px;
-      right: -7px;
-      display: inline-grid;
-      place-items: center;
-      min-width: 22px;
-      height: 22px;
-      padding: 0 5px;
-      border: 2px solid #fff;
-      border-radius: 999px;
-      background: var(--rose);
-      color: #fff;
-      font-size: .75rem;
-      font-weight: 900;
-      box-shadow: 0 4px 12px rgba(23,33,38,.22);
-    }
-
-    .combo-pair {
-      display: grid;
-      grid-template-columns: auto 24px auto;
-      gap: 7px;
-      align-items: start;
-      margin-bottom: 10px;
-      min-height: 92px;
-    }
-
-    .combo-pair .icon {
-      margin-top: 25px;
-    }
-
-    .trigger-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      color: #213338;
-      font-weight: 860;
-    }
-
-    .mind-map {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(150px, 1fr));
-      gap: 10px;
-    }
-
-    .map-node {
-      position: relative;
-      padding: 13px;
-      min-height: 124px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .map-node strong {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 7px;
-    }
-
-    .map-node p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .map-node::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -10px;
-      width: 10px;
-      height: 2px;
-      background: var(--line);
-    }
-
-    .map-node:last-child::after { display: none; }
-
-    .route-shell {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 12px;
-      align-items: start;
-    }
-
-    .route-sidebar {
-      position: sticky;
-      top: 66px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .route-stage {
-      min-width: 0;
-    }
-
-    .route-summary {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-      gap: 12px;
-      align-items: start;
-      margin-bottom: 12px;
-    }
-
-    .route-card {
-      padding: 14px;
-    }
-
-    .route-title {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: start;
-      margin-bottom: 10px;
-    }
-
-    .route-title h3 {
-      margin-bottom: 2px;
-      font-size: 1.35rem;
-    }
-
-    .format-badge,
-    .risk-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      color: #fff;
-      background: var(--teal);
-      font-size: .78rem;
-      font-weight: 850;
-      white-space: nowrap;
-    }
-
-    .risk-badge {
-      background: var(--rose);
-    }
-
-    .route-graph {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .graph-node {
-      position: relative;
-      min-height: 154px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel-2);
-    }
-
-    .graph-node::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -10px;
-      width: 10px;
-      height: 2px;
-      background: var(--line);
-    }
-
-    .graph-node:nth-child(3n)::after,
-    .graph-node:last-child::after {
-      display: none;
-    }
-
-    .node-label {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 8px;
-      font-weight: 850;
-    }
-
-    .node-text {
-      color: var(--muted);
-      font-size: .92rem;
-      margin-bottom: 8px;
-    }
-
-    .step-list {
-      display: grid;
-      gap: 7px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: steps;
-    }
-
-    .step-list li {
-      position: relative;
-      padding: 9px 10px 9px 38px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: #27383e;
-    }
-
-    .step-list li::before {
-      counter-increment: steps;
-      content: counter(steps);
-      position: absolute;
-      left: 10px;
-      top: 9px;
-      display: inline-grid;
-      place-items: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--teal);
-      color: #fff;
-      font-size: .78rem;
-      font-weight: 900;
-    }
-
-    .endboard-list {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .endboard-list li {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      padding: 9px;
-      border-radius: var(--radius);
-      background: #fff;
-      border: 1px solid var(--line);
-    }
-
-    .field-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .field-zone {
-      min-height: 150px;
-      padding: 10px;
-      border: 1px dashed rgba(13,114,118,.42);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.76);
-    }
-
-    .zone-title {
-      margin-bottom: 8px;
-      color: var(--teal);
-      font-size: .78rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .zone-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .zone-cards .card-token {
-      --card-w: 42px;
-      --card-h: 61px;
-    }
-
-    .zone-cards .card-name { display: none; }
-
-    .compact-list {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding-left: 18px;
-      color: #2f4248;
-    }
-
-    .compact-list li::marker { color: var(--teal); }
-
-    .variant-table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .variant-table th,
-    .variant-table td {
-      padding: 10px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    .variant-table th {
-      color: var(--teal);
-      font-size: .82rem;
-      text-transform: uppercase;
-      background: var(--panel-2);
-    }
-
-    .variant-table tr:last-child td { border-bottom: none; }
-
-    .tab-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
-    .note-box {
-      padding: 12px;
-      border: 1px solid rgba(161,61,89,.28);
-      border-left: 4px solid var(--rose);
-      border-radius: var(--radius);
-      background: rgba(161,61,89,.06);
-      color: #3b3036;
-    }
-
-    .note-box strong { color: var(--rose); }
-
-    .refs-wrap {
-      margin-top: 12px;
-    }
-
-    .references {
-      display: none;
-      padding-top: 12px;
-    }
-
-    .references.open { display: block; }
-
-    .reference-card {
-      display: grid;
-      gap: 6px;
-    }
-
-    .reference-card a {
-      font-weight: 830;
-    }
-
-    .source-date {
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    @media (max-width: 1040px) {
-      h1 { font-size: 3.65rem; }
-      .hero,
-      .route-shell,
-      .route-summary {
-        grid-template-columns: 1fr;
-      }
-      .hero-showcase { min-height: 0; }
-      .route-sidebar {
-        position: static;
-        display: flex;
-        overflow-x: auto;
-        padding-bottom: 2px;
-      }
-      .route-button { width: max-content; }
-      .grid.four,
-      .grid.three,
-      .mind-map {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .field-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 720px) {
-      .page {
-        width: min(100% - 20px, 680px);
-        padding-top: 10px;
-      }
-      h1 {
-        font-size: 2.65rem;
-        line-height: 1;
-      }
-      h2 { font-size: 1.65rem; }
-      .hero { gap: 12px; }
-      .showcase {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        padding: 10px;
-      }
-      .showcase .card-token {
-        --card-w: 46px;
-        --card-h: 67px;
-      }
-      .quick-nav {
-        margin-left: -10px;
-        margin-right: -10px;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-      .section-head {
-        display: block;
-      }
-      .grid.two,
-      .grid.three,
-      .grid.four,
-      .mind-map,
-      .route-graph {
-        grid-template-columns: 1fr;
-      }
-      .map-node::after,
-      .graph-node::after {
-        display: none;
-      }
-      .field-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .card-token:hover img,
-      .card-token:focus img {
-        transform: scale(1.85);
-      }
-      .variant-table {
-        display: block;
-        overflow-x: auto;
-      }
-    }
-
-    @media (max-width: 430px) {
-      h1 { font-size: 2.25rem; }
-      .lead { font-size: 1rem; }
-      .field-grid {
-        grid-template-columns: 1fr;
-      }
-      .combo-pair {
-        grid-template-columns: 1fr;
-      }
-      .combo-pair .icon {
-        margin-top: 0;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Maliss Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <div class="page">
+  <main class="shell">
+
     <header class="hero">
-      <div>
-        <div class="eyebrow"><span class="icon">i</span> 2026 Maliss cheat card</div>
-        <h1>Maliss Combo Mind Map</h1>
-        <p class="lead">A top-to-bottom reference for the banish-to-extend engine, current @Ignister/Bystial tournament builds, combo pivots, end boards, recovery lines, and matchup side options.</p>
-        <div class="hero-pills">
-          <span class="pill"><strong>Core plan</strong> banish Maliss names, link climb, recycle</span>
-          <span class="pill"><strong>Current TCG</strong> @Ignister + Bystial + Dominus</span>
-          <span class="pill"><strong>Spreadsheet found</strong> MDM Ignister Maliss sheet</span>
-          <span class="pill"><strong>Latest top</strong> YCS Columbus, May 23 2026</span>
+      <div class="hero-main">
+        <div class="eyebrow">Banish-to-extend combo — checked June 2026</div>
+        <h1>Maliss</h1>
+        <p class="subtitle">A top-to-bottom reference for the banish-to-extend engine and the current @Ignister/Bystial tournament builds: combo pivots, end boards, recovery lines, and matchup side options.</p>
+        <div class="pill-row">
+          <span class="pill green">Checked June 2026</span>
+          <span class="pill blue">Role: combo-control</span>
+          <span class="pill gold">Win: link climb into Accesscode lethal</span>
+          <span class="pill red">TCG: Apollousa forbidden (May 18, 2026 list)</span>
         </div>
       </div>
-      <div class="hero-showcase">
-        <div class="showcase" id="heroCards"></div>
-      </div>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="dormouse"></span>
+          <span class="cloud-card" data-card="rabbit"></span>
+          <span class="cloud-card" data-card="chessy"></span>
+          <span class="cloud-card" data-card="hare"></span>
+          <span class="cloud-card" data-card="underground"></span>
+          <span class="cloud-card" data-card="ransom"></span>
+          <span class="cloud-card" data-card="crypter"></span>
+          <span class="cloud-card" data-card="backup"></span>
+          <span class="cloud-card" data-card="magnamhut"></span>
+          <span class="cloud-card" data-card="impulse"></span>
+        </div>
+      </aside>
     </header>
 
-    <nav class="quick-nav" aria-label="Cheatsheet sections">
-      <a href="#playstyle">Playstyle</a>
-      <a href="#core">Core Interactions</a>
-      <a href="#combos">Combo Graph</a>
-      <a href="#boards">End Boards</a>
-      <a href="#variants">2026 Variants</a>
-      <a href="#tips">Tips</a>
-      <a href="#recovery">Recovery</a>
-      <a href="#side">Side & Counters</a>
-      <a href="#references">References</a>
-    </nav>
-
-    <section id="playstyle">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> Playstyle and win condition</div>
-          <h2>Banish is your extension zone</h2>
-        </div>
-        <p>Maliss turns banishing into tempo. The main-deck monsters pay 300 LP to return from banishment, while Link monsters convert those bodies into protected interruptions, removal, and OTK pressure.</p>
-      </div>
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
       <div class="grid two">
-        <div class="panel band">
-          <h3>Game plan</h3>
-          <ul class="compact-list">
-            <li>Open a starter, banish a Maliss name, then use the self-summon trigger to build Link material without spending many cards.</li>
-            <li>Use Red Ransom and Maliss in Underground to reach the missing engine piece, then climb through Cyberse links.</li>
-            <li>Convert excess bodies into Hearts Crypter, Firewall/S:P style interaction, Heatsoul draw pressure, or Accesscode/Allied Code lethal.</li>
-            <li>Keep a banished or graveyard Maliss name available so Bystials, traps, and Underground become follow-up instead of one-shot combo tools.</li>
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Maliss turns banishing into tempo. The main-deck monsters pay 300 LP to return from banishment, while the Link monsters convert those bodies into protected interruptions, removal, and OTK pressure.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Open a starter, banish a Maliss name, then use the self-summon trigger to build Link material without spending many cards.</span></li>
+            <li><span class="num">2</span><span>Use <span class="card-mention" data-card="ransom">Red Ransom</span> and <span class="card-mention" data-card="underground">Maliss in Underground</span> to reach the missing engine piece, then climb through Cyberse Links.</span></li>
+            <li><span class="num">3</span><span>Convert excess bodies into <span class="card-mention" data-card="crypter">Hearts Crypter</span>, <span class="card-mention" data-card="firewall">Firewall Dragon</span>/<span class="card-mention" data-card="sp">S:P Little Knight</span> style interaction, <span class="card-mention" data-card="heatsoul">Heatsoul</span> draw pressure, or <span class="card-mention" data-card="accesscode">Accesscode Talker</span>/<span class="card-mention" data-card="allied">Allied Code Talker @Ignister</span> lethal.</span></li>
+            <li><span class="num">4</span><span>Keep a banished or graveyard Maliss name available so Bystials, traps, and <span class="card-mention" data-card="underground">Underground</span> become follow-up instead of one-shot combo tools.</span></li>
           </ul>
-        </div>
-        <div class="panel">
-          <h3>Win condition</h3>
-          <div class="mind-map">
-            <div class="map-node">
-              <strong><span class="icon">1</span> Starter</strong>
-              <p>Dormouse, Rabbit, Underground, Gold Sarc, or Backup @Ignister finds the first banish.</p>
-            </div>
-            <div class="map-node">
-              <strong><span class="icon plus">+</span> Loop</strong>
-              <p>Banished Maliss monsters revive themselves and become Link material.</p>
-            </div>
-            <div class="map-node">
-              <strong><span class="icon">i</span> Control</strong>
-              <p>Traps, Hearts Crypter, Firewall, S:P, and hand traps compress the opponent's turn.</p>
-            </div>
-            <div class="map-node">
-              <strong><span class="icon warn">!</span> Kill</strong>
-              <p>Accesscode, Allied Code, or a powered Hearts Crypter closes once the board is simplified.</p>
-            </div>
-          </div>
-        </div>
+        </article>
+        <article class="note-card">
+          <h3>Win Condition / Format Notes</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><b>Starter:</b> <span class="card-mention" data-card="dormouse">Dormouse</span>, <span class="card-mention" data-card="rabbit">White Rabbit</span>, <span class="card-mention" data-card="underground">Underground</span>, <span class="card-mention" data-card="sarc">Gold Sarcophagus</span>, or <span class="card-mention" data-card="backup">Backup @Ignister</span> finds the first banish.</span></li>
+            <li><span class="num">2</span><span><b>Loop:</b> banished Maliss monsters revive themselves and become Link material.</span></li>
+            <li><span class="num">3</span><span><b>Control:</b> traps, <span class="card-mention" data-card="crypter">Hearts Crypter</span>, <span class="card-mention" data-card="firewall">Firewall Dragon</span>, <span class="card-mention" data-card="sp">S:P Little Knight</span>, and hand traps compress the opponent's turn.</span></li>
+            <li><span class="num">4</span><span><b>Kill:</b> <span class="card-mention" data-card="accesscode">Accesscode Talker</span>, <span class="card-mention" data-card="allied">Allied Code Talker @Ignister</span>, or a powered <span class="card-mention" data-card="crypter">Hearts Crypter</span> closes once the board is simplified.</span></li>
+            <li><span class="num">5</span><span><b>Format:</b> current TCG builds run @Ignister + Bystial + Dominus. The Master Duel spreadsheet route ends on <span class="card-mention" data-card="apollousa">Apollousa</span>, which is not legal in TCG Advanced as of the May 18, 2026 list.</span></li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <section id="core">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon plus">+</span> Core combos and interactions</div>
-          <h2>Cards that trigger together</h2>
-        </div>
-        <p>Read these as pairings. The first card opens or pays cost; the second card converts that banish, search, or link arrow into the next body.</p>
-      </div>
-      <div class="grid four" id="triggerGrid"></div>
-    </section>
-
-    <section id="combos">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> Combo graph</div>
-          <h2>Explore the starter routes</h2>
-        </div>
-        <p>The detailed Master Duel spreadsheet route is shown with a format warning. The TCG routes are tournament-safe pivots based on the YCS Columbus 2026 @Ignister/Bystial builds.</p>
-      </div>
-      <div class="route-shell">
-        <div class="route-sidebar" id="routeButtons"></div>
-        <div class="route-stage">
-          <article class="route-card" id="routeCard"></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="boards">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> End board examples</div>
-          <h2>Field by End Phase</h2>
-        </div>
-        <p>These are practical snapshots, not mandatory boards. Maliss lines flex heavily based on interruptions, whether Apollousa is legal in the format, and which hand traps remain in hand.</p>
-      </div>
-      <div class="grid two" id="boardGrid"></div>
-    </section>
-
-    <section id="variants">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> Latest tournament top</div>
-          <h2>2026 top-list variants</h2>
-        </div>
-        <p>YCS Columbus on May 23, 2026 had two Top 32 @Ignister Maliss lists on YGOPRODeck. Both use a compact Maliss core with Backup @Ignister and Bystials, then split on defensive cards.</p>
-      </div>
-      <div class="panel">
-        <table class="variant-table">
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="table-wrap">
+        <table class="combo-table">
           <thead>
-            <tr>
-              <th>Variant</th>
-              <th>Engine signal</th>
-              <th>Main-deck pressure</th>
-              <th>Side plan</th>
-            </tr>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
           </thead>
           <tbody>
+            <tr class="route-head"><td colspan="4">Dormouse + discard — Master Duel spreadsheet line (uses Apollousa; not legal in current TCG Advanced)</td></tr>
             <tr>
-              <td><strong>Michael Gold Jr. - 40 cards</strong><br>YCS Columbus Top 32</td>
-              <td>1 Dormouse, 1 Rabbit, 3 Chessy, 3 Hare, 3 Backup, 1 Wizard, 4 Bystials including Saronir.</td>
-              <td>3 Mulcharmy Fuwalos, 2 Ghost Belle, 3 Dominus Impulse, 2 Dominus Spark.</td>
-              <td>Purulia, Ogre, Droll, Nibiru, Duster, Lightning Storm, Dimensional Fissure.</td>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Open the banish</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="dormouse"></span><span class="card-chip" data-card="hare"></span></div></td>
+              <td>Normal <span class="card-mention" data-card="dormouse">Dormouse</span> and banish <span class="card-mention" data-card="hare">March Hare</span> from Deck. Convert Dormouse through <span class="card-mention" data-card="decoder">Link Decoder</span> so Hare can bring back both bodies. Dormouse is not an on-summon effect, so make the opponent answer the activation.</td>
             </tr>
             <tr>
-              <td><strong>James Valentino - 41 cards</strong><br>YCS Columbus Top 32</td>
-              <td>Same Maliss and @Ignister core, 3 Bystials, Dharc over Dark Infant in Extra.</td>
-              <td>2 Droll, 3 Infinite Impermanence, 3 Dominus Impulse, 3 Dominus Spark.</td>
-              <td>Retaliating "C", Belle, Ogre, Duster, Talent, Anti-Spell, Different Dimension Ground.</td>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Search the field spell</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="underground"></span></div></td>
+              <td>Use the first three bodies for <span class="card-mention" data-card="ransom">Red Ransom</span>, add <span class="card-mention" data-card="underground">Maliss in Underground</span>, and use the field spell to banish <span class="card-mention" data-card="rabbit">White Rabbit</span>. Chain order should protect the field-spell search while <span class="card-mention" data-card="decoder">Link Decoder</span> returns.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">@Ignister bridge</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="wicckid"></span><span class="card-chip" data-card="backup"></span><span class="card-chip" data-card="wizard"></span></div></td>
+              <td>Summon Rabbit under <span class="card-mention" data-card="wicckid">Cyberse Wicckid</span>, use Wicckid to find <span class="card-mention" data-card="backup">Backup @Ignister</span>, which searches <span class="card-mention" data-card="wizard">Wizard @Ignister</span> for more Cyberse material.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Link names</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="crypter"></span><span class="card-chip" data-card="splash"></span><span class="card-chip" data-card="binder"></span></div></td>
+              <td>Make <span class="card-mention" data-card="crypter">Hearts Crypter</span>, use <span class="card-mention" data-card="splash">Splash Mage</span>, then convert the revived Maliss into <span class="card-mention" data-card="binder">White Binder</span> while preserving <span class="card-mention" data-card="chessy">Chessy Cat</span> as follow-up. Use Chessy only after the bounce line is ready so the hand reload happens after follow-up is secured.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Trap loop</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="binder"></span><span class="card-chip" data-card="gwc"></span><span class="card-chip" data-card="ransom"></span></div></td>
+              <td>Set <span class="card-mention" data-card="gwc">GWC-06</span>, use <span class="card-mention" data-card="binder">Binder</span> and <span class="card-mention" data-card="crypter">Crypter</span> to reach <span class="card-mention" data-card="firewall">Firewall Dragon</span>, then GWC revives <span class="card-mention" data-card="ransom">Red Ransom</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">6</span></td>
+              <td><span class="route-title">End board</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="apollousa"></span><span class="card-chip" data-card="allied"></span><span class="card-chip" data-card="linguriboh"></span></div></td>
+              <td>End on <span class="card-mention" data-card="apollousa">Apollousa</span> plus <span class="card-mention" data-card="allied">Allied Code Talker @Ignister</span>, <span class="card-mention" data-card="linguriboh">Linguriboh</span> in GY, <span class="card-mention" data-card="gwc">GWC-06</span> set, <span class="card-mention" data-card="hare">Hare</span> in hand, and extra draws.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Underground + discard — cleanest non-normal-summon opener (TCG and Master Duel)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Activate the field spell</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="rabbit"></span></div></td>
+              <td><span class="card-mention" data-card="underground">Underground</span> banishes a Maliss card from hand, Deck, or GY, immediately creating a self-summoning body. Banish <span class="card-mention" data-card="rabbit">Rabbit</span> from Deck if you need a trap; banish <span class="card-mention" data-card="hare">Hare</span> or <span class="card-mention" data-card="chessy">Chessy</span> when the rest of the hand already has trap access.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Set the right trap</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rabbit"></span><span class="card-chip" data-card="tb"></span><span class="card-chip" data-card="mtp"></span></div></td>
+              <td><span class="card-mention" data-card="rabbit">Rabbit</span> sets <span class="card-mention" data-card="tb">TB-11</span> for a deck summon or <span class="card-mention" data-card="mtp">MTP-07</span> for search/removal pressure. TB-11 is the default extension route; MTP-07 is better when you need a searched Maliss name or a removal line.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Climb</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="wicckid"></span></div></td>
+              <td>Use the first bodies for <span class="card-mention" data-card="ransom">Red Ransom</span> or <span class="card-mention" data-card="wicckid">Wicckid</span>, then search the missing @Ignister extender. Underground can banish from Deck, so do not spend the normal summon before checking whether the field spell already solves the opener.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Choose the finish</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="crypter"></span><span class="card-chip" data-card="sp"></span><span class="card-chip" data-card="firewall"></span></div></td>
+              <td>Finish on <span class="card-mention" data-card="crypter">Hearts Crypter</span> if you can point it at a monster; otherwise choose <span class="card-mention" data-card="sp">S:P Little Knight</span>/<span class="card-mention" data-card="firewall">Firewall Dragon</span> utility. If <span class="card-mention" data-card="ogre">Ghost Ogre</span> is likely, activate Underground only once you can still make a Cyberse Link without it.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">White Rabbit + discard — trap-first opener; explosive with a second banish enabler</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Summon and set</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rabbit"></span><span class="card-chip" data-card="tb"></span></div></td>
+              <td>Summon <span class="card-mention" data-card="rabbit">White Rabbit</span> and set <span class="card-mention" data-card="tb">TB-11</span> if the hand lacks material, or <span class="card-mention" data-card="mtp">MTP-07</span> when you already have material but need a Maliss search or banish removal.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Pay the trap cost</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="tb"></span><span class="card-chip" data-card="hare"></span></div></td>
+              <td>Activate the trap by banishing a face-up Maliss, then summon the banished name back. Do not banish the only Maliss name you need for a later Link requirement unless a self-summon is queued.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Search the second banish</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="underground"></span></div></td>
+              <td>Convert material into <span class="card-mention" data-card="ransom">Red Ransom</span> to fetch <span class="card-mention" data-card="underground">Underground</span> for the second banish.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Stabilize if checked</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="heatsoul"></span><span class="card-chip" data-card="impulse"></span><span class="card-chip" data-card="spark"></span></div></td>
+              <td>If the route is interrupted, end on <span class="card-mention" data-card="heatsoul">Heatsoul</span> plus live hand traps (<span class="card-mention" data-card="impulse">Dominus Impulse</span>, <span class="card-mention" data-card="spark">Dominus Spark</span>) rather than chasing a full board. If Rabbit is negated, use <span class="card-mention" data-card="underground">Underground</span>, <span class="card-mention" data-card="sarc">Gold Sarc</span>, or a Bystial to create the first banished Maliss.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Bystial extender — current TCG variant; best after a DARK Maliss was used as Link material</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Load the GY</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="dormouse"></span><span class="card-chip" data-card="ransom"></span></div></td>
+              <td>Use a Maliss body as Link material so it lands in the GY as a DARK target.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Banish to summon</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="magnamhut"></span><span class="card-chip" data-card="dormouse"></span></div></td>
+              <td>The Bystial banishes that DARK Maliss, summoning itself and turning on the Maliss 300 LP self-summon. Do not fire Bystials before you know which Maliss name you want banished.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Extend</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="dormouse"></span><span class="card-chip" data-card="firewall"></span></div></td>
+              <td>Bring back the banished name and climb into <span class="card-mention" data-card="firewall">Firewall Dragon</span>, <span class="card-mention" data-card="sp">S:P Little Knight</span>, or <span class="card-mention" data-card="heatsoul">Heatsoul</span>. <span class="card-mention" data-card="magnamhut">Magnamhut</span> gives follow-up; <span class="card-mention" data-card="druiswurm">Druiswurm</span> and <span class="card-mention" data-card="baldrake">Baldrake</span> add pressure or removal value.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Cross-purpose interruption</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="druiswurm"></span><span class="card-chip" data-card="baldrake"></span></div></td>
+              <td>In mirrors and DARK matchups, Bystials also interrupt the opponent while extending your own turn. They are weaker under effects that stop banishing, so side them carefully into <span class="card-mention" data-card="lancea">Artifact Lancea</span>-heavy opponents.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section id="tips">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> Tips</div>
-          <h2>Sequencing notes</h2>
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Open the first banish</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="dormouse"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="underground"></span>
+              </div>
+              <p class="step-note">Any starter — <span class="card-mention" data-card="dormouse">Dormouse</span>, <span class="card-mention" data-card="rabbit">Rabbit</span>, <span class="card-mention" data-card="underground">Underground</span>, or <span class="card-mention" data-card="sarc">Gold Sarc</span> — banishes a Maliss name from Deck, hand, or GY. Banishing a Maliss monster is functionally summoning it.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Self-summon loop and trap access</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="hare"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="rabbit"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="tb"></span>
+              </div>
+              <p class="step-note">Banished Maliss monsters pay 300 LP to revive themselves and become Link material. <span class="card-mention" data-card="rabbit">Rabbit</span> sets <span class="card-mention" data-card="tb">TB-11</span> (body from Deck) or <span class="card-mention" data-card="mtp">MTP-07</span> (search/removal).</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Red Ransom pivot</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="ransom"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="underground"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="ransom">Red Ransom</span> adds <span class="card-mention" data-card="underground">Underground</span> and then can banish another Maliss, bridging the Link climb into more bodies.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> @Ignister bridge</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="wicckid"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="backup"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="wizard"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="wicckid">Wicckid</span> searches <span class="card-mention" data-card="backup">Backup @Ignister</span>; Backup finds <span class="card-mention" data-card="wizard">Wizard @Ignister</span>, which revives Cyberse material to keep climbing. Keep Wizard until a Cyberse is in GY so it becomes a real extender.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Interaction or lethal</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="crypter"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="heatsoul"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="accesscode"></span>
+              </div>
+              <p class="step-note">Going first: <span class="card-mention" data-card="crypter">Hearts Crypter</span> pointed at a monster plus set traps and <span class="card-mention" data-card="heatsoul">Heatsoul</span> draws. Going second: <span class="card-mention" data-card="transcode">Transcode Talker</span> + <span class="card-mention" data-card="accesscode">Accesscode Talker</span> or <span class="card-mention" data-card="allied">Allied Code Talker @Ignister</span> for the kill.</p>
+            </div>
+          </div>
+        </div>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>Backup @Ignister pivot</h4>
+            <p>When the normal summon is a hand trap or any spare body. Backup is a bridge, not the whole starter: it supplies the missing Cyberse tuner and searches <span class="card-mention" data-card="wizard">Wizard</span>, turning the normal summon into Link material toward <span class="card-mention" data-card="ransom">Red Ransom</span>.</p>
+            <div class="card-row"><span class="card-chip" data-card="backup"></span><span class="card-chip" data-card="wizard"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Gold Sarcophagus opener</h4>
+            <p>Sarc is a starter because banishing a Maliss is a delayed search and an immediate extender. Banish the name whose self-summon fixes the current hand — not always the flashiest one. Strong under <span class="card-mention" data-card="droll">Droll</span> since it summons before stacking searches.</p>
+            <div class="card-row"><span class="card-chip" data-card="sarc"></span><span class="card-chip" data-card="rabbit"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Bystial extender</h4>
+            <p>After a DARK Maliss hits the GY as Link material, a Bystial banishes it, summons itself, and re-enables the 300 LP self-summon — extension plus disruption in one card.</p>
+            <div class="card-row"><span class="card-chip" data-card="magnamhut"></span><span class="card-chip" data-card="druiswurm"></span><span class="card-chip" data-card="baldrake"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Master Duel trap loop</h4>
+            <p>MD-only: <span class="card-mention" data-card="binder">White Binder</span> plus <span class="card-mention" data-card="gwc">GWC-06</span> converts a banished Link into revived pressure and a set interruption, ending on <span class="card-mention" data-card="apollousa">Apollousa</span>. Not legal in current TCG Advanced.</p>
+            <div class="card-row"><span class="card-chip" data-card="binder"></span><span class="card-chip" data-card="gwc"></span><span class="card-chip" data-card="apollousa"></span></div>
+          </div>
         </div>
       </div>
-      <div class="grid three" id="tipsGrid"></div>
     </section>
 
-    <section id="recovery">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon warn">!</span> Recovery options</div>
-          <h2>How to keep playing after interruption</h2>
-        </div>
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid four">
+        <article class="board-card">
+          <span class="tag blue">YCS-style</span>
+          <h3>TCG control board</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="crypter"></span><span class="card-chip" data-card="firewall"></span><span class="card-chip" data-card="sp"></span><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="tb"></span><span class="card-chip" data-card="mtp"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="linguriboh"></span><span class="card-chip" data-card="impulse"></span><span class="card-chip" data-card="belle"></span></div></div>
+          <p>A realistic current TCG finish after interruption: <span class="card-mention" data-card="crypter">Hearts Crypter</span> live under an arrow, Firewall or S:P utility, Underground active, and a trap or Dominus in hand/set.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag gold">MD only</span>
+          <h3>Master Duel spreadsheet board</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="apollousa"></span><span class="card-chip" data-card="allied"></span><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="gwc"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="linguriboh"></span><span class="card-chip" data-card="crypter"></span><span class="card-chip" data-card="binder"></span><span class="card-chip" data-card="hare"></span><span class="card-chip" data-card="dormouse"></span></div></div>
+          <p>The published Dormouse route ends on <span class="card-mention" data-card="apollousa">Apollousa</span> plus <span class="card-mention" data-card="allied">Allied Code</span> pressure, <span class="card-mention" data-card="linguriboh">Linguriboh</span> in GY, <span class="card-mention" data-card="gwc">GWC-06</span> set, and <span class="card-mention" data-card="hare">Hare</span> in hand.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag green">OTK line</span>
+          <h3>Going-second conversion</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="transcode"></span><span class="card-chip" data-card="accesscode"></span><span class="card-chip" data-card="crypter"></span><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="mirror"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="wicckid"></span><span class="card-chip" data-card="magnamhut"></span><span class="card-chip" data-card="druiswurm"></span></div></div>
+          <p>After trading hand traps, convert the remaining Cyberse bodies into <span class="card-mention" data-card="transcode">Transcode</span> plus <span class="card-mention" data-card="accesscode">Accesscode</span>, or use <span class="card-mention" data-card="underground">Underground</span> to push <span class="card-mention" data-card="crypter">Hearts Crypter</span> into lethal range.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag red">After disruption</span>
+          <h3>Low-resource reload</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="heatsoul"></span><span class="card-chip" data-card="backup"></span><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="tb"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="dormouse"></span><span class="card-chip" data-card="ransom"></span><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="imperm"></span></div></div>
+          <p>If the full climb fails, preserve <span class="card-mention" data-card="underground">Underground</span> or a banished name, end with <span class="card-mention" data-card="heatsoul">Heatsoul</span>/hand traps, and use <span class="card-mention" data-card="tb">TB-11</span> or a Bystial to rebuild next turn.</p>
+        </article>
       </div>
-      <div class="grid three" id="recoveryGrid"></div>
     </section>
 
-    <section id="side">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon plus">+</span> Side deck and counters</div>
-          <h2>Matchup cards</h2>
-        </div>
-        <p>Use this both ways: what Maliss sides into the field, and what opponents should side against Maliss.</p>
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><b>Placement matters:</b> <span class="card-mention" data-card="crypter">Hearts Crypter</span> is best when it points to a monster. Put <span class="card-mention" data-card="ransom">Ransom</span>/Crypter/other Links in zones that keep arrows live before committing to interruption.</span></li>
+            <li><span class="num">2</span><span><b>Current TCG is not the MD combo:</b> <span class="card-mention" data-card="apollousa">Apollousa</span> remains forbidden in TCG Advanced as of the May 18, 2026 list. Use <span class="card-mention" data-card="heatsoul">Heatsoul</span>, <span class="card-mention" data-card="firewall">Firewall</span>, <span class="card-mention" data-card="sp">S:P</span>, and <span class="card-mention" data-card="allied">Allied Code</span> routes in paper.</span></li>
+            <li><span class="num">3</span><span><b>Rabbit target is contextual:</b> <span class="card-mention" data-card="tb">TB-11</span> gives a body from Deck; <span class="card-mention" data-card="mtp">MTP-07</span> searches or banishes. Pick the trap that fixes the hand, not the one you memorized first.</span></li>
+            <li><span class="num">4</span><span><b>Bystials are extenders:</b> after linking away a DARK Maliss, <span class="card-mention" data-card="magnamhut">Magnamhut</span> both summons itself and moves that Maliss to banish for the 300 LP self-summon.</span></li>
+            <li><span class="num">5</span><span><b>Play under Droll:</b> when <span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> is likely, value <span class="card-mention" data-card="sarc">Gold Sarc</span>, <span class="card-mention" data-card="underground">Underground</span>, and already-opened extenders. Do not stack unnecessary searches before you have a board.</span></li>
+            <li><span class="num">6</span><span><b>Hold the real follow-up:</b> <span class="card-mention" data-card="hare">Hare</span> in hand or a live <span class="card-mention" data-card="chessy">Chessy Cat</span> draw keeps the next turn playable after a board breaker. Do not spend every Maliss name for a slightly larger board.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row"><span class="card-chip" data-card="underground"></span><span class="card-chip" data-card="tb"></span><span class="card-chip" data-card="sarc"></span><span class="card-chip" data-card="backup"></span><span class="card-chip" data-card="magnamhut"></span><span class="card-chip" data-card="heatsoul"></span></div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><b>Normal summon negated:</b> <span class="card-mention" data-card="dormouse">Dormouse</span> is not an on-summon effect, so force the opponent to answer the activation. If stopped, pivot through <span class="card-mention" data-card="underground">Underground</span>, <span class="card-mention" data-card="backup">Backup</span>, or <span class="card-mention" data-card="sarc">Sarc</span>.</span></li>
+            <li><span class="num">2</span><span><b>Rabbit stopped:</b> create banish pressure another way — <span class="card-mention" data-card="sarc">Gold Sarc</span> banishes a name, a Bystial banishes a DARK Maliss from GY, or <span class="card-mention" data-card="underground">Underground</span> restarts.</span></li>
+            <li><span class="num">3</span><span><b>Nibiru reset:</b> keep one set trap or banished Maliss before the fifth summon when possible. The <span class="card-mention" data-card="nibiru">Nibiru</span> token can still become <span class="card-mention" data-card="linkSpider">Link Spider</span>, but only if you preserved follow-up.</span></li>
+            <li><span class="num">4</span><span><b>Droll turn:</b> stop chasing extra searches. Convert existing bodies into <span class="card-mention" data-card="heatsoul">Heatsoul</span> or Hearts, then lean on Dominus, <span class="card-mention" data-card="imperm">Impermanence</span>, and remaining hand traps.</span></li>
+            <li><span class="num">5</span><span><b>Artifact Lancea:</b> <span class="card-mention" data-card="lancea">Lancea</span> is one of the hardest counters because it shuts off banish costs and self-summons. Make a minimal Cyberse board and pass with interaction.</span></li>
+            <li><span class="num">6</span><span><b>Board wiped:</b> <span class="card-mention" data-card="underground">Underground</span>, <span class="card-mention" data-card="tb">TB-11</span>, and Bystials rebuild from spent names. Prioritize keeping a Maliss in GY or banished over emptying all zones for damage.</span></li>
+          </ul>
+        </article>
       </div>
-      <div class="tab-bar" id="sideTabs"></div>
-      <div id="sidePanels"></div>
     </section>
 
-    <section id="references">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="icon">i</span> Hidden reference tab</div>
-          <h2>Sources used</h2>
-        </div>
-        <button class="ref-toggle" type="button" id="refToggle">Show references</button>
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="source-note">YCS Columbus on May 23, 2026 had two Top 32 @Ignister Maliss lists on YGOPRODeck. Both use a compact Maliss core with <span class="card-mention" data-card="backup">Backup @Ignister</span> and Bystials, then split on defensive cards.</div>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">40 cards</span>
+          <h3>Michael Gold Jr. — YCS Columbus Top 32</h3>
+          <p>Engine: 1 <span class="card-mention" data-card="dormouse">Dormouse</span>, 1 <span class="card-mention" data-card="rabbit">Rabbit</span>, 3 <span class="card-mention" data-card="chessy">Chessy</span>, 3 <span class="card-mention" data-card="hare">Hare</span>, 3 <span class="card-mention" data-card="backup">Backup</span>, 1 <span class="card-mention" data-card="wizard">Wizard</span>, 4 Bystials including <span class="card-mention" data-card="saronir">Saronir</span>. Main-deck pressure: 3 <span class="card-mention" data-card="fuwalos">Mulcharmy Fuwalos</span>, 2 <span class="card-mention" data-card="belle">Ghost Belle</span>, 3 <span class="card-mention" data-card="impulse">Dominus Impulse</span>, 2 <span class="card-mention" data-card="spark">Dominus Spark</span>.</p>
+          <div class="card-row"><span class="card-chip" data-card="purulia"></span><span class="card-chip" data-card="ogre"></span><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="nibiru"></span><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="storm"></span><span class="card-chip" data-card="fissure"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag green">41 cards</span>
+          <h3>James Valentino — YCS Columbus Top 32</h3>
+          <p>Same Maliss and @Ignister core, 3 Bystials, Dharc over <span class="card-mention" data-card="darkInfant">Dark Infant @Ignister</span> in the Extra Deck. Main-deck pressure: 2 <span class="card-mention" data-card="droll">Droll</span>, 3 <span class="card-mention" data-card="imperm">Infinite Impermanence</span>, 3 <span class="card-mention" data-card="impulse">Dominus Impulse</span>, 3 <span class="card-mention" data-card="spark">Dominus Spark</span>.</p>
+          <div class="card-row"><span class="card-chip" data-card="retC"></span><span class="card-chip" data-card="belle"></span><span class="card-chip" data-card="ogre"></span><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="talent"></span><span class="card-chip" data-card="antiSpell"></span><span class="card-chip" data-card="ddg"></span></div>
+        </article>
       </div>
-      <div class="refs-wrap">
-        <div class="references" id="refPanel">
-          <div class="grid two" id="referenceGrid"></div>
-        </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2026-05-23</div><div><b>YCS Columbus:</b> two @Ignister Maliss decks reach Top 32 (Michael Gold Jr., 40 cards; James Valentino, 41 cards), both on the Maliss + Backup @Ignister + Bystial + Dominus shell.</div></div>
       </div>
     </section>
-  </div>
+
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="source-note">Use this both ways: what Maliss sides into the field, and what opponents should side against Maliss.</div>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Against combo</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="nibiru"></span><span class="card-chip" data-card="fuwalos"></span><span class="card-chip" data-card="purulia"></span><span class="card-chip" data-card="impulse"></span><span class="card-chip" data-card="imperm"></span></div></td>
+              <td>Use <span class="card-mention" data-card="droll">Droll</span> and <span class="card-mention" data-card="nibiru">Nibiru</span> to cap explosive turns. <span class="card-mention" data-card="fuwalos">Fuwalos</span>/<span class="card-mention" data-card="purulia">Purulia</span> punish extension. <span class="card-mention" data-card="impulse">Dominus Impulse</span> and <span class="card-mention" data-card="imperm">Impermanence</span> answer key monster effects.</td>
+            </tr>
+            <tr>
+              <td>Against GY and DARK decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="magnamhut"></span><span class="card-chip" data-card="druiswurm"></span><span class="card-chip" data-card="belle"></span><span class="card-chip" data-card="fissure"></span><span class="card-chip" data-card="ddg"></span><span class="card-chip" data-card="retC"></span></div></td>
+              <td>Bystials double as extenders and disruption. <span class="card-mention" data-card="belle">Ghost Belle</span> checks GY effects. <span class="card-mention" data-card="fissure">Dimensional Fissure</span> and <span class="card-mention" data-card="ddg">Different Dimension Ground</span> punish GY decks while Maliss can still use banished names.</td>
+            </tr>
+            <tr>
+              <td>Against backrow / control</td>
+              <td><div class="card-row"><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="storm"></span><span class="card-chip" data-card="talent"></span><span class="card-chip" data-card="antiSpell"></span><span class="card-chip" data-card="sp"></span><span class="card-chip" data-card="accesscode"></span></div></td>
+              <td><span class="card-mention" data-card="duster">Duster</span> and <span class="card-mention" data-card="storm">Lightning Storm</span> clear backrow. <span class="card-mention" data-card="talent">Talent</span> punishes interaction. <span class="card-mention" data-card="antiSpell">Anti-Spell</span> is a going-first lock piece; <span class="card-mention" data-card="accesscode">Accesscode</span> converts a cleared lane into lethal.</td>
+            </tr>
+            <tr>
+              <td>What opponents side vs Maliss</td>
+              <td><div class="card-row"><span class="card-chip" data-card="lancea"></span><span class="card-chip" data-card="nibiru"></span><span class="card-chip" data-card="ogre"></span><span class="card-chip" data-card="ash"></span><span class="card-chip" data-card="imperm"></span><span class="card-chip" data-card="droll"></span></div></td>
+              <td><span class="card-mention" data-card="lancea">Lancea</span> is the cleanest turn stop. <span class="card-mention" data-card="nibiru">Nibiru</span> punishes the long climb. <span class="card-mention" data-card="ogre">Ogre</span> on Underground, <span class="card-mention" data-card="ash">Ash</span> on Backup/Underground, <span class="card-mention" data-card="imperm">Imperm</span> on Chessy/Hare, and <span class="card-mention" data-card="droll">Droll</span> after the first search all force lower boards.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="lancea">Artifact Lancea</span> shuts off banish costs and self-summons — the hardest single counter.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="nibiru">Nibiru</span> punishes the long Link climb if you commit five summons without protection.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> after the first search caps Ransom/Backup search chains.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="ogre">Ghost Ogre</span> and <span class="card-mention" data-card="ash">Ash Blossom</span> on <span class="card-mention" data-card="underground">Underground</span>/<span class="card-mention" data-card="backup">Backup</span>; <span class="card-mention" data-card="imperm">Imperm</span> on <span class="card-mention" data-card="chessy">Chessy</span>/<span class="card-mention" data-card="hare">Hare</span>.</span></li>
+          </ul>
+        </article>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Against Lancea, make a minimal Cyberse board and pass with hand-trap interaction instead of forcing the climb.</span></li>
+            <li><span class="num">2</span><span>Against Nibiru, bank a set trap or a banished Maliss before the fifth summon; the token can become <span class="card-mention" data-card="linkSpider">Link Spider</span>.</span></li>
+            <li><span class="num">3</span><span>Against Droll, lead with <span class="card-mention" data-card="sarc">Gold Sarc</span>/<span class="card-mention" data-card="underground">Underground</span> summon pressure before stacking searches; settle for <span class="card-mention" data-card="heatsoul">Heatsoul</span> plus hand traps.</span></li>
+            <li><span class="num">4</span><span>Hold <span class="card-mention" data-card="hare">Hare</span> in hand or a live <span class="card-mention" data-card="chessy">Chessy</span> draw so board breakers do not end the game; rebuild with <span class="card-mention" data-card="tb">TB-11</span> and Bystials.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Maliss" target="_blank" rel="noreferrer">Master Duel Meta — Maliss Deck Breakdown</a> — combos marked updated Sept. 11, 2025; page crawled June 2026. Used for the Ignister-updated combo categories, Dormouse + discard route, endboard note, and spreadsheet link.</li>
+        <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhhELZcNIW6SagBk6rMtb8k_kBOX36sO4xtFcaSsHJHwHyfSDP1BVic7Eb7vhZUUjSOA9DPQU7f_3q/pubhtml" target="_blank" rel="noreferrer">Master Duel Ignister Maliss Combo Spreadsheet</a> — public Google Sheets link from MDM; the published shell linked directly for manual review.</li>
+        <li><a href="https://ygoprodeck.com/tournament/ycs-columbus-4610" target="_blank" rel="noreferrer">YGOPRODeck — YCS Columbus 2026 tournament</a> — event date May 23, 2026. Used to identify the latest large tournament top: two Maliss Top 32 decks.</li>
+        <li><a href="https://ygoprodeck.com/deck/ignister-maliss-713179" target="_blank" rel="noreferrer">YGOPRODeck — Michael Gold Jr. @Ignister Maliss</a> — YCS Columbus Top 32, May 23, 2026. Used for the 40-card Bystial/Dominus/Fuwalos variant and side deck mapping.</li>
+        <li><a href="https://ygoprodeck.com/deck/ignister-maliss-713165" target="_blank" rel="noreferrer">YGOPRODeck — James Valentino @Ignister Maliss</a> — YCS Columbus Top 32, May 23, 2026. Used for the 41-card Droll/Impermanence/Dominus variant and side deck mapping.</li>
+        <li><a href="https://tcgcontender.com/yugioh/meta" target="_blank" rel="noreferrer">TCG Contender — Yu-Gi-Oh! Meta Tier List</a> — June 2026; meta data fresh on June 7, 2026. Used for current tier positioning and matchup context.</li>
+        <li><a href="https://tcgcontender.com/yugioh/decks/tcg/maliss" target="_blank" rel="noreferrer">TCG Contender — Maliss Deck Guide</a> — updated June 2026. Used for high-level strengths, weaknesses, and hand-trap pressure points against Maliss.</li>
+        <li><a href="https://www.thegamer.com/yu-gi-oh-maliss-deck-guide/" target="_blank" rel="noreferrer">TheGamer — How To Play The Maliss Deck</a> — published Feb. 17, 2025. Used for general engine explanation: Dormouse starter role, Rabbit trap access, Underground banish starter, Bystial synergy, and going-second Accesscode pressure.</li>
+        <li><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/" target="_blank" rel="noreferrer">Official Yu-Gi-Oh! TCG Forbidden and Limited List</a> — effective May 18, 2026. Used to distinguish Master Duel Apollousa combo notes from current TCG Advanced legality.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Maliss" target="_blank" rel="noreferrer">YGOPRODeck Card API</a> — queried June 8, 2026. Used for card IDs and real image URLs.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
+    </section>
+
+  </main>
 
   <script>
-    const cards = {
-      dormouse: ["32061192", "Maliss <P> Dormouse"],
-      rabbit: ["69272449", "Maliss <P> White Rabbit"],
-      chessy: ["96676583", "Maliss <P> Chessy Cat"],
-      hare: ["20938824", "Maliss <P> March Hare"],
-      underground: ["68337209", "Maliss in Underground"],
-      mirror: ["93453053", "Maliss in the Mirror"],
-      gwc: ["20726052", "Maliss <C> GWC-06"],
-      mtp: ["94722358", "Maliss <C> MTP-07"],
-      tb: ["57111661", "Maliss <C> TB-11"],
-      crypter: ["21848500", "Maliss <Q> Hearts Crypter"],
-      ransom: ["68059897", "Maliss <Q> Red Ransom"],
-      binder: ["95454996", "Maliss <Q> White Binder"],
-      backup: ["30118811", "Backup @Ignister"],
-      wizard: ["3723262", "Wizard @Ignister"],
-      darkInfant: ["74567889", "Dark Infant @Ignister"],
-      wicckid: ["52698008", "Cyberse Wicckid"],
-      decoder: ["30342076", "Link Decoder"],
-      disciple: ["32995276", "Link Disciple"],
-      linguriboh: ["24842059", "Linguriboh"],
-      splash: ["59859086", "Splash Mage"],
-      firewall: ["5043010", "Firewall Dragon"],
-      singularity: ["21637210", "Firewall Dragon Singularity"],
-      linkSpider: ["98978921", "Link Spider"],
-      sp: ["29301450", "S:P Little Knight"],
-      heatsoul: ["61245672", "Decode Talker Heatsoul"],
-      transcode: ["46947713", "Transcode Talker"],
-      accesscode: ["86066372", "Accesscode Talker"],
-      allied: ["39138610", "Allied Code Talker @Ignister"],
-      apollousa: ["4280258", "Apollousa, Bow of the Goddess"],
-      haggard: ["9763474", "Haggard Lizardose"],
-      shifter: ["91800273", "Dimension Shifter"],
-      allure: ["1475311", "Allure of Darkness"],
-      sarc: ["75500286", "Gold Sarcophagus"],
-      terraforming: ["73628505", "Terraforming"],
-      magnamhut: ["33854624", "Bystial Magnamhut"],
-      druiswurm: ["6637331", "Bystial Druiswurm"],
-      baldrake: ["72656408", "Bystial Baldrake"],
-      saronir: ["60242223", "Bystial Saronir"],
-      impulse: ["40366667", "Dominus Impulse"],
-      spark: ["6325660", "Dominus Spark"],
-      ash: ["14558128", "Ash Blossom & Joyous Spring"],
-      imperm: ["10045474", "Infinite Impermanence"],
-      belle: ["73642296", "Ghost Belle & Haunted Mansion"],
-      ogre: ["59438930", "Ghost Ogre & Snow Rabbit"],
-      droll: ["94145021", "Droll & Lock Bird"],
-      nibiru: ["27204311", "Nibiru, the Primal Being"],
-      fuwalos: ["42141493", "Mulcharmy Fuwalos"],
-      purulia: ["84192580", "Mulcharmy Purulia"],
-      retC: ["46502744", "Retaliating \"C\""],
-      called: ["24224830", "Called by the Grave"],
-      duster: ["18144507", "Harpie's Feather Duster"],
-      storm: ["14532163", "Lightning Storm"],
-      fissure: ["81674782", "Dimensional Fissure"],
-      talent: ["25311006", "Triple Tactics Talent"],
-      antiSpell: ["58921041", "Anti-Spell Fragrance"],
-      ddg: ["31849106", "Different Dimension Ground"],
-      lancea: ["34267821", "Artifact Lancea"]
+    const CARDS = {
+      dormouse: { id: 32061192, name: "Maliss <P> Dormouse" },
+      rabbit: { id: 69272449, name: "Maliss <P> White Rabbit" },
+      chessy: { id: 96676583, name: "Maliss <P> Chessy Cat" },
+      hare: { id: 20938824, name: "Maliss <P> March Hare" },
+      underground: { id: 68337209, name: "Maliss in Underground" },
+      mirror: { id: 93453053, name: "Maliss in the Mirror" },
+      gwc: { id: 20726052, name: "Maliss <C> GWC-06" },
+      mtp: { id: 94722358, name: "Maliss <C> MTP-07" },
+      tb: { id: 57111661, name: "Maliss <C> TB-11" },
+      crypter: { id: 21848500, name: "Maliss <Q> Hearts Crypter" },
+      ransom: { id: 68059897, name: "Maliss <Q> Red Ransom" },
+      binder: { id: 95454996, name: "Maliss <Q> White Binder" },
+      backup: { id: 30118811, name: "Backup @Ignister" },
+      wizard: { id: 3723262, name: "Wizard @Ignister" },
+      darkInfant: { id: 74567889, name: "Dark Infant @Ignister" },
+      wicckid: { id: 52698008, name: "Cyberse Wicckid" },
+      decoder: { id: 30342076, name: "Link Decoder" },
+      linguriboh: { id: 24842059, name: "Linguriboh" },
+      splash: { id: 59859086, name: "Splash Mage" },
+      firewall: { id: 5043010, name: "Firewall Dragon" },
+      linkSpider: { id: 98978921, name: "Link Spider" },
+      sp: { id: 29301450, name: "S:P Little Knight" },
+      heatsoul: { id: 61245672, name: "Decode Talker Heatsoul" },
+      transcode: { id: 46947713, name: "Transcode Talker" },
+      accesscode: { id: 86066372, name: "Accesscode Talker" },
+      allied: { id: 39138610, name: "Allied Code Talker @Ignister" },
+      apollousa: { id: 4280258, name: "Apollousa, Bow of the Goddess" },
+      sarc: { id: 75500286, name: "Gold Sarcophagus" },
+      magnamhut: { id: 33854624, name: "Bystial Magnamhut" },
+      druiswurm: { id: 6637331, name: "Bystial Druiswurm" },
+      baldrake: { id: 72656408, name: "Bystial Baldrake" },
+      saronir: { id: 60242223, name: "Bystial Saronir" },
+      impulse: { id: 40366667, name: "Dominus Impulse" },
+      spark: { id: 6325660, name: "Dominus Spark" },
+      ash: { id: 14558128, name: "Ash Blossom & Joyous Spring" },
+      imperm: { id: 10045474, name: "Infinite Impermanence" },
+      belle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
+      ogre: { id: 59438930, name: "Ghost Ogre & Snow Rabbit" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      nibiru: { id: 27204311, name: "Nibiru, the Primal Being" },
+      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos" },
+      purulia: { id: 84192580, name: "Mulcharmy Purulia" },
+      retC: { id: 46502744, name: "Retaliating \"C\"" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster" },
+      storm: { id: 14532163, name: "Lightning Storm" },
+      fissure: { id: 81674782, name: "Dimensional Fissure" },
+      talent: { id: 25311006, name: "Triple Tactics Talent" },
+      antiSpell: { id: 58921041, name: "Anti-Spell Fragrance" },
+      ddg: { id: 31849106, name: "Different Dimension Ground" },
+      lancea: { id: 34267821, name: "Artifact Lancea" }
     };
-
-    const hero = ["dormouse", "rabbit", "chessy", "hare", "underground", "ransom", "crypter", "backup", "magnamhut", "impulse"];
-
-    const triggers = [
-      {
-        title: "Dormouse starts the chain",
-        icon: "1",
-        pair: ["dormouse", "hare"],
-        text: "Dormouse banishes a Maliss from Deck. A banished Hare can return and later protect pointed Links from targeting."
-      },
-      {
-        title: "Rabbit turns banish into trap access",
-        icon: "+",
-        pair: ["rabbit", "tb"],
-        text: "White Rabbit usually converts the first summon into TB-11 or MTP-07, giving extension or a second search."
-      },
-      {
-        title: "Underground is a starter and reload",
-        icon: "i",
-        pair: ["underground", "rabbit"],
-        text: "Field spell activation banishes a Maliss card from hand, Deck, or GY, turning almost any name into a live body."
-      },
-      {
-        title: "Red Ransom finds the field spell",
-        icon: "+",
-        pair: ["ransom", "underground"],
-        text: "Red Ransom adds Underground and then can banish another Maliss, bridging the Link climb into more bodies."
-      },
-      {
-        title: "Bystials recycle your DARK names",
-        icon: "+",
-        pair: ["magnamhut", "dormouse"],
-        text: "Bystials banish a DARK Maliss from the GY, summon themselves, and re-enable the Maliss self-summon."
-      },
-      {
-        title: "White Binder turns GY into banish pressure",
-        icon: "i",
-        pair: ["binder", "gwc"],
-        text: "In Master Duel routes, Binder plus GWC converts a banished Link into revived pressure and a set interruption."
-      },
-      {
-        title: "Hearts Crypter needs an arrow",
-        icon: "!",
-        pair: ["crypter", "ransom"],
-        text: "Point Crypter at a monster before relying on its banish interruption. Placement matters more than raw material count."
-      },
-      {
-        title: "@Ignister fills missing Cyberse bodies",
-        icon: "+",
-        pair: ["backup", "wizard"],
-        text: "Backup searches Wizard, and Wizard revives Cyberse material to continue climbing into Firewall, Heatsoul, or Allied Code."
-      }
-    ];
-
-    const routes = [
-      {
-        id: "dormouse",
-        title: "Dormouse + discard",
-        format: "Master Duel spreadsheet line",
-        warning: "Uses Apollousa. Not legal in current TCG Advanced as of May 18, 2026.",
-        starters: ["dormouse", "hare"],
-        outcome: ["apollousa", "allied", "linguriboh", "gwc", "hare"],
-        summary: "The published MDM route turns Dormouse into Red Ransom, Underground, Wicckid, Backup, Crypter, Binder, Firewall, and a final Allied Code board with GWC set.",
-        graph: [
-          { label: "Open", cards: ["dormouse", "hare"], text: "Normal Dormouse, banish Hare, then use Hare to bring itself and Dormouse back through Link Decoder." },
-          { label: "Search field", cards: ["ransom", "underground"], text: "Make Red Ransom, add Underground, and use the field spell to banish Rabbit." },
-          { label: "Bridge", cards: ["wicckid", "backup", "wizard"], text: "Wicckid plus a pointed Rabbit line searches Backup, which finds Wizard for more Cyberse material." },
-          { label: "Link names", cards: ["crypter", "splash", "binder"], text: "Make Hearts Crypter, use Splash Mage, then convert into White Binder while preserving Chessy as follow-up." },
-          { label: "Trap loop", cards: ["binder", "gwc", "ransom"], text: "Set GWC, use Binder and Crypter to reach Firewall, then GWC revives Red Ransom." },
-          { label: "End", cards: ["apollousa", "allied", "linguriboh"], text: "End on Apollousa plus Allied Code, Linguriboh in GY, GWC set, Hare in hand, and extra draws." }
-        ],
-        steps: [
-          "Use Dormouse to put Hare into banish, then convert Dormouse through Link Decoder so Hare can bring back both bodies.",
-          "Use the first three bodies for Red Ransom. Chain order should protect the field-spell search while Link Decoder returns.",
-          "Use Underground to banish Rabbit, summon it under Wicckid, then use Wicckid to find Backup @Ignister.",
-          "Backup finds Wizard. Wizard and a recovered Maliss name extend into Hearts Crypter and Splash Mage.",
-          "Turn the revived Maliss into White Binder, set GWC, then use GWC to bring back Red Ransom while climbing into Firewall.",
-          "Use Chessy only after the bounce line is ready so the hand reload happens after you have secured follow-up."
-        ]
-      },
-      {
-        id: "backup",
-        title: "Backup @Ignister + normal summon",
-        format: "TCG-safe pivot",
-        warning: "Best when the normal summon is a hand trap or any body that becomes Link material.",
-        starters: ["backup", "ash"],
-        outcome: ["ransom", "underground", "heatsoul", "crypter", "impulse"],
-        summary: "Backup supplies the missing Cyberse tuner, searches Wizard, and lets the normal summon become the first Link body. Convert into Red Ransom to reach Underground.",
-        graph: [
-          { label: "Open", cards: ["backup", "ash"], text: "Special Backup when you control a Cyberse or can make one; otherwise normal the spare body first." },
-          { label: "Search", cards: ["backup", "wizard"], text: "Backup adds Wizard. Keep Wizard until a Cyberse is in GY so it becomes a real extender." },
-          { label: "Pivot", cards: ["ransom", "underground"], text: "Use a Maliss body plus Cyberse material for Red Ransom and fetch Underground." },
-          { label: "Board", cards: ["heatsoul", "crypter", "impulse"], text: "Choose Heatsoul draw pressure or Hearts Crypter plus set trap depending on how many extenders remain." },
-          { label: "Follow-up", cards: ["hare", "tb", "mtp"], text: "Keep one Maliss in hand or banished so TB-11/MTP-07 is live on the next exchange." }
-        ],
-        steps: [
-          "Treat Backup as a bridge, not the whole starter. It is strongest when it turns a normal-summoned hand trap into Cyberse material.",
-          "Find Wizard before committing every body to Links, because Wizard needs a Cyberse target to convert.",
-          "If Ransom resolves, prioritize Underground unless you already opened it.",
-          "If the opponent stops the search, settle for Heatsoul plus hand traps instead of overextending into Nibiru."
-        ]
-      },
-      {
-        id: "field",
-        title: "Underground + discard",
-        format: "TCG and Master Duel",
-        warning: "Discard quality matters. Prefer banishing Rabbit or a name that creates the missing next effect.",
-        starters: ["underground", "rabbit"],
-        outcome: ["rabbit", "tb", "ransom", "crypter"],
-        summary: "Underground is the cleanest non-normal-summon opener. It banishes a Maliss card from Deck or hand, immediately creating a self-summoning body.",
-        graph: [
-          { label: "Activate", cards: ["underground", "rabbit"], text: "Banish Rabbit from Deck if you need a trap; banish Hare or Chessy when the rest of the hand already has trap access." },
-          { label: "Set", cards: ["rabbit", "tb"], text: "Rabbit sets TB-11 for deck summon or MTP-07 for search/removal pressure." },
-          { label: "Climb", cards: ["ransom", "wicckid"], text: "Use the first bodies for Red Ransom or Wicckid, then search the missing @Ignister extender." },
-          { label: "Choose", cards: ["crypter", "sp", "firewall"], text: "Finish on Hearts Crypter if you can point it; otherwise choose S:P/Firewall utility." }
-        ],
-        steps: [
-          "Underground can banish from Deck, so do not spend your normal summon before checking whether the field spell already solves the opener.",
-          "Rabbit into TB-11 is the default extension route. Rabbit into MTP-07 is better when you need a searched Maliss name or removal line.",
-          "If Ghost Ogre is likely, use Underground after you can still make a Cyberse Link without it."
-        ]
-      },
-      {
-        id: "rabbit",
-        title: "White Rabbit + discard",
-        format: "TCG and Master Duel",
-        warning: "Rabbit is stronger with another banish enabler. Alone, it sets the trap but needs a way to keep bodies flowing.",
-        starters: ["rabbit", "tb"],
-        outcome: ["tb", "ransom", "underground", "heatsoul"],
-        summary: "Rabbit opens by setting the correct trap. The route becomes explosive when the discard, trap cost, or a Bystial banishes a Maliss name.",
-        graph: [
-          { label: "Summon", cards: ["rabbit", "tb"], text: "Summon Rabbit and set TB-11 if you need another body from Deck." },
-          { label: "Cost", cards: ["tb", "hare"], text: "Activate the trap by banishing a face-up Maliss, then summon the banished name back." },
-          { label: "Search", cards: ["ransom", "underground"], text: "Convert material into Red Ransom to fetch Underground for the second banish." },
-          { label: "Stabilize", cards: ["heatsoul", "impulse", "spark"], text: "If the route is checked, end on Heatsoul plus live hand traps rather than chasing a full board." }
-        ],
-        steps: [
-          "Pick TB-11 when the hand lacks material. Pick MTP-07 when you already have material but need a Maliss search or banish removal.",
-          "Do not banish the only Maliss name you need for a later Link requirement unless you have a self-summon queued.",
-          "If Rabbit gets negated, use Underground, Gold Sarc, or a Bystial to create the first banished Maliss."
-        ]
-      },
-      {
-        id: "sarc",
-        title: "Gold Sarcophagus + discard",
-        format: "TCG and Master Duel",
-        warning: "Sarc is a starter because banishing a Maliss monster is functionally summoning it.",
-        starters: ["sarc", "rabbit"],
-        outcome: ["rabbit", "tb", "ransom", "crypter"],
-        summary: "Gold Sarcophagus becomes a delayed search and immediate extender. Banish the name whose self-summon fixes your current hand.",
-        graph: [
-          { label: "Banish", cards: ["sarc", "rabbit"], text: "Banish Rabbit if you need trap access; banish Dormouse/Hare if you need a specific protection body." },
-          { label: "Trigger", cards: ["rabbit", "tb"], text: "Pay 300 LP to summon the banished Maliss and unlock Rabbit's set effect." },
-          { label: "Convert", cards: ["ransom", "underground"], text: "Use the free body to reach Red Ransom, then add Underground for another banish." },
-          { label: "Pressure", cards: ["crypter", "accesscode"], text: "Choose a protected Hearts board going first or Accesscode conversion going second." }
-        ],
-        steps: [
-          "Sarc should banish the card that generates the next missing trigger, not always the flashiest name.",
-          "If you already opened Rabbit, Sarc on Hare or Chessy is often better than redundant trap access.",
-          "Against Droll, Sarc lines are useful because they can start with summon pressure before multiple searches."
-        ]
-      },
-      {
-        id: "bystial",
-        title: "Bystial extender",
-        format: "Current TCG variant",
-        warning: "Best after a Maliss was used as Link material and is now DARK in GY.",
-        starters: ["magnamhut", "dormouse"],
-        outcome: ["magnamhut", "dormouse", "firewall", "sp"],
-        summary: "The latest YCS lists both use Bystials because they turn spent DARK Maliss monsters into fresh banished summons while adding a large body.",
-        graph: [
-          { label: "Load GY", cards: ["dormouse", "ransom"], text: "Use a Maliss body as Link material so it lands in GY." },
-          { label: "Banish", cards: ["magnamhut", "dormouse"], text: "Bystial banishes that DARK monster, summoning itself and turning on the Maliss self-summon." },
-          { label: "Extend", cards: ["dormouse", "firewall"], text: "Bring back the banished name and climb into Firewall, S:P, or Heatsoul." },
-          { label: "Counter", cards: ["druiswurm", "baldrake"], text: "In mirrors and DARK matchups, Bystials also interrupt the opponent while extending your own turn." }
-        ],
-        steps: [
-          "Do not fire Bystials before you know which Maliss name you want banished.",
-          "Magnamhut gives follow-up; Druiswurm and Baldrake add board pressure or removal value.",
-          "Bystials are weaker under effects that stop banishing, so side them carefully into Lancea-heavy opponents."
-        ]
-      }
-    ];
-
-    const boards = [
-      {
-        title: "TCG control board",
-        badge: "YCS-style",
-        text: "A realistic current TCG finish after interruption: Hearts Crypter live under an arrow, Firewall or S:P utility, Underground active, and a trap or Dominus in hand/set.",
-        zones: {
-          Monsters: ["crypter", "firewall", "sp"],
-          Spell: ["underground"],
-          Set: ["tb", "mtp"],
-          GY: ["ransom", "linguriboh"],
-          Hand: ["impulse", "belle"]
-        }
-      },
-      {
-        title: "Master Duel spreadsheet board",
-        badge: "MD only",
-        text: "The published Dormouse route ends on Apollousa plus Allied Code pressure, Linguriboh in GY, GWC set, Hare in hand, and multiple Link names loaded.",
-        zones: {
-          Monsters: ["apollousa", "allied", "ransom"],
-          Spell: ["underground"],
-          Set: ["gwc"],
-          GY: ["linguriboh", "crypter", "binder"],
-          Hand: ["hare", "dormouse"]
-        }
-      },
-      {
-        title: "Going-second conversion",
-        badge: "OTK line",
-        text: "After trading hand traps, convert the remaining Cyberse bodies into Transcode plus Accesscode, or use Underground to push Hearts Crypter into lethal range.",
-        zones: {
-          Monsters: ["transcode", "accesscode", "crypter"],
-          Spell: ["underground"],
-          Set: ["mirror"],
-          GY: ["ransom", "wicckid"],
-          Hand: ["magnamhut", "druiswurm"]
-        }
-      },
-      {
-        title: "Low-resource reload",
-        badge: "after disruption",
-        text: "If the full climb fails, preserve Underground or a banished name, end with Heatsoul/hand traps, and use TB-11 or a Bystial to rebuild on the next turn.",
-        zones: {
-          Monsters: ["heatsoul", "backup"],
-          Spell: ["underground"],
-          Set: ["tb"],
-          GY: ["dormouse", "ransom"],
-          Hand: ["droll", "imperm"]
-        }
-      }
-    ];
-
-    const tips = [
-      {
-        title: "Placement matters",
-        cards: ["crypter", "ransom"],
-        text: "Hearts Crypter is best when it points to a monster. Put Ransom/Crypter/other Links in zones that keep arrows live before committing to interruption."
-      },
-      {
-        title: "Current TCG is not the MD combo",
-        cards: ["apollousa", "heatsoul"],
-        text: "Apollousa remains forbidden in TCG Advanced as of the May 18, 2026 list. Use Heatsoul, Firewall, S:P, and Allied Code routes in paper TCG."
-      },
-      {
-        title: "Rabbit target is contextual",
-        cards: ["rabbit", "tb", "mtp"],
-        text: "TB-11 gives a body from Deck. MTP-07 searches or banishes. Pick the trap that fixes the hand, not the one you memorized first."
-      },
-      {
-        title: "Bystials are extenders",
-        cards: ["magnamhut", "dormouse"],
-        text: "After linking away a DARK Maliss, a Bystial both summons itself and moves that Maliss to banish for the 300 LP self-summon."
-      },
-      {
-        title: "Play under Droll",
-        cards: ["droll", "sarc"],
-        text: "When Droll is likely, value Gold Sarc, Underground, and already-opened extenders. Do not stack unnecessary searches before you have a board."
-      },
-      {
-        title: "Hold the real follow-up",
-        cards: ["hare", "chessy"],
-        text: "Hare in hand or a live Chessy draw keeps the next turn playable after a board breaker. Do not spend every Maliss name for a slightly larger board."
-      }
-    ];
-
-    const recovery = [
-      {
-        title: "Normal summon negated",
-        cards: ["dormouse", "underground", "backup"],
-        text: "Dormouse is not an on-summon effect, so force the opponent to answer the activation. If stopped, pivot through Underground, Backup, or Sarc."
-      },
-      {
-        title: "Rabbit stopped",
-        cards: ["rabbit", "sarc", "magnamhut"],
-        text: "If Rabbit cannot set a trap, create banish pressure another way: Gold Sarc banishes a name, Bystial banishes a DARK Maliss from GY, or Underground restarts."
-      },
-      {
-        title: "Nibiru reset",
-        cards: ["nibiru", "tb", "linkSpider"],
-        text: "Keep one set trap or banished Maliss before the fifth summon when possible. A token can still become Link Spider, but only if you preserved follow-up."
-      },
-      {
-        title: "Droll turn",
-        cards: ["droll", "heatsoul", "impulse"],
-        text: "Stop chasing extra searches. Convert existing bodies into Heatsoul or Hearts, then lean on Dominus, Impermanence, and remaining hand traps."
-      },
-      {
-        title: "Artifact Lancea",
-        cards: ["lancea", "heatsoul", "ash"],
-        text: "Lancea is one of the hardest counters because it shuts off banish costs and self-summons. Make a minimal Cyberse board and pass with interaction."
-      },
-      {
-        title: "Board wiped",
-        cards: ["underground", "tb", "magnamhut"],
-        text: "Underground, TB-11, and Bystials rebuild from spent names. Prioritize keeping a Maliss in GY or banished over emptying all zones for damage."
-      }
-    ];
-
-    const sideGroups = [
-      {
-        id: "vs_combo",
-        title: "Against combo",
-        cards: ["droll", "nibiru", "fuwalos", "purulia", "impulse", "imperm"],
-        text: "Use Droll and Nibiru to cap explosive turns. Fuwalos/Purulia punish extension. Dominus Impulse and Impermanence answer key monster effects."
-      },
-      {
-        id: "vs_grave",
-        title: "Against GY and DARK",
-        cards: ["magnamhut", "druiswurm", "belle", "fissure", "ddg", "retC"],
-        text: "Bystials double as extenders and disruption. Ghost Belle checks GY effects. Dimensional Fissure and Different Dimension Ground punish GY decks while Maliss can still use banished names."
-      },
-      {
-        id: "vs_backrow",
-        title: "Against backrow/control",
-        cards: ["duster", "storm", "talent", "antiSpell", "sp", "accesscode"],
-        text: "Duster and Lightning Storm clear backrow. Talent punishes interaction. Anti-Spell is a going-first lock piece; Accesscode converts a cleared lane into lethal."
-      },
-      {
-        id: "counter_maliss",
-        title: "Counters to Maliss",
-        cards: ["lancea", "nibiru", "ogre", "ash", "imperm", "droll"],
-        text: "Lancea is the cleanest turn stop. Nibiru punishes the long climb. Ogre on Underground, Ash on Backup/Underground, Imperm on Chessy/Hare, and Droll after the first search all force lower boards."
-      }
-    ];
-
-    const references = [
-      {
-        title: "Master Duel Meta - Maliss Deck Breakdown",
-        url: "https://www.masterduelmeta.com/tier-list/deck-types/Maliss",
-        date: "Combos marked updated Sept. 11, 2025; page crawled June 2026",
-        note: "Used for the Ignister-updated combo categories, Dormouse + discard route, endboard note, and spreadsheet link."
-      },
-      {
-        title: "Master Duel Ignister Maliss Combo Spreadsheet",
-        url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhhELZcNIW6SagBk6rMtb8k_kBOX36sO4xtFcaSsHJHwHyfSDP1BVic7Eb7vhZUUjSOA9DPQU7f_3q/pubhtml",
-        date: "Public Google Sheets link from MDM",
-        note: "Found spreadsheet requested by the user. The published shell is linked directly here for manual review."
-      },
-      {
-        title: "YGOPRODeck - YCS Columbus 2026 tournament",
-        url: "https://ygoprodeck.com/tournament/ycs-columbus-4610",
-        date: "Event date May 23, 2026",
-        note: "Used to identify the latest large tournament top explored here: two Maliss Top 32 decks."
-      },
-      {
-        title: "YGOPRODeck - Michael Gold Jr. @Ignister Maliss",
-        url: "https://ygoprodeck.com/deck/ignister-maliss-713179",
-        date: "YCS Columbus Top 32, May 23, 2026",
-        note: "Used for the 40-card Bystial/Dominus/Fuwalos variant and side deck mapping."
-      },
-      {
-        title: "YGOPRODeck - James Valentino @Ignister Maliss",
-        url: "https://ygoprodeck.com/deck/ignister-maliss-713165",
-        date: "YCS Columbus Top 32, May 23, 2026",
-        note: "Used for the 41-card Droll/Impermanence/Dominus variant and side deck mapping."
-      },
-      {
-        title: "TCG Contender - Yu-Gi-Oh! Meta Tier List",
-        url: "https://tcgcontender.com/yugioh/meta",
-        date: "June 2026; meta data fresh on June 7, 2026",
-        note: "Used for current tier positioning and matchup context for Maliss in the 2026 TCG environment."
-      },
-      {
-        title: "TCG Contender - Maliss Deck Guide",
-        url: "https://tcgcontender.com/yugioh/decks/tcg/maliss",
-        date: "Updated June 2026",
-        note: "Used for high-level strengths, weaknesses, and hand-trap pressure points against Maliss."
-      },
-      {
-        title: "TheGamer - How To Play The Maliss Deck",
-        url: "https://www.thegamer.com/yu-gi-oh-maliss-deck-guide/",
-        date: "Published Feb. 17, 2025",
-        note: "Used for general engine explanation: Dormouse starter role, Rabbit trap access, Underground banish starter, Bystial synergy, and going-second Accesscode pressure."
-      },
-      {
-        title: "Official Yu-Gi-Oh! TCG Forbidden and Limited List",
-        url: "https://www.yugioh-card.com/en/limited/list_2026-05-18/",
-        date: "Effective May 18, 2026",
-        note: "Used to distinguish Master Duel Apollousa combo notes from current TCG Advanced legality."
-      },
-      {
-        title: "YGOPRODeck Card API",
-        url: "https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Maliss",
-        date: "Queried June 8, 2026",
-        note: "Used for card IDs and real image URLs in the format https://images.ygoprodeck.com/images/cards/CARD_ID.jpg."
-      }
-    ];
-
-    function cardUrl(id) {
-      return `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
-    }
-
-    function cardToken(key, count = "") {
-      const [id, name] = cards[key];
-      const href = `https://ygoprodeck.com/card/?search=${id}`;
-      const countHtml = count ? `<span class="card-count">${count}</span>` : "";
-      return `<a class="card-token" href="${href}" target="_blank" rel="noopener" aria-label="${escapeAttr(name)}">
-        ${countHtml}<img src="${cardUrl(id)}" alt="${escapeAttr(name)}" loading="lazy">
-        <span class="card-name">${escapeHtml(name)}</span>
-      </a>`;
-    }
-
-    function cardRow(keys) {
-      return `<div class="card-row">${keys.map(k => cardToken(k)).join("")}</div>`;
-    }
-
-    function escapeHtml(text) {
-      return text.replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      }[char]));
-    }
-
-    function escapeAttr(text) {
-      return escapeHtml(text);
-    }
-
-    function initHero() {
-      document.getElementById("heroCards").innerHTML = hero.map(k => cardToken(k)).join("");
-    }
-
-    function initTriggers() {
-      document.getElementById("triggerGrid").innerHTML = triggers.map(item => `
-        <article class="trigger-card">
-          <div class="trigger-title"><span class="icon ${item.icon === "+" ? "plus" : item.icon === "!" ? "warn" : ""}">${item.icon}</span>${escapeHtml(item.title)}</div>
-          <div class="combo-pair">
-            ${cardToken(item.pair[0])}
-            <span class="icon plus">+</span>
-            ${cardToken(item.pair[1])}
-          </div>
-          <p>${escapeHtml(item.text)}</p>
-        </article>
-      `).join("");
-    }
-
-    function initRoutes() {
-      const buttons = document.getElementById("routeButtons");
-      buttons.innerHTML = routes.map((route, index) => `
-        <button class="route-button ${index === 0 ? "active" : ""}" type="button" data-route="${route.id}">
-          ${escapeHtml(route.title)}
-        </button>
-      `).join("");
-      buttons.addEventListener("click", event => {
-        const button = event.target.closest(".route-button");
-        if (!button) return;
-        document.querySelectorAll(".route-button").forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        renderRoute(button.dataset.route);
-      });
-      renderRoute(routes[0].id);
-    }
-
-    function renderRoute(id) {
-      const route = routes.find(item => item.id === id);
-      const graph = route.graph.map(node => `
-        <div class="graph-node">
-          <div class="node-label"><span class="icon">${escapeHtml(node.label.slice(0, 1))}</span>${escapeHtml(node.label)}</div>
-          ${cardRow(node.cards)}
-          <p class="node-text">${escapeHtml(node.text)}</p>
-        </div>
-      `).join("");
-      const steps = route.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("");
-      document.getElementById("routeCard").innerHTML = `
-        <div class="route-title">
-          <div>
-            <h3>${escapeHtml(route.title)}</h3>
-            <div class="chips">
-              <span class="format-badge">${escapeHtml(route.format)}</span>
-              <span class="risk-badge">${escapeHtml(route.warning)}</span>
-            </div>
-          </div>
-        </div>
-        <div class="route-summary">
-          <div>
-            <p>${escapeHtml(route.summary)}</p>
-            <div class="route-graph">${graph}</div>
-          </div>
-          <aside class="panel">
-            <h3>Starter and payoff</h3>
-            <div class="combo-pair">
-              ${cardToken(route.starters[0])}
-              <span class="icon plus">+</span>
-              ${cardToken(route.starters[1])}
-            </div>
-            <h3>End targets</h3>
-            ${cardRow(route.outcome)}
-          </aside>
-        </div>
-        <h3>Walkthrough</h3>
-        <ol class="step-list">${steps}</ol>
-      `;
-    }
-
-    function initBoards() {
-      document.getElementById("boardGrid").innerHTML = boards.map(board => `
-        <article class="board-card">
-          <div class="route-title">
-            <h3>${escapeHtml(board.title)}</h3>
-            <span class="format-badge">${escapeHtml(board.badge)}</span>
-          </div>
-          <p>${escapeHtml(board.text)}</p>
-          <div class="field-grid">
-            ${Object.entries(board.zones).map(([zone, keys]) => `
-              <div class="field-zone">
-                <div class="zone-title">${escapeHtml(zone)}</div>
-                <div class="zone-cards">${keys.map(k => cardToken(k)).join("")}</div>
-              </div>
-            `).join("")}
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function initInfoGrids() {
-      document.getElementById("tipsGrid").innerHTML = tips.map(item => infoCard(item)).join("");
-      document.getElementById("recoveryGrid").innerHTML = recovery.map(item => infoCard(item)).join("");
-    }
-
-    function infoCard(item) {
-      return `
-        <article class="mini-card">
-          <h3>${escapeHtml(item.title)}</h3>
-          ${cardRow(item.cards)}
-          <p>${escapeHtml(item.text)}</p>
-        </article>
-      `;
-    }
-
-    function initSideTabs() {
-      const tabs = document.getElementById("sideTabs");
-      const panels = document.getElementById("sidePanels");
-      tabs.innerHTML = sideGroups.map((group, index) => `
-        <button class="tab-button ${index === 0 ? "active" : ""}" type="button" data-tab="${group.id}">${escapeHtml(group.title)}</button>
-      `).join("");
-      panels.innerHTML = sideGroups.map((group, index) => `
-        <div class="tab-panel ${index === 0 ? "active" : ""}" data-panel="${group.id}">
-          <article class="match-card">
-            <h3>${escapeHtml(group.title)}</h3>
-            ${cardRow(group.cards)}
-            <p>${escapeHtml(group.text)}</p>
-          </article>
-        </div>
-      `).join("");
-      tabs.addEventListener("click", event => {
-        const button = event.target.closest(".tab-button");
-        if (!button) return;
-        tabs.querySelectorAll(".tab-button").forEach(btn => btn.classList.remove("active"));
-        panels.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
-        button.classList.add("active");
-        panels.querySelector(`[data-panel="${button.dataset.tab}"]`).classList.add("active");
-      });
-    }
-
-    function initReferences() {
-      document.getElementById("referenceGrid").innerHTML = references.map(ref => `
-        <article class="reference-card">
-          <a href="${ref.url}" target="_blank" rel="noopener">${escapeHtml(ref.title)}</a>
-          <span class="source-date">${escapeHtml(ref.date)}</span>
-          <p>${escapeHtml(ref.note)}</p>
-        </article>
-      `).join("");
-      const toggle = document.getElementById("refToggle");
-      const panel = document.getElementById("refPanel");
-      toggle.addEventListener("click", () => {
-        const open = panel.classList.toggle("open");
-        toggle.classList.toggle("active", open);
-        toggle.textContent = open ? "Hide references" : "Show references";
-      });
-    }
-
-    initHero();
-    initTriggers();
-    initRoutes();
-    initBoards();
-    initInfoGrids();
-    initSideTabs();
-    initReferences();
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

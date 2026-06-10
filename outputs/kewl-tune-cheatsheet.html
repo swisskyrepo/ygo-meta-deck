@@ -3,1384 +3,548 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kewl Tune Deck Mind Map Cheatsheet</title>
-  <style>
-    :root {
-      --bg: #101214;
-      --panel: #171b1f;
-      --panel-2: #20262b;
-      --line: #34404a;
-      --text: #f3f6f7;
-      --muted: #aab7bd;
-      --teal: #38c6b1;
-      --amber: #e3aa43;
-      --red: #ef6a67;
-      --blue: #74a7ff;
-      --green: #7bd66f;
-      --purple: #b78cff;
-      --radius: 8px;
-      --shadow: 0 18px 45px rgba(0, 0, 0, .32);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--text);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.025), transparent 260px),
-        var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.45;
-      letter-spacing: 0;
-    }
-
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    button, input, select { font: inherit; }
-    img { max-width: 100%; display: block; }
-    img {
-      color: transparent;
-      font-size: 0;
-    }
-
-    .shell {
-      width: min(1220px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      border-bottom: 1px solid var(--line);
-      background: #11161a;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(320px, .75fr);
-      gap: 26px;
-      align-items: end;
-      min-height: 470px;
-      padding: 42px 0 26px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--teal);
-      font-size: .82rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 14px;
-    }
-
-    .plus-icon,
-    .info-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      font-size: .86rem;
-      font-weight: 900;
-      line-height: 1;
-      flex: 0 0 auto;
-    }
-
-    .plus-icon { background: var(--teal); color: #071110; }
-    .info-icon { border: 1px solid var(--blue); color: var(--blue); background: rgba(116,167,255,.09); }
-
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      margin-bottom: 14px;
-      max-width: 780px;
-      font-size: clamp(2.25rem, 5.6vw, 5.1rem);
-      line-height: .96;
-      letter-spacing: 0;
-    }
-    h2 { margin-bottom: 12px; font-size: 1.55rem; letter-spacing: 0; }
-    h3 { margin-bottom: 9px; font-size: 1.02rem; letter-spacing: 0; }
-
-    .lead {
-      max-width: 780px;
-      color: #dce4e7;
-      font-size: 1.06rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    .metric {
-      min-height: 88px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-    }
-
-    .metric b {
-      display: block;
-      color: var(--text);
-      font-size: 1.55rem;
-      line-height: 1.1;
-      margin-bottom: 5px;
-    }
-
-    .metric span { color: var(--muted); font-size: .84rem; }
-
-    .hero-cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(86px, 1fr));
-      gap: 10px;
-      align-items: end;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #0d1114;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-cards figure {
-      margin: 0;
-      min-width: 0;
-    }
-    .hero-cards img {
-      width: 100%;
-      aspect-ratio: 421 / 614;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: #222;
-    }
-    .hero-cards figcaption {
-      min-height: 38px;
-      color: var(--muted);
-      font-size: .76rem;
-      text-align: center;
-      margin-top: 7px;
-      overflow-wrap: anywhere;
-    }
-
-    .nav-band {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(17, 22, 26, .94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 10px 0;
-      scrollbar-width: thin;
-    }
-
-    nav a,
-    .tab-button {
-      white-space: nowrap;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--text);
-      background: #151a1f;
-      padding: 8px 12px;
-      font-size: .86rem;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    nav a:hover,
-    .tab-button:hover,
-    .tab-button.active {
-      border-color: var(--teal);
-      background: rgba(56, 198, 177, .12);
-      text-decoration: none;
-    }
-
-    main { padding: 22px 0 58px; }
-
-    section {
-      padding: 26px 0;
-      border-bottom: 1px solid rgba(52, 64, 74, .65);
-    }
-
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-    .section-head p {
-      max-width: 780px;
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .panel,
-    .item-card,
-    .route-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-    }
-
-    .panel { padding: 16px; }
-    .panel.accent-teal { border-top: 3px solid var(--teal); }
-    .panel.accent-amber { border-top: 3px solid var(--amber); }
-    .panel.accent-red { border-top: 3px solid var(--red); }
-    .panel.accent-blue { border-top: 3px solid var(--blue); }
-    .panel.accent-green { border-top: 3px solid var(--green); }
-
-    .mini-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .muted { color: var(--muted); }
-    .small { font-size: .87rem; }
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 999px;
-      background: rgba(255,255,255,.045);
-      padding: 5px 9px;
-      color: #dde6e9;
-      font-size: .78rem;
-    }
-    .tag.teal { border-color: rgba(56,198,177,.38); color: #9cf1e4; }
-    .tag.amber { border-color: rgba(227,170,67,.45); color: #ffd98f; }
-    .tag.red { border-color: rgba(239,106,103,.45); color: #ffaaa8; }
-    .tag.blue { border-color: rgba(116,167,255,.45); color: #b9d2ff; }
-
-    ul.clean {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 9px;
-    }
-    ul.clean li {
-      position: relative;
-      padding-left: 18px;
-      color: #dce3e6;
-    }
-    ul.clean li::before {
-      content: "+";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--teal);
-      font-weight: 900;
-    }
-
-    .card-strip,
-    .card-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .card-chip {
-      position: relative;
-      display: grid;
-      grid-template-columns: 38px minmax(0, 1fr) auto;
-      gap: 8px;
-      align-items: center;
-      min-height: 58px;
-      min-width: min(260px, 100%);
-      max-width: 100%;
-      padding: 6px 8px 6px 6px;
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 7px;
-      background: #12171b;
-      color: var(--text);
-      overflow: visible;
-    }
-
-    .card-chip.compact {
-      min-width: min(205px, 100%);
-      grid-template-columns: 32px minmax(0, 1fr) auto;
-      min-height: 50px;
-    }
-
-    .card-chip img.card-thumb {
-      width: 38px;
-      aspect-ratio: 421 / 614;
-      object-fit: cover;
-      border-radius: 4px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: #24292e;
-    }
-    .card-chip.compact img.card-thumb { width: 32px; }
-
-    .card-name {
-      display: block;
-      min-width: 0;
-      font-weight: 800;
-      font-size: .83rem;
-      line-height: 1.15;
-      overflow-wrap: anywhere;
-    }
-    .card-note {
-      display: block;
-      color: var(--muted);
-      font-size: .74rem;
-      margin-top: 3px;
-      overflow-wrap: anywhere;
-    }
-
-    .chip-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(116,167,255,.65);
-      color: var(--blue);
-      font-size: .74rem;
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .card-zoom {
-      pointer-events: none;
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 10px);
-      z-index: 35;
-      width: 190px;
-      transform: translateX(-50%) translateY(8px);
-      opacity: 0;
-      transition: opacity .13s ease, transform .13s ease;
-      filter: drop-shadow(0 18px 28px rgba(0,0,0,.56));
-    }
-    .card-zoom img {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.24);
-    }
-    .card-chip:hover .card-zoom,
-    .card-chip:focus-within .card-zoom {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .mind-map {
-      display: grid;
-      grid-template-columns: 300px minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
-    }
-
-    .route-list {
-      display: grid;
-      gap: 8px;
-      position: sticky;
-      top: 62px;
-    }
-
-    .route-button {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 28px minmax(0, 1fr);
-      gap: 10px;
-      align-items: center;
-      text-align: left;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      color: var(--text);
-      cursor: pointer;
-    }
-    .route-button:hover,
-    .route-button.active {
-      border-color: var(--teal);
-      background: rgba(56, 198, 177, .1);
-    }
-    .route-number {
-      display: grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(227,170,67,.16);
-      color: var(--amber);
-      font-weight: 900;
-      font-size: .82rem;
-    }
-    .route-button.active .route-number { background: var(--teal); color: #061110; }
-    .route-label strong { display: block; font-size: .86rem; }
-    .route-label span { display: block; color: var(--muted); font-size: .76rem; margin-top: 2px; }
-
-    .route-panel {
-      min-height: 620px;
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    .route-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-    .route-header h3 { font-size: 1.25rem; margin-bottom: 5px; }
-    .route-header p { color: var(--muted); margin-bottom: 0; max-width: 720px; }
-
-    .route-source {
-      min-width: 160px;
-      padding: 8px 10px;
-      border: 1px solid rgba(227,170,67,.35);
-      border-radius: 7px;
-      color: #ffd98f;
-      background: rgba(227,170,67,.08);
-      font-size: .78rem;
-      text-align: right;
-    }
-
-    .graph-canvas {
-      margin-top: 14px;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 34px 34px,
-        linear-gradient(180deg, rgba(255,255,255,.028) 1px, transparent 1px) 0 0 / 34px 34px,
-        #11161a;
-      overflow-x: auto;
-    }
-
-    .flow {
-      min-width: 680px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .flow-step {
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 12px;
-      align-items: stretch;
-    }
-    .step-index {
-      display: grid;
-      place-items: center;
-      width: 34px;
-      height: 34px;
-      margin-top: 12px;
-      border-radius: 50%;
-      background: #0b0f12;
-      border: 1px solid var(--line);
-      color: var(--teal);
-      font-weight: 900;
-    }
-
-    .step-body {
-      padding: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      background: rgba(23,27,31,.92);
-    }
-    .step-title {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 9px;
-      color: #eff7f8;
-      font-weight: 900;
-    }
-    .step-note { color: var(--muted); font-size: .86rem; margin: 8px 0 0; }
-
-    .connector {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      color: var(--amber);
-      font-weight: 900;
-      align-self: center;
-    }
-
-    .branch-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .branch-card {
-      padding: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      background: #151b20;
-    }
-    .branch-card h4 {
-      margin: 0 0 8px;
-      color: var(--amber);
-      font-size: .95rem;
-    }
-    .branch-card p { color: var(--muted); font-size: .85rem; margin-bottom: 9px; }
-
-    .endboard-grid,
-    .variant-grid,
-    .tip-grid,
-    .side-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .item-card {
-      padding: 14px;
-      min-width: 0;
-    }
-    .item-card h3 {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #f5fafb;
-    }
-    .item-card p { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
-    .item-card .field-label {
-      display: inline-flex;
-      margin-bottom: 9px;
-      color: var(--green);
-      font-weight: 900;
-      font-size: .8rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    .decklist {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-    }
-    .deck-columns {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-    .deck-columns ul {
-      margin: 0;
-      padding-left: 18px;
-      color: #dce3e6;
-      font-size: .86rem;
-    }
-    .deck-columns li { margin-bottom: 5px; }
-
-    .refs-panel {
-      display: none;
-      margin-top: 14px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #11161a;
-    }
-    .refs-panel.open { display: block; }
-    .refs-panel ol {
-      margin: 0;
-      padding-left: 20px;
-      color: #dce3e6;
-    }
-    .refs-panel li { margin-bottom: 10px; }
-
-    footer {
-      color: var(--muted);
-      padding: 28px 0 42px;
-      background: #0d1114;
-      border-top: 1px solid var(--line);
-      font-size: .88rem;
-    }
-
-    @media (max-width: 980px) {
-      .hero,
-      .mind-map,
-      .decklist {
-        grid-template-columns: 1fr;
-      }
-      .hero { min-height: 0; }
-      .route-list { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .route-panel { min-height: 0; }
-      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 720px) {
-      .shell { width: min(100% - 22px, 1220px); }
-      h1 { font-size: 2.5rem; }
-      .hero-grid,
-      .grid-2,
-      .grid-3,
-      .endboard-grid,
-      .variant-grid,
-      .tip-grid,
-      .side-grid,
-      .branch-grid,
-      .deck-columns {
-        grid-template-columns: 1fr;
-      }
-      .hero-cards { grid-template-columns: repeat(3, minmax(74px, 1fr)); padding: 10px; }
-      .section-head,
-      .route-header {
-        flex-direction: column;
-      }
-      .route-source { text-align: left; width: 100%; }
-      .route-list { grid-template-columns: 1fr; }
-      .card-chip { min-width: 100%; }
-      .flow { min-width: 0; }
-      .flow-step { grid-template-columns: 1fr; }
-      .step-index { margin-top: 0; }
-      .graph-canvas { padding: 10px; }
-      .card-zoom { display: none; }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Kewl Tune Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <header>
-    <div class="shell hero">
-      <div>
-        <div class="eyebrow"><span class="plus-icon">+</span> Master Duel meta mind map</div>
-        <h1>Kewl Tune Cheatsheet</h1>
-        <p class="lead">
-          A top-to-bottom combo and matchup map for the current Kewl Tune strategy. The deck wins by turning
-          Tuner density into flexible Synchro lines, then using Rotary hand knowledge, Cue deck-top pressure,
-          and opponent-turn Synchro effects to choose the right interruption instead of forcing one fixed board.
-        </p>
-        <div class="hero-grid" aria-label="Current deck snapshot">
-          <div class="metric"><b>17.5</b><span>MDM tournament power, checked Jun 8, 2026</span></div>
-          <div class="metric"><b>15.99%</b><span>Master 1 popularity on MDM tier list</span></div>
-          <div class="metric"><b>40</b><span>cards in the latest pure Top 8 sample list</span></div>
-        </div>
-      </div>
-      <div class="hero-cards" aria-label="Key Kewl Tune cards">
-        <figure>
-          <img src="https://images.ygoprodeck.com/images/cards/16387555.jpg" alt="Kewl Tune Cue card">
-          <figcaption>Cue starts the clean 1-card route.</figcaption>
-        </figure>
-        <figure>
-          <img src="https://images.ygoprodeck.com/images/cards/17209452.jpg" alt="Kewl Tune Rotary card">
-          <figcaption>Rotary reveals the hand and finds the Spell/Trap.</figcaption>
-        </figure>
-        <figure>
-          <img src="https://images.ygoprodeck.com/images/cards/78058681.jpg" alt="Kewl Tune Synchro card">
-          <figcaption>Synchro turns any search into another Tuner Synchro.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </header>
-
-  <div class="nav-band">
-    <div class="shell">
-      <nav aria-label="Cheatsheet navigation">
-        <a href="#identity">Identity</a>
-        <a href="#combos">Combo Graph</a>
-        <a href="#endboards">End Boards</a>
-        <a href="#variants">Latest Variants</a>
-        <a href="#tips">Tips</a>
-        <a href="#recovery">Recovery</a>
-        <a href="#side">Side & Counters</a>
-        <button class="tab-button" id="refsToggle" type="button">References</button>
-      </nav>
-    </div>
-  </div>
-
   <main class="shell">
-    <section id="identity">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Playstyle and win condition</div>
-          <h2>Information-Control Synchro</h2>
-        </div>
-        <p>
-          Kewl Tune is closer to a reactive control-combo deck than a pile that always ends on the same negates.
-          Your best lines see the opponent's hand, shape their next draw, then keep Remix, Clip, Synchro, RS,
-          Zalen, B2B, or Loudness War live for the exact threat in front of you.
-        </p>
-      </div>
 
-      <div class="grid-3">
-        <div class="panel accent-teal">
-          <div class="mini-title"><span class="plus-icon">+</span> Starters</div>
-          <div class="card-row" id="starterCards"></div>
-          <ul class="clean small" style="margin-top:12px">
-            <li>Cue is the premium 1-card starter because it summons Rotary from Deck.</li>
-            <li>Reco and Mix are real starters but expose you harder to Droll after their search.</li>
-            <li>Synchro Overtake and Duelist Genesis act as 1-card access or extension depending on hand.</li>
+    <header class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">Information-control Synchro — checked June 2026</div>
+        <h1>Kewl Tune</h1>
+        <p class="subtitle">A top-to-bottom combo and matchup map for the current Kewl Tune strategy. The deck wins by turning Tuner density into flexible Synchro lines, then using <span class="card-mention" data-card="rotary">Rotary</span> hand knowledge, <span class="card-mention" data-card="cue">Cue</span> deck-top pressure, and opponent-turn Synchro effects to choose the right interruption instead of forcing one fixed board.</p>
+        <div class="pill-row">
+          <span class="pill green">Last checked: 2026-06-08 UTC</span>
+          <span class="pill blue">Role: reactive control-combo Synchro</span>
+          <span class="pill gold">Win: read the hand, pick the interruption</span>
+          <span class="pill red">MDM power 17.5 — 15.99% Master 1 popularity</span>
+        </div>
+      </div>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="cue"></span>
+          <span class="cloud-card" data-card="rotary"></span>
+          <span class="cloud-card" data-card="synchro"></span>
+          <span class="cloud-card" data-card="track"></span>
+          <span class="cloud-card" data-card="mix"></span>
+          <span class="cloud-card" data-card="reco"></span>
+          <span class="cloud-card" data-card="jj"></span>
+          <span class="cloud-card" data-card="remix"></span>
+          <span class="cloud-card" data-card="zalen"></span>
+          <span class="cloud-card" data-card="b2b"></span>
+        </div>
+      </aside>
+    </header>
+
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Kewl Tune is closer to a reactive control-combo deck than a pile that always ends on the same negates. Your best lines see the opponent's hand, shape their next draw, then keep <span class="card-mention" data-card="remix">Remix</span>, <span class="card-mention" data-card="clip">Clip</span>, <span class="card-mention" data-card="synchro">Kewl Tune Synchro</span>, <span class="card-mention" data-card="rs">RS</span>, <span class="card-mention" data-card="zalen">Zalen</span>, <span class="card-mention" data-card="b2b">B2B</span>, or <span class="card-mention" data-card="loud">Loudness War</span> live for the exact threat in front of you.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Going first: build layered opponent-turn Synchro pressure with hand knowledge from <span class="card-mention" data-card="rotary">Rotary</span>.</span></li>
+            <li><span class="num">2</span><span>Going second: use Tuner hand traps as both defense and Synchro material, then convert into <span class="card-mention" data-card="b2b">B2B</span>/<span class="card-mention" data-card="rs">RS</span>/<span class="card-mention" data-card="crackle">Crackle</span> damage.</span></li>
+            <li><span class="num">3</span><span>In grind: <span class="card-mention" data-card="jj">JJ</span>, <span class="card-mention" data-card="synchro">Kewl Tune Synchro</span>, <span class="card-mention" data-card="remix">Remix</span>, <span class="card-mention" data-card="b2b">B2B</span>, and <span class="card-mention" data-card="loud">Loudness War</span> keep recycling the same Tuner names.</span></li>
           </ul>
-        </div>
-        <div class="panel accent-amber">
-          <div class="mini-title"><span class="info-icon">i</span> Triggers that matter</div>
-          <ul class="clean small">
-            <li>All main Kewl Tune Tuners can use a Tuner in hand as another Synchro material while on field.</li>
-            <li>Rotary as Synchro material either checks hand and searches Kewl Tune Spell/Trap, or recycles an opponent GY card.</li>
-            <li>Cue as material excavates the top 2 opponent cards, banishes 1, then stacks or bottoms the other.</li>
-            <li>Reco pops Spell/Trap, Mix pops monster, Clip hits a random face-down Extra Deck card.</li>
-          </ul>
-        </div>
-        <div class="panel accent-blue">
-          <div class="mini-title"><span class="plus-icon">+</span> Win pattern</div>
-          <ul class="clean small">
-            <li>Going first: build layered opponent-turn Synchro pressure with hand knowledge.</li>
-            <li>Going second: use Tuner hand traps as both defense and material, then convert into B2B/RS/Crackle damage.</li>
-            <li>In grind: JJ, Kewl Tune Synchro, Remix, B2B, and Loudness War keep recycling the same Tuner names.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="combos">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Core combos and interactions</div>
-          <h2>Interactive Combo Graph</h2>
-        </div>
-        <p>
-          Select a route to explore starter, trigger cluster, decision points, and outs. The graph favors
-          practical routes from the MDM combo submissions and spreadsheet records over theoretical maximum boards.
-        </p>
-      </div>
-
-      <div class="panel accent-amber" style="margin-bottom:14px">
-        <div class="mini-title"><span class="info-icon">i</span> Combo spreadsheet found</div>
-        <p class="muted small" style="margin-bottom:10px">
-          Live MDM data returned 3 Kewl Tune spreadsheet records. The main visible record has 6 tabs:
-          Cue 1 Card, Reco 1 Card, Synchro Overtake 1 Card, Rotary + Lv3 Tuner, Mix + Tuner, and Other.
-          The Reddit post also links a public Google spreadsheet; both are listed in the hidden References tab.
-        </p>
-        <div class="tag-row">
-          <span class="tag amber">36 combo records checked</span>
-          <span class="tag teal">3 spreadsheet records checked</span>
-          <span class="tag blue">14 counter records checked</span>
-        </div>
-      </div>
-
-      <div class="mind-map">
-        <div class="route-list" id="routeList" aria-label="Combo route list"></div>
-        <div class="route-panel" id="routePanel" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section id="endboards">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Field by End Phase</div>
-          <h2>End Board Examples</h2>
-        </div>
-        <p>
-          Kewl Tune end boards should be chosen after Rotary resolves. These are common practical endpoints,
-          not mandatory destinations.
-        </p>
-      </div>
-      <div class="endboard-grid" id="endboardGrid"></div>
-    </section>
-
-    <section id="variants">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Latest tournament top</div>
-          <h2>Variant Read</h2>
-        </div>
-        <p>
-          Baseline is cofi's pure Kewl Tune Top 8 list from Dkayed Meta Weekly #228 on June 8, 2026.
-          MDM's latest top-deck feed also shows Fallen/Virtuous, Super Polymerization, and K9-tagged variants.
-        </p>
-      </div>
-
-      <div class="decklist">
-        <div class="panel accent-teal">
-          <h3>Pure Kewl Tune - cofi, Top 8 Meta Weekly #228</h3>
-          <p class="muted small">40 Main / 15 Extra. No side deck in the Master Duel list. Cost shown by MDM: 930 UR / 480 SR.</p>
-          <div class="deck-columns">
-            <div>
-              <h3>Main deck shell</h3>
-              <ul>
-                <li>3 Rotary, 3 Cue, 3 Reco, 3 Mix, 1 Clip</li>
-                <li>3 Kewl Tune Synchro, 2 JJ, 1 Overtake, 2 Duelist Genesis</li>
-                <li>3 Effect Veiler, 3 Ash, 2 Belle, 2 Mourner, 1 Ogre</li>
-                <li>3 Fuwalos, 1 Maxx C, 1 Called By, 3 Impermanence</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Extra deck shell</h3>
-              <ul>
-                <li>3 Track Maker, 2 RS, 2 Remix, 2 Loudness War, 2 B2B</li>
-                <li>1 Crackle, 1 Garden Rose Flora, 1 Zalen, 1 TY-PHON</li>
-              </ul>
-            </div>
+        </article>
+        <article class="note-card">
+          <h3>Starters And Material Triggers</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="cue"></span>
+            <span class="card-chip" data-card="reco"></span>
+            <span class="card-chip" data-card="mix"></span>
+            <span class="card-chip" data-card="rotary"></span>
+            <span class="card-chip" data-card="overtake"></span>
+            <span class="card-chip" data-card="genesis"></span>
           </div>
-        </div>
-        <div class="variant-grid" id="variantGrid"></div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="cue">Cue</span> is the premium 1-card starter because it summons <span class="card-mention" data-card="rotary">Rotary</span> from Deck. <span class="card-mention" data-card="reco">Reco</span> and <span class="card-mention" data-card="mix">Mix</span> are real starters but expose you harder to <span class="card-mention" data-card="droll">Droll</span> after their search. <span class="card-mention" data-card="overtake">Synchro Overtake</span> and <span class="card-mention" data-card="genesis">Duelist Genesis</span> act as 1-card access or extension.</span></li>
+            <li><span class="num">2</span><span>All main Kewl Tune Tuners can use a Tuner in hand as another Synchro material while on field.</span></li>
+            <li><span class="num">3</span><span>As Synchro material: <span class="card-mention" data-card="rotary">Rotary</span> checks the hand and searches a Kewl Tune Spell/Trap (or recycles an opponent GY card); <span class="card-mention" data-card="cue">Cue</span> excavates the top 2 opponent cards, banishes 1, then stacks or bottoms the other; <span class="card-mention" data-card="reco">Reco</span> pops a Spell/Trap, <span class="card-mention" data-card="mix">Mix</span> pops a monster, <span class="card-mention" data-card="clip">Clip</span> hits a random face-down Extra Deck card.</span></li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <section id="tips">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Latest meta tips</div>
-          <h2>Sequencing Tips</h2>
-        </div>
-        <p>
-          Most mistakes happen after you already have access. Use hand knowledge to pick the interaction,
-          then stop before giving high-value draw cards or board breakers a better trade than they deserve.
-        </p>
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="source-note">
+        Live MDM data returned 36 Kewl Tune combo records, 3 spreadsheet records, and 14 counter records. The main visible spreadsheet record has 6 tabs: Cue 1 Card, Reco 1 Card, Synchro Overtake 1 Card, Rotary + Lv3 Tuner, Mix + Tuner, and Other. The graph favors practical routes from MDM combo submissions and spreadsheet records over theoretical maximum boards; the public Google spreadsheet and the Reddit post that links it are in References.
       </div>
-      <div class="tip-grid" id="tipGrid"></div>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Cue 1-card adaptive — 1-card starter: Cue (MDM spreadsheet + CardsRealm guide)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Open with Cue</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="cue"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rotary"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="cue">Cue</span>; it Special Summons <span class="card-mention" data-card="rotary">Rotary</span> from Deck. This is the safest one-card access because Cue immediately puts Rotary into Synchro-material position.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">First Synchro</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="cue"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rotary"></span><span class="plus-sign">+</span><span class="card-chip" data-card="track"></span></div></td>
+              <td>Synchro Summon <span class="card-mention" data-card="track">Track Maker</span>, which searches a Kewl Tune card. <span class="card-mention" data-card="cue">Cue</span> and <span class="card-mention" data-card="rotary">Rotary</span> both trigger after being used as material.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Stack the trigger cluster</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="cue"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rotary"></span></div></td>
+              <td>Order the chain based on the opponent's hand and your need for protected searches. If you need deck-top disruption, let <span class="card-mention" data-card="cue">Cue</span> resolve after seeing the hand; if you need chain-blocking, protect the more important <span class="card-mention" data-card="rotary">Rotary</span> search.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Access package</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="jj"></span><span class="plus-sign">+</span><span class="card-chip" data-card="synchro"></span></div></td>
+              <td><span class="card-mention" data-card="rotary">Rotary</span> finds <span class="card-mention" data-card="synchro">Kewl Tune Synchro</span>, <span class="card-mention" data-card="track">Track Maker</span> finds <span class="card-mention" data-card="jj">JJ</span>; tribute Track Maker with JJ for <span class="card-mention" data-card="mix">Mix</span>/<span class="card-mention" data-card="reco">Reco</span>. CardsRealm's basic line ends with JJ plus Kewl Tune Synchro access, then Reco/Mix into <span class="card-mention" data-card="remix">Remix</span> and <span class="card-mention" data-card="clip">Clip</span> follow-up.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Reco 1-card — backup starter when Cue is missing (MDM spreadsheet)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Normal Reco</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="reco"></span><span class="plus-sign">+</span><span class="card-chip" data-card="mix"></span></div></td>
+              <td><span class="card-mention" data-card="reco">Reco</span> searches a non-Level 3 Kewl Tune, usually <span class="card-mention" data-card="mix">Mix</span> or another missing name. It exposes you to <span class="card-mention" data-card="droll">Droll</span> immediately, so resolve or protect the first search carefully.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Make Remix</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="reco"></span><span class="plus-sign">+</span><span class="card-chip" data-card="mix"></span><span class="plus-sign">+</span><span class="card-chip" data-card="remix"></span></div></td>
+              <td><span class="card-mention" data-card="reco">Reco</span> plus <span class="card-mention" data-card="mix">Mix</span> creates <span class="card-mention" data-card="remix">Remix</span> and loads both pop triggers (Spell/Trap and monster destruction) into the GY for later.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Conservative or greedy</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="plus-sign">+</span><span class="card-chip" data-card="b2b"></span><span class="plus-sign">+</span><span class="card-chip" data-card="jj"></span></div></td>
+              <td>MDM routes show <span class="card-mention" data-card="zalen">Zalen</span> + <span class="card-mention" data-card="remix">Remix</span> + <span class="card-mention" data-card="jj">JJ</span> for stable follow-up, or greedy <span class="card-mention" data-card="b2b">B2B</span> + <span class="card-mention" data-card="reframing">Reframing</span>. An anti-Nib route instead leaves <span class="card-mention" data-card="clip">Clip</span> and <span class="card-mention" data-card="remix">Remix</span> quick Synchros rather than committing everything immediately.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Mix plus Tuner — two-card cleanup; the Tuner's Level picks the endpoint (MDM spreadsheet)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Summon Mix</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="mix"></span><span class="plus-sign">+</span><span class="card-chip" data-card="veiler"></span></div></td>
+              <td><span class="card-mention" data-card="mix">Mix</span> searches <span class="card-mention" data-card="reco">Reco</span>/<span class="card-mention" data-card="cue">Cue</span>. The pure list is full of Tuner hand traps like <span class="card-mention" data-card="veiler">Effect Veiler</span>, so this pairing comes up naturally.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Convert by Level</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="track"></span><span class="plus-sign">+</span><span class="card-chip" data-card="remix"></span><span class="plus-sign">+</span><span class="card-chip" data-card="zalen"></span></div></td>
+              <td>MDM lists separate Mix + Lv1, Lv2, and Lv3 routes with different end boards: Lv1 ends on <span class="card-mention" data-card="jj">JJ</span>, <span class="card-mention" data-card="reco">Reco</span>, <span class="card-mention" data-card="remix">Remix</span>, KTS set; Lv2 keeps an extra <span class="card-mention" data-card="track">Track Maker</span> search body in the loop; Lv3 reaches <span class="card-mention" data-card="zalen">Zalen</span> more naturally.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Hold KTS</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="synchro"></span><span class="plus-sign">+</span><span class="card-chip" data-card="jj"></span><span class="plus-sign">+</span><span class="card-chip" data-card="clip"></span></div></td>
+              <td>Do not spend <span class="card-mention" data-card="synchro">Kewl Tune Synchro</span> just because you can; it is often your best opponent-turn pivot. Keep <span class="card-mention" data-card="jj">JJ</span> for follow-up and <span class="card-mention" data-card="clip">Clip</span> as a quick Synchro if searched.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Rotary plus Level 3 Tuner — hand knowledge first; the route with the most explicit anti-hand-trap notes (MDM spreadsheet)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Reveal Rotary</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rotary"></span><span class="plus-sign">+</span><span class="card-chip" data-card="reco"></span></div></td>
+              <td><span class="card-mention" data-card="rotary">Rotary</span> can immediately Normal Summon a Tuner by revealing itself and another Tuner, here a Level 3 like <span class="card-mention" data-card="reco">Reco</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Track Maker cluster</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="rotary"></span><span class="plus-sign">+</span><span class="card-chip" data-card="track"></span><span class="plus-sign">+</span><span class="card-chip" data-card="cue"></span></div></td>
+              <td>Use the <span class="card-mention" data-card="rotary">Rotary</span> hand check to decide whether you can value-search with <span class="card-mention" data-card="track">Track Maker</span> or need protection; <span class="card-mention" data-card="cue">Cue</span> adds topdeck control if used.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Hand-trap branches</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="ash"></span><span class="plus-sign">+</span><span class="card-chip" data-card="droll"></span><span class="plus-sign">+</span><span class="card-chip" data-card="fuwalos"></span></div></td>
+              <td>The spreadsheet separates <span class="card-mention" data-card="ash">Ash</span>, <span class="card-mention" data-card="belle">Belle</span>, <span class="card-mention" data-card="droll">Droll</span>, <span class="card-mention" data-card="fuwalos">Fuwalos</span>, and <span class="card-mention" data-card="purulia">Purulia</span> branches. With one opponent hand card, do not create a chain order where <span class="card-mention" data-card="ash">Ash</span> on <span class="card-mention" data-card="track">Track Maker</span> blanks <span class="card-mention" data-card="rotary">Rotary</span> too; if <span class="card-mention" data-card="droll">Droll</span> cuts off further Deck adds, end with <span class="card-mention" data-card="mix">Mix</span> in hand.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
-    <section id="recovery">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="plus-icon">+</span> Recovery options</div>
-          <h2>How You Keep Playing</h2>
-        </div>
-        <p>
-          The deck's grind comes from cards that turn spent Tuners into fresh bodies, searches, or repeated
-          Synchro summons.
-        </p>
-      </div>
-      <div class="grid-3" id="recoveryGrid"></div>
-    </section>
-
-    <section id="side">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Side deck options and counters</div>
-          <h2>Matchup Plan</h2>
-        </div>
-        <p>
-          Master Duel is mostly best-of-one, but these are the cards and packages that matter for tournament
-          sideboarding or local best-of-three play. The counter list is based on MDM counter submissions and
-          current top-list patterns.
-        </p>
-      </div>
-      <div class="side-grid" id="sideGrid"></div>
-    </section>
-
-    <section id="referencesSection">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow"><span class="info-icon">i</span> Hidden tab</div>
-          <h2>References Used</h2>
-        </div>
-        <p>Click the References button in the sticky navigation to show or hide the source list.</p>
-      </div>
-      <div class="refs-panel" id="refsPanel"></div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="shell">
-      Built as a local HTML cheatsheet on June 8, 2026 UTC. Card images are loaded from YGOPRODeck using direct numeric ids.
-    </div>
-  </footer>
-
-  <script>
-    const img = id => `https://images.ygoprodeck.com/images/cards/${id}.jpg`;
-    const cards = {
-      cue: { id: 16387555, name: "Kewl Tune Cue", note: "Normal Summon starter; summons a Tuner from hand, Deck, or GY." },
-      rotary: { id: 17209452, name: "Kewl Tune Rotary", note: "Hand knowledge plus Kewl Tune Spell/Trap search when used as Synchro material." },
-      mix: { id: 16509007, name: "Kewl Tune Mix", note: "Searches non-Level 2 Kewl Tune; material trigger destroys a monster." },
-      reco: { id: 89392810, name: "Kewl Tune Reco", note: "Searches non-Level 3 Kewl Tune; material trigger destroys a Spell/Trap." },
-      clip: { id: 43904702, name: "Kewl Tune Clip", note: "Opponent-turn Special Summon and Tuner Synchro line; material trigger hits Extra Deck." },
-      track: { id: 42781164, name: "Kewl Tune Track Maker", note: "Extra Deck searcher; material trigger bounces an opponent card." },
-      rs: { id: 15665977, name: "Kewl Tune RS", note: "Main Phase face-up negate by banishing a Tuner from GY." },
-      remix: { id: 88170262, name: "Kewl Tune Remix", note: "Opponent-turn tribute to add plus summon 2 non-Synchro Tuners from GY." },
-      loud: { id: 41069676, name: "Kewl Tune Loudness War", note: "Protects Tuners and replays a banished Kewl Tune material trigger." },
-      b2b: { id: 65961304, name: "Kewl Tune B2B", note: "Level pressure, double attacks for Tuners, and up to two opponent-turn Tuner recoveries." },
-      crackle: { id: 39576656, name: "Kewl Tune Crackle", note: "Looks at Extra Deck and temporary banishes key Extra Deck cards." },
-      synchro: { id: 78058681, name: "Kewl Tune Synchro", note: "Search any Kewl Tune card, then optionally Synchro Summon a Tuner Synchro." },
-      jj: { id: 14442329, name: "JJ \"Kewl Tune\"", note: "Extra Normal Summon for Tuners and tribute access to any Kewl Tune monster." },
-      playlist: { id: 40847034, name: "Kewl Tune Playlist", note: "Low-usage trap that applies a material trigger and returns the target to hand." },
-      zalen: { id: 4891376, name: "Zalen the Shackled Dragon", note: "Chain-position negate that can treat itself as non-Tuner for Synchro material." },
-      reframing: { id: 18158393, name: "Mannadium Reframing", note: "Searchable going-first omni-negate in Visas Amritara packages." },
-      baronne: { id: 84815190, name: "Baronne de Fleur", note: "Generic Synchro omni-negate, used in greedy routes where legal." },
-      chaos: { id: 22850702, name: "Chaos Angel", note: "Banishes a card and can add protection with LIGHT/DARK materials." },
-      typhon: { id: 93039339, name: "Super Starslayer TY-PHON - Sky Crisis", note: "Emergency Extra Deck out to established monsters." },
-      flora: { id: 76524506, name: "Garden Rose Flora", note: "Synchro Tuner utility slot in current pure lists." },
-      overtake: { id: 99243014, name: "Synchro Overtake", note: "1-card access or extender through Track Maker names." },
-      genesis: { id: 97474300, name: "Duelist Genesis", note: "Gets limited Synchro Overtake access in current builds." },
-      veiler: { id: 97268402, name: "Effect Veiler", note: "Tuner hand trap and material." },
-      ash: { id: 14558127, name: "Ash Blossom & Joyous Spring", note: "Tuner hand trap and common counter." },
-      belle: { id: 73642296, name: "Ghost Belle & Haunted Mansion", note: "Tuner hand trap; checks GY recovery." },
-      mourner: { id: 52038441, name: "Ghost Mourner & Moonlit Chill", note: "Tuner hand trap played for density." },
-      ogre: { id: 59438930, name: "Ghost Ogre & Snow Rabbit", note: "Tuner hand trap with field-spell pressure." },
-      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos", note: "Draws from Deck or Extra Deck Special Summons." },
-      purulia: { id: 84192580, name: "Mulcharmy Purulia", note: "Draws from hand summons; can be awkward into Kewl Tune." },
-      meowls: { id: 87126721, name: "Mulcharmy Meowls", note: "Low impact against Kewl Tune unless Remix/B2B starts reviving." },
-      maxx: { id: 23434538, name: "Maxx \"C\"", note: "Still pressures, but timing matters because Kewl Tune can plan around early use." },
-      droll: { id: 94145021, name: "Droll & Lock Bird", note: "High impact after Reco/Mix or when Kewl Tune Synchro is forced early." },
-      nibiru: { id: 27204311, name: "Nibiru, the Primal Being", note: "Routes can preserve opponent-turn Synchro access or Zalen lines to reduce exposure." },
-      superpoly: { id: 48130397, name: "Super Polymerization", note: "Uses two Tuners into Sea Monster of Theseus." },
-      theseus: { id: 96334243, name: "Sea Monster of Theseus", note: "Super Polymerization target for any 2 Tuners." },
-      contactc: { id: 87170768, name: "Contact \"C\"", note: "Locks Synchro progress unless removed or used creatively." },
-      shifter: { id: 91800273, name: "Dimension Shifter", note: "Stops GY Tuner fuel and prevents Kewl Tune material triggers from hitting GY." },
-      droplet: { id: 24299458, name: "Forbidden Droplet", note: "Trades cleanly into RS and Zalen." },
-      tactics: { id: 25311006, name: "Triple Tactics Talent", note: "Punishes opponent-turn monster effects and can draw or take." },
-      thrust: { id: 35269904, name: "Triple Tactics Thrust", note: "Searches board breakers after Kewl Tune interaction." },
-      called: { id: 24224830, name: "Called by the Grave", note: "Protects combo from hand traps." },
-      fallen: { id: 30271097, name: "The Fallen & The Virtuous", note: "Engine-tagged tournament variant card." },
-      k9izuna: { id: 92248362, name: "K9-17 Izuna", note: "K9 variant starter card." },
-      k9lupis: { id: 91025875, name: "K9-00 Lupis", note: "K9 variant utility card." },
-      fydraulis: { id: 70088809, name: "Fydraulis Harmonia", note: "TCG/OCG tech that converts Kewl Tune Tuner access into toolbox Synchros." },
-      amritara: { id: 821049, name: "Visas Amritara", note: "Can search Mannadium Reframing in supported going-first packages." },
-      littleknight: { id: 29301450, name: "S:P Little Knight", note: "Out to awkward monsters when not locked." }
-    };
-
-    const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      "\"": "&quot;",
-      "'": "&#39;"
-    }[ch]));
-
-    function cardChip(key, note = "", compact = false) {
-      const card = cards[key] || { id: key, name: key, note: "" };
-      const displayNote = note || card.note || "";
-      return `
-        <span class="card-chip ${compact ? "compact" : ""}" tabindex="0">
-          <img class="card-thumb" src="${img(card.id)}" alt="${esc(card.name)}">
-          <span>
-            <span class="card-name">${esc(card.name)}</span>
-            ${displayNote ? `<span class="card-note">${esc(displayNote)}</span>` : ""}
-          </span>
-          <span class="chip-icon" title="${esc(card.note || card.name)}">i</span>
-          <span class="card-zoom"><img src="${img(card.id)}" alt="${esc(card.name)} large preview"></span>
-        </span>
-      `;
-    }
-
-    const routes = [
-      {
-        id: "cue-adaptive",
-        title: "Cue 1-card adaptive",
-        short: "Standard hand-read line",
-        source: "MDM spreadsheet + CardsRealm guide",
-        summary: "Use Cue to summon Rotary, Synchro into Track Maker, then stack your chain links based on opponent hand and your need for protected searches.",
-        start: ["cue"],
-        steps: [
-          { title: "Starter", cards: [["cue", "Normal Summon"], ["rotary", "Cue Special Summons from Deck"]], note: "This is the safest one-card access because Cue immediately puts Rotary into material position." },
-          { title: "First Synchro", cards: [["cue", "Material"], ["rotary", "Material"], ["track", "Synchro Summon"]], note: "Track Maker searches a Kewl Tune card; Cue and Rotary both trigger after being used as material." },
-          { title: "Trigger cluster", cards: [["cue", "CL1 or CL3"], ["rotary", "Protect this search"], ["track", "Search JJ or KTS"]], note: "If you need better deck-top disruption, let Cue resolve after seeing hand. If you need chain-blocking, protect the more important search." },
-          { title: "Access package", cards: [["rotary", "Search Kewl Tune Synchro"], ["track", "Search JJ"], ["jj", "Tribute Track Maker for Mix/Reco"], ["synchro", "Set or fire as extender"]], note: "CardsRealm's basic line ends with JJ plus Kewl Tune Synchro access, then Reco/Mix into Remix and Clip follow-up." }
-        ],
-        branches: [
-          { title: "Practical field", cards: ["jj", "synchro", "remix", "clip"], text: "JJ face-up, Kewl Tune Synchro set/live, Remix on field, Clip in hand if Reco found it. Use Remix, Clip, or KTS on opponent turn." },
-          { title: "Zero-extension disruption", cards: ["zalen", "remix", "rs"], text: "The highest-voted MDM 1-card route recommends prioritizing Zalen plus Remix when your hand has no real extension." },
-          { title: "Hand-trap-aware branch", cards: ["cue", "rotary", "track", "jj", "synchro"], text: "If opponent has exactly one card, avoid a chain order that lets Ash on Track Maker blank both searches because Rotary needs an opponent hand card to search." }
-        ]
-      },
-      {
-        id: "cue-greedy",
-        title: "Greedy Cue",
-        short: "Max board line",
-        source: "MDM combo record",
-        summary: "Pushes past the normal midrange endpoint into B2B, Reframing, and high-value Synchros. Use only when hand knowledge says the path is clear.",
-        start: ["cue"],
-        steps: [
-          { title: "Open Cue", cards: [["cue", "Normal Summon"], ["rotary", "Summon or access"], ["track", "Search package"]], note: "Same first access pattern, but you keep converting every Tuner into another Synchro instead of stopping on flexible interaction." },
-          { title: "Build layered negates", cards: [["b2b", "Level pressure"], ["zalen", "Chain-position negate"], ["reframing", "Trap omni"], ["rs", "Face-up negate"]], note: "The greedy record lists B2B, Zalen, Reframing, Baronne/Chaos Angel options, and RS." },
-          { title: "Risk check", cards: [["droll", "Punishes search chains"], ["nibiru", "Punishes overextension"], ["droplet", "Breaks monster negates"]], note: "This route is powerful but gives opposing board breakers more value." }
-        ],
-        branches: [
-          { title: "Negate pile", cards: ["b2b", "reframing", "zalen", "rs"], text: "B2B plus Reframing plus Zalen/RS is a high ceiling, but it is less flexible than the adaptive midrange line." },
-          { title: "Synchro toolbox", cards: ["baronne", "chaos", "b2b"], text: "Where legal, Baronne and Chaos Angel add broad removal and protection." }
-        ]
-      },
-      {
-        id: "reco-one",
-        title: "Reco 1-card",
-        short: "Backup starter",
-        source: "MDM spreadsheet",
-        summary: "Reco is not as clean as Cue, but it still converts into Remix/Zalen or B2B lines when Droll is absent.",
-        start: ["reco"],
-        steps: [
-          { title: "Normal Reco", cards: [["reco", "Search non-Level 3"], ["mix", "Common search target"]], note: "Reco searches Mix or another missing name; it exposes you to Droll immediately." },
-          { title: "Make Track or Remix", cards: [["reco", "Material"], ["mix", "Material"], ["remix", "Opponent-turn engine"]], note: "Reco plus Mix creates Remix and loads both pop triggers into the GY." },
-          { title: "Choose conservative or greedy", cards: [["zalen", "Safer interaction"], ["b2b", "Greedy recovery"], ["jj", "Follow-up"]], note: "MDM routes show Zalen + Remix + JJ for follow-up, or greedy B2B + Reframing." }
-        ],
-        branches: [
-          { title: "Stable Reco", cards: ["zalen", "remix", "jj"], text: "End with Zalen live, Remix ready, and JJ as the next-turn resource engine." },
-          { title: "Anti-Nib Reco", cards: ["clip", "remix", "rs", "jj"], text: "An anti-Nib route leaves Clip and Remix quick Synchros instead of committing everything immediately." }
-        ]
-      },
-      {
-        id: "mix-tuner",
-        title: "Mix plus Tuner",
-        short: "Two-card cleanup",
-        source: "MDM spreadsheet",
-        summary: "Mix becomes strong once paired with a Level 1, 2, or 3 Tuner. The Tuner level changes whether you end on Track Maker, Remix, Zalen, or extra KTS.",
-        start: ["mix", "veiler"],
-        steps: [
-          { title: "Summon Mix", cards: [["mix", "Search Reco/Cue"], ["veiler", "Any Level 1 Tuner example"]], note: "The pure list is full of Tuner hand traps, so this pairing comes up naturally." },
-          { title: "Convert level", cards: [["track", "Level 4 route"], ["remix", "Level 5 route"], ["zalen", "Higher line"]], note: "MDM lists separate Mix + Lv1, Lv2, and Lv3 routes with different endboards." },
-          { title: "Hold KTS", cards: [["synchro", "Set for next turn"], ["jj", "Follow-up"], ["clip", "Quick Synchro if searched"]], note: "Do not spend Kewl Tune Synchro just because you can; it is often your best opponent-turn pivot." }
-        ],
-        branches: [
-          { title: "Mix + Lv1", cards: ["jj", "reco", "remix", "synchro"], text: "MDM route ends on JJ, Reco, Remix, and KTS set for next turn." },
-          { title: "Mix + Lv2", cards: ["jj", "track", "remix", "synchro"], text: "Track Maker route keeps an extra search body in the loop." },
-          { title: "Mix + Lv3", cards: ["jj", "remix", "zalen", "synchro"], text: "Level 3 route reaches Zalen more naturally." }
-        ]
-      },
-      {
-        id: "rotary-lv3",
-        title: "Rotary plus Level 3",
-        short: "Hand knowledge first",
-        source: "MDM spreadsheet",
-        summary: "Rotary with a Level 3 Tuner lets you see hand before choosing the rest of the line and is the route with the most explicit anti-hand-trap notes.",
-        start: ["rotary", "reco"],
-        steps: [
-          { title: "Reveal Rotary", cards: [["rotary", "Reveal with Tuner"], ["reco", "Normal/Summon Level 3 Tuner"]], note: "Rotary can immediately Normal Summon a Tuner by revealing itself and another Tuner." },
-          { title: "Track Maker cluster", cards: [["rotary", "Hand check"], ["track", "Search"], ["cue", "Topdeck control if used"]], note: "Use the hand check to decide if you can value-search or need protection." },
-          { title: "Hand-trap branches", cards: [["ash", "Chain order issue"], ["belle", "Remix check"], ["droll", "After first add"], ["fuwalos", "Draw management"]], note: "Dominick's spreadsheet routes separate Ash, Belle, Droll, Fuwalos, and Purulia branches." }
-        ],
-        branches: [
-          { title: "Versus Ash", cards: ["jj", "remix", "zalen"], text: "Important note: with one opponent hand card, do not create a chain order where Ash on Track Maker blanks Rotary too." },
-          { title: "Versus Droll", cards: ["jj", "remix", "zalen", "mix"], text: "End with Mix in hand if Droll cuts off further Deck adds." },
-          { title: "Versus Fuwalos", cards: ["jj", "track", "mix", "cue", "synchro"], text: "Spreadsheet route accepts one draw to keep stronger follow-up." }
-        ]
-      },
-      {
-        id: "handtrap",
-        title: "Hand-trap branches",
-        short: "Droll, Fuwalos, Purulia",
-        source: "MDM combo spreadsheet",
-        summary: "These routes are about giving the opponent fewer cards while keeping enough interaction. Do not treat them as full-combo lines.",
-        start: ["cue", "reco", "overtake"],
-        steps: [
-          { title: "Cue vs Droll", cards: [["cue", "Start"], ["rotary", "Hand search"], ["synchro", "Chain to Droll if needed"], ["mix", "Add before lock"]], note: "Cue can still finish on JJ plus Remix/Track/Zalen through Droll in the spreadsheet route." },
-          { title: "Cue vs Fuwalos", cards: [["cue", "Normal"], ["fuwalos", "Opponent chains"], ["mix", "Summon from Deck"], ["track", "Second draw point"]], note: "The listed route gives Fuwalos two draws but keeps JJ, Track Maker, Reco, KTS, and Clip in hand." },
-          { title: "Reco vs Purulia", cards: [["reco", "Starter"], ["purulia", "Opponent draw card"], ["remix", "End engine"], ["synchro", "Set/live"]], note: "Purulia can draw, but its quality varies because Kewl Tune can shift between hand, Deck, and Extra Deck summons." }
-        ],
-        branches: [
-          { title: "Cue vs Droll", cards: ["jj", "remix", "track", "zalen"], text: "Spreadsheet endpoint keeps multiple opponent-turn choices despite the add lock." },
-          { title: "Cue vs Fuwalos", cards: ["jj", "track", "reco", "synchro", "clip"], text: "Opponent draws two; you keep Clip and KTS to play on their turn." },
-          { title: "Reco vs Fuwalos", cards: ["jj", "track", "remix"], text: "Reco line is concise and accepts two Fuwalos draws." }
-        ]
-      },
-      {
-        id: "otk",
-        title: "OTK lines",
-        short: "Close games",
-        source: "MDM spreadsheet",
-        summary: "Kewl Tune usually wins by control, but B2B double attacks and Crackle/RS bodies create real damage routes.",
-        start: ["reco", "cue", "overtake"],
-        steps: [
-          { title: "Reco OTK", cards: [["reco", "1-card open field route"], ["crackle", "Extra Deck pressure"], ["b2b", "Tuners attack twice"]], note: "The spreadsheet labels Reco OTK as 8000 damage on an open field." },
-          { title: "Cue + Overtake", cards: [["cue", "Starter"], ["genesis", "Find Overtake"], ["overtake", "Extend"], ["b2b", "Damage engine"]], note: "Max damage route uses Cue plus Duelist Genesis/Synchro Overtake." },
-          { title: "B2B Turbo", cards: [["rotary", "With Cue"], ["cue", "With Rotary"], ["b2b", "Push"], ["rs", "Negate body"]], note: "Use when the opponent has few monsters or under Maxx C pressure." }
-        ],
-        branches: [
-          { title: "Reco OTK", cards: ["jj", "crackle", "b2b"], text: "Open-field 8000 route from spreadsheet." },
-          { title: "Max damage", cards: ["jj", "b2b", "rs"], text: "Cue plus Overtake/Duelist Genesis route." }
-        ]
-      }
-    ];
-
-    const endboards = [
-      {
-        title: "Adaptive Cue End",
-        label: "Standard",
-        cards: ["jj", "synchro", "remix", "clip"],
-        text: "Field has JJ and Remix, Kewl Tune Synchro set or live, Clip in hand if searched. Opponent-turn Synchro lines can become RS, Loudness War, B2B, Zalen, or Track Maker bounce based on the hand you saw."
-      },
-      {
-        title: "No-Extension Disruption",
-        label: "Safe 1-card",
-        cards: ["zalen", "remix", "rs"],
-        text: "MDM's highest-voted Cue 1-card route favors Zalen plus Remix access, with RS as a face-up negate and level pressure. This is the route to know when the rest of your hand is defensive cards."
-      },
-      {
-        title: "Greedy Going First",
-        label: "High ceiling",
-        cards: ["b2b", "reframing", "zalen", "rs"],
-        text: "B2B plus Reframing plus Zalen/RS is strong when hand knowledge confirms low punishment. It is weaker into Droplet, Super Polymerization, and Droll if forced too early."
-      },
-      {
-        title: "Anti-Mulcharmy Cue",
-        label: "Draw management",
-        cards: ["jj", "track", "reco", "synchro", "clip"],
-        text: "Cue vs Fuwalos route accepts two draws but keeps enough opponent-turn play: JJ, Track Maker, Reco, KTS, and Clip in hand."
-      },
-      {
-        title: "Reco Backup Board",
-        label: "Starter 2",
-        cards: ["zalen", "remix", "jj"],
-        text: "Reco can still end on Zalen and Remix with JJ follow-up. This is worse into Droll than Cue, so resolve or protect the first search carefully."
-      },
-      {
-        title: "OTK Setup",
-        label: "Open field",
-        cards: ["jj", "crackle", "b2b"],
-        text: "The spreadsheet's Reco OTK uses JJ, Crackle, and B2B pressure to clear 8000 on an open field."
-      }
-    ];
-
-    const variants = [
-      {
-        title: "Pure Kewl Tune",
-        cards: ["cue", "rotary", "synchro", "zalen"],
-        text: "Latest tournament baseline: cofi Top 8, Meta Weekly #228, Jun 8, 2026. Maximizes Tuner density and defensive hand traps."
-      },
-      {
-        title: "The Fallen & The Virtuous",
-        cards: ["fallen", "cue", "rotary"],
-        text: "B O R Y reached Top 4 in Special Tournament #3 on Jun 8, 2026 with this engine tag; rafa also used it for Top 4 in Meta Weekly #227."
-      },
-      {
-        title: "Super Poly Kewl Tune",
-        cards: ["superpoly", "theseus", "rotary"],
-        text: "Appears in recent MDM top decks and win streak lists. It mirrors a major counter to Kewl Tune by converting any two Tuners into Theseus."
-      },
-      {
-        title: "K9 Kewl Tune",
-        cards: ["k9izuna", "k9lupis", "cue"],
-        text: "Seen in current Master I top-deck feed. K9 adds non-Kewl pressure but can dilute the pure list's Tuner-hand-trap density."
-      }
-    ];
-
-    const tips = [
-      {
-        title: "Rotary is the deck's steering wheel",
-        cards: ["rotary", "track", "synchro"],
-        text: "Resolve Rotary with a plan. Once you see the hand, decide whether you need KTS, JJ, Clip, a Tuner hand trap, or a conservative end board."
-      },
-      {
-        title: "Chain order changes matchups",
-        cards: ["cue", "rotary", "track", "ash"],
-        text: "Against one-card hands, avoid a chain setup that lets Ash on Track Maker also turn off Rotary's Spell/Trap search. If their hand is bigger, you can prioritize topdeck rip or chain-blocking differently."
-      },
-      {
-        title: "Do not overbuild by default",
-        cards: ["zalen", "remix", "b2b", "droplet"],
-        text: "The deck's strength is choosing interaction after hand knowledge. Greedy B2B/Reframing boards are real, but they can give Droplet or Super Polymerization a cleaner trade."
-      },
-      {
-        title: "Treat Tuner hand traps as engine",
-        cards: ["veiler", "ash", "belle", "mourner"],
-        text: "The current pure list plays many Tuner hand traps because they defend, then become hand materials for Kewl Tune Synchro lines."
-      },
-      {
-        title: "Fuwalos timing matters",
-        cards: ["fuwalos", "maxx", "cue", "synchro"],
-        text: "MDM counter notes warn that firing draw cards too early lets Kewl Tune plan around them. Chaining to the Normal Summon effect can force awkward KTS lines and pair well with Droll."
-      },
-      {
-        title: "Droll is not always equal",
-        cards: ["droll", "reco", "mix", "cue"],
-        text: "Droll is most punishing once Reco or Mix has added. Cue has more documented routes through Droll because it starts with Deck summon plus Rotary information."
-      }
-    ];
-
-    const recovery = [
-      { title: "JJ follow-up", cards: ["jj", "reco", "mix"], text: "JJ gives an extra Tuner Normal Summon and can tribute a Tuner to add or Special Summon a missing Kewl Tune monster from Deck." },
-      { title: "Kewl Tune Synchro", cards: ["synchro", "track", "rs"], text: "KTS searches any Kewl Tune card except itself, then can immediately Synchro Summon a Tuner Synchro. It is both extender and trap-speed pivot." },
-      { title: "Remix loop", cards: ["remix", "reco", "mix"], text: "On opponent turn, Remix tributes itself to add one non-Synchro Tuner from GY and Special Summon another, then Synchro Summon." },
-      { title: "B2B reload", cards: ["b2b", "clip", "cue"], text: "B2B can trigger twice per turn when the opponent activates monster effects, recovering a Tuner from GY/banish and Synchro Summoning." },
-      { title: "Loudness War replay", cards: ["loud", "rotary", "cue"], text: "Loudness War banishes a Kewl Tune monster from GY to apply that monster's material trigger again." },
-      { title: "Playlist fringe line", cards: ["playlist", "rotary", "mix"], text: "Playlist is not common in top lists, but it can apply a material trigger and return the target to hand for grind-heavy games." }
-    ];
-
-    const side = [
-      { title: "Against Kewl Tune starters", cards: ["ash", "droll", "contactc"], text: "Ash can hit first Normal Summon or KTS. Droll is high impact after Reco/Mix. Contact C can lock Synchro progress unless they have a clean out." },
-      { title: "Against Kewl Tune boards", cards: ["droplet", "superpoly", "theseus"], text: "Droplet trades into RS and Zalen. Super Polymerization plus Theseus converts any two Tuners and cannot be responded to." },
-      { title: "GY denial", cards: ["shifter", "belle", "called"], text: "Shifter removes the GY trigger economy. Belle checks Remix and other GY recovery. Called By protects your own starter from hand traps." },
-      { title: "Draw cards", cards: ["fuwalos", "maxx", "purulia", "meowls"], text: "Fuwalos and Maxx C are medium-to-strong with precise timing. Purulia and Meowls can underperform depending on the route." },
-      { title: "Tactics package", cards: ["tactics", "thrust", "droplet"], text: "Kewl Tune often activates monster effects on your turn; Talent and Thrust convert that into draw, take, or searched breakers." },
-      { title: "Going-first tech packages", cards: ["amritara", "reframing", "fydraulis"], text: "In formats where these packages are available, Amritara into Reframing and Fydraulis toolbox lines add another layer beyond pure Kewl Tune." }
-    ];
-
-    const references = [
-      {
-        title: "Master Duel Meta - Kewl Tune Deck Breakdown",
-        url: "https://www.masterduelmeta.com/tier-list/deck-types/Kewl%20Tune",
-        used: "Current deck statistics, tournament sample deck, sample cofi Top 8 list, and usage patterns checked Jun 8, 2026."
-      },
-      {
-        title: "Master Duel Meta API - cofi Top 8 Meta Weekly #228 deck record",
-        url: "https://www.masterduelmeta.com/api/v1/top-decks?_id=6a262d95226da3f38c1789ba",
-        used: "Latest tournament pure Kewl Tune list: 40-card main, 15-card extra, Top 8 on Jun 8, 2026."
-      },
-      {
-        title: "Master Duel Meta - Combos & Counters",
-        url: "https://www.masterduelmeta.com/combos-and-counters",
-        used: "Queried live API behind the page: 36 Kewl Tune combo records, 3 spreadsheet records, and 14 counter records."
-      },
-      {
-        title: "Reddit - Kewl Tune Combo Spreadsheet",
-        url: "https://www.reddit.com/r/masterduel/comments/1sphf3n/kewl_tune_combo_spreadsheet/",
-        used: "Found the public Google Sheets combo spreadsheet link shared by the author."
-      },
-      {
-        title: "Public Google combo spreadsheet",
-        url: "https://docs.google.com/spreadsheets/d/19ib4iPqkA0wXy9g0H-47lqcVvhC8n9F-E9x_NrAFth4/edit?usp=sharing",
-        used: "External combo-spreadsheet reference found during research."
-      },
-      {
-        title: "CardsRealm - Yu-Gi-Oh! TCG: Deck Tech - Kewl Tune",
-        url: "https://yugioh.cardsrealm.com/ja-jp/articles/yu-gi-oh-tcg-deck-tech-kewl-tune",
-        used: "Playstyle, main combo structure, card roles, and matchup framing from the May 26, 2026 guide."
-      },
-      {
-        title: "Master Duel Meta - Tier List",
-        url: "https://www.masterduelmeta.com/tier-list",
-        used: "Current popularity and power context for Kewl Tune in Master Duel."
-      },
-      {
-        title: "YGOPRODeck Card API and images",
-        url: "https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Kewl%20Tune",
-        used: "Numeric card ids and direct card-image URLs."
-      }
-    ];
-
-    function renderStarterCards() {
-      document.getElementById("starterCards").innerHTML = ["cue", "reco", "mix", "rotary", "overtake", "genesis"]
-        .map(key => cardChip(key, "", true)).join("");
-    }
-
-    function renderRouteButtons() {
-      const list = document.getElementById("routeList");
-      list.innerHTML = routes.map((route, index) => `
-        <button class="route-button" type="button" data-route="${route.id}">
-          <span class="route-number">${index + 1}</span>
-          <span class="route-label"><strong>${esc(route.title)}</strong><span>${esc(route.short)}</span></span>
-        </button>
-      `).join("");
-      list.addEventListener("click", event => {
-        const button = event.target.closest(".route-button");
-        if (!button) return;
-        renderRoute(button.dataset.route);
-      });
-    }
-
-    function renderRoute(routeId) {
-      const route = routes.find(r => r.id === routeId) || routes[0];
-      document.querySelectorAll(".route-button").forEach(button => {
-        button.classList.toggle("active", button.dataset.route === route.id);
-      });
-      const panel = document.getElementById("routePanel");
-      panel.innerHTML = `
-        <div class="route-header">
-          <div>
-            <h3>${esc(route.title)}</h3>
-            <p>${esc(route.summary)}</p>
-            <div class="tag-row">
-              ${route.start.map(key => `<span class="tag teal">Start: ${esc(cards[key]?.name || key)}</span>`).join("")}
-            </div>
-          </div>
-          <div class="route-source">${esc(route.source)}</div>
-        </div>
-        <div class="graph-canvas">
-          <div class="flow">
-            ${route.steps.map((step, index) => `
-              <div class="flow-step">
-                <div class="step-index">${index + 1}</div>
-                <div class="step-body">
-                  <div class="step-title">
-                    <span class="plus-icon">+</span>
-                    <span>${esc(step.title)}</span>
-                  </div>
-                  <div class="card-strip">
-                    ${step.cards.map((entry, cardIndex) => `
-                      ${cardIndex ? `<span class="connector">${cardIndex === 1 ? "+" : "i"}</span>` : ""}
-                      ${cardChip(entry[0], entry[1])}
-                    `).join("")}
-                  </div>
-                  ${step.note ? `<p class="step-note">${esc(step.note)}</p>` : ""}
-                </div>
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Cue summons Rotary from Deck</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="cue"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="rotary"></span>
               </div>
-            `).join("")}
+              <p class="step-note">The premium 1-card open: <span class="card-mention" data-card="cue">Cue</span> can summon a Tuner from hand, Deck, or GY, and Deck access to <span class="card-mention" data-card="rotary">Rotary</span> is the safest line.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Synchro into Track Maker</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="cue"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="rotary"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="track"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="track">Track Maker</span> searches; both materials trigger. Every Kewl Tune Tuner can also use a hand Tuner as extra Synchro material.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Order the trigger cluster after seeing the hand</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="rotary"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="cue"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="rotary">Rotary</span> reveals the opponent's hand and searches a Kewl Tune Spell/Trap; <span class="card-mention" data-card="cue">Cue</span> rips the deck top. Chain-block the search you need most, or take the topdeck disruption.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> JJ plus Kewl Tune Synchro access</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="jj"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="synchro"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="jj">JJ</span> gives an extra Tuner Normal Summon and tribute access to any Kewl Tune monster; <span class="card-mention" data-card="synchro">KTS</span> searches any Kewl Tune card, then can Synchro Summon a Tuner Synchro at trap speed.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Adaptive end board</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="jj"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="remix"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="clip"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="jj">JJ</span> and <span class="card-mention" data-card="remix">Remix</span> on field, <span class="card-mention" data-card="synchro">KTS</span> set or live, <span class="card-mention" data-card="clip">Clip</span> in hand if <span class="card-mention" data-card="reco">Reco</span> found it. Opponent-turn Synchro lines become <span class="card-mention" data-card="rs">RS</span>, <span class="card-mention" data-card="loud">Loudness War</span>, <span class="card-mention" data-card="b2b">B2B</span>, <span class="card-mention" data-card="zalen">Zalen</span>, or a <span class="card-mention" data-card="track">Track Maker</span> bounce based on the hand you saw.</p>
+            </div>
+          </div>
+          <div class="flow-step warn">
+            <div class="step-index">6</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag red">Warn</span> Hand-trap and breaker exposure</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="droll"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="nibiru"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="droplet"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="droll">Droll</span> punishes search chains (worst after <span class="card-mention" data-card="reco">Reco</span>/<span class="card-mention" data-card="mix">Mix</span>), <span class="card-mention" data-card="nibiru">Nibiru</span> punishes overextension, <span class="card-mention" data-card="droplet">Droplet</span> breaks monster negates. Greedy boards give all three a better trade.</p>
+            </div>
           </div>
         </div>
         <div class="branch-grid">
-          ${route.branches.map(branch => `
-            <div class="branch-card">
-              <h4>${esc(branch.title)}</h4>
-              <p>${esc(branch.text)}</p>
-              <div class="card-row">${branch.cards.map(key => cardChip(key, "", true)).join("")}</div>
-            </div>
-          `).join("")}
+          <div class="branch-card">
+            <h4>Zero-extension disruption</h4>
+            <p>The highest-voted MDM 1-card route: when your hand has no real extension, prioritize <span class="card-mention" data-card="zalen">Zalen</span> plus <span class="card-mention" data-card="remix">Remix</span>, with <span class="card-mention" data-card="rs">RS</span> as a face-up negate.</p>
+            <div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="card-chip" data-card="remix"></span><span class="card-chip" data-card="rs"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Greedy negate pile</h4>
+            <p>Push past the midrange endpoint only when hand knowledge says the path is clear: <span class="card-mention" data-card="b2b">B2B</span> + <span class="card-mention" data-card="reframing">Reframing</span> + <span class="card-mention" data-card="zalen">Zalen</span>/<span class="card-mention" data-card="rs">RS</span>, with <span class="card-mention" data-card="baronne">Baronne</span> and <span class="card-mention" data-card="chaos">Chaos Angel</span> options where legal. High ceiling, less flexible.</p>
+            <div class="card-row"><span class="card-chip" data-card="b2b"></span><span class="card-chip" data-card="reframing"></span><span class="card-chip" data-card="baronne"></span><span class="card-chip" data-card="chaos"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>OTK lines</h4>
+            <p>The spreadsheet labels Reco OTK as 8000 on an open field via <span class="card-mention" data-card="crackle">Crackle</span> and <span class="card-mention" data-card="b2b">B2B</span> double attacks; max damage uses <span class="card-mention" data-card="cue">Cue</span> plus <span class="card-mention" data-card="genesis">Duelist Genesis</span>/<span class="card-mention" data-card="overtake">Synchro Overtake</span>. Use when the opponent has few monsters or under <span class="card-mention" data-card="maxx">Maxx "C"</span> pressure.</p>
+            <div class="card-row"><span class="card-chip" data-card="jj"></span><span class="card-chip" data-card="crackle"></span><span class="card-chip" data-card="b2b"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Hand-trap-aware chain order</h4>
+            <p>If the opponent has exactly one card, avoid a chain order that lets <span class="card-mention" data-card="ash">Ash</span> on <span class="card-mention" data-card="track">Track Maker</span> blank both searches — <span class="card-mention" data-card="rotary">Rotary</span> needs an opponent hand card to search.</p>
+            <div class="card-row"><span class="card-chip" data-card="ash"></span><span class="card-chip" data-card="track"></span><span class="card-chip" data-card="rotary"></span></div>
+          </div>
         </div>
-      `;
-    }
+      </div>
+    </section>
 
-    function renderCardGrid(target, data) {
-      document.getElementById(target).innerHTML = data.map(item => `
-        <article class="item-card">
-          <h3><span class="info-icon">i</span>${esc(item.title)}</h3>
-          ${item.label ? `<span class="field-label">${esc(item.label)}</span>` : ""}
-          <p>${esc(item.text)}</p>
-          <div class="card-row">${item.cards.map(key => cardChip(key, "", true)).join("")}</div>
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
+        <article class="board-card">
+          <span class="tag blue">Standard</span>
+          <h3>Adaptive Cue End</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="jj"></span><span class="card-chip" data-card="remix"></span></div></div>
+          <div class="field-line"><b>Set / hand</b><div class="card-row"><span class="card-chip" data-card="synchro"></span><span class="card-chip" data-card="clip"></span></div></div>
+          <p>Pick the opponent-turn Synchro (<span class="card-mention" data-card="rs">RS</span>, <span class="card-mention" data-card="loud">Loudness War</span>, <span class="card-mention" data-card="b2b">B2B</span>, <span class="card-mention" data-card="zalen">Zalen</span>, <span class="card-mention" data-card="track">Track Maker</span> bounce) based on the hand you saw.</p>
         </article>
-      `).join("");
-    }
+        <article class="board-card">
+          <span class="tag green">Safe 1-card</span>
+          <h3>No-Extension Disruption</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="card-chip" data-card="remix"></span><span class="card-chip" data-card="rs"></span></div></div>
+          <p>MDM's highest-voted Cue 1-card route: <span class="card-mention" data-card="zalen">Zalen</span> plus <span class="card-mention" data-card="remix">Remix</span> access with <span class="card-mention" data-card="rs">RS</span> as a face-up negate. The route to know when the rest of your hand is defensive cards.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag red">High ceiling</span>
+          <h3>Greedy Going First</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="b2b"></span><span class="card-chip" data-card="zalen"></span><span class="card-chip" data-card="rs"></span></div></div>
+          <div class="field-line"><b>Set</b><div class="card-row"><span class="card-chip" data-card="reframing"></span></div></div>
+          <p>Strong when hand knowledge confirms low punishment; weaker into <span class="card-mention" data-card="droplet">Droplet</span>, <span class="card-mention" data-card="superpoly">Super Polymerization</span>, and <span class="card-mention" data-card="droll">Droll</span> if forced too early.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag gold">Draw management</span>
+          <h3>Anti-Mulcharmy Cue</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="jj"></span><span class="card-chip" data-card="track"></span></div></div>
+          <div class="field-line"><b>Hand</b><div class="card-row"><span class="card-chip" data-card="reco"></span><span class="card-chip" data-card="synchro"></span><span class="card-chip" data-card="clip"></span></div></div>
+          <p>The Cue-vs-<span class="card-mention" data-card="fuwalos">Fuwalos</span> route accepts two draws but keeps enough opponent-turn play.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag violet">Backup starter</span>
+          <h3>Reco Backup Board</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="zalen"></span><span class="card-chip" data-card="remix"></span><span class="card-chip" data-card="jj"></span></div></div>
+          <p><span class="card-mention" data-card="reco">Reco</span> can still end on <span class="card-mention" data-card="zalen">Zalen</span> and <span class="card-mention" data-card="remix">Remix</span> with <span class="card-mention" data-card="jj">JJ</span> follow-up. Worse into <span class="card-mention" data-card="droll">Droll</span> than Cue, so resolve or protect the first search carefully.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag green">Open field</span>
+          <h3>OTK Setup</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="jj"></span><span class="card-chip" data-card="crackle"></span><span class="card-chip" data-card="b2b"></span></div></div>
+          <p>The spreadsheet's Reco OTK uses <span class="card-mention" data-card="jj">JJ</span>, <span class="card-mention" data-card="crackle">Crackle</span>, and <span class="card-mention" data-card="b2b">B2B</span> double-attack pressure to clear 8000 on an open field.</p>
+        </article>
+      </div>
+    </section>
 
-    function renderReferences() {
-      document.getElementById("refsPanel").innerHTML = `
-        <ol>
-          ${references.map(ref => `
-            <li>
-              <a href="${esc(ref.url)}" target="_blank" rel="noreferrer">${esc(ref.title)}</a>
-              <br><span class="muted small">${esc(ref.used)}</span>
-            </li>
-          `).join("")}
-        </ol>
-      `;
-      document.getElementById("refsToggle").addEventListener("click", () => {
-        const panel = document.getElementById("refsPanel");
-        panel.classList.toggle("open");
-        document.getElementById("refsSection").scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="rotary">Rotary</span> is the deck's steering wheel. Resolve it with a plan: once you see the hand, decide whether you need <span class="card-mention" data-card="synchro">KTS</span>, <span class="card-mention" data-card="jj">JJ</span>, <span class="card-mention" data-card="clip">Clip</span>, a Tuner hand trap, or a conservative end board.</span></li>
+            <li><span class="num">2</span><span>Chain order changes matchups. Against one-card hands, avoid a chain setup that lets <span class="card-mention" data-card="ash">Ash</span> on <span class="card-mention" data-card="track">Track Maker</span> also turn off <span class="card-mention" data-card="rotary">Rotary</span>'s Spell/Trap search. If their hand is bigger, prioritize the topdeck rip or chain-blocking differently.</span></li>
+            <li><span class="num">3</span><span>Do not overbuild by default. Greedy <span class="card-mention" data-card="b2b">B2B</span>/<span class="card-mention" data-card="reframing">Reframing</span> boards are real, but they can give <span class="card-mention" data-card="droplet">Droplet</span> or <span class="card-mention" data-card="superpoly">Super Polymerization</span> a cleaner trade.</span></li>
+            <li><span class="num">4</span><span>Treat Tuner hand traps as engine: <span class="card-mention" data-card="veiler">Veiler</span>, <span class="card-mention" data-card="ash">Ash</span>, <span class="card-mention" data-card="belle">Belle</span>, <span class="card-mention" data-card="mourner">Mourner</span>, and <span class="card-mention" data-card="ogre">Ogre</span> defend, then become hand materials for <span class="card-mention" data-card="synchro">Kewl Tune Synchro</span> lines.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="droll">Droll</span> is not always equal: it is most punishing once <span class="card-mention" data-card="reco">Reco</span> or <span class="card-mention" data-card="mix">Mix</span> has added. <span class="card-mention" data-card="cue">Cue</span> has more documented routes through Droll because it starts with a Deck summon plus <span class="card-mention" data-card="rotary">Rotary</span> information.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="jj"></span>
+            <span class="card-chip" data-card="synchro"></span>
+            <span class="card-chip" data-card="remix"></span>
+            <span class="card-chip" data-card="b2b"></span>
+            <span class="card-chip" data-card="loud"></span>
+            <span class="card-chip" data-card="playlist"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="jj">JJ</span> gives an extra Tuner Normal Summon and can tribute a Tuner to add or Special Summon a missing Kewl Tune monster from Deck.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="synchro">Kewl Tune Synchro</span> searches any Kewl Tune card except itself, then can immediately Synchro Summon a Tuner Synchro — both extender and trap-speed pivot.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="remix">Remix</span> tributes itself on the opponent's turn to add one non-Synchro Tuner from GY and Special Summon another, then Synchro Summon.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="b2b">B2B</span> can trigger twice per turn off opponent monster effects, recovering a Tuner from GY/banish and Synchro Summoning.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="loud">Loudness War</span> banishes a Kewl Tune monster from GY to apply that monster's material trigger again, and protects your Tuners.</span></li>
+            <li><span class="num">6</span><span><span class="card-mention" data-card="playlist">Playlist</span> is a fringe line — uncommon in top lists, but it applies a material trigger and returns the target to hand in grind-heavy games.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-    renderStarterCards();
-    renderRouteButtons();
-    renderRoute(routes[0].id);
-    renderCardGrid("endboardGrid", endboards);
-    renderCardGrid("variantGrid", variants);
-    renderCardGrid("tipGrid", tips);
-    renderCardGrid("recoveryGrid", recovery);
-    renderCardGrid("sideGrid", side);
-    renderReferences();
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">Baseline</span>
+          <h3>Pure Kewl Tune — cofi, Top 8 Meta Weekly #228</h3>
+          <p>40 Main / 15 Extra, no side deck in the Master Duel list; MDM cost 930 UR / 480 SR. Main: 3 <span class="card-mention" data-card="rotary">Rotary</span>, 3 <span class="card-mention" data-card="cue">Cue</span>, 3 <span class="card-mention" data-card="reco">Reco</span>, 3 <span class="card-mention" data-card="mix">Mix</span>, 1 <span class="card-mention" data-card="clip">Clip</span>, 3 <span class="card-mention" data-card="synchro">KTS</span>, 2 <span class="card-mention" data-card="jj">JJ</span>, 1 <span class="card-mention" data-card="overtake">Overtake</span>, 2 <span class="card-mention" data-card="genesis">Duelist Genesis</span>, 3 <span class="card-mention" data-card="veiler">Veiler</span>, 3 <span class="card-mention" data-card="ash">Ash</span>, 2 <span class="card-mention" data-card="belle">Belle</span>, 2 <span class="card-mention" data-card="mourner">Mourner</span>, 1 <span class="card-mention" data-card="ogre">Ogre</span>, 3 <span class="card-mention" data-card="fuwalos">Fuwalos</span>, 1 <span class="card-mention" data-card="maxx">Maxx "C"</span>, 1 <span class="card-mention" data-card="called">Called By</span>, 3 Impermanence. Extra: 3 <span class="card-mention" data-card="track">Track Maker</span>, 2 <span class="card-mention" data-card="rs">RS</span>, 2 <span class="card-mention" data-card="remix">Remix</span>, 2 <span class="card-mention" data-card="loud">Loudness War</span>, 2 <span class="card-mention" data-card="b2b">B2B</span>, 1 <span class="card-mention" data-card="crackle">Crackle</span>, 1 <span class="card-mention" data-card="flora">Garden Rose Flora</span>, 1 <span class="card-mention" data-card="zalen">Zalen</span>, 1 <span class="card-mention" data-card="typhon">TY-PHON</span>.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="cue"></span>
+            <span class="card-chip" data-card="rotary"></span>
+            <span class="card-chip" data-card="synchro"></span>
+            <span class="card-chip" data-card="zalen"></span>
+          </div>
+        </article>
+        <article class="variant-card">
+          <span class="tag blue">Engine tag</span>
+          <h3>The Fallen &amp; The Virtuous</h3>
+          <p>B O R Y reached Top 4 in Special Tournament #3 on Jun 8, 2026 with the <span class="card-mention" data-card="fallen">Fallen &amp; Virtuous</span> engine tag; rafa also used it for Top 4 in Meta Weekly #227.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="fallen"></span>
+            <span class="card-chip" data-card="cue"></span>
+            <span class="card-chip" data-card="rotary"></span>
+          </div>
+        </article>
+        <article class="variant-card">
+          <span class="tag gold">Mirror tech</span>
+          <h3>Super Poly Kewl Tune</h3>
+          <p>Appears in recent MDM top decks and win-streak lists. It mirrors a major counter to Kewl Tune by converting any two Tuners into <span class="card-mention" data-card="theseus">Sea Monster of Theseus</span> with <span class="card-mention" data-card="superpoly">Super Polymerization</span>.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="superpoly"></span>
+            <span class="card-chip" data-card="theseus"></span>
+            <span class="card-chip" data-card="rotary"></span>
+          </div>
+        </article>
+        <article class="variant-card">
+          <span class="tag violet">Hybrid</span>
+          <h3>K9 Kewl Tune</h3>
+          <p>Seen in the current Master I top-deck feed. K9 adds non-Kewl pressure through <span class="card-mention" data-card="k9izuna">K9-17 Izuna</span> and <span class="card-mention" data-card="k9lupis">K9-00 Lupis</span>, but can dilute the pure list's Tuner-hand-trap density.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="k9izuna"></span>
+            <span class="card-chip" data-card="k9lupis"></span>
+            <span class="card-chip" data-card="cue"></span>
+          </div>
+        </article>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2026-06-08</div><div><b>Dkayed Meta Weekly #228:</b> cofi Top 8 with pure Kewl Tune — the baseline list for this cheatsheet.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026-06-08</div><div><b>Special Tournament #3:</b> B O R Y Top 4 with <span class="card-mention" data-card="fallen">The Fallen &amp; The Virtuous</span> Kewl Tune; rafa took the same tag to Top 4 in Meta Weekly #227.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026-06-08</div><div><b>MDM tier list snapshot:</b> 17.5 tournament power, 15.99% Master 1 popularity.</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="source-note">
+        Master Duel is mostly best-of-one, but these are the cards and packages that matter for tournament sideboarding or local best-of-three play. The counter list is based on MDM counter submissions and current top-list patterns.
+      </div>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Against Kewl Tune starters</td>
+              <td><div class="card-row"><span class="card-chip" data-card="ash"></span><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="contactc"></span></div></td>
+              <td><span class="card-mention" data-card="ash">Ash</span> can hit the first Normal Summon or <span class="card-mention" data-card="synchro">KTS</span>. <span class="card-mention" data-card="droll">Droll</span> is high impact after <span class="card-mention" data-card="reco">Reco</span>/<span class="card-mention" data-card="mix">Mix</span>. <span class="card-mention" data-card="contactc">Contact "C"</span> can lock Synchro progress unless they have a clean out.</td>
+            </tr>
+            <tr>
+              <td>Against Kewl Tune boards</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droplet"></span><span class="card-chip" data-card="superpoly"></span><span class="card-chip" data-card="theseus"></span></div></td>
+              <td><span class="card-mention" data-card="droplet">Droplet</span> trades cleanly into <span class="card-mention" data-card="rs">RS</span> and <span class="card-mention" data-card="zalen">Zalen</span>. <span class="card-mention" data-card="superpoly">Super Polymerization</span> plus <span class="card-mention" data-card="theseus">Theseus</span> converts any two Tuners and cannot be responded to.</td>
+            </tr>
+            <tr>
+              <td>GY denial</td>
+              <td><div class="card-row"><span class="card-chip" data-card="shifter"></span><span class="card-chip" data-card="belle"></span><span class="card-chip" data-card="called"></span></div></td>
+              <td><span class="card-mention" data-card="shifter">Shifter</span> removes the GY trigger economy and stops GY Tuner fuel. <span class="card-mention" data-card="belle">Belle</span> checks <span class="card-mention" data-card="remix">Remix</span> and other GY recovery. <span class="card-mention" data-card="called">Called By</span> protects your own starter from hand traps.</td>
+            </tr>
+            <tr>
+              <td>Draw cards</td>
+              <td><div class="card-row"><span class="card-chip" data-card="fuwalos"></span><span class="card-chip" data-card="maxx"></span><span class="card-chip" data-card="purulia"></span><span class="card-chip" data-card="meowls"></span></div></td>
+              <td><span class="card-mention" data-card="fuwalos">Fuwalos</span> and <span class="card-mention" data-card="maxx">Maxx "C"</span> are medium-to-strong with precise timing. <span class="card-mention" data-card="purulia">Purulia</span> and <span class="card-mention" data-card="meowls">Meowls</span> can underperform because Kewl Tune shifts between hand, Deck, and Extra Deck summons.</td>
+            </tr>
+            <tr>
+              <td>Tactics package</td>
+              <td><div class="card-row"><span class="card-chip" data-card="tactics"></span><span class="card-chip" data-card="thrust"></span><span class="card-chip" data-card="droplet"></span></div></td>
+              <td>Kewl Tune often activates monster effects on your turn; <span class="card-mention" data-card="tactics">Talent</span> and <span class="card-mention" data-card="thrust">Thrust</span> convert that into draw, take, or searched breakers.</td>
+            </tr>
+            <tr>
+              <td>Going-first tech packages</td>
+              <td><div class="card-row"><span class="card-chip" data-card="amritara"></span><span class="card-chip" data-card="reframing"></span><span class="card-chip" data-card="fydraulis"></span></div></td>
+              <td>Where available, <span class="card-mention" data-card="amritara">Visas Amritara</span> into <span class="card-mention" data-card="reframing">Reframing</span> and <span class="card-mention" data-card="fydraulis">Fydraulis Harmonia</span> toolbox lines add another layer beyond pure Kewl Tune.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="ash">Ash</span> on <span class="card-mention" data-card="track">Track Maker</span> with the wrong chain order can blank both searches in one shot.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="droll">Droll</span> after a <span class="card-mention" data-card="reco">Reco</span>/<span class="card-mention" data-card="mix">Mix</span> add, or when <span class="card-mention" data-card="synchro">KTS</span> is forced early, cuts off the whole search web.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="shifter">Dimension Shifter</span> stops GY Tuner fuel and prevents material triggers from reaching the GY.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="droplet">Droplet</span> and <span class="card-mention" data-card="superpoly">Super Polymerization</span> punish greedy boards; <span class="card-mention" data-card="nibiru">Nibiru</span> punishes overextension.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="contactc">Contact "C"</span> locks Synchro progress unless removed or used creatively.</span></li>
+          </ul>
+        </article>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Use <span class="card-mention" data-card="rotary">Rotary</span> hand knowledge to pick interaction instead of forcing one board — that is the deck's whole edge.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="called">Called By</span> protects the combo from hand traps; Tuner hand traps double as defense and material.</span></li>
+            <li><span class="num">3</span><span>Routes can preserve opponent-turn Synchro access or <span class="card-mention" data-card="zalen">Zalen</span> lines to reduce <span class="card-mention" data-card="nibiru">Nibiru</span> exposure.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="maxx">Maxx "C"</span> and <span class="card-mention" data-card="fuwalos">Fuwalos</span> timing can be planned around; spreadsheet routes accept one or two draws to keep stronger follow-up.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="typhon">TY-PHON</span> is the emergency Extra Deck out to established monsters; <span class="card-mention" data-card="littleknight">S:P Little Knight</span> outs awkward monsters when not locked.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/tier-list/deck-types/Kewl%20Tune" target="_blank" rel="noreferrer">Master Duel Meta: Kewl Tune Deck Breakdown</a> — current deck statistics, tournament sample deck, cofi Top 8 list, and usage patterns checked Jun 8, 2026.</li>
+        <li><a href="https://www.masterduelmeta.com/api/v1/top-decks?_id=6a262d95226da3f38c1789ba" target="_blank" rel="noreferrer">Master Duel Meta API: cofi Top 8 Meta Weekly #228 deck record</a> — latest tournament pure Kewl Tune list: 40-card main, 15-card extra, Top 8 on Jun 8, 2026.</li>
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta: Combos &amp; Counters</a> — queried live API behind the page: 36 Kewl Tune combo records, 3 spreadsheet records, and 14 counter records.</li>
+        <li><a href="https://www.reddit.com/r/masterduel/comments/1sphf3n/kewl_tune_combo_spreadsheet/" target="_blank" rel="noreferrer">Reddit: Kewl Tune Combo Spreadsheet</a> — source of the public Google Sheets combo spreadsheet link shared by the author.</li>
+        <li><a href="https://docs.google.com/spreadsheets/d/19ib4iPqkA0wXy9g0H-47lqcVvhC8n9F-E9x_NrAFth4/edit?usp=sharing" target="_blank" rel="noreferrer">Public Google combo spreadsheet</a> — external combo-spreadsheet reference found during research.</li>
+        <li><a href="https://yugioh.cardsrealm.com/ja-jp/articles/yu-gi-oh-tcg-deck-tech-kewl-tune" target="_blank" rel="noreferrer">CardsRealm: Yu-Gi-Oh! TCG Deck Tech — Kewl Tune</a> — playstyle, main combo structure, card roles, and matchup framing from the May 26, 2026 guide.</li>
+        <li><a href="https://www.masterduelmeta.com/tier-list" target="_blank" rel="noreferrer">Master Duel Meta: Tier List</a> — current popularity and power context for Kewl Tune in Master Duel.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=Kewl%20Tune" target="_blank" rel="noreferrer">YGOPRODeck Card API and images</a> — numeric card ids and direct card-image URLs.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
+    </section>
+
+  </main>
+
+  <script>
+    const CARDS = {
+      cue: { id: 16387555, name: "Kewl Tune Cue" },
+      rotary: { id: 17209452, name: "Kewl Tune Rotary" },
+      mix: { id: 16509007, name: "Kewl Tune Mix" },
+      reco: { id: 89392810, name: "Kewl Tune Reco" },
+      clip: { id: 43904702, name: "Kewl Tune Clip" },
+      track: { id: 42781164, name: "Kewl Tune Track Maker" },
+      rs: { id: 15665977, name: "Kewl Tune RS" },
+      remix: { id: 88170262, name: "Kewl Tune Remix" },
+      loud: { id: 41069676, name: "Kewl Tune Loudness War" },
+      b2b: { id: 65961304, name: "Kewl Tune B2B" },
+      crackle: { id: 39576656, name: "Kewl Tune Crackle" },
+      synchro: { id: 78058681, name: "Kewl Tune Synchro" },
+      jj: { id: 14442329, name: "JJ \"Kewl Tune\"" },
+      playlist: { id: 40847034, name: "Kewl Tune Playlist" },
+      zalen: { id: 4891376, name: "Zalen the Shackled Dragon" },
+      reframing: { id: 18158393, name: "Mannadium Reframing" },
+      baronne: { id: 84815190, name: "Baronne de Fleur" },
+      chaos: { id: 22850702, name: "Chaos Angel" },
+      typhon: { id: 93039339, name: "Super Starslayer TY-PHON - Sky Crisis" },
+      flora: { id: 76524506, name: "Garden Rose Flora" },
+      overtake: { id: 99243014, name: "Synchro Overtake" },
+      genesis: { id: 97474300, name: "Duelist Genesis" },
+      veiler: { id: 97268402, name: "Effect Veiler" },
+      ash: { id: 14558127, name: "Ash Blossom & Joyous Spring" },
+      belle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
+      mourner: { id: 52038441, name: "Ghost Mourner & Moonlit Chill" },
+      ogre: { id: 59438930, name: "Ghost Ogre & Snow Rabbit" },
+      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos" },
+      purulia: { id: 84192580, name: "Mulcharmy Purulia" },
+      meowls: { id: 87126721, name: "Mulcharmy Meowls" },
+      maxx: { id: 23434538, name: "Maxx \"C\"" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      nibiru: { id: 27204311, name: "Nibiru, the Primal Being" },
+      superpoly: { id: 48130397, name: "Super Polymerization" },
+      theseus: { id: 96334243, name: "Sea Monster of Theseus" },
+      contactc: { id: 87170768, name: "Contact \"C\"" },
+      shifter: { id: 91800273, name: "Dimension Shifter" },
+      droplet: { id: 24299458, name: "Forbidden Droplet" },
+      tactics: { id: 25311006, name: "Triple Tactics Talent" },
+      thrust: { id: 35269904, name: "Triple Tactics Thrust" },
+      called: { id: 24224830, name: "Called by the Grave" },
+      fallen: { id: 30271097, name: "The Fallen & The Virtuous" },
+      k9izuna: { id: 92248362, name: "K9-17 Izuna" },
+      k9lupis: { id: 91025875, name: "K9-00 Lupis" },
+      fydraulis: { id: 70088809, name: "Fydraulis Harmonia" },
+      amritara: { id: 821049, name: "Visas Amritara" },
+      littleknight: { id: 29301450, name: "S:P Little Knight" }
+    };
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

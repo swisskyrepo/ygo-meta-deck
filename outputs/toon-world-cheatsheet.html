@@ -3,1231 +3,437 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Toon World Deck Cheatsheet Mind Map</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --paper: #f5f6f2;
-      --panel: #ffffff;
-      --panel-2: #eef4f2;
-      --ink: #172126;
-      --muted: #5c6870;
-      --line: #d7e0dc;
-      --green: #1d6a54;
-      --teal: #087987;
-      --gold: #a57313;
-      --red: #9e3d3c;
-      --blue: #315f90;
-      --violet: #654e8d;
-      --shadow: 0 18px 44px rgba(23, 33, 38, .12);
-      --radius: 8px;
-      --card-w: 58px;
-      --card-h: 84px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--paper);
-      overflow-x: hidden;
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(245,246,242,.98) 380px, #edf3f1 100%),
-        repeating-linear-gradient(135deg, rgba(8,121,135,.08) 0 1px, transparent 1px 18px);
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    button {
-      font: inherit;
-      letter-spacing: 0;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 880px;
-      margin-bottom: 12px;
-      font-size: 4.1rem;
-      line-height: .97;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 2rem;
-      line-height: 1.1;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    p { margin-bottom: 12px; }
-
-    .page {
-      width: min(1240px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 20px 0 58px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
-      gap: 24px;
-      align-items: center;
-      padding: 18px 0 16px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--green);
-      font-size: .82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .lead {
-      max-width: 840px;
-      color: #314247;
-      font-size: 1.1rem;
-    }
-
-    .hero-pills,
-    .tags,
-    .chips,
-    .route-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill,
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,.86);
-      color: #263338;
-      font-size: .88rem;
-      white-space: nowrap;
-    }
-
-    .pill strong,
-    .tag strong { color: var(--ink); }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(52px, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border: 1px solid rgba(23,33,38,.12);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow);
-      overflow: visible;
-    }
-
-    .showcase .card-token:nth-child(1) { transform: translateY(14px) rotate(-5deg); }
-    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
-    .showcase .card-token:nth-child(3) { transform: translateY(7px) rotate(-2deg); }
-    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
-    .showcase .card-token:nth-child(5) { transform: translateY(9px) rotate(-3deg); }
-    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
-    .showcase .card-token:nth-child(7) { transform: translateY(8px) rotate(-1deg); }
-    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
-    .showcase .card-name { display: none; }
-
-    .quick-nav {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 14px;
-      border-bottom: 1px solid rgba(215,224,220,.86);
-      background: linear-gradient(180deg, rgba(245,246,242,.98), rgba(245,246,242,.92));
-      backdrop-filter: blur(10px);
-      scrollbar-width: none;
-    }
-
-    .quick-nav::-webkit-scrollbar { display: none; }
-
-    .quick-nav a,
-    .route-button,
-    .tab-button,
-    .ref-toggle {
-      flex: 0 0 auto;
-      min-height: 38px;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font-weight: 760;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .quick-nav a:hover,
-    .route-button:hover,
-    .tab-button:hover,
-    .ref-toggle:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .route-button.active,
-    .tab-button.active,
-    .ref-toggle.active {
-      color: #fff;
-      background: var(--teal);
-      border-color: var(--teal);
-    }
-
-    section {
-      margin-top: 22px;
-      scroll-margin-top: 74px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .section-head p {
-      max-width: 680px;
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .panel,
-    .combo-node,
-    .board-card,
-    .tip-card,
-    .ref-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: 0 8px 22px rgba(23,33,38,.06);
-    }
-
-    .panel,
-    .board-card,
-    .tip-card,
-    .ref-card {
-      padding: 14px;
-    }
-
-    .panel.compact { padding: 12px; }
-
-    .panel[data-tone="gold"] { border-color: #e2c786; background: #fffaf0; }
-    .panel[data-tone="green"] { border-color: #b8decf; background: #f1fbf6; }
-    .panel[data-tone="blue"] { border-color: #c4d7eb; background: #f1f7fc; }
-    .panel[data-tone="red"] { border-color: #e5c4c1; background: #fff4f2; }
-    .panel[data-tone="violet"] { border-color: #d7cae7; background: #f8f4ff; }
-
-    .small {
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    .note {
-      margin: 0;
-      color: var(--muted);
-      font-size: .88rem;
-    }
-
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .stat {
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.78);
-    }
-
-    .stat strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--teal);
-      font-size: 1.35rem;
-      line-height: 1;
-    }
-
-    .info {
-      position: relative;
-      display: inline-grid;
-      place-items: center;
-      width: 18px;
-      height: 18px;
-      margin-left: 4px;
-      border-radius: 50%;
-      background: var(--teal);
-      color: #fff;
-      font-size: .76rem;
-      font-weight: 900;
-      cursor: help;
-    }
-
-    .info:hover::after,
-    .info:focus-visible::after {
-      content: attr(data-tip);
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 8px);
-      z-index: 100;
-      width: min(280px, 78vw);
-      transform: translateX(-50%);
-      padding: 9px 10px;
-      border-radius: var(--radius);
-      background: #172126;
-      color: #fff;
-      box-shadow: var(--shadow);
-      font-size: .82rem;
-      line-height: 1.35;
-      text-align: left;
-    }
-
-    .card-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: flex-start;
-      overflow: visible;
-    }
-
-    .plus {
-      display: inline-grid;
-      place-items: center;
-      width: 20px;
-      height: var(--card-h);
-      color: var(--gold);
-      font-weight: 950;
-      font-size: 1.1rem;
-    }
-
-    .card-token {
-      position: relative;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      width: var(--card-w);
-      min-width: var(--card-w);
-      overflow: visible;
-    }
-
-    .card-img {
-      width: var(--card-w);
-      height: var(--card-h);
-      border-radius: 4px;
-      object-fit: cover;
-      box-shadow: 0 4px 12px rgba(23,33,38,.18);
-      background: #dce3e0;
-    }
-
-    .card-name {
-      width: 100%;
-      margin-top: 5px;
-      color: #25343a;
-      font-size: .68rem;
-      font-weight: 760;
-      line-height: 1.12;
-      text-align: center;
-      overflow-wrap: normal;
-      word-break: normal;
-      hyphens: none;
-    }
-
-    .card-pop {
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 8px);
-      z-index: 120;
-      width: 194px;
-      transform: translateX(-50%) scale(.92);
-      transform-origin: bottom center;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .12s ease, transform .12s ease, visibility .12s ease;
-      filter: drop-shadow(0 18px 34px rgba(23,33,38,.36));
-    }
-
-    .card-pop img {
-      width: 100%;
-      border-radius: 8px;
-      display: block;
-    }
-
-    .card-token:hover .card-pop,
-    .card-token:focus-within .card-pop {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) scale(1);
-    }
-
-    .wildcard {
-      display: inline-grid;
-      place-items: center;
-      width: var(--card-w);
-      min-width: var(--card-w);
-      height: var(--card-h);
-      padding: 7px;
-      border: 1px dashed #c8d3cf;
-      border-radius: 4px;
-      background: #f8fbfa;
-      color: var(--muted);
-      font-size: .74rem;
-      font-weight: 780;
-      text-align: center;
-    }
-
-    .graph-shell {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      gap: 12px;
-      align-items: start;
-    }
-
-    .route-list {
-      display: grid;
-      gap: 8px;
-      position: sticky;
-      top: 58px;
-    }
-
-    .route-button {
-      width: 100%;
-      text-align: left;
-      white-space: normal;
-    }
-
-    .graph-panel {
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.92);
-      overflow: clip;
-      box-shadow: var(--shadow);
-    }
-
-    .graph-title {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
-      align-items: start;
-      padding: 14px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(135deg, rgba(8,121,135,.1), rgba(165,115,19,.08));
-    }
-
-    .graph-title h3 {
-      margin-bottom: 4px;
-      font-size: 1.25rem;
-    }
-
-    .graph-title p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    .route-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: var(--teal);
-      color: #fff;
-      font-size: .78rem;
-      font-weight: 850;
-      white-space: nowrap;
-    }
-
-    .graph-scroll {
-      overflow-x: auto;
-      padding: 14px;
-    }
-
-    .graph-flow {
-      display: flex;
-      align-items: stretch;
-      gap: 20px;
-      min-width: max-content;
-    }
-
-    .combo-node {
-      position: relative;
-      width: 250px;
-      min-height: 270px;
-      padding: 12px;
-    }
-
-    .combo-node::after {
-      content: "";
-      position: absolute;
-      top: 58px;
-      right: -20px;
-      width: 20px;
-      height: 2px;
-      background: var(--teal);
-    }
-
-    .combo-node::before {
-      content: "";
-      position: absolute;
-      top: 53px;
-      right: -22px;
-      width: 0;
-      height: 0;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-      border-left: 8px solid var(--teal);
-    }
-
-    .combo-node:last-child::after,
-    .combo-node:last-child::before { display: none; }
-
-    .combo-node[data-tone="start"] { border-color: #b8decf; background: #f1fbf6; }
-    .combo-node[data-tone="search"] { border-color: #c4d7eb; background: #f1f7fc; }
-    .combo-node[data-tone="summon"] { border-color: #d7cae7; background: #f8f4ff; }
-    .combo-node[data-tone="protect"] { border-color: #e2c786; background: #fffaf0; }
-    .combo-node[data-tone="lethal"] { border-color: #e5c4c1; background: #fff4f2; }
-
-    .node-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      color: var(--teal);
-      font-size: .78rem;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .branches {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border-top: 1px solid var(--line);
-      background: #fbfdfc;
-    }
-
-    .branch {
-      padding: 11px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .branch strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--green);
-    }
-
-    .interaction-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .interaction {
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .board-field {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(42px, 1fr));
-      gap: 7px;
-      margin: 10px 0;
-      padding: 10px;
-      border: 1px solid #d8e1dd;
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, #eff5f2, #e8efec);
-    }
-
-    .zone {
-      display: grid;
-      place-items: center;
-      min-height: 88px;
-      border: 1px solid rgba(23,33,38,.13);
-      border-radius: 4px;
-      background: rgba(255,255,255,.68);
-    }
-
-    .zone img {
-      width: 50px;
-      height: 73px;
-      object-fit: cover;
-      border-radius: 3px;
-      box-shadow: 0 4px 10px rgba(23,33,38,.14);
-    }
-
-    .field-list,
-    .clean-list {
-      display: grid;
-      gap: 8px;
-      margin: 10px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .field-list li,
-    .clean-list li {
-      display: grid;
-      grid-template-columns: 18px minmax(0, 1fr);
-      gap: 8px;
-      align-items: start;
-    }
-
-    .bullet {
-      display: inline-grid;
-      place-items: center;
-      width: 18px;
-      height: 18px;
-      margin-top: 1px;
-      border-radius: 50%;
-      background: var(--teal);
-      color: #fff;
-      font-size: .76rem;
-      font-weight: 950;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      margin-bottom: 10px;
-    }
-
-    .tab-content[hidden],
-    .references[hidden] { display: none; }
-
-    .side-table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-    }
-
-    .side-table th,
-    .side-table td {
-      padding: 10px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: top;
-      text-align: left;
-    }
-
-    .side-table th {
-      background: #edf4f2;
-      color: #213137;
-      font-size: .84rem;
-      text-transform: uppercase;
-    }
-
-    .side-table tr:last-child td { border-bottom: 0; }
-
-    .refs-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.88);
-    }
-
-    .references {
-      margin-top: 10px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .references-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .footer-note {
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: .88rem;
-      text-align: center;
-    }
-
-    @media (max-width: 980px) {
-      h1 { font-size: 3.1rem; }
-      .hero,
-      .grid.two,
-      .grid.three,
-      .grid.four,
-      .graph-shell,
-      .interaction-grid,
-      .references-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .route-list {
-        position: static;
-        display: flex;
-        overflow-x: auto;
-        padding-bottom: 2px;
-      }
-
-      .route-button {
-        width: min(260px, 78vw);
-      }
-
-      .stat-row {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 620px) {
-      :root {
-        --card-w: 50px;
-        --card-h: 72px;
-      }
-
-      .page {
-        width: min(100vw - 16px, 1240px);
-        padding-top: 10px;
-      }
-
-      h1 {
-        font-size: 2.35rem;
-        line-height: 1.02;
-      }
-
-      h2 { font-size: 1.55rem; }
-
-      .hero {
-        gap: 12px;
-        padding-top: 8px;
-      }
-
-      .showcase {
-        grid-template-columns: repeat(4, 1fr);
-        padding: 10px;
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .stat-row,
-      .branches {
-        grid-template-columns: 1fr;
-      }
-
-      .graph-scroll {
-        padding: 10px;
-      }
-
-      .graph-flow {
-        flex-direction: column;
-        min-width: 0;
-      }
-
-      .combo-node {
-        width: 100%;
-        min-height: 0;
-      }
-
-      .combo-node::after,
-      .combo-node::before {
-        display: none;
-      }
-
-      .graph-title {
-        grid-template-columns: 1fr;
-      }
-
-      .board-field {
-        grid-template-columns: repeat(3, minmax(42px, 1fr));
-      }
-
-      .card-row {
-        gap: 5px;
-      }
-
-      .plus {
-        width: 12px;
-        font-size: 1rem;
-      }
-
-      .card-name {
-        font-size: .56rem;
-        line-height: 1.05;
-      }
-
-      .zone {
-        min-height: 76px;
-      }
-
-      .zone img {
-        width: 42px;
-        height: 61px;
-      }
-
-      .card-pop {
-        width: 150px;
-      }
-
-      .quick-nav {
-        margin-left: -8px;
-        margin-right: -8px;
-        padding-left: 8px;
-      }
-
-      .side-table,
-      .side-table tbody,
-      .side-table tr,
-      .side-table td {
-        display: block;
-        width: 100%;
-      }
-
-      .side-table thead { display: none; }
-
-      .side-table td {
-        border-bottom: 0;
-        padding: 8px 10px;
-      }
-
-      .side-table tr {
-        border-bottom: 1px solid var(--line);
-        padding: 8px 0;
-      }
-
-      .side-table tr:last-child { border-bottom: 0; }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Toon World Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <main class="page">
+  <main class="shell">
+
     <header class="hero">
-      <div>
-        <div class="eyebrow">Toon World / Toon Kingdom Mind Map</div>
-        <h1>Toon World Deck Cheatsheet</h1>
-        <p class="lead">A top-to-bottom pilot card for classic Toon Kingdom lines and the latest OCG Toon World the Perfect World support. The deck wins by making Toon monsters hard to answer, then ignoring boards with direct attacks, Comic Hand steals, or a new Perfect World search chain.</p>
-        <div class="hero-pills">
-          <span class="pill"><strong>Primary plan</strong> direct damage</span>
-          <span class="pill"><strong>Core spell</strong> Toon Kingdom or Perfect World</span>
-          <span class="pill"><strong>Latest variant</strong> OCG RV01 support</span>
-          <span class="pill"><strong>Spreadsheet search</strong> no public Toon sheet found</span>
-        </div>
-        <div class="stat-row">
-          <div class="stat"><strong>40</strong><span>average OCG list size on Yu-Gi-Oh! Meta Toon breakdown</span></div>
-          <div class="stat"><strong>3x</strong><span>Table, Bookmark, and the new Perfect World in current OCG stats</span></div>
-          <div class="stat"><strong>1 card</strong><span>Funny Dark Rabbit public combo route on YgoCombo</span></div>
-          <div class="stat"><strong>May 30</strong><span>2026 OCG Revolution Booster release date</span></div>
+      <div class="hero-main">
+        <div class="eyebrow">Aggro-control — Toon Kingdom and OCG RV01 support, checked June 2026</div>
+        <h1>Toon World</h1>
+        <p class="subtitle">A pilot card for classic Toon Kingdom lines and the OCG "Toon World the Perfect World" support. The deck makes Toon monsters hard to answer, then ignores boards with direct attacks, <span class="card-mention" data-card="comicHand">Comic Hand</span> steals, or the new Perfect World search chain.</p>
+        <div class="pill-row">
+          <span class="pill green">Sources checked: June 2026</span>
+          <span class="pill blue">Role: aggro-control</span>
+          <span class="pill gold">Win: direct attacks past the board</span>
+          <span class="pill red">Mind TCG F&amp;L list of May 18, 2026</span>
         </div>
       </div>
-      <div class="showcase" id="showcase"></div>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="perfectWorld"></span>
+          <span class="cloud-card" data-card="kingdom"></span>
+          <span class="cloud-card" data-card="funnyRabbit"></span>
+          <span class="cloud-card" data-card="comicCat"></span>
+          <span class="cloud-card" data-card="evilBox"></span>
+          <span class="cloud-card" data-card="beToonUltimate"></span>
+          <span class="cloud-card" data-card="toonBLS"></span>
+          <span class="cloud-card" data-card="redEyes"></span>
+          <span class="cloud-card" data-card="toonDM"></span>
+          <span class="cloud-card" data-card="comicHand"></span>
+        </div>
+      </aside>
     </header>
 
-    <nav class="quick-nav" aria-label="Cheatsheet sections">
-      <a href="#plan">Plan</a>
-      <a href="#combo-graph">Combos</a>
-      <a href="#boards">End Boards</a>
-      <a href="#variants">Variants</a>
-      <a href="#tips">Tips</a>
-      <a href="#recovery">Recovery</a>
-      <a href="#side">Side/Counters</a>
-      <a href="#references-wrap">References</a>
-    </nav>
-
-    <section id="plan">
-      <div class="section-head">
-        <div>
-          <h2>Playstyle and Win Condition</h2>
-          <p>Toons are an aggro-control deck: assemble a live "Toon World" substitute, convert searches into bodies, protect the field spell, then end games by attacking directly over the opponent's board.</p>
-        </div>
-      </div>
-      <div class="grid three">
-        <article class="panel" data-tone="green">
-          <h3>1. Turn on the book <span class="info" tabindex="0" data-tip="Toon Kingdom and Toon World the Perfect World both become Toon World while in the Field Zone, which enables most Toon text.">i</span></h3>
-          <div class="card-row" data-cards="table,bookmark,kingdom,perfectWorld,terraforming"></div>
-          <p>Start by finding Toon Kingdom or Toon World the Perfect World. Table finds Bookmark or any Toon card; Bookmark finds cards that mention Toon World, including Kingdom and Comic Hand.</p>
-        </article>
-        <article class="panel" data-tone="blue">
-          <h3>2. Convert searchers into pressure</h3>
-          <div class="card-row" data-cards="pageFlip,redEyes,toonDM,toonBLS,blackStone"></div>
-          <p>Page-Flip, Red-Eyes Toon Dragon, Toon Dark Magician, and The Black Stone of Legend turn one enabled field spell into multiple Toon bodies or a Toon Spell/Trap search.</p>
-        </article>
-        <article class="panel" data-tone="gold">
-          <h3>3. Protect, steal, and end</h3>
-          <div class="card-row" data-cards="toonTerror,briefcase,comicHand,shadowToon,rollback"></div>
-          <p>Toon Terror protects the field spell and monster effects. Briefcase punishes summons. Comic Hand and Shadow Toon let you go second without needing to clear every monster first.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="combo-graph">
-      <div class="section-head">
-        <div>
-          <h2>Core Combos and Interactions</h2>
-          <p>Select a route to explore the branches. The plus icon marks cards that trigger or matter together.</p>
-        </div>
-      </div>
-      <div class="graph-shell">
-        <div class="route-list" id="routeList"></div>
-        <div class="graph-panel">
-          <div class="graph-title">
-            <div>
-              <h3 id="routeTitle"></h3>
-              <p id="routeSummary"></p>
-            </div>
-            <span class="route-badge" id="routeBadge"></span>
-          </div>
-          <div class="graph-scroll">
-            <div class="graph-flow" id="graphFlow"></div>
-          </div>
-          <div class="branches" id="routeBranches"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="interactions">
-      <div class="section-head">
-        <div>
-          <h2>Cards That Trigger Together</h2>
-          <p>These are the small interactions that decide whether the deck feels like pressure or a pile of big monsters.</p>
-        </div>
-      </div>
-      <div class="interaction-grid" id="interactionGrid"></div>
-    </section>
-
-    <section id="boards">
-      <div class="section-head">
-        <div>
-          <h2>End Board Examples</h2>
-          <p>Field by End Phase, with what the opponent has to answer first.</p>
-        </div>
-      </div>
-      <div class="grid three">
-        <article class="board-card">
-          <h3>Classic Kingdom control</h3>
-          <p class="small">Aim when Page-Flip or Black Stone resolves and you are not forced into immediate lethal.</p>
-          <div class="board-field" data-zones="kingdom,redEyes,toonDM,toonBLS,toonTerror"></div>
-          <ul class="field-list">
-            <li><span class="bullet">+</span><span><strong>Field by End Phase:</strong> Toon Kingdom, Red-Eyes Toon Dragon, Toon Dark Magician, Toon Black Luster Soldier, and set Toon Terror or Briefcase.</span></li>
-            <li><span class="bullet">i</span><span><strong>Pressure:</strong> protected direct attackers threaten lethal next Battle Phase if Kingdom stays up.</span></li>
-          </ul>
-        </article>
-        <article class="board-card">
-          <h3>Going second steal lethal</h3>
-          <p class="small">Best when the opponent leaves a 2000+ ATK monster and you can force Toon World access.</p>
-          <div class="board-field" data-zones="perfectWorld,comicHand,toonBLS,shadowToon,rollback"></div>
-          <ul class="field-list">
-            <li><span class="bullet">+</span><span><strong>Field by Battle Phase:</strong> Toon World substitute, Comic Hand monster, Toon BLS, plus Shadow Toon or Toon Rollback.</span></li>
-            <li><span class="bullet">i</span><span><strong>Pressure:</strong> Toon BLS can attack the turn it is summoned; stolen monsters become Toons and can attack directly.</span></li>
-          </ul>
-        </article>
-        <article class="board-card">
-          <h3>RV01 Perfect World control</h3>
-          <p class="small">Current OCG variant based on Yu-Gi-Oh! Meta stats and the new Revolution Booster cards.</p>
-          <div class="board-field" data-zones="perfectWorld,funnyRabbit,comicCat,evilBox,mindScan"></div>
-          <ul class="field-list">
-            <li><span class="bullet">+</span><span><strong>Field by End Phase:</strong> Perfect World, Rabbit or Cat body, Evil Box, Mind Scan, and usually Toon Terror set.</span></li>
-            <li><span class="bullet">i</span><span><strong>Pressure:</strong> revealed hand plus Mind Scan naming gives targeted turn coverage after Perfect World searched the right pieces.</span></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section id="variants">
-      <div class="section-head">
-        <div>
-          <h2>Latest Variant Notes</h2>
-          <p>There is no public Toon T3 decklist available on the current Yu-Gi-Oh! Meta page, but the page does expose tournament-stat card usage for OCG Toons.</p>
-        </div>
-      </div>
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
       <div class="grid two">
-        <article class="panel" data-tone="violet">
-          <h3>OCG RV01 tournament-stat shell <span class="info" tabindex="0" data-tip="Yu-Gi-Oh! Meta labels this as OCG and says the stats are automated from the last few weeks of tournament decks, but the public deck table says no decks are available.">i</span></h3>
-          <div class="card-row" data-cards="funnyRabbit,table,bookmark,perfectWorld,comicCat,darkEyes,evilBox,mindScan,toonTerror,beToonUltimate"></div>
-          <p>The current stat profile shifts the deck toward Funny Dark Rabbit, Comic Cat, Evil Box, Dark-Eyes, Mind Scan, and Blue-Eyes Toon Ultimate Dragon. This gives the deck real search velocity and interactive information control.</p>
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Assemble a live "Toon World" substitute, convert searches into bodies, protect the field spell, then end games by attacking directly over the opponent's board.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span><b>Turn on the book.</b> <span class="card-mention" data-card="kingdom">Toon Kingdom</span> and <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> are both treated as <span class="card-mention" data-card="toonWorld">Toon World</span> in the Field Zone, which enables most Toon text. <span class="card-mention" data-card="table">Toon Table of Contents</span> finds <span class="card-mention" data-card="bookmark">Toon Bookmark</span> or any Toon card; Bookmark finds anything that mentions Toon World, including Kingdom and <span class="card-mention" data-card="comicHand">Comic Hand</span>. <span class="card-mention" data-card="terraforming">Terraforming</span> is a fifth copy of the field spell.</span></li>
+            <li><span class="num">2</span><span><b>Convert searchers into pressure.</b> <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span>, <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span>, <span class="card-mention" data-card="toonDM">Toon Dark Magician</span>, and <span class="card-mention" data-card="blackStone">The Black Stone of Legend</span> turn one enabled field spell into multiple Toon bodies or a Toon Spell/Trap search.</span></li>
+            <li><span class="num">3</span><span><b>Protect, steal, and end.</b> <span class="card-mention" data-card="toonTerror">Toon Terror</span> protects the field spell and monster effects, <span class="card-mention" data-card="briefcase">Toon Briefcase</span> punishes summons, and <span class="card-mention" data-card="comicHand">Comic Hand</span> plus <span class="card-mention" data-card="shadowToon">Shadow Toon</span> let you go second without clearing every monster first.</span></li>
+          </ul>
         </article>
-        <article class="panel" data-tone="blue">
-          <h3>Classic Toon Kingdom shell</h3>
-          <div class="card-row" data-cards="blackStone,kingdom,pageFlip,redEyes,toonDM,toonBLS,comicHand,toonTerror"></div>
-          <p>For Master Duel and older TCG card pools, the stable shell is still Kingdom plus Table, Bookmark, Page-Flip, Red-Eyes Toon Dragon, Toon Dark Magician, Toon BLS, and searchable protection.</p>
-        </article>
-        <article class="panel" data-tone="gold">
-          <h3>Going second profile</h3>
-          <div class="card-row" data-cards="comicHand,shadowToon,evenly,lightning,duster,droplet,thrust"></div>
-          <p>Lean on non-targeting board breakers and Comic Hand. Your best wins ignore the board, so side cards should either clear backrow that hits the field spell or convert an opponent's monster into lethal damage.</p>
-        </article>
-        <article class="panel" data-tone="red">
-          <h3>Format warning</h3>
-          <div class="card-row" data-cards="abyss,bahamut,baronne,savage,summonLimit"></div>
-          <p>Older guides mention Bahamut Shark, Toadally Awesome, Abyss Dweller, Baronne, Borreload Savage, and Summon Limit. Several are forbidden on the official TCG list effective May 18, 2026, so verify format legality before copying older Extra Deck or side plans.</p>
+        <article class="note-card">
+          <h3>Win Condition And Format Notes</h3>
+          <p>The win condition is direct damage: Toon monsters attack directly while the book is up, so opposing monster walls matter less than whether the opponent can banish, bounce, or negate your field spell.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Current OCG Toon lists average <b>40 cards</b> per the Yu-Gi-Oh! Meta breakdown, running 3x <span class="card-mention" data-card="table">Toon Table of Contents</span>, <span class="card-mention" data-card="bookmark">Toon Bookmark</span>, and <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span>.</span></li>
+            <li><span class="num">2</span><span>The RV01 Revolution Booster support (<span class="card-mention" data-card="funnyRabbit">Funny Dark Rabbit</span>, <span class="card-mention" data-card="comicCat">Comic Cat</span>, <span class="card-mention" data-card="evilBox">Evil Box</span>, <span class="card-mention" data-card="mindScan">Mind Scan</span>, <span class="card-mention" data-card="beToonUltimate">Blue-Eyes Toon Ultimate Dragon</span>) released in the OCG on May 30, 2026 and is not guaranteed TCG-legal at every event.</span></li>
+            <li><span class="num">3</span><span>One public structured combo route exists: the 1-card <span class="card-mention" data-card="funnyRabbit">Funny Dark Rabbit</span> FTK line on YgoCombo (May 12, 2026). No public Toon spreadsheet was found on Master Duel Meta.</span></li>
+          </ul>
         </article>
       </div>
     </section>
 
-    <section id="tips">
-      <div class="section-head">
-        <div>
-          <h2>Tips</h2>
-          <p>Small sequencing rules that prevent common Toon losses.</p>
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Classic access route — 1-card search: Toon Table of Contents</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Lead with Table</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="table"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="table">Toon Table of Contents</span>. If your hand lacks field access, add <span class="card-mention" data-card="bookmark">Toon Bookmark</span>. Table into Bookmark is the least committal opening search.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Bookmark bridge</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="bookmark"></span></div></td>
+              <td><span class="card-mention" data-card="bookmark">Toon Bookmark</span> adds <span class="card-mention" data-card="kingdom">Toon Kingdom</span>, <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span>, <span class="card-mention" data-card="comicHand">Comic Hand</span>, or any other card that mentions <span class="card-mention" data-card="toonWorld">Toon World</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Pick the book</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="kingdom"></span><span class="plus-sign">+</span><span class="card-chip" data-card="perfectWorld"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="kingdom">Toon Kingdom</span> for protection (it banishes from the top of your Deck face-down to shield Toons) or <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> for repeated search and dodge lines.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Hold cover</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="bookmark"></span><span class="plus-sign">+</span><span class="card-chip" data-card="toonTerror"></span></div></td>
+              <td><span class="card-mention" data-card="bookmark">Toon Bookmark</span> in GY can banish itself to protect a Toon World you control from destruction by card effect — it does not stop banish, bounce, or negation. Search <span class="card-mention" data-card="toonTerror">Toon Terror</span> when the hand already has bodies; going second, take <span class="card-mention" data-card="comicHand">Comic Hand</span> instead when an opposing monster creates lethal math.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Page-Flip swarm — 2-card setup: live Toon World + Toon Page-Flip</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Enable the book</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="kingdom"></span><span class="plus-sign">+</span><span class="card-chip" data-card="perfectWorld"></span></div></td>
+              <td>Control a card treated as <span class="card-mention" data-card="toonWorld">Toon World</span>. <span class="card-mention" data-card="blackStone">The Black Stone of Legend</span> offers the same chain from a Normal Summon: Tribute it to Special Summon <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span> from Deck and skip straight to step 3.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Reveal three names</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="pageFlip"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span> and reveal three different Toon names. The best pile is <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span>, <span class="card-mention" data-card="toonDM">Toon Dark Magician</span>, and <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span>, because every result either extends, searches, or attacks quickly.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Chain the summons</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="redEyes"></span><span class="plus-sign">+</span><span class="card-chip" data-card="toonDM"></span></div></td>
+              <td>If <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span> hits, it summons <span class="card-mention" data-card="toonDM">Toon Dark Magician</span> from hand. If Toon DM hits, discard a Toon card to summon <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> from Deck or search a Toon Spell/Trap.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">End on pressure</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="toonBLS"></span><span class="plus-sign">+</span><span class="card-chip" data-card="toonTerror"></span><span class="plus-sign">+</span><span class="card-chip" data-card="briefcase"></span></div></td>
+              <td>End on <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> pressure and searchable disruption, or take the highest-damage monster for next-turn lethal. If interrupted, prioritize keeping Toon World active — without field access most Toon bodies lose their best text.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Going-second lethal — OTK branch: steal or burn around the board</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Secure access first</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="bookmark"></span><span class="plus-sign">+</span><span class="card-chip" data-card="kingdom"></span></div></td>
+              <td>Find a Toon World substitute before committing <span class="card-mention" data-card="comicHand">Comic Hand</span>. <span class="card-mention" data-card="bookmark">Toon Bookmark</span> can search Comic Hand directly.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Steal a body</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="comicHand"></span></div></td>
+              <td><span class="card-mention" data-card="comicHand">Comic Hand</span> takes an opposing monster, makes it a Toon, and lets it attack directly if the opponent controls no Toons. The stolen monster can also be used as Tribute material for <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Count the damage</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="toonBLS"></span><span class="plus-sign">+</span><span class="card-chip" data-card="shadowToon"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rollback"></span></div></td>
+              <td><span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> can attack the turn it is summoned. Two BLS attacks plus a 2000+ ATK <span class="card-mention" data-card="comicHand">Comic Hand</span> monster reaches 8000 direct damage; <span class="card-mention" data-card="shadowToon">Shadow Toon</span> and <span class="card-mention" data-card="rollback">Toon Rollback</span> close exact lethal. BLS either banishes a card or attacks that turn, not both — skip the banish when damage is lethal.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Keep removal cover</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="toonTerror"></span><span class="plus-sign">+</span><span class="card-chip" data-card="bookmark"></span></div></td>
+              <td>Hold <span class="card-mention" data-card="toonTerror">Toon Terror</span> for removal aimed at your field spell or <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> before the Battle Phase, with <span class="card-mention" data-card="bookmark">Toon Bookmark</span> in GY as destruction backup.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">RV01 Perfect World control — 1-card starter: Funny Dark Rabbit (latest OCG)</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Normal Summon Rabbit</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="funnyRabbit"></span></div></td>
+              <td>Normal Summon <span class="card-mention" data-card="funnyRabbit">Funny Dark Rabbit</span>. Its summon grants an extra Normal Summon for a monster that mentions <span class="card-mention" data-card="toonWorld">Toon World</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Place the book</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="funnyRabbit"></span><span class="plus-sign">+</span><span class="card-chip" data-card="perfectWorld"></span></div></td>
+              <td>Rabbit places or adds <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> from Deck — one body compresses field access, the extra Normal Summon, and the search chain below.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Search and re-Normal</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="perfectWorld"></span><span class="plus-sign">+</span><span class="card-chip" data-card="comicCat"></span></div></td>
+              <td><span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> searches <span class="card-mention" data-card="comicCat">Comic Cat</span>; Normal Summon Cat with Rabbit's extra Normal Summon.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Tribute and set traps</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="comicCat"></span><span class="plus-sign">+</span><span class="card-chip" data-card="evilBox"></span></div></td>
+              <td><span class="card-mention" data-card="comicCat">Comic Cat</span> tributes a monster to summon a Toon World-mentioning monster from Deck — with Toon World active it can even tribute an opponent's monster you do not control. <span class="card-mention" data-card="evilBox">Evil Box</span> Special Summons itself while Toon World is up, then adds or sets <span class="card-mention" data-card="toonTerror">Toon Terror</span> or <span class="card-mention" data-card="mindScan">Mind Scan</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Information control</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="mindScan"></span><span class="plus-sign">+</span><span class="card-chip" data-card="toonTerror"></span></div></td>
+              <td><span class="card-mention" data-card="mindScan">Mind Scan</span> reveals the opponent's hand and names the next card effect, while <span class="card-mention" data-card="toonTerror">Toon Terror</span> covers field-spell removal. In the grind, <span class="card-mention" data-card="darkEyes">Dark-Eyes Illusionist Faceless Mage</span> can place Mind Scan or revive a Toon World-mentioning monster from GY.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Funny Dark Rabbit</div>
+              <div class="card-row"><span class="card-chip" data-card="funnyRabbit"></span></div>
+              <p class="step-note">Normal Summon. Grants an extra Normal Summon for a monster that mentions <span class="card-mention" data-card="toonWorld">Toon World</span>.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Place Perfect World</div>
+              <div class="card-row"><span class="card-chip" data-card="funnyRabbit"></span><span class="connector">+</span><span class="card-chip" data-card="perfectWorld"></span></div>
+              <p class="step-note">Rabbit places or adds <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> from Deck — the book is live without spending a search.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Perfect World search</div>
+              <div class="card-row"><span class="card-chip" data-card="perfectWorld"></span><span class="connector">+</span><span class="card-chip" data-card="comicCat"></span></div>
+              <p class="step-note">Search <span class="card-mention" data-card="comicCat">Comic Cat</span> and use the extra Normal Summon; against grindier hands, search protection before greedy extension.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Cat tribute and Evil Box</div>
+              <div class="card-row"><span class="card-chip" data-card="comicCat"></span><span class="connector">+</span><span class="card-chip" data-card="toonDM"></span><span class="connector">+</span><span class="card-chip" data-card="evilBox"></span></div>
+              <p class="step-note">Cat tributes a monster (yours, or the opponent's while Toon World is active) to summon from Deck; <span class="card-mention" data-card="evilBox">Evil Box</span> self-summons and sets a Toon Trap.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Mind Scan + Terror coverage</div>
+              <div class="card-row"><span class="card-chip" data-card="mindScan"></span><span class="connector">+</span><span class="card-chip" data-card="toonTerror"></span></div>
+              <p class="step-note">Revealed hand plus <span class="card-mention" data-card="mindScan">Mind Scan</span> naming gives targeted turn coverage; <span class="card-mention" data-card="toonTerror">Toon Terror</span> protects the field spell and monster effects.</p>
+            </div>
+          </div>
+          <div class="flow-step warn">
+            <div class="step-index">6</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag red">Warn</span> The book is the deck</div>
+              <div class="card-row"><span class="card-chip" data-card="bookmark"></span><span class="connector">+</span><span class="card-chip" data-card="toonTerror"></span></div>
+              <p class="step-note">Without Toon World active, most Toon text turns off. <span class="card-mention" data-card="bookmark">Toon Bookmark</span> in GY only stops destruction — banish, bounce, and negation still beat the field spell, so hold <span class="card-mention" data-card="toonTerror">Toon Terror</span> for that exchange.</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="tabs" role="tablist" aria-label="Tip categories">
-        <button class="tab-button active" type="button" data-tab="sequencing">Sequencing</button>
-        <button class="tab-button" type="button" data-tab="combat">Combat</button>
-        <button class="tab-button" type="button" data-tab="meta">Meta</button>
-      </div>
-      <div class="tab-content" id="tab-sequencing">
-        <div class="grid three">
-          <article class="tip-card">
-            <h3>Lead with the least committal search</h3>
-            <p>Table of Contents into Bookmark is safer than activating Toon Kingdom blind when you also need Bookmark in GY as destruction cover.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Do not overpay Kingdom protection</h3>
-            <p>Kingdom protection banishes from the top of your Deck face-down. Count your deck before protecting every small Toon in grind games.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Page-Flip wants different names</h3>
-            <p>Reveal Red-Eyes Toon Dragon, Toon Dark Magician, and Toon Black Luster Soldier when possible. Any hit is useful and two of them extend.</p>
-          </article>
-        </div>
-      </div>
-      <div class="tab-content" id="tab-combat" hidden>
-        <div class="grid three">
-          <article class="tip-card">
-            <h3>Choose BLS mode before Battle Phase</h3>
-            <p>Toon BLS either banishes a card or attacks that turn, not both. If direct damage is lethal, ignore the removal effect.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Comic Hand changes math quickly</h3>
-            <p>Bookmark can search Comic Hand. A stolen monster becomes a Toon, can attack directly, and can be used as tribute material for Toon BLS.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Perfect World protects on resolution</h3>
-            <p>Perfect World's temporary banish happens before another activated effect resolves. It can dodge removal aimed at a Toon body, but it does not save the field spell itself.</p>
-          </article>
-        </div>
-      </div>
-      <div class="tab-content" id="tab-meta" hidden>
-        <div class="grid three">
-          <article class="tip-card">
-            <h3>Respect Droll</h3>
-            <p>Current stats show Droll in the main-deck ecosystem. If you already have field access, search protection before greedy extension.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Mind Scan names the non-chain card</h3>
-            <p>Mind Scan's negation declares a card name not activated in that chain. Use revealed hand knowledge to name the next engine piece, not the current chain link.</p>
-          </article>
-          <article class="tip-card">
-            <h3>Field spell removal beats monster walls</h3>
-            <p>Most opposing boards are less important than whether they can banish, bounce, or negate Toon Kingdom or Perfect World. Hold Terror for that exchange.</p>
-          </article>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>Classic Kingdom fallback</h4>
+            <p>Without RV01 cards (Master Duel, older TCG pools), open <span class="card-mention" data-card="table">Toon Table of Contents</span> into <span class="card-mention" data-card="bookmark">Toon Bookmark</span> into <span class="card-mention" data-card="kingdom">Toon Kingdom</span>, then convert with <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span>.</p>
+            <div class="card-row"><span class="card-chip" data-card="table"></span><span class="card-chip" data-card="bookmark"></span><span class="card-chip" data-card="kingdom"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Black Stone extension</h4>
+            <p>Tribute <span class="card-mention" data-card="blackStone">The Black Stone of Legend</span> to Special Summon <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span> from Deck; Red-Eyes summons <span class="card-mention" data-card="toonDM">Toon Dark Magician</span> from hand. Later, Black Stone shuffles a Red-Eyes from GY into Deck and returns itself to hand.</p>
+            <div class="card-row"><span class="card-chip" data-card="blackStone"></span><span class="card-chip" data-card="redEyes"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Comic Hand steal lethal</h4>
+            <p>Going second with an opposing 2000+ ATK monster: <span class="card-mention" data-card="bookmark">Toon Bookmark</span> searches <span class="card-mention" data-card="comicHand">Comic Hand</span>, the stolen monster attacks directly, and <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> swings the same turn.</p>
+            <div class="card-row"><span class="card-chip" data-card="comicHand"></span><span class="card-chip" data-card="toonBLS"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Funny Dark Rabbit FTK theory</h4>
+            <p>Public YgoCombo route: Cat summons <span class="card-mention" data-card="toonDM">Toon Dark Magician</span>, who discards <span class="card-mention" data-card="blueEyesToon">Blue-Eyes Toon Dragon</span> to reach <span class="card-mention" data-card="table">Toon Table of Contents</span> loops; <span class="card-mention" data-card="darkMagicianDestruction">Dark Magician of Destruction</span> gets <span class="card-mention" data-card="darkEradicator">Dark Eradicator Warlock</span>, so each Normal Spell burns for 1000 while <span class="card-mention" data-card="evilBox">Evil Box</span> and <span class="card-mention" data-card="beToonUltimate">Blue-Eyes Toon Ultimate Dragon</span> recycle Table. OCG RV01 only — check the event's card pool.</p>
+            <div class="card-row"><span class="card-chip" data-card="darkEradicator"></span><span class="card-chip" data-card="darkMagicianDestruction"></span><span class="card-chip" data-card="table"></span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="recovery">
-      <div class="section-head">
-        <div>
-          <h2>Recovery Options</h2>
-          <p>The deck can rebuild, but only if you preserve search access and know which zone still has value.</p>
-        </div>
-      </div>
-      <div class="grid four">
-        <article class="panel" data-tone="green">
-          <h3>GY protection</h3>
-          <div class="card-row" data-cards="bookmark,kingdom,perfectWorld"></div>
-          <p>Bookmark in GY protects a Toon World you control from destruction by card effect. It does not stop banish, bounce, or negation.</p>
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
+        <article class="board-card">
+          <span class="tag blue">Going first</span>
+          <h3>Classic Kingdom control</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="kingdom"></span><span class="card-chip" data-card="redEyes"></span><span class="card-chip" data-card="toonDM"></span><span class="card-chip" data-card="toonBLS"></span><span class="card-chip" data-card="toonTerror"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="bookmark"></span><span class="card-chip" data-card="briefcase"></span></div></div>
+          <p>Aim here when <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span> or <span class="card-mention" data-card="blackStone">The Black Stone of Legend</span> resolves and you are not forced into immediate lethal. Protected direct attackers threaten lethal next Battle Phase if Kingdom stays up.</p>
         </article>
-        <article class="panel" data-tone="blue">
-          <h3>Monster loop</h3>
-          <div class="card-row" data-cards="blackStone,redEyes,toonDM,toonBLS"></div>
-          <p>The Black Stone can recycle a Red-Eyes monster from GY back to Deck on a later turn, then return itself to hand.</p>
+        <article class="board-card">
+          <span class="tag gold">Going second</span>
+          <h3>Steal lethal</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="perfectWorld"></span><span class="card-chip" data-card="comicHand"></span><span class="card-chip" data-card="toonBLS"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="shadowToon"></span><span class="card-chip" data-card="rollback"></span></div></div>
+          <p>Best when the opponent leaves a 2000+ ATK monster and you can force Toon World access. <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> attacks the turn it is summoned; stolen monsters become Toons and attack directly.</p>
         </article>
-        <article class="panel" data-tone="violet">
-          <h3>RV01 grave rebuild</h3>
-          <div class="card-row" data-cards="darkEyes,mindScan,beToonUltimate,table"></div>
-          <p>Dark-Eyes can place Mind Scan or recover another Toon World-mentioning monster from GY. Blue-Eyes Toon Ultimate Dragon adds back Toon cards from GY.</p>
-        </article>
-        <article class="panel" data-tone="gold">
-          <h3>Search reload</h3>
-          <div class="card-row" data-cards="table,bookmark,pageFlip,terraforming"></div>
-          <p>After a wipe, prioritize field access first, then Page-Flip or Red-Eyes lines. A hand full of monsters without Toon World text is not a recovery.</p>
+        <article class="board-card">
+          <span class="tag green">Latest OCG</span>
+          <h3>RV01 Perfect World control</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="perfectWorld"></span><span class="card-chip" data-card="funnyRabbit"></span><span class="card-chip" data-card="comicCat"></span><span class="card-chip" data-card="evilBox"></span><span class="card-chip" data-card="mindScan"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="toonTerror"></span><span class="card-chip" data-card="darkEyes"></span></div></div>
+          <p>Current OCG variant per Yu-Gi-Oh! Meta stats. Revealed hand plus <span class="card-mention" data-card="mindScan">Mind Scan</span> naming gives targeted turn coverage after Perfect World searched the right pieces; <span class="card-mention" data-card="toonTerror">Toon Terror</span> usually sits set.</p>
         </article>
       </div>
     </section>
 
-    <section id="side">
-      <div class="section-head">
-        <div>
-          <h2>Side Deck Options and Counters</h2>
-          <p>Side cards should either protect the field spell, force damage through, or stop the opponent from removing the field spell cleanly.</p>
-        </div>
-      </div>
-      <table class="side-table">
-        <thead>
-          <tr>
-            <th>Matchup / Problem</th>
-            <th>Side In</th>
-            <th>Why it matters</th>
-            <th>What opponents side against Toons</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Backrow and field-spell hate</strong></td>
-            <td><div class="card-row" data-cards="cosmic,duster,lightning,prohibition"></div></td>
-            <td>Cosmic banishes problem backrow and field spells. Duster and Lightning clear set cards before Kingdom or Perfect World commits.</td>
-            <td>Cosmic Cyclone, Twin Twisters, Evenly Matched, and any banish/bounce effect that Bookmark cannot replace.</td>
-          </tr>
-          <tr>
-            <td><strong>Combo decks</strong></td>
-            <td><div class="card-row" data-cards="droll,nibiru,imperm,ash,veiler"></div></td>
-            <td>Use low-commitment hand traps because your own engine needs spells. Droll is strongest when the opponent needs multiple searches.</td>
-            <td>Ash on Bookmark/Page-Flip, Imperm on Toon Dark Magician or Comic Cat, and Nibiru after your fifth summon.</td>
-          </tr>
-          <tr>
-            <td><strong>Graveyard decks</strong></td>
-            <td><div class="card-row" data-cards="ddCrow,ghostBelle,evilBox,shifter"></div></td>
-            <td>Evil Box puts a GY card on the bottom of the Deck. Crow and Belle are clean single-card answers. Shifter is strong only when your build can give up GY loops.</td>
-            <td>Ghost Belle on Dark-Eyes or Blue-Eyes Toon Ultimate recursion; D.D. Crow on Bookmark if they can remove the field spell afterward.</td>
-          </tr>
-          <tr>
-            <td><strong>Going second into boards</strong></td>
-            <td><div class="card-row" data-cards="evenly,droplet,thrust,comicHand,bookEclipse"></div></td>
-            <td>Break interaction with Evenly or Droplet, then use Comic Hand and direct attackers to win without fully clearing the board.</td>
-            <td>Negate the field spell access, remove Comic Hand's equip target, or keep removal for Toon BLS before Battle Phase.</td>
-          </tr>
-          <tr>
-            <td><strong>Control mirrors</strong></td>
-            <td><div class="card-row" data-cards="royalDecree,fieldBarrier,crossout,calledBy"></div></td>
-            <td>Royal Decree is a high-risk trap shutoff if you trim your traps. Field Barrier protects field spells from destruction but not banish or bounce.</td>
-            <td>Hold removal until Bookmark is out of GY or use non-destruction removal on Kingdom/Perfect World.</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note" style="margin-top:10px;">Format note: the official TCG Forbidden & Limited List effective May 18, 2026 forbids several older generic Extra Deck and floodgate suggestions, including Abyss Dweller, Bahamut Shark, Baronne de Fleur, Borreload Savage Dragon, and Summon Limit.</p>
-    </section>
-
-    <section id="references-wrap">
-      <div class="refs-bar">
-        <div>
-          <h2 style="margin-bottom:4px;">References</h2>
-          <p class="note">Hidden research tab with the sources used to build this cheatsheet.</p>
-        </div>
-        <button id="refsToggle" class="ref-toggle" type="button" aria-expanded="false" aria-controls="references">Show References</button>
-      </div>
-      <div class="references" id="references" hidden>
-        <div class="references-grid">
-          <article class="ref-card">
-            <h3>Combo and spreadsheet search</h3>
-            <ul class="clean-list">
-              <li><span class="bullet">i</span><span><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta Combos &amp; Counters</a>: checked the public Combos/Counters/Spreadsheets surface. The static public page exposes a Spreadsheets tab and login prompt, but no public Toon-specific spreadsheet was available.</span></li>
-              <li><span class="bullet">+</span><span><a href="https://ygocombo.com/combo/43">YgoCombo combo 43</a>: used as the current public structured combo route for the Funny Dark Rabbit Toon FTK line, published May 12, 2026.</span></li>
-            </ul>
-          </article>
-          <article class="ref-card">
-            <h3>Latest meta and variants</h3>
-            <ul class="clean-list">
-              <li><span class="bullet">i</span><span><a href="https://www.yugiohmeta.com/tier-list/deck-types/Toon">Yu-Gi-Oh! Meta Toon Deck Breakdown</a>: used for current OCG tournament-stat cards, average 40-card size, and the note that no public decklists were available in the Best Decks table.</span></li>
-              <li><span class="bullet">+</span><span><a href="https://duelingnexus.com/blog/new-toon-deck-february-2026-tcg-format/">Dueling Nexus new Toon profile</a>: supporting snapshot for a 40-card new-support profile with Funny Dark Rabbit, Comic Cat, Evil Box, Perfect World, Toon traps, and Blue-Eyes Toon Ultimate Dragon.</span></li>
-            </ul>
-          </article>
-          <article class="ref-card">
-            <h3>New Toon support</h3>
-            <ul class="clean-list">
-              <li><span class="bullet">i</span><span><a href="https://www.yugiohmeta.com/articles/news/mar-14-2026/RV01">Yu-Gi-Oh! Meta RV01 Toon reveal</a>: used for Funny Dark Rabbit, Comic Cat, Evil Box, Blue-Eyes Toon Ultimate Dragon, and Toon World the Perfect World text.</span></li>
-              <li><span class="bullet">i</span><span><a href="https://www.yugiohmeta.com/articles/news/apr-17-2026/RV01">Yu-Gi-Oh! Meta remaining Toon cards</a>: used for Dark-Eyes Illusionist Faceless Mage and Mind Scan.</span></li>
-              <li><span class="bullet">i</span><span><a href="https://www.yugiohmeta.com/articles/news/2026/jan/revolution-booster-announced">Yu-Gi-Oh! Meta Revolution Booster announcement</a>: used for the May 30, 2026 OCG release framing.</span></li>
-            </ul>
-          </article>
-          <article class="ref-card">
-            <h3>Classic Toon play</h3>
-            <ul class="clean-list">
-              <li><span class="bullet">i</span><span><a href="https://www.masterduelmeta.com/articles/guides/toon-guide-vizionz333">Master Duel Meta Toon guide</a>: used for classic Toon Kingdom strategy, core cards, and side-card framing.</span></li>
-              <li><span class="bullet">i</span><span><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/356053">Game8 Pegasus Toon Kingdom guide</a>: used for the Special Summoning chain and playstyle/counter notes. Game8 marks its Master Duel guides discontinued after December 2025, so it is treated as legacy support.</span></li>
-              <li><span class="bullet">i</span><span><a href="https://www.yugioh-card.com/en/downloads/rivalry_of_warlords/Toons-Manual.pdf">Official Rivalry of Warlords Toons manual</a>: used for official beginner sequencing, Page-Flip targets, direct-attack win condition, and classic recovery notes.</span></li>
-            </ul>
-          </article>
-          <article class="ref-card">
-            <h3>Card IDs and legality</h3>
-            <ul class="clean-list">
-              <li><span class="bullet">+</span><span><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php">YGOPRODeck API</a>: used to verify exact card IDs and effect text. Every visible card image uses the requested <code>https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</code> format.</span></li>
-              <li><span class="bullet">i</span><span><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/">Official TCG Forbidden &amp; Limited List, May 18, 2026</a>: used for current TCG legality warnings on older Extra Deck and floodgate options.</span></li>
-            </ul>
-          </article>
-        </div>
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Lead with the least committal search: <span class="card-mention" data-card="table">Toon Table of Contents</span> into <span class="card-mention" data-card="bookmark">Toon Bookmark</span> is safer than activating <span class="card-mention" data-card="kingdom">Toon Kingdom</span> blind when you also want Bookmark in GY as destruction cover.</span></li>
+            <li><span class="num">2</span><span>Do not overpay Kingdom protection — it banishes from the top of your Deck face-down. Count your deck before protecting every small Toon in grind games.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="pageFlip">Toon Page-Flip</span> wants different names: reveal <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span>, <span class="card-mention" data-card="toonDM">Toon Dark Magician</span>, and <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> when possible; any hit is useful and two of them extend.</span></li>
+            <li><span class="num">4</span><span>Choose the <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> mode before the Battle Phase: it either banishes a card or attacks that turn, not both. If direct damage is lethal, ignore the removal effect.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span>'s temporary banish happens before another activated effect resolves — it dodges removal aimed at a Toon body, but never saves the field spell itself.</span></li>
+            <li><span class="num">6</span><span><span class="card-mention" data-card="mindScan">Mind Scan</span> declares a card name not activated in that chain. Use revealed-hand knowledge to name the opponent's next engine piece, not the current chain link.</span></li>
+            <li><span class="num">7</span><span>Respect <span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> — it is common in the current main-deck ecosystem. With field access already secured, search protection before greedy extension.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="bookmark"></span>
+            <span class="card-chip" data-card="blackStone"></span>
+            <span class="card-chip" data-card="darkEyes"></span>
+            <span class="card-chip" data-card="beToonUltimate"></span>
+            <span class="card-chip" data-card="table"></span>
+          </div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><b>GY protection:</b> <span class="card-mention" data-card="bookmark">Toon Bookmark</span> in GY protects a Toon World you control from destruction by card effect — not banish, bounce, or negation.</span></li>
+            <li><span class="num">2</span><span><b>Monster loop:</b> <span class="card-mention" data-card="blackStone">The Black Stone of Legend</span> recycles a Red-Eyes monster from GY back to Deck on a later turn, then returns itself to hand for another starter.</span></li>
+            <li><span class="num">3</span><span><b>RV01 grave rebuild:</b> <span class="card-mention" data-card="darkEyes">Dark-Eyes Illusionist Faceless Mage</span> places <span class="card-mention" data-card="mindScan">Mind Scan</span> or recovers a Toon World-mentioning monster from GY; <span class="card-mention" data-card="beToonUltimate">Blue-Eyes Toon Ultimate Dragon</span> shuffles Fusion materials from hand, field, or GY and adds Toon cards back from GY each turn.</span></li>
+            <li><span class="num">4</span><span><b>Search reload:</b> after a wipe, prioritize field access first via <span class="card-mention" data-card="table">Toon Table of Contents</span>, <span class="card-mention" data-card="bookmark">Toon Bookmark</span>, or <span class="card-mention" data-card="terraforming">Terraforming</span>, then <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span> or Red-Eyes lines. A hand full of monsters without Toon World text is not a recovery.</span></li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <p class="footer-note">Card images load from images.ygoprodeck.com using verified passcodes. New RV01 cards are marked as OCG-current support, not guaranteed TCG legal in every event.</p>
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="source-note">No public Toon T3 decklist is available on the current Yu-Gi-Oh! Meta page, but it exposes automated tournament-stat card usage for OCG Toons (last few weeks of tournament decks). No public Toon spreadsheet was found on Master Duel Meta.</div>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">OCG RV01</span>
+          <h3>Tournament-stat Perfect World shell</h3>
+          <p>The current stat profile shifts the deck toward <span class="card-mention" data-card="funnyRabbit">Funny Dark Rabbit</span>, <span class="card-mention" data-card="comicCat">Comic Cat</span>, <span class="card-mention" data-card="evilBox">Evil Box</span>, <span class="card-mention" data-card="darkEyes">Dark-Eyes Illusionist Faceless Mage</span>, <span class="card-mention" data-card="mindScan">Mind Scan</span>, and <span class="card-mention" data-card="beToonUltimate">Blue-Eyes Toon Ultimate Dragon</span> — real search velocity and interactive information control. RV01 released in the OCG May 30, 2026.</p>
+          <div class="card-row"><span class="card-chip" data-card="funnyRabbit"></span><span class="card-chip" data-card="perfectWorld"></span><span class="card-chip" data-card="comicCat"></span><span class="card-chip" data-card="evilBox"></span><span class="card-chip" data-card="mindScan"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag blue">Classic</span>
+          <h3>Toon Kingdom shell</h3>
+          <p>For Master Duel and older TCG pools, the stable shell is <span class="card-mention" data-card="kingdom">Toon Kingdom</span> plus <span class="card-mention" data-card="table">Toon Table of Contents</span>, <span class="card-mention" data-card="bookmark">Toon Bookmark</span>, <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span>, <span class="card-mention" data-card="redEyes">Red-Eyes Toon Dragon</span>, <span class="card-mention" data-card="toonDM">Toon Dark Magician</span>, <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span>, and searchable protection.</p>
+          <div class="card-row"><span class="card-chip" data-card="blackStone"></span><span class="card-chip" data-card="kingdom"></span><span class="card-chip" data-card="pageFlip"></span><span class="card-chip" data-card="redEyes"></span><span class="card-chip" data-card="toonBLS"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag gold">Going second</span>
+          <h3>Board-breaker profile</h3>
+          <p>Lean on non-targeting board breakers and <span class="card-mention" data-card="comicHand">Comic Hand</span>. Your best wins ignore the board, so flex slots should either clear backrow that hits the field spell or convert an opponent's monster into lethal damage.</p>
+          <div class="card-row"><span class="card-chip" data-card="comicHand"></span><span class="card-chip" data-card="shadowToon"></span><span class="card-chip" data-card="evenly"></span><span class="card-chip" data-card="lightning"></span><span class="card-chip" data-card="droplet"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag red">Format warning</span>
+          <h3>Outdated Extra Deck advice</h3>
+          <p>Older guides mention <span class="card-mention" data-card="bahamut">Bahamut Shark</span>, Toadally Awesome, <span class="card-mention" data-card="abyss">Abyss Dweller</span>, <span class="card-mention" data-card="baronne">Baronne de Fleur</span>, <span class="card-mention" data-card="savage">Borreload Savage Dragon</span>, and <span class="card-mention" data-card="summonLimit">Summon Limit</span>. Several are forbidden on the official TCG list effective May 18, 2026 — verify legality before copying older Extra Deck or side plans.</p>
+          <div class="card-row"><span class="card-chip" data-card="abyss"></span><span class="card-chip" data-card="bahamut"></span><span class="card-chip" data-card="baronne"></span><span class="card-chip" data-card="savage"></span><span class="card-chip" data-card="summonLimit"></span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Backrow and field-spell hate</td>
+              <td><div class="card-row"><span class="card-chip" data-card="cosmic"></span><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="lightning"></span><span class="card-chip" data-card="prohibition"></span></div></td>
+              <td><span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> banishes problem backrow and field spells. <span class="card-mention" data-card="duster">Harpie's Feather Duster</span> and <span class="card-mention" data-card="lightning">Lightning Storm</span> clear set cards before <span class="card-mention" data-card="kingdom">Toon Kingdom</span> or <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> commits.</td>
+            </tr>
+            <tr>
+              <td>Combo decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="nibiru"></span><span class="card-chip" data-card="imperm"></span><span class="card-chip" data-card="ash"></span><span class="card-chip" data-card="veiler"></span></div></td>
+              <td>Use low-commitment hand traps because your own engine needs spells. <span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> is strongest when the opponent needs multiple searches.</td>
+            </tr>
+            <tr>
+              <td>Graveyard decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="ddCrow"></span><span class="card-chip" data-card="ghostBelle"></span><span class="card-chip" data-card="evilBox"></span><span class="card-chip" data-card="shifter"></span></div></td>
+              <td><span class="card-mention" data-card="evilBox">Evil Box</span> puts a GY card on the bottom of the Deck. <span class="card-mention" data-card="ddCrow">D.D. Crow</span> and <span class="card-mention" data-card="ghostBelle">Ghost Belle &amp; Haunted Mansion</span> are clean single-card answers. <span class="card-mention" data-card="shifter">Dimension Shifter</span> is strong only when your build can give up GY loops.</td>
+            </tr>
+            <tr>
+              <td>Going second into boards</td>
+              <td><div class="card-row"><span class="card-chip" data-card="evenly"></span><span class="card-chip" data-card="droplet"></span><span class="card-chip" data-card="thrust"></span><span class="card-chip" data-card="comicHand"></span><span class="card-chip" data-card="bookEclipse"></span></div></td>
+              <td>Break interaction with <span class="card-mention" data-card="evenly">Evenly Matched</span> or <span class="card-mention" data-card="droplet">Forbidden Droplet</span>, then use <span class="card-mention" data-card="comicHand">Comic Hand</span> and direct attackers to win without fully clearing the board.</td>
+            </tr>
+            <tr>
+              <td>Control mirrors</td>
+              <td><div class="card-row"><span class="card-chip" data-card="royalDecree"></span><span class="card-chip" data-card="fieldBarrier"></span><span class="card-chip" data-card="crossout"></span><span class="card-chip" data-card="calledBy"></span></div></td>
+              <td><span class="card-mention" data-card="royalDecree">Royal Decree</span> is a high-risk trap shutoff if you trim your own traps. <span class="card-mention" data-card="fieldBarrier">Field Barrier</span> protects field spells from destruction but not banish or bounce.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="cosmic">Cosmic Cyclone</span>, Twin Twisters, <span class="card-mention" data-card="evenly">Evenly Matched</span>, and any banish or bounce effect on the field spell that <span class="card-mention" data-card="bookmark">Toon Bookmark</span> cannot replace.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="ash">Ash Blossom &amp; Joyous Spring</span> on <span class="card-mention" data-card="bookmark">Toon Bookmark</span> or <span class="card-mention" data-card="pageFlip">Toon Page-Flip</span>; <span class="card-mention" data-card="imperm">Infinite Impermanence</span> on <span class="card-mention" data-card="toonDM">Toon Dark Magician</span> or <span class="card-mention" data-card="comicCat">Comic Cat</span>; <span class="card-mention" data-card="nibiru">Nibiru, the Primal Being</span> after the fifth summon.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="ghostBelle">Ghost Belle &amp; Haunted Mansion</span> on <span class="card-mention" data-card="darkEyes">Dark-Eyes Illusionist Faceless Mage</span> or <span class="card-mention" data-card="beToonUltimate">Blue-Eyes Toon Ultimate Dragon</span> recursion; <span class="card-mention" data-card="ddCrow">D.D. Crow</span> on <span class="card-mention" data-card="bookmark">Toon Bookmark</span> when they can remove the field spell afterward.</span></li>
+            <li><span class="num">4</span><span>Opponents who keep removal for <span class="card-mention" data-card="toonBLS">Toon Black Luster Soldier</span> before the Battle Phase, or who remove <span class="card-mention" data-card="comicHand">Comic Hand</span>'s equip target.</span></li>
+          </ul>
+        </article>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Hold <span class="card-mention" data-card="toonTerror">Toon Terror</span> specifically for effects that hit <span class="card-mention" data-card="kingdom">Toon Kingdom</span> or <span class="card-mention" data-card="perfectWorld">Toon World the Perfect World</span> — that exchange matters more than any monster trade.</span></li>
+            <li><span class="num">2</span><span>Load <span class="card-mention" data-card="bookmark">Toon Bookmark</span> into GY early so targeted destruction on the book is never a clean one-for-one.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="calledBy">Called by the Grave</span> and <span class="card-mention" data-card="crossout">Crossout Designator</span> protect the critical Bookmark or <span class="card-mention" data-card="funnyRabbit">Funny Dark Rabbit</span> activation from hand traps.</span></li>
+            <li><span class="num">4</span><span>When their removal is spent, <span class="card-mention" data-card="comicHand">Comic Hand</span> and direct attackers convert any leftover monster into lethal instead of fighting through it.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters</a> — checked the public Combos/Counters/Spreadsheets surface; no public Toon-specific spreadsheet was available.</li>
+        <li><a href="https://ygocombo.com/combo/43" target="_blank" rel="noreferrer">YgoCombo combo 43</a> — current public structured combo route for the Funny Dark Rabbit Toon FTK line, published May 12, 2026.</li>
+        <li><a href="https://www.yugiohmeta.com/tier-list/deck-types/Toon" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta Toon Deck Breakdown</a> — current OCG tournament-stat cards, average 40-card size, and the note that no public decklists were available in the Best Decks table.</li>
+        <li><a href="https://duelingnexus.com/blog/new-toon-deck-february-2026-tcg-format/" target="_blank" rel="noreferrer">Dueling Nexus new Toon profile</a> — supporting snapshot for a 40-card new-support profile with Funny Dark Rabbit, Comic Cat, Evil Box, Perfect World, Toon traps, and Blue-Eyes Toon Ultimate Dragon.</li>
+        <li><a href="https://www.yugiohmeta.com/articles/news/mar-14-2026/RV01" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta RV01 Toon reveal</a> — Funny Dark Rabbit, Comic Cat, Evil Box, Blue-Eyes Toon Ultimate Dragon, and Toon World the Perfect World text.</li>
+        <li><a href="https://www.yugiohmeta.com/articles/news/apr-17-2026/RV01" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta remaining Toon cards</a> — Dark-Eyes Illusionist Faceless Mage and Mind Scan.</li>
+        <li><a href="https://www.yugiohmeta.com/articles/news/2026/jan/revolution-booster-announced" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta Revolution Booster announcement</a> — the May 30, 2026 OCG release framing.</li>
+        <li><a href="https://www.masterduelmeta.com/articles/guides/toon-guide-vizionz333" target="_blank" rel="noreferrer">Master Duel Meta Toon guide</a> — classic Toon Kingdom strategy, core cards, and side-card framing.</li>
+        <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/356053" target="_blank" rel="noreferrer">Game8 Pegasus Toon Kingdom guide</a> — Special Summoning chain and playstyle/counter notes; Game8 marks its Master Duel guides discontinued after December 2025, so treated as legacy support.</li>
+        <li><a href="https://www.yugioh-card.com/en/downloads/rivalry_of_warlords/Toons-Manual.pdf" target="_blank" rel="noreferrer">Official Rivalry of Warlords Toons manual</a> — official beginner sequencing, Page-Flip targets, direct-attack win condition, and classic recovery notes.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php" target="_blank" rel="noreferrer">YGOPRODeck API</a> — used to verify exact card IDs and effect text.</li>
+        <li><a href="https://www.yugioh-card.com/en/limited/list_2026-05-18/" target="_blank" rel="noreferrer">Official TCG Forbidden &amp; Limited List, May 18, 2026</a> — current TCG legality warnings on older Extra Deck and floodgate options.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg — new RV01 cards are OCG-current support, not guaranteed TCG legal in every event.</p>
+    </section>
+
   </main>
 
   <script>
-    const cards = {
+    const CARDS = {
       toonWorld: { id: 15259703, name: "Toon World" },
       kingdom: { id: 43175858, name: "Toon Kingdom" },
       perfectWorld: { id: 7293697, name: "Toon World the Perfect World" },
@@ -1237,10 +443,8 @@
       rollback: { id: 70560957, name: "Toon Rollback" },
       comicHand: { id: 33453260, name: "Comic Hand" },
       shadowToon: { id: 6958551, name: "Shadow Toon" },
-      mimicat: { id: 88032456, name: "Mimicat" },
       toonTerror: { id: 53094821, name: "Toon Terror" },
       briefcase: { id: 5832914, name: "Toon Briefcase" },
-      toonMask: { id: 79447365, name: "Toon Mask" },
       funnyRabbit: { id: 45536531, name: "Funny Dark Rabbit" },
       comicCat: { id: 72921536, name: "Comic Cat" },
       evilBox: { id: 8915275, name: "Evil Box" },
@@ -1250,31 +454,22 @@
       blueEyesToon: { id: 53183600, name: "Blue-Eyes Toon Dragon" },
       redEyes: { id: 31733941, name: "Red-Eyes Toon Dragon" },
       toonDM: { id: 21296502, name: "Toon Dark Magician" },
-      toonDMG: { id: 90960358, name: "Toon Dark Magician Girl" },
       toonBLS: { id: 28711704, name: "Toon Black Luster Soldier" },
-      toonHarpie: { id: 64116319, name: "Toon Harpie Lady" },
-      mermaid: { id: 65458948, name: "Toon Mermaid" },
-      ancientGear: { id: 7171149, name: "Toon Ancient Gear Golem" },
       blackStone: { id: 66574418, name: "The Black Stone of Legend" },
       darkMagicianDestruction: { id: 59400890, name: "Dark Magician of Destruction" },
       darkEradicator: { id: 29436665, name: "Dark Eradicator Warlock" },
       terraforming: { id: 73628505, name: "Terraforming" },
       ash: { id: 14558127, name: "Ash Blossom & Joyous Spring" },
       droll: { id: 94145021, name: "Droll & Lock Bird" },
-      maxxC: { id: 23434538, name: 'Maxx "C"' },
       imperm: { id: 10045474, name: "Infinite Impermanence" },
       veiler: { id: 97268402, name: "Effect Veiler" },
-      ghostOgre: { id: 59438930, name: "Ghost Ogre & Snow Rabbit" },
       ghostBelle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
       ddCrow: { id: 24508238, name: "D.D. Crow" },
       shifter: { id: 91800273, name: "Dimension Shifter" },
       nibiru: { id: 27204311, name: "Nibiru, the Primal Being" },
-      purulia: { id: 84192580, name: "Mulcharmy Purulia" },
-      fuwalos: { id: 42141493, name: "Mulcharmy Fuwalos" },
       calledBy: { id: 24224830, name: "Called by the Grave" },
       crossout: { id: 65681983, name: "Crossout Designator" },
       thrust: { id: 35269904, name: "Triple Tactics Thrust" },
-      talent: { id: 25311006, name: "Triple Tactics Talent" },
       droplet: { id: 24299458, name: "Forbidden Droplet" },
       evenly: { id: 15693423, name: "Evenly Matched" },
       lightning: { id: 14532163, name: "Lightning Storm" },
@@ -1284,294 +479,13 @@
       prohibition: { id: 43711255, name: "Prohibition" },
       fieldBarrier: { id: 7153114, name: "Field Barrier" },
       royalDecree: { id: 51452091, name: "Royal Decree" },
-      extravagance: { id: 49238328, name: "Pot of Extravagance" },
-      prosperity: { id: 84211599, name: "Pot of Prosperity" },
-      anima: { id: 94259633, name: "Relinquished Anima" },
-      sp: { id: 29301450, name: "S:P Little Knight" },
-      dugares: { id: 66011101, name: "Number 60: Dugares the Timeless" },
-      zea: { id: 45112597, name: "Worldsea Dragon Zealantis" },
-      crossSheep: { id: 50277355, name: "Cross-Sheep" },
       abyss: { id: 21044178, name: "Abyss Dweller" },
       bahamut: { id: 440556, name: "Bahamut Shark" },
       baronne: { id: 84815190, name: "Baronne de Fleur" },
       savage: { id: 27548199, name: "Borreload Savage Dragon" },
       summonLimit: { id: 23516703, name: "Summon Limit" }
     };
-
-    const routes = [
-      {
-        id: "classic-access",
-        title: "Classic access route",
-        type: "1 card search",
-        summary: "Use Table and Bookmark to reach a live field spell while loading Bookmark into GY for destruction protection.",
-        nodes: [
-          { label: "Starter", tone: "start", cards: ["table"], text: "Activate Toon Table of Contents. If your hand lacks field access, add Toon Bookmark." },
-          { label: "Bridge", tone: "search", cards: ["bookmark"], text: "Bookmark adds Toon Kingdom, Toon Page-Flip, Comic Hand, or any card that mentions Toon World." },
-          { label: "Enable", tone: "protect", cards: ["kingdom", "perfectWorld"], text: "Activate Kingdom for protection or Perfect World for repeated search and dodge lines." },
-          { label: "Hold cover", tone: "protect", cards: ["bookmark", "toonTerror"], text: "Bookmark in GY protects from destruction. Search Terror when the hand already has bodies." }
-        ],
-        branches: [
-          { title: "If going first", text: "Take Kingdom or Perfect World before extension, then set Toon Terror or Briefcase as the protection layer." },
-          { title: "If going second", text: "Bookmark can take Comic Hand instead of more engine when an opposing monster creates lethal math." }
-        ]
-      },
-      {
-        id: "page-flip",
-        title: "Page-Flip swarm",
-        type: "2 card setup",
-        summary: "Toon World access plus Page-Flip turns three different Toon names into one guaranteed extender.",
-        nodes: [
-          { label: "Enable", tone: "start", cards: ["kingdom", "perfectWorld"], text: "Control a card treated as Toon World." },
-          { label: "Reveal", tone: "search", cards: ["pageFlip", "redEyes", "toonDM", "toonBLS"], text: "Activate Page-Flip and reveal Red-Eyes Toon Dragon, Toon Dark Magician, and Toon BLS." },
-          { label: "Extend", tone: "summon", cards: ["redEyes", "toonDM"], text: "If Red-Eyes hits, summon Toon Dark Magician from hand. If Toon DM hits, discard to summon from Deck or search a Toon S/T." },
-          { label: "Output", tone: "lethal", cards: ["toonBLS", "toonTerror", "briefcase"], text: "End on BLS pressure and searchable disruption, or take the highest-damage monster for next-turn lethal." }
-        ],
-        branches: [
-          { title: "Best reveal pile", text: "Red-Eyes, Toon Dark Magician, and Toon BLS because every result either extends, searches, or attacks quickly." },
-          { title: "If interrupted", text: "Prioritize keeping Toon World active. Without field access, most Toon bodies lose their best text." }
-        ]
-      },
-      {
-        id: "black-stone",
-        title: "Black Stone extension",
-        type: "normal summon",
-        summary: "The Black Stone of Legend gives immediate Red-Eyes Toon Dragon access and a later rebuild line.",
-        nodes: [
-          { label: "Normal", tone: "start", cards: ["blackStone"], text: "Tribute The Black Stone of Legend to Special Summon Red-Eyes Toon Dragon from Deck." },
-          { label: "Summon", tone: "summon", cards: ["redEyes", "toonDM"], text: "Red-Eyes summons a Toon monster from hand, often Toon Dark Magician." },
-          { label: "Convert", tone: "search", cards: ["toonDM", "toonBLS", "toonTerror"], text: "Toon DM discards a Toon card to summon Toon BLS from Deck or search Toon Terror." },
-          { label: "Recycle", tone: "protect", cards: ["blackStone", "redEyes"], text: "On a later turn, Black Stone can shuffle a Red-Eyes from GY into Deck and return itself to hand." }
-        ],
-        branches: [
-          { title: "If Toon DM is not in hand", text: "Use Red-Eyes to put any live Toon into play, then keep searches for protection." },
-          { title: "If Red-Eyes dies", text: "The GY recycle gives another starter once the duel slows down." }
-        ]
-      },
-      {
-        id: "going-second",
-        title: "Going-second lethal",
-        type: "OTK branch",
-        summary: "Skip monster combat by stealing or burning around the board, then attack directly.",
-        nodes: [
-          { label: "Access", tone: "start", cards: ["bookmark", "kingdom", "perfectWorld"], text: "Find a Toon World substitute before committing Comic Hand." },
-          { label: "Steal", tone: "summon", cards: ["comicHand", "wild:Opponent monster"], text: "Comic Hand takes an opposing monster, makes it a Toon, and lets it attack directly if they control no Toons." },
-          { label: "Damage", tone: "lethal", cards: ["toonBLS", "shadowToon", "rollback"], text: "Toon BLS attacks the turn it is summoned. Shadow Toon and Rollback help close exact lethal." },
-          { label: "Cover", tone: "protect", cards: ["toonTerror", "bookmark"], text: "Hold Toon Terror for removal aimed at your field spell or BLS before Battle Phase." }
-        ],
-        branches: [
-          { title: "Damage rule", text: "Two Toon BLS attacks plus a 2000+ ATK Comic Hand monster reaches 8000 direct damage." },
-          { title: "Removal rule", text: "BLS banish effect is strong, but it turns off that BLS attack for the turn. Use it only when lethal is not available." }
-        ]
-      },
-      {
-        id: "rv01-control",
-        title: "RV01 Perfect World control",
-        type: "latest OCG",
-        summary: "Funny Dark Rabbit plus Perfect World compresses field access, extra normal summon, Cat interaction, and trap setup.",
-        nodes: [
-          { label: "Starter", tone: "start", cards: ["funnyRabbit"], text: "Normal Summon Funny Dark Rabbit. Its summon grants an extra Normal Summon for a monster that mentions Toon World." },
-          { label: "Place", tone: "search", cards: ["funnyRabbit", "perfectWorld"], text: "Rabbit places or adds Toon World the Perfect World from Deck." },
-          { label: "Search", tone: "search", cards: ["perfectWorld", "comicCat"], text: "Perfect World searches Comic Cat. Normal Summon Cat with Rabbit's extra Normal." },
-          { label: "Interact", tone: "summon", cards: ["comicCat", "toonDM", "evilBox"], text: "Comic Cat tributes a monster to summon a Toon World-mentioning monster from Deck. Evil Box sets Toon Terror or Mind Scan." },
-          { label: "Information", tone: "protect", cards: ["mindScan", "toonTerror"], text: "Mind Scan reveals hand and names the next card effect. Terror covers field-spell removal." }
-        ],
-        branches: [
-          { title: "If opponent controls a monster", text: "With Toon World active, Comic Cat can tribute an opponent's monster even though you do not control it." },
-          { title: "If grind starts", text: "Dark-Eyes can place Mind Scan or revive a Toon World-mentioning monster from GY." }
-        ]
-      },
-      {
-        id: "rv01-ftk",
-        title: "Funny Dark Rabbit FTK theory",
-        type: "public combo",
-        summary: "YgoCombo documents a one-card OCG route that loops Toon searches through Dark Eradicator Warlock burn.",
-        nodes: [
-          { label: "Start", tone: "start", cards: ["funnyRabbit", "perfectWorld", "comicCat"], text: "Rabbit places Perfect World, searches Comic Cat, and gives the extra Normal Summon." },
-          { label: "Summon chain", tone: "summon", cards: ["comicCat", "toonDM", "blueEyesToon"], text: "Cat summons Toon Dark Magician. Toon DM discards Blue-Eyes Toon Dragon to access Toon Table." },
-          { label: "Burn engine", tone: "lethal", cards: ["darkMagicianDestruction", "darkEradicator", "table"], text: "Dark Magician of Destruction gets Dark Eradicator Warlock. Each activated Normal Spell burns for 1000." },
-          { label: "Recycle", tone: "protect", cards: ["evilBox", "beToonUltimate", "table"], text: "Evil Box and Blue-Eyes Toon Ultimate recycle Table of Contents lines for more Warlock triggers." },
-          { label: "Finish", tone: "lethal", cards: ["darkEradicator", "table", "perfectWorld"], text: "Repeated Table activations and Perfect World search finish the burn sequence." }
-        ],
-        branches: [
-          { title: "Legality note", text: "This is a current public combo route, but it depends on OCG RV01 cards and should be checked against the event's card pool." },
-          { title: "Practical note", text: "For normal play, treat the Rabbit, Perfect World, Cat, and Evil Box pieces as a control shell even if the FTK is not legal or desired." }
-        ]
-      }
-    ];
-
-    const interactions = [
-      { title: "Bookmark protects the book", cards: ["bookmark", "kingdom", "perfectWorld"], why: "Bookmark can banish from GY if a Toon World you control would be destroyed by card effect." },
-      { title: "Red-Eyes into Toon DM", cards: ["redEyes", "toonDM", "toonBLS"], why: "Red-Eyes summons Toon DM from hand; Toon DM turns discard fodder into a deck summon or Toon S/T search." },
-      { title: "Comic Hand lethal math", cards: ["bookmark", "comicHand", "toonBLS"], why: "Bookmark searches Comic Hand, which converts an opposing monster into direct damage and tribute material." },
-      { title: "Rabbit starts Perfect World", cards: ["funnyRabbit", "perfectWorld", "comicCat"], why: "Rabbit places the field spell, then Perfect World finds Cat, and Rabbit's extra Normal Summon lets Cat resolve." },
-      { title: "Evil Box turns on traps", cards: ["evilBox", "toonTerror", "mindScan"], why: "Evil Box Special Summons itself while Toon World is up, then adds or sets a Toon Trap." },
-      { title: "Blue-Eyes Ultimate grind", cards: ["beToonUltimate", "blueEyesToon", "table"], why: "The Fusion shuffles materials from hand, field, or GY and adds Toon cards back from GY each turn." }
-    ];
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
-    }
-
-    function imageUrl(card) {
-      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
-    }
-
-    function shortName(name) {
-      return name
-        .replace("Toon World the Perfect World", "Perfect World")
-        .replace("Toon Kingdom", "Kingdom")
-        .replace("Toon Bookmark", "Bookmark")
-        .replace("Toon Page-Flip", "Page-Flip")
-        .replace("Toon Terror", "Terror")
-        .replace("Toon Briefcase", "Briefcase")
-        .replace("Toon Rollback", "Rollback")
-        .replace("Blue-Eyes Toon Ultimate Dragon", "BE Toon Ultimate")
-        .replace("Blue-Eyes Toon Dragon", "BE Toon")
-        .replace("Dark-Eyes Illusionist Faceless Mage", "Dark-Eyes")
-        .replace("Dark Magician of Destruction", "DM Destroyer")
-        .replace("Dark Eradicator Warlock", "Warlock")
-        .replace("Toon Black Luster Soldier", "Toon BLS")
-        .replace("Toon Table of Contents", "Table")
-        .replace("The Black Stone of Legend", "Black Stone")
-        .replace("Red-Eyes Toon Dragon", "Red-Eyes Toon")
-        .replace("Toon Dark Magician", "Toon DM")
-        .replace("Terraforming", "Terra")
-        .replace("Harpie's Feather Duster", "Duster")
-        .replace("Infinite Impermanence", "Imperm")
-        .replace("Cosmic Cyclone", "Cosmic")
-        .replace("Book of Eclipse", "Eclipse")
-        .replace("Lightning Storm", "Storm")
-        .replace("Forbidden Droplet", "Droplet")
-        .replace("Triple Tactics Thrust", "Thrust")
-        .replace("Triple Tactics Talent", "Talent")
-        .replace("Pot of Extravagance", "Extrav")
-        .replace("Pot of Prosperity", "Prosperity");
-    }
-
-    function cardMini(key) {
-      if (key.startsWith("wild:")) {
-        return `<span class="wildcard">${escapeHtml(key.slice(5))}</span>`;
-      }
-      const card = cards[key];
-      if (!card) {
-        return `<span class="wildcard">${escapeHtml(key)}</span>`;
-      }
-      const img = imageUrl(card);
-      return `
-        <span class="card-token" tabindex="0" title="${escapeHtml(card.name)}">
-          <img class="card-img" src="${img}" alt="${escapeHtml(card.name)}" loading="lazy">
-          <span class="card-pop"><img src="${img}" alt=""></span>
-          <span class="card-name">${escapeHtml(shortName(card.name))}</span>
-        </span>
-      `;
-    }
-
-    function cardRow(keys) {
-      return keys.map((key, index) => {
-        const plus = index > 0 ? '<span class="plus">+</span>' : "";
-        return plus + cardMini(key);
-      }).join("");
-    }
-
-    function renderShowcase() {
-      const keys = ["perfectWorld", "funnyRabbit", "comicCat", "evilBox", "beToonUltimate", "kingdom", "toonBLS", "comicHand"];
-      document.getElementById("showcase").innerHTML = keys.map(cardMini).join("");
-    }
-
-    function renderRouteButtons() {
-      const list = document.getElementById("routeList");
-      list.innerHTML = routes.map((route, index) => `
-        <button class="route-button ${index === 0 ? "active" : ""}" type="button" data-route="${route.id}">
-          ${escapeHtml(route.title)}
-          <span class="small" style="display:block;">${escapeHtml(route.type)}</span>
-        </button>
-      `).join("");
-      list.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-route]");
-        if (!button) return;
-        renderRoute(button.dataset.route);
-      });
-    }
-
-    function renderRoute(routeId) {
-      const route = routes.find(item => item.id === routeId) || routes[0];
-      document.querySelectorAll(".route-button").forEach(button => {
-        button.classList.toggle("active", button.dataset.route === route.id);
-      });
-      document.getElementById("routeTitle").textContent = route.title;
-      document.getElementById("routeSummary").textContent = route.summary;
-      document.getElementById("routeBadge").textContent = route.type;
-      document.getElementById("graphFlow").innerHTML = route.nodes.map(node => `
-        <article class="combo-node" data-tone="${escapeHtml(node.tone)}">
-          <span class="node-label">${escapeHtml(node.label)}</span>
-          <h3>${escapeHtml(node.cards.map(key => key.startsWith("wild:") ? key.slice(5) : shortName(cards[key]?.name || key)).join(" + "))}</h3>
-          <div class="card-row">${cardRow(node.cards)}</div>
-          <p class="small">${escapeHtml(node.text)}</p>
-        </article>
-      `).join("");
-      document.getElementById("routeBranches").innerHTML = route.branches.map(branch => `
-        <article class="branch">
-          <strong>${escapeHtml(branch.title)}</strong>
-          <span>${escapeHtml(branch.text)}</span>
-        </article>
-      `).join("");
-    }
-
-    function renderDataRows() {
-      document.querySelectorAll("[data-cards]").forEach(row => {
-        row.innerHTML = cardRow(row.dataset.cards.split(",").map(item => item.trim()).filter(Boolean));
-      });
-      document.querySelectorAll("[data-zones]").forEach(field => {
-        field.innerHTML = field.dataset.zones.split(",").map(key => {
-          const card = cards[key.trim()];
-          if (!card) return '<div class="zone"></div>';
-          return `<div class="zone"><img src="${imageUrl(card)}" alt="${escapeHtml(card.name)}" loading="lazy"></div>`;
-        }).join("");
-      });
-      document.getElementById("interactionGrid").innerHTML = interactions.map(pair => `
-        <article class="interaction">
-          <h3>${escapeHtml(pair.title)} <span class="info" tabindex="0" data-tip="${escapeHtml(pair.why)}">i</span></h3>
-          <div class="card-row">${cardRow(pair.cards)}</div>
-          <p class="small">${escapeHtml(pair.why)}</p>
-        </article>
-      `).join("");
-    }
-
-    function initTabs() {
-      document.querySelectorAll(".tab-button").forEach(button => {
-        button.addEventListener("click", () => {
-          const tab = button.dataset.tab;
-          document.querySelectorAll(".tab-button").forEach(item => item.classList.toggle("active", item === button));
-          document.querySelectorAll(".tab-content").forEach(content => {
-            content.hidden = content.id !== `tab-${tab}`;
-          });
-        });
-      });
-    }
-
-    function initReferences() {
-      const refs = document.getElementById("references");
-      const toggle = document.getElementById("refsToggle");
-      toggle.addEventListener("click", () => {
-        const show = refs.hidden;
-        refs.hidden = !show;
-        toggle.classList.toggle("active", show);
-        toggle.textContent = show ? "Hide References" : "Show References";
-        toggle.setAttribute("aria-expanded", String(show));
-      });
-    }
-
-    renderShowcase();
-    renderRouteButtons();
-    renderRoute(routes[0].id);
-    renderDataRows();
-    initTabs();
-    initReferences();
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

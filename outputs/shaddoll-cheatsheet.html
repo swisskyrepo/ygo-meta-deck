@@ -3,1394 +3,518 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shaddoll 2026 Cheatsheet Mind Map</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #172024;
-      --muted: #5d6870;
-      --paper: #f4f7f4;
-      --panel: #ffffff;
-      --panel-2: #edf4f0;
-      --line: #d7e1dc;
-      --green: #1e6a58;
-      --teal: #147780;
-      --gold: #a67416;
-      --red: #a8423b;
-      --blue: #315f88;
-      --violet: #65518a;
-      --shadow: 0 16px 42px rgba(23, 32, 36, .12);
-      --radius: 8px;
-      --card-w: 56px;
-      --card-h: 82px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      background: var(--paper);
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.98) 0, rgba(244,247,244,.98) 360px, #edf4f0 100%),
-        repeating-linear-gradient(135deg, rgba(20,119,128,.08) 0 1px, transparent 1px 18px);
-      font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      letter-spacing: 0;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    button {
-      font: inherit;
-      letter-spacing: 0;
-    }
-
-    .page {
-      width: min(1240px, calc(100vw - 28px));
-      margin: 0 auto;
-      padding: 20px 0 56px;
-    }
-
-    .hero {
-      min-height: 0;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
-      gap: 24px;
-      align-items: center;
-      padding: 18px 0 16px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--green);
-      font-size: .82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1 {
-      max-width: 840px;
-      margin-bottom: 14px;
-      font-size: 4.65rem;
-      line-height: .96;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 2.05rem;
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 1.03rem;
-      line-height: 1.18;
-      letter-spacing: 0;
-    }
-
-    p { margin-bottom: 12px; }
-
-    .lead {
-      max-width: 820px;
-      color: #314247;
-      font-size: 1.12rem;
-    }
-
-    .hero-pills,
-    .chips,
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill,
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,.86);
-      color: #263338;
-      font-size: .88rem;
-      white-space: nowrap;
-    }
-
-    .pill strong,
-    .tag strong { color: var(--ink); }
-
-    .hero-showcase {
-      min-height: 350px;
-      display: grid;
-      align-items: center;
-      overflow: visible;
-    }
-
-    .showcase {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(48px, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border: 1px solid rgba(23,32,36,.12);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow);
-      overflow: visible;
-    }
-
-    .showcase .card-token:nth-child(1) { transform: translateY(13px) rotate(-5deg); }
-    .showcase .card-token:nth-child(2) { transform: translateY(-10px) rotate(3deg); }
-    .showcase .card-token:nth-child(3) { transform: translateY(6px) rotate(-2deg); }
-    .showcase .card-token:nth-child(4) { transform: translateY(-16px) rotate(4deg); }
-    .showcase .card-token:nth-child(5) { transform: translateY(11px) rotate(-3deg); }
-    .showcase .card-token:nth-child(6) { transform: translateY(-5px) rotate(2deg); }
-    .showcase .card-token:nth-child(7) { transform: translateY(7px) rotate(-1deg); }
-    .showcase .card-token:nth-child(8) { transform: translateY(-12px) rotate(1deg); }
-    .showcase .card-token:nth-child(9) { transform: translateY(4px) rotate(-4deg); }
-    .showcase .card-token:nth-child(10) { transform: translateY(-7px) rotate(3deg); }
-    .showcase .card-name { display: none; }
-
-    .quick-nav {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 14px;
-      border-bottom: 1px solid rgba(215,225,220,.86);
-      background: linear-gradient(180deg, rgba(244,247,244,.98), rgba(244,247,244,.9));
-      backdrop-filter: blur(10px);
-    }
-
-    .quick-nav a,
-    .route-button,
-    .tab-button,
-    .ref-toggle {
-      flex: 0 0 auto;
-      min-height: 38px;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: var(--ink);
-      font-weight: 750;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .quick-nav a:hover,
-    .route-button:hover,
-    .tab-button:hover,
-    .ref-toggle:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      text-decoration: none;
-    }
-
-    .route-button.active,
-    .tab-button.active,
-    .ref-toggle.active {
-      color: #fff;
-      background: var(--teal);
-      border-color: var(--teal);
-    }
-
-    section {
-      margin: 16px 0;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.94);
-      box-shadow: var(--shadow);
-      overflow: visible;
-      scroll-margin-top: 70px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .section-kicker {
-      margin: 0 0 6px;
-      color: var(--green);
-      font-size: .78rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .info-dot {
-      display: inline-grid;
-      place-items: center;
-      width: 21px;
-      height: 21px;
-      border: 1px solid currentColor;
-      border-radius: 50%;
-      color: var(--teal);
-      font-size: .78rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .plus-icon {
-      display: inline-grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #e7f4f2;
-      color: var(--teal);
-      font-weight: 950;
-      line-height: 1;
-    }
-
-    .grid-2,
-    .grid-3,
-    .grid-4 {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .panel {
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 13px;
-    }
-
-    .panel.soft { background: var(--panel-2); }
-
-    .panel h3,
-    .combo-node h3,
-    .board-card h3,
-    .matchup h3 { color: #1c2c32; }
-
-    .tight-list {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .tight-list li {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      color: #314047;
-    }
-
-    .bullet {
-      flex: 0 0 auto;
-      width: 7px;
-      height: 7px;
-      margin-top: 7px;
-      border-radius: 50%;
-      background: var(--teal);
-    }
-
-    .card-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      margin: 10px 0 8px;
-      overflow: visible;
-    }
-
-    .card-token {
-      position: relative;
-      flex: 0 0 auto;
-      width: var(--card-w);
-      min-width: var(--card-w);
-      overflow: visible;
-      outline: none;
-    }
-
-    .card-token img.card-img {
-      display: block;
-      width: var(--card-w);
-      height: var(--card-h);
-      object-fit: cover;
-      border-radius: 4px;
-      border: 1px solid rgba(23,32,36,.18);
-      box-shadow: 0 6px 14px rgba(23,32,36,.18);
-      background: #e8ecea;
-    }
-
-    .card-name {
-      display: block;
-      width: 86px;
-      margin-top: 5px;
-      color: #26343a;
-      font-size: .72rem;
-      line-height: 1.1;
-      font-weight: 760;
-      overflow-wrap: anywhere;
-    }
-
-    .card-pop {
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 8px);
-      z-index: 50;
-      width: 182px;
-      max-width: 58vw;
-      padding: 7px;
-      border: 1px solid rgba(23,32,36,.16);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: 0 18px 44px rgba(23,32,36,.24);
-      opacity: 0;
-      transform: translateX(-50%) translateY(8px) scale(.98);
-      pointer-events: none;
-      transition: opacity .16s ease, transform .16s ease;
-    }
-
-    .card-pop img {
-      display: block;
-      width: 100%;
-      border-radius: 5px;
-    }
-
-    .card-token:hover .card-pop,
-    .card-token:focus .card-pop,
-    .card-token:focus-within .card-pop {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    .mindmap {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .mind-center {
-      grid-column: 1 / -1;
-      display: grid;
-      place-items: center;
-      min-height: 0;
-      border: 2px solid rgba(30,106,88,.34);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, #ffffff, #edf7f4);
-      text-align: center;
-      padding: 16px;
-    }
-
-    .mind-center strong {
-      display: block;
-      font-size: 1.45rem;
-      line-height: 1.05;
-      margin-bottom: 4px;
-    }
-
-    .mind-branch {
-      min-height: 0;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 12px;
-    }
-
-    .mind-branch b {
-      display: block;
-      color: var(--teal);
-      margin-bottom: 6px;
-    }
-
-    .route-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
-    }
-
-    .combo-graph {
-      display: grid;
-      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr);
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .combo-node {
-      position: relative;
-      min-height: 188px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 12px;
-      overflow: visible;
-    }
-
-    .combo-node:after {
-      content: "->";
-      position: absolute;
-      right: -20px;
-      top: 48%;
-      color: var(--muted);
-      font-weight: 900;
-    }
-
-    .combo-node:last-child:after { display: none; }
-
-    .combo-node[data-tone="start"] { border-top: 4px solid var(--green); }
-    .combo-node[data-tone="send"] { border-top: 4px solid var(--gold); }
-    .combo-node[data-tone="lock"] { border-top: 4px solid var(--red); }
-    .combo-node[data-tone="recover"] { border-top: 4px solid var(--blue); }
-
-    .route-panel { display: none; }
-    .route-panel.active { display: block; }
-
-    .node-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 850;
-      text-transform: uppercase;
-    }
-
-    .sequence {
-      display: grid;
-      gap: 8px;
-      margin: 10px 0 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: step;
-    }
-
-    .sequence li {
-      display: grid;
-      grid-template-columns: 26px minmax(0, 1fr);
-      gap: 8px;
-      align-items: start;
-      color: #314047;
-    }
-
-    .sequence li:before {
-      counter-increment: step;
-      content: counter(step);
-      display: inline-grid;
-      place-items: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #e8f4f2;
-      color: var(--teal);
-      font-weight: 900;
-      font-size: .78rem;
-    }
-
-    .trigger-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin: 10px 0;
-    }
-
-    .trigger {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 28px;
-      padding: 5px 8px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      color: #263338;
-      font-size: .82rem;
-      font-weight: 760;
-    }
-
-    .endboard {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .board-card {
-      min-height: 260px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 13px;
-    }
-
-    .field {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .zone {
-      min-height: 84px;
-      display: grid;
-      place-items: center;
-      border: 1px dashed #c7d4ce;
-      border-radius: 6px;
-      background: #f8fbfa;
-      text-align: center;
-      color: var(--muted);
-      font-size: .7rem;
-      font-weight: 760;
-      padding: 4px;
-    }
-
-    .zone img {
-      width: 46px;
-      height: 68px;
-      object-fit: cover;
-      border-radius: 3px;
-      border: 1px solid rgba(23,32,36,.18);
-    }
-
-    .variant-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: 12px;
-    }
-
-    .decklist {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .decklist ul {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      color: #314047;
-    }
-
-    .matchup-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .matchup {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 13px;
-    }
-
-    .counter-band {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .reference-panel {
-      border-color: rgba(49,95,136,.28);
-      background: #f8fbff;
-    }
-
-    .reference-list {
-      display: grid;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .reference-list li {
-      border: 1px solid #d6e0ea;
-      border-radius: var(--radius);
-      background: #fff;
-      padding: 10px;
-    }
-
-    .small {
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 8px;
-      border-radius: var(--radius);
-      font-size: .8rem;
-      font-weight: 850;
-    }
-
-    .status.good { color: #0d6846; background: #e9f6ef; }
-    .status.warn { color: #8a5410; background: #fff4df; }
-    .status.bad { color: #9a342f; background: #ffebe8; }
-
-    @media (max-width: 980px) {
-      h1 { font-size: 3.25rem; }
-      h2 { font-size: 1.72rem; }
-      .hero,
-      .variant-grid,
-      .grid-2,
-      .grid-3,
-      .grid-4,
-      .endboard,
-      .matchup-grid,
-      .counter-band,
-      .decklist {
-        grid-template-columns: 1fr;
-      }
-      .combo-graph {
-        grid-template-columns: 1fr;
-      }
-      .combo-node:after {
-        content: "v";
-        right: 50%;
-        top: auto;
-        bottom: -24px;
-      }
-      .mindmap {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .mind-center {
-        grid-column: 1 / -1;
-      }
-      .showcase {
-        grid-template-columns: repeat(5, minmax(44px, 1fr));
-      }
-    }
-
-    @media (max-width: 620px) {
-      .page {
-        width: min(100vw - 18px, 1240px);
-        padding-top: 12px;
-      }
-      h1 { font-size: 2.42rem; }
-      h2 { font-size: 1.45rem; }
-      section { padding: 14px; }
-      .hero-showcase { min-height: 250px; }
-      .showcase {
-        grid-template-columns: repeat(4, minmax(42px, 1fr));
-        gap: 8px;
-        padding: 10px;
-      }
-      .card-name { width: 76px; }
-      .mindmap { grid-template-columns: 1fr; }
-      .field { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .route-button,
-      .quick-nav a,
-      .ref-toggle {
-        min-height: 36px;
-        padding: 8px 10px;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Shaddoll Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <div class="page">
+  <main class="shell">
+
     <header class="hero">
-      <div>
-        <div class="eyebrow"><span class="info-dot">i</span> Shaddoll mind map - checked June 8, 2026</div>
-        <h1>Shaddoll Cheatsheet</h1>
-        <p class="lead">Fusion-control deck that turns sent-to-GY effects into tempo, then wins through Winda pressure, Schism removal, Construct recursion, or the newer Grysta and Dracotail lines.</p>
-        <div class="hero-pills">
-          <span class="pill"><strong>Plan A</strong> Winda + Schism</span>
-          <span class="pill"><strong>Plan B</strong> Construct loop</span>
-          <span class="pill"><strong>2026 shell</strong> Dracotail Shaddoll</span>
-          <span class="pill"><strong>Speed</strong> midrange control</span>
+      <div class="hero-main">
+        <div class="eyebrow">Fusion control — checked June 8, 2026</div>
+        <h1>Shaddoll</h1>
+        <p class="subtitle">Fusion-control deck that turns sent-to-GY effects into tempo, then wins through Winda pressure, Schism removal, Construct recursion, or the newer Grysta and Dracotail lines.</p>
+        <div class="pill-row">
+          <span class="pill green">Last checked: 2026-06-08</span>
+          <span class="pill blue">Role: midrange Fusion control</span>
+          <span class="pill gold">Win: Winda lock + Schism trades</span>
+          <span class="pill red">TCG May 18, 2026: Ketu, Mululu, Rahu limited; Lukias, Arthalion semi-limited</span>
         </div>
       </div>
-      <div class="hero-showcase" aria-label="Shaddoll core cards">
-        <div class="showcase">
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt="Shaddoll Fusion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt=""></span><span class="card-name">Shaddoll Fusion</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="El Shaddoll Construct"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt=""></span><span class="card-name">Construct</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt="El Shaddoll Winda"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt=""></span><span class="card-name">Winda</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt="Shaddoll Schism"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt=""></span><span class="card-name">Schism</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/51023024.jpg" alt="Reeshaddoll Wendi"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/51023024.jpg" alt=""></span><span class="card-name">Wendi</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt="Shaddoll Squamata"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt=""></span><span class="card-name">Squamata</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/95072744.jpg" alt="Tohushaddoll Grysta"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/95072744.jpg" alt=""></span><span class="card-name">Tohu Grysta</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/32467459.jpg" alt="El Shaddoll Meshahrail"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/32467459.jpg" alt=""></span><span class="card-name">Meshahrail</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/75003700.jpg" alt="Dracotail Lukias"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/75003700.jpg" alt=""></span><span class="card-name">Lukias</span></span>
-          <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/1498449.jpg" alt="Dracotail Faimena"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/1498449.jpg" alt=""></span><span class="card-name">Faimena</span></span>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="shadfusion"></span>
+          <span class="cloud-card" data-card="construct"></span>
+          <span class="cloud-card" data-card="winda"></span>
+          <span class="cloud-card" data-card="schism"></span>
+          <span class="cloud-card" data-card="wendi"></span>
+          <span class="cloud-card" data-card="squamata"></span>
+          <span class="cloud-card" data-card="grysta"></span>
+          <span class="cloud-card" data-card="meshahrail"></span>
+          <span class="cloud-card" data-card="lukias"></span>
+          <span class="cloud-card" data-card="faimena"></span>
         </div>
-      </div>
+      </aside>
     </header>
 
-    <nav class="quick-nav" aria-label="Cheatsheet navigation">
-      <a href="#map">Map</a>
-      <a href="#combos">Combos</a>
-      <a href="#boards">End Boards</a>
-      <a href="#variant">Latest Top Variant</a>
-      <a href="#tips">Tips</a>
-      <a href="#recovery">Recovery</a>
-      <a href="#side">Side + Counters</a>
-      <button class="ref-toggle" id="refToggle" type="button">References</button>
-    </nav>
-
-    <section id="map">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Deck map</p>
-          <h2>Playstyle and Win Condition</h2>
-        </div>
-        <span class="status good">control grind</span>
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Trigger by effect: every Fusion material choice should either add a card, remove a card, or set up the next turn. Starters are the Fusion spells, Mathematician, <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> into an opponent Extra Deck monster, <span class="card-mention" data-card="lukias">Dracotail Lukias</span>, and <span class="card-mention" data-card="ketu">Ketu Dracotail</span>.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Send targets: <span class="card-mention" data-card="squamata">Squamata</span> extends sends, <span class="card-mention" data-card="beast">Beast</span> converts to cards, Hedgehog searches, <span class="card-mention" data-card="dragon">Dragon</span> removes backrow, <span class="card-mention" data-card="wendi">Wendi</span> places bodies, <span class="card-mention" data-card="ariel">Ariel</span> manages GY.</span></li>
+            <li><span class="num">2</span><span>Fusion outputs: <span class="card-mention" data-card="construct">Construct</span> for sends and battle pressure, <span class="card-mention" data-card="winda">Winda</span> for the Special Summon cap, <span class="card-mention" data-card="apkallone">Apkallone</span> for negate/search, <span class="card-mention" data-card="meshahrail">Meshahrail</span> and <span class="card-mention" data-card="wendikurhu">Wendikurhu</span> for newer pure lines.</span></li>
+            <li><span class="num">3</span><span>Closing: trade up with <span class="card-mention" data-card="schism">Schism</span>, force awkward turns under <span class="card-mention" data-card="winda">Winda</span>, then recycle Fusion spells and attack over simplified boards.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Meta Posture And Weak Points</h3>
+          <p>Pure Shaddoll is more rogue/control. The 2026 tournament result came from Dracotail Shaddoll, which uses Shaddolls as value material for <span class="card-mention" data-card="arthalion">Arthalion</span> and <span class="card-mention" data-card="gulamel">Gulamel</span> Fusions.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Weak to GY hate, Fusion negation, banishing <span class="card-mention" data-card="schism">Schism</span> material, and removal that outs <span class="card-mention" data-card="winda">Winda</span> without Special Summoning.</span></li>
+            <li><span class="num">2</span><span>Banlist-sensitive: the May 18, 2026 TCG list limits <span class="card-mention" data-card="ketu">Ketu</span>, Mululu, and Rahu, and semi-limits <span class="card-mention" data-card="lukias">Lukias</span> and <span class="card-mention" data-card="arthalion">Arthalion</span>, so hybrid ratios differ from older lists.</span></li>
+            <li><span class="num">3</span><span>Terminal World 3 support (<span class="card-mention" data-card="grysta">Tohushaddoll Grysta</span>, <span class="card-mention" data-card="meshahrail">Meshahrail</span>, <span class="card-mention" data-card="wendikurhu">Wendikurhu</span>, <span class="card-mention" data-card="voidlib">Void Liberation</span>, <span class="card-mention" data-card="levfusion">Lev Shaddoll Fusion</span>) gives pure builds real starters at the cost of a Shaddoll-only Extra Deck restriction.</span></li>
+          </ul>
+        </article>
       </div>
-      <div class="mindmap">
-        <div class="mind-center">
-          <div>
-            <strong>Trigger by effect</strong>
-            <p class="small">Every Fusion material choice should either add a card, remove a card, or set up the next turn.</p>
+    </section>
+
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="source-note">Master Duel Meta's Combos &amp; Counters page includes a Spreadsheets tab, but no public Shaddoll-specific spreadsheet was exposed in the static crawl without login. The public Open Combo Codex Markdown library did expose Dracotail combo routes, so the lines below use those plus Shaddoll guide/card-interaction research.</div>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Winda lock — Quick-Play Fusion access plus a DARK and a Shaddoll</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Fusion access</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="elfusion"></span><span class="plus-sign">+</span><span class="card-chip" data-card="squamata"></span><span class="plus-sign">+</span><span class="card-chip" data-card="wendi"></span></div></td>
+              <td>Use <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span>'s Quick-Play timing after the opponent spends a summon or commits a board action, fusing a DARK plus a Shaddoll into <span class="card-mention" data-card="winda">Winda</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Stack the triggers</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="squamata"></span><span class="plus-sign">+</span><span class="card-chip" data-card="wendi"></span></div></td>
+              <td><span class="card-mention" data-card="squamata">Squamata</span> sends <span class="card-mention" data-card="beast">Beast</span> or Hedgehog; <span class="card-mention" data-card="wendi">Wendi</span> sets <span class="card-mention" data-card="ariel">Ariel</span> or <span class="card-mention" data-card="falco">Falco</span>. When multiple Shaddolls are sent together, build the chain so the most important effect is protected behind lower-value effects.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Winda plus Schism</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="winda"></span><span class="plus-sign">+</span><span class="card-chip" data-card="schism"></span></div></td>
+              <td><span class="card-mention" data-card="winda">Winda</span> is strongest when the opponent has already used their one permitted Special Summon or when <span class="card-mention" data-card="schism">Schism</span> can convert GY material into removal.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Clear your own lock</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="gravcon"></span><span class="plus-sign">+</span><span class="card-chip" data-card="construct"></span></div></td>
+              <td>Link or fuse away your own Fusion monster (e.g. into <span class="card-mention" data-card="gravcon">Gravity Controller</span>) to recover <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span>, <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span>, or <span class="card-mention" data-card="schism">Schism</span> and keep playing.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Construct &rarr; Schism loop — any Fusion spell that makes Construct</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Make Construct</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="shadfusion"></span><span class="plus-sign">+</span><span class="card-chip" data-card="construct"></span></div></td>
+              <td>Fusion Summon <span class="card-mention" data-card="construct">Construct</span> in the Extra Monster Zone. Construct sends any Shaddoll card from Deck to GY, so it can load <span class="card-mention" data-card="schism">Schism</span> or a missing monster effect.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Send what the hand lacks</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="schism"></span><span class="plus-sign">+</span><span class="card-chip" data-card="squamata"></span></div></td>
+              <td>If <span class="card-mention" data-card="schism">Schism</span> is already available, send <span class="card-mention" data-card="squamata">Squamata</span>, <span class="card-mention" data-card="beast">Beast</span>, <span class="card-mention" data-card="wendi">Wendi</span>, <span class="card-mention" data-card="dragon">Dragon</span>, or <span class="card-mention" data-card="ariel">Ariel</span> based on what the hand lacks.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Recycle through the Link</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="gravcon"></span></div></td>
+              <td>Link <span class="card-mention" data-card="construct">Construct</span> into <span class="card-mention" data-card="gravcon">Gravity Controller</span>: Construct sent to GY adds <span class="card-mention" data-card="schism">Schism</span> back. Set it to threaten opponent-turn <span class="card-mention" data-card="winda">Winda</span> or Construct with send-to-GY removal.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Opponent-turn Schism Fusion</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="schism"></span><span class="plus-sign">+</span><span class="card-chip" data-card="winda"></span></div></td>
+              <td><span class="card-mention" data-card="schism">Schism</span> fuses from GY and banish zone: <span class="card-mention" data-card="winda">Winda</span> to cap summons, <span class="card-mention" data-card="construct">Construct</span> to send a monster. The send is strongest when your Fusion's Attribute matches a monster the opponent already controls.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Deck Fusion punish — opponent controls a monster Special Summoned from the Extra Deck</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Shaddoll Fusion from Deck</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="shadfusion"></span></div></td>
+              <td>The classic punish: <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> can send materials from Deck if the opponent controls a monster Special Summoned from the Extra Deck.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Choose the two effects you need</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="squamata"></span><span class="plus-sign">+</span><span class="card-chip" data-card="beast"></span><span class="plus-sign">+</span><span class="card-chip" data-card="dragon"></span></div></td>
+              <td><span class="card-mention" data-card="squamata">Squamata</span> sends any Shaddoll, <span class="card-mention" data-card="beast">Beast</span> draws, <span class="card-mention" data-card="dragon">Dragon</span> pops a Spell/Trap, Hedgehog searches, <span class="card-mention" data-card="wendi">Wendi</span> sets from Deck. Pick by board state, not by habit.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Pick the output</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="construct"></span><span class="plus-sign">+</span><span class="card-chip" data-card="apkallone"></span><span class="plus-sign">+</span><span class="card-chip" data-card="winda"></span></div></td>
+              <td>Summon <span class="card-mention" data-card="construct">Construct</span> for more sends, <span class="card-mention" data-card="apkallone">Apkallone</span> for a negate plus search, or <span class="card-mention" data-card="winda">Winda</span> if the cap punishes their plan.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Convert to Schism pressure</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="schism"></span><span class="plus-sign">+</span><span class="card-chip" data-card="elfusion"></span></div></td>
+              <td>Use <span class="card-mention" data-card="construct">Construct</span>'s send and Fusion monster recursion to set up a second Fusion on the opponent turn. If ahead, hold <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span> to dodge targeting and convert battle math.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">New Terminal World 3 support — Grysta sent by card effect</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Grysta spell-less Fusion</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="grysta"></span><span class="plus-sign">+</span><span class="card-chip" data-card="foolish"></span></div></td>
+              <td>When <span class="card-mention" data-card="grysta">Tohushaddoll Grysta</span> is sent by card effect (e.g. <span class="card-mention" data-card="foolish">Foolish Burial</span>), it can Fusion Summon a Shaddoll Fusion by banishing materials — but it locks Extra Deck summons to Shaddoll monsters that turn.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Meshahrail searches</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="meshahrail"></span><span class="plus-sign">+</span><span class="card-chip" data-card="voidlib"></span></div></td>
+              <td><span class="card-mention" data-card="meshahrail">El Shaddoll Meshahrail</span> finds Shaddoll or Void cards such as <span class="card-mention" data-card="voidlib">Void Liberation</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Wendikurhu flips boards</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="wendikurhu"></span><span class="plus-sign">+</span><span class="card-chip" data-card="levfusion"></span></div></td>
+              <td><span class="card-mention" data-card="wendikurhu">Reeshaddoll Wendikurhu</span> can turn set monsters face-up, then set opposing face-up monsters based on Flip count; <span class="card-mention" data-card="levfusion">Lev Shaddoll Fusion</span> supports the line.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Mind the tradeoff</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="gravcon"></span></div></td>
+              <td>More ceiling, tighter lock: the Shaddoll-only Extra Deck restriction changes older <span class="card-mention" data-card="gravcon">Gravity Controller</span>, Cross-Sheep, and Invoked routes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Reach a Fusion spell or Schism</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="shadfusion"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="elfusion"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="schism"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> sends from Deck if the opponent controls an Extra Deck monster; <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span> is a Quick-Play — hold it for their commitment.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Pick materials for their send triggers</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="squamata"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="beast"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="dragon"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="wendi"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="squamata">Squamata</span> sends another Shaddoll, <span class="card-mention" data-card="beast">Beast</span> draws, <span class="card-mention" data-card="dragon">Dragon</span> pops backrow, <span class="card-mention" data-card="wendi">Wendi</span> sets a body from Deck. Every material choice must add, remove, or set up.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Construct loads Schism from Deck</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="construct"></span>
+                <span class="connector">&rarr;</span>
+                <span class="card-chip" data-card="schism"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="construct">Construct</span> sends any Shaddoll card from Deck to GY — the usual pick is <span class="card-mention" data-card="schism">Schism</span> or the missing monster effect.</p>
+            </div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Link away Construct, recover Schism</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="construct"></span>
+                <span class="connector">&rarr;</span>
+                <span class="card-chip" data-card="gravcon"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="construct">Construct</span> sent to GY adds <span class="card-mention" data-card="schism">Schism</span> back to hand; set it for the opponent's turn.</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Opponent-turn Schism into Winda or Construct</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="schism"></span>
+                <span class="connector">&rarr;</span>
+                <span class="card-chip" data-card="winda"></span>
+                <span class="connector">/</span>
+                <span class="card-chip" data-card="construct"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="winda">Winda</span> caps both players at one Special Summon; <span class="card-mention" data-card="construct">Construct</span> sends a monster when your Fusion's Attribute matches one the opponent controls.</p>
+            </div>
+          </div>
+          <div class="flow-step warn">
+            <div class="step-index">6</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag red">Warn</span> Winda locks you too</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="winda"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="schism"></span>
+              </div>
+              <p class="step-note">Do not summon <span class="card-mention" data-card="winda">Winda</span> before your own necessary Special Summons, and do not pass Winda with no follow-up — pair it with <span class="card-mention" data-card="schism">Schism</span>, disruption, or real card advantage.</p>
+            </div>
           </div>
         </div>
-        <div class="mind-branch">
-          <b>Starters</b>
-          <p class="small">Fusion spells, Mathematician, Shaddoll Fusion into an opponent Extra Deck monster, Dracotail Lukias, Ketu Dracotail.</p>
-        </div>
-        <div class="mind-branch">
-          <b>Send targets</b>
-          <p class="small">Squamata extends sends, Beast converts to cards, Hedgehog searches, Dragon removes backrow, Wendi places bodies, Ariel manages GY.</p>
-        </div>
-        <div class="mind-branch">
-          <b>Fusion outputs</b>
-          <p class="small">Construct for sends and battle pressure, Winda for Special Summon cap, Apkallone for negate/search, Meshahrail and Wendikurhu for newer pure lines.</p>
-        </div>
-        <div class="mind-branch">
-          <b>Closing</b>
-          <p class="small">Trade up with Schism, force awkward turns under Winda, then recycle Fusion spells and attack over simplified boards.</p>
-        </div>
-        <div class="mind-branch">
-          <b>Meta posture</b>
-          <p class="small">Pure Shaddoll is more rogue/control. The 2026 tournament result came from Dracotail Shaddoll, which uses Shaddolls as value material.</p>
-        </div>
-        <div class="mind-branch">
-          <b>Weak points</b>
-          <p class="small">GY hate, Fusion negation, banishing Schism material, and removal that outs Winda without Special Summoning.</p>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>Dracotail hybrid line</h4>
+            <p><span class="card-mention" data-card="lukias">Lukias</span> or <span class="card-mention" data-card="ketu">Ketu</span> sets up fusing; <span class="card-mention" data-card="faimena">Faimena</span> gives Quick Effect Fusion timing. Pan brings monster pressure, Urgula backrow pressure, Mululu a negate line, while <span class="card-mention" data-card="beast">Shaddoll Beast</span> turns the Fusion into a draw. Outputs are <span class="card-mention" data-card="arthalion">Arthalion</span> or <span class="card-mention" data-card="gulamel">Gulamel</span> plus Shaddoll value.</p>
+            <div class="card-row"><span class="card-chip" data-card="lukias"></span><span class="card-chip" data-card="faimena"></span><span class="card-chip" data-card="arthalion"></span><span class="card-chip" data-card="gulamel"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Invoked / Dogmatika shell</h4>
+            <p><span class="card-mention" data-card="aleister">Aleister</span> searches <span class="card-mention" data-card="invocation">Invocation</span> for <span class="card-mention" data-card="mechaba">Mechaba</span> or <span class="card-mention" data-card="augoeides">Augoeides</span> pressure; <span class="card-mention" data-card="nadir">Nadir Servant</span> with <span class="card-mention" data-card="ecclesia">Ecclesia</span> sends <span class="card-mention" data-card="apkallone">Apkallone</span> (searches <span class="card-mention" data-card="schism">Schism</span>, then discards) or Titaniklad. Less explosive than Dracotail but compact and easy to side.</p>
+            <div class="card-row"><span class="card-chip" data-card="aleister"></span><span class="card-chip" data-card="invocation"></span><span class="card-chip" data-card="mechaba"></span><span class="card-chip" data-card="nadir"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Pure Terminal World 3 line</h4>
+            <p><span class="card-mention" data-card="grysta">Grysta</span> reaches Fusion without a spell when sent by effect, <span class="card-mention" data-card="meshahrail">Meshahrail</span> searches Shaddoll/Void cards, <span class="card-mention" data-card="wendikurhu">Wendikurhu</span> flips boards. Real starters and bosses, but the Shaddoll-only Extra Deck restriction cuts <span class="card-mention" data-card="gravcon">Gravity Controller</span>, Cross-Sheep, and Invoked routes.</p>
+            <div class="card-row"><span class="card-chip" data-card="grysta"></span><span class="card-chip" data-card="meshahrail"></span><span class="card-chip" data-card="wendikurhu"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Interruption answers</h4>
+            <p>Opponents stop <span class="card-mention" data-card="construct">Construct</span>/<span class="card-mention" data-card="apkallone">Apkallone</span> with <span class="card-mention" data-card="calledby">Called by the Grave</span> and <span class="card-mention" data-card="imperm">Infinite Impermanence</span>, banish <span class="card-mention" data-card="schism">Schism</span> materials, or clear with <span class="card-mention" data-card="evenly">Evenly Matched</span>. Recover by linking away Fusions to reclaim spells, or rebuild through <span class="card-mention" data-card="ariel">Ariel</span> and <span class="card-mention" data-card="incarnation">Incarnation</span>.</p>
+            <div class="card-row"><span class="card-chip" data-card="calledby"></span><span class="card-chip" data-card="imperm"></span><span class="card-chip" data-card="evenly"></span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="combos">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Graph explorer</p>
-          <h2>Core Combos and Interactions</h2>
-        </div>
-        <span class="status warn">banlist-sensitive</span>
-      </div>
-      <div class="panel soft" style="margin-bottom: 12px;">
-        <h3>Combo spreadsheet/source status</h3>
-        <p class="small">Master Duel Meta's Combos & Counters page includes a Spreadsheets tab, but no public Shaddoll-specific spreadsheet was exposed in the static crawl without login. The public Open Combo Codex Markdown library did expose Dracotail combo routes, so the hybrid graph uses those lines plus Shaddoll guide/card-interaction research.</p>
-      </div>
-      <div class="route-tabs" role="tablist" aria-label="Combo route selector">
-        <button class="route-button active" type="button" data-route="route-winda">Winda Lock</button>
-        <button class="route-button" type="button" data-route="route-schism">Construct -> Schism</button>
-        <button class="route-button" type="button" data-route="route-punish">Deck Fusion Punish</button>
-        <button class="route-button" type="button" data-route="route-new">New Support</button>
-        <button class="route-button" type="button" data-route="route-dracotail">Dracotail Hybrid</button>
-        <button class="route-button" type="button" data-route="route-invoked">Invoked Shell</button>
-      </div>
-
-      <div class="route-panel active" id="route-winda">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> Starter</div>
-            <h3>El Shaddoll Fusion or Schism access</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/6417578.jpg" alt="El Shaddoll Fusion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/6417578.jpg" alt=""></span><span class="card-name">El Shaddoll Fusion</span></span>
-              <span class="plus-icon">+</span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt="Shaddoll Squamata"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt=""></span><span class="card-name">Squamata</span></span>
-              <span class="plus-icon">+</span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/51023024.jpg" alt="Reeshaddoll Wendi"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/51023024.jpg" alt=""></span><span class="card-name">Wendi</span></span>
-            </div>
-            <p class="small">Use the Quick-Play timing after the opponent spends a summon or commits a board action.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Trigger stack</div>
-            <h3>Fuse DARK + Shaddoll into Winda</h3>
-            <div class="trigger-strip">
-              <span class="trigger">Squamata -> send Beast/Hedgehog</span>
-              <span class="trigger">Wendi -> set Ariel/Falco</span>
-              <span class="trigger">Fusion monster later -> recover spell/trap</span>
-            </div>
-            <p class="small">When multiple Shaddolls are sent together, build the chain so the most important effect is protected behind lower-value effects.</p>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Lock</div>
-            <h3>El Shaddoll Winda</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt="El Shaddoll Winda"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt=""></span><span class="card-name">Winda</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt="Shaddoll Schism"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt=""></span><span class="card-name">Schism</span></span>
-            </div>
-            <p class="small">Winda is strongest when the opponent has already used their one permitted Special Summon or when Schism can convert GY material into removal.</p>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> Exit</div>
-            <h3>Clear your own lock when needed</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/23656668.jpg" alt="Gravity Controller"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/23656668.jpg" alt=""></span><span class="card-name">Gravity Controller</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="El Shaddoll Construct"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt=""></span><span class="card-name">Construct</span></span>
-            </div>
-            <p class="small">Link or fuse away your own Fusion monster to recover Shaddoll Fusion, El Shaddoll Fusion, or Schism and keep playing.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="route-panel" id="route-schism">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> Starter</div>
-            <h3>Make Construct in the Extra Monster Zone</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt="Shaddoll Fusion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt=""></span><span class="card-name">Shaddoll Fusion</span></span>
-              <span class="plus-icon">+</span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="El Shaddoll Construct"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt=""></span><span class="card-name">Construct</span></span>
-            </div>
-            <p class="small">Construct sends any Shaddoll card from Deck to GY, so it can load Schism or a missing monster effect.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Send</div>
-            <h3>Construct sends Schism</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt="Shaddoll Schism"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt=""></span><span class="card-name">Schism</span></span>
-              <span class="plus-icon">+</span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt="Shaddoll Squamata"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/30328508.jpg" alt=""></span><span class="card-name">Squamata</span></span>
-            </div>
-            <p class="small">If Schism is already available, send Squamata, Beast, Wendi, Dragon, or Ariel based on what the hand lacks.</p>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Recycle</div>
-            <h3>Link Construct into Gravity Controller</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/23656668.jpg" alt="Gravity Controller"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/23656668.jpg" alt=""></span><span class="card-name">Gravity Controller</span></span>
-            </div>
-            <p class="small">Construct sent to GY adds Schism back. Set it to threaten opponent-turn Winda or Construct with send-to-GY removal.</p>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> Opponent turn</div>
-            <h3>Schism fuses from GY and banish zone</h3>
-            <div class="trigger-strip">
-              <span class="trigger">Summon Winda to cap summons</span>
-              <span class="trigger">Summon Construct to send a monster</span>
-              <span class="trigger">Match Attribute to send opponent monster</span>
-            </div>
-            <p class="small">Schism's send is strongest when your Fusion's Attribute matches a monster the opponent already controls.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="route-panel" id="route-punish">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> Condition</div>
-            <h3>Opponent controls an Extra Deck monster</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt="Shaddoll Fusion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/44394295.jpg" alt=""></span><span class="card-name">Shaddoll Fusion</span></span>
-            </div>
-            <p class="small">This is the classic punish: Shaddoll Fusion can send materials from Deck if the opponent controls a monster Special Summoned from the Extra Deck.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Materials</div>
-            <h3>Choose the two effects you need</h3>
-            <div class="trigger-strip">
-              <span class="trigger">Squamata -> any Shaddoll</span>
-              <span class="trigger">Beast -> draw</span>
-              <span class="trigger">Dragon -> pop S/T</span>
-              <span class="trigger">Hedgehog -> search</span>
-              <span class="trigger">Wendi -> set from Deck</span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Output</div>
-            <h3>Construct, Apkallone, or Winda</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="El Shaddoll Construct"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt=""></span><span class="card-name">Construct</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/50907446.jpg" alt="El Shaddoll Apkallone"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/50907446.jpg" alt=""></span><span class="card-name">Apkallone</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt="El Shaddoll Winda"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt=""></span><span class="card-name">Winda</span></span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> Follow-up</div>
-            <h3>Turn bodies into Schism pressure</h3>
-            <p class="small">Use Construct's send and Fusion monster recursion to set up a second Fusion on the opponent turn. If ahead, hold El Shaddoll Fusion to dodge targeting and convert battle math.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="route-panel" id="route-new">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> New starter</div>
-            <h3>Tohushaddoll Grysta reaches Fusion without a spell</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/95072744.jpg" alt="Tohushaddoll Grysta"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/95072744.jpg" alt=""></span><span class="card-name">Tohu Grysta</span></span>
-              <span class="plus-icon">+</span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/81439173.jpg" alt="Foolish Burial"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/81439173.jpg" alt=""></span><span class="card-name">Foolish Burial</span></span>
-            </div>
-            <p class="small">When Grysta is sent by card effect, it can Fusion Summon a Shaddoll Fusion by banishing materials, but it locks Extra Deck summons to Shaddoll monsters that turn.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Search</div>
-            <h3>Meshahrail finds Shaddoll or Void cards</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/32467459.jpg" alt="El Shaddoll Meshahrail"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/32467459.jpg" alt=""></span><span class="card-name">Meshahrail</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/61345801.jpg" alt="Void Liberation"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/61345801.jpg" alt=""></span><span class="card-name">Void Liberation</span></span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Flip pressure</div>
-            <h3>Wendikurhu flips boards</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/8852158.jpg" alt="Reeshaddoll Wendikurhu"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/8852158.jpg" alt=""></span><span class="card-name">Wendikurhu</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/34950192.jpg" alt="Lev Shaddoll Fusion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/34950192.jpg" alt=""></span><span class="card-name">Lev Fusion</span></span>
-            </div>
-            <p class="small">Wendikurhu can turn set monsters face-up, then set opposing face-up monsters based on Flip count.</p>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> Tradeoff</div>
-            <h3>More ceiling, tighter lock</h3>
-            <p class="small">New pure lines give real starters and bosses, but the Shaddoll-only Extra Deck restriction changes older Gravity Controller, Cross-Sheep, and Invoked routes.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="route-panel" id="route-dracotail">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> Hybrid starter</div>
-            <h3>Lukias or Ketu sets up fusing</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/75003700.jpg" alt="Dracotail Lukias"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/75003700.jpg" alt=""></span><span class="card-name">Lukias</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/6153210.jpg" alt="Ketu Dracotail"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/6153210.jpg" alt=""></span><span class="card-name">Ketu</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/1498449.jpg" alt="Dracotail Faimena"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/1498449.jpg" alt=""></span><span class="card-name">Faimena</span></span>
-            </div>
-            <p class="small">Dracotail supplies material, backrow, and Quick Effect fusion timing. Shaddolls reward being used as material.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Material choices</div>
-            <h3>Pan, Urgula, Mululu define interaction</h3>
-            <div class="trigger-strip">
-              <span class="trigger">Pan -> monster pressure</span>
-              <span class="trigger">Urgula -> backrow pressure</span>
-              <span class="trigger">Mululu -> negate line</span>
-              <span class="trigger">Shaddoll Beast -> draw</span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Fusion output</div>
-            <h3>Arthalion or Gulamel plus Shaddoll value</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/33760966.jpg" alt="Dracotail Arthalion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/33760966.jpg" alt=""></span><span class="card-name">Arthalion</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/79755671.jpg" alt="Dracotail Gulamel"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/79755671.jpg" alt=""></span><span class="card-name">Gulamel</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/3717252.jpg" alt="Shaddoll Beast"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/3717252.jpg" alt=""></span><span class="card-name">Beast</span></span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> Current note</div>
-            <h3>Adjust ratios for May 18, 2026 TCG</h3>
-            <p class="small">The Richmond list used high Dracotail counts. Current TCG list limits Ketu, Mululu, and Rahu, and semi-limits Lukias and Arthalion.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="route-panel" id="route-invoked">
-        <div class="combo-graph">
-          <article class="combo-node" data-tone="start">
-            <div class="node-label"><span class="info-dot">i</span> Normal summon</div>
-            <h3>Aleister searches Invocation</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/86120751.jpg" alt="Aleister the Invoker"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/86120751.jpg" alt=""></span><span class="card-name">Aleister</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/74063034.jpg" alt="Invocation"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/74063034.jpg" alt=""></span><span class="card-name">Invocation</span></span>
-            </div>
-            <p class="small">A compact engine gives Mechaba pressure while Shaddoll cards supply Fusion material and grind.</p>
-          </article>
-          <article class="combo-node" data-tone="send">
-            <div class="node-label"><span class="plus-icon">+</span> Fusion lines</div>
-            <h3>Mechaba, Augoeides, Winda</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/75286621.jpg" alt="Invoked Mechaba"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/75286621.jpg" alt=""></span><span class="card-name">Mechaba</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/97300502.jpg" alt="Invoked Augoeides"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/97300502.jpg" alt=""></span><span class="card-name">Augoeides</span></span>
-            </div>
-          </article>
-          <article class="combo-node" data-tone="lock">
-            <div class="node-label"><span class="info-dot">i</span> Dogmatika option</div>
-            <h3>Nadir sends Apkallone or Titaniklad</h3>
-            <div class="card-row">
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/1984618.jpg" alt="Nadir Servant"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/1984618.jpg" alt=""></span><span class="card-name">Nadir</span></span>
-              <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/60303688.jpg" alt="Dogmatika Ecclesia, the Virtuous"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/60303688.jpg" alt=""></span><span class="card-name">Ecclesia</span></span>
-            </div>
-            <p class="small">Apkallone sent to GY searches Schism, then discards. Titaniklad finds Dogmatika follow-up in End Phase.</p>
-          </article>
-          <article class="combo-node" data-tone="recover">
-            <div class="node-label"><span class="plus-icon">+</span> End board</div>
-            <h3>Mechaba + Schism or Winda</h3>
-            <p class="small">This is less explosive than Dracotail but simple, compact, and easy to side for a known matchup.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="boards">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Field by End Phase</p>
-          <h2>End Board Examples</h2>
-        </div>
-      </div>
-      <div class="endboard">
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
         <article class="board-card">
+          <span class="tag blue">Going first</span>
           <h3>Classic control</h3>
-          <p class="small">Aim when going first with Construct access and discard fodder.</p>
-          <div class="field" aria-label="Classic Shaddoll end board">
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/94977269.jpg" alt="Winda"></div>
-            <div class="zone">set S/T</div>
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/21011044.jpg" alt="Schism"></div>
-            <div class="zone">Ariel/Falco set</div>
-            <div class="zone">Fusion in GY</div>
-          </div>
-          <ul class="sequence">
-            <li>Opponent turn Schism threatens Winda or Construct.</li>
-            <li>GY has at least two Attributes to choose Schism output.</li>
-            <li>Set monster converts next turn into more material.</li>
-          </ul>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="winda"></span><span class="card-chip" data-card="schism"></span><span class="card-chip" data-card="ariel"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="shadfusion"></span><span class="card-chip" data-card="falco"></span></div></div>
+          <p>Aim when going first with <span class="card-mention" data-card="construct">Construct</span> access and discard fodder. Opponent-turn <span class="card-mention" data-card="schism">Schism</span> threatens <span class="card-mention" data-card="winda">Winda</span> or Construct; keep at least two Attributes in GY to choose the Schism output, and the set monster (<span class="card-mention" data-card="ariel">Ariel</span>/<span class="card-mention" data-card="falco">Falco</span>) converts into next-turn material.</p>
         </article>
         <article class="board-card">
+          <span class="tag gold">Going second</span>
           <h3>Deck Fusion punish</h3>
-          <p class="small">Aim when the opponent gave you an Extra Deck monster condition.</p>
-          <div class="field" aria-label="Deck Fusion punish end board">
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="Construct"></div>
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/50907446.jpg" alt="Apkallone"></div>
-            <div class="zone">Beast draw</div>
-            <div class="zone">Dragon pop</div>
-            <div class="zone">Schism set</div>
-          </div>
-          <ul class="sequence">
-            <li>Use Shaddoll Fusion to send from Deck.</li>
-            <li>Pick material effects by board state, not by habit.</li>
-            <li>Recover Fusion spells when Fusions leave field.</li>
-          </ul>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="construct"></span><span class="card-chip" data-card="apkallone"></span><span class="card-chip" data-card="schism"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="beast"></span><span class="card-chip" data-card="dragon"></span></div></div>
+          <p>Aim when the opponent gave you the Extra Deck monster condition: <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> sends from Deck (<span class="card-mention" data-card="beast">Beast</span> draw, <span class="card-mention" data-card="dragon">Dragon</span> pop), and Fusion spells come back when the Fusions leave the field.</p>
         </article>
         <article class="board-card">
+          <span class="tag green">Hybrid</span>
           <h3>Dracotail Shaddoll</h3>
-          <p class="small">Aim when using the current competitive hybrid idea.</p>
-          <div class="field" aria-label="Dracotail Shaddoll end board">
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/33760966.jpg" alt="Arthalion"></div>
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/79755671.jpg" alt="Gulamel"></div>
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/5431722.jpg" alt="Dracotail Flame"></div>
-            <div class="zone"><img src="https://images.ygoprodeck.com/images/cards/3717252.jpg" alt="Shaddoll Beast"></div>
-            <div class="zone">Shaddoll GY</div>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="arthalion"></span><span class="card-chip" data-card="gulamel"></span><span class="card-chip" data-card="flame"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="beast"></span></div></div>
+          <p>Aim when on the current competitive hybrid: Dracotail materials generate removal or set backrow (<span class="card-mention" data-card="flame">Flame</span>), while <span class="card-mention" data-card="beast">Shaddoll Beast</span>, Hedgehog, or <span class="card-mention" data-card="squamata">Squamata</span> turns the Fusion into extra value. Current TCG ratios differ from the Richmond list.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Send <span class="card-mention" data-card="squamata">Squamata</span> first only if the extra send is worth more than a direct <span class="card-mention" data-card="beast">Beast</span> draw, Hedgehog search, or <span class="card-mention" data-card="dragon">Dragon</span> removal.</span></li>
+            <li><span class="num">2</span><span>When <span class="card-mention" data-card="construct">Construct</span> sends <span class="card-mention" data-card="schism">Schism</span>, have a way to send Construct to GY so the recovery trigger can add Schism back.</span></li>
+            <li><span class="num">3</span><span>Use <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span> after the opponent commits targeting removal or battle math.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="schism">Schism</span> into <span class="card-mention" data-card="winda">Winda</span> is often better than making Winda early and passing — and never lock yourself out of your own needed Special Summons.</span></li>
+            <li><span class="num">5</span><span>Meta adjustments: into combo, prioritize Winda timing, <span class="card-mention" data-card="droll">Droll</span>-style search denial, and board breakers that need no Special Summon; into backrow, <span class="card-mention" data-card="dragon">Dragon</span>, <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span>, and <span class="card-mention" data-card="superpoly">Super Polymerization</span> targets matter more than raw Winda; into GY decks, heavy floodgate GY hate can also turn off your own engine.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row">
+            <span class="card-chip" data-card="construct"></span>
+            <span class="card-chip" data-card="apkallone"></span>
+            <span class="card-chip" data-card="ariel"></span>
+            <span class="card-chip" data-card="falco"></span>
+            <span class="card-chip" data-card="incarnation"></span>
+            <span class="card-chip" data-card="core"></span>
           </div>
-          <ul class="sequence">
-            <li>Dracotail materials generate removal or set backrow.</li>
-            <li>Shaddoll Beast, Hedgehog, or Squamata turns the fusion into extra value.</li>
-            <li>Current TCG ratios differ from the Richmond list.</li>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span>Fusion sent to GY: <span class="card-mention" data-card="construct">Construct</span>/<span class="card-mention" data-card="apkallone">Apkallone</span> recover <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span>, <span class="card-mention" data-card="elfusion">El Shaddoll Fusion</span>, or <span class="card-mention" data-card="schism">Schism</span>; Apkallone searches then discards, which can trigger another Shaddoll.</span></li>
+            <li><span class="num">2</span><span>GY toolbox: <span class="card-mention" data-card="ariel">Ariel</span> recycles or attacks opposing GY lines; <span class="card-mention" data-card="falco">Falco</span> sets itself and becomes material next turn.</span></li>
+            <li><span class="num">3</span><span>Trap recursion: <span class="card-mention" data-card="incarnation">Incarnation</span> flips your set Shaddoll for value or revives by banishing with a Shaddoll; <span class="card-mention" data-card="core">Core</span> can recover a Shaddoll Spell/Trap when sent.</span></li>
+            <li><span class="num">4</span><span>Hybrid grind: <span class="card-mention" data-card="arthalion">Arthalion</span> and <span class="card-mention" data-card="horn">Horn</span> keep field presence and backrow flowing while Shaddoll materials replace themselves.</span></li>
           </ul>
         </article>
       </div>
     </section>
 
-    <section id="variant">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Latest tournament top found</p>
-          <h2>2026 Dracotail Shaddoll Variant</h2>
-        </div>
-        <span class="status warn">Genesys result</span>
-      </div>
-      <div class="variant-grid">
-        <div class="panel">
-          <h3>Why this shell topped</h3>
-          <p>Edwin Martin Strom IV's Shaddoll Dracotail list reached Top 4 at Genesys Proto-YCS Richmond on February 14, 2026. Konami's Round 10 top-table breakdown also showed Shaddoll Dracotail and Shaddoll Magistus Dracotail represented among the leading tables.</p>
-          <div class="trigger-strip">
-            <span class="trigger">Dracotail = starter density</span>
-            <span class="trigger">Shaddoll = material payoff</span>
-            <span class="trigger">Kaiju + Dark Ruler = going-second plan</span>
-            <span class="trigger">Side Shaddoll Fusion = punish ED boards</span>
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">Genesys Top 4</span>
+          <h3>2026 Dracotail Shaddoll</h3>
+          <p>Edwin Martin Strom IV's Shaddoll Dracotail list reached Top 4 at Genesys Proto-YCS Richmond on February 14, 2026. Konami's Round 10 top-table breakdown also showed Shaddoll Dracotail and Shaddoll Magistus Dracotail at leading tables. Dracotail brings starter density, Shaddoll the material payoff; Kaijus plus <span class="card-mention" data-card="darkruler">Dark Ruler No More</span> are the going-second plan, with sided <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> to punish Extra Deck boards.</p>
+          <div class="card-row">
+            <span class="card-chip" data-card="lukias"></span>
+            <span class="card-chip" data-card="arthalion"></span>
+            <span class="card-chip" data-card="gulamel"></span>
+            <span class="card-chip" data-card="gameciel"></span>
+            <span class="card-chip" data-card="darkruler"></span>
           </div>
-          <p class="small">The Richmond list is useful as a structure map, not as a copy-paste June 2026 TCG list. The current official list has since hit multiple Dracotail cards.</p>
-        </div>
-        <div class="panel soft">
-          <h3>Current build notes</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Keep the Shaddoll package lean unless you are building pure around the new Terminal World 3 support.</span></li>
-            <li><span class="bullet"></span><span>Choose Shaddoll Beast when you need raw cards, Squamata when you need access, Dragon when backrow matters, and Ariel when GY interaction matters.</span></li>
-            <li><span class="bullet"></span><span>Post-May 18, 2026 TCG: Ketu, Mululu, and Rahu are limited; Lukias and Arthalion are semi-limited.</span></li>
+          <p>Richmond signals — Main: 3 <span class="card-mention" data-card="lukias">Lukias</span>/Pan/Urgula, 3 Mululu, 3 Rahu, 2 <span class="card-mention" data-card="ketu">Ketu</span>, 2 <span class="card-mention" data-card="beast">Beast</span>, 1 Hedgehog, 1 <span class="card-mention" data-card="squamata">Squamata</span>, 3 <span class="card-mention" data-card="gameciel">Gameciel</span>, 3 <span class="card-mention" data-card="ddcrow">D.D. Crow</span>, 3 <span class="card-mention" data-card="darkruler">Dark Ruler No More</span>. Extra: <span class="card-mention" data-card="arthalion">Arthalion</span>, 3 <span class="card-mention" data-card="gulamel">Gulamel</span>, <span class="card-mention" data-card="construct">Construct</span>, Grysta, Wendigo, plus Slayer targets (Malong, Aggregator, Millennium-Eyes). Side: 3 <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span>, 3 <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span>, 3 <span class="card-mention" data-card="mistaken">Mistaken Arrest</span>, 3 Ultimate Slayer, Jizukiru, plus <span class="card-mention" data-card="dragon">Shaddoll Dragon</span> and <span class="card-mention" data-card="ariel">Ariel</span> as searchable utility.</p>
+        </article>
+        <article class="variant-card">
+          <span class="tag gold">Build notes</span>
+          <h3>Current Build Notes (June 2026)</h3>
+          <p>The Richmond list is a structure map, not a copy-paste June 2026 TCG list — the current official list has since hit multiple Dracotail cards.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Keep the Shaddoll package lean unless building pure around the new Terminal World 3 support.</span></li>
+            <li><span class="num">2</span><span>Choose <span class="card-mention" data-card="beast">Beast</span> when you need raw cards, <span class="card-mention" data-card="squamata">Squamata</span> when you need access, <span class="card-mention" data-card="dragon">Dragon</span> when backrow matters, and <span class="card-mention" data-card="ariel">Ariel</span> when GY interaction matters.</span></li>
+            <li><span class="num">3</span><span>Post-May 18, 2026 TCG: <span class="card-mention" data-card="ketu">Ketu</span>, Mululu, and Rahu are limited; <span class="card-mention" data-card="lukias">Lukias</span> and <span class="card-mention" data-card="arthalion">Arthalion</span> are semi-limited — adjust ratios accordingly.</span></li>
           </ul>
-        </div>
+        </article>
       </div>
-      <div class="decklist" style="margin-top: 12px;">
-        <div class="panel">
-          <h3>Richmond main deck signals</h3>
-          <ul>
-            <li>3 Dracotail Lukias, Pan, Urgula</li>
-            <li>3 Dracotail Mululu, 3 Rahu, 2 Ketu</li>
-            <li>2 Shaddoll Beast, 1 Hedgehog, 1 Squamata</li>
-            <li>3 Gameciel, 3 D.D. Crow, 3 Dark Ruler No More</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Richmond extra deck signals</h3>
-          <ul>
-            <li>Dracotail Arthalion and 3 Gulamel</li>
-            <li>El Shaddoll Construct, Grysta, Wendigo</li>
-            <li>Slayer targets: Malong, Aggregator, Millennium-Eyes</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Richmond side deck signals</h3>
-          <ul>
-            <li>3 Shaddoll Fusion</li>
-            <li>3 Cosmic Cyclone, 3 Mistaken Arrest</li>
-            <li>3 Ultimate Slayer, Jizukiru</li>
-            <li>Shaddoll Dragon and Ariel as searchable utility</li>
-          </ul>
-        </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2026-02-14</div><div><b>Genesys Proto-YCS Richmond:</b> Edwin Martin Strom IV, Shaddoll Dracotail, Top 4; Shaddoll Dracotail and Shaddoll Magistus Dracotail also at Round 10 leading tables.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2026-05-18</div><div><b>TCG Forbidden &amp; Limited List:</b> Ketu, Mululu, Rahu limited; Lukias, Arthalion semi-limited.</div></div>
       </div>
     </section>
 
-    <section id="tips">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Cheatsheet notes</p>
-          <h2>Tips</h2>
-        </div>
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Combo boards</td>
+              <td><div class="card-row"><span class="card-chip" data-card="darkruler"></span><span class="card-chip" data-card="droplet"></span><span class="card-chip" data-card="gameciel"></span></div></td>
+              <td>Break the board without using your Normal Summon, then land <span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> or <span class="card-mention" data-card="schism">Schism</span> pressure.</td>
+            </tr>
+            <tr>
+              <td>Backrow and trap decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="cosmic"></span><span class="card-chip" data-card="dragon"></span><span class="card-chip" data-card="duster"></span></div></td>
+              <td><span class="card-mention" data-card="dragon">Dragon</span> is searchable and triggerable by Fusion; <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> is best into <span class="card-mention" data-card="schism">Schism</span> mirrors and field-spell decks.</td>
+            </tr>
+            <tr>
+              <td>Search-heavy decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="mistaken"></span><span class="card-chip" data-card="ash"></span></div></td>
+              <td>Do not overside cards that also stop your own Hedgehog, <span class="card-mention" data-card="voidlib">Void Liberation</span>, or Dracotail search routes unless the matchup demands it.</td>
+            </tr>
+            <tr>
+              <td>GY decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="ddcrow"></span><span class="card-chip" data-card="ghostbelle"></span><span class="card-chip" data-card="ariel"></span></div></td>
+              <td>Prefer pinpoint GY interaction over blanket hate when your own follow-up needs Fusion material in GY.</td>
+            </tr>
+            <tr>
+              <td>Extra Deck decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="superpoly"></span><span class="card-chip" data-card="garura"></span><span class="card-chip" data-card="mudragon"></span></div></td>
+              <td><span class="card-mention" data-card="shadfusion">Shaddoll Fusion</span> punishes an established Extra Deck monster; <span class="card-mention" data-card="superpoly">Super Polymerization</span> converts their board before your engine starts.</td>
+            </tr>
+            <tr>
+              <td>What counters Shaddoll</td>
+              <td><div class="card-row"><span class="card-chip" data-card="calledby"></span><span class="card-chip" data-card="imperm"></span><span class="card-chip" data-card="evenly"></span></div></td>
+              <td>Common opposing plans: stop <span class="card-mention" data-card="construct">Construct</span>/<span class="card-mention" data-card="apkallone">Apkallone</span>, banish <span class="card-mention" data-card="schism">Schism</span> materials, remove <span class="card-mention" data-card="winda">Winda</span> without Special Summoning, or trade one card for your set Schism.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="grid-3">
-        <div class="panel">
-          <h3>Sequencing</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Send Squamata first only if the extra send is worth more than a direct Beast draw, Hedgehog search, or Dragon removal.</span></li>
-            <li><span class="bullet"></span><span>When Construct sends Schism, have a way to send Construct to GY so the recovery trigger can add Schism back.</span></li>
-            <li><span class="bullet"></span><span>Use El Shaddoll Fusion after the opponent commits targeting removal or battle math.</span></li>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Normal Summon pressure can force <span class="card-mention" data-card="winda">Winda</span> trades if you lack <span class="card-mention" data-card="schism">Schism</span> follow-up.</span></li>
+            <li><span class="num">2</span><span>Kaiju, <span class="card-mention" data-card="droplet">Droplet</span>, <span class="card-mention" data-card="darkruler">Dark Ruler</span>, <span class="card-mention" data-card="imperm">Imperm</span>, Book-style effects, or battle removal break the lock without a chain of Special Summons.</span></li>
+            <li><span class="num">3</span><span>If <span class="card-mention" data-card="schism">Schism</span> is telegraphed, opponents banish a needed material or remove Schism before you can pick the correct Attribute Fusion.</span></li>
           </ul>
-        </div>
-        <div class="panel">
-          <h3>Winda discipline</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Winda affects both players. Do not lock yourself before your own necessary Special Summons.</span></li>
-            <li><span class="bullet"></span><span>Winda plus no follow-up loses to normal summon pressure. Pair it with Schism, disruption, or real card advantage.</span></li>
-            <li><span class="bullet"></span><span>Schism into Winda is often better than making Winda early and passing.</span></li>
+        </article>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Going first: add Dimensional Barrier, Anti-Spell Fragrance, or extra trap disruption only when they do not conflict with your own spell-heavy hand.</span></li>
+            <li><span class="num">2</span><span>Going second: add Kaijus, <span class="card-mention" data-card="darkruler">Dark Ruler No More</span>, <span class="card-mention" data-card="superpoly">Super Polymerization</span>, Ultimate Slayer, and <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> based on the expected board.</span></li>
+            <li><span class="num">3</span><span>Mirror and Fusion decks: <span class="card-mention" data-card="cosmic">Cosmic</span> on <span class="card-mention" data-card="schism">Schism</span>, <span class="card-mention" data-card="ariel">Ariel</span> on GY material, and <span class="card-mention" data-card="superpoly">Super Polymerization</span> targets matter.</span></li>
           </ul>
-        </div>
-        <div class="panel">
-          <h3>Meta adjustments</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Into combo, prioritize Winda timing, Droll-style search denial, and board breakers that do not require Special Summons.</span></li>
-            <li><span class="bullet"></span><span>Into GY decks, Ariel and D.D. Crow are interaction, but heavy floodgate GY hate can also turn off your own engine.</span></li>
-            <li><span class="bullet"></span><span>Into backrow, Dragon, Cosmic Cyclone, and Super Polymerization targets matter more than raw Winda.</span></li>
-          </ul>
-        </div>
+        </article>
       </div>
     </section>
 
-    <section id="recovery">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">After disruption</p>
-          <h2>Recovery Options</h2>
-        </div>
-      </div>
-      <div class="grid-4">
-        <div class="panel">
-          <h3>Fusion sent to GY</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt="El Shaddoll Construct"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/20366274.jpg" alt=""></span><span class="card-name">Construct</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/50907446.jpg" alt="El Shaddoll Apkallone"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/50907446.jpg" alt=""></span><span class="card-name">Apkallone</span></span>
-          </div>
-          <p class="small">Recover Shaddoll Fusion, El Shaddoll Fusion, or Schism. Apkallone searches then discards, which can trigger another Shaddoll if discarded by effect.</p>
-        </div>
-        <div class="panel">
-          <h3>GY toolbox</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/97518132.jpg" alt="Naelshaddoll Ariel"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/97518132.jpg" alt=""></span><span class="card-name">Ariel</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/37445295.jpg" alt="Shaddoll Falco"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/37445295.jpg" alt=""></span><span class="card-name">Falco</span></span>
-          </div>
-          <p class="small">Ariel recycles or attacks opposing GY lines. Falco sets itself and can turn into material next turn.</p>
-        </div>
-        <div class="panel">
-          <h3>Trap recursion</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/23912837.jpg" alt="Resh Shaddoll Incarnation"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/23912837.jpg" alt=""></span><span class="card-name">Incarnation</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/4904633.jpg" alt="Shaddoll Core"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/4904633.jpg" alt=""></span><span class="card-name">Core</span></span>
-          </div>
-          <p class="small">Incarnation flips your set Shaddoll for value or revives by banishing with a Shaddoll. Core can recover a Shaddoll spell/trap when sent.</p>
-        </div>
-        <div class="panel">
-          <h3>Hybrid grind</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/33760966.jpg" alt="Dracotail Arthalion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/33760966.jpg" alt=""></span><span class="card-name">Arthalion</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/69932023.jpg" alt="Dracotail Horn"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/69932023.jpg" alt=""></span><span class="card-name">Horn</span></span>
-          </div>
-          <p class="small">Dracotail cards help keep field presence and backrow flowing while Shaddoll materials replace themselves.</p>
-        </div>
-      </div>
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <ol class="refs-list">
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters</a> — checked for combo/counter/spreadsheet resource structure; the page exposes a Spreadsheets tab but did not surface a public Shaddoll-specific spreadsheet without login in the static crawl.</li>
+        <li><a href="https://www.opencombocodex.com/" target="_blank" rel="noreferrer">Open Combo Codex</a> and <a href="https://github.com/Siebe-Uy/Open-Combo-Codex/tree/main/content/combos/dracotail" target="_blank" rel="noreferrer">Dracotail combo Markdown files</a> — public combo library reference for Dracotail route structure, especially Lukias into Faimena and Ketu going-second fusion patterns.</li>
+        <li><a href="https://ygoprodeck.com/deck/shaddoll-dracotail-692005" target="_blank" rel="noreferrer">YGOPRODeck: Shaddoll Dracotail</a> — Top 4 Genesys Proto-YCS Richmond deck page used for the tournament variant and the sectioned main/extra/side signals.</li>
+        <li><a href="https://ygoprodeck.com/tournament/genesys-proto-ycs-richmond-4225" target="_blank" rel="noreferrer">YGOPRODeck: Genesys Proto-YCS Richmond tournament</a> — used to verify event date, tier, player, and Top 4 tournament context.</li>
+        <li><a href="https://yugiohblog.konami.com/2026/ycs/2026-02-300th-na/300th-ycs-in-richmond-top-tables-update-round-10-genesys-format/" target="_blank" rel="noreferrer">Konami YCS Richmond Round 10 Top Tables</a> — meta context showing Shaddoll Dracotail and Shaddoll Magistus Dracotail at leading tables.</li>
+        <li><a href="https://www.masterduelmeta.com/articles/guides/dracotail-guide" target="_blank" rel="noreferrer">Master Duel Meta: Introduction to Dracotail</a> — current Dracotail role: midrange fusion engine, hybrid flexibility, Faimena timing, material-trigger interaction, and GY/backrow vulnerabilities.</li>
+        <li><a href="https://www.yugiohmeta.com/articles/news/oct-31-2025/tw03" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta: OCG Terminal World 3 Shaddoll reveal</a> and <a href="https://www.masterduelmeta.com/articles/news/nov-19-2025/tw03" target="_blank" rel="noreferrer">Lev Shaddoll Fusion reveal</a> — newer Shaddoll support cards: Tohushaddoll Grysta, El Shaddoll Meshahrail, Reeshaddoll Wendikurhu, Void Liberation, and Lev Shaddoll Fusion.</li>
+        <li><a href="https://www.db.yugioh-card.com/yugiohdb/forbidden_limited.action?request_locale=en" target="_blank" rel="noreferrer">Official Yu-Gi-Oh! Neuron Forbidden &amp; Limited List</a> — checked June 8, 2026; status updated May 18, 2026; used for the current Dracotail ratio warning.</li>
+        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php" target="_blank" rel="noreferrer">YGOPRODeck API</a> and <a href="https://images.ygoprodeck.com/images/cards/44394295.jpg" target="_blank" rel="noreferrer">YGOPRODeck image URL pattern</a> — used to verify exact card IDs and image URLs.</li>
+        <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/377168" target="_blank" rel="noreferrer">Game8 Fusion Shaddoll guide</a> and <a href="https://www.masterduelmeta.com/articles/guides/invoked-dogmatika-shaddoll-guide-santashock" target="_blank" rel="noreferrer">Master Duel Meta Invoked Dogmatika Shaddoll guide</a> — supporting references for Invoked/Dogmatika Shaddoll playstyle, Winda/Mechaba control framing, and older engine context.</li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
     </section>
 
-    <section id="side">
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Matchups</p>
-          <h2>Side Deck Options and Counters</h2>
-        </div>
-      </div>
-      <div class="matchup-grid">
-        <article class="matchup">
-          <h3>Combo boards</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/54693926.jpg" alt="Dark Ruler No More"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/54693926.jpg" alt=""></span><span class="card-name">Dark Ruler</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/24299458.jpg" alt="Forbidden Droplet"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/24299458.jpg" alt=""></span><span class="card-name">Droplet</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/55063751.jpg" alt="Gameciel, the Sea Turtle Kaiju"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/55063751.jpg" alt=""></span><span class="card-name">Gameciel</span></span>
-          </div>
-          <p class="small">Break the board without using your Normal Summon, then land Shaddoll Fusion or Schism pressure.</p>
-        </article>
-        <article class="matchup">
-          <h3>Backrow and trap decks</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt="Cosmic Cyclone"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/8267140.jpg" alt=""></span><span class="card-name">Cosmic</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/77723643.jpg" alt="Shaddoll Dragon"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/77723643.jpg" alt=""></span><span class="card-name">Dragon</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/18144507.jpg" alt="Harpie's Feather Duster"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/18144507.jpg" alt=""></span><span class="card-name">Duster</span></span>
-          </div>
-          <p class="small">Dragon is searchable and triggerable by Fusion; Cosmic is best into Schism mirrors and field-spell decks.</p>
-        </article>
-        <article class="matchup">
-          <h3>Search-heavy decks</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/94145021.jpg" alt="Droll & Lock Bird"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/94145021.jpg" alt=""></span><span class="card-name">Droll</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/4227096.jpg" alt="Mistaken Arrest"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/4227096.jpg" alt=""></span><span class="card-name">Mistaken Arrest</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/14558127.jpg" alt="Ash Blossom & Joyous Spring"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/14558127.jpg" alt=""></span><span class="card-name">Ash</span></span>
-          </div>
-          <p class="small">Do not overside cards that also stop your own Hedgehog, Void Liberation, or Dracotail search routes unless the matchup demands it.</p>
-        </article>
-        <article class="matchup">
-          <h3>GY decks</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/24508238.jpg" alt="D.D. Crow"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/24508238.jpg" alt=""></span><span class="card-name">D.D. Crow</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/73642296.jpg" alt="Ghost Belle & Haunted Mansion"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/73642296.jpg" alt=""></span><span class="card-name">Ghost Belle</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/97518132.jpg" alt="Naelshaddoll Ariel"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/97518132.jpg" alt=""></span><span class="card-name">Ariel</span></span>
-          </div>
-          <p class="small">Prefer pinpoint GY interaction over blanket hate when your own follow-up needs Fusion material in GY.</p>
-        </article>
-        <article class="matchup">
-          <h3>Extra Deck decks</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/48130397.jpg" alt="Super Polymerization"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/48130397.jpg" alt=""></span><span class="card-name">Super Poly</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/11765832.jpg" alt="Garura, Wings of Resonant Life"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/11765832.jpg" alt=""></span><span class="card-name">Garura</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/54757758.jpg" alt="Mudragon of the Swamp"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/54757758.jpg" alt=""></span><span class="card-name">Mudragon</span></span>
-          </div>
-          <p class="small">Shaddoll Fusion punishes an established Extra Deck monster. Super Polymerization converts their board before your engine starts.</p>
-        </article>
-        <article class="matchup">
-          <h3>What counters Shaddoll</h3>
-          <div class="card-row">
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/24224830.jpg" alt="Called by the Grave"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/24224830.jpg" alt=""></span><span class="card-name">Called By</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/10045474.jpg" alt="Infinite Impermanence"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/10045474.jpg" alt=""></span><span class="card-name">Imperm</span></span>
-            <span class="card-token" tabindex="0"><img class="card-img" src="https://images.ygoprodeck.com/images/cards/15693423.jpg" alt="Evenly Matched"><span class="card-pop"><img src="https://images.ygoprodeck.com/images/cards/15693423.jpg" alt=""></span><span class="card-name">Evenly</span></span>
-          </div>
-          <p class="small">Common opposing plans: stop Construct/Apkallone, banish Schism materials, remove Winda without Special Summoning, or trade one card for your set Schism.</p>
-        </article>
-      </div>
-      <div class="counter-band">
-        <div class="panel">
-          <h3>Side pattern by role</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Going first: add Dimensional Barrier, Anti-Spell Fragrance, or extra trap disruption only when they do not conflict with your own spell-heavy hand.</span></li>
-            <li><span class="bullet"></span><span>Going second: add Kaijus, Dark Ruler, Super Polymerization, Ultimate Slayer, and Cosmic based on the board you expect.</span></li>
-            <li><span class="bullet"></span><span>Mirror and Fusion decks: Cosmic on Schism, Ariel on GY material, and Super Polymerization targets matter.</span></li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Counterplay against Winda</h3>
-          <ul class="tight-list">
-            <li><span class="bullet"></span><span>Normal Summon pressure can force Winda trades if the Shaddoll player lacks Schism follow-up.</span></li>
-            <li><span class="bullet"></span><span>Kaiju, Droplet, Dark Ruler, Imperm, Book-style effects, or battle removal can break the lock without building a chain of Special Summons.</span></li>
-            <li><span class="bullet"></span><span>If Schism is telegraphed, banish a needed material or remove Schism before the opponent can pick the correct Attribute Fusion.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="references" class="reference-panel" hidden>
-      <div class="section-head">
-        <div>
-          <p class="section-kicker">Source tab</p>
-          <h2>References Used</h2>
-        </div>
-        <span class="status good">hidden by default</span>
-      </div>
-      <ul class="reference-list">
-        <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta Combos & Counters</a><br><span class="small">Checked for combo/counter/spreadsheet resource structure. The page exposes a Spreadsheets tab but did not surface a public Shaddoll-specific spreadsheet without login in the static crawl.</span></li>
-        <li><a href="https://www.opencombocodex.com/">Open Combo Codex</a> and <a href="https://github.com/Siebe-Uy/Open-Combo-Codex/tree/main/content/combos/dracotail">Dracotail combo Markdown files</a><br><span class="small">Used as a public combo library reference for Dracotail route structure, especially Lukias into Faimena and Ketu going-second fusion patterns.</span></li>
-        <li><a href="https://ygoprodeck.com/deck/shaddoll-dracotail-692005">YGOPRODeck: Shaddoll Dracotail</a><br><span class="small">Top 4 Genesys Proto-YCS Richmond deck page used for the tournament variant and the sectioned main/extra/side signals.</span></li>
-        <li><a href="https://ygoprodeck.com/tournament/genesys-proto-ycs-richmond-4225">YGOPRODeck: Genesys Proto-YCS Richmond tournament</a><br><span class="small">Used to verify event date, tier, player, and Top 4 tournament context.</span></li>
-        <li><a href="https://yugiohblog.konami.com/2026/ycs/2026-02-300th-na/300th-ycs-in-richmond-top-tables-update-round-10-genesys-format/">Konami YCS Richmond Round 10 Top Tables</a><br><span class="small">Used for meta context showing Shaddoll Dracotail and Shaddoll Magistus Dracotail at leading tables.</span></li>
-        <li><a href="https://www.masterduelmeta.com/articles/guides/dracotail-guide">Master Duel Meta: Introduction to Dracotail</a><br><span class="small">Used for current Dracotail role: midrange fusion engine, hybrid flexibility, Faimena timing, material-trigger interaction, and GY/backrow vulnerabilities.</span></li>
-        <li><a href="https://www.yugiohmeta.com/articles/news/oct-31-2025/tw03">Yu-Gi-Oh! Meta: OCG Terminal World 3 Shaddoll reveal</a> and <a href="https://www.masterduelmeta.com/articles/news/nov-19-2025/tw03">Lev Shaddoll Fusion reveal</a><br><span class="small">Used for the newer Shaddoll support cards: Tohushaddoll Grysta, El Shaddoll Meshahrail, Reeshaddoll Wendikurhu, Void Liberation, and Lev Shaddoll Fusion.</span></li>
-        <li><a href="https://www.db.yugioh-card.com/yugiohdb/forbidden_limited.action?request_locale=en">Official Yu-Gi-Oh! Neuron Forbidden & Limited List</a><br><span class="small">Checked June 8, 2026. Status updated May 18, 2026. Used for the current Dracotail ratio warning.</span></li>
-        <li><a href="https://db.ygoprodeck.com/api/v7/cardinfo.php">YGOPRODeck API</a> and <a href="https://images.ygoprodeck.com/images/cards/44394295.jpg">YGOPRODeck image URL pattern</a><br><span class="small">Used to verify exact card IDs and image URLs. Every visible card image in this file uses the requested CARD_ID.jpg format.</span></li>
-        <li><a href="https://game8.co/games/Yu-Gi-Oh-Master-Duel/archives/377168">Game8 Fusion Shaddoll guide</a> and <a href="https://www.masterduelmeta.com/articles/guides/invoked-dogmatika-shaddoll-guide-santashock">Master Duel Meta Invoked Dogmatika Shaddoll guide</a><br><span class="small">Used as supporting references for Invoked/Dogmatika Shaddoll playstyle, Winda/Mechaba control framing, and older engine context.</span></li>
-      </ul>
-    </section>
-  </div>
+  </main>
 
   <script>
-    const routeButtons = document.querySelectorAll(".route-button");
-    const routePanels = document.querySelectorAll(".route-panel");
-
-    routeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const route = button.dataset.route;
-        routeButtons.forEach((item) => item.classList.toggle("active", item === button));
-        routePanels.forEach((panel) => panel.classList.toggle("active", panel.id === route));
-      });
-    });
-
-    const refToggle = document.getElementById("refToggle");
-    const references = document.getElementById("references");
-    refToggle.addEventListener("click", () => {
-      const isHidden = references.hasAttribute("hidden");
-      if (isHidden) {
-        references.removeAttribute("hidden");
-        refToggle.classList.add("active");
-        references.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        references.setAttribute("hidden", "");
-        refToggle.classList.remove("active");
-      }
-    });
+    const CARDS = {
+      shadfusion: { id: 44394295, name: "Shaddoll Fusion" },
+      elfusion: { id: 6417578, name: "El Shaddoll Fusion" },
+      levfusion: { id: 34950192, name: "Lev Shaddoll Fusion" },
+      schism: { id: 21011044, name: "Shaddoll Schism" },
+      core: { id: 4904633, name: "Shaddoll Core" },
+      incarnation: { id: 23912837, name: "Resh Shaddoll Incarnation" },
+      construct: { id: 20366274, name: "El Shaddoll Construct" },
+      winda: { id: 94977269, name: "El Shaddoll Winda" },
+      apkallone: { id: 50907446, name: "El Shaddoll Apkallone" },
+      meshahrail: { id: 32467459, name: "El Shaddoll Meshahrail" },
+      squamata: { id: 30328508, name: "Shaddoll Squamata" },
+      beast: { id: 3717252, name: "Shaddoll Beast" },
+      dragon: { id: 77723643, name: "Shaddoll Dragon" },
+      falco: { id: 37445295, name: "Shaddoll Falco" },
+      wendi: { id: 51023024, name: "Reeshaddoll Wendi" },
+      wendikurhu: { id: 8852158, name: "Reeshaddoll Wendikurhu" },
+      ariel: { id: 97518132, name: "Naelshaddoll Ariel" },
+      grysta: { id: 95072744, name: "Tohushaddoll Grysta" },
+      voidlib: { id: 61345801, name: "Void Liberation" },
+      gravcon: { id: 23656668, name: "Gravity Controller" },
+      foolish: { id: 81439173, name: "Foolish Burial" },
+      lukias: { id: 75003700, name: "Dracotail Lukias" },
+      ketu: { id: 6153210, name: "Ketu Dracotail" },
+      faimena: { id: 1498449, name: "Dracotail Faimena" },
+      arthalion: { id: 33760966, name: "Dracotail Arthalion" },
+      gulamel: { id: 79755671, name: "Dracotail Gulamel" },
+      flame: { id: 5431722, name: "Dracotail Flame" },
+      horn: { id: 69932023, name: "Dracotail Horn" },
+      aleister: { id: 86120751, name: "Aleister the Invoker" },
+      invocation: { id: 74063034, name: "Invocation" },
+      mechaba: { id: 75286621, name: "Invoked Mechaba" },
+      augoeides: { id: 97300502, name: "Invoked Augoeides" },
+      nadir: { id: 1984618, name: "Nadir Servant" },
+      ecclesia: { id: 60303688, name: "Dogmatika Ecclesia, the Virtuous" },
+      darkruler: { id: 54693926, name: "Dark Ruler No More" },
+      droplet: { id: 24299458, name: "Forbidden Droplet" },
+      gameciel: { id: 55063751, name: "Gameciel, the Sea Turtle Kaiju" },
+      cosmic: { id: 8267140, name: "Cosmic Cyclone" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      mistaken: { id: 4227096, name: "Mistaken Arrest" },
+      ash: { id: 14558127, name: "Ash Blossom & Joyous Spring" },
+      ddcrow: { id: 24508238, name: "D.D. Crow" },
+      ghostbelle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
+      superpoly: { id: 48130397, name: "Super Polymerization" },
+      garura: { id: 11765832, name: "Garura, Wings of Resonant Life" },
+      mudragon: { id: 54757758, name: "Mudragon of the Swamp" },
+      calledby: { id: 24224830, name: "Called by the Grave" },
+      imperm: { id: 10045474, name: "Infinite Impermanence" },
+      evenly: { id: 15693423, name: "Evenly Matched" }
+    };
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>

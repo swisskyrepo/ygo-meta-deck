@@ -3,1626 +3,566 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eldlich Horus Mind Map Cheatsheet</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f5f7fa;
-      --paper: #ffffff;
-      --ink: #17202a;
-      --muted: #5d6a79;
-      --line: #d7dee8;
-      --soft-line: #e9eef4;
-      --gold: #a97616;
-      --gold-soft: #fff4d6;
-      --red: #8f2736;
-      --red-soft: #fde8ec;
-      --green: #1d7352;
-      --green-soft: #e5f6ef;
-      --blue: #285f9f;
-      --blue-soft: #e8f1fb;
-      --violet: #63478d;
-      --violet-soft: #f0eafa;
-      --shadow: 0 18px 44px rgba(20, 32, 48, 0.11);
-      --mini-card-w: 58px;
-      --mini-card-h: 84px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      line-height: 1.48;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .page {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 18px;
-    }
-
-    .sheet {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      overflow: clip;
-    }
-
-    .header {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      padding: 24px;
-      border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(135deg, rgba(169, 118, 22, 0.12), transparent 34%),
-        linear-gradient(135deg, rgba(40, 95, 159, 0.10), transparent 62%),
-        #fff;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin: 0 0 8px;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-      font-size: 36px;
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 24px;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 16px;
-      line-height: 1.25;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      max-width: 66ch;
-      margin-bottom: 16px;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .pill.gold {
-      border-color: #e1ca8b;
-      background: var(--gold-soft);
-      color: #6b4307;
-    }
-
-    .pill.blue {
-      border-color: #c5d8ef;
-      background: var(--blue-soft);
-      color: #183f69;
-    }
-
-    .pill.green {
-      border-color: #bfe5d2;
-      background: var(--green-soft);
-      color: #13523a;
-    }
-
-    .header-aside {
-      display: grid;
-      align-content: start;
-      gap: 10px;
-    }
-
-    .summary-box {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-    }
-
-    .summary-box strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-
-    .summary-box p {
-      margin-bottom: 0;
-      font-size: 14px;
-    }
-
-    .jumpbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(10px);
-    }
-
-    .jumpbar a,
-    .jumpbar button {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 32px;
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .jumpbar button[aria-expanded="true"] {
-      border-color: #c5d8ef;
-      background: var(--blue-soft);
-      color: #183f69;
-    }
-
-    section {
-      padding: 24px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    section:last-child {
-      border-bottom: 0;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .section-head p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .mind-grid {
-      display: grid;
-      grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .center-node {
-      display: grid;
-      align-content: center;
-      min-height: 280px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background:
-        linear-gradient(160deg, rgba(169, 118, 22, 0.10), transparent 48%),
-        linear-gradient(20deg, rgba(29, 115, 82, 0.10), transparent 48%),
-        #fff;
-    }
-
-    .center-node h2 {
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-
-    .center-node p {
-      margin-bottom: 14px;
-      color: var(--muted);
-    }
-
-    .map-lanes {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .lane {
-      min-height: 132px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .lane h3 {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 7px;
-    }
-
-    .lane p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .badge.gold {
-      background: var(--gold-soft);
-      color: var(--gold);
-    }
-
-    .badge.red {
-      background: var(--red-soft);
-      color: var(--red);
-    }
-
-    .badge.green {
-      background: var(--green-soft);
-      color: var(--green);
-    }
-
-    .badge.blue {
-      background: var(--blue-soft);
-      color: var(--blue);
-    }
-
-    .badge.violet {
-      background: var(--violet-soft);
-      color: var(--violet);
-    }
-
-    .info {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--blue);
-      font-size: 12px;
-      font-weight: 900;
-      cursor: help;
-    }
-
-    .info::after {
-      content: attr(data-tip);
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 8px);
-      z-index: 60;
-      width: min(260px, 70vw);
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #17202a;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.35;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(-50%) translateY(4px);
-      transition: opacity 0.14s ease, transform 0.14s ease;
-    }
-
-    .info:hover::after,
-    .info:focus::after {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .graph-shell {
-      display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
-      gap: 14px;
-      align-items: start;
-    }
-
-    .route-list {
-      display: grid;
-      gap: 8px;
-    }
-
-    .route-button {
-      width: 100%;
-      min-height: 54px;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink);
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .route-button strong {
-      display: block;
-      font-size: 13px;
-      line-height: 1.2;
-    }
-
-    .route-button span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
-    .route-button.is-active {
-      border-color: #c5d8ef;
-      background: var(--blue-soft);
-      box-shadow: inset 4px 0 0 var(--blue);
-    }
-
-    .graph-panel {
-      min-width: 0;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      overflow: hidden;
-    }
-
-    .graph-title {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px;
-      border-bottom: 1px solid var(--line);
-      background: #fbfcfe;
-    }
-
-    .graph-title h3 {
-      margin-bottom: 3px;
-      font-size: 18px;
-    }
-
-    .graph-title p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .graph-scroll {
-      overflow-x: auto;
-      padding: 18px;
-    }
-
-    .graph-flow {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(174px, 210px);
-      align-items: stretch;
-      gap: 26px;
-      min-width: max-content;
-    }
-
-    .graph-node {
-      position: relative;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      min-height: 238px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .graph-node::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -24px;
-      width: 22px;
-      height: 1px;
-      background: var(--line);
-    }
-
-    .graph-node::before {
-      content: "";
-      position: absolute;
-      top: calc(50% - 4px);
-      right: -25px;
-      width: 8px;
-      height: 8px;
-      border-top: 1px solid var(--line);
-      border-right: 1px solid var(--line);
-      transform: rotate(45deg);
-      background: var(--bg);
-    }
-
-    .graph-node:last-child::after,
-    .graph-node:last-child::before {
-      display: none;
-    }
-
-    .node-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 10px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-
-    .node-text {
-      margin: 10px 0 0;
-      color: var(--ink);
-      font-size: 13px;
-    }
-
-    .branch-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      padding: 14px;
-      border-top: 1px solid var(--line);
-      background: #fbfcfe;
-    }
-
-    .branch {
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .branch strong {
-      display: block;
-      margin-bottom: 5px;
-      font-size: 13px;
-    }
-
-    .branch p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .card-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-mini {
-      position: relative;
-      display: inline-grid;
-      width: var(--mini-card-w);
-      min-width: var(--mini-card-w);
-      color: var(--ink);
-      vertical-align: top;
-    }
-
-    .card-mini img {
-      display: block;
-      width: var(--mini-card-w);
-      height: var(--mini-card-h);
-      border: 1px solid rgba(23, 32, 42, 0.18);
-      border-radius: 5px;
-      object-fit: cover;
-      background: #e8edf3;
-    }
-
-    .card-mini span {
-      display: block;
-      margin-top: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      line-height: 1.12;
-      overflow-wrap: anywhere;
-    }
-
-    .card-mini .zoom {
-      position: fixed;
-      top: 72px;
-      right: 22px;
-      z-index: 80;
-      width: 242px;
-      height: auto;
-      border: 1px solid rgba(23, 32, 42, 0.28);
-      border-radius: 8px;
-      box-shadow: 0 24px 64px rgba(20, 32, 48, 0.32);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(8px);
-      transition: opacity 0.14s ease, transform 0.14s ease;
-    }
-
-    .card-mini:hover .zoom,
-    .card-mini:focus-within .zoom {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .plus {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 23px;
-      height: 23px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--gold);
-      font-size: 17px;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .wildcard {
-      display: inline-grid;
-      align-content: center;
-      justify-items: center;
-      width: var(--mini-card-w);
-      min-width: var(--mini-card-w);
-      height: var(--mini-card-h);
-      border: 1px dashed var(--line);
-      border-radius: 5px;
-      background: #fbfcfe;
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 900;
-      text-align: center;
-      padding: 5px;
-    }
-
-    .cluster-grid,
-    .board-grid,
-    .variant-grid,
-    .tips-grid,
-    .side-grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .cluster-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .board-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .variant-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .tips-grid,
-    .side-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .panel {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .panel h3 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .panel p,
-    .panel li {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .panel p:last-child,
-    .panel ul:last-child,
-    .panel ol:last-child {
-      margin-bottom: 0;
-    }
-
-    .panel ul,
-    .panel ol {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .panel li + li {
-      margin-top: 7px;
-    }
-
-    .trigger-pair {
-      display: grid;
-      grid-template-columns: auto 24px auto;
-      gap: 8px;
-      align-items: start;
-      padding: 10px 0;
-      border-top: 1px solid var(--soft-line);
-    }
-
-    .trigger-pair:first-of-type {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .trigger-pair .why {
-      grid-column: 1 / -1;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .field-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .field-item {
-      display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--soft-line);
-      font-size: 13px;
-    }
-
-    .field-item strong {
-      color: var(--ink);
-    }
-
-    .field-item span {
-      color: var(--muted);
-    }
-
-    .variant {
-      display: grid;
-      gap: 10px;
-    }
-
-    .variant .date {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-
-    .meta-band {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .meta-stat {
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfcfe;
-    }
-
-    .meta-stat strong {
-      display: block;
-      font-size: 18px;
-      line-height: 1.2;
-    }
-
-    .meta-stat span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .references {
-      display: none;
-      padding: 18px 24px 24px;
-      border-bottom: 1px solid var(--line);
-      background: #fbfcfe;
-    }
-
-    .references.is-open {
-      display: block;
-    }
-
-    .references h2 {
-      margin-bottom: 10px;
-    }
-
-    .references-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .ref-list {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .ref-list li {
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .note {
-      padding: 10px 12px;
-      border: 1px solid #e1ca8b;
-      border-radius: 8px;
-      background: var(--gold-soft);
-      color: #6b4307;
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    .footer-note {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 960px) {
-      .header,
-      .mind-grid,
-      .graph-shell,
-      .cluster-grid,
-      .board-grid,
-      .variant-grid,
-      .tips-grid,
-      .side-grid,
-      .references-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .route-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .meta-band {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page {
-        padding: 8px;
-      }
-
-      .header,
-      section,
-      .references {
-        padding: 16px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      h2 {
-        font-size: 21px;
-      }
-
-      .route-list,
-      .map-lanes,
-      .branch-grid,
-      .meta-band {
-        grid-template-columns: 1fr;
-      }
-
-      .graph-scroll {
-        padding: 14px;
-      }
-
-      .card-mini .zoom {
-        top: auto;
-        right: 12px;
-        bottom: 12px;
-        width: min(210px, 54vw);
-      }
-
-      .field-item {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media print {
-      body {
-        background: #fff;
-      }
-
-      .page {
-        max-width: none;
-        padding: 0;
-      }
-
-      .sheet {
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-      }
-
-      .jumpbar,
-      .card-mini .zoom {
-        display: none;
-      }
-
-      section,
-      .references {
-        break-inside: avoid;
-      }
-
-      .references {
-        display: block;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="cheatsheet-unifier.css">
+  <title>Eldlich Horus Cheatsheet</title>
+  <link rel="stylesheet" href="cheatsheet.css">
 </head>
 <body>
-  <main class="page">
-    <article class="sheet">
-      <header class="header" id="top">
-        <div>
-          <p class="eyebrow"><span class="badge gold">i</span> Eldlich Horus control map</p>
-          <h1>Eldlich Horus Mind Map</h1>
-          <p class="lead">A top-to-bottom cheatsheet for piloting the trap grind engine, Horus Level 8 package, and the modern Golden Land support seen in recent tournament and rogue variants.</p>
-          <div class="pill-row">
-            <span class="pill gold">Plan: trap attrition</span>
-            <span class="pill blue">Pressure: recursive Level 8/10 bodies</span>
-            <span class="pill green">Finish: Rank 8/10, Super Poly, Eldlich swings</span>
-          </div>
-        </div>
-        <aside class="header-aside" aria-label="Deck summary">
-          <div class="summary-box">
-            <strong>Current status</strong>
-            <p>Rogue TCG control shell. Latest directly relevant tournament top found: Guayaquil WCQ Regional Top 4 on October 25, 2025.</p>
-          </div>
-          <div class="summary-box">
-            <strong>Meta pressure</strong>
-            <p>June 2026 field is shaped by Kewl Tune, Branded, DoomZ, Dracotail, Elfnote, Mitsurugi, Sky Striker, Maliss, Yummy, and Vanquish Soul K9.</p>
-          </div>
-          <div class="summary-box">
-            <strong>Spreadsheet status</strong>
-            <p>No dedicated Eldlich Horus combo spreadsheet surfaced in indexed results; Master Duel Meta's Combos &amp; Counters spreadsheet tab was checked.</p>
-          </div>
-        </aside>
-      </header>
+  <main class="shell">
 
-      <nav class="jumpbar" aria-label="Cheatsheet navigation">
-        <a href="#map">Map</a>
-        <a href="#combo-graph">Combos</a>
-        <a href="#triggers">Triggers</a>
-        <a href="#boards">End Boards</a>
-        <a href="#variants">Variants</a>
-        <a href="#tips">Tips</a>
-        <a href="#recovery">Recovery</a>
-        <a href="#side">Side/Counters</a>
-        <button id="refsToggle" type="button" aria-expanded="false" aria-controls="references">References</button>
-      </nav>
-
-      <div class="references" id="references" aria-hidden="true">
-        <h2>References Used</h2>
-        <div class="references-grid">
-          <div class="panel">
-            <h3>Deck and tournament evidence</h3>
-            <ul class="ref-list">
-              <li><a href="https://ygoprodeck.com/deck/horus-eldlich-660054">Horus Eldlich</a>, Albert Ordenana, Guayaquil WCQ Regional Top 4, October 25, 2025.</li>
-              <li><a href="https://ygoprodeck.com/deck/horus-odion-eldlich-629036">Horus Odion Eldlich</a>, Griffin Kitterman, Boise WCQ Regional Top 4, August 9, 2025.</li>
-              <li><a href="https://ygoprodeck.com/deck/dogmatika-horus-eldlich-390131">Dogmatika Horus Eldlich</a>, Trenton Gross, Remote WCQ Regional Runner-Up, November 11, 2023.</li>
-              <li><a href="https://ygoprodeck.com/deck/eldlich-adventure-horus-448876">Eldlich Adventure Horus</a>, Hafid Ramirez, OTS Championship 2nd Place, March 3, 2024.</li>
-              <li><a href="https://ygoprodeck.com/deck/eldlich-horus-control-561618">Eldlich Horus Control</a>, local-winning control primer with sequencing notes.</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Meta and card data</h3>
-            <ul class="ref-list">
-              <li><a href="https://www.yugiohmeta.com/tier-list">Yu-Gi-Oh! Meta TCG tier list</a>, last-month tournament-top view pulled June 8, 2026.</li>
-              <li><a href="https://ygoprodeck.com/article/dood-format-final-tally-september-2025-to-january-2026-302797">YGOPRODeck DOOD format final tally</a>, September 15, 2025 to January 11, 2026.</li>
-              <li><a href="https://ygoprodeck.com/">YGOPRODeck home tournament feed</a>, latest tournament context on June 8, 2026.</li>
-              <li><a href="https://www.masterduelmeta.com/combos-and-counters">Master Duel Meta Combos &amp; Counters</a>, checked for combo and spreadsheet submissions.</li>
-              <li><a href="https://db.ygoprodeck.com/api-guide/">YGOPRODeck card API</a>, used to verify card IDs and effect text summaries.</li>
-            </ul>
-          </div>
+    <header class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">Trap-control grind — checked June 8, 2026</div>
+        <h1>Eldlich Horus</h1>
+        <p class="subtitle">A top-to-bottom cheatsheet for piloting the trap grind engine, the Horus Level 8 package, and the modern Golden Land support seen in recent tournament and rogue variants. Control first, pressure second: every removal trade should feed another set trap, body, or Rank 8 threat.</p>
+        <div class="pill-row">
+          <span class="pill green">Checked June 8, 2026</span>
+          <span class="pill blue">Role: trap attrition control</span>
+          <span class="pill gold">Win: Rank 8/10 + protected Eldlich swings</span>
+          <span class="pill red">Rogue TCG shell — latest top Oct 25, 2025</span>
         </div>
-        <p class="note">Knowledge note: the lines below are built from public deck lists, primers, current meta pages, and API card text. Where no spreadsheet exists, the graph uses confirmed card interactions rather than inventing a source.</p>
       </div>
+      <aside class="hero-cloud" aria-label="Core cards">
+        <div class="card-cloud">
+          <span class="cloud-card" data-card="eldlich"></span>
+          <span class="cloud-card" data-card="imsety"></span>
+          <span class="cloud-card" data-card="sarc"></span>
+          <span class="cloud-card" data-card="hapi"></span>
+          <span class="cloud-card" data-card="scarlet"></span>
+          <span class="cloud-card" data-card="conq"></span>
+          <span class="cloud-card" data-card="huaq"></span>
+          <span class="cloud-card" data-card="dragonMind"></span>
+          <span class="cloud-card" data-card="superPoly"></span>
+          <span class="cloud-card" data-card="number90"></span>
+        </div>
+      </aside>
+    </header>
 
-      <section id="map">
-        <div class="section-head">
-          <div>
-            <h2>Playstyle and Win Condition</h2>
-            <p>Control first, pressure second. The deck wins by making every removal trade feed another set trap, body, or Rank 8 threat.</p>
-          </div>
-        </div>
-        <div class="mind-grid">
-          <div class="center-node">
-            <h2>Eldlich Horus</h2>
-            <p>Keep the opponent inside narrow lanes with traps, then turn recurring Zombies and Horus monsters into Rank 8/10 pressure or protected damage.</p>
-            <div class="pill-row">
-              <span class="pill gold">Backrow loop</span>
-              <span class="pill blue">GY bodies</span>
-              <span class="pill green">Rank toolbox</span>
-              <span class="pill">Super Poly pivots</span>
-            </div>
-          </div>
-          <div class="map-lanes">
-            <div class="lane">
-              <h3><span class="badge gold">1</span> Eldlich axis</h3>
-              <p>Scarlet Sanguine summons Golden Lord, Golden Land traps become Zombies, then Conquistador, Huaquero, and Glorious Golden Land trade while replacing themselves in the End Phase.</p>
-            </div>
-            <div class="lane">
-              <h3><span class="badge blue">2</span> Horus axis</h3>
-              <p>Imsety finds King's Sarcophagus, Sarcophagus loads Horus names, and each name revives itself from the GY while Sarcophagus is controlled.</p>
-            </div>
-            <div class="lane">
-              <h3><span class="badge green">3</span> Lock axis</h3>
-              <p>Skill Drain, There Can Be Only One, Dragon's Mind, Golden Land Forever, and floodgate side cards trade well because your engines work from hand, GY, or trap bodies.</p>
-            </div>
-            <div class="lane">
-              <h3><span class="badge red">4</span> Close axis</h3>
-              <p>Rank 8 negates, 3500 protected Eldlich, Super Polymerization, Gustav Max burn, and Varudras convert a simplified game into lethal pressure.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section class="section" id="playstyle">
+      <h2><span class="icon">+</span> Playstyle And Win Condition</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Game Plan</h3>
+          <p>Keep the opponent inside narrow lanes with traps, then turn recurring Zombies and Horus monsters into Rank 8/10 pressure or protected damage. The deck runs on four axes:</p>
+          <ul class="list">
+            <li><span class="num">1</span><span><b>Eldlich axis:</b> <span class="card-mention" data-card="scarlet">Eldlixir of Scarlet Sanguine</span> summons the Golden Lord, Golden Land traps become Zombies, then <span class="card-mention" data-card="conq">Conquistador of the Golden Land</span>, <span class="card-mention" data-card="huaq">Huaquero of the Golden Land</span>, and <span class="card-mention" data-card="glorious">Eldlixir of the Glorious Golden Land</span> trade while replacing themselves in the End Phase.</span></li>
+            <li><span class="num">2</span><span><b>Horus axis:</b> <span class="card-mention" data-card="imsety">Imsety, Glory of Horus</span> finds <span class="card-mention" data-card="sarc">King's Sarcophagus</span>, Sarcophagus loads Horus names, and each name revives itself from the GY while Sarcophagus is controlled.</span></li>
+            <li><span class="num">3</span><span><b>Lock axis:</b> <span class="card-mention" data-card="skill">Skill Drain</span>, <span class="card-mention" data-card="tcboo">There Can Be Only One</span>, <span class="card-mention" data-card="dragonMind">Dragon's Mind</span>, and <span class="card-mention" data-card="forever">Golden Land Forever!</span> trade well because your engines work from hand, GY, or trap bodies.</span></li>
+            <li><span class="num">4</span><span><b>Close axis:</b> Rank 8 negates, a 3500 protected <span class="card-mention" data-card="eldlich">Eldlich the Golden Lord</span>, <span class="card-mention" data-card="superPoly">Super Polymerization</span>, <span class="card-mention" data-card="gustav">Superdreadnought Rail Cannon Gustav Max</span> burn, and <span class="card-mention" data-card="varudras">Varudras, the Final Bringer of the End Times</span> convert a simplified game into lethal pressure.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Win Condition And Format Notes</h3>
+          <p><b>Status:</b> rogue TCG control shell. Latest directly relevant tournament top found: Guayaquil WCQ Regional Top 4 on October 25, 2025 (43-card Horus Eldlich).</p>
+          <p><b>Meta pressure:</b> the June 2026 field is shaped by Kewl Tune (27.44% of last-month TCG tops), Branded (16.64%), DoomZ (10.12%), Dracotail (5.83%), plus Elfnote, Mitsurugi, Sky Striker, Maliss, Yummy, and Vanquish Soul K9.</p>
+          <ul class="list">
+            <li><span class="num">1</span><span>Win by attrition: every set trap, <span class="card-mention" data-card="eldlich">Eldlich</span> revival, and Horus self-summon must trade up or replace itself.</span></li>
+            <li><span class="num">2</span><span>Close with Rank 8 negates (<span class="card-mention" data-card="number90">Number 90: Galaxy-Eyes Photon Lord</span>, <span class="card-mention" data-card="number38">Number 38: Hope Harbinger Dragon Titanic Galaxy</span>), Rank 10 burn, <span class="card-mention" data-card="superPoly">Super Polymerization</span> pivots, and protected Eldlich swings.</span></li>
+            <li><span class="num">3</span><span>Floodgates are real win conditions here: your engines keep working under <span class="card-mention" data-card="skill">Skill Drain</span> and <span class="card-mention" data-card="tcboo">There Can Be Only One</span> while most opponents do not.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-      <section id="combo-graph">
-        <div class="section-head">
-          <div>
-            <h2>Core Combo Graph</h2>
-            <p>Select a route to explore the branches. Each node shows the cards that move together.</p>
-          </div>
-        </div>
-        <div class="graph-shell">
-          <div class="route-list" id="routeList" aria-label="Combo routes"></div>
-          <div class="graph-panel">
-            <div class="graph-title">
-              <div>
-                <h3 id="routeTitle">Loading</h3>
-                <p id="routeSummary"></p>
+    <section class="section" id="combos">
+      <h2><span class="icon">+</span> Core Combos And Interactions</h2>
+      <div class="source-note">No dedicated Eldlich Horus combo spreadsheet surfaced in indexed results; Master Duel Meta's Combos &amp; Counters spreadsheet tab was checked. The lines below are built from public deck lists, primers, and API card text — confirmed card interactions rather than an invented source.</div>
+      <div class="table-wrap">
+        <table class="combo-table">
+          <thead>
+            <tr><th>Step</th><th>Route</th><th>Key cards</th><th>Detailed description</th></tr>
+          </thead>
+          <tbody>
+            <tr class="route-head"><td colspan="4">Imsety starter — 1.5-card starter: Imsety + any discard</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Discard for search</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="imsety"></span></div></td>
+              <td>Send <span class="card-mention" data-card="imsety">Imsety, Glory of Horus</span> plus any other card from hand to the GY: add <span class="card-mention" data-card="sarc">King's Sarcophagus</span>, then draw 1. The discard is fuel, not cost — Eldlixir and Golden Land cards want to be in the GY.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Load Horus names</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="sarc"></span></div></td>
+              <td>Activate <span class="card-mention" data-card="sarc">King's Sarcophagus</span> and send the Horus name your hand needs most from Deck to GY — up to four times in a turn for different names if the hand can afford the discards.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Revive bodies</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="imsety"></span><span class="plus-sign">+</span><span class="card-chip" data-card="hapi"></span><span class="plus-sign">+</span><span class="card-chip" data-card="qebe"></span></div></td>
+              <td>Special Summon each available Horus name once from the GY while Sarcophagus is face-up. Every opponent removal of your cards now risks trigger value: <span class="card-mention" data-card="hapi">Hapi, Guidance of Horus</span> can pull two cards back from GY or banishment when the opponent removes your card.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Pick the output</span><span class="route-meta">Choice</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="number90"></span><span class="plus-sign">+</span><span class="card-chip" data-card="number38"></span><span class="plus-sign">+</span><span class="card-chip" data-card="rabbit"></span></div></td>
+              <td>Two Level 8s make <span class="card-mention" data-card="number90">Number 90: Galaxy-Eyes Photon Lord</span> (monster negate) into monster-effect decks or <span class="card-mention" data-card="number38">Number 38: Hope Harbinger Dragon Titanic Galaxy</span> (Spell negate that absorbs the card) into spell-centered decks. Two effect monsters instead make <span class="card-mention" data-card="rabbit">Silhouhatte Rabbit</span>, which sets a Continuous Trap that summons itself — when that trap moves to the Monster Zone, Rabbit can destroy an opposing Spell/Trap.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">5</span></td>
+              <td><span class="route-title">Four Horus ceiling</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="coach"></span><span class="plus-sign">+</span><span class="card-chip" data-card="sp"></span></div></td>
+              <td>With four names loaded, overlay three Level 8s into <span class="card-mention" data-card="coach">Coach King Giantrainer</span> for up to three draws (you lose the Battle Phase), then link Coach plus the remaining Horus into <span class="card-mention" data-card="rabbit">Silhouhatte Rabbit</span> — or split bodies into Rank 8 plus <span class="card-mention" data-card="sp">S:P Little Knight</span> pressure, or two Rank 8s if the hand needs negates.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Cursed Eldland bait — sequencing line: lead Eldland before Imsety</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Lead with Eldland</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="cursed"></span></div></td>
+              <td>Pay 800 LP with <span class="card-mention" data-card="cursed">Cursed Eldland</span> to search an Eldlich monster or Golden Land Spell/Trap. This baits interruption: if it eats <span class="card-mention" data-card="ash">Ash Blossom &amp; Joyous Spring</span>, <span class="card-mention" data-card="imsety">Imsety</span> is still live and usually more important than the search.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Convert the search</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="imsety"></span></div></td>
+              <td>If it resolves, the added card becomes <span class="card-mention" data-card="imsety">Imsety</span> discard fuel when the hand needs Horus access more than the card itself. Add <span class="card-mention" data-card="eldlich">Eldlich the Golden Lord</span> when <span class="card-mention" data-card="delta">Delta of Invitation</span> or traps are already available; add Golden Land when you need End Phase loop access.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Load the follow-up</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="sarc"></span><span class="plus-sign">+</span><span class="card-chip" data-card="eldlich"></span></div></td>
+              <td><span class="card-mention" data-card="sarc">King's Sarcophagus</span> loads Horus names while <span class="card-mention" data-card="eldlich">Eldlich</span> or the discarded trap sits in the GY as follow-up.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Replacement value</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="scarlet"></span><span class="plus-sign">+</span><span class="card-chip" data-card="conq"></span><span class="plus-sign">+</span><span class="card-chip" data-card="huaq"></span></div></td>
+              <td>If <span class="card-mention" data-card="cursed">Cursed Eldland</span> later leaves the Spell/Trap Zone, it sends an Eldlich or Golden Land card from Deck to GY: <span class="card-mention" data-card="scarlet">Scarlet Sanguine</span> for future set access, <span class="card-mention" data-card="conq">Conquistador</span> for an Eldlixir set, or <span class="card-mention" data-card="eldlich">Eldlich</span> if you need the Golden Lord in GY.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Delta into protected Eldlich — 1 card plus a Spell/Trap you control</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Activate Delta</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="delta"></span></div></td>
+              <td>On activation, <span class="card-mention" data-card="delta">Delta of Invitation</span> sends a Level 5 or higher Zombie from Deck to GY — usually <span class="card-mention" data-card="eldlich">Eldlich the Golden Lord</span>.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Revive the Golden Lord</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="eldlich"></span><span class="plus-sign">+</span><span class="card-chip" data-card="delta"></span></div></td>
+              <td>Use <span class="card-mention" data-card="eldlich">Eldlich</span> in GY: send the <span class="card-mention" data-card="delta">Delta</span> you control to the GY, add Eldlich to hand, then Special Summon it. Revived this way it becomes 3500/3800 and cannot be destroyed by card effects until the end of the opponent's turn.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Delta refunds itself</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="delta"></span></div></td>
+              <td>Because a monster was added from GY to hand while <span class="card-mention" data-card="delta">Delta</span> is in the GY, Delta adds itself back to hand. The next Delta can summon a Level 5 Zombie token if a Zombie is on field — tribute, Link, or Fusion material.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Protected pressure</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="eldlich"></span><span class="plus-sign">+</span><span class="card-chip" data-card="dragonMind"></span><span class="plus-sign">+</span><span class="card-chip" data-card="forever"></span></div></td>
+              <td><span class="card-mention" data-card="eldlich">Eldlich</span> is a 2500 original ATK/DEF body that turns <span class="card-mention" data-card="dragonMind">Dragon's Mind</span> into an omni-negate, and a Zombie body for <span class="card-mention" data-card="forever">Golden Land Forever!</span>. A protected Eldlich turns <span class="card-mention" data-card="conq">Conquistador</span>, <span class="card-mention" data-card="huaq">Huaquero</span>, and <span class="card-mention" data-card="glorious">Glorious Golden Land</span> fully online.</td>
+            </tr>
+
+            <tr class="route-head"><td colspan="4">Eldlixir and Golden Land loop — the grind core: each half sets the other</td></tr>
+            <tr>
+              <td><span class="step-badge">1</span></td>
+              <td><span class="route-title">Summon</span><span class="route-meta">Starter</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="scarlet"></span><span class="plus-sign">+</span><span class="card-chip" data-card="eldlich"></span></div></td>
+              <td><span class="card-mention" data-card="scarlet">Eldlixir of Scarlet Sanguine</span> summons <span class="card-mention" data-card="eldlich">Eldlich</span> from Deck or GY, then applies a Zombie-only Special Summon lock for the rest of that turn — so resolve Rank/Link plans first.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">2</span></td>
+              <td><span class="route-title">Interrupt</span><span class="route-meta">Extender</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="conq"></span><span class="plus-sign">+</span><span class="card-chip" data-card="huaq"></span><span class="plus-sign">+</span><span class="card-chip" data-card="glorious"></span></div></td>
+              <td>Golden Land traps become Zombie monsters. With <span class="card-mention" data-card="eldlich">Eldlich</span> up: <span class="card-mention" data-card="conq">Conquistador</span> pops a face-up card, <span class="card-mention" data-card="huaq">Huaquero</span> banishes from either GY, <span class="card-mention" data-card="glorious">Glorious Golden Land</span> bounces a monster or resets a banished Golden Land/Eldlixir card.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">3</span></td>
+              <td><span class="route-title">Set back</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="scarlet"></span><span class="plus-sign">+</span><span class="card-chip" data-card="conq"></span></div></td>
+              <td>In the End Phase a used Eldlixir banishes itself from the GY to set a Golden Land trap, and a used Golden Land banishes itself to set an Eldlixir. Discarding these cards to <span class="card-mention" data-card="imsety">Imsety</span> or <span class="card-mention" data-card="superPoly">Super Polymerization</span> is therefore not pure cost.</td>
+            </tr>
+            <tr>
+              <td><span class="step-badge">4</span></td>
+              <td><span class="route-title">Negate</span><span class="route-meta">Payoff</span></td>
+              <td><div class="card-row"><span class="card-chip" data-card="forever"></span></div></td>
+              <td><span class="card-mention" data-card="forever">Golden Land Forever!</span> tributes any Zombie you control — including trap bodies — while you control <span class="card-mention" data-card="eldlich">Eldlich</span> to negate and destroy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="combo-graph">
+      <h2><span class="icon">+</span> Combo Graph</h2>
+      <div class="graph-canvas">
+        <div class="flow">
+          <div class="flow-step starter">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag blue">Starter</span> Imsety discard</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="imsety"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="cursed"></span>
               </div>
-              <span class="pill blue" id="routeType"></span>
+              <p class="step-note">Send <span class="card-mention" data-card="imsety">Imsety</span> plus any card to GY: add <span class="card-mention" data-card="sarc">King's Sarcophagus</span>, draw 1. Lead <span class="card-mention" data-card="cursed">Cursed Eldland</span> first when you have both — it baits Ash and its search becomes discard fuel.</p>
             </div>
-            <div class="graph-scroll">
-              <div class="graph-flow" id="graphFlow"></div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Sarcophagus engine</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="sarc"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="sarc">King's Sarcophagus</span> sends the Horus name your hand needs most from Deck to GY — up to four times for different names. Two names usually suffice for a Rank 8; save four-name dumps for high-pressure hands.</p>
             </div>
-            <div class="branch-grid" id="branchGrid"></div>
+          </div>
+          <div class="flow-step extend">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag violet">Extend</span> Horus bodies return</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="hapi"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="qebe"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="duamutef"></span>
+              </div>
+              <p class="step-note">Each name Special Summons itself once from the GY while Sarcophagus is face-up, and revives again every turn — opponent removal risks <span class="card-mention" data-card="hapi">Hapi</span> trigger value.</p>
+            </div>
+          </div>
+          <div class="flow-step choice">
+            <div class="step-index">4</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag gold">Choice</span> Pick the output</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="number90"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="number38"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="rabbit"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="coach"></span>
+              </div>
+              <p class="step-note"><span class="card-mention" data-card="number90">Number 90</span> for monster negate, <span class="card-mention" data-card="number38">Number 38</span> for Spell negate, <span class="card-mention" data-card="rabbit">Silhouhatte Rabbit</span> to set a self-summoning Golden Land trap, or <span class="card-mention" data-card="coach">Coach King Giantrainer</span> for up to three draws (no Battle Phase that turn).</p>
+            </div>
+          </div>
+          <div class="flow-step payoff">
+            <div class="step-index">5</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag green">Payoff</span> Trap loop end board</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="scarlet"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="conq"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="forever"></span>
+              </div>
+              <p class="step-note">Set traps behind the bodies. <span class="card-mention" data-card="scarlet">Scarlet Sanguine</span> revives <span class="card-mention" data-card="eldlich">Eldlich</span> on the opponent's turn, Golden Land traps interrupt, and in the End Phase each used half sets the other for the next turn.</p>
+            </div>
+          </div>
+          <div class="flow-step warn">
+            <div class="step-index">6</div>
+            <div class="step-body">
+              <div class="step-title"><span class="tag red">Warn</span> Protect the engine pieces</div>
+              <div class="card-row">
+                <span class="card-chip" data-card="sarc"></span>
+                <span class="connector">+</span>
+                <span class="card-chip" data-card="scarlet"></span>
+              </div>
+              <p class="step-note">Never let <span class="card-mention" data-card="sarc">King's Sarcophagus</span> get banished for free — without it Horus bodies stop self-summoning. Remember <span class="card-mention" data-card="scarlet">Scarlet Sanguine</span> locks later Special Summons to Zombies, so resolve Rank/Link plans first.</p>
+            </div>
           </div>
         </div>
-      </section>
+        <div class="branch-grid">
+          <div class="branch-card">
+            <h4>Super Poly fusion pivot (going second)</h4>
+            <p>Discard an Eldlixir or Golden Land card that still matters from GY, fuse opponent material into <span class="card-mention" data-card="garura">Garura, Wings of Resonant Life</span> or <span class="card-mention" data-card="mudragon">Mudragon of the Swamp</span>, or your Zombies into <span class="card-mention" data-card="mad">Eldlich the Mad Golden Lord</span>. <span class="card-mention" data-card="fallen">Fallen Angel of the Golden Land</span> floats into an Eldlich monster when sent from field to GY.</p>
+            <div class="card-row"><span class="card-chip" data-card="superPoly"></span><span class="card-chip" data-card="garura"></span><span class="card-chip" data-card="mudragon"></span><span class="card-chip" data-card="fallen"></span><span class="card-chip" data-card="mad"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Delta refund loop</h4>
+            <p><span class="card-mention" data-card="delta">Delta of Invitation</span> sends <span class="card-mention" data-card="eldlich">Eldlich</span>; Eldlich sends Delta to revive itself protected at 3500; Delta then returns to hand because a monster was added from GY to hand. Repeats every turn.</p>
+            <div class="card-row"><span class="card-chip" data-card="delta"></span><span class="card-chip" data-card="eldlich"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Dragon's Mind omni-negate</h4>
+            <p>Live whenever you control a monster with 2500 original ATK or DEF: <span class="card-mention" data-card="eldlich">Eldlich</span>, <span class="card-mention" data-card="imsety">Imsety</span>, <span class="card-mention" data-card="number38">Number 38</span>, <span class="card-mention" data-card="number90">Number 90</span>, and <span class="card-mention" data-card="varudras">Varudras</span> all qualify. It sets itself back with restrictions after use.</p>
+            <div class="card-row"><span class="card-chip" data-card="dragonMind"></span><span class="card-chip" data-card="imsety"></span></div>
+          </div>
+          <div class="branch-card">
+            <h4>Burn close</h4>
+            <p>In simplified games, two Level 10s (or <span class="card-mention" data-card="glorious">Glorious Golden Land</span> as a Level 10 body) make <span class="card-mention" data-card="gustav">Gustav Max</span> for 2000 burn. In a going-second Xyz line, <span class="card-mention" data-card="zeus">Divine Arsenal AA-ZEUS - Sky Thunder</span> resets the board if battle occurred.</p>
+            <div class="card-row"><span class="card-chip" data-card="gustav"></span><span class="card-chip" data-card="zeus"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section id="triggers">
-        <div class="section-head">
-          <div>
-            <h2>Cards That Trigger Together</h2>
-            <p>These are the interactions to see before committing cards. The plus icon marks real paired pressure.</p>
-          </div>
-        </div>
-        <div class="cluster-grid" id="triggerGrid"></div>
-      </section>
+    <section class="section" id="boards">
+      <h2><span class="icon">i</span> End Board Examples</h2>
+      <div class="grid three">
+        <article class="board-card">
+          <span class="tag blue">Going first</span>
+          <h3>Imsety control board</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="number90"></span><span class="card-chip" data-card="sarc"></span><span class="card-chip" data-card="dragonMind"></span></div></div>
+          <div class="field-line"><b>GY / hand</b><div class="card-row"><span class="card-chip" data-card="imsety"></span><span class="card-chip" data-card="scarlet"></span></div></div>
+          <p><span class="card-mention" data-card="number90">Number 90</span> or <span class="card-mention" data-card="number38">Number 38</span> plus a Horus body, Sarcophagus, and one to three set traps. Best when Imsety resolves and your hand already has one live trap or discard. GY holds Imsety and an Eldlixir or Golden Land trap ready to replace itself.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag green">Grind default</span>
+          <h3>Golden Land loop</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="eldlich"></span><span class="card-chip" data-card="forever"></span></div></div>
+          <div class="field-line"><b>Set / GY</b><div class="card-row"><span class="card-chip" data-card="scarlet"></span><span class="card-chip" data-card="conq"></span><span class="card-chip" data-card="huaq"></span></div></div>
+          <p>The safest default with a trap-heavy hand: <span class="card-mention" data-card="eldlich">Eldlich</span> at 3500 and protected if self-revived, Scarlet set plus Golden Land traps. In the End Phase, banish used Eldlixir to set Golden Land and vice versa.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag gold">Fork</span>
+          <h3>Rabbit fork</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="rabbit"></span><span class="card-chip" data-card="sarc"></span></div></div>
+          <div class="field-line"><b>Set</b><div class="card-row"><span class="card-chip" data-card="glorious"></span><span class="card-chip" data-card="conq"></span></div></div>
+          <p>Strong when you can spare two effect monsters after establishing the engine. <span class="card-mention" data-card="rabbit">Silhouhatte Rabbit</span> sets a self-summoning Continuous Trap; when it enters the Monster Zone, Rabbit can destroy an opposing Spell/Trap.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag blue">Resource</span>
+          <h3>Giantrainer reload</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="coach"></span></div></div>
+          <div class="field-line"><b>Material</b><div class="card-row"><span class="card-chip" data-card="imsety"></span><span class="card-chip" data-card="hapi"></span><span class="card-chip" data-card="qebe"></span><span class="card-chip" data-card="duamutef"></span></div></div>
+          <p><span class="card-mention" data-card="coach">Coach King Giantrainer</span> turns three Level 8s into up to three draws — a first-turn resource line, not a kill line (no Battle Phase). Afterwards, link Coach plus a remaining Horus into <span class="card-mention" data-card="rabbit">Rabbit</span> or keep Rank 8 pressure.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag red">Going second</span>
+          <h3>Going second clear</h3>
+          <div class="field-line"><b>Breaker</b><div class="card-row"><span class="card-chip" data-card="superPoly"></span><span class="card-chip" data-card="garura"></span><span class="card-chip" data-card="mudragon"></span></div></div>
+          <div class="field-line"><b>Follow-up</b><div class="card-row"><span class="card-chip" data-card="fallen"></span><span class="card-chip" data-card="mad"></span></div></div>
+          <p>Use when the board is larger than your trap hand can answer cleanly. <span class="card-mention" data-card="superPoly">Super Polymerization</span> converts opponent material while discarding a card you want in GY; Horus bodies and <span class="card-mention" data-card="eldlich">Eldlich</span> revive after the clear, then the End Phase loop sets up next turn.</p>
+        </article>
+        <article class="board-card">
+          <span class="tag gold">Close</span>
+          <h3>Burn close</h3>
+          <div class="field-line"><b>Field</b><div class="card-row"><span class="card-chip" data-card="gustav"></span><span class="card-chip" data-card="eldlich"></span></div></div>
+          <div class="field-line"><b>Material</b><div class="card-row"><span class="card-chip" data-card="glorious"></span><span class="card-chip" data-card="mad"></span><span class="card-chip" data-card="zeus"></span></div></div>
+          <p>For simplified games where two Level 10s survive or <span class="card-mention" data-card="glorious">Glorious Golden Land</span> becomes a Level 10 body: <span class="card-mention" data-card="gustav">Gustav Max</span> burns 2000, Eldlich and Horus swings close, and <span class="card-mention" data-card="zeus">Zeus</span> resets going second if battle occurred.</p>
+        </article>
+      </div>
+    </section>
 
-      <section id="boards">
-        <div class="section-head">
-          <div>
-            <h2>End Board Examples</h2>
-            <p>Field by End Phase. Do not chase all of these at once; pick the line that beats the matchup and your hand texture.</p>
-          </div>
-        </div>
-        <div class="board-grid">
-          <div class="panel">
-            <h3>Imsety control board <span class="info" tabindex="0" data-tip="Best when Imsety resolves and your hand already has one live trap or discard.">i</span></h3>
-            <div class="card-row" data-cards="sarc,number90,scarlet,dragonMind"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Monster</strong><span>Number 90 or Number 38 plus one Horus body if resources allow.</span></div>
-              <div class="field-item"><strong>Spell/Trap</strong><span>King's Sarcophagus and one to three set traps.</span></div>
-              <div class="field-item"><strong>GY</strong><span>At least Imsety, often one Eldlixir or Golden Land trap ready to replace itself later.</span></div>
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Golden Land loop <span class="info" tabindex="0" data-tip="The safest default when the hand is trap heavy and you expect a grind game.">i</span></h3>
-            <div class="card-row" data-cards="eldlich,scarlet,conq,huaq,forever"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Monster</strong><span>Eldlich, often 3500 ATK and protected if revived by its own GY effect.</span></div>
-              <div class="field-item"><strong>Spell/Trap</strong><span>Scarlet set plus Conquistador/Huaquero/Golden Land Forever depending on access.</span></div>
-              <div class="field-item"><strong>End Phase</strong><span>Banish used Eldlixir to set Golden Land, then used Golden Land to set Eldlixir.</span></div>
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Rabbit fork <span class="info" tabindex="0" data-tip="Strong when you can spare two effect monsters after establishing the engine.">i</span></h3>
-            <div class="card-row" data-cards="rabbit,glorious,conq,sarc"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Monster</strong><span>Silhouhatte Rabbit, sometimes with a Horus body or Eldlich beside it.</span></div>
-              <div class="field-item"><strong>Set</strong><span>A Continuous Trap that summons itself, usually Glorious Golden Land, Conquistador, or Huaquero.</span></div>
-              <div class="field-item"><strong>Threat</strong><span>When the trap enters the Monster Zone, Rabbit can destroy an opposing Spell/Trap.</span></div>
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Giantrainer reload <span class="info" tabindex="0" data-tip="No Battle Phase after using Giantrainer, so this is a first-turn resource line, not a kill line.">i</span></h3>
-            <div class="card-row" data-cards="coach,imsety,hapi,qebe,duamutef"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Monster</strong><span>Coach King Giantrainer turns three Level 8s into up to three draws.</span></div>
-              <div class="field-item"><strong>After draw</strong><span>Link Coach plus remaining Horus into Rabbit, or keep Rank 8 pressure if traps are enough.</span></div>
-              <div class="field-item"><strong>Payoff</strong><span>More hand traps, board breakers, or Eldlich traps found without using the Battle Phase.</span></div>
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Going second clear <span class="info" tabindex="0" data-tip="Use this when the opponent's board is larger than your trap hand can answer cleanly.">i</span></h3>
-            <div class="card-row" data-cards="superPoly,garura,mudragon,fallen,mad"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Breaker</strong><span>Super Polymerization converts opponent material while discarding a card you may want in GY.</span></div>
-              <div class="field-item"><strong>Follow-up</strong><span>Horus bodies or Eldlich revive after the board is simplified.</span></div>
-              <div class="field-item"><strong>End Phase</strong><span>Used Eldlixir and Golden Land cards begin setting each other for the next turn.</span></div>
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Burn close <span class="info" tabindex="0" data-tip="This is for simplified games where two Level 10s survive or Glorious Golden Land becomes Level 10.">i</span></h3>
-            <div class="card-row" data-cards="gustav,eldlich,glorious,mad,zeus"></div>
-            <div class="field-list">
-              <div class="field-item"><strong>Monster</strong><span>Two Level 10 monsters make Gustav Max for 2000 burn.</span></div>
-              <div class="field-item"><strong>Damage</strong><span>Burn plus Eldlich/Horus bodies closes games after traps have drained interaction.</span></div>
-              <div class="field-item"><strong>Fallback</strong><span>In a going-second Xyz line, Zeus can reset if battle occurred.</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section class="section" id="tips">
+      <h2><span class="icon">i</span> Tips And Recovery</h2>
+      <div class="grid two">
+        <article class="note-card">
+          <h3>Sequencing Tips</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>With <span class="card-mention" data-card="cursed">Cursed Eldland</span> and <span class="card-mention" data-card="imsety">Imsety</span>, lead Cursed Eldland. If it eats <span class="card-mention" data-card="ash">Ash Blossom</span>, Imsety is still live; if it resolves, the searched card becomes Imsety discard fuel.</span></li>
+            <li><span class="num">2</span><span>Resolve Rank/Link plans before <span class="card-mention" data-card="scarlet">Scarlet Sanguine</span> if it will resolve this turn — Scarlet locks later Special Summons to Zombies.</span></li>
+            <li><span class="num">3</span><span>Do not dump all four Horus names by default. Two names usually make a Rank 8; four are for the <span class="card-mention" data-card="coach">Giantrainer</span> reload or very high-pressure hands.</span></li>
+            <li><span class="num">4</span><span>Flip <span class="card-mention" data-card="skill">Skill Drain</span> after resolving effects that must matter on field. GY and hand effects keep the deck functional, but Horus trigger effects on field go blank.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="sarc">King's Sarcophagus</span> battle send is non-destruction removal during the Damage Step — it forces awkward combat math even through established boards.</span></li>
+            <li><span class="num">6</span><span>Use <span class="card-mention" data-card="huaq">Huaquero</span> proactively on cards that would otherwise be revived, fused, banished for cost, or shuffled back for follow-up.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Common Misplays</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Sending your only live set trap for <span class="card-mention" data-card="eldlich">Eldlich</span>'s GY effect without checking whether the End Phase replacement chain will still exist.</span></li>
+            <li><span class="num">2</span><span>Making <span class="card-mention" data-card="coach">Coach King Giantrainer</span> when you need Battle Phase damage that same turn.</span></li>
+            <li><span class="num">3</span><span>Letting <span class="card-mention" data-card="sarc">King's Sarcophagus</span> get banished for free — without it, Horus bodies stop self-summoning.</span></li>
+            <li><span class="num">4</span><span>Activating <span class="card-mention" data-card="dominus">Dominus Purge</span> from hand without accepting the rest-of-duel DARK, WATER, and FIRE monster-effect lock.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Meta Calls (June 2026)</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Current TCG tops reward cards that compress interaction: <span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span>, <span class="card-mention" data-card="dbarrier">Dimensional Barrier</span>, <span class="card-mention" data-card="antiSpell">Anti-Spell Fragrance</span>, <span class="card-mention" data-card="superPoly">Super Polymerization</span>, <span class="card-mention" data-card="evenly">Evenly Matched</span>, and <span class="card-mention" data-card="lightning">Lightning Storm</span> all have clear jobs.</span></li>
+            <li><span class="num">2</span><span>Against Kewl Tune, Branded, Dracotail, and other engine-heavy decks, commit one high-impact stop instead of trading three small traps into an established chain.</span></li>
+            <li><span class="num">3</span><span>Against Sky Striker and control mirrors, hold <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> or <span class="card-mention" data-card="huaq">Huaquero</span> for recursion points instead of firing them into replaceable cards.</span></li>
+            <li><span class="num">4</span><span>Against Maliss and other banish decks, <span class="card-mention" data-card="lancea">Artifact Lancea</span> is a cleaner turn-skip than trying to win a long value exchange.</span></li>
+          </ul>
+        </article>
+        <article class="note-card">
+          <h3>Recovery Options</h3>
+          <div class="card-row"><span class="card-chip" data-card="eldlich"></span><span class="card-chip" data-card="sarc"></span><span class="card-chip" data-card="hapi"></span><span class="card-chip" data-card="delta"></span><span class="card-chip" data-card="glorious"></span><span class="card-chip" data-card="canopic"></span></div>
+          <ul class="list" style="margin-top:10px">
+            <li><span class="num">1</span><span><b>GY recovery:</b> <span class="card-mention" data-card="eldlich">Eldlich</span> returns by sending a Spell/Trap you control; <span class="card-mention" data-card="scarlet">Scarlet</span> and Golden Land traps banish themselves in the End Phase to set the opposite half; <span class="card-mention" data-card="hapi">Hapi</span> pulls two cards from GY or banishment when the opponent removes your card.</span></li>
+            <li><span class="num">2</span><span><b>Sarcophagus recovery:</b> if <span class="card-mention" data-card="sarc">King's Sarcophagus</span> survives, every Horus name in GY threatens to become material again next turn — discard costs and board wipes hurt less.</span></li>
+            <li><span class="num">3</span><span><b>Spell/Trap recovery:</b> <span class="card-mention" data-card="delta">Delta of Invitation</span> returns to hand when a monster is added from GY to hand; <span class="card-mention" data-card="glorious">Glorious Golden Land</span> resets banished Golden Land or Eldlixir cards; <span class="card-mention" data-card="canopic">Canopic Protector</span> and <span class="card-mention" data-card="dragonMind">Dragon's Mind</span> set themselves back with restrictions; <span class="card-mention" data-card="lordPrison">Lord of the Heavenly Prison</span> shields the backrow.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-      <section id="variants">
-        <div class="section-head">
-          <div>
-            <h2>Tournament Variants</h2>
-            <p>The latest directly relevant tournament top is the 43-card Guayaquil build. Older tops explain why Dogmatika, Adventure, Branded, Odion, and trap-monster packages appear.</p>
-          </div>
-        </div>
-        <div class="variant-grid">
-          <div class="panel variant">
-            <span class="date">October 25, 2025 - Guayaquil WCQ Regional Top 4</span>
-            <h3>Horus Eldlich, 43 cards</h3>
-            <div class="card-row" data-cards="eldlich,imsety,hapi,qebe,delta,dragonMind,superPoly,glorious"></div>
-            <p>Modern Golden Land support build with Delta of Invitation, Dragon's Mind, Dominus Purge, Super Polymerization, and Rank 8/10 toolbox. This is the primary list used for the cheatsheet skeleton.</p>
-          </div>
-          <div class="panel variant">
-            <span class="date">August 9, 2025 - Boise WCQ Regional Top 4</span>
-            <h3>Horus Odion Eldlich, 60 cards</h3>
-            <div class="card-row" data-cards="temple,treasures,apophis,lordPrison,grass,sarc,superPoly"></div>
-            <p>Trap-monster and Temple package. It trades raw compactness for more trap bodies, Apophis pressure, Grass upside, and a broader going-second side plan.</p>
-          </div>
-          <div class="panel variant">
-            <span class="date">November 11, 2023 - Remote WCQ Regional Runner-Up</span>
-            <h3>Dogmatika Horus Eldlich</h3>
-            <div class="card-row" data-cards="punishment,ntss,nadir,imsety,sarc,tcboo"></div>
-            <p>Dogmatika Punishment and Nadir Servant add removal while loading Extra Deck send targets. The cost is an Extra Deck lock after Punishment resolves.</p>
-          </div>
-          <div class="panel variant">
-            <span class="date">March 3, 2024 - OTS Championship 2nd Place</span>
-            <h3>Adventure Branded Horus Eldlich</h3>
-            <div class="card-row" data-cards="rite,gryphon,brandedFusion,fenrir,eldlich,imsety"></div>
-            <p>Adventure and Branded raise the ceiling and give extra board-breaking/fusion pressure, but they compete for space with hand traps and pure trap density.</p>
-          </div>
-        </div>
-        <div class="meta-band" aria-label="Current meta snapshot">
-          <div class="meta-stat"><strong>27.44%</strong><span>Kewl Tune tops, last-month TCG view</span></div>
-          <div class="meta-stat"><strong>16.64%</strong><span>Branded tops</span></div>
-          <div class="meta-stat"><strong>10.12%</strong><span>DoomZ tops</span></div>
-          <div class="meta-stat"><strong>5.83%</strong><span>Dracotail tops</span></div>
-        </div>
-      </section>
+    <section class="section" id="variants">
+      <h2><span class="icon">i</span> Latest Tournament Variants</h2>
+      <div class="grid two">
+        <article class="variant-card">
+          <span class="tag green">Oct 25, 2025 — Guayaquil WCQ Regional Top 4</span>
+          <h3>Horus Eldlich, 43 cards (primary list)</h3>
+          <p>Modern Golden Land support build with <span class="card-mention" data-card="delta">Delta of Invitation</span>, <span class="card-mention" data-card="dragonMind">Dragon's Mind</span>, <span class="card-mention" data-card="dominus">Dominus Purge</span>, <span class="card-mention" data-card="superPoly">Super Polymerization</span>, and the Rank 8/10 toolbox. This is the list this cheatsheet's skeleton is built on.</p>
+          <div class="card-row"><span class="card-chip" data-card="eldlich"></span><span class="card-chip" data-card="imsety"></span><span class="card-chip" data-card="delta"></span><span class="card-chip" data-card="dragonMind"></span><span class="card-chip" data-card="dominus"></span><span class="card-chip" data-card="superPoly"></span><span class="card-chip" data-card="glorious"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag blue">Aug 9, 2025 — Boise WCQ Regional Top 4</span>
+          <h3>Horus Odion Eldlich, 60 cards</h3>
+          <p>Trap-monster and <span class="card-mention" data-card="temple">Temple of the Kings</span> package with <span class="card-mention" data-card="treasures">Treasures of the Kings</span>. Trades compactness for more trap bodies, <span class="card-mention" data-card="apophis">Apophis the Swamp Deity</span> pressure, <span class="card-mention" data-card="grass">That Grass Looks Greener</span> upside, and a broader going-second side plan.</p>
+          <div class="card-row"><span class="card-chip" data-card="temple"></span><span class="card-chip" data-card="treasures"></span><span class="card-chip" data-card="apophis"></span><span class="card-chip" data-card="lordPrison"></span><span class="card-chip" data-card="grass"></span><span class="card-chip" data-card="sarc"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag gold">Nov 11, 2023 — Remote WCQ Regional Runner-Up</span>
+          <h3>Dogmatika Horus Eldlich</h3>
+          <p><span class="card-mention" data-card="punishment">Dogmatika Punishment</span> and <span class="card-mention" data-card="nadir">Nadir Servant</span> add removal while loading Extra Deck send targets like <span class="card-mention" data-card="ntss">Elder Entity N'tss</span>. The cost is an Extra Deck lock after Punishment resolves.</p>
+          <div class="card-row"><span class="card-chip" data-card="punishment"></span><span class="card-chip" data-card="ntss"></span><span class="card-chip" data-card="nadir"></span><span class="card-chip" data-card="imsety"></span><span class="card-chip" data-card="tcboo"></span></div>
+        </article>
+        <article class="variant-card">
+          <span class="tag red">Mar 3, 2024 — OTS Championship 2nd Place</span>
+          <h3>Adventure Branded Horus Eldlich</h3>
+          <p><span class="card-mention" data-card="rite">Rite of Aramesir</span> with <span class="card-mention" data-card="gryphon">Wandering Gryphon Rider</span> and <span class="card-mention" data-card="brandedFusion">Branded Fusion</span> raise the ceiling and add board-breaking fusion pressure (plus <span class="card-mention" data-card="fenrir">Kashtira Fenrir</span>), but compete for space with hand traps and pure trap density.</p>
+          <div class="card-row"><span class="card-chip" data-card="rite"></span><span class="card-chip" data-card="gryphon"></span><span class="card-chip" data-card="brandedFusion"></span><span class="card-chip" data-card="fenrir"></span><span class="card-chip" data-card="eldlich"></span></div>
+        </article>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-date">2025-10-25</div><div><b>Guayaquil WCQ Regional:</b> Horus Eldlich (43 cards), Albert Ordenana, Top 4 — latest directly relevant top.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2025-08-09</div><div><b>Boise WCQ Regional:</b> Horus Odion Eldlich (60 cards), Griffin Kitterman, Top 4.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2024-03-03</div><div><b>OTS Championship:</b> Eldlich Adventure Horus, Hafid Ramirez, 2nd Place.</div></div>
+        <div class="timeline-item"><div class="timeline-date">2023-11-11</div><div><b>Remote WCQ Regional:</b> Dogmatika Horus Eldlich, Trenton Gross, Runner-Up.</div></div>
+      </div>
+    </section>
 
-      <section id="tips">
-        <div class="section-head">
-          <div>
-            <h2>Sequencing Tips</h2>
-            <p>High-value details for avoiding self-inflicted locks and wasting recursive cards.</p>
-          </div>
-        </div>
-        <div class="tips-grid">
-          <div class="panel">
-            <h3>Openers</h3>
-            <ul>
-              <li>If you have Cursed Eldland and Imsety, lead Cursed Eldland first. If it eats Ash, Imsety is still live; if it resolves, the card you add becomes Imsety discard fuel.</li>
-              <li>Activate Rank/Link plans before Scarlet Sanguine if Scarlet will resolve this turn, because Scarlet locks later Special Summons to Zombies.</li>
-              <li>Do not dump all four Horus names by default. Two names usually make a Rank 8; four names are for Giantrainer reload or very high-pressure hands.</li>
-              <li>Dragon's Mind needs a monster with 2500 original ATK or DEF. Eldlich, Imsety, Number 38, Number 90, and Varudras qualify.</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Resource Use</h3>
-            <ul>
-              <li>Discard Eldlixir or Golden Land cards to Imsety and Super Polymerization when their delayed GY set effect matters more than keeping them in hand.</li>
-              <li>Flip Skill Drain after resolving effects that need to matter on field. GY and hand effects still keep the deck functional, but Horus trigger effects on field become blank.</li>
-              <li>King's Sarcophagus battle send is non-destruction removal during the Damage Step. It forces awkward combat math even through many established boards.</li>
-              <li>Use Huaquero proactively on cards that would otherwise be revived, fused, banished for cost, or shuffled back for follow-up.</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Meta Calls</h3>
-            <ul>
-              <li>Current TCG tops reward cards that compress interaction: Droll, Dimensional Barrier, Anti-Spell, Super Polymerization, Evenly Matched, and Lightning Storm all have clear jobs.</li>
-              <li>Against Kewl Tune, Branded, Dracotail, and other engine-heavy decks, commit to one high-impact stop instead of trading three small traps into an already established chain.</li>
-              <li>Against Sky Striker and control mirrors, hold Cosmic Cyclone or Huaquero for recursion points instead of firing them into replaceable cards.</li>
-              <li>Against Maliss and other banish decks, Lancea is a cleaner turn-skip card than trying to win a long value exchange.</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Common Misplays</h3>
-            <ul>
-              <li>Sending your only live set trap for Eldlich GY effect without checking whether the End Phase replacement chain will still exist.</li>
-              <li>Making Coach King Giantrainer when you need Battle Phase damage that same turn.</li>
-              <li>Letting King's Sarcophagus get banished for free. If Sarcophagus is gone, Horus bodies stop self-summoning.</li>
-              <li>Activating Dominus Purge from hand without accepting the rest-of-duel DARK, WATER, and FIRE monster-effect lock.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+    <section class="section" id="side">
+      <h2><span class="icon">+</span> Side Deck Options And Counters</h2>
+      <div class="table-wrap">
+        <table class="side-table">
+          <thead>
+            <tr><th>Matchup / problem</th><th>Side options</th><th>How to use them</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Combo / Fusion fields</td>
+              <td><div class="card-row"><span class="card-chip" data-card="dbarrier"></span><span class="card-chip" data-card="superPoly"></span><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="dominus"></span><span class="card-chip" data-card="dragonMind"></span></div></td>
+              <td>Compress their interaction with one high-impact stop. <span class="card-mention" data-card="dominus">Dominus Purge</span> only if you accept the rest-of-duel DARK/WATER/FIRE monster-effect lock.</td>
+            </tr>
+            <tr>
+              <td>Banish / Cyberse fields</td>
+              <td><div class="card-row"><span class="card-chip" data-card="lancea"></span><span class="card-chip" data-card="belle"></span><span class="card-chip" data-card="droll"></span><span class="card-chip" data-card="huaq"></span></div></td>
+              <td>Use <span class="card-mention" data-card="lancea">Artifact Lancea</span> to stop the turn, not to trade small. Timely <span class="card-mention" data-card="huaq">Huaquero</span> hits their GY recursion points.</td>
+            </tr>
+            <tr>
+              <td>Backrow / control mirrors</td>
+              <td><div class="card-row"><span class="card-chip" data-card="lordPrison"></span><span class="card-chip" data-card="cosmic"></span><span class="card-chip" data-card="duster"></span><span class="card-chip" data-card="lightning"></span><span class="card-chip" data-card="evenly"></span></div></td>
+              <td>Hold <span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> for recursion pieces (their Sarcophagus, Eldlixirs) instead of replaceable sets; <span class="card-mention" data-card="lordPrison">Lord of the Heavenly Prison</span> shields your own.</td>
+            </tr>
+            <tr>
+              <td>Established monster boards</td>
+              <td><div class="card-row"><span class="card-chip" data-card="lava"></span><span class="card-chip" data-card="darkHole"></span><span class="card-chip" data-card="evenly"></span><span class="card-chip" data-card="superPoly"></span><span class="card-chip" data-card="typhon"></span></div></td>
+              <td>Break, then rebuild from GY. <span class="card-mention" data-card="typhon">TY-PHON</span> and <span class="card-mention" data-card="zeus">Zeus</span> lines convert leftover bodies into board resets.</td>
+            </tr>
+            <tr>
+              <td>Spell-heavy decks</td>
+              <td><div class="card-row"><span class="card-chip" data-card="antiSpell"></span><span class="card-chip" data-card="dragonMind"></span></div></td>
+              <td><span class="card-mention" data-card="antiSpell">Anti-Spell Fragrance</span> going first, backed by a 2500-original-stat body that turns <span class="card-mention" data-card="dragonMind">Dragon's Mind</span> online.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:14px">
+        <article class="match-card">
+          <h3>What Stops You</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span><span class="card-mention" data-card="ash">Ash Blossom &amp; Joyous Spring</span>: <span class="card-mention" data-card="imsety">Imsety</span>, <span class="card-mention" data-card="cursed">Cursed Eldland</span>, and <span class="card-mention" data-card="scarlet">Scarlet Sanguine</span> are common targets.</span></li>
+            <li><span class="num">2</span><span><span class="card-mention" data-card="droll">Droll &amp; Lock Bird</span> punishes the Imsety search-plus-draw and any follow-up search chain.</span></li>
+            <li><span class="num">3</span><span><span class="card-mention" data-card="belle">Ghost Belle &amp; Haunted Mansion</span> / D.D. Crow interrupt <span class="card-mention" data-card="eldlich">Eldlich</span>, Scarlet, Horus self-summons, and Golden Land recursion points.</span></li>
+            <li><span class="num">4</span><span><span class="card-mention" data-card="cosmic">Cosmic Cyclone</span> banishing Scarlet, Golden Land traps, or <span class="card-mention" data-card="sarc">King's Sarcophagus</span> cuts off replacement value.</span></li>
+            <li><span class="num">5</span><span><span class="card-mention" data-card="shifter">Dimension Shifter</span>, Macro effects, Necrovalley, and Soul Drain attack the GY loop directly and force you into normal trap control.</span></li>
+            <li><span class="num">6</span><span><span class="card-mention" data-card="evenly">Evenly Matched</span>, <span class="card-mention" data-card="duster">Harpie's Feather Duster</span>, and <span class="card-mention" data-card="lightning">Lightning Storm</span> punish over-setting.</span></li>
+          </ul>
+        </article>
+        <article class="match-card">
+          <h3>How You Counter Back</h3>
+          <ul class="list">
+            <li><span class="num">1</span><span>Against mass backrow removal, make <span class="card-mention" data-card="lordPrison">Lord of the Heavenly Prison</span>, <span class="card-mention" data-card="forever">Golden Land Forever!</span>, <span class="card-mention" data-card="dragonMind">Dragon's Mind</span>, or conservative set counts matter.</span></li>
+            <li><span class="num">2</span><span>Your engines work from hand, GY, or trap bodies, so floodgates like <span class="card-mention" data-card="skill">Skill Drain</span> and <span class="card-mention" data-card="tcboo">There Can Be Only One</span> hurt the opponent far more than you.</span></li>
+            <li><span class="num">3</span><span>Keep <span class="card-mention" data-card="sarc">King's Sarcophagus</span> alive: while it stands, every Horus name in GY rebuilds the board after a wipe, and <span class="card-mention" data-card="hapi">Hapi</span> converts their removal into card advantage.</span></li>
+            <li><span class="num">4</span><span>Under GY hate, pivot to pure trap control plus <span class="card-mention" data-card="superPoly">Super Polymerization</span> and Rank 8 bodies until the lock card is answered.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
 
-      <section id="recovery">
-        <div class="section-head">
-          <div>
-            <h2>Recovery Options</h2>
-            <p>The deck is built to be annoying after a board wipe. Recovery depends on what zone still has cards.</p>
-          </div>
-        </div>
-        <div class="cluster-grid">
-          <div class="panel">
-            <h3>GY recovery</h3>
-            <div class="card-row" data-cards="eldlich,scarlet,conq,huaq,hapi"></div>
-            <p>Eldlich returns by sending a Spell/Trap you control. Scarlet and Golden Land traps banish themselves in the End Phase to set the opposite half of the engine. Hapi can pull two cards from GY or banishment when the opponent removes your card.</p>
-          </div>
-          <div class="panel">
-            <h3>Sarcophagus recovery</h3>
-            <div class="card-row" data-cards="sarc,imsety,hapi,qebe,duamutef"></div>
-            <p>If King's Sarcophagus survives, every Horus name in GY threatens to become material again next turn. This makes discard costs and board wipes less punishing.</p>
-          </div>
-          <div class="panel">
-            <h3>Spell/Trap recovery</h3>
-            <div class="card-row" data-cards="delta,glorious,canopic,dragonMind,lordPrison"></div>
-            <p>Delta can return to hand when a monster is added from GY to hand. Glorious Golden Land can reset banished Golden Land or Eldlixir cards. Canopic Protector and Dragon's Mind set themselves back with restrictions.</p>
-          </div>
-        </div>
-      </section>
+    <section class="section" id="references">
+      <h2><span class="icon">i</span> References</h2>
+      <div class="source-note">Knowledge note: the lines in this cheatsheet are built from public deck lists, primers, current meta pages, and API card text. Where no spreadsheet exists, the graph uses confirmed card interactions rather than inventing a source.</div>
+      <ol class="refs-list">
+        <li><a href="https://ygoprodeck.com/deck/horus-eldlich-660054" target="_blank" rel="noreferrer">Horus Eldlich — Albert Ordenana, Guayaquil WCQ Regional Top 4, October 25, 2025</a></li>
+        <li><a href="https://ygoprodeck.com/deck/horus-odion-eldlich-629036" target="_blank" rel="noreferrer">Horus Odion Eldlich — Griffin Kitterman, Boise WCQ Regional Top 4, August 9, 2025</a></li>
+        <li><a href="https://ygoprodeck.com/deck/dogmatika-horus-eldlich-390131" target="_blank" rel="noreferrer">Dogmatika Horus Eldlich — Trenton Gross, Remote WCQ Regional Runner-Up, November 11, 2023</a></li>
+        <li><a href="https://ygoprodeck.com/deck/eldlich-adventure-horus-448876" target="_blank" rel="noreferrer">Eldlich Adventure Horus — Hafid Ramirez, OTS Championship 2nd Place, March 3, 2024</a></li>
+        <li><a href="https://ygoprodeck.com/deck/eldlich-horus-control-561618" target="_blank" rel="noreferrer">Eldlich Horus Control — local-winning control primer with sequencing notes</a></li>
+        <li><a href="https://www.yugiohmeta.com/tier-list" target="_blank" rel="noreferrer">Yu-Gi-Oh! Meta TCG tier list — last-month tournament-top view pulled June 8, 2026</a></li>
+        <li><a href="https://ygoprodeck.com/article/dood-format-final-tally-september-2025-to-january-2026-302797" target="_blank" rel="noreferrer">YGOPRODeck DOOD format final tally — September 15, 2025 to January 11, 2026</a></li>
+        <li><a href="https://ygoprodeck.com/" target="_blank" rel="noreferrer">YGOPRODeck home tournament feed — latest tournament context on June 8, 2026</a></li>
+        <li><a href="https://www.masterduelmeta.com/combos-and-counters" target="_blank" rel="noreferrer">Master Duel Meta Combos &amp; Counters — checked for combo and spreadsheet submissions</a></li>
+        <li><a href="https://db.ygoprodeck.com/api-guide/" target="_blank" rel="noreferrer">YGOPRODeck card API — used to verify card IDs and effect text summaries</a></li>
+      </ol>
+      <p class="footer-note">Card images via YGOPRODeck: https://images.ygoprodeck.com/images/cards/CARD_ID.jpg</p>
+    </section>
 
-      <section id="side">
-        <div class="section-head">
-          <div>
-            <h2>Side Deck Options and Counters</h2>
-            <p>Side for the current field, and know how opponents will attack this deck.</p>
-          </div>
-        </div>
-        <div class="side-grid">
-          <div class="panel">
-            <h3>Side in by matchup</h3>
-            <ul>
-              <li><strong>Combo/Fusion fields:</strong> Dimensional Barrier, Super Polymerization, Droll &amp; Lock Bird, Dominus Purge, and Dragon's Mind.</li>
-              <li><strong>Banish/Cyberse fields:</strong> Artifact Lancea, Ghost Belle, Droll, and timely Huaquero. Use Lancea to stop the turn, not to trade small.</li>
-              <li><strong>Backrow/control mirrors:</strong> Lord of the Heavenly Prison, Cosmic Cyclone, Harpie's Feather Duster, Lightning Storm, and Evenly Matched.</li>
-              <li><strong>Established monster boards:</strong> Lava Golem, Dark Hole, Evenly Matched, Super Polymerization, and TY-PHON/Zeus lines.</li>
-              <li><strong>Spell-heavy decks:</strong> Anti-Spell Fragrance going first, backed by a body that turns Dragon's Mind online.</li>
-            </ul>
-          </div>
-          <div class="panel">
-            <h3>Likely counters against you</h3>
-            <ul>
-              <li><strong>Ash Blossom:</strong> Imsety, Cursed Eldland, and Scarlet Sanguine are common targets.</li>
-              <li><strong>Droll &amp; Lock Bird:</strong> Punishes Imsety search plus draw and any follow-up search chain.</li>
-              <li><strong>Ghost Belle / D.D. Crow:</strong> Interrupt Eldlich, Scarlet, Horus self-summons, and Golden Land recursion points.</li>
-              <li><strong>Cosmic Cyclone:</strong> Banishing Scarlet, Golden Land traps, or King's Sarcophagus cuts off replacement value.</li>
-              <li><strong>Shifter, Macro effects, Necrovalley, Soul Drain:</strong> Attack the GY loop directly and force you into normal trap control.</li>
-              <li><strong>Evenly, Duster, Lightning Storm:</strong> Make Lord of the Heavenly Prison, Golden Land Forever, Dragon's Mind, or conservative set counts matter.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </article>
-    <p class="footer-note">Card images load from images.ygoprodeck.com using the card IDs shown in public deck lists and API data.</p>
   </main>
 
   <script>
-    const cards = {
-      eldlich: { id: "95440947", name: "Eldlich the Golden Lord" },
-      imsety: { id: "84941194", name: "Imsety, Glory of Horus" },
-      hapi: { id: "47330808", name: "Hapi, Guidance of Horus" },
-      qebe: { id: "74725513", name: "Qebehsenuef, Protection of Horus" },
-      duamutef: { id: "11335209", name: "Duamutef, Blessing of Horus" },
-      sarc: { id: "16528181", name: "King's Sarcophagus" },
-      cursed: { id: "31434645", name: "Cursed Eldland" },
-      scarlet: { id: "20612097", name: "Eldlixir of Scarlet Sanguine" },
-      conq: { id: "20590515", name: "Conquistador of the Golden Land" },
-      huaq: { id: "93191801", name: "Huaquero of the Golden Land" },
-      glorious: { id: "22669793", name: "Eldlixir of the Glorious Golden Land" },
-      forever: { id: "56984514", name: "Golden Land Forever!" },
-      delta: { id: "3129133", name: "Delta of Invitation" },
-      dragonMind: { id: "85442146", name: "Dragon's Mind" },
-      dominus: { id: "97045737", name: "Dominus Purge" },
-      skill: { id: "82732705", name: "Skill Drain" },
-      tcboo: { id: "24207889", name: "There Can Be Only One" },
-      superPoly: { id: "48130397", name: "Super Polymerization" },
-      rabbit: { id: "1528054", name: "Silhouhatte Rabbit" },
-      coach: { id: "30741334", name: "Coach King Giantrainer" },
-      number38: { id: "63767246", name: "Number 38: Hope Harbinger Dragon Titanic Galaxy" },
-      number90: { id: "8165596", name: "Number 90: Galaxy-Eyes Photon Lord" },
-      varudras: { id: "70636044", name: "Varudras, the Final Bringer of the End Times" },
-      fallen: { id: "43143567", name: "Fallen Angel of the Golden Land" },
-      mad: { id: "74889525", name: "Eldlich the Mad Golden Lord" },
-      garura: { id: "11765832", name: "Garura, Wings of Resonant Life" },
-      mudragon: { id: "54757758", name: "Mudragon of the Swamp" },
-      canopic: { id: "1490690", name: "Canopic Protector" },
-      sp: { id: "29301450", name: "S:P Little Knight" },
-      gustav: { id: "56910167", name: "Superdreadnought Rail Cannon Gustav Max" },
-      zeus: { id: "90448279", name: "Divine Arsenal AA-ZEUS - Sky Thunder" },
-      typhon: { id: "93039339", name: "Super Starslayer TY-PHON - Sky Crisis" },
-      lordPrison: { id: "9822220", name: "Lord of the Heavenly Prison" },
-      lava: { id: "102380", name: "Lava Golem" },
-      droll: { id: "94145021", name: "Droll & Lock Bird" },
-      belle: { id: "73642296", name: "Ghost Belle & Haunted Mansion" },
-      ash: { id: "14558128", name: "Ash Blossom & Joyous Spring" },
-      fuwalos: { id: "42141493", name: "Mulcharmy Fuwalos" },
-      lancea: { id: "34267821", name: "Artifact Lancea" },
-      dbarrier: { id: "83326048", name: "Dimensional Barrier" },
-      cosmic: { id: "8267140", name: "Cosmic Cyclone" },
-      evenly: { id: "15693423", name: "Evenly Matched" },
-      lightning: { id: "14532163", name: "Lightning Storm" },
-      duster: { id: "18144507", name: "Harpie's Feather Duster" },
-      antiSpell: { id: "58921041", name: "Anti-Spell Fragrance" },
-      darkHole: { id: "53129443", name: "Dark Hole" },
-      crossout: { id: "65681983", name: "Crossout Designator" },
-      shifter: { id: "91800273", name: "Dimension Shifter" },
-      punishment: { id: "82956214", name: "Dogmatika Punishment" },
-      ntss: { id: "80532587", name: "Elder Entity N'tss" },
-      nadir: { id: "1984618", name: "Nadir Servant" },
-      trapTrick: { id: "80101899", name: "Trap Trick" },
-      imperm: { id: "10045474", name: "Infinite Impermanence" },
-      daruma: { id: "30748475", name: "Destructive Daruma Karma Cannon" },
-      temple: { id: "29762407", name: "Temple of the Kings" },
-      treasures: { id: "69299029", name: "Treasures of the Kings" },
-      apophis: { id: "85888377", name: "Apophis the Swamp Deity" },
-      rite: { id: "3285551", name: "Rite of Aramesir" },
-      gryphon: { id: "2563463", name: "Wandering Gryphon Rider" },
-      brandedFusion: { id: "44362883", name: "Branded Fusion" },
-      fenrir: { id: "32909498", name: "Kashtira Fenrir" },
-      grass: { id: "11110587", name: "That Grass Looks Greener" }
+    const CARDS = {
+      eldlich: { id: 95440947, name: "Eldlich the Golden Lord" },
+      imsety: { id: 84941194, name: "Imsety, Glory of Horus" },
+      hapi: { id: 47330808, name: "Hapi, Guidance of Horus" },
+      qebe: { id: 74725513, name: "Qebehsenuef, Protection of Horus" },
+      duamutef: { id: 11335209, name: "Duamutef, Blessing of Horus" },
+      sarc: { id: 16528181, name: "King's Sarcophagus" },
+      cursed: { id: 31434645, name: "Cursed Eldland" },
+      scarlet: { id: 20612097, name: "Eldlixir of Scarlet Sanguine" },
+      conq: { id: 20590515, name: "Conquistador of the Golden Land" },
+      huaq: { id: 93191801, name: "Huaquero of the Golden Land" },
+      glorious: { id: 22669793, name: "Eldlixir of the Glorious Golden Land" },
+      forever: { id: 56984514, name: "Golden Land Forever!" },
+      delta: { id: 3129133, name: "Delta of Invitation" },
+      dragonMind: { id: 85442146, name: "Dragon's Mind" },
+      dominus: { id: 97045737, name: "Dominus Purge" },
+      skill: { id: 82732705, name: "Skill Drain" },
+      tcboo: { id: 24207889, name: "There Can Be Only One" },
+      superPoly: { id: 48130397, name: "Super Polymerization" },
+      rabbit: { id: 1528054, name: "Silhouhatte Rabbit" },
+      coach: { id: 30741334, name: "Coach King Giantrainer" },
+      number38: { id: 63767246, name: "Number 38: Hope Harbinger Dragon Titanic Galaxy" },
+      number90: { id: 8165596, name: "Number 90: Galaxy-Eyes Photon Lord" },
+      varudras: { id: 70636044, name: "Varudras, the Final Bringer of the End Times" },
+      fallen: { id: 43143567, name: "Fallen Angel of the Golden Land" },
+      mad: { id: 74889525, name: "Eldlich the Mad Golden Lord" },
+      garura: { id: 11765832, name: "Garura, Wings of Resonant Life" },
+      mudragon: { id: 54757758, name: "Mudragon of the Swamp" },
+      canopic: { id: 1490690, name: "Canopic Protector" },
+      sp: { id: 29301450, name: "S:P Little Knight" },
+      gustav: { id: 56910167, name: "Superdreadnought Rail Cannon Gustav Max" },
+      zeus: { id: 90448279, name: "Divine Arsenal AA-ZEUS - Sky Thunder" },
+      typhon: { id: 93039339, name: "Super Starslayer TY-PHON - Sky Crisis" },
+      lordPrison: { id: 9822220, name: "Lord of the Heavenly Prison" },
+      lava: { id: 102380, name: "Lava Golem" },
+      droll: { id: 94145021, name: "Droll & Lock Bird" },
+      belle: { id: 73642296, name: "Ghost Belle & Haunted Mansion" },
+      ash: { id: 14558128, name: "Ash Blossom & Joyous Spring" },
+      lancea: { id: 34267821, name: "Artifact Lancea" },
+      dbarrier: { id: 83326048, name: "Dimensional Barrier" },
+      cosmic: { id: 8267140, name: "Cosmic Cyclone" },
+      evenly: { id: 15693423, name: "Evenly Matched" },
+      lightning: { id: 14532163, name: "Lightning Storm" },
+      duster: { id: 18144507, name: "Harpie's Feather Duster" },
+      antiSpell: { id: 58921041, name: "Anti-Spell Fragrance" },
+      darkHole: { id: 53129443, name: "Dark Hole" },
+      shifter: { id: 91800273, name: "Dimension Shifter" },
+      punishment: { id: 82956214, name: "Dogmatika Punishment" },
+      ntss: { id: 80532587, name: "Elder Entity N'tss" },
+      nadir: { id: 1984618, name: "Nadir Servant" },
+      temple: { id: 29762407, name: "Temple of the Kings" },
+      treasures: { id: 69299029, name: "Treasures of the Kings" },
+      apophis: { id: 85888377, name: "Apophis the Swamp Deity" },
+      rite: { id: 3285551, name: "Rite of Aramesir" },
+      gryphon: { id: 2563463, name: "Wandering Gryphon Rider" },
+      brandedFusion: { id: 44362883, name: "Branded Fusion" },
+      fenrir: { id: 32909498, name: "Kashtira Fenrir" },
+      grass: { id: 11110587, name: "That Grass Looks Greener" }
     };
-
-    const routes = [
-      {
-        id: "imsety",
-        title: "Imsety starter",
-        type: "1.5 card",
-        summary: "Turns any discard into King's Sarcophagus, a draw, and live Rank 8 or trap-control pressure.",
-        nodes: [
-          { label: "Start", cards: ["imsety", "wild:Any discard"], text: "Send Imsety plus any card from hand to GY. Add King's Sarcophagus, then draw 1." },
-          { label: "Engine", cards: ["sarc"], text: "Activate Sarcophagus. Send the Horus name your hand needs most from Deck to GY." },
-          { label: "Bodies", cards: ["imsety", "hapi", "qebe"], text: "Special Summon available Horus names from GY while Sarcophagus is face-up." },
-          { label: "Output", cards: ["number90", "number38", "rabbit"], text: "Make monster negate, spell negate, or Rabbit to set a Golden Land trap." }
-        ],
-        branches: [
-          { title: "Number 90 line", text: "Best into monster-effect decks. Two Level 8s become a monster negate while Sarcophagus keeps future bodies live." },
-          { title: "Number 38 line", text: "Best into spell-centered decks. It negates a Spell activation/effect on field and absorbs that card as material." },
-          { title: "Rabbit line", text: "Use two effect monsters to set a Continuous Trap that summons itself, then threaten Rabbit's Spell/Trap destruction." },
-          { title: "Floodgate line", text: "Keep big Horus bodies under Skill Drain or TCBOO and force the opponent to answer Sarcophagus." }
-        ]
-      },
-      {
-        id: "cursed",
-        title: "Cursed Eldland bait",
-        type: "sequencing",
-        summary: "Use Cursed Eldland to bait Ash and turn searched Eldlich cards into Imsety discard fuel.",
-        nodes: [
-          { label: "Lead", cards: ["cursed"], text: "Pay 800 to search an Eldlich monster or Golden Land Spell/Trap. This baits interruption before Imsety." },
-          { label: "Convert", cards: ["imsety", "wild:Searched card"], text: "Discard Imsety plus the searched card if the hand needs Horus access more than the card in hand." },
-          { label: "Load", cards: ["sarc", "eldlich"], text: "Sarcophagus loads Horus. Eldlich or the discarded trap sits in GY as follow-up." },
-          { label: "Replace", cards: ["scarlet", "conq", "huaq"], text: "If Cursed leaves the Spell/Trap Zone later, it sends an Eldlich or Golden Land card from Deck to GY." }
-        ],
-        branches: [
-          { title: "If Cursed is Ashed", text: "Imsety remains live and is usually more important than the Eldlich search." },
-          { title: "If Cursed resolves", text: "Add Eldlich when Delta or traps are already available; add Golden Land when you need End Phase loop access." },
-          { title: "If Cursed is sent", text: "Send Scarlet for future set access, Conquistador for an Eldlixir set, or Eldlich if you need Golden Lord in GY." }
-        ]
-      },
-      {
-        id: "delta",
-        title: "Delta into protected Eldlich",
-        type: "1 card plus S/T",
-        summary: "Delta sends Eldlich, Eldlich sends Delta, and Delta returns when Eldlich is added from GY to hand.",
-        nodes: [
-          { label: "Activate", cards: ["delta"], text: "On activation, send a Level 5 or higher Zombie from Deck to GY, usually Eldlich." },
-          { label: "Revive", cards: ["eldlich", "delta"], text: "Use Eldlich in GY: send Delta you control to GY, add Eldlich to hand, then Special Summon it." },
-          { label: "Refund", cards: ["delta"], text: "Because a monster was added from GY to hand while Delta is in GY, Delta can add itself back to hand." },
-          { label: "Field", cards: ["eldlich", "dragonMind", "forever"], text: "Eldlich is a 2500 original ATK/DEF body for Dragon's Mind and a Zombie body for Golden Land Forever." }
-        ],
-        branches: [
-          { title: "Safe pressure", text: "Eldlich becomes 3500/3800 and cannot be destroyed by card effects until the end of the opponent's turn." },
-          { title: "Token follow-up", text: "Next Delta can summon a Level 5 Zombie token if a Zombie is on field, creating tribute, link, or Fusion material." },
-          { title: "Trap leverage", text: "A protected Eldlich turns Conquistador, Huaquero, Glorious Golden Land, and Golden Land Forever fully online." }
-        ]
-      },
-      {
-        id: "trap-loop",
-        title: "Eldlixir and Golden Land loop",
-        type: "grind",
-        summary: "The core control loop: Eldlixir summons, Golden Land interrupts, and each half sets the other during the End Phase.",
-        nodes: [
-          { label: "Summon", cards: ["scarlet", "eldlich"], text: "Scarlet Sanguine summons Eldlich from Deck or GY, then applies a Zombie-only Special Summon lock for the rest of that turn." },
-          { label: "Interrupt", cards: ["conq", "huaq", "glorious"], text: "Golden Land traps become Zombies. With Eldlich up, they pop, banish, or bounce." },
-          { label: "Set back", cards: ["scarlet", "conq"], text: "Used Eldlixir banishes in GY to set Golden Land. Used Golden Land banishes in GY to set Eldlixir." },
-          { label: "Negate", cards: ["forever", "wild:Zombie body"], text: "Golden Land Forever tributes a Zombie while you control Eldlich to negate and destroy." }
-        ],
-        branches: [
-          { title: "Conquistador", text: "Pop a face-up card. Best against field spells, floodgates, and monsters that must remain face-up." },
-          { title: "Huaquero", text: "Banish from either GY. Best against revival, Branded lines, and cards trying to dodge by leaving field." },
-          { title: "Glorious Golden Land", text: "Bounce a monster or reset a banished Golden Land/Eldlixir card. Strong in long games." }
-        ]
-      },
-      {
-        id: "four-horus",
-        title: "Four Horus fork",
-        type: "ceiling",
-        summary: "When Sarcophagus has enough discard fuel, four Horus bodies become draw power, double Rank 8, or Link pressure.",
-        nodes: [
-          { label: "Load", cards: ["sarc", "imsety", "hapi", "qebe", "duamutef"], text: "Use Sarcophagus up to four times in a turn to send different Horus names to GY." },
-          { label: "Summon", cards: ["imsety", "hapi", "qebe", "duamutef"], text: "Special Summon each available name once while Sarcophagus is controlled." },
-          { label: "Draw route", cards: ["coach"], text: "Overlay three Level 8s for Coach King Giantrainer and draw up to three cards. You lose the Battle Phase." },
-          { label: "Board route", cards: ["number90", "number38", "sp"], text: "Split bodies into Rank 8 plus Link pressure, or make two Rank 8s if the hand needs negates." }
-        ],
-        branches: [
-          { title: "Giantrainer into Rabbit", text: "After drawing, link Coach plus the remaining Horus into Rabbit and set a Golden Land Continuous Trap." },
-          { title: "Photon Lord plus Harbinger", text: "Two Level 8s make Number 90 and two more make Number 38 for monster plus spell coverage." },
-          { title: "Hold bodies", text: "Sometimes four monsters are better as pressure under floodgates, especially when you do not want to expose Extra Deck lines." }
-        ]
-      },
-      {
-        id: "super-poly",
-        title: "Super Poly fusion pivot",
-        type: "going second",
-        summary: "Break a board, discard a card you want in GY, and turn Golden Land bodies into Fusion pressure.",
-        nodes: [
-          { label: "Discard", cards: ["superPoly", "wild:Eldlixir/Golden Land"], text: "Discard a trap that can still matter from the GY later." },
-          { label: "Fuse", cards: ["garura", "mudragon", "fallen", "mad"], text: "Use opponent material for generic Fusions or your Zombie material for Eldlich Fusions." },
-          { label: "Float", cards: ["fallen", "eldlich"], text: "If Fallen Angel is sent from field to GY, summon an Eldlich monster from Deck, Extra Deck, or GY." },
-          { label: "Reset", cards: ["scarlet", "conq", "huaq"], text: "End Phase trap replacement gives you a board after the clear." }
-        ],
-        branches: [
-          { title: "Generic clear", text: "Garura and Mudragon are common Super Poly targets when opponent attributes/types line up." },
-          { title: "Mad Golden Lord", text: "A Level 5 or higher Zombie plus Eldlich makes a sticky Golden Lord name with takeover pressure." },
-          { title: "Fallen Angel", text: "Can be Special Summoned by tributing a LIGHT Zombie while Eldlich is on field or in GY, then floats when sent." }
-        ]
-      }
-    ];
-
-    const triggerPairs = [
-      {
-        title: "Delta refund loop",
-        a: "delta",
-        b: "eldlich",
-        why: "Delta sends Eldlich. Eldlich sends Delta to add itself back and summon. Delta then returns to hand because a monster was added from GY to hand."
-      },
-      {
-        title: "Sarcophagus shield",
-        a: "sarc",
-        b: "hapi",
-        why: "Sarcophagus revives Horus names and makes every opponent removal of your cards risk Hapi, Imsety, Qebehsenuef, or Duamutef trigger value."
-      },
-      {
-        title: "Rabbit trap trigger",
-        a: "rabbit",
-        b: "conq",
-        why: "Rabbit sets a Continuous Trap that summons itself. When that trap moves from Spell/Trap Zone to Monster Zone, Rabbit can destroy an opponent Spell/Trap."
-      },
-      {
-        title: "Forever tribute live",
-        a: "forever",
-        b: "glorious",
-        why: "Golden Land traps become Zombie monsters. They can be tributed for Golden Land Forever while Eldlich is controlled."
-      },
-      {
-        title: "Dragon's Mind online",
-        a: "dragonMind",
-        b: "imsety",
-        why: "Dragon's Mind turns into an omni-negate when you control a monster with 2500 original ATK or DEF, which includes Imsety and Eldlich."
-      },
-      {
-        title: "Super Poly discard value",
-        a: "superPoly",
-        b: "scarlet",
-        why: "Discarding Eldlixir or Golden Land cards is not pure cost when their GY replacement effect gives a future set card."
-      }
-    ];
-
-    function imageUrl(card) {
-      return `https://images.ygoprodeck.com/images/cards/${card.id}.jpg`;
-    }
-
-    function cardMini(key) {
-      if (key.startsWith("wild:")) {
-        return `<span class="wildcard">${key.slice(5)}</span>`;
-      }
-      const card = cards[key];
-      if (!card) {
-        return `<span class="wildcard">${key}</span>`;
-      }
-      const img = imageUrl(card);
-      return `
-        <span class="card-mini" title="${escapeHtml(card.name)}">
-          <img src="${img}" alt="${escapeHtml(card.name)}" loading="lazy">
-          <span>${escapeHtml(card.name)}</span>
-          <img class="zoom" src="${img}" alt="" loading="lazy" aria-hidden="true">
-        </span>
-      `;
-    }
-
-    function cardRow(keys) {
-      return keys.map((key, index) => {
-        const plus = index === 0 ? "" : '<span class="plus" aria-label="plus">+</span>';
-        return plus + cardMini(key);
-      }).join("");
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
-    }
-
-    function renderRouteList(activeId) {
-      const list = document.getElementById("routeList");
-      list.innerHTML = routes.map(route => `
-        <button class="route-button ${route.id === activeId ? "is-active" : ""}" type="button" data-route="${route.id}">
-          <strong>${escapeHtml(route.title)}</strong>
-          <span>${escapeHtml(route.type)}</span>
-        </button>
-      `).join("");
-      list.querySelectorAll("button").forEach(button => {
-        button.addEventListener("click", () => renderRoute(button.dataset.route));
-      });
-    }
-
-    function renderRoute(routeId) {
-      const route = routes.find(item => item.id === routeId) || routes[0];
-      renderRouteList(route.id);
-      document.getElementById("routeTitle").textContent = route.title;
-      document.getElementById("routeSummary").textContent = route.summary;
-      document.getElementById("routeType").textContent = route.type;
-      document.getElementById("graphFlow").innerHTML = route.nodes.map(node => `
-        <article class="graph-node">
-          <div>
-            <div class="node-label">
-              <span>${escapeHtml(node.label)}</span>
-              <span class="info" tabindex="0" data-tip="${escapeHtml(node.text)}">i</span>
-            </div>
-            <div class="card-row">${cardRow(node.cards)}</div>
-          </div>
-          <p class="node-text">${escapeHtml(node.text)}</p>
-        </article>
-      `).join("");
-      document.getElementById("branchGrid").innerHTML = route.branches.map(branch => `
-        <article class="branch">
-          <strong>${escapeHtml(branch.title)}</strong>
-          <p>${escapeHtml(branch.text)}</p>
-        </article>
-      `).join("");
-    }
-
-    function renderStaticCardRows() {
-      document.querySelectorAll("[data-cards]").forEach(row => {
-        row.innerHTML = cardRow(row.dataset.cards.split(",").map(item => item.trim()));
-      });
-    }
-
-    function renderTriggers() {
-      const grid = document.getElementById("triggerGrid");
-      grid.innerHTML = triggerPairs.map(pair => `
-        <article class="panel">
-          <h3>${escapeHtml(pair.title)} <span class="info" tabindex="0" data-tip="${escapeHtml(pair.why)}">i</span></h3>
-          <div class="trigger-pair">
-            ${cardMini(pair.a)}
-            <span class="plus" aria-label="plus">+</span>
-            ${cardMini(pair.b)}
-            <div class="why">${escapeHtml(pair.why)}</div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    const refsToggle = document.getElementById("refsToggle");
-    const refs = document.getElementById("references");
-    refsToggle.addEventListener("click", () => {
-      const next = refsToggle.getAttribute("aria-expanded") !== "true";
-      refsToggle.setAttribute("aria-expanded", String(next));
-      refs.setAttribute("aria-hidden", String(!next));
-      refs.classList.toggle("is-open", next);
-      if (next) refs.scrollIntoView({ block: "nearest" });
-    });
-
-    renderStaticCardRows();
-    renderTriggers();
-    renderRoute(routes[0].id);
   </script>
-  <script src="cheatsheet-unifier.js"></script>
+  <script src="cheatsheet.js"></script>
 </body>
 </html>
