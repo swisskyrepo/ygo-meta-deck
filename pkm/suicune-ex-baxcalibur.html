@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suicune ex / Baxcalibur — PTCGP Deck Guide</title>
+<style>
+:root{
+  --bg:#eef3fb; --ink:#10151d; --muted:#566; --line:#cfd9ea; --soft:#e3eaf6;
+  --panel:#ffffff; --panel2:#f1f6fd; --accent:#1f6fd6; --ice:#36b6e8; --deep:#0f4c8a;
+  --good:#138a5e; --bad:#cc3b34; --warn:#b97e10; --violet:#6f53b0;
+  --shadow:0 16px 50px rgba(15,40,80,.14); --radius:14px; color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#0a1018; --ink:#eaf2fb; --muted:#9fb2c6; --line:#23394f; --soft:#15212e;
+  --panel:#101a26; --panel2:#15212e; --accent:#56a6ff; --ice:#5fd0f5; --deep:#7fc4ff;
+  --good:#5fd49c; --bad:#ff8a83; --warn:#e7be64; --violet:#bda3f0;
+  --shadow:0 18px 54px rgba(0,0,0,.5); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:
+    radial-gradient(1100px 460px at 80% -8%,color-mix(in srgb,var(--ice) 22%,transparent),transparent),
+    radial-gradient(900px 420px at 0% 0%,color-mix(in srgb,var(--deep) 20%,transparent),transparent),
+    var(--bg);
+  -webkit-text-size-adjust:100%;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4,p{margin:0}
+.shell{width:min(1160px,calc(100vw - 26px));margin:0 auto;padding:26px 0 80px}
+
+/* top bar */
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.brand{font-weight:800;letter-spacing:.5px;font-size:13px;color:var(--muted);text-transform:uppercase}
+.bar .sp{flex:1}
+.toggle{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;display:inline-flex;gap:7px;align-items:center}
+.toggle:hover{border-color:var(--accent)}
+
+/* hero */
+.hero{position:relative;background:linear-gradient(140deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:30px 28px;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(125deg,color-mix(in srgb,var(--ice) 9%,transparent) 0 1px,transparent 1px 17px)}
+.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.05;letter-spacing:-.5px;position:relative}
+.hero h1 .ice{background:linear-gradient(90deg,var(--ice),var(--deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{color:var(--muted);margin-top:10px;max-width:62ch;position:relative;font-size:15.5px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;position:relative}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+  border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px}
+.badge b{color:var(--accent)}
+.badge.tier{border-color:color-mix(in srgb,var(--ice) 55%,var(--line));color:var(--deep)}
+.badge.wr{color:var(--good)}
+
+/* nav chips */
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px;position:sticky;top:0;z-index:30;
+  padding:10px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(8px);
+  border-radius:12px;border:1px solid var(--line)}
+.nav a{font-size:12.5px;font-weight:600;color:var(--muted);border:1px solid var(--line);
+  background:var(--panel);border-radius:999px;padding:5px 11px}
+.nav a:hover{color:var(--accent);border-color:var(--accent);text-decoration:none}
+
+section{margin-top:30px}
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.sec-h .ix{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  font-weight:800;font-size:14px;color:#fff;background:linear-gradient(140deg,var(--ice),var(--deep))}
+.sec-h h2{font-size:21px;letter-spacing:-.3px}
+.sec-h p{color:var(--muted);font-size:13px}
+
+.card-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+.lede p+p{margin-top:11px}
+.lede{color:var(--ink)}
+.lede .k{color:var(--accent);font-weight:700}
+
+/* pros cons */
+.pc{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--panel2)}
+.pc h3{font-size:15px;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.pc.pro h3{color:var(--good)}
+.pc.con h3{color:var(--bad)}
+.pc ul{margin:0;padding-left:2px;list-style:none}
+.pc li{position:relative;padding:6px 0 6px 24px;border-top:1px dashed var(--line);font-size:14px}
+.pc li:first-child{border-top:0}
+.pc li::before{position:absolute;left:0;top:6px;font-weight:800}
+.pc.pro li::before{content:"▲";color:var(--good)}
+.pc.con li::before{content:"▼";color:var(--bad)}
+
+/* deck grid */
+.deck-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;color:var(--muted);font-size:13px}
+.deck-meta b{color:var(--ink)}
+.deck{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:900px){.deck{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:620px){.deck{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:420px){.deck{grid-template-columns:repeat(2,1fr)}}
+
+.slot{position:relative;border-radius:10px;overflow:visible;cursor:zoom-in;transition:transform .18s ease,z-index 0s}
+.slot img{width:100%;display:block;border-radius:9px;border:1px solid var(--line);
+  box-shadow:0 4px 14px rgba(10,25,50,.22);background:var(--panel2);aspect-ratio:367/512;object-fit:cover}
+.slot .qty{position:absolute;top:6px;right:6px;background:var(--deep);color:#fff;font-weight:800;
+  font-size:12px;border-radius:7px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.25)}
+.slot .role{position:absolute;left:6px;bottom:6px;font-size:9.5px;font-weight:800;letter-spacing:.4px;
+  text-transform:uppercase;padding:2px 6px;border-radius:6px;color:#fff;backdrop-filter:blur(2px)}
+.role.core{background:var(--bad)} .role.support{background:var(--accent)}
+.role.low{background:var(--violet)} .role.flex{background:var(--warn)}
+.slot:hover{transform:scale(1.04);z-index:5}
+/* hover-enlarge popover */
+.slot:hover .zoom{opacity:1;transform:translateX(-50%) scale(1);pointer-events:none}
+.zoom{position:absolute;left:50%;bottom:104%;transform:translateX(-50%) scale(.92);
+  opacity:0;transition:.16s ease;width:260px;max-width:70vw;z-index:60;filter:drop-shadow(0 18px 40px rgba(0,0,0,.55))}
+.zoom img{width:100%;border-radius:12px;border:2px solid var(--ice)}
+.zoom .nm{margin-top:6px;text-align:center;font-size:12px;font-weight:700;color:var(--ink);
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:4px 8px}
+@media(hover:none){.zoom{display:none}}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+/* gameplay priority cards */
+.prio{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.prio{grid-template-columns:1fr}}
+.tier-card{border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;background:var(--panel2)}
+.tier-card .head{padding:11px 15px;font-weight:800;font-size:14px;color:#fff;display:flex;align-items:center;gap:8px}
+.tier-card.core .head{background:linear-gradient(90deg,var(--bad),#9a2a25)}
+.tier-card.opt .head{background:linear-gradient(90deg,var(--accent),var(--deep))}
+.tier-card.low .head{background:linear-gradient(90deg,var(--violet),#4a3580)}
+.tier-card.sit .head{background:linear-gradient(90deg,var(--warn),#8a5b08)}
+.tier-card .body{padding:6px 15px 14px}
+.row{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row img{width:54px;flex:none;border-radius:7px;border:1px solid var(--line);cursor:zoom-in;
+  transition:transform .16s;box-shadow:0 3px 9px rgba(0,0,0,.25);aspect-ratio:367/512;object-fit:cover}
+.row img:hover{transform:scale(1.7) translateY(-6px);z-index:20;position:relative;border-color:var(--ice)}
+.row .t{font-size:13.5px}
+.row .t b{font-size:13.5px}
+.row .t .meta{color:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.3px}
+.row .t p{color:var(--ink);margin-top:3px;font-size:13px}
+
+/* combos */
+.combos{margin-top:16px;display:grid;gap:10px}
+.combo{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);
+  border-left:4px solid var(--ice);border-radius:10px;padding:12px 15px;background:var(--panel2)}
+.combo .n{flex:none;width:25px;height:25px;border-radius:50%;background:var(--deep);color:#fff;
+  font-weight:800;font-size:13px;display:grid;place-items:center}
+.combo .ct b{color:var(--accent)}
+.combo .ct .chain{font-weight:700;color:var(--ink)}
+.arrowsep{color:var(--ice);font-weight:900;padding:0 4px}
+
+/* matchups */
+.mtable{width:100%;border-collapse:collapse;font-size:14px}
+.mtable th,.mtable td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.mtable th{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.wrbar{display:flex;align-items:center;gap:9px;min-width:150px}
+.wrbar .track{flex:1;height:9px;border-radius:6px;background:var(--soft);overflow:hidden;border:1px solid var(--line)}
+.wrbar .fill{height:100%;border-radius:6px}
+.wrbar .pct{font-weight:800;width:42px;text-align:right;font-variant-numeric:tabular-nums}
+.tag{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.tag.fav{background:color-mix(in srgb,var(--good) 22%,transparent);color:var(--good)}
+.tag.even{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn)}
+.tag.unfav{background:color-mix(in srgb,var(--bad) 22%,transparent);color:var(--bad)}
+
+/* tier ladder graphic */
+.ladder{margin-top:8px;display:grid;gap:9px}
+.lrow{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:stretch}
+.ltag{border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  color:#fff;font-weight:800;padding:10px 6px;text-align:center;font-size:13px}
+.ltag small{font-weight:600;opacity:.85;font-size:10px}
+.lt-t2{background:linear-gradient(140deg,#e0533b,#b8281f)}
+.lt-t3{background:linear-gradient(140deg,#e0a52f,#a9750c)}
+.lt-tr{background:linear-gradient(140deg,#5aa6e8,#2f6fb0)}
+.ldecks{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border:1px solid var(--line);
+  border-radius:10px;padding:10px 12px;background:var(--panel2)}
+.chip{font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--panel);
+  border-radius:8px;padding:5px 9px;display:inline-flex;gap:7px;align-items:center}
+.chip .pw{font-size:10.5px;color:var(--muted);font-weight:600}
+.chip.here{border:2px solid var(--ice);background:color-mix(in srgb,var(--ice) 16%,var(--panel));
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--ice) 18%,transparent)}
+.chip.here::after{content:"◀ THIS DECK";color:var(--deep);font-size:10px;font-weight:800;margin-left:2px}
+.ladder-cap{color:var(--muted);font-size:12px;margin-top:10px;display:flex;align-items:center;gap:8px}
+
+/* variants */
+.varwrap{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.varwrap{grid-template-columns:1fr}}
+.varc{border:1px solid var(--line);border-radius:12px;padding:15px 17px;background:var(--panel2)}
+.varc h3{font-size:15px;color:var(--accent);margin-bottom:6px}
+.varc p{font-size:13.5px;color:var(--ink)}
+.varc .cards{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+.varc .cards img{width:46px;border-radius:6px;border:1px solid var(--line);cursor:zoom-in;transition:transform .16s;aspect-ratio:367/512;object-fit:cover}
+.varc .cards img:hover{transform:scale(1.9) translateY(-8px);z-index:20;position:relative;border-color:var(--ice)}
+
+/* references */
+.refs{font-size:13px;color:var(--muted);line-height:1.8}
+.refs a{word-break:break-all}
+.note{font-size:12px;color:var(--muted);border-left:3px solid var(--ice);padding:6px 0 6px 12px;margin-top:14px}
+
+footer{margin-top:40px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="bar">
+    <span class="brand">PTCGP · Graphic Deck Guide</span>
+    <span class="sp"></span>
+    <button class="toggle" id="themeBtn" aria-label="Toggle theme">🌙 <span>Theme</span></button>
+  </div>
+
+  <!-- HERO / INTRO -->
+  <header class="hero" id="top">
+    <h1><span class="ice">Suicune ex</span> / Baxcalibur</h1>
+    <p class="tagline">A Water tempo deck that turns <b>Baxcalibur</b> into a perpetual energy battery, then snowballs damage with <b>Suicune ex</b>'s board-scaling attack — backed by <b>Chien-Pao ex</b> as a hard-hitting closer and <b>Cyrus</b> for surgical knockouts.</p>
+    <div class="badges">
+      <span class="badge tier">Tier&nbsp;<b>2</b> · Power <b>35.0</b></span>
+      <span class="badge">Meta rank <b>#2</b></span>
+      <span class="badge wr">Win rate <b>~52.5%</b></span>
+      <span class="badge">Format <b>B3a Standard</b></span>
+      <span class="badge">Type <b>💧 Water</b></span>
+      <span class="badge">Snapshot <b>2026-06-13</b></span>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#strategy">Strategy</a>
+    <a href="#proscons">Pros / Cons</a>
+    <a href="#deck">Decklist</a>
+    <a href="#gameplay">Core Gameplay</a>
+    <a href="#combos">Combos</a>
+    <a href="#meta">Matchups & Meta</a>
+    <a href="#variants">Variants</a>
+    <a href="#refs">Sources</a>
+  </nav>
+
+  <!-- STRATEGY -->
+  <section id="strategy">
+    <div class="sec-h"><span class="ix">1</span><div><h2>General Strategy</h2><p>What the deck wants to do every game</p></div></div>
+    <div class="card-panel lede">
+      <p>The deck is an <span class="k">energy-acceleration tempo</span> build. You rush the <b>Frigibax → Baxcalibur</b> line online (often via <b>Rare Candy</b>), then use Baxcalibur's <b>Ice Maker</b> ability to attach an extra Water Energy from your Energy Zone every turn — on top of your natural turn energy. That doubled energy flow lets your attackers hit a turn ahead of the curve.</p>
+      <p>Your payoff is <b>Suicune ex</b> and its <span class="k">Crystal Waltz</span> attack, which deals <b>20 damage for every Benched Pokémon in play</b> (yours <em>and</em> the opponent's). With your own bench full of the Baxcalibur line plus Chien-Pao, and the opponent developing their board, Crystal Waltz quickly climbs past 100+ damage. <b>Chien-Pao ex</b> is the secondary heavy-hitter / sniping closer, and <b>Cyrus</b> drags a wounded benched threat into the Active spot so you can finish it for free tempo.</p>
+      <p>The game plan: <span class="k">survive the early turns</span>, stabilize the energy engine, then convert your board advantage into back-to-back knockouts before the opponent's Mega ex attackers can out-muscle your 140-HP line.</p>
+    </div>
+  </section>
+
+  <!-- PROS / CONS -->
+  <section id="proscons">
+    <div class="sec-h"><span class="ix">2</span><div><h2>Pros & Cons</h2><p>Where the deck shines and where it folds</p></div></div>
+    <div class="grid2">
+      <div class="pc pro">
+        <h3>✓ Strengths</h3>
+        <ul>
+          <li><b>Repeatable energy acceleration</b> — Baxcalibur attaches an extra Water Energy every turn, letting you out-tempo slower setups.</li>
+          <li><b>Scaling damage</b> — Crystal Waltz snowballs with a full board; punishes wide benches hard.</li>
+          <li><b>Two strong ex attackers</b> — Suicune ex and Chien-Pao ex give you redundant win conditions.</li>
+          <li><b>Surgical knockouts</b> — Cyrus + a hard hit picks off the opponent's key benched Pokémon.</li>
+          <li><b>Proven results</b> — consistent Tier-2 placement (Power 35.0) with multiple community-tournament toppings.</li>
+        </ul>
+      </div>
+      <div class="pc con">
+        <h3>✗ Weaknesses</h3>
+        <ul>
+          <li><b>Stage-2 reliance</b> — bricks if Baxcalibur or Rare Candy never show up; clunky opening hands.</li>
+          <li><b>Board-dependent damage</b> — Crystal Waltz is weak into lone-attacker / empty-bench decks.</li>
+          <li><b>Fragile 140-HP bodies</b> — Mega ex hitters out-size your attackers; Water is weak to Lightning.</li>
+          <li><b>Rough vs the #1 deck</b> — loses to Miraidon ex / Magnezone (~36%) and Mega Lucario ex / Greninja (~33%).</li>
+          <li><b>Consistency tax</b> — needs its draw supporters (Professor's Research / Copycat) to keep the engine fed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECK DISPLAY -->
+  <section id="deck">
+    <div class="sec-h"><span class="ix">3</span><div><h2>Decklist — 20 Cards</h2><p>Representative tournament list · hover any card to enlarge</p></div></div>
+    <div class="card-panel">
+      <div class="deck-meta">
+        <span><b>Pokémon</b> 7</span>
+        <span><b>Trainers</b> 13</span>
+        <span><b>Energy</b> Water (Energy Zone)</span>
+        <span><b>Total</b> 20 / 20</span>
+      </div>
+      <div class="deck" id="deckGrid"></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--bad)"></i> Core engine</span>
+        <span><i class="dot" style="background:var(--accent)"></i> Support</span>
+        <span><i class="dot" style="background:var(--violet)"></i> Low priority</span>
+        <span><i class="dot" style="background:var(--warn)"></i> Situational / tech</span>
+      </div>
+      <p class="note">PTCGP decks are exactly 20 cards, max 2 copies each. Energy is drawn from the Water Energy Zone, so no basic Energy cards occupy deck slots. Counts shown are a representative meta list — flex slots (Field Blower, Pokémon Center Lady, Inflatable Boat) are commonly swapped (see Variants).</p>
+    </div>
+  </section>
+
+  <!-- CORE GAMEPLAY -->
+  <section id="gameplay">
+    <div class="sec-h"><span class="ix">4</span><div><h2>Core Gameplay — Card Roles</h2><p>What to prioritize when you build your board · hover cards to enlarge</p></div></div>
+    <div class="prio">
+      <div class="tier-card core">
+        <div class="head">🔴 Core — the engine you must assemble</div>
+        <div class="body" data-roles="core"></div>
+      </div>
+      <div class="tier-card opt">
+        <div class="head">🔵 Optional / Support — high-value add-ons</div>
+        <div class="body" data-roles="support"></div>
+      </div>
+      <div class="tier-card low">
+        <div class="head">🟣 Low Priority — situational glue</div>
+        <div class="body" data-roles="low"></div>
+      </div>
+      <div class="tier-card sit">
+        <div class="head">🟡 Situational / Tech — matchup-dependent</div>
+        <div class="body" data-roles="flex"></div>
+      </div>
+    </div>
+
+    <!-- COMBOS -->
+    <div id="combos" class="sec-h" style="margin-top:28px"><span class="ix">5</span><div><h2>Key Combos & Lines</h2><p>The sequences that win games</p></div></div>
+    <div class="combos">
+      <div class="combo"><span class="n">1</span><div class="ct"><span class="chain">Frigibax <span class="arrowsep">→</span> Rare Candy <span class="arrowsep">→</span> Baxcalibur</span><p>Skip the Arctibax middle stage and bring the energy engine online a full turn early. This is your priority play turns 2–3.</p></div></div>
+      <div class="combo"><span class="n">2</span><div class="ct"><span class="chain">Baxcalibur "Ice Maker" <span class="arrowsep">→</span> load Suicune ex / Chien-Pao ex</span><p>Every turn, attach an extra Water Energy from the Energy Zone onto an attacker — stacking energy faster than the opponent can keep pace.</p></div></div>
+      <div class="combo"><span class="n">3</span><div class="ct"><span class="chain">Full bench <span class="arrowsep">→</span> Suicune ex "Crystal Waltz"</span><p>20 damage × every Benched Pokémon (both sides). Keep your own Baxcalibur line + Chien-Pao benched, and the opponent's development only feeds your damage.</p></div></div>
+      <div class="combo"><span class="n">4</span><div class="ct"><span class="chain">Cyrus <span class="arrowsep">→</span> drag wounded Bench Pokémon <span class="arrowsep">→</span> KO</span><p>Pull a damaged or key benched threat into the Active spot, then knock it out with Suicune or Chien-Pao for a free tempo swing.</p></div></div>
+      <div class="combo"><span class="n">5</span><div class="ct"><span class="chain">Giant Cape on Suicune ex <span class="arrowsep">+</span> Pokémon Center Lady</span><p>Push your attacker to 160 HP and heal 30 between turns to keep your scaling attacker on the board through Mega ex punches.</p></div></div>
+      <div class="combo"><span class="n">6</span><div class="ct"><span class="chain">Professor's Research <span class="arrowsep">/</span> Copycat <span class="arrowsep">→</span> refuel</span><p>Dump and redraw to keep finding Rare Candy, Poké Ball, and your second attacker. Copycat is huge when the opponent has a fat hand.</p></div></div>
+    </div>
+  </section>
+
+  <!-- META / MATCHUPS -->
+  <section id="meta">
+    <div class="sec-h"><span class="ix">6</span><div><h2>Meta Power Level & Matchups</h2><p>Where the deck sits on the B3a ladder, and who it beats</p></div></div>
+
+    <div class="card-panel">
+      <h3 style="font-size:16px;margin-bottom:4px">📊 Current Meta Power Ranking</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Tiers from emerging (bottom) to top of the meta — Suicune ex / Baxcalibur sits at #2 in the highest tier.</p>
+      <div class="ladder">
+        <div class="lrow">
+          <div class="ltag lt-t2">TIER 2<small>Power 25–50 · top</small></div>
+          <div class="ldecks">
+            <span class="chip">Miraidon ex Magnezone <span class="pw">47.0</span></span>
+            <span class="chip here">Suicune ex Baxcalibur <span class="pw">35.0</span></span>
+            <span class="chip">Mega Altaria ex Espeon <span class="pw">32.0</span></span>
+            <span class="chip">Mega Lucario ex <span class="pw">28.5</span></span>
+            <span class="chip">Mega Blaziken ex <span class="pw">26.5</span></span>
+          </div>
+        </div>
+        <div class="lrow">
+          <div class="ltag lt-t3">TIER 3<small>Power 10–25</small></div>
+          <div class="ldecks">
+            <span class="chip">Mega Absol ex Hydreigon</span>
+            <span class="chip">Other strong secondary decks</span>
+          </div>
+        </div>
+        <div class="lrow">
+          <div class="ltag lt-tr">TRENDING<small>Power 4–10</small></div>
+          <div class="ldecks">
+            <span class="chip">Emerging / fringe brews</span>
+          </div>
+        </div>
+      </div>
+      <div class="ladder-cap">↑ Higher = stronger meta standing. <b style="color:var(--ice)">◀</b> marks this deck. Source: pokemonmeta.com power rankings (auto-updated from tournament-topping decks).</div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px">
+      <div class="card-panel">
+        <h3 style="font-size:15px;color:var(--good);margin-bottom:12px">✓ Favorable Matchups</h3>
+        <table class="mtable">
+          <tr><th>Opponent</th><th>Win&nbsp;rate</th><th></th></tr>
+          <tr><td>Mega Blaziken ex</td><td><div class="wrbar"><div class="track"><div class="fill" style="width:63%;background:var(--good)"></div></div><span class="pct" style="color:var(--good)">63%</span></div></td><td><span class="tag fav">Favored</span></td></tr>
+          <tr><td>Mega Absol ex Hydreigon</td><td><div class="wrbar"><div class="track"><div class="fill" style="width:58%;background:var(--good)"></div></div><span class="pct" style="color:var(--good)">58%</span></div></td><td><span class="tag fav">Favored</span></td></tr>
+          <tr><td>Mega Altaria ex Espeon</td><td><div class="wrbar"><div class="track"><div class="fill" style="width:48%;background:var(--warn)"></div></div><span class="pct" style="color:var(--warn)">48%</span></div></td><td><span class="tag even">Coin-flip</span></td></tr>
+        </table>
+      </div>
+      <div class="card-panel">
+        <h3 style="font-size:15px;color:var(--bad);margin-bottom:12px">✗ Unfavorable Matchups</h3>
+        <table class="mtable">
+          <tr><th>Opponent</th><th>Win&nbsp;rate</th><th></th></tr>
+          <tr><td>Mega Lucario ex Greninja</td><td><div class="wrbar"><div class="track"><div class="fill" style="width:33%;background:var(--bad)"></div></div><span class="pct" style="color:var(--bad)">33%</span></div></td><td><span class="tag unfav">Hard</span></td></tr>
+          <tr><td>Miraidon ex Magnezone <span style="color:var(--muted);font-size:11px">(#1 deck)</span></td><td><div class="wrbar"><div class="track"><div class="fill" style="width:36%;background:var(--bad)"></div></div><span class="pct" style="color:var(--bad)">36%</span></div></td><td><span class="tag unfav">Hard</span></td></tr>
+        </table>
+        <p class="note" style="margin-top:14px">Matchup % from pokemonmeta deck report (last week of ladder + tournament data). Overall record on Limitless ≈ 1694 W / 1440 L / 93 T (52.5%).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section id="variants">
+    <div class="sec-h"><span class="ix">7</span><div><h2>Variants & Alternatives</h2><p>Common swaps and sibling builds</p></div></div>
+    <div class="varwrap">
+      <div class="varc">
+        <h3>Disruption package</h3>
+        <p>Swap a flex slot for <b>Mars</b> — force the opponent to shuffle their hand and draw fewer cards, slowing combo decks that hoard resources. Pairs well against the grindy Miraidon matchup.</p>
+        <div class="cards" data-cards="mars,copycat"></div>
+      </div>
+      <div class="varc">
+        <h3>Search consistency</h3>
+        <p>Run <b>Juliana</b> to dig for your Basics (Frigibax / Suicune ex) more reliably, smoothing the clunky openings that plague Stage-2 lines.</p>
+        <div class="cards" data-cards="juliana,pokeball"></div>
+      </div>
+      <div class="varc">
+        <h3>Tech vs Tools & Stadiums</h3>
+        <p><b>Field Blower</b> is a flex/tech slot — strip the opponent's Giant Cape, defensive tools, or a problematic Stadium. Cut it in matchups where it's dead.</p>
+        <div class="cards" data-cards="fieldblower,giantcape"></div>
+      </div>
+      <div class="varc">
+        <h3>Sibling archetypes</h3>
+        <p>The Baxcalibur Water engine also powers <b>Suicune ex / Greninja / Giratina ex</b> bench-damage shells and pure <b>Chien-Pao ex</b> snipe builds. Same engine, different payoff attacker.</p>
+        <div class="cards" data-cards="suicune,chienpao,baxcalibur"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="refs">
+    <div class="sec-h"><span class="ix">8</span><div><h2>Sources</h2><p>Verified during research · 2026-06-13</p></div></div>
+    <div class="card-panel refs">
+      <p>• <a href="https://play.limitlesstcg.com/decks/suicune-ex-a4a-baxcalibur-b2a?game=POCKET&format=standard&set=B3a" target="_blank" rel="noopener">Limitless TCG — Suicune ex (A4a) / Baxcalibur (B2a) archetype</a> — win rate, tournament results, set codes</p>
+      <p>• <a href="https://www.pokemonmeta.com/tier-list/deck-types/Suicune%20ex%20Baxcalibur" target="_blank" rel="noopener">PokémonMeta — Suicune ex Baxcalibur deck report</a> — decklist & matchup percentages</p>
+      <p>• <a href="https://www.pokemonmeta.com/tier-list" target="_blank" rel="noopener">PokémonMeta — Power Rankings / Tier List</a> — tier placement (Tier 2, Power 35.0)</p>
+      <p>• <a href="https://game8.co/games/Pokemon-TCG-Pocket/archives/583154" target="_blank" rel="noopener">Game8 — Chien-Pao ex / Baxcalibur deck list</a> — representative 20-card composition</p>
+      <p>• <a href="https://pocketcards.net/pokemon/frigibax" target="_blank" rel="noopener">PocketCards.net</a> — card set codes (Frigibax B2a-034, Arctibax B2a-035, Baxcalibur B2a-036)</p>
+      <p>• Card images: s3.duellinksmeta.com / static.dotgg.gg (PTCGP card art)</p>
+    </div>
+    <p class="note">⚠️ Time-sensitive: meta data reflects the B3a "Paradox Drive" Standard format as of 2026-06-13. Suicune ex is set <b>A4a #020</b> (Secluded Springs), not A2a. Quantities are a representative list; tournament lists vary in their flex slots.</p>
+  </section>
+
+  <footer>PTCGP Graphic Deck Guide · Suicune ex / Baxcalibur · generated 2026-06-13 · card art © The Pokémon Company / Creatures / GAME FREAK</footer>
+</div>
+
+<script>
+/* ---- card database ---- */
+const IMG = oid => `https://s3.duellinksmeta.com/pkm_img/cards/${oid}_w420.webp`;
+const CARDS = {
+  suicune:    {name:"Suicune ex", oid:"68a8700806f307803439410f", set:"A4a 020", type:"💧 Water · Basic ex · 140 HP",
+               desc:"Main attacker. <b>Crystal Waltz</b> deals 20 damage for each Benched Pokémon in play (both players) — your win condition that scales with the board."},
+  frigibax:   {name:"Frigibax", oid:"699fa12a429f5fa6e7e046bc", set:"B2a 034", type:"💧 Water · Basic",
+               desc:"The seed of the engine. You need it on the bench early to evolve into Baxcalibur (via Rare Candy)."},
+  baxcalibur: {name:"Baxcalibur", oid:"699fa179429f5fa6e7e047aa", set:"B2a 036", type:"💧 Water · Stage 2 · 140 HP",
+               desc:"The engine. <b>Ice Maker</b> attaches an extra Water Energy from your Energy Zone each turn — the deck's whole tempo advantage."},
+  chienpao:   {name:"Chien-Pao ex", oid:"699fa1c6429f5fa6e7e0486d", set:"B2a 037", type:"💧 Water · Basic ex · ~130 HP",
+               desc:"Secondary heavy hitter / closer. Fed by Baxcalibur's energy, it delivers big knockouts but is fragile — wants Giant Cape / Starting Plains."},
+  research:   {name:"Professor's Research", oid:"672181b7c08874f5ab2e1700", set:"Supporter", type:"Supporter",
+               desc:"Draw 2. Primary card-advantage engine to keep finding your pieces."},
+  pokeball:   {name:"Poké Ball", oid:"672181a6c08874f5ab2e16f0", set:"Item", type:"Item",
+               desc:"Search a random Basic Pokémon from your deck — finds Frigibax, Suicune ex, or Chien-Pao ex."},
+  rarecandy:  {name:"Rare Candy", oid:"680a3bcc8bc31f24c36ad483", set:"Item", type:"Item",
+               desc:"Evolve Frigibax straight into Baxcalibur, skipping Arctibax. The key consistency item — get the engine online a turn early."},
+  cyrus:      {name:"Cyrus", oid:"6798ea0c6950657553dc675d", set:"Supporter", type:"Supporter",
+               desc:"Drag a damaged Benched Pokémon to the Active spot — set up surgical knockouts and tempo swings."},
+  centerlady: {name:"Pokémon Center Lady", oid:"67e395a2575eceb838a249c9", set:"Supporter", type:"Supporter",
+               desc:"Heal 30 and clear status from one of your Pokémon — keeps a scaling Suicune alive through chip damage."},
+  copycat:    {name:"Copycat", oid:"6901da2dce2f4236a0a1ea0a", set:"Supporter", type:"Supporter",
+               desc:"Draw cards equal to the opponent's hand size. A big refuel when they're hoarding resources."},
+  giantcape:  {name:"Giant Cape", oid:"6798e48fb5fbced301dccc91", set:"Tool", type:"Pokémon Tool",
+               desc:"+20 max HP to the holder. Pushes Suicune ex to 160 HP / shores up Chien-Pao's fragile body."},
+  boat:       {name:"Inflatable Boat", oid:"68aff74d4544bfaebafa0e14", set:"Item", type:"Item",
+               desc:"Retreat / pivot aid — swap your Active Pokémon cheaply so you can reposition the right attacker."},
+  plains:     {name:"Starting Plains", oid:"6979afb05e1290c7469d7ac3", set:"Stadium", type:"Stadium",
+               desc:"Stadium that supports the board's setup — helps stabilize your fragile attackers."},
+  fieldblower:{name:"Field Blower", oid:"69ea21765c9e4e64b09d2db6", set:"Item", type:"Item",
+               desc:"Tech item — discard an opposing Pokémon Tool or Stadium in play. Great vs Giant Cape / Stadium decks, dead otherwise."},
+  juliana:    {name:"Juliana", oid:"6a179c50b3e386cbea663a34", set:"Supporter", type:"Supporter",
+               desc:"Search Basic Pokémon from your deck — alternative consistency supporter for smoothing openings."},
+  mars:       {name:"Mars", oid:null, set:"Supporter", type:"Supporter (flex)",
+               desc:"Disruption supporter — forces the opponent to shuffle their hand and draw fewer cards. Common tech swap."},
+};
+
+/* ---- decklist: 20 cards ---- */
+const DECK = [
+  ["suicune",2,"core"], ["chienpao",1,"support"], ["frigibax",2,"core"], ["baxcalibur",2,"core"],
+  ["research",2,"core"], ["pokeball",2,"core"], ["rarecandy",2,"core"],
+  ["cyrus",1,"support"], ["copycat",1,"support"], ["giantcape",1,"support"],
+  ["centerlady",1,"low"], ["boat",1,"low"], ["plains",1,"low"],
+  ["fieldblower",1,"flex"],
+];
+
+/* render deck grid (duplicates shown as separate slots) */
+const grid = document.getElementById('deckGrid');
+const roleLabel = {core:"Core",support:"Support",low:"Low",flex:"Tech"};
+DECK.forEach(([key,qty,role])=>{
+  const c = CARDS[key];
+  const slot = document.createElement('div');
+  slot.className='slot';
+  slot.innerHTML = `
+    <img src="${IMG(c.oid)}" alt="${c.name}" loading="lazy">
+    <span class="qty">×${qty}</span>
+    <span class="role ${role}">${roleLabel[role]}</span>
+    <div class="zoom"><img src="${IMG(c.oid)}" alt="${c.name}"><div class="nm">${c.name} · ${c.set}</div></div>`;
+  grid.appendChild(slot);
+});
+
+/* render role/priority sections in gameplay */
+const ROLE_GROUPS = {
+  core:    ["baxcalibur","frigibax","rarecandy","suicune","research","pokeball"],
+  support: ["chienpao","cyrus","copycat","giantcape"],
+  low:     ["centerlady","boat","plains"],
+  flex:    ["fieldblower","juliana","mars"],
+};
+document.querySelectorAll('.tier-card .body').forEach(box=>{
+  const grp = box.dataset.roles;
+  ROLE_GROUPS[grp].forEach(key=>{
+    const c = CARDS[key];
+    const row = document.createElement('div');
+    row.className='row';
+    const img = c.oid ? `<img src="${IMG(c.oid)}" alt="${c.name}" loading="lazy">`
+                      : `<div style="width:54px;flex:none"></div>`;
+    row.innerHTML = `${img}<div class="t"><b>${c.name}</b> <span class="meta">· ${c.set}</span><div class="meta">${c.type}</div><p>${c.desc}</p></div>`;
+    box.appendChild(row);
+  });
+});
+
+/* render small card rows in variants */
+document.querySelectorAll('[data-cards]').forEach(box=>{
+  box.dataset.cards.split(',').forEach(key=>{
+    const c = CARDS[key.trim()];
+    if(!c || !c.oid) return;
+    const img = document.createElement('img');
+    img.src = IMG(c.oid); img.alt = c.name; img.loading='lazy'; img.title = c.name;
+    box.appendChild(img);
+  });
+});
+
+/* theme toggle */
+const btn = document.getElementById('themeBtn');
+const root = document.documentElement;
+function setTheme(t){ root.dataset.theme=t; btn.firstChild.textContent = t==='dark'?'🌙 ':'☀️ '; try{localStorage.setItem('ptcgp-theme',t)}catch(e){} }
+setTheme((()=>{try{return localStorage.getItem('ptcgp-theme')||'dark'}catch(e){return 'dark'}})());
+btn.addEventListener('click',()=>setTheme(root.dataset.theme==='dark'?'light':'dark'));
+
+/* tap-to-zoom on touch devices: open full card in overlay */
+document.querySelectorAll('.slot img, .row img, .varc .cards img').forEach(im=>{
+  im.addEventListener('click',()=>{
+    const ov=document.createElement('div');
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.8);display:grid;place-items:center;z-index:200;cursor:zoom-out;padding:20px';
+    ov.innerHTML=`<img src="${im.src}" style="max-width:90vw;max-height:90vh;border-radius:14px;border:2px solid #5fd0f5">`;
+    ov.addEventListener('click',()=>ov.remove());
+    document.body.appendChild(ov);
+  });
+});
+</script>
+</body>
+</html>
