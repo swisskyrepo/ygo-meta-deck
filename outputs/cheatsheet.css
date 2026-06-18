@@ -709,3 +709,56 @@ h1 {
   .theme-toggle { top: auto; bottom: 12px; }
   .combo-table, .side-table { min-width: 680px; }
 }
+
+/* ---------- Tournament decklist display ---------- */
+.deck-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.deck-meta b { color: var(--ink); font-weight: 800; }
+.deck-piles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.deck-pile {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 13px 14px;
+}
+.deck-pile h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.deck-pile h3 .deck-tally {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.deck-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+  gap: 7px;
+}
+.deck-cards .cloud-card img { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18); }
+.deck-pile.monster { background: color-mix(in srgb, #b5732f 16%, var(--panel)); border-color: color-mix(in srgb, #b5732f 36%, var(--line)); }
+.deck-pile.spell   { background: color-mix(in srgb, #2fa36b 15%, var(--panel)); border-color: color-mix(in srgb, #2fa36b 34%, var(--line)); }
+.deck-pile.trap    { background: color-mix(in srgb, #d65b97 15%, var(--panel)); border-color: color-mix(in srgb, #d65b97 34%, var(--line)); }
+.deck-pile.extra   { background: color-mix(in srgb, #7d5bd6 15%, var(--panel)); border-color: color-mix(in srgb, #7d5bd6 34%, var(--line)); }
+.deck-pile.side    { background: color-mix(in srgb, #8b94a1 16%, var(--panel)); border-color: color-mix(in srgb, #8b94a1 35%, var(--line)); }
+@media (max-width: 650px) {
+  .deck-cards { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 5px; }
+}
